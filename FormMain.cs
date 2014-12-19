@@ -94,31 +94,71 @@ namespace Vixen_Messaging
                     for (int messageNum = 1; messageNum <= messageCount; messageNum++)
                     {
                         var header = pop.GetMessageHeaders(messageNum);
-                        listBoxLog.Items.Insert(0,
-                            "Retrieved Header # " + messageNum.ToString() + ": " + header.Subject.ToString());
-                        if (header.Subject.Contains("SMS from"))
-                        {
-                            var msg = pop.GetMessage(messageNum);
-                            var phoneNumber = header.Subject.Substring(9).Trim();
+                        var msg = pop.GetMessage(messageNum);
+                        var smsMessage = msg.MessagePart.GetBodyAsText();
+                        var msgLines = smsMessage.Split('\r');
 
-                            try
+						if (header.Subject != null) 
+						{
+							if (header.Subject.Contains("SMS from"))
                             {
-                                var smsMessage = msg.MessagePart.GetBodyAsText();
-                                var msgLines = smsMessage.Split('\r');
-                                smsMessage = msgLines[0];
-                                listBoxLog.Items.Insert(0, "SMS Message: " + smsMessage);
-                                pop.DeleteMessage(messageNum);
-                                // We only want one message at a time so, disconnect and wait for next time.
-                                pop.Disconnect();
-                                SendMessageToVixen(smsMessage);
-                                SendReturnText(phoneNumber, header.From.ToString());
-                                return;
+                                if (msgLines[0] != "")
+                                {
+                                    var phoneNumber = header.Subject.Substring(9).Trim();
+								    listBoxLog.Items.Insert(0, "Retrieved Header # " + messageNum.ToString() + ": " + header.Subject.ToString());
+								    try
+								    {
+									    smsMessage = msgLines[0];
+									    listBoxLog.Items.Insert(0, "SMS Message: " + smsMessage);
+									    pop.DeleteMessage(messageNum);
+									    // We only want one message at a time so, disconnect and wait for next time.
+									    pop.Disconnect();
+									    SendMessageToVixen(smsMessage);
+                                        string rtnmsg = "Your message will appear soon in lights.";
+                                        SendReturnText(phoneNumber, header.From.ToString(), rtnmsg, messageNum);
+									    return;
+								    }
+								    catch (Exception ex)
+								    {
+									    listBoxLog.Items.Insert(0, "Error Parsing Message Body: " + ex.Message);
+								    }
+                                }
+                                else
+                                {
+                                    pop.DeleteMessage(messageNum);
+                                    pop.Disconnect();
+                                    string rtnmsg = "The body of your SMS is blank, please ensure the message you want to say in the body and not the subject line.";
+                                    SendReturnText("", header.From.ToString(), rtnmsg, messageNum); 
+                                }
+					        }
+					        else
+						    {
+						        listBoxLog.Items.Insert(0, "Retrieved Header # " + messageNum.ToString() + ": " + header.Subject.ToString());
+						        try
+						        {
+							        smsMessage = header.Subject;
+								    listBoxLog.Items.Insert(0, "SMS Message: " + smsMessage);
+							        pop.DeleteMessage(messageNum);
+									// We only want one message at a time so, disconnect and wait for next time.
+								    pop.Disconnect();
+								    SendMessageToVixen(smsMessage);
+                                    string rtnmsg = "Your message will appear soon in lights.";
+                                    SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+								    return;
+							    }
+							    catch (Exception ex)
+							    {
+								    listBoxLog.Items.Insert(0, "Error Parsing Message Body: " + ex.Message);
+							    }  
                             }
-                            catch (Exception ex)
-                            {
-                                listBoxLog.Items.Insert(0, "Error Parsing Message Body: " + ex.Message);
-                            }
-                        }
+						}
+						else
+						{
+							pop.DeleteMessage(messageNum);
+                            pop.Disconnect();
+                            string rtnmsg = "Please ensure you enter the message in the subject line.";
+                            SendReturnText("", header.From.ToString(), rtnmsg, messageNum); 
+						}
                         Application.DoEvents();
                     }
                 }
@@ -157,7 +197,7 @@ namespace Vixen_Messaging
             textBoxServer.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "POP3Server", "pop.gmail.com");
             textBoxUID.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "UID", "");
             textBoxPWD.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "Password", "");
-            textBoxVixenServer.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "VixenServer", "http://localhost:8080/api/play/playSequence");
+            textBoxVixenServer.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "VixenServer", "http://localhost:8888/api/play/playSequence");
             textBoxSequenceTemplate.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "SequenceTemplate", "C:\\Users\\Study\\Documents\\Vixen 3\\Sequence");
 			textBoxOutputSequence.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "OutputSequence", "C:\\Users\\Study\\Documents\\Vixen 3\\Sequence\\HelloOut.tim");
             textBoxReplaceText.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "ReplaceText", "NamePlaceholder");
@@ -210,7 +250,7 @@ namespace Vixen_Messaging
         {
             foreach (string word in BadWords)
             {
-                if (msg.Contains(word))
+                if (msg.ToLower().Contains(word))
                 {
                     listBoxLog.Items.Insert(0, "Bad Words Detected!");
                     return true;
@@ -232,8 +272,9 @@ namespace Vixen_Messaging
             profile.PutSetting(XMLProfileSettings.SettingType.Profiles, "LogFile", textBoxLogFileName.Text);
         }
 
-        private void SendReturnText(string phoneNumber, string msgTo)
+        private void SendReturnText(string phoneNumber, string msgTo, string rtnmsg, int messageNum)
         {
+           
             try
             {
                 var message = new System.Net.Mail.MailMessage();
@@ -241,7 +282,7 @@ namespace Vixen_Messaging
                 message.To.Add(msgTo);
                 message.Subject = "Northridge Lights";
                 message.From = new System.Net.Mail.MailAddress("derek@kiwimill.com");
-                message.Body = "Your message will appear soon in lights.";
+                message.Body = rtnmsg; // "Your message will appear soon in lights.";
                 var smtp = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587);
                 smtp.EnableSsl = true;
                 smtp.UseDefaultCredentials = false;
@@ -256,6 +297,11 @@ namespace Vixen_Messaging
         }
 
 		private void textBoxReplaceText_TextChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void listBoxLog_SelectedIndexChanged(object sender, EventArgs e)
 		{
 
 		}
