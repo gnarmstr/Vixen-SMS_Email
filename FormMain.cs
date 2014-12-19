@@ -17,7 +17,7 @@ using OpenPop;
 using OpenPop.Pop3;
 using System.Web;
 
-namespace Vixen_SMS
+namespace Vixen_Messaging
 {
     public partial class FormMain : Form
     {
@@ -53,7 +53,7 @@ namespace Vixen_SMS
         {
             buttonStart.Enabled = false;
             buttonStop.Enabled = true;
-            timerCheckMail.Interval = 500;
+            timerCheckMail.Interval = 200;
             timerCheckMail.Enabled = true;
         }
 
@@ -83,7 +83,7 @@ namespace Vixen_SMS
 
         private void timerCheckMail_Tick(object sender, EventArgs e)
         {
-            timerCheckMail.Interval = 60000;
+            timerCheckMail.Interval = 30000;
             try
             {
                 if (Pop3Login())
@@ -158,10 +158,10 @@ namespace Vixen_SMS
             textBoxUID.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "UID", "");
             textBoxPWD.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "Password", "");
             textBoxVixenServer.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "VixenServer", "http://localhost:8080/api/play/playSequence");
-            textBoxSequenceTemplate.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "SequenceTemplate", "C:\\OneDrive\\Christmas Lights\\Sequences\\Hello.tim");
-            textBoxOutputSequence.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "OutputSequence", "C:\\OneDrive\\Christmas Lights\\Sequences\\HelloOut.tim");
+            textBoxSequenceTemplate.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "SequenceTemplate", "C:\\Users\\Study\\Documents\\Vixen 3\\Sequence");
+			textBoxOutputSequence.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "OutputSequence", "C:\\Users\\Study\\Documents\\Vixen 3\\Sequence\\HelloOut.tim");
             textBoxReplaceText.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "ReplaceText", "NamePlaceholder");
-            textBoxLogFileName.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "LogFile", "C:\\OneDrive\\Christmas Lights\\Vixen SMS\\Vixen SMS\\Log.txt");
+			textBoxLogFileName.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "LogFile", "C:\\Users\\Study\\Documents\\Vixen 3\\Logs\\Message.log");
 
             buttonStop.Enabled = false;
             StartChecking();
@@ -239,9 +239,9 @@ namespace Vixen_SMS
                 var message = new System.Net.Mail.MailMessage();
                 listBoxLog.Items.Insert(0, "To: " + msgTo);
                 message.To.Add(msgTo);
-                message.Subject = "XTremeLights";
+                message.Subject = "Northridge Lights";
                 message.From = new System.Net.Mail.MailAddress("derek@kiwimill.com");
-                message.Body = "Your name will appear soon in lights. Check us out at facebook.com/backuslights";
+                message.Body = "Your message will appear soon in lights.";
                 var smtp = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587);
                 smtp.EnableSsl = true;
                 smtp.UseDefaultCredentials = false;
@@ -254,5 +254,10 @@ namespace Vixen_SMS
                 listBoxLog.Items.Insert(0, "SMTP Error: " + ex.Message);
             }
         }
+
+		private void textBoxReplaceText_TextChanged(object sender, EventArgs e)
+		{
+
+		}
     }
 }

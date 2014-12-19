@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml;
 
-namespace Vixen_SMS
+namespace Vixen_Messaging
 {
     public class XMLProfileSettings
     {
@@ -14,7 +14,7 @@ namespace Vixen_SMS
             try
             {
                 _documentPath =
-                    System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "Vixen SMS",
+                    System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "Vixen Messaging",
                                            "Settings.xml");
                 if (!System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(_documentPath)))
                     System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(_documentPath));

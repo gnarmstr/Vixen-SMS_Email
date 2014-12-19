@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Vixen_SMS
+namespace Vixen_Messaging
 {
     static class Program
     {
