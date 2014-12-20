@@ -53,15 +53,20 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxVixenServer = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 40);
+            this.label1.Location = new System.Drawing.Point(24, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(104, 20);
             this.label1.TabIndex = 0;
@@ -69,14 +74,14 @@
             // 
             // textBoxServer
             // 
-            this.textBoxServer.Location = new System.Drawing.Point(132, 37);
+            this.textBoxServer.Location = new System.Drawing.Point(135, 38);
             this.textBoxServer.Name = "textBoxServer";
             this.textBoxServer.Size = new System.Drawing.Size(514, 26);
             this.textBoxServer.TabIndex = 1;
             // 
             // textBoxUID
             // 
-            this.textBoxUID.Location = new System.Drawing.Point(132, 68);
+            this.textBoxUID.Location = new System.Drawing.Point(135, 69);
             this.textBoxUID.Name = "textBoxUID";
             this.textBoxUID.Size = new System.Drawing.Size(514, 26);
             this.textBoxUID.TabIndex = 3;
@@ -84,7 +89,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 69);
+            this.label2.Location = new System.Drawing.Point(24, 70);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(93, 20);
             this.label2.TabIndex = 2;
@@ -92,7 +97,7 @@
             // 
             // textBoxPWD
             // 
-            this.textBoxPWD.Location = new System.Drawing.Point(132, 97);
+            this.textBoxPWD.Location = new System.Drawing.Point(135, 98);
             this.textBoxPWD.Name = "textBoxPWD";
             this.textBoxPWD.PasswordChar = '*';
             this.textBoxPWD.Size = new System.Drawing.Size(514, 26);
@@ -101,7 +106,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 98);
+            this.label3.Location = new System.Drawing.Point(24, 99);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 20);
             this.label3.TabIndex = 4;
@@ -115,7 +120,7 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBoxUID);
-            this.groupBox1.Location = new System.Drawing.Point(9, 9);
+            this.groupBox1.Location = new System.Drawing.Point(12, 19);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(669, 145);
             this.groupBox1.TabIndex = 6;
@@ -124,7 +129,7 @@
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(418, 635);
+            this.buttonStart.Location = new System.Drawing.Point(409, 720);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(123, 46);
             this.buttonStart.TabIndex = 7;
@@ -134,7 +139,7 @@
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(555, 635);
+            this.buttonStop.Location = new System.Drawing.Point(546, 720);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(123, 46);
             this.buttonStop.TabIndex = 8;
@@ -147,7 +152,7 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.textBoxLogFileName);
             this.groupBox2.Controls.Add(this.listBoxLog);
-            this.groupBox2.Location = new System.Drawing.Point(9, 354);
+            this.groupBox2.Location = new System.Drawing.Point(12, 354);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(669, 266);
             this.groupBox2.TabIndex = 9;
@@ -196,7 +201,7 @@
             this.groupBox3.Controls.Add(this.textBoxSequenceTemplate);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.textBoxVixenServer);
-            this.groupBox3.Location = new System.Drawing.Point(9, 158);
+            this.groupBox3.Location = new System.Drawing.Point(12, 170);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(669, 178);
             this.groupBox3.TabIndex = 10;
@@ -277,18 +282,50 @@
             this.toolTip1.InitialDelay = 300;
             this.toolTip1.ReshowDelay = 60;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(4, 7);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(711, 684);
+            this.tabControl1.TabIndex = 11;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Controls.Add(this.groupBox3);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(703, 651);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Settings";
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(703, 651);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Options";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 706);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
+            this.ClientSize = new System.Drawing.Size(721, 793);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonStart);
-            this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(720, 736);
+            this.MinimumSize = new System.Drawing.Size(743, 849);
             this.Name = "FormMain";
             this.Text = "Vixen Messaging";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
@@ -299,6 +336,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -329,6 +368,9 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBoxLogFileName;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 

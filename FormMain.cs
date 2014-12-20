@@ -95,13 +95,20 @@ namespace Vixen_Messaging
                     {
                         var header = pop.GetMessageHeaders(messageNum);
                         var msg = pop.GetMessage(messageNum);
-                        var smsMessage = msg.MessagePart.GetBodyAsText();
-                        var msgLines = smsMessage.Split('\r');
 
-						if (header.Subject != null) 
+						if (header.Subject == null || header.Subject == "") //need to sort this out.
 						{
-							if (header.Subject.Contains("SMS from"))
+							pop.DeleteMessage(messageNum);
+                            pop.Disconnect();
+                            string rtnmsg = "Please ensure you enter the message in the subject line.";
+                            SendReturnText("", header.From.ToString(), rtnmsg, messageNum); 
+						}
+						else
+                        {
+                            if (header.Subject.Contains("SMS from"))
                             {
+                                var smsMessage = msg.MessagePart.GetBodyAsText();
+                                var msgLines = smsMessage.Split('\r');
                                 if (msgLines[0] != "")
                                 {
                                     var phoneNumber = header.Subject.Substring(9).Trim();
@@ -136,12 +143,13 @@ namespace Vixen_Messaging
 						        listBoxLog.Items.Insert(0, "Retrieved Header # " + messageNum.ToString() + ": " + header.Subject.ToString());
 						        try
 						        {
-							        smsMessage = header.Subject;
-								    listBoxLog.Items.Insert(0, "SMS Message: " + smsMessage);
+                                    string emailMessage;
+							        emailMessage = header.Subject;
+								    listBoxLog.Items.Insert(0, "SMS Message: " + emailMessage);
 							        pop.DeleteMessage(messageNum);
 									// We only want one message at a time so, disconnect and wait for next time.
 								    pop.Disconnect();
-								    SendMessageToVixen(smsMessage);
+								    SendMessageToVixen(emailMessage);
                                     string rtnmsg = "Your message will appear soon in lights.";
                                     SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
 								    return;
@@ -151,13 +159,6 @@ namespace Vixen_Messaging
 								    listBoxLog.Items.Insert(0, "Error Parsing Message Body: " + ex.Message);
 							    }  
                             }
-						}
-						else
-						{
-							pop.DeleteMessage(messageNum);
-                            pop.Disconnect();
-                            string rtnmsg = "Please ensure you enter the message in the subject line.";
-                            SendReturnText("", header.From.ToString(), rtnmsg, messageNum); 
 						}
                         Application.DoEvents();
                     }
@@ -198,10 +199,10 @@ namespace Vixen_Messaging
             textBoxUID.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "UID", "");
             textBoxPWD.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "Password", "");
             textBoxVixenServer.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "VixenServer", "http://localhost:8888/api/play/playSequence");
-            textBoxSequenceTemplate.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "SequenceTemplate", "C:\\Users\\Study\\Documents\\Vixen 3\\Sequence");
-			textBoxOutputSequence.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "OutputSequence", "C:\\Users\\Study\\Documents\\Vixen 3\\Sequence\\HelloOut.tim");
+            textBoxSequenceTemplate.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "SequenceTemplate", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Sequence"));
+            textBoxOutputSequence.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "OutputSequence", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Sequence\\HelloOut.tim"));
             textBoxReplaceText.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "ReplaceText", "NamePlaceholder");
-			textBoxLogFileName.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "LogFile", "C:\\Users\\Study\\Documents\\Vixen 3\\Logs\\Message.log");
+            textBoxLogFileName.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "LogFile", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Logs\\Messaging.log")); // "C:\\Users\\Study\\Documents\\Vixen 3\\Logs\\Message.log");
 
             buttonStop.Enabled = false;
             StartChecking();
@@ -305,5 +306,10 @@ namespace Vixen_Messaging
 		{
 
 		}
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
