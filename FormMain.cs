@@ -69,7 +69,8 @@ namespace Vixen_Messaging
 
         private void timerCheckMail_Tick(object sender, EventArgs e)
         {
-            timerCheckMail.Interval = 30000;
+            timerCheckMail.Interval = Convert.ToInt32(msgretrievaltime.Value)*1000;
+     //       timerCheckMail.Interval = 30000;
             bool blacklist;
             try
             {
@@ -208,6 +209,7 @@ namespace Vixen_Messaging
             textBoxOutputSequence.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "OutputSequence", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Sequence\\HelloOut.tim"));
             textBoxReplaceText.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "ReplaceText", "NamePlaceholder");
             textBoxLogFileName.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "LogFile", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Logs\\Messaging.log")); // "C:\\Users\\Study\\Documents\\Vixen 3\\Logs\\Message.log");
+            msgretrievaltime.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "ReplaceValue", "30");
 
             buttonStop.Enabled = false;
             StartChecking();
@@ -296,6 +298,7 @@ namespace Vixen_Messaging
             profile.PutSetting(XMLProfileSettings.SettingType.Profiles, "OutputSequence", textBoxOutputSequence.Text);
             profile.PutSetting(XMLProfileSettings.SettingType.Profiles, "ReplaceText", textBoxReplaceText.Text);
             profile.PutSetting(XMLProfileSettings.SettingType.Profiles, "LogFile", textBoxLogFileName.Text);
+            profile.PutSetting(XMLProfileSettings.SettingType.Profiles, "ReplaceValue", msgretrievaltime.Text);
         }
 
         private void SendReturnText(string phoneNumber, string msgTo, string rtnmsg, int messageNum)
@@ -339,7 +342,7 @@ namespace Vixen_Messaging
 
         private void msgretrievaltime_ValueChanged(object sender, EventArgs e)
         {
-
+            StartChecking();
         }
     }
 }

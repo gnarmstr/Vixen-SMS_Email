@@ -336,7 +336,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(284, 39);
+            this.label10.Location = new System.Drawing.Point(294, 39);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(37, 20);
             this.label10.TabIndex = 2;
@@ -356,8 +356,9 @@
             0,
             0});
             this.msgretrievaltime.Name = "msgretrievaltime";
-            this.msgretrievaltime.Size = new System.Drawing.Size(65, 26);
+            this.msgretrievaltime.Size = new System.Drawing.Size(75, 26);
             this.msgretrievaltime.TabIndex = 3;
+            this.msgretrievaltime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.msgretrievaltime.Value = new decimal(new int[] {
             30,
             0,
