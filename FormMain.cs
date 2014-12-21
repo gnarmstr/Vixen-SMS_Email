@@ -15,27 +15,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using OpenPop;
 using OpenPop.Pop3;
-using System.Web;
+using System.Text.RegularExpressions; 
+
 
 namespace Vixen_Messaging
 {
     public partial class FormMain : Form
     {
-        string[] BadWords =
-        {
-            "shit", 
-            "dick",
-            "fuck",
-            "condom",
-            "tit",
-            "pussy",
-            "cunt",
-            "ass",
-            "fart",
-            "rape",
-            "condoms",
-            "sex"
-        };
 
         Pop3Client pop = new Pop3Client();
 
@@ -249,15 +235,27 @@ namespace Vixen_Messaging
         
         private bool HasBadWords(string msg)
         {
-            foreach (string word in BadWords)
+            string textLine = "";
+
+            using (System.IO.StreamReader file = new System.IO.StreamReader(Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Logs\\Blacklist.txt")))
             {
-                if (msg.ToLower().Contains(word))
+                do
                 {
-                    listBoxLog.Items.Insert(0, "Bad Words Detected!");
-                    return true;
-                }
+
+                    textLine = file.ReadLine();
+
+                    Regex rgx = new Regex("[^a-zA-Z0-9]");
+                    msg = rgx.Replace(msg, "");
+
+                    if (msg.ToLower().Contains(textLine))
+                    {
+                        listBoxLog.Items.Insert(0, "Bad Words Detected!");
+                        return true;
+                    }
+                } while (file.Peek() != -1);
+                file.Close();
+                return false;
             }
-            return false;
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
