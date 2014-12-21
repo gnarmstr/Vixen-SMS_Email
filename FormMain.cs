@@ -70,6 +70,7 @@ namespace Vixen_Messaging
         private void timerCheckMail_Tick(object sender, EventArgs e)
         {
             timerCheckMail.Interval = 30000;
+            bool blacklist;
             try
             {
                 if (Pop3Login())
@@ -106,10 +107,19 @@ namespace Vixen_Messaging
 									    pop.DeleteMessage(messageNum);
 									    // We only want one message at a time so, disconnect and wait for next time.
 									    pop.Disconnect();
-									    SendMessageToVixen(smsMessage);
-                                        string rtnmsg = "Your message will appear soon in lights.";
-                                        SendReturnText(phoneNumber, header.From.ToString(), rtnmsg, messageNum);
-									    return;
+									    SendMessageToVixen(smsMessage, out blacklist);
+                                        if (blacklist == true)
+                                        {
+                                            string rtnmsg = "Please reframe from using inappropiate words. If this happens again your email address will be banned.";
+                                            SendReturnText(phoneNumber, header.From.ToString(), rtnmsg, messageNum);
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            string rtnmsg = "Your message will appear soon in lights.";
+                                            SendReturnText(phoneNumber, header.From.ToString(), rtnmsg, messageNum);
+                                            return;
+                                        }
 								    }
 								    catch (Exception ex)
 								    {
@@ -135,10 +145,19 @@ namespace Vixen_Messaging
 							        pop.DeleteMessage(messageNum);
 									// We only want one message at a time so, disconnect and wait for next time.
 								    pop.Disconnect();
-								    SendMessageToVixen(emailMessage);
-                                    string rtnmsg = "Your message will appear soon in lights.";
-                                    SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
-								    return;
+								    SendMessageToVixen(emailMessage, out blacklist);
+                                    if (blacklist == true)
+                                    {
+                                        string rtnmsg = "Please reframe from using inappropiate words. If this happens again your email address will be banned.";
+                                        SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        string rtnmsg = "Your message will appear soon in lights.";
+                                        SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+                                        return;
+                                    }
 							    }
 							    catch (Exception ex)
 							    {
@@ -194,8 +213,9 @@ namespace Vixen_Messaging
             StartChecking();
         }
 
-        private void SendMessageToVixen(string msg)
+        private void SendMessageToVixen(string msg, out bool blacklist)
         {
+            blacklist = false;
             try
             {
                 var outputFileName = textBoxOutputSequence.Text.ToString();
@@ -218,6 +238,12 @@ namespace Vixen_Messaging
                     var result = new WebClient().DownloadString(url);
                     listBoxLog.Items.Insert(0, "Vixen Started: + " + result);
                     Log(msg);
+                }
+                else
+                {
+                    blacklist = true;
+            //        string blacklist = "Please reframe from sending inappropiate words. Your message has been deleted and email address recordered. If this happens again your email address will be band.";
+            //        SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
                 }
             }
             catch (Exception ex)
@@ -250,6 +276,7 @@ namespace Vixen_Messaging
                     if (msg.ToLower().Contains(textLine))
                     {
                         listBoxLog.Items.Insert(0, "Bad Words Detected!");
+                        file.Close();
                         return true;
                     }
                 } while (file.Peek() != -1);
@@ -306,6 +333,11 @@ namespace Vixen_Messaging
 		}
 
         private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void msgretrievaltime_ValueChanged(object sender, EventArgs e)
         {
 
         }

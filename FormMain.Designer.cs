@@ -56,11 +56,16 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.msgretrievaltime = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.msgretrievaltime)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -308,13 +313,57 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.msgretrievaltime);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(703, 651);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Options";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(19, 39);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(178, 20);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Message Retrieval time:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(284, 39);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(37, 20);
+            this.label10.TabIndex = 2;
+            this.label10.Text = "Sec";
+            // 
+            // msgretrievaltime
+            // 
+            this.msgretrievaltime.Location = new System.Drawing.Point(213, 37);
+            this.msgretrievaltime.Maximum = new decimal(new int[] {
+            6000,
+            0,
+            0,
+            0});
+            this.msgretrievaltime.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.msgretrievaltime.Name = "msgretrievaltime";
+            this.msgretrievaltime.Size = new System.Drawing.Size(65, 26);
+            this.msgretrievaltime.TabIndex = 3;
+            this.msgretrievaltime.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.msgretrievaltime.ValueChanged += new System.EventHandler(this.msgretrievaltime_ValueChanged);
             // 
             // FormMain
             // 
@@ -338,6 +387,9 @@
             this.groupBox3.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.msgretrievaltime)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -371,6 +423,9 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown msgretrievaltime;
     }
 }
 
