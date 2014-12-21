@@ -70,7 +70,6 @@ namespace Vixen_Messaging
         private void timerCheckMail_Tick(object sender, EventArgs e)
         {
             timerCheckMail.Interval = Convert.ToInt32(msgretrievaltime.Value)*1000;
-     //       timerCheckMail.Interval = 30000;
             bool blacklist;
             try
             {
@@ -84,88 +83,108 @@ namespace Vixen_Messaging
                         var header = pop.GetMessageHeaders(messageNum);
                         var msg = pop.GetMessage(messageNum);
 
-						if (header.Subject == null || header.Subject == "") //need to sort this out.
-						{
-							pop.DeleteMessage(messageNum);
-                            pop.Disconnect();
-                            string rtnmsg = "Please ensure you enter the message in the subject line.";
-                            SendReturnText("", header.From.ToString(), rtnmsg, messageNum); 
-						}
-						else
+                        if (!CheckBlacklistEmail(header.From.Address))
                         {
-                            if (header.Subject.Contains("SMS from"))
+                            if (header.Subject == null || header.Subject == "")
                             {
-                                var smsMessage = msg.MessagePart.GetBodyAsText();
-                                var msgLines = smsMessage.Split('\r');
-                                if (msgLines[0] != "")
+                                pop.DeleteMessage(messageNum);
+                                pop.Disconnect();
+                                string rtnmsg = "Please ensure you enter the message in the subject line.";
+                                SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+                            }
+                            else
+                            {
+                                if (header.Subject.Contains("SMS from"))
                                 {
-                                    var phoneNumber = header.Subject.Substring(9).Trim();
-								    listBoxLog.Items.Insert(0, "Retrieved Header # " + messageNum.ToString() + ": " + header.Subject.ToString());
-								    try
-								    {
-									    smsMessage = msgLines[0];
-									    listBoxLog.Items.Insert(0, "SMS Message: " + smsMessage);
-									    pop.DeleteMessage(messageNum);
-									    // We only want one message at a time so, disconnect and wait for next time.
-									    pop.Disconnect();
-									    SendMessageToVixen(smsMessage, out blacklist);
+                                    var smsMessage = msg.MessagePart.GetBodyAsText();
+                                    var msgLines = smsMessage.Split('\r');
+                                    if (msgLines[0] != "")
+                                    {
+                                        var phoneNumber = header.Subject.Substring(9).Trim();
+                                        listBoxLog.Items.Insert(0, "Retrieved Header # " + messageNum.ToString() + ": " + header.Subject.ToString());
+                                        try
+                                        {
+                                            smsMessage = msgLines[0];
+                                            listBoxLog.Items.Insert(0, "SMS Message: " + smsMessage);
+                                            pop.DeleteMessage(messageNum);
+                                            // We only want one message at a time so, disconnect and wait for next time.
+                                            pop.Disconnect();
+                                            SendMessageToVixen(smsMessage, out blacklist);
+                                            if (blacklist == true)
+                                            {
+                                                string rtnmsg = "Please reframe from using inappropiate words. If this happens again your email address will be banned for the night.";
+                                                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@textBoxBlacklistEmailLog.Text, true))
+                                                {
+                                                    file.WriteLine(header.From.Address);
+                                                }
+                                                SendReturnText(phoneNumber, header.From.ToString(), rtnmsg, messageNum);
+                                                return;
+                                            }
+                                            else
+                                            {
+                                                string rtnmsg = "Your message will appear soon in lights.";
+                                                SendReturnText(phoneNumber, header.From.ToString(), rtnmsg, messageNum);
+                                                return;
+                                            }
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            listBoxLog.Items.Insert(0, "Error Parsing Message Body: " + ex.Message);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        pop.DeleteMessage(messageNum);
+                                        pop.Disconnect();
+                                        string rtnmsg = "The body of your SMS is blank, please ensure the message you want to say in the body and not the subject line.";
+                                        SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+                                    }
+                                }
+                                else
+                                {
+                                    listBoxLog.Items.Insert(0, "Retrieved Header # " + messageNum.ToString() + ": " + header.Subject.ToString());
+                                    try
+                                    {
+                                        string emailMessage;
+                                        emailMessage = header.Subject;
+                                        listBoxLog.Items.Insert(0, "SMS Message: " + emailMessage);
+                                        pop.DeleteMessage(messageNum);
+                                        // We only want one message at a time so, disconnect and wait for next time.
+                                        pop.Disconnect();
+                                        SendMessageToVixen(emailMessage, out blacklist);
                                         if (blacklist == true)
                                         {
-                                            string rtnmsg = "Please reframe from using inappropiate words. If this happens again your email address will be banned.";
-                                            SendReturnText(phoneNumber, header.From.ToString(), rtnmsg, messageNum);
+                                            string rtnmsg = "Please reframe from using inappropiate words. If this happens again your email address will be banned for the night.";
+                                            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@textBoxBlacklistEmailLog.Text, true))
+                                            {
+                                                file.WriteLine(header.From.Address);
+                                            }
+                                            SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
                                             return;
                                         }
                                         else
                                         {
                                             string rtnmsg = "Your message will appear soon in lights.";
-                                            SendReturnText(phoneNumber, header.From.ToString(), rtnmsg, messageNum);
+                                            SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
                                             return;
                                         }
-								    }
-								    catch (Exception ex)
-								    {
-									    listBoxLog.Items.Insert(0, "Error Parsing Message Body: " + ex.Message);
-								    }
-                                }
-                                else
-                                {
-                                    pop.DeleteMessage(messageNum);
-                                    pop.Disconnect();
-                                    string rtnmsg = "The body of your SMS is blank, please ensure the message you want to say in the body and not the subject line.";
-                                    SendReturnText("", header.From.ToString(), rtnmsg, messageNum); 
-                                }
-					        }
-					        else
-						    {
-						        listBoxLog.Items.Insert(0, "Retrieved Header # " + messageNum.ToString() + ": " + header.Subject.ToString());
-						        try
-						        {
-                                    string emailMessage;
-							        emailMessage = header.Subject;
-								    listBoxLog.Items.Insert(0, "SMS Message: " + emailMessage);
-							        pop.DeleteMessage(messageNum);
-									// We only want one message at a time so, disconnect and wait for next time.
-								    pop.Disconnect();
-								    SendMessageToVixen(emailMessage, out blacklist);
-                                    if (blacklist == true)
-                                    {
-                                        string rtnmsg = "Please reframe from using inappropiate words. If this happens again your email address will be banned.";
-                                        SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
-                                        return;
                                     }
-                                    else
+                                    catch (Exception ex)
                                     {
-                                        string rtnmsg = "Your message will appear soon in lights.";
-                                        SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
-                                        return;
+                                        listBoxLog.Items.Insert(0, "Error Parsing Message Body: " + ex.Message);
                                     }
-							    }
-							    catch (Exception ex)
-							    {
-								    listBoxLog.Items.Insert(0, "Error Parsing Message Body: " + ex.Message);
-							    }  
+                                }
                             }
-						}
+                            
+                        }
+
+                        else
+                        {
+                            pop.DeleteMessage(messageNum);
+                            pop.Disconnect();
+                            string rtnmsg = "You have been banned for the night for sending ninappropiate words. Thanks for watching the lights on Northridge Rd.";
+                            SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+                        }
                         Application.DoEvents();
                     }
                 }
@@ -208,10 +227,15 @@ namespace Vixen_Messaging
             textBoxSequenceTemplate.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "SequenceTemplate", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Sequence"));
             textBoxOutputSequence.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "OutputSequence", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Sequence\\HelloOut.tim"));
             textBoxReplaceText.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "ReplaceText", "NamePlaceholder");
-            textBoxLogFileName.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "LogFile", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Logs\\Messaging.log")); // "C:\\Users\\Study\\Documents\\Vixen 3\\Logs\\Message.log");
+            textBoxLogFileName.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "LogMessageFile", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Logs\\Message.log"));
+            textBoxBlacklistEmailLog.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "LogBlacklistFile", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Logs\\BlacklistEmail.log")); 
             msgretrievaltime.Text = profile.GetSetting(XMLProfileSettings.SettingType.Profiles, "ReplaceValue", "30");
 
             buttonStop.Enabled = false;
+            File.Create(textBoxBlacklistEmailLog.Text).Close();
+            BlacklistLocation.Text = (Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Logs\\Blacklist.txt"));
+            string content = File.ReadAllText(BlacklistLocation.Text);
+            richTextBoxBlacklist.Text = content; 
             StartChecking();
         }
 
@@ -244,8 +268,6 @@ namespace Vixen_Messaging
                 else
                 {
                     blacklist = true;
-            //        string blacklist = "Please reframe from sending inappropiate words. Your message has been deleted and email address recordered. If this happens again your email address will be band.";
-            //        SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
                 }
             }
             catch (Exception ex)
@@ -265,7 +287,7 @@ namespace Vixen_Messaging
         {
             string textLine = "";
 
-            using (System.IO.StreamReader file = new System.IO.StreamReader(Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Logs\\Blacklist.txt")))
+            using (System.IO.StreamReader file = new System.IO.StreamReader(BlacklistLocation.Text))
             {
                 do
                 {
@@ -287,6 +309,33 @@ namespace Vixen_Messaging
             }
         }
 
+        private bool CheckBlacklistEmail(string headerfrom)
+        {
+            string blacklistaddress = "";
+            int maxaddress = 0;
+
+            using (System.IO.StreamReader file = new System.IO.StreamReader(textBoxBlacklistEmailLog.Text))
+            {
+                do
+                {
+
+                    blacklistaddress = file.ReadLine();
+
+                    if (headerfrom == blacklistaddress)
+                    {
+                        maxaddress = maxaddress + 1;
+                        if (maxaddress == 2)
+                        {
+                            file.Close();
+                            return true;
+                        }
+                    }
+                } while (file.Peek() != -1);
+                file.Close();
+                return false;
+            }
+        }
+
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             XMLProfileSettings profile = new XMLProfileSettings();
@@ -297,8 +346,9 @@ namespace Vixen_Messaging
             profile.PutSetting(XMLProfileSettings.SettingType.Profiles, "SequenceTemplate", textBoxSequenceTemplate.Text);
             profile.PutSetting(XMLProfileSettings.SettingType.Profiles, "OutputSequence", textBoxOutputSequence.Text);
             profile.PutSetting(XMLProfileSettings.SettingType.Profiles, "ReplaceText", textBoxReplaceText.Text);
-            profile.PutSetting(XMLProfileSettings.SettingType.Profiles, "LogFile", textBoxLogFileName.Text);
+            profile.PutSetting(XMLProfileSettings.SettingType.Profiles, "LogMessageFile", textBoxLogFileName.Text);
             profile.PutSetting(XMLProfileSettings.SettingType.Profiles, "ReplaceValue", msgretrievaltime.Text);
+            profile.PutSetting(XMLProfileSettings.SettingType.Profiles, "LogBlacklistFile", textBoxBlacklistEmailLog.Text);
         }
 
         private void SendReturnText(string phoneNumber, string msgTo, string rtnmsg, int messageNum)
@@ -344,5 +394,32 @@ namespace Vixen_Messaging
         {
             StartChecking();
         }
+
+        private void addblacklistname_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void blacklistname_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SaveBlacklist_Click(object sender, EventArgs e)
+        {
+            richTextBoxBlacklist.SaveFile(BlacklistLocation.Text, RichTextBoxStreamType.PlainText);
+            MessageBox.Show("Programs saved!");
+        }
+
+        private void richTextBoxBlacklist_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BlacklistLocation_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

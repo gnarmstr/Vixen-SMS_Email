@@ -59,6 +59,13 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.msgretrievaltime = new System.Windows.Forms.NumericUpDown();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBoxBlacklistEmailLog = new System.Windows.Forms.TextBox();
+            this.richTextBoxBlacklist = new System.Windows.Forms.RichTextBox();
+            this.BlacklistLocation = new System.Windows.Forms.TextBox();
+            this.SaveBlacklist = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -66,6 +73,7 @@
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.msgretrievaltime)).BeginInit();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -81,14 +89,14 @@
             // 
             this.textBoxServer.Location = new System.Drawing.Point(135, 38);
             this.textBoxServer.Name = "textBoxServer";
-            this.textBoxServer.Size = new System.Drawing.Size(514, 26);
+            this.textBoxServer.Size = new System.Drawing.Size(588, 26);
             this.textBoxServer.TabIndex = 1;
             // 
             // textBoxUID
             // 
             this.textBoxUID.Location = new System.Drawing.Point(135, 69);
             this.textBoxUID.Name = "textBoxUID";
-            this.textBoxUID.Size = new System.Drawing.Size(514, 26);
+            this.textBoxUID.Size = new System.Drawing.Size(588, 26);
             this.textBoxUID.TabIndex = 3;
             // 
             // label2
@@ -105,7 +113,7 @@
             this.textBoxPWD.Location = new System.Drawing.Point(135, 98);
             this.textBoxPWD.Name = "textBoxPWD";
             this.textBoxPWD.PasswordChar = '*';
-            this.textBoxPWD.Size = new System.Drawing.Size(514, 26);
+            this.textBoxPWD.Size = new System.Drawing.Size(588, 26);
             this.textBoxPWD.TabIndex = 5;
             // 
             // label3
@@ -127,14 +135,14 @@
             this.groupBox1.Controls.Add(this.textBoxUID);
             this.groupBox1.Location = new System.Drawing.Point(12, 19);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(669, 145);
+            this.groupBox1.Size = new System.Drawing.Size(729, 145);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mail Server";
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(409, 720);
+            this.buttonStart.Location = new System.Drawing.Point(289, 865);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(123, 46);
             this.buttonStart.TabIndex = 7;
@@ -144,7 +152,7 @@
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(546, 720);
+            this.buttonStop.Location = new System.Drawing.Point(426, 865);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(123, 46);
             this.buttonStop.TabIndex = 8;
@@ -154,12 +162,14 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.textBoxBlacklistEmailLog);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.textBoxLogFileName);
             this.groupBox2.Controls.Add(this.listBoxLog);
             this.groupBox2.Location = new System.Drawing.Point(12, 354);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(669, 266);
+            this.groupBox2.Size = new System.Drawing.Size(729, 420);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Log";
@@ -167,17 +177,17 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(18, 232);
+            this.label8.Location = new System.Drawing.Point(18, 339);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(69, 20);
+            this.label8.Size = new System.Drawing.Size(109, 20);
             this.label8.TabIndex = 11;
-            this.label8.Text = "Log File:";
+            this.label8.Text = "Message Log:";
             // 
             // textBoxLogFileName
             // 
-            this.textBoxLogFileName.Location = new System.Drawing.Point(93, 229);
+            this.textBoxLogFileName.Location = new System.Drawing.Point(183, 336);
             this.textBoxLogFileName.Name = "textBoxLogFileName";
-            this.textBoxLogFileName.Size = new System.Drawing.Size(553, 26);
+            this.textBoxLogFileName.Size = new System.Drawing.Size(540, 26);
             this.textBoxLogFileName.TabIndex = 12;
             // 
             // listBoxLog
@@ -187,7 +197,7 @@
             this.listBoxLog.ItemHeight = 20;
             this.listBoxLog.Location = new System.Drawing.Point(21, 35);
             this.listBoxLog.Name = "listBoxLog";
-            this.listBoxLog.Size = new System.Drawing.Size(625, 184);
+            this.listBoxLog.Size = new System.Drawing.Size(702, 284);
             this.listBoxLog.TabIndex = 0;
             this.listBoxLog.SelectedIndexChanged += new System.EventHandler(this.listBoxLog_SelectedIndexChanged);
             // 
@@ -208,7 +218,7 @@
             this.groupBox3.Controls.Add(this.textBoxVixenServer);
             this.groupBox3.Location = new System.Drawing.Point(12, 170);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(669, 178);
+            this.groupBox3.Size = new System.Drawing.Size(729, 178);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Vixen Info";
@@ -228,7 +238,7 @@
             // 
             this.textBoxReplaceText.Location = new System.Drawing.Point(183, 123);
             this.textBoxReplaceText.Name = "textBoxReplaceText";
-            this.textBoxReplaceText.Size = new System.Drawing.Size(463, 26);
+            this.textBoxReplaceText.Size = new System.Drawing.Size(540, 26);
             this.textBoxReplaceText.TabIndex = 9;
             this.textBoxReplaceText.TextChanged += new System.EventHandler(this.textBoxReplaceText_TextChanged);
             // 
@@ -245,7 +255,7 @@
             // 
             this.textBoxOutputSequence.Location = new System.Drawing.Point(183, 92);
             this.textBoxOutputSequence.Name = "textBoxOutputSequence";
-            this.textBoxOutputSequence.Size = new System.Drawing.Size(463, 26);
+            this.textBoxOutputSequence.Size = new System.Drawing.Size(540, 26);
             this.textBoxOutputSequence.TabIndex = 7;
             // 
             // label5
@@ -261,7 +271,7 @@
             // 
             this.textBoxSequenceTemplate.Location = new System.Drawing.Point(183, 63);
             this.textBoxSequenceTemplate.Name = "textBoxSequenceTemplate";
-            this.textBoxSequenceTemplate.Size = new System.Drawing.Size(463, 26);
+            this.textBoxSequenceTemplate.Size = new System.Drawing.Size(540, 26);
             this.textBoxSequenceTemplate.TabIndex = 5;
             // 
             // label4
@@ -277,7 +287,7 @@
             // 
             this.textBoxVixenServer.Location = new System.Drawing.Point(183, 34);
             this.textBoxVixenServer.Name = "textBoxVixenServer";
-            this.textBoxVixenServer.Size = new System.Drawing.Size(463, 26);
+            this.textBoxVixenServer.Size = new System.Drawing.Size(540, 26);
             this.textBoxVixenServer.TabIndex = 3;
             // 
             // toolTip1
@@ -291,10 +301,11 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(4, 7);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(4, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(711, 684);
+            this.tabControl1.Size = new System.Drawing.Size(766, 830);
             this.tabControl1.TabIndex = 11;
             // 
             // tabPage1
@@ -306,7 +317,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(703, 651);
+            this.tabPage1.Size = new System.Drawing.Size(758, 797);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Settings";
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
@@ -320,7 +331,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(703, 651);
+            this.tabPage2.Size = new System.Drawing.Size(758, 797);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Options";
             // 
@@ -329,14 +340,14 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(19, 39);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(178, 20);
+            this.label9.Size = new System.Drawing.Size(198, 20);
             this.label9.TabIndex = 1;
-            this.label9.Text = "Message Retrieval time:";
+            this.label9.Text = "Message Retrieval interval:";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(294, 39);
+            this.label10.Location = new System.Drawing.Point(310, 39);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(37, 20);
             this.label10.TabIndex = 2;
@@ -344,7 +355,7 @@
             // 
             // msgretrievaltime
             // 
-            this.msgretrievaltime.Location = new System.Drawing.Point(213, 37);
+            this.msgretrievaltime.Location = new System.Drawing.Point(229, 37);
             this.msgretrievaltime.Maximum = new decimal(new int[] {
             6000,
             0,
@@ -366,16 +377,85 @@
             0});
             this.msgretrievaltime.ValueChanged += new System.EventHandler(this.msgretrievaltime_ValueChanged);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage3.Controls.Add(this.label11);
+            this.tabPage3.Controls.Add(this.SaveBlacklist);
+            this.tabPage3.Controls.Add(this.BlacklistLocation);
+            this.tabPage3.Controls.Add(this.richTextBoxBlacklist);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(758, 797);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Blacklist";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(18, 381);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(145, 20);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "Blacklist Email Log:";
+            this.toolTip1.SetToolTip(this.label12, "Email address will be stored in this file when a member has sent a Blaclist word." +
+        " This will be cleared each time Vixen Messaging is loaded.");
+            // 
+            // textBoxBlacklistEmailLog
+            // 
+            this.textBoxBlacklistEmailLog.Location = new System.Drawing.Point(183, 378);
+            this.textBoxBlacklistEmailLog.Name = "textBoxBlacklistEmailLog";
+            this.textBoxBlacklistEmailLog.Size = new System.Drawing.Size(540, 26);
+            this.textBoxBlacklistEmailLog.TabIndex = 14;
+            // 
+            // richTextBoxBlacklist
+            // 
+            this.richTextBoxBlacklist.Location = new System.Drawing.Point(6, 49);
+            this.richTextBoxBlacklist.Name = "richTextBoxBlacklist";
+            this.richTextBoxBlacklist.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.richTextBoxBlacklist.Size = new System.Drawing.Size(443, 742);
+            this.richTextBoxBlacklist.TabIndex = 5;
+            this.richTextBoxBlacklist.Text = "";
+            this.richTextBoxBlacklist.TextChanged += new System.EventHandler(this.richTextBoxBlacklist_TextChanged);
+            // 
+            // BlacklistLocation
+            // 
+            this.BlacklistLocation.Location = new System.Drawing.Point(165, 13);
+            this.BlacklistLocation.Name = "BlacklistLocation";
+            this.BlacklistLocation.Size = new System.Drawing.Size(575, 26);
+            this.BlacklistLocation.TabIndex = 6;
+            this.BlacklistLocation.TextChanged += new System.EventHandler(this.BlacklistLocation_TextChanged);
+            // 
+            // SaveBlacklist
+            // 
+            this.SaveBlacklist.Location = new System.Drawing.Point(535, 742);
+            this.SaveBlacklist.Name = "SaveBlacklist";
+            this.SaveBlacklist.Size = new System.Drawing.Size(161, 49);
+            this.SaveBlacklist.TabIndex = 7;
+            this.SaveBlacklist.Text = "Save";
+            this.SaveBlacklist.UseVisualStyleBackColor = true;
+            this.SaveBlacklist.Click += new System.EventHandler(this.SaveBlacklist_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 16);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(136, 20);
+            this.label11.TabIndex = 8;
+            this.label11.Text = "Blacklist Location:";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(721, 793);
+            this.ClientSize = new System.Drawing.Size(782, 944);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonStart);
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(743, 849);
+            this.MinimumSize = new System.Drawing.Size(804, 1000);
             this.Name = "FormMain";
             this.Text = "Vixen Messaging";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
@@ -391,6 +471,8 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.msgretrievaltime)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -427,6 +509,13 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown msgretrievaltime;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBoxBlacklistEmailLog;
+        private System.Windows.Forms.RichTextBox richTextBoxBlacklist;
+        private System.Windows.Forms.TextBox BlacklistLocation;
+        private System.Windows.Forms.Button SaveBlacklist;
+        private System.Windows.Forms.Label label11;
     }
 }
 
