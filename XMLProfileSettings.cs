@@ -3,18 +3,18 @@ using System.Xml;
 
 namespace Vixen_Messaging
 {
-    public class XMLProfileSettings
+    public class XmlProfileSettings
     {
         private readonly XmlDocument _xmlDocument = new XmlDocument();
         private readonly string _documentPath;
         private const string Root = "settings";
 
-        public XMLProfileSettings()
+        public XmlProfileSettings()
         {
             try
             {
                 _documentPath =
-                    System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "Vixen Messaging",
+                    System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Vixen Messaging",
                                            "Settings.xml");
                 if (!System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(_documentPath)))
                     System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(_documentPath));
@@ -26,7 +26,7 @@ namespace Vixen_Messaging
             }
         }
 
-        public XMLProfileSettings(string path)
+        public XmlProfileSettings(string path)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace Vixen_Messaging
             if (xmlNode != null)
             {
                 xmlNode.RemoveAll();
-                xmlNode.ParentNode.RemoveChild(xmlNode);
+                if (xmlNode.ParentNode != null) xmlNode.ParentNode.RemoveChild(xmlNode);
                 _xmlDocument.Save(_documentPath);
             }
         }
@@ -62,12 +62,8 @@ namespace Vixen_Messaging
 
         public void PutSetting(SettingType type, string xPath, string value)
         {
-            string path = String.Format("{0}/{1}/{2}", Root, type, xPath);
-            XmlNode xmlNode = _xmlDocument.SelectSingleNode(path);
-            if (xmlNode == null)
-            {
-                xmlNode = CreateMissingNode(path);
-            }
+            var path = String.Format("{0}/{1}/{2}", Root, type, xPath);
+            XmlNode xmlNode = _xmlDocument.SelectSingleNode(path) ?? CreateMissingNode(path);
             xmlNode.InnerText = value;
             _xmlDocument.Save(_documentPath);
         }
@@ -84,7 +80,7 @@ namespace Vixen_Messaging
 
         public string GetSetting(SettingType type, string xPath, string defaultValue)
         {
-            XmlNode xmlNode = _xmlDocument.SelectSingleNode(String.Format("{0}/{1}/{2}", Root, type, xPath));
+            var xmlNode = _xmlDocument.SelectSingleNode(String.Format("{0}/{1}/{2}", Root, type, xPath));
             if (xmlNode != null)
             {
                 return xmlNode.InnerText;
@@ -103,7 +99,7 @@ namespace Vixen_Messaging
                 XmlNode testNode = _xmlDocument.SelectSingleNode(currentXPath);
                 if (testNode == null)
                 {
-                    currentNode.InnerXml += string.Format("<{0}></{0}>", xPathSection);
+                    if (currentNode != null) currentNode.InnerXml += string.Format("<{0}></{0}>", xPathSection);
                 }
                 currentNode = _xmlDocument.SelectSingleNode(currentXPath);
                 currentXPath += "/";
