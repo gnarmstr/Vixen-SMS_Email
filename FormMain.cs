@@ -2126,22 +2126,12 @@ namespace Vixen_Messaging
         switch (comboBoxEmailSettings.Text)
             {
                 case "Manual":
-                    textBoxComments.Text = @"Ensure you use an email client that supports POP (port 995) and TLS (587). You may need to chnange your email settings to enable POP, also create a filter to ensure all messages are sent to the inbox and are not directed to the Spam folder.";
+                    textBoxComments.Text = @"Ensure you use an email client that supports POP (port 995) and TLS (587). You may need to change your email settings to enable POP, also create a filter to ensure all messages are sent to the inbox and are not directed to the Spam folder. Outlook.com and Hotmail are not supported due to Microsoft limiting the number of retrievals per 15min.";
                     break;
                 case "GMail":
                     textBoxServer.Text = @"pop.gmail.com";
                     textBoxSMTP.Text = @"smtp.gmail.com";
                     textBoxComments.Text = @"You will need to reduce the security settings in Gmail to allow 'access for less secure apps'. This can be done in your account settings. Also create a filter to ensure emails do not get sent to the spam folder.";
-                    break;
-                case "Outlook/Hotmail":
-                    textBoxServer.Text = @"pop3.live.com";
-                    textBoxSMTP.Text = @"smtp.live.com";
-                    textBoxComments.Text = @"No email settings were required to be changed, however a filter to ensure all emails are sent to the inbox wouldn't hurt.";
-                    break;
-                case "Office365":
-                    textBoxServer.Text = @"outlook.office365.com";
-                    textBoxSMTP.Text = @"smtp.office365.com";
-                    textBoxComments.Text = @"No email settings were required to be changed, however a filter to ensure all emails are sent to the inbox wouldn't hurt.";
                     break;
                 case "Yahoo.com":
                     textBoxServer.Text = @"pop.mail.yahoo.com";
