@@ -133,7 +133,8 @@
 6. A Whitelist is used when you only want to display the words that are listed. All words in the message must be in the Whitelist for the message to be displayed.
 
 7. Mail Server setting. I would suggest creating a new email address specifically for your lights and enter all email settings before using this app. You may need to lower the security settings within your email settings, this is necessary for gmail addresses, it is also a good idea to create a filter that allows all emails less than 20k as emails could end up in your junk mail and will not be able to be retrieved to show on your display.
-</value>
+
+8. Message retrival Intervals are automatically adjusted based on the effect length.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
