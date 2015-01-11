@@ -110,8 +110,8 @@ namespace Vixen_Messaging
             catch (Exception)
             {
             }
-            
-            timerCheckMail.Interval = Convert.ToInt16(msgretrievaltime.Value) * 1000;
+
+			timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + 5) * 1000;
             var headerphone = "";
 
             //Will only display after first run from install.
@@ -326,13 +326,11 @@ namespace Vixen_Messaging
             {
                 groupBoxEffects.Visible = false;
                 groupBoxSeqControl.Visible = true;
-                msgretrievaltime.Enabled = false;
             }
             else
             {
                 groupBoxEffects.Visible = true;
                 groupBoxSeqControl.Visible = false;
-                msgretrievaltime.Enabled = true;
             }
 
             if (checkBoxDisableSeq.Checked)
@@ -430,7 +428,6 @@ namespace Vixen_Messaging
             checkBoxEnableSqnctrl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxSqnEnable", false);
             checkBoxAutoStart.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", true);
             checkBoxBlacklist.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxBlack_list", true);
-            msgretrievaltime.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "ReplaceValue", "30");
             textBoxNodeId.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxNodeId", "");
             checkBoxDisableSeq.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxDisableSeq", false);
             checkBoxRandomCol.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandomCol", true);
@@ -519,6 +516,7 @@ namespace Vixen_Messaging
             textBoxReturnSubjectHeading.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxReturnSubjectHeading", "Lights on Northridge Rd");
             textBoxSMTP.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSMTP", "smtp.gmail.com");
             comboBoxEmailSettings.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxEmailSettings", "GMail");
+            checkBoxVariableLength.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVariableLength", true);
         }
         #endregion
 
@@ -574,10 +572,28 @@ namespace Vixen_Messaging
                     {
               #region Custom Effects
 
+                        if (checkBoxVariableLength.Checked)
+                        {
+                            timerCheckMail.Enabled = false;
+                            var msgcount = msg.Length;
+                            string selectedSeqTime = (Convert.ToDecimal(msgcount) * Convert.ToDecimal(0.8) * (Convert.ToDecimal((double)5 / (double)trackBarTextSpeed.Value))).ToString();
+                            var index = selectedSeqTime.IndexOf(".");
+                            if (index > 0)
+                                selectedSeqTime = selectedSeqTime.Substring(0, index);
+                            selectedSeqTime = selectedSeqTime.TrimEnd('.');
+                            selectedSeqTime = selectedSeqTime.Replace("S", "");
+                            var newSeqTime = Convert.ToDecimal(selectedSeqTime);
+                            GlobalVar.SeqIntervalTime = newSeqTime + 1;
+                        }
+                        else
+                        {
+                            GlobalVar.SeqIntervalTime = Convert.ToDecimal(EffectTime.Value);
+                        }
+
                         outputFileName = textBoxOutputSequence.Text;
                         fileText = fileText.Replace("NodeId_Change", textBoxNodeId.Text);//adds NodeId
                         fileText = fileText.Replace("StringOrienation_Change", comboBoxString.Text);
-                        fileText = fileText.Replace("TextTime_Change", EffectTime.Value.ToString()); //Text Sequence time
+                        fileText = fileText.Replace("TextTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Text Sequence time
                         fileText = fileText.Replace("SnowFlake_Change", EffectType.Value.ToString()); //Type
                         fileText = fileText.Replace("SnowFlakeMax_Change", MaxSnowFlake.Value.ToString()); //Max number
                         fileText = fileText.Replace("FireHeight_Change", FireHeight.Value.ToString()); //Fire height
@@ -621,7 +637,7 @@ namespace Vixen_Messaging
                             
                         var textColorNum = Convert.ToUInt32(hexValue, 16);
                         fileText = fileText.Replace("Colour1_Change", textColorNum.ToString());
-                        fileText = fileText.Replace("PT20S", "PT" + EffectTime.Value + "S"); //Sequence time
+                        fileText = fileText.Replace("PT20S", "PT" + GlobalVar.SeqIntervalTime.ToString() + "S"); //Sequence time
 
                         string selectedSeq;
                         //Random or selected Selection
@@ -653,7 +669,7 @@ namespace Vixen_Messaging
                         {
                             case "SnowFlakes":
                                 fileText = fileText.Replace("Speed_1Change", trackBarSpeedSnowFlakes.Value.ToString());
-                                fileText = fileText.Replace("SnowFlakeTime_Change", EffectTime.Value.ToString()); //Sequence time
+                                fileText = fileText.Replace("SnowFlakeTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                                 fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
@@ -687,7 +703,7 @@ namespace Vixen_Messaging
 
                             case "Fire":
                                 fileText = fileText.Replace("Speed_1Change", "0");
-                                fileText = fileText.Replace("FireHeightTime_Change", EffectTime.Value.ToString()); //Sequence time
+                                fileText = fileText.Replace("FireHeightTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                                 fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
@@ -707,7 +723,7 @@ namespace Vixen_Messaging
                                 break;
                             case "Meteors":
                                 fileText = fileText.Replace("Speed_1Change", trackBarSpeedMeteors.Value.ToString());
-                                fileText = fileText.Replace("MeteorTime_Change", EffectTime.Value.ToString()); //Sequence time
+                                fileText = fileText.Replace("MeteorTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                                 fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
@@ -740,7 +756,7 @@ namespace Vixen_Messaging
                                 break;
                             case "Twinkles":
                                 fileText = fileText.Replace("Speed_1Change", trackBarSpeedTwinkles.Value.ToString());
-                                fileText = fileText.Replace("TwinkleTime_Change", EffectTime.Value.ToString()); //Sequence time
+                                fileText = fileText.Replace("TwinkleTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                                 fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
@@ -795,6 +811,11 @@ namespace Vixen_Messaging
                         }
                         File.Delete(outputFileName);
                         File.WriteAllText(outputFileName, fileText);
+                        if (checkBoxVariableLength.Checked)
+                        {
+                            timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime)*1000;
+                            timerCheckMail.Enabled = true;
+                        }
                     }
               #endregion
                     else
@@ -892,7 +913,7 @@ namespace Vixen_Messaging
             msg = rgx.Replace(msg, ""); //creates an array of all the individual names.
             var splitmsg = msg.Split(' ');
             var i = 0;
-            var splitmsgcount = splitmsg.Length; //to determine how mant words are in the message.
+            var splitmsgcount = splitmsg.Length; //to determine how many words are in the message.
 
             bool notWhiteCheck;
             do
@@ -1296,15 +1317,20 @@ namespace Vixen_Messaging
                     int seqTimeString2 = Convert.ToInt16(seqTimeString1);
                     seqTimeString2 = seqTimeString2 * 60;
                     seqTimeString = seqTimeString.Remove(0, 1);
+					seqTimeString = seqTimeString.Replace("S", "");
                     int seqTimeString3 = Convert.ToInt16(seqTimeString);
                     var newSeqTime = Convert.ToDecimal(seqTimeString2 + seqTimeString3);
-                    msgretrievaltime.Value = newSeqTime + 20; // add 20 seconds to allow for the Sequence to finish before another check for messages is performed.
+					GlobalVar.SeqIntervalTime = newSeqTime + 20; // add 20 seconds to allow for the Sequence to finish before another check for messages is performed.
                 }
                 else
                 {
-                    seqTimeString = selection.Replace("S", "");
-                    var newSeqTime = Convert.ToDecimal(seqTimeString);
-                    msgretrievaltime.Value = newSeqTime + 10; // add 10 seconds to allow for the Sequence to finish before another check for messages is performed.
+					var index = selection.IndexOf(".");
+					if (index > 0)
+						selection = selection.Substring(0, index);
+					seqTimeString = selection.TrimEnd('.');
+					seqTimeString = seqTimeString.Replace("S", "");
+					var newSeqTime = Convert.ToDecimal(seqTimeString);
+					GlobalVar.SeqIntervalTime = newSeqTime + 10; // add 10 seconds to allow for the Sequence to finish before another check for messages is performed.
                 }
             }
         }
@@ -1562,6 +1588,41 @@ namespace Vixen_Messaging
                 }
             }
 
+			string seqTimeString;
+			var selectedSeqTime1 = "";
+			if (selectedSeqTime.Contains("M"))
+			{
+				//get time string of 1M23.345S for example and convert to seconds then add to Time Interval box.
+				var index = selectedSeqTime.IndexOf(".");
+				
+				if (index > 0)
+					selectedSeqTime1 = selectedSeqTime.Substring(0, index);
+				seqTimeString = selectedSeqTime1.TrimEnd('.');
+				seqTimeString = selectedSeqTime1.Replace("M", "");
+				var length = seqTimeString.Length;
+				var seqTimeString1 = seqTimeString.Remove(1, length - 1);
+				int seqTimeString2 = Convert.ToInt16(seqTimeString1);
+				seqTimeString2 = seqTimeString2 * 60;
+				seqTimeString = seqTimeString.Remove(0, 1);
+				seqTimeString = seqTimeString.Replace("S", "");
+				int seqTimeString3 = Convert.ToInt16(seqTimeString);
+				var newSeqTime = Convert.ToDecimal(seqTimeString2 + seqTimeString3);
+				GlobalVar.SeqIntervalTime = newSeqTime + 15; // add 20 seconds to allow for the Sequence to finish before another check for messages is performed.
+			}
+			else
+			{
+				var index = selectedSeqTime.IndexOf(".");
+				if (index > 0)
+					selectedSeqTime1 = selectedSeqTime.Substring(0, index);
+				seqTimeString = selectedSeqTime1.TrimEnd('.');
+				seqTimeString = seqTimeString.Replace("S", "");
+				var newSeqTime = Convert.ToDecimal(seqTimeString);
+				GlobalVar.SeqIntervalTime = newSeqTime + 5; // add 10 seconds to allow for the Sequence to finish before another check for messages is performed.
+			}
+
+			timerCheckMail.Enabled = false;
+			
+
             //Open Sequence and determine Line numbers for the insert of Nutcracker files 1 and 2
             using (var file = new StreamReader(selectedSeq))
             {
@@ -1665,6 +1726,8 @@ namespace Vixen_Messaging
             fileText = fileText.Replace("TextDirection_Change", textDirection.ToString());
             File.Delete(textBoxOutputSequence.Text);
             File.WriteAllText(textBoxOutputSequence.Text, fileText);
+			timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime) * 1000; 
+			timerCheckMail.Enabled = true;
         }
 #endregion
 
@@ -1909,7 +1972,6 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", textBoxGroupName.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "StringOrienation", comboBoxString.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "LogMessageFile", textBoxLogFileName.Text);
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "ReplaceValue", msgretrievaltime.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "LogBlacklistFile", textBoxBlacklistEmailLog.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "SMSSubjectHeader", textBoxSubjectHeader.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxSqnEnable", checkBoxEnableSqnctrl.Checked);
@@ -1991,7 +2053,7 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength6", textBoxSequenceLength6.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "tabControlSequence", tabControlSequence.SelectedIndex);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "tabControlEffects", tabControlEffects.SelectedIndex);
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "SeqIntervalTime", seqIntervalTime.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "SeqIntervalTime", GlobalVar.SeqIntervalTime.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFont", textBoxFont.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFontSize", textBoxFontSize.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxTextDirection", comboBoxTextDirection.Text);
@@ -2003,6 +2065,7 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFromEmailAddress", textBoxFromEmailAddress.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSMTP", textBoxSMTP.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxEmailSettings", comboBoxEmailSettings.Text);
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVariableLength", checkBoxVariableLength.Checked.ToString());
         }
 #endregion
 
@@ -2166,28 +2229,6 @@ namespace Vixen_Messaging
             }
         }
         #endregion        
-       
-        private void msgretrievaltime_ValueChanged(object sender, EventArgs e)
-        {
-            if (EffectTime.Value > msgretrievaltime.Value)
-            {
-                if (MessageBox.Show(@"Message Interval time is less then the Effect sequence length. This may result in loosing incoming messages. Would you like to decrease the Effect sequence length to ensure all messages are captured?", @"Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    EffectTime.Value = msgretrievaltime.Value - 5;
-                }
-            }
-        }
-
-        private void EffectTime_ValueChanged(object sender, EventArgs e)
-        {
-            if (msgretrievaltime.Value < EffectTime.Value)
-            {
-                if (MessageBox.Show(@"Sequence time is greater then the Message retrieval time. This may result in loosing incoming messages. Would you like to increase the Message retrival time to ensure all messages are captured?", @"Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    msgretrievaltime.Value = EffectTime.Value + 5;
-                }
-            }
-        }
 
         private void checkBoxWhitelist_CheckedChanged(object sender, EventArgs e)
         {
@@ -2202,18 +2243,34 @@ namespace Vixen_Messaging
         {
             groupBoxEffects.Visible = !groupBoxEffects.Visible;
             groupBoxSeqControl.Visible = !groupBoxSeqControl.Visible;
-            msgretrievaltime.Enabled = !msgretrievaltime.Enabled;
-
-            if (checkBoxEnableSqnctrl.Checked)
-            {
-                GlobalVar.SeqIntervalTime = msgretrievaltime.Value;
-                SelectSeqTime();
-            }
-            else
-            {
-                msgretrievaltime.Value = GlobalVar.SeqIntervalTime;
-            }
-            
+			if (timerCheckMail.Enabled)
+			{
+				Stop_Vixen();
+				if (checkBoxEnableSqnctrl.Checked)
+				{
+					SelectSeqTime();
+				}
+				else
+				{
+					GlobalVar.SeqIntervalTime = EffectTime.Value + 5;
+				}
+				buttonStart.Image = Tools.GetIcon(Resources.StartB_W, 40);
+				buttonStart.Text = "";
+				buttonStop.Image = Tools.GetIcon(Resources.Stop, 40);
+				buttonStop.Text = "";
+				StartChecking();
+			}
+			else
+			{
+				if (checkBoxEnableSqnctrl.Checked)
+				{
+					SelectSeqTime();
+				}
+				else
+				{
+					GlobalVar.SeqIntervalTime = EffectTime.Value + 5;
+				}
+			}
         }
 
         private void FontSelection ()
@@ -2259,6 +2316,17 @@ namespace Vixen_Messaging
             checkBoxEnableSqnctrl.Enabled = !checkBoxEnableSqnctrl.Enabled;
             checkBoxRandomSeqSelection.Enabled = !checkBoxRandomSeqSelection.Enabled;
             checkBoxEnableSqnctrl.Checked = false;
+        }
+
+		private void EffectTime_ValueChanged(object sender, EventArgs e)
+		{
+			GlobalVar.SeqIntervalTime = EffectTime.Value + 5;
+		}
+
+        private void checkBoxVariableLength_CheckedChanged(object sender, EventArgs e)
+        {
+            EffectTime.Enabled = !EffectTime.Enabled;
+            GlobalVar.SeqIntervalTime = EffectTime.Value + 5;
         }
         
     }

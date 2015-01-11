@@ -28,34 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelpForm));
-            this.label1 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(46, 43);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(696, 704);
-            this.label1.TabIndex = 0;
-            this.label1.Text = resources.GetString("label1.Text");
-            // 
-            // HelpForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Azure;
-            this.ClientSize = new System.Drawing.Size(788, 962);
-            this.Controls.Add(this.label1);
-            this.HelpButton = true;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(810, 1018);
-            this.MinimumSize = new System.Drawing.Size(810, 1018);
-            this.Name = "HelpForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Vixen Messaging Help";
-            this.Load += new System.EventHandler(this.Help_Load);
-            this.ResumeLayout(false);
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelpForm));
+			this.label1 = new System.Windows.Forms.Label();
+			this.SuspendLayout();
+			// 
+			// label1
+			// 
+			this.label1.Location = new System.Drawing.Point(31, 28);
+			this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(464, 563);
+			this.label1.TabIndex = 0;
+			this.label1.Text = resources.GetString("label1.Text");
+			// 
+			// HelpForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.Color.Azure;
+			this.ClientSize = new System.Drawing.Size(529, 636);
+			this.Controls.Add(this.label1);
+			this.HelpButton = true;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.MaximumSize = new System.Drawing.Size(545, 675);
+			this.MinimumSize = new System.Drawing.Size(545, 675);
+			this.Name = "HelpForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+			this.Text = "Vixen Messaging Help";
+			this.Load += new System.EventHandler(this.Help_Load);
+			this.ResumeLayout(false);
 
         }
 
