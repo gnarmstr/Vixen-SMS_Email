@@ -77,237 +77,6 @@ namespace Vixen_Messaging
         }
 #endregion
 
-#region Main Form
-        private void timerCheckMail_Tick(object sender, EventArgs e)
-        {
-            
-            //checks Vixen for port setting and compare to Vixen messaging
-            try
-            {
-                string[] fullFile = File.ReadAllLines(textBoxVixenFolder.Text + "\\SystemData\\ModuleStore.xml");
-                var l = new List<string>();
-                l.AddRange(fullFile);
-                int i = 0;
-                do
-                {
-                    if (fullFile[i].Contains("<HttpPort>"))
-                    {
-                        if (fullFile[i + 1].Contains("true"))
-                        {
-                            WebServerStatus.Text = @"Vixen Web Server is ENABLED";
-                            WebServerStatus.BackColor = Color.LightGreen;
-                        }
-                        else
-                        {
-                            WebServerStatus.Text = @"Vixen Web Server is DISABLED";
-                            WebServerStatus.BackColor = Color.OrangeRed;
-                        }
-                    }
-                    i++;
-                } while (i != l.Count);
-            }
-            // ReSharper disable once EmptyGeneralCatchClause
-            catch (Exception)
-            {
-            }
-
-			timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + 5) * 1000;
-            var headerphone = "";
-
-            //Will only display after first run from install.
-            var profile = new XmlProfileSettings();
-            string checkfirstload = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "True");
-            if (checkfirstload == "True")
-            {
-                MessageBox.Show(@"Welcome to Vixen Messaging, as this is the first time you have run Vixen Messaging you are required to enter in some information on the following Data form. Also it is recommended that you create a new Email account for use with Vixen Messaging as it will process every incoming email.");
-                Stop_Vixen();
-                GetVixenSettings();
-            }
-
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "False");
-
-            try
-            {
-                if (Pop3Login())
-                {
-                    int messageCount = _pop.GetMessageCount();
-                    LogDisplay(GlobalVar.LogMsg = ("Message Count: " + messageCount));
-                    for (int messageNum = 1; messageNum <= messageCount; messageNum++)
-                    {
-                        var header = _pop.GetMessageHeaders(messageNum);
-                        string rtnmsg;
-                        if (string.IsNullOrEmpty(header.Subject))
-                        {
-                            _pop.DeleteMessage(messageNum);
-                            _pop.Disconnect();
-                            rtnmsg = "Please ensure you enter the message in the subject line.";
-                            SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
-                        }
-                        else
-                        {
-                            if (header.Subject.Contains(textBoxSubjectHeader.Text))
-                            {
-                                headerphone = header.Subject.Substring(textBoxSubjectHeader.Text.Length).Trim();
-                            }
-
-                            if (!CheckBlacklistMessage(header.From.Address, header.Subject, headerphone))
-                        {
-    #region SMS
-
-                            bool blacklist;
-                            bool notWhitemsg;
-                            if (header.Subject.Contains(textBoxSubjectHeader.Text)) //grabs the SMS header details from the form
-                            {
-
-                                var phoneNumber = header.Subject.Substring(textBoxSubjectHeader.Text.Length).Trim();
-                                var msg = _pop.GetMessage(messageNum);
-
-                                //To check if text is in the main body or subpart of body for example from an Hotmail account
-                                string smsMessage;
-                                if (msg.MessagePart.Body == null)
-                                {
-                                    smsMessage = msg.MessagePart.MessageParts[0].GetBodyAsText();
-                                    smsMessage = Regex.Replace(smsMessage, @"\t", "");
-                                    smsMessage = smsMessage.TrimEnd(' ');
-                                }
-                                else
-                                {
-                                    smsMessage = msg.MessagePart.GetBodyAsText();
-                                }
-                                var msgLines = smsMessage.Split('\r');
-                                if (msgLines[0] != "")
-                                {
-                                    LogDisplay(GlobalVar.LogMsg = ("Retrieved Header # " + messageNum + ": " + header.Subject));
-                                    try
-                                        {
-                                            smsMessage = msgLines[0];
-                                            LogDisplay(GlobalVar.LogMsg = ("SMS Message: " + smsMessage));
-                                            _pop.DeleteMessage(messageNum);
-                                            // We only want one message at a time so, disconnect and wait for next time.
-                                            _pop.Disconnect();
-                                            SendMessageToVixen(smsMessage, out blacklist, out notWhitemsg);
-                                            if (blacklist)
-                                            {
-                                                rtnmsg = "Please reframe from using inappropiate words. If this happens again your phone number will be banned for the night.";
-                                                using (var file = new StreamWriter(@textBoxBlacklistEmailLog.Text, true))
-                                                {
-                                                    file.WriteLine(phoneNumber);
-                                                }
-                                                SendReturnText(phoneNumber, header.From.ToString(), rtnmsg, messageNum);
-                                                return;
-                                            }
-                                            else
-                                            {
-                                                if (!notWhitemsg)
-                                                {
-                                                    rtnmsg = "Your message will appear soon in lights.";
-                                                    SendReturnText(phoneNumber, header.From.ToString(), rtnmsg, messageNum);
-                                                    return;
-                                                }
-                                                else
-                                                {
-                                                    rtnmsg = "Sorry one or more of the names you sent is not in the approved list!";
-                                                    SendReturnText(phoneNumber, header.From.ToString(), rtnmsg, messageNum);
-                                                }
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            LogDisplay(GlobalVar.LogMsg = ("Error Parsing Message Body: " + ex.Message));
-                                        }
-                                }
-                                else
-                                {
-                                    _pop.DeleteMessage(messageNum);
-                                    _pop.Disconnect();
-                                    rtnmsg = "The body of your SMS is blank, please ensure the message you want to say in the body and not the subject line.";
-                                    SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
-                                }
-                            }
-                            #endregion
-                            else
-    #region Email
-                            {
-                                if (!CheckBlacklistMessage(header.From.Address, header.Subject, headerphone))
-                                {
-                                    LogDisplay(GlobalVar.LogMsg = ("Retrieved Header # " + messageNum + ": " + header.Subject));
-                                    try
-                                    {
-                                        string emailMessage = header.Subject;
-                                        LogDisplay(GlobalVar.LogMsg = ("Message: " + emailMessage));
-                                        _pop.DeleteMessage(messageNum);
-                                            // We only want one message at a time so, disconnect and wait for next time.
-                                        _pop.Disconnect();
-                                        SendMessageToVixen(emailMessage, out blacklist, out notWhitemsg);
-                                        if (blacklist && !notWhitemsg)
-                                        {
-                                            rtnmsg = "Please reframe from using inappropiate words. If this happens again your email address will be banned for the night.";
-                                            using (var file = new StreamWriter(@textBoxBlacklistEmailLog.Text, true))
-                                            {
-                                                file.WriteLine(header.From.Address);
-                                            }
-                                            SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
-                                            return;
-                                        }
-                                        else
-                                        {
-                                            if (!notWhitemsg)
-                                            {
-                                                rtnmsg = "Your message will appear soon in lights.";
-                                                SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
-                                                return;
-                                            }
-                                            else
-                                            {
-                                                rtnmsg = "Sorry one or more of the names you sent is not in the approved list!";
-                                                SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
-                                            }
-                                        }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                    LogDisplay(GlobalVar.LogMsg = ("Error Parsing Message Body: " + ex.Message));
-                                    }
-                                }
-                            }
-                            #endregion
-                        }
-                        else
-                        {
-                            //Banned from App
-                            _pop.DeleteMessage(messageNum);
-                            _pop.Disconnect();
-                            rtnmsg = textBoxReturnBannedMSG.Text;
-                            SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
-                        }
-                    }
-                        Application.DoEvents();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LogDisplay(GlobalVar.LogMsg = (ex.Message));
-            }
-            finally
-            {
-                if (_pop.Connected)
-                {
-                    try
-                    {
-                        _pop.Disconnect();
-                    }
-// ReSharper disable once EmptyGeneralCatchClause
-                    catch
-                    {
-
-                    }
-                }
-                LogDisplay(GlobalVar.LogMsg = ("Disconnected"));
-            }
-        }
-#endregion
-
 #region Load Form
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -319,6 +88,11 @@ namespace Vixen_Messaging
             richTextBoxBlacklist.Text = content;
             var content1 = File.ReadAllText(GlobalVar.Whitelistlocation);
             richTextBoxWhitelist.Text = content1;
+            var content2 = File.ReadAllText(GlobalVar.LocalMessages);
+            richTextBoxMessage.Text = content2;
+
+            GlobalVar.Msgindex = 0;
+            GlobalVar.PlayMessage = false;
 
             //Ensures correct groups are enabled or visable on first load.
             buttonStop.Enabled = false;
@@ -344,11 +118,11 @@ namespace Vixen_Messaging
 
             //Changes Position and Size of Group boxs in the Sequence Tab
             groupBoxSeqControl.Location = new Point(6, 35);
-            tabControlSequence.Size = new Size(505, 170);
-            groupBoxSeqControl.Size = new Size(510, 195);
-            label26.Location = new Point(60, 240);
-            listBoxLog1.Location = new Point(6, 280);
-            listBoxLog1.Size = new Size(505, 240);
+            tabControlSequence.Size = new Size(505, 185);
+            groupBoxSeqControl.Size = new Size(510, 210);
+            label26.Location = new Point(60, 255);
+            richTextBoxLog2.Location = new Point(6, 295);
+            richTextBoxLog2.Size = new Size(505, 270);
 
             buttonRemoveSeq1.Image = Tools.GetIcon(Resources.delete, 16);
             buttonRemoveSeq1.Text = "";
@@ -417,7 +191,8 @@ namespace Vixen_Messaging
             textBoxVixenFolder.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxVixenFolder", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3"));
             textBoxVixenServer.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "VixenServer", "http://localhost:8888/api/play/playSequence");
             GlobalVar.Blacklistlocation = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%") + "\\Documents\\Vixen 3 Messaging\\Blacklist.txt");
-            GlobalVar.Whitelistlocation = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%") + "\\Documents\\Vixen 3 Messaging\\Whitelist.txt"); 
+            GlobalVar.Whitelistlocation = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%") + "\\Documents\\Vixen 3 Messaging\\Whitelist.txt");
+            GlobalVar.LocalMessages = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%") + "\\Documents\\Vixen 3 Messaging\\LocalMessages.txt");
             textBoxSequenceTemplate.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SequenceTemplate", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3 Messaging"));
             textBoxOutputSequence.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "OutputSequence", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Sequence\\VixenOut.tim"));
             textBoxGroupName.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", "Front Matrix");
@@ -426,7 +201,7 @@ namespace Vixen_Messaging
             textBoxBlacklistEmailLog.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "LogBlacklistFile", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3 Messaging\\Logs\\Blacklist.log"));
             textBoxSubjectHeader.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SMSSubjectHeader", "SMS from");
             checkBoxEnableSqnctrl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxSqnEnable", false);
-            checkBoxAutoStart.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", true);
+            checkBoxAutoStart.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", false);
             checkBoxBlacklist.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxBlack_list", true);
             textBoxNodeId.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxNodeId", "");
             checkBoxDisableSeq.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxDisableSeq", false);
@@ -518,8 +293,388 @@ namespace Vixen_Messaging
             comboBoxEmailSettings.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxEmailSettings", "GMail");
             checkBoxVariableLength.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVariableLength", true);
             textBoxReturnBannedMSG.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxReturnBannedMSG", "You have been banned for the night for sending inappropiate words.");
+            comboBoxPlayMode.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxPlayMode", "Play Only Incoming Msgs");
+            checkBoxLocalRandom.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocalRandom", true);
+            extraTime.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "extraTime", 0);
+            extraTime.Enabled = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "extraTimeEnabled", false);
         }
         #endregion
+
+#region Main Form
+        private void timerCheckMail_Tick(object sender, EventArgs e)
+        {
+            
+            //checks Vixen for port setting and compare to Vixen messaging
+            try
+            {
+                string[] fullFile = File.ReadAllLines(textBoxVixenFolder.Text + "\\SystemData\\ModuleStore.xml");
+                var l = new List<string>();
+                l.AddRange(fullFile);
+                int i = 0;
+                do
+                {
+                    if (fullFile[i].Contains("<HttpPort>"))
+                    {
+                        if (fullFile[i + 1].Contains("true"))
+                        {
+                            WebServerStatus.Text = @"Vixen Web Server is ENABLED";
+                            WebServerStatus.BackColor = Color.LightGreen;
+                        }
+                        else
+                        {
+                            WebServerStatus.Text = @"Vixen Web Server is DISABLED";
+                            WebServerStatus.BackColor = Color.OrangeRed;
+                        }
+                    }
+                    i++;
+                } while (i != l.Count);
+            }
+            // ReSharper disable once EmptyGeneralCatchClause
+            catch (Exception)
+            {
+            }
+
+			timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + 5) * 1000;
+            
+
+            //Will only display after first run from install.
+            var profile = new XmlProfileSettings();
+            string checkfirstload = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "True");
+            if (checkfirstload == "True")
+            {
+                MessageBox.Show(@"Welcome to Vixen Messaging, as this is the first time you have run Vixen Messaging you are required to enter in some information on the following Data form. Also it is recommended that you create a new Email account for use with Vixen Messaging as it will process every incoming email.");
+                Stop_Vixen();
+                GetVixenSettings();
+            }
+
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "False");
+
+            switch (comboBoxPlayMode.Text)
+            {
+                case "Play Only Incoming Msgs":
+                    PlayIncomingMsgs();
+                    break;
+                case "Play Only Local Msgs":
+                    PlayLocalMsgs();
+                    break;
+                case "Play Local Msgs when NO Incoming Msgs":
+                    GlobalVar.PlayMessage = true;
+                    PlayIncomingMsgs();
+                    break;
+                case "Play Incoming and Local Randomly":
+                    PlayRandom();
+                    break;
+                case "Play Incoming and Local Alternating":
+                    PlayAlternating();
+                    break;
+            }
+        }
+#endregion
+
+#region Play Mode
+    
+    #region Play Only Incoming Messages
+        private void PlayIncomingMsgs()
+        {
+            try
+            {
+                var headerphone = "";
+                if (Pop3Login())
+                {
+                    int messageCount = _pop.GetMessageCount();
+                    LogDisplay(GlobalVar.LogMsg = ("Message Count: " + messageCount));
+                    if (messageCount == 0 & GlobalVar.PlayMessage)
+                    {
+                        PlayLocalMsgs();
+                        return;
+                    }
+                    
+                    GlobalVar.PlayMessage = false;
+                    
+                    for (int messageNum = 1; messageNum <= messageCount; messageNum++)
+                    {
+                        var header = _pop.GetMessageHeaders(messageNum);
+                        string rtnmsg;
+                        if (string.IsNullOrEmpty(header.Subject))
+                        {
+                            _pop.DeleteMessage(messageNum);
+                            _pop.Disconnect();
+                            rtnmsg = "Please ensure you enter the message in the subject line.";
+                            SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+                        }
+                        else
+                        {
+                            if (header.Subject.Contains(textBoxSubjectHeader.Text))
+                            {
+                                headerphone = header.Subject.Substring(textBoxSubjectHeader.Text.Length).Trim();
+                            }
+
+                            if (!CheckBlacklistMessage(header.From.Address, header.Subject, headerphone))
+                            {
+                                #region SMS
+
+                                bool blacklist;
+                                bool notWhitemsg;
+                                if (header.Subject.Contains(textBoxSubjectHeader.Text))
+                                //grabs the SMS header details from the form
+                                {
+
+                                    var phoneNumber =
+                                        header.Subject.Substring(textBoxSubjectHeader.Text.Length).Trim();
+                                    var msg = _pop.GetMessage(messageNum);
+
+                                    //To check if text is in the main body or subpart of body for example from an Hotmail account
+                                    string smsMessage;
+                                    if (msg.MessagePart.Body == null)
+                                    {
+                                        smsMessage = msg.MessagePart.MessageParts[0].GetBodyAsText();
+                                        smsMessage = Regex.Replace(smsMessage, @"\t", "");
+                                        smsMessage = smsMessage.TrimEnd(' ');
+                                    }
+                                    else
+                                    {
+                                        smsMessage = msg.MessagePart.GetBodyAsText();
+                                    }
+                                    var msgLines = smsMessage.Split('\r');
+                                    if (msgLines[0] != "")
+                                    {
+                                        LogDisplay(
+                                            GlobalVar.LogMsg =
+                                                ("Retrieved Header # " + messageNum + ": " + header.Subject));
+                                        try
+                                        {
+                                            smsMessage = msgLines[0];
+                                            LogDisplay(GlobalVar.LogMsg = ("SMS Message: " + smsMessage));
+                                            _pop.DeleteMessage(messageNum);
+                                            // We only want one message at a time so, disconnect and wait for next time.
+                                            _pop.Disconnect();
+                                            SendMessageToVixen(smsMessage, out blacklist, out notWhitemsg);
+                                            if (blacklist)
+                                            {
+                                                rtnmsg =
+                                                    "Please reframe from using inappropiate words. If this happens again your phone number will be banned for the night.";
+                                                using (
+                                                    var file = new StreamWriter(@textBoxBlacklistEmailLog.Text,
+                                                        true))
+                                                {
+                                                    file.WriteLine(phoneNumber);
+                                                }
+                                                SendReturnText(phoneNumber, header.From.ToString(), rtnmsg,
+                                                    messageNum);
+                                                return;
+                                            }
+                                            else
+                                            {
+                                                if (!notWhitemsg)
+                                                {
+                                                    rtnmsg = "Your message will appear soon in lights.";
+                                                    SendReturnText(phoneNumber, header.From.ToString(), rtnmsg,
+                                                        messageNum);
+                                                    return;
+                                                }
+                                                else
+                                                {
+                                                    rtnmsg =
+                                                        "Sorry one or more of the names you sent is not in the approved list!";
+                                                    SendReturnText(phoneNumber, header.From.ToString(), rtnmsg,
+                                                        messageNum);
+                                                }
+                                            }
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            LogDisplay(
+                                                GlobalVar.LogMsg = ("Error Parsing Message Body: " + ex.Message));
+                                        }
+                                    }
+                                    else
+                                    {
+                                        _pop.DeleteMessage(messageNum);
+                                        _pop.Disconnect();
+                                        rtnmsg =
+                                            "The body of your SMS is blank, please ensure the message you want to say in the body and not the subject line.";
+                                        SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+                                    }
+                                }
+                                #endregion
+
+                                else
+                                #region Email
+
+                                {
+                                    if (!CheckBlacklistMessage(header.From.Address, header.Subject, headerphone))
+                                    {
+                                        LogDisplay(
+                                            GlobalVar.LogMsg =
+                                                ("Retrieved Header # " + messageNum + ": " + header.Subject));
+                                        try
+                                        {
+                                            string emailMessage = header.Subject;
+                                            LogDisplay(GlobalVar.LogMsg = ("Message: " + emailMessage));
+                                            _pop.DeleteMessage(messageNum);
+                                            // We only want one message at a time so, disconnect and wait for next time.
+                                            _pop.Disconnect();
+                                            SendMessageToVixen(emailMessage, out blacklist, out notWhitemsg);
+                                            if (blacklist && !notWhitemsg)
+                                            {
+                                                rtnmsg =
+                                                    "Please reframe from using inappropiate words. If this happens again your email address will be banned for the night.";
+                                                using (
+                                                    var file = new StreamWriter(@textBoxBlacklistEmailLog.Text,
+                                                        true))
+                                                {
+                                                    file.WriteLine(header.From.Address);
+                                                }
+                                                SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+                                                return;
+                                            }
+                                            else
+                                            {
+                                                if (!notWhitemsg)
+                                                {
+                                                    rtnmsg = "Your message will appear soon in lights.";
+                                                    SendReturnText("", header.From.ToString(), rtnmsg,
+                                                        messageNum);
+                                                    return;
+                                                }
+                                                else
+                                                {
+                                                    rtnmsg =
+                                                        "Sorry one or more of the names you sent is not in the approved list!";
+                                                    SendReturnText("", header.From.ToString(), rtnmsg,
+                                                        messageNum);
+                                                }
+                                            }
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            LogDisplay(
+                                                GlobalVar.LogMsg = ("Error Parsing Message Body: " + ex.Message));
+                                        }
+                                    }
+                                }
+
+                                #endregion
+                            }
+                            else
+                            {
+                                //Banned from App
+                                _pop.DeleteMessage(messageNum);
+                                _pop.Disconnect();
+                                rtnmsg = textBoxReturnBannedMSG.Text;
+                                SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+                            }
+                        }
+                        Application.DoEvents();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (GlobalVar.PlayMessage)
+                {
+                    PlayLocalMsgs();
+                }
+                   LogDisplay(GlobalVar.LogMsg = (ex.Message)); 
+            }
+            finally
+            {
+                if (_pop.Connected)
+                {
+                    try
+                    {
+                        _pop.Disconnect();
+                    }
+                    // ReSharper disable once EmptyGeneralCatchClause
+                    catch
+                    {
+
+                    }
+                }
+                LogDisplay(GlobalVar.LogMsg = ("Disconnected"));
+            }
+        }
+        #endregion
+
+    #region Play Local Only Msgs
+        private void PlayLocalMsgs()
+        {
+            if (richTextBoxMessage.Text != "")
+            {
+                bool blacklist;
+                bool notWhitemsg;
+                string msg;
+
+                string richTextBoxText = richTextBoxMessage.Text;
+                string[] phrases = richTextBoxText.Split('\n');
+                var msgcount = phrases.Length;
+
+                if (checkBoxLocalRandom.Checked)
+                {
+
+                    var rndLineNumber = new Random();
+                    var rndLineNumberResult = rndLineNumber.Next(0, msgcount - 1);
+                    msg = phrases[rndLineNumberResult];
+                }
+                else
+                {
+                    if (GlobalVar.Msgindex < msgcount)
+                    {
+                        msg = phrases[GlobalVar.Msgindex];
+                        GlobalVar.Msgindex++;
+                    }
+                    else
+                    {
+                        msg = phrases[0];
+                        GlobalVar.Msgindex++;
+                    }
+                }
+                SendMessageToVixen(msg, out blacklist, out notWhitemsg);
+            }
+        }
+        #endregion
+
+    #region Play Random Local and Incoming
+        private void PlayRandom()
+        {
+            var randomplay = new Random();
+            string[] mystrings =
+            {
+                "Play Local Msgs when NO Incoming Msgs", "Play Only Local Msgs"
+            };
+            string selectedPlay = mystrings[randomplay.Next(mystrings.Length)];
+            
+
+            switch (selectedPlay)
+            {
+                case "Play Local Msgs when NO Incoming Msgs":
+                    GlobalVar.PlayMessage = true;
+                    PlayIncomingMsgs();
+                    break;
+                case "Play Only Local Msgs":
+                    PlayLocalMsgs();
+                    break;
+             }
+        }
+        #endregion
+
+    #region Play Incoming and Local Alternating
+        private void PlayAlternating()
+        {
+            GlobalVar.Alternating = !GlobalVar.Alternating;
+            if (GlobalVar.Alternating)
+            {
+                PlayLocalMsgs();
+            }
+            else
+            {
+                GlobalVar.PlayMessage = true;
+                PlayIncomingMsgs(); 
+            }
+        }
+        #endregion
+
+#endregion
 
 #region Message to Vixen
 
@@ -584,7 +739,7 @@ namespace Vixen_Messaging
                             selectedSeqTime = selectedSeqTime.TrimEnd('.');
                             selectedSeqTime = selectedSeqTime.Replace("S", "");
                             var newSeqTime = Convert.ToDecimal(selectedSeqTime);
-                            GlobalVar.SeqIntervalTime = newSeqTime + 1;
+                            GlobalVar.SeqIntervalTime = newSeqTime + extraTime.Value + 1;
                         }
                         else
                         {
@@ -1912,6 +2067,23 @@ namespace Vixen_Messaging
         }
 #endregion
 
+#region Stop Currently Running Sequence
+        private void buttonStopSequence_Click(object sender, EventArgs e)
+        {
+            StopSequence();
+        }
+
+        private void StopSequence()
+        {
+            using (var wc = new WebClient())
+            {
+                var stopSequence = textBoxVixenServer.Text.Replace("playSequence", "stopSequence");
+                wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+                wc.UploadString(stopSequence, "");
+            }
+        }
+        #endregion
+
 #region Logs
 
         #region Log File
@@ -1925,9 +2097,9 @@ namespace Vixen_Messaging
         #region Log Display
         private void LogDisplay(string logMsg)
         {
-            listBoxLog.Items.Insert(0, (DateTime.Now.ToString("h:mm tt ")) + logMsg);
-            listBoxLog1.Items.Insert(0, (DateTime.Now.ToString("h:mm tt ")) + logMsg);
-            listBoxLog2.Items.Insert(0, (DateTime.Now.ToString("h:mm tt ")) + logMsg);
+            richTextBoxLog.Text = richTextBoxLog.Text.Insert(0, (DateTime.Now.ToString("h:mm tt ")) + logMsg + "\n");
+            richTextBoxLog1.Text = richTextBoxLog.Text.Insert(0, (DateTime.Now.ToString("h:mm tt ")) + logMsg + "\n");
+            richTextBoxLog2.Text = richTextBoxLog.Text.Insert(0, (DateTime.Now.ToString("h:mm tt ")) + logMsg + "\n");
         }
         #endregion
 #endregion
@@ -1955,6 +2127,7 @@ namespace Vixen_Messaging
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             SeqSave();
+            StopSequence();
         }
 #endregion
 
@@ -2068,6 +2241,10 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxEmailSettings", comboBoxEmailSettings.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVariableLength", checkBoxVariableLength.Checked.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxReturnBannedMSG", textBoxReturnBannedMSG.Text);
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxPlayMode", comboBoxPlayMode.Text);
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocalRandom", checkBoxLocalRandom.Checked.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "extraTime", extraTime.Value.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "extraTimeEnabled", extraTime.Enabled.ToString());
         }
 #endregion
 
@@ -2232,6 +2409,7 @@ namespace Vixen_Messaging
         }
         #endregion        
 
+        #region Other
         private void checkBoxWhitelist_CheckedChanged(object sender, EventArgs e)
         {
             checkBoxBlacklist.Checked = !checkBoxWhitelist.Checked;
@@ -2328,9 +2506,30 @@ namespace Vixen_Messaging
         private void checkBoxVariableLength_CheckedChanged(object sender, EventArgs e)
         {
             EffectTime.Enabled = !EffectTime.Enabled;
+            extraTime.Enabled = !extraTime.Enabled;
             GlobalVar.SeqIntervalTime = EffectTime.Value + 5;
         }
-        
+
+        private void buttonSaveMessageList_Click(object sender, EventArgs e)
+        {
+            richTextBoxMessage.SaveFile(GlobalVar.LocalMessages, RichTextBoxStreamType.PlainText);
+            MessageBox.Show(@"Messages saved!");
+        }
+
+        private void buttonSaveLog_Click(object sender, EventArgs e)
+        {
+            if (richTextBoxLog.Text != "")
+            {
+                string[] sfd = richTextBoxLog.Text.Split('\n');
+                File.WriteAllLines(textBoxSequenceTemplate.Text + "\\Log.txt", sfd);
+                MessageBox.Show(@"Log.txt has been saved in " + textBoxSequenceTemplate.Text);
+            }
+            else
+            {
+                MessageBox.Show(@"Log is empty and will not be saved");
+            }
+        }
+        #endregion   
     }
 }
 #endregion

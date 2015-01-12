@@ -11,31 +11,18 @@
 
             public static string Whitelistlocation { get; set; }
 
+            public static string LocalMessages { get; set; }
+
             public static decimal SeqIntervalTime { get; set; }
 
             /// <summary>
             /// Static value protected by access routine.
             /// </summary>
-  //          static int _globalValue;
+            public static int Msgindex;
 
-            /// <summary>
-            /// Access routine for global variable.
-            /// </summary>
-  //          public static int GlobalValue
-  //          {
-  //              get
-  //              {
-  //                  return _globalValue;
-  //              }
-  //              set
-  //              {
-  //                  _globalValue = value;
-  //              }
-  //          }
+            public static bool PlayMessage;
 
-            /// <summary>
-            /// Global static field.
-            /// </summary>
-  //          public static bool GlobalBoolean;
+            public static bool Alternating;
+
     }
 }
