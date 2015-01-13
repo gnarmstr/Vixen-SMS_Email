@@ -637,7 +637,7 @@
             this.label70.Size = new System.Drawing.Size(131, 20);
             this.label70.TabIndex = 41;
             this.label70.Text = "Extend length by:";
-            this.toolTip1.SetToolTip(this.label70, "Set length. Message will repeat until seq length time has reached.");
+            this.toolTip1.SetToolTip(this.label70, "Extends the Sequence length by adding this to the Auto adjusted length.");
             // 
             // label69
             // 
@@ -1483,7 +1483,7 @@
             0,
             0});
             this.EffectTime.Minimum = new decimal(new int[] {
-            10,
+            1,
             0,
             0,
             0});
@@ -2029,12 +2029,13 @@
             // 
             // buttonSaveLog
             // 
+            this.buttonSaveLog.BackColor = System.Drawing.Color.Honeydew;
             this.buttonSaveLog.Location = new System.Drawing.Point(644, 503);
             this.buttonSaveLog.Name = "buttonSaveLog";
             this.buttonSaveLog.Size = new System.Drawing.Size(122, 41);
             this.buttonSaveLog.TabIndex = 60;
             this.buttonSaveLog.Text = "Export Log";
-            this.buttonSaveLog.UseVisualStyleBackColor = true;
+            this.buttonSaveLog.UseVisualStyleBackColor = false;
             this.buttonSaveLog.Click += new System.EventHandler(this.buttonSaveLog_Click);
             // 
             // label66
@@ -2106,12 +2107,13 @@
             // 
             // buttonResetToDefault
             // 
+            this.buttonResetToDefault.BackColor = System.Drawing.Color.Honeydew;
             this.buttonResetToDefault.Location = new System.Drawing.Point(558, 815);
             this.buttonResetToDefault.Name = "buttonResetToDefault";
             this.buttonResetToDefault.Size = new System.Drawing.Size(206, 42);
             this.buttonResetToDefault.TabIndex = 16;
             this.buttonResetToDefault.Text = "Reset to Default Setting";
-            this.buttonResetToDefault.UseVisualStyleBackColor = true;
+            this.buttonResetToDefault.UseVisualStyleBackColor = false;
             this.buttonResetToDefault.Click += new System.EventHandler(this.buttonResetToDefault_Click);
             // 
             // groupBox3
@@ -2147,6 +2149,7 @@
             // 
             // buttonGetVixenData
             // 
+            this.buttonGetVixenData.BackColor = System.Drawing.Color.Honeydew;
             this.buttonGetVixenData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.buttonGetVixenData.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonGetVixenData.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
@@ -2155,7 +2158,7 @@
             this.buttonGetVixenData.Size = new System.Drawing.Size(286, 40);
             this.buttonGetVixenData.TabIndex = 11;
             this.buttonGetVixenData.Text = "Get Vixen Data Settings";
-            this.buttonGetVixenData.UseVisualStyleBackColor = true;
+            this.buttonGetVixenData.UseVisualStyleBackColor = false;
             this.buttonGetVixenData.Click += new System.EventHandler(this.buttonGetVixenData_Click);
             // 
             // textBoxVixenFolder
@@ -3048,12 +3051,13 @@
             // 
             // buttonStopSequence
             // 
-            this.buttonStopSequence.Location = new System.Drawing.Point(113, 1001);
+            this.buttonStopSequence.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonStopSequence.Location = new System.Drawing.Point(77, 1001);
             this.buttonStopSequence.Name = "buttonStopSequence";
-            this.buttonStopSequence.Size = new System.Drawing.Size(223, 40);
+            this.buttonStopSequence.Size = new System.Drawing.Size(293, 40);
             this.buttonStopSequence.TabIndex = 61;
-            this.buttonStopSequence.Text = "Stop Running Sequence";
-            this.buttonStopSequence.UseVisualStyleBackColor = true;
+            this.buttonStopSequence.Text = "Stop Currently Running Sequence";
+            this.buttonStopSequence.UseVisualStyleBackColor = false;
             this.buttonStopSequence.Click += new System.EventHandler(this.buttonStopSequence_Click);
             // 
             // FormMain

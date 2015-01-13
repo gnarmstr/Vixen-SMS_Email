@@ -13,6 +13,8 @@
 
             public static string LocalMessages { get; set; }
 
+            public static string SettingsPath { get; set; }
+
             public static decimal SeqIntervalTime { get; set; }
 
             /// <summary>

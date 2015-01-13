@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vixen Messaging", "Vixen Messaging.csproj", "{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vixen_Messaging", "Vixen_Messaging.csproj", "{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5BA691E1-CC10-48A0-9E48-B6168CF78F24}"
 EndProject

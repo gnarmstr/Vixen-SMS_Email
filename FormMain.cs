@@ -38,14 +38,6 @@ namespace Vixen_Messaging
 
         void StartChecking()
         { 
-            //change to 2 when using VS
-            int applicationInstance = Process.GetProcesses().Count(clsProcess => clsProcess.ProcessName.Contains("Vixen Messaging"));
-            if (applicationInstance > 1)
-            {
-                MessageBox.Show(@"Vixen Messaging is already running. This instance will close");
-                Application.Exit();
-            }
-
             buttonStart.Enabled = false;
             buttonStop.Enabled = true;
             timerCheckMail.Interval = 200;
@@ -80,10 +72,27 @@ namespace Vixen_Messaging
 #region Load Form
         private void FormMain_Load(object sender, EventArgs e)
         {
+            GlobalVar.SettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Vixen Messaging");
             LoadData();
             EmailSettings();
 
             File.Create(textBoxBlacklistEmailLog.Text).Close();
+            if (File.Exists(GlobalVar.Blacklistlocation + ".bkp"))
+            {
+                var copyfile = File.ReadAllText(GlobalVar.Blacklistlocation + ".bkp");
+                File.WriteAllText(GlobalVar.Blacklistlocation, copyfile);
+            }
+            if (File.Exists(GlobalVar.Whitelistlocation + ".bkp"))
+            {
+                var copyfile = File.ReadAllText(GlobalVar.Whitelistlocation + ".bkp");
+                File.WriteAllText(GlobalVar.Whitelistlocation, copyfile);
+            }
+            if (File.Exists(GlobalVar.LocalMessages + ".bkp"))
+            {
+                var copyfile = File.ReadAllText(GlobalVar.LocalMessages + ".bkp");
+                File.WriteAllText(GlobalVar.LocalMessages, copyfile);
+            }
+            
             var content = File.ReadAllText(GlobalVar.Blacklistlocation);
             richTextBoxBlacklist.Text = content;
             var content1 = File.ReadAllText(GlobalVar.Whitelistlocation);
@@ -190,9 +199,9 @@ namespace Vixen_Messaging
             textBoxPWD.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "Password", "");
             textBoxVixenFolder.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxVixenFolder", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3"));
             textBoxVixenServer.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "VixenServer", "http://localhost:8888/api/play/playSequence");
-            GlobalVar.Blacklistlocation = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%") + "\\Documents\\Vixen 3 Messaging\\Blacklist.txt");
-            GlobalVar.Whitelistlocation = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%") + "\\Documents\\Vixen 3 Messaging\\Whitelist.txt");
-            GlobalVar.LocalMessages = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%") + "\\Documents\\Vixen 3 Messaging\\LocalMessages.txt");
+            GlobalVar.Blacklistlocation = Path.Combine(GlobalVar.SettingsPath + "\\Blacklist.txt");
+            GlobalVar.Whitelistlocation = Path.Combine(GlobalVar.SettingsPath + "\\Whitelist.txt");
+            GlobalVar.LocalMessages = Path.Combine(GlobalVar.SettingsPath + "\\LocalMessages.txt");
             textBoxSequenceTemplate.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SequenceTemplate", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3 Messaging"));
             textBoxOutputSequence.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "OutputSequence", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Sequence\\VixenOut.tim"));
             textBoxGroupName.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", "Front Matrix");
@@ -348,6 +357,7 @@ namespace Vixen_Messaging
             }
 
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "False");
+            Cursor.Current = Cursors.WaitCursor;
 
             switch (comboBoxPlayMode.Text)
             {
@@ -695,28 +705,16 @@ namespace Vixen_Messaging
                     switch (TextLineNumber.Value.ToString())
                     {
                         case "1":
-                            fileText = fileText.Replace("NamePlaceholder1", msg);//replaces the text
-                            fileText = fileText.Replace("NamePlaceholder2", "");//replaces the text
-                            fileText = fileText.Replace("NamePlaceholder3", "");//replaces the text
-                            fileText = fileText.Replace("NamePlaceholder4", "");//replaces the text
+                            fileText = fileText.Replace("NamePlaceholder1", msg).Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", "");//replaces the text
                             break;
                         case "2":
-                            fileText = fileText.Replace("NamePlaceholder1", "");//replaces the text
-                            fileText = fileText.Replace("NamePlaceholder2", msg);//replaces the text
-                            fileText = fileText.Replace("NamePlaceholder3", "");//replaces the text
-                            fileText = fileText.Replace("NamePlaceholder4", "");//replaces the text
+                            fileText = fileText.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", msg).Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", "");//replaces the text
                             break;
                         case "3":
-                            fileText = fileText.Replace("NamePlaceholder1", "");//replaces the text
-                            fileText = fileText.Replace("NamePlaceholder2", "");//replaces the text
-                            fileText = fileText.Replace("NamePlaceholder3", msg);//replaces the text
-                            fileText = fileText.Replace("NamePlaceholder4", "");//replaces the text
+                            fileText = fileText.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", msg).Replace("NamePlaceholder4", "");//replaces the text
                             break;
                         case "4":
-                            fileText = fileText.Replace("NamePlaceholder1", "");//replaces the text
-                            fileText = fileText.Replace("NamePlaceholder2", "");//replaces the text
-                            fileText = fileText.Replace("NamePlaceholder3", "");//replaces the text
-                            fileText = fileText.Replace("NamePlaceholder4", msg);//replaces the text
+                            fileText = fileText.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", msg);//replaces the text
                             break;
                     }
                     
@@ -792,7 +790,7 @@ namespace Vixen_Messaging
                         ColourSelect(out hexValue); //Colour Selection for Text. Random or Single
                             
                         var textColorNum = Convert.ToUInt32(hexValue, 16);
-                        fileText = fileText.Replace("Colour1_Change", textColorNum.ToString());
+                        fileText = fileText.Replace("Colour_Change1", textColorNum.ToString());
                         fileText = fileText.Replace("PT20S", "PT" + GlobalVar.SeqIntervalTime.ToString() + "S"); //Sequence time
 
                         string selectedSeq;
@@ -819,7 +817,8 @@ namespace Vixen_Messaging
                                 selectedSeq = tabControlEffects.SelectedTab.Text;
                             }
                         }
-                    
+
+                        var i = 1;
                         //Select an Effect
                         switch (selectedSeq)
                         {
@@ -829,53 +828,29 @@ namespace Vixen_Messaging
                                 fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
-
-                                hexValue = SnowFlakeColour1.BackColor.A.ToString("x2") + SnowFlakeColour1.BackColor.R.ToString("x2") + SnowFlakeColour1.BackColor.G.ToString("x2") + SnowFlakeColour1.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour_Change1", textColorNum.ToString()); //Colour
-                                hexValue = SnowFlakeColour2.BackColor.A.ToString("x2") + SnowFlakeColour2.BackColor.R.ToString("x2") + SnowFlakeColour2.BackColor.G.ToString("x2") + SnowFlakeColour2.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour2_Change", textColorNum.ToString()); //Colour
-                                hexValue = SnowFlakeColour3.BackColor.A.ToString("x2") + SnowFlakeColour3.BackColor.R.ToString("x2") + SnowFlakeColour3.BackColor.G.ToString("x2") + SnowFlakeColour3.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour3_Change", textColorNum.ToString()); //Colour
-                                hexValue = SnowFlakeColour4.BackColor.A.ToString("x2") + SnowFlakeColour4.BackColor.R.ToString("x2") + SnowFlakeColour4.BackColor.G.ToString("x2") + SnowFlakeColour4.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour4_Change", textColorNum.ToString()); //Colour
-                                hexValue = SnowFlakeColour5.BackColor.A.ToString("x2") + SnowFlakeColour5.BackColor.R.ToString("x2") + SnowFlakeColour5.BackColor.G.ToString("x2") + SnowFlakeColour5.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour5_Change", textColorNum.ToString()); //Colour
-                                hexValue = SnowFlakeColour6.BackColor.A.ToString("x2") + SnowFlakeColour6.BackColor.R.ToString("x2") + SnowFlakeColour6.BackColor.G.ToString("x2") + SnowFlakeColour6.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour6_Change", textColorNum.ToString()); //Colour
-
-                                fileText = fileText.Replace("CheckBox1_Change", checkBoxSnowFlakeColour1.Checked.ToString().ToLower()); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox2_Change", checkBoxSnowFlakeColour2.Checked.ToString().ToLower()); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox3_Change", checkBoxSnowFlakeColour3.Checked.ToString().ToLower()); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox4_Change", checkBoxSnowFlakeColour4.Checked.ToString().ToLower()); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox5_Change", checkBoxSnowFlakeColour5.Checked.ToString().ToLower()); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox6_Change", checkBoxSnowFlakeColour6.Checked.ToString().ToLower()); //Colour Enabled true or False
+                                do
+                                {
+                                    var btn = new Button[] { null, SnowFlakeColour1, SnowFlakeColour2, SnowFlakeColour3, SnowFlakeColour4, SnowFlakeColour5, SnowFlakeColour6 };
+                                    var ckb = new CheckBox[] { null, checkBoxSnowFlakeColour1, checkBoxSnowFlakeColour2, checkBoxSnowFlakeColour3, checkBoxSnowFlakeColour4, checkBoxSnowFlakeColour5, checkBoxSnowFlakeColour6 };
+                                    hexValue = btn[i].BackColor.A.ToString("x2") + btn[i].BackColor.R.ToString("x2") + btn[i].BackColor.G.ToString("x2") + btn[i].BackColor.B.ToString("x2");
+                                    textColorNum = Convert.ToUInt32(hexValue, 16);
+                                    fileText = fileText.Replace("Colour" + i + "_Change", textColorNum.ToString()); //Colour
+                                    fileText = fileText.Replace("CheckBox" + i + "_Change", ckb[i].Checked.ToString().ToLower()); //Colour Enabled true or False
+                                    i++;
+                                } while (i < 7);
                                 break;
-
                             case "Fire":
                                 fileText = fileText.Replace("Speed_1Change", "0");
                                 fileText = fileText.Replace("FireHeightTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                                 fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
-
-                                fileText = fileText.Replace("Colour_Change1", "0"); //Colour
-                                fileText = fileText.Replace("Colour2_Change", "0"); //Colour
-                                fileText = fileText.Replace("Colour3_Change", "0"); //Colour
-                                fileText = fileText.Replace("Colour4_Change", "0"); //Colour
-                                fileText = fileText.Replace("Colour5_Change", "0"); //Colour
-                                fileText = fileText.Replace("Colour6_Change", "0"); //Colour
-                                fileText = fileText.Replace("CheckBox1_Change", "true"); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox2_Change", "false"); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox3_Change", "false"); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox4_Change", "false"); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox5_Change", "false"); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox6_Change", "false"); //Colour Enabled true or False
+                                do
+                                {
+                                    fileText = fileText.Replace("Colour" + i + "_Change", "0"); //Colour
+                                    fileText = fileText.Replace("CheckBox" + i + "_Change", "false"); //Colour Enabled true or False
+                                    i++;
+                                } while (i < 7);
                                 break;
                             case "Meteors":
                                 fileText = fileText.Replace("Speed_1Change", trackBarSpeedMeteors.Value.ToString());
@@ -884,31 +859,16 @@ namespace Vixen_Messaging
                                 fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
 
-                                hexValue = MeteorColour1.BackColor.A.ToString("x2") + MeteorColour1.BackColor.R.ToString("x2") + MeteorColour1.BackColor.G.ToString("x2") + MeteorColour1.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour_Change1", textColorNum.ToString()); //Colour
-                                hexValue = MeteorColour2.BackColor.A.ToString("x2") + MeteorColour2.BackColor.R.ToString("x2") + MeteorColour2.BackColor.G.ToString("x2") + MeteorColour2.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour2_Change", textColorNum.ToString()); //Colour
-                                hexValue = MeteorColour3.BackColor.A.ToString("x2") + MeteorColour3.BackColor.R.ToString("x2") + MeteorColour3.BackColor.G.ToString("x2") + MeteorColour3.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour3_Change", textColorNum.ToString()); //Colour
-                                hexValue = MeteorColour4.BackColor.A.ToString("x2") + MeteorColour4.BackColor.R.ToString("x2") + MeteorColour4.BackColor.G.ToString("x2") + MeteorColour4.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour4_Change", textColorNum.ToString()); //Colour
-                                hexValue = MeteorColour5.BackColor.A.ToString("x2") + MeteorColour5.BackColor.R.ToString("x2") + MeteorColour5.BackColor.G.ToString("x2") + MeteorColour5.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour5_Change", textColorNum.ToString()); //Colour
-                                hexValue = MeteorColour6.BackColor.A.ToString("x2") + MeteorColour6.BackColor.R.ToString("x2") + MeteorColour6.BackColor.G.ToString("x2") + MeteorColour6.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour6_Change", textColorNum.ToString()); //Colour
-
-                                fileText = fileText.Replace("CheckBox1_Change", checkBoxMeteorColour1.Checked.ToString().ToLower()); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox2_Change", checkBoxMeteorColour2.Checked.ToString().ToLower()); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox3_Change", checkBoxMeteorColour3.Checked.ToString().ToLower()); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox4_Change", checkBoxMeteorColour4.Checked.ToString().ToLower()); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox5_Change", checkBoxMeteorColour5.Checked.ToString().ToLower()); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox6_Change", checkBoxMeteorColour6.Checked.ToString().ToLower()); //Colour Enabled true or False
+                                do
+                                {
+                                    var btn = new Button[] { null, MeteorColour1, MeteorColour2, MeteorColour3, MeteorColour4, MeteorColour5, MeteorColour6 };
+                                    var ckb = new CheckBox[] { null, checkBoxMeteorColour1, checkBoxMeteorColour2, checkBoxMeteorColour3, checkBoxMeteorColour4, checkBoxMeteorColour5, checkBoxMeteorColour6 };
+                                    hexValue = btn[i].BackColor.A.ToString("x2") + btn[i].BackColor.R.ToString("x2") + btn[i].BackColor.G.ToString("x2") + btn[i].BackColor.B.ToString("x2");
+                                    textColorNum = Convert.ToUInt32(hexValue, 16);
+                                    fileText = fileText.Replace("Colour" + i + "_Change", textColorNum.ToString()); //Colour
+                                    fileText = fileText.Replace("CheckBox" + i + "_Change", ckb[i].Checked.ToString().ToLower()); //Colour Enabled true or False
+                                    i++;
+                                } while (i < 7);
                                 break;
                             case "Twinkles":
                                 fileText = fileText.Replace("Speed_1Change", trackBarSpeedTwinkles.Value.ToString());
@@ -917,31 +877,16 @@ namespace Vixen_Messaging
                                 fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
 
-                                hexValue = TwinkleColour1.BackColor.A.ToString("x2") + TwinkleColour1.BackColor.R.ToString("x2") + TwinkleColour1.BackColor.G.ToString("x2") + TwinkleColour1.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour_Change1", textColorNum.ToString()); //Colour
-                                hexValue = TwinkleColour2.BackColor.A.ToString("x2") + TwinkleColour2.BackColor.R.ToString("x2") + TwinkleColour2.BackColor.G.ToString("x2") + TwinkleColour2.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour2_Change", textColorNum.ToString()); //Colour
-                                hexValue = TwinkleColour3.BackColor.A.ToString("x2") + TwinkleColour3.BackColor.R.ToString("x2") + TwinkleColour3.BackColor.G.ToString("x2") + TwinkleColour3.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour3_Change", textColorNum.ToString()); //Colour
-                                hexValue = TwinkleColour4.BackColor.A.ToString("x2") + TwinkleColour4.BackColor.R.ToString("x2") + TwinkleColour4.BackColor.G.ToString("x2") + TwinkleColour4.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour4_Change", textColorNum.ToString()); //Colour
-                                hexValue = TwinkleColour5.BackColor.A.ToString("x2") + TwinkleColour5.BackColor.R.ToString("x2") + TwinkleColour5.BackColor.G.ToString("x2") + TwinkleColour5.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour5_Change", textColorNum.ToString()); //Colour
-                                hexValue = TwinkleColour6.BackColor.A.ToString("x2") + TwinkleColour6.BackColor.R.ToString("x2") + TwinkleColour6.BackColor.G.ToString("x2") + TwinkleColour6.BackColor.B.ToString("x2");
-                                textColorNum = Convert.ToUInt32(hexValue, 16);
-                                fileText = fileText.Replace("Colour6_Change", textColorNum.ToString()); //Colour
-
-                                fileText = fileText.Replace("CheckBox1_Change", checkBoxTwinkleColour1.Checked.ToString().ToLower()); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox2_Change", checkBoxTwinkleColour2.Checked.ToString().ToLower()); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox3_Change", checkBoxTwinkleColour3.Checked.ToString().ToLower()); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox4_Change", checkBoxTwinkleColour4.Checked.ToString().ToLower()); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox5_Change", checkBoxTwinkleColour5.Checked.ToString().ToLower()); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox6_Change", checkBoxTwinkleColour6.Checked.ToString().ToLower()); //Colour Enabled true or False
+                                do
+                                {
+                                    var btn = new Button[] { null, TwinkleColour1, TwinkleColour2, TwinkleColour3, TwinkleColour4, TwinkleColour5, TwinkleColour6 };
+                                    var ckb = new CheckBox[] { null, checkBoxTwinkleColour1, checkBoxTwinkleColour2, checkBoxTwinkleColour3, checkBoxTwinkleColour4, checkBoxTwinkleColour5, checkBoxTwinkleColour6 };
+                                    hexValue = btn[i].BackColor.A.ToString("x2") + btn[i].BackColor.R.ToString("x2") + btn[i].BackColor.G.ToString("x2") + btn[i].BackColor.B.ToString("x2");
+                                    textColorNum = Convert.ToUInt32(hexValue, 16);
+                                    fileText = fileText.Replace("Colour" + i + "_Change", textColorNum.ToString()); //Colour
+                                    fileText = fileText.Replace("CheckBox" + i + "_Change", ckb[i].Checked.ToString().ToLower()); //Colour Enabled true or False
+                                    i++;
+                                } while (i < 7);
                                 break;
                             case "None":
                                 fileText = fileText.Replace("Speed_1Change", "0");
@@ -949,20 +894,12 @@ namespace Vixen_Messaging
                                 fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
-
-                                fileText = fileText.Replace("Colour_Change1", "0"); //Colour
-                                fileText = fileText.Replace("Colour2_Change", "0"); //Colour
-                                fileText = fileText.Replace("Colour3_Change", "0"); //Colour
-                                fileText = fileText.Replace("Colour4_Change", "0"); //Colour
-                                fileText = fileText.Replace("Colour5_Change", "0"); //Colour
-                                fileText = fileText.Replace("Colour6_Change", "0"); //Colour
-
-                                fileText = fileText.Replace("CheckBox1_Change", "false"); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox2_Change", "false"); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox3_Change", "false"); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox4_Change", "false"); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox5_Change", "false"); //Colour Enabled true or False
-                                fileText = fileText.Replace("CheckBox6_Change", "false"); //Colour Enabled true or False
+                                do
+                                {
+                                    fileText = fileText.Replace("Colour" + i + "_Change", "0"); //Colour
+                                    fileText = fileText.Replace("CheckBox" + i + "_Change", "false"); //Colour Enabled true or False
+                                    i++;
+                                } while (i < 7);
                                 break;
                         }
                         File.Delete(outputFileName);
@@ -983,6 +920,7 @@ namespace Vixen_Messaging
                     
                     var url = textBoxVixenServer.Text + "?name=" + WebUtility.UrlEncode(outputFileName);
                     var result = new WebClient().DownloadString(url); //Used to output to Vixen WebClient
+                    Cursor.Current = Cursors.Default; 
                     LogDisplay(GlobalVar.LogMsg = ("Vixen Started: + " + result));
                     Log(msg);
                 }
@@ -1202,109 +1140,109 @@ namespace Vixen_Messaging
 
         private void SnowFlakeColour1_Click(object sender, EventArgs e)
         {
-            int colNum = 21;
+            int colNum = 12;
             ColPal(colNum);
         }
 
         private void SnowFlakeColour2_Click(object sender, EventArgs e)
         {
-            int colNum = 22;
+            int colNum = 13;
             ColPal(colNum);
         }
 
         private void SnowFlakeColour3_Click(object sender, EventArgs e)
         {
-            int colNum = 23;
+            int colNum = 14;
             ColPal(colNum);
         }
 
         private void SnowFlakeColour4_Click(object sender, EventArgs e)
         {
-            int colNum = 24;
+            int colNum = 15;
             ColPal(colNum);
         }
 
         private void SnowFlakeColour5_Click(object sender, EventArgs e)
         {
-            int colNum = 25;
+            int colNum = 16;
             ColPal(colNum);
         }
 
         private void SnowFlakeColour6_Click(object sender, EventArgs e)
         {
-            int colNum = 26;
+            int colNum = 17;
             ColPal(colNum);
         }
 
         private void MeteorColour1_Click(object sender, EventArgs e)
         {
-            int colNum = 31;
+            int colNum = 18;
             ColPal(colNum);
         }
 
         private void MeteorColour2_Click(object sender, EventArgs e)
         {
-            int colNum = 32;
+            int colNum = 19;
             ColPal(colNum);
         }
 
         private void MeteorColour3_Click(object sender, EventArgs e)
         {
-            int colNum = 33;
+            int colNum = 20;
             ColPal(colNum);
         }
 
         private void MeteorColour4_Click(object sender, EventArgs e)
         {
-            int colNum = 34;
+            int colNum = 21;
             ColPal(colNum);
         }
 
         private void MeteorColour5_Click(object sender, EventArgs e)
         {
-            int colNum = 35;
+            int colNum = 22;
             ColPal(colNum);
         }
 
         private void MeteorColour6_Click(object sender, EventArgs e)
         {
-            int colNum = 36;
+            int colNum = 23;
             ColPal(colNum);
         }
 
         private void TwinkleColour1_Click(object sender, EventArgs e)
         {
-            int colNum = 41;
+            int colNum = 24;
             ColPal(colNum);
         }
 
         private void TwinkleColour2_Click(object sender, EventArgs e)
         {
-            int colNum = 42;
+            int colNum = 25;
             ColPal(colNum);
         }
 
         private void TwinkleColour3_Click(object sender, EventArgs e)
         {
-            int colNum = 43;
+            int colNum = 26;
             ColPal(colNum);
         }
 
         private void TwinkleColour4_Click(object sender, EventArgs e)
         {
-            int colNum = 44;
+            int colNum = 27;
             ColPal(colNum);
         }
 
         private void TwinkleColour5_Click(object sender, EventArgs e)
         {
-            int colNum = 45;
+            int colNum = 28;
             ColPal(colNum);
         }
 
         private void TwinkleColour6_Click(object sender, EventArgs e)
         {
-            int colNum = 46;
+            int colNum = 29;
             ColPal(colNum);
         }
 
@@ -1317,67 +1255,9 @@ namespace Vixen_Messaging
         private void ColPal(int colNum)
         {
             colorDialog1.ShowDialog();
-            switch (colNum)
-            {
-                case 1: TextColor1.BackColor = colorDialog1.Color;
-                    break;
-                case 2: TextColor2.BackColor = colorDialog1.Color;
-                    break;
-                case 3: TextColor3.BackColor = colorDialog1.Color;
-                    break;
-                case 4: TextColor4.BackColor = colorDialog1.Color;
-                    break;
-                case 5: TextColor5.BackColor = colorDialog1.Color;
-                    break;
-                case 6: TextColor6.BackColor = colorDialog1.Color;
-                    break;
-                case 7: TextColor7.BackColor = colorDialog1.Color;
-                    break;
-                case 8: TextColor8.BackColor = colorDialog1.Color;
-                    break;
-                case 9: TextColor9.BackColor = colorDialog1.Color;
-                    break;
-                case 10: TextColor10.BackColor = colorDialog1.Color;
-                    break;
-                case 11: SingleCol1.BackColor = colorDialog1.Color;
-                    break;
-                case 21: SnowFlakeColour1.BackColor = colorDialog1.Color;
-                    break;
-                case 22: SnowFlakeColour2.BackColor = colorDialog1.Color;
-                    break;
-                case 23: SnowFlakeColour3.BackColor = colorDialog1.Color;
-                    break;
-                case 24: SnowFlakeColour4.BackColor = colorDialog1.Color;
-                    break;
-                case 25: SnowFlakeColour5.BackColor = colorDialog1.Color;
-                    break;
-                case 26: SnowFlakeColour6.BackColor = colorDialog1.Color;
-                    break;
-                case 31: MeteorColour1.BackColor = colorDialog1.Color;
-                    break;
-                case 32: MeteorColour2.BackColor = colorDialog1.Color;
-                    break;
-                case 33: MeteorColour3.BackColor = colorDialog1.Color;
-                    break;
-                case 34: MeteorColour4.BackColor = colorDialog1.Color;
-                    break;
-                case 35: MeteorColour5.BackColor = colorDialog1.Color;
-                    break;
-                case 36: MeteorColour6.BackColor = colorDialog1.Color;
-                    break;
-                case 41: TwinkleColour1.BackColor = colorDialog1.Color;
-                    break;
-                case 42: TwinkleColour2.BackColor = colorDialog1.Color;
-                    break;
-                case 43: TwinkleColour3.BackColor = colorDialog1.Color;
-                    break;
-                case 44: TwinkleColour4.BackColor = colorDialog1.Color;
-                    break;
-                case 45: TwinkleColour5.BackColor = colorDialog1.Color;
-                    break;
-                case 46: TwinkleColour6.BackColor = colorDialog1.Color;
-                    break;
-            }
+
+            var btn = new Button[] { TextColor1, TextColor1, TextColor2, TextColor3, TextColor4, TextColor5, TextColor6, TextColor7, TextColor8, TextColor9, TextColor10, SingleCol1, SnowFlakeColour1, SnowFlakeColour2, SnowFlakeColour3, SnowFlakeColour4, SnowFlakeColour5, SnowFlakeColour6, MeteorColour1, MeteorColour2, MeteorColour3, MeteorColour4, MeteorColour5, MeteorColour6, TwinkleColour1, TwinkleColour2, TwinkleColour3, TwinkleColour4, TwinkleColour5, TwinkleColour6 };
+            btn[colNum].BackColor = colorDialog1.Color;
             SeqSave();
         }
         #endregion
@@ -1385,38 +1265,15 @@ namespace Vixen_Messaging
         #region Colour Selection
         public void ColourSelect(out string hexValue)
         {
-            var random = new Random(); 
-        //    var RandomCol = random.Next(1, 10);
+            
             if (checkBoxRandomCol.Checked)
             {
                 do
                 {
+                    var random = new Random(); 
                     var randomCol = random.Next(1, 10);
-                    switch (randomCol)
-                    {
-                        case 1: hexValue = TextColor1.BackColor.A.ToString("x2") + TextColor1.BackColor.R.ToString("x2") + TextColor1.BackColor.G.ToString("x2") + TextColor1.BackColor.B.ToString("x2");
-                            break;
-                        case 2: hexValue = TextColor2.BackColor.A.ToString("x2") + TextColor2.BackColor.R.ToString("x2") + TextColor2.BackColor.G.ToString("x2") + TextColor2.BackColor.B.ToString("x2");
-                            break;
-                        case 3: hexValue = TextColor3.BackColor.A.ToString("x2") + TextColor3.BackColor.R.ToString("x2") + TextColor3.BackColor.G.ToString("x2") + TextColor3.BackColor.B.ToString("x2");
-                            break;
-                        case 4: hexValue = TextColor4.BackColor.A.ToString("x2") + TextColor4.BackColor.R.ToString("x2") + TextColor4.BackColor.G.ToString("x2") + TextColor4.BackColor.B.ToString("x2");
-                            break;
-                        case 5: hexValue = TextColor5.BackColor.A.ToString("x2") + TextColor5.BackColor.R.ToString("x2") + TextColor5.BackColor.G.ToString("x2") + TextColor5.BackColor.B.ToString("x2");
-                            break;
-                        case 6: hexValue = TextColor6.BackColor.A.ToString("x2") + TextColor6.BackColor.R.ToString("x2") + TextColor6.BackColor.G.ToString("x2") + TextColor6.BackColor.B.ToString("x2");
-                            break;
-                        case 7: hexValue = TextColor7.BackColor.A.ToString("x2") + TextColor7.BackColor.R.ToString("x2") + TextColor7.BackColor.G.ToString("x2") + TextColor7.BackColor.B.ToString("x2");
-                            break;
-                        case 8: hexValue = TextColor8.BackColor.A.ToString("x2") + TextColor8.BackColor.R.ToString("x2") + TextColor8.BackColor.G.ToString("x2") + TextColor8.BackColor.B.ToString("x2");
-                            break;
-                        case 9: hexValue = TextColor9.BackColor.A.ToString("x2") + TextColor9.BackColor.R.ToString("x2") + TextColor9.BackColor.G.ToString("x2") + TextColor9.BackColor.B.ToString("x2");
-                            break;
-                        case 10: hexValue = TextColor2.BackColor.A.ToString("x2") + TextColor2.BackColor.R.ToString("x2") + TextColor2.BackColor.G.ToString("x2") + TextColor2.BackColor.B.ToString("x2");
-                            break;
-                        default: hexValue = TextColor10.BackColor.A.ToString("x2") + TextColor10.BackColor.R.ToString("x2") + TextColor10.BackColor.G.ToString("x2") + TextColor10.BackColor.B.ToString("x2");
-                            break;
-                    }
+                    var btn = new Button[] { TextColor1, TextColor2, TextColor3, TextColor4, TextColor5, TextColor6, TextColor7, TextColor8, TextColor9, TextColor10 };
+                    hexValue = btn[randomCol].BackColor.A.ToString("x2") + btn[randomCol].BackColor.R.ToString("x2") + btn[randomCol].BackColor.G.ToString("x2") + btn[randomCol].BackColor.B.ToString("x2");
                 } while (hexValue == "ff000000");
             }
             else
@@ -1436,27 +1293,12 @@ namespace Vixen_Messaging
         {
             var selection = "";
 
-            switch (tabControlSequence.SelectedIndex)
+            var txt = new TextBox[]
             {
-                case 0:
-                    selection = textBoxSequenceLength1.Text;
-                    break;
-                case 1:
-                    selection = textBoxSequenceLength2.Text;
-                    break;
-                case 2:
-                    selection = textBoxSequenceLength3.Text;
-                    break;
-                case 3:
-                    selection = textBoxSequenceLength4.Text;
-                    break;
-                case 4:
-                    selection = textBoxSequenceLength5.Text;
-                    break;
-                case 5:
-                    selection = textBoxSequenceLength6.Text;
-                    break;
-            }
+                textBoxSequenceLength1, textBoxSequenceLength2, textBoxSequenceLength3, textBoxSequenceLength4,
+                textBoxSequenceLength5, textBoxSequenceLength6 };
+            selection = txt[tabControlSequence.SelectedIndex].Text;
+
             if (selection != "")
             {
                 string seqTimeString;
@@ -1495,96 +1337,36 @@ namespace Vixen_Messaging
         #region Button Remove or Click
         private void buttonVixenSeq1_Click(object sender, EventArgs e)
         {
-            string seqNumber;
-            string seqTime;
-            LoadSeq(out seqNumber, out seqTime);
-            if (seqNumber != "")
-            {
-                textBoxVixenSeq1.Text = seqNumber;
-            }
-            if (seqTime != "")
-            {
-                textBoxSequenceLength1.Text = seqTime;
-            }
-            SelectSeqTime();
+            var index = 0;
+            LoadSeq(index);
         }
 
         private void buttonVixenSeq2_Click(object sender, EventArgs e)
         {
-            string seqNumber;
-            string seqTime;
-            LoadSeq(out seqNumber, out seqTime);
-            if (seqNumber != "")
-            {
-                textBoxVixenSeq2.Text = seqNumber;
-            }
-            if (seqTime != "")
-            {
-                textBoxSequenceLength2.Text = seqTime;
-            }
-            SelectSeqTime();
+            var index = 2;
+            LoadSeq(index);
         }
 
         private void buttonVixenSeq3_Click(object sender, EventArgs e)
         {
-            string seqNumber;
-            string seqTime;
-            LoadSeq(out seqNumber, out seqTime);
-            if (seqNumber != "")
-            {
-                textBoxVixenSeq3.Text = seqNumber;
-            }
-            if (seqTime != "")
-            {
-                textBoxSequenceLength3.Text = seqTime;
-            }
-            SelectSeqTime();
+            var index = 4;
+            LoadSeq(index);
         }
         private void buttonVixenSeq4_Click(object sender, EventArgs e)
         {
-            string seqNumber;
-            string seqTime;
-            LoadSeq(out seqNumber, out seqTime);
-            if (seqNumber != "")
-            {
-                textBoxVixenSeq4.Text = seqNumber;
-            }
-            if (seqTime != "")
-            {
-                textBoxSequenceLength4.Text = seqTime;
-            }
-            SelectSeqTime();
+            var index = 6;
+            LoadSeq(index);
         }
 
         private void buttonVixenSeq5_Click(object sender, EventArgs e)
         {
-            string seqNumber;
-            string seqTime;
-            LoadSeq(out seqNumber, out seqTime);
-            if (seqNumber != "")
-            {
-                textBoxVixenSeq5.Text = seqNumber;
-            }
-            if (seqTime != "")
-            {
-                textBoxSequenceLength5.Text = seqTime;
-            }
-            SelectSeqTime();
+            var index = 8;
+            LoadSeq(index);
         }
         private void buttonVixenSeq6_Click(object sender, EventArgs e)
         {
-            string seqNumber;
-            string seqTime;
-            LoadSeq(out seqNumber, out seqTime);
-            if (seqNumber != "")
-            {
-                textBoxVixenSeq6.Text = seqNumber;
-            }
-            if (seqTime != "")
-            {
-                textBoxSequenceLength6.Text = seqTime;
-            }
-            SelectSeqTime();
+            var index = 10;
+            LoadSeq(index);
         }
 
         private void buttonRemoveSeq1_Click(object sender, EventArgs e)
@@ -1620,6 +1402,25 @@ namespace Vixen_Messaging
         {
             textBoxVixenSeq6.Text = "";
             textBoxSequenceLength6.Text = "";
+        }
+        #endregion
+
+        #region Initial settings to Load Seq
+        private void LoadSeq(int index)
+        {
+            string seqNumber;
+            string seqTime;
+            var loadSeq = new TextBox[] { textBoxVixenSeq1, textBoxSequenceLength1, textBoxVixenSeq2, textBoxSequenceLength2, textBoxVixenSeq3, textBoxSequenceLength3, textBoxVixenSeq4, textBoxSequenceLength4, textBoxVixenSeq5, textBoxSequenceLength5, textBoxVixenSeq6, textBoxSequenceLength6 };
+            LoadSeq(out seqNumber, out seqTime);
+            if (seqNumber != "")
+            {
+                loadSeq[index].Text = seqNumber;
+            }
+            if (seqTime != "")
+            {
+                loadSeq[index + 1].Text = seqTime;
+            }
+            SelectSeqTime();
         }
         #endregion
 
@@ -1714,34 +1515,11 @@ namespace Vixen_Messaging
             }
             else
             {
-                selectedSeq = tabControlSequence.SelectedIndex.ToString();
-                switch (selectedSeq)
-                {
-                    case "0":
-                        selectedSeq = textBoxVixenSeq1.Text;
-                        selectedSeqTime = textBoxSequenceLength1.Text;
-                        break;
-                    case "1": 
-                        selectedSeq = textBoxVixenSeq2.Text;
-                        selectedSeqTime = textBoxSequenceLength2.Text;
-                        break;
-                    case "2": 
-                        selectedSeq = textBoxVixenSeq3.Text;
-                        selectedSeqTime = textBoxSequenceLength3.Text;
-                        break;
-                    case "3": 
-                        selectedSeq = textBoxVixenSeq4.Text;
-                        selectedSeqTime = textBoxSequenceLength4.Text;
-                        break;
-                    case "4":
-                        selectedSeq = textBoxVixenSeq5.Text;
-                        selectedSeqTime = textBoxSequenceLength5.Text;
-                        break;
-                    case "5":
-                        selectedSeq = textBoxVixenSeq6.Text;
-                        selectedSeqTime = textBoxSequenceLength6.Text;
-                        break;
-                }
+                var selected = tabControlSequence.SelectedIndex;
+                var txtSeq = new TextBox[] { textBoxVixenSeq1, textBoxVixenSeq2, textBoxVixenSeq3, textBoxVixenSeq4};
+                var txtLen = new TextBox[] { textBoxSequenceLength1, textBoxSequenceLength2, textBoxSequenceLength3, textBoxSequenceLength4 };
+                selectedSeq = txtSeq[selected].Text;
+                selectedSeqTime = txtLen[selected].Text;
             }
 
 			string seqTimeString;
@@ -1763,7 +1541,7 @@ namespace Vixen_Messaging
 				seqTimeString = seqTimeString.Replace("S", "");
 				int seqTimeString3 = Convert.ToInt16(seqTimeString);
 				var newSeqTime = Convert.ToDecimal(seqTimeString2 + seqTimeString3);
-				GlobalVar.SeqIntervalTime = newSeqTime + 15; // add 20 seconds to allow for the Sequence to finish before another check for messages is performed.
+				GlobalVar.SeqIntervalTime = newSeqTime + 15; // add 15 seconds to allow for the Sequence to finish before another check for messages is performed.
 			}
 			else
 			{
@@ -1773,7 +1551,7 @@ namespace Vixen_Messaging
 				seqTimeString = selectedSeqTime1.TrimEnd('.');
 				seqTimeString = seqTimeString.Replace("S", "");
 				var newSeqTime = Convert.ToDecimal(seqTimeString);
-				GlobalVar.SeqIntervalTime = newSeqTime + 5; // add 10 seconds to allow for the Sequence to finish before another check for messages is performed.
+				GlobalVar.SeqIntervalTime = newSeqTime + 5; // add 5 seconds to allow for the Sequence to finish before another check for messages is performed.
 			}
 
 			timerCheckMail.Enabled = false;
@@ -1831,35 +1609,23 @@ namespace Vixen_Messaging
             switch (TextLineNumber.Value.ToString()) //need to check
             {
                 case "1":
-                    fileText = fileText.Replace("NamePlaceholder1", msg);//replaces the text
-                    fileText = fileText.Replace("NamePlaceholder2", "");//replaces the text
-                    fileText = fileText.Replace("NamePlaceholder3", "");//replaces the text
-                    fileText = fileText.Replace("NamePlaceholder4", "");//replaces the text
+                    fileText = fileText.Replace("NamePlaceholder1", msg).Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", "");//replaces the text
                     break;
                 case "2":
-                    fileText = fileText.Replace("NamePlaceholder1", "");//replaces the text
-                    fileText = fileText.Replace("NamePlaceholder2", msg);//replaces the text
-                    fileText = fileText.Replace("NamePlaceholder3", "");//replaces the text
-                    fileText = fileText.Replace("NamePlaceholder4", "");//replaces the text
+                    fileText = fileText.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", msg).Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", "");//replaces the text
                     break;
                 case "3":
-                    fileText = fileText.Replace("NamePlaceholder1", "");//replaces the text
-                    fileText = fileText.Replace("NamePlaceholder2", "");//replaces the text
-                    fileText = fileText.Replace("NamePlaceholder3", msg);//replaces the text
-                    fileText = fileText.Replace("NamePlaceholder4", "");//replaces the text
+                    fileText = fileText.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", msg).Replace("NamePlaceholder4", "");//replaces the text
                     break;
                 case "4":
-                    fileText = fileText.Replace("NamePlaceholder1", "");//replaces the text
-                    fileText = fileText.Replace("NamePlaceholder2", "");//replaces the text
-                    fileText = fileText.Replace("NamePlaceholder3", "");//replaces the text
-                    fileText = fileText.Replace("NamePlaceholder4", msg);//replaces the text
+                    fileText = fileText.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", msg);//replaces the text
                     break;
             }
             ColourSelect(out hexValue); //Colour Selection for Text. Random or Single
             var textColorNum = Convert.ToUInt32(hexValue, 16);
             fileText = fileText.Replace("FontName_Change", textBoxFont.Text);
             fileText = fileText.Replace("FontSize_Change", textBoxFontSize.Text);
-            fileText = fileText.Replace("Colour1_Change", textColorNum.ToString());
+            fileText = fileText.Replace("Colour_Change1", textColorNum.ToString());
             fileText = fileText.Replace("Speed_Change", trackBarTextSpeed.Value.ToString());
             fileText = fileText.Replace("StringOrienation_Change", comboBoxString.Text);
             fileText = fileText.Replace("TextPosition_Change", trackBarTextPosition.Value.ToString());
@@ -2470,13 +2236,21 @@ namespace Vixen_Messaging
         private void pictureBoxSaveBlacklist_Click(object sender, EventArgs e)
         {
             richTextBoxBlacklist.SaveFile(GlobalVar.Blacklistlocation, RichTextBoxStreamType.PlainText);
+            richTextBoxBlacklist.SaveFile(GlobalVar.Blacklistlocation + ".bkp", RichTextBoxStreamType.PlainText);
             MessageBox.Show(@"Blacklist saved!");
         }
 
         private void pictureBoxSaveWhitelist_Click(object sender, EventArgs e)
         {
             richTextBoxWhitelist.SaveFile(GlobalVar.Whitelistlocation, RichTextBoxStreamType.PlainText);
+            richTextBoxWhitelist.SaveFile(GlobalVar.Whitelistlocation + ".bkp", RichTextBoxStreamType.PlainText);
             MessageBox.Show(@"Whitelist saved!");
+        }
+        private void buttonSaveMessageList_Click(object sender, EventArgs e)
+        {
+            richTextBoxMessage.SaveFile(GlobalVar.LocalMessages, RichTextBoxStreamType.PlainText);
+            richTextBoxMessage.SaveFile(GlobalVar.LocalMessages + ".bkp", RichTextBoxStreamType.PlainText);
+            MessageBox.Show(@"Messages saved!");
         }
 
         private void tabControlSequence_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -2508,12 +2282,6 @@ namespace Vixen_Messaging
             EffectTime.Enabled = !EffectTime.Enabled;
             extraTime.Enabled = !extraTime.Enabled;
             GlobalVar.SeqIntervalTime = EffectTime.Value + 5;
-        }
-
-        private void buttonSaveMessageList_Click(object sender, EventArgs e)
-        {
-            richTextBoxMessage.SaveFile(GlobalVar.LocalMessages, RichTextBoxStreamType.PlainText);
-            MessageBox.Show(@"Messages saved!");
         }
 
         private void buttonSaveLog_Click(object sender, EventArgs e)
