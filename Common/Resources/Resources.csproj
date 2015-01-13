@@ -87,6 +87,7 @@
     <None Include="StopB_W.png" />
     <None Include="SaveWhitelist.png" />
     <None Include="SaveBlacklist.png" />
+    <None Include="ClicktoOpen.png" />
     <Content Include="Vixen Messaging.png" />
   </ItemGroup>
   <ItemGroup>

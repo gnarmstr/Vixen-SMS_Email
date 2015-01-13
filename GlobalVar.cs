@@ -15,6 +15,8 @@
 
             public static string SettingsPath { get; set; }
 
+            public static string MovieFolder { get; set; }
+
             public static decimal SeqIntervalTime { get; set; }
 
             /// <summary>

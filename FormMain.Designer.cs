@@ -130,6 +130,13 @@
             this.label51 = new System.Windows.Forms.Label();
             this.trackBarTwinkleSteps = new System.Windows.Forms.TrackBar();
             this.trackBarTwinkleLights = new System.Windows.Forms.TrackBar();
+            this.tabPageMovie = new System.Windows.Forms.TabPage();
+            this.buttonMovieDelete = new System.Windows.Forms.Button();
+            this.label72 = new System.Windows.Forms.Label();
+            this.label73 = new System.Windows.Forms.Label();
+            this.trackBarMovieSpeed = new System.Windows.Forms.TrackBar();
+            this.trackBarThumbnail = new System.Windows.Forms.TrackBar();
+            this.pictureBoxMovie = new System.Windows.Forms.PictureBox();
             this.label28 = new System.Windows.Forms.Label();
             this.EffectTime = new System.Windows.Forms.NumericUpDown();
             this.label37 = new System.Windows.Forms.Label();
@@ -275,6 +282,15 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.buttonStopSequence = new System.Windows.Forms.Button();
+            this.fileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.numericUpDownIntervalMsgs = new System.Windows.Forms.NumericUpDown();
+            this.label71 = new System.Windows.Forms.Label();
+            this.checkBoxRandom5 = new System.Windows.Forms.CheckBox();
+            this.checkBoxRandom4 = new System.Windows.Forms.CheckBox();
+            this.checkBoxRandom3 = new System.Windows.Forms.CheckBox();
+            this.checkBoxRandom2 = new System.Windows.Forms.CheckBox();
+            this.checkBoxRandom1 = new System.Windows.Forms.CheckBox();
+            this.label74 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxEffects.SuspendLayout();
@@ -294,6 +310,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeedTwinkles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTwinkleSteps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTwinkleLights)).BeginInit();
+            this.tabPageMovie.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarMovieSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarThumbnail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMovie)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EffectTime)).BeginInit();
             this.TabSeq1.SuspendLayout();
             this.TabSeq2.SuspendLayout();
@@ -325,6 +345,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -677,6 +698,7 @@
             this.tabControlEffects.Controls.Add(this.tabPageFire);
             this.tabControlEffects.Controls.Add(this.tabPageMeteors);
             this.tabControlEffects.Controls.Add(this.tabPageTwinkles);
+            this.tabControlEffects.Controls.Add(this.tabPageMovie);
             this.tabControlEffects.Location = new System.Drawing.Point(6, 64);
             this.tabControlEffects.Name = "tabControlEffects";
             this.tabControlEffects.SelectedIndex = 0;
@@ -686,6 +708,7 @@
             // tabPageSnowFlake
             // 
             this.tabPageSnowFlake.BackColor = System.Drawing.Color.Azure;
+            this.tabPageSnowFlake.Controls.Add(this.checkBoxRandom1);
             this.tabPageSnowFlake.Controls.Add(this.label56);
             this.tabPageSnowFlake.Controls.Add(this.checkBoxSnowFlakeColour6);
             this.tabPageSnowFlake.Controls.Add(this.checkBoxSnowFlakeColour5);
@@ -932,6 +955,7 @@
             // tabPageFire
             // 
             this.tabPageFire.BackColor = System.Drawing.Color.Azure;
+            this.tabPageFire.Controls.Add(this.checkBoxRandom2);
             this.tabPageFire.Controls.Add(this.FireHeight);
             this.tabPageFire.Controls.Add(this.label31);
             this.tabPageFire.Location = new System.Drawing.Point(4, 29);
@@ -970,6 +994,7 @@
             // tabPageMeteors
             // 
             this.tabPageMeteors.BackColor = System.Drawing.Color.Azure;
+            this.tabPageMeteors.Controls.Add(this.checkBoxRandom3);
             this.tabPageMeteors.Controls.Add(this.label55);
             this.tabPageMeteors.Controls.Add(this.checkBoxMeteorColour6);
             this.tabPageMeteors.Controls.Add(this.checkBoxMeteorColour5);
@@ -1234,6 +1259,7 @@
             // tabPageTwinkles
             // 
             this.tabPageTwinkles.BackColor = System.Drawing.Color.Azure;
+            this.tabPageTwinkles.Controls.Add(this.checkBoxRandom4);
             this.tabPageTwinkles.Controls.Add(this.label54);
             this.tabPageTwinkles.Controls.Add(this.checkBoxTwinkleColour6);
             this.tabPageTwinkles.Controls.Add(this.checkBoxTwinkleColour5);
@@ -1463,6 +1489,92 @@
             this.trackBarTwinkleLights.Scroll += new System.EventHandler(this.trackBarTwinkleLights_Scroll);
             this.trackBarTwinkleLights.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTwinkleLights_MouseDown);
             this.trackBarTwinkleLights.MouseHover += new System.EventHandler(this.trackBarTwinkleLights_MouseHover);
+            // 
+            // tabPageMovie
+            // 
+            this.tabPageMovie.BackColor = System.Drawing.Color.Azure;
+            this.tabPageMovie.Controls.Add(this.checkBoxRandom5);
+            this.tabPageMovie.Controls.Add(this.buttonMovieDelete);
+            this.tabPageMovie.Controls.Add(this.label72);
+            this.tabPageMovie.Controls.Add(this.label73);
+            this.tabPageMovie.Controls.Add(this.trackBarMovieSpeed);
+            this.tabPageMovie.Controls.Add(this.trackBarThumbnail);
+            this.tabPageMovie.Controls.Add(this.pictureBoxMovie);
+            this.tabPageMovie.Location = new System.Drawing.Point(4, 29);
+            this.tabPageMovie.Name = "tabPageMovie";
+            this.tabPageMovie.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMovie.Size = new System.Drawing.Size(736, 225);
+            this.tabPageMovie.TabIndex = 4;
+            this.tabPageMovie.Text = "Movie";
+            // 
+            // buttonMovieDelete
+            // 
+            this.buttonMovieDelete.Location = new System.Drawing.Point(473, 6);
+            this.buttonMovieDelete.Name = "buttonMovieDelete";
+            this.buttonMovieDelete.Size = new System.Drawing.Size(38, 38);
+            this.buttonMovieDelete.TabIndex = 49;
+            this.buttonMovieDelete.Text = "-";
+            this.toolTip1.SetToolTip(this.buttonMovieDelete, "Remove Sequence File Path");
+            this.buttonMovieDelete.UseVisualStyleBackColor = true;
+            this.buttonMovieDelete.Click += new System.EventHandler(this.buttonMovieDelete_Click);
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(10, 60);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(105, 20);
+            this.label72.TabIndex = 48;
+            this.label72.Text = "Movie Speed:";
+            this.toolTip1.SetToolTip(this.label72, "Speed of the output movie.");
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(10, 146);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(146, 20);
+            this.label73.TabIndex = 47;
+            this.label73.Text = "Thumbnail Position:";
+            this.toolTip1.SetToolTip(this.label73, "Viual only, has no effect on output.");
+            // 
+            // trackBarMovieSpeed
+            // 
+            this.trackBarMovieSpeed.AutoSize = false;
+            this.trackBarMovieSpeed.Location = new System.Drawing.Point(14, 94);
+            this.trackBarMovieSpeed.Maximum = 100;
+            this.trackBarMovieSpeed.Minimum = -100;
+            this.trackBarMovieSpeed.Name = "trackBarMovieSpeed";
+            this.trackBarMovieSpeed.Size = new System.Drawing.Size(497, 40);
+            this.trackBarMovieSpeed.TabIndex = 45;
+            this.trackBarMovieSpeed.Scroll += new System.EventHandler(this.trackBarMovieSpeed_Scroll);
+            this.trackBarMovieSpeed.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarMovieSpeed_MouseDown);
+            this.trackBarMovieSpeed.MouseHover += new System.EventHandler(this.trackBarMovieSpeed_MouseHover);
+            // 
+            // trackBarThumbnail
+            // 
+            this.trackBarThumbnail.AutoSize = false;
+            this.trackBarThumbnail.Location = new System.Drawing.Point(10, 169);
+            this.trackBarThumbnail.Maximum = 20000;
+            this.trackBarThumbnail.Minimum = 1;
+            this.trackBarThumbnail.Name = "trackBarThumbnail";
+            this.trackBarThumbnail.Size = new System.Drawing.Size(501, 40);
+            this.trackBarThumbnail.TabIndex = 44;
+            this.trackBarThumbnail.Value = 1;
+            this.trackBarThumbnail.Scroll += new System.EventHandler(this.trackBarThumbnail_Scroll);
+            this.trackBarThumbnail.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarThumbnail_MouseDown);
+            this.trackBarThumbnail.MouseHover += new System.EventHandler(this.trackBarThumbnail_MouseHover);
+            // 
+            // pictureBoxMovie
+            // 
+            this.pictureBoxMovie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBoxMovie.Location = new System.Drawing.Point(517, 6);
+            this.pictureBoxMovie.Name = "pictureBoxMovie";
+            this.pictureBoxMovie.Size = new System.Drawing.Size(210, 200);
+            this.pictureBoxMovie.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxMovie.TabIndex = 2;
+            this.pictureBoxMovie.TabStop = false;
+            this.pictureBoxMovie.Click += new System.EventHandler(this.pictureBoxMovie_Click);
             // 
             // label28
             // 
@@ -1942,9 +2054,9 @@
             // 
             this.WebServerStatus.BackColor = System.Drawing.Color.OrangeRed;
             this.WebServerStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WebServerStatus.Location = new System.Drawing.Point(28, 938);
+            this.WebServerStatus.Location = new System.Drawing.Point(45, 938);
             this.WebServerStatus.Name = "WebServerStatus";
-            this.WebServerStatus.Size = new System.Drawing.Size(394, 57);
+            this.WebServerStatus.Size = new System.Drawing.Size(369, 47);
             this.WebServerStatus.TabIndex = 31;
             this.WebServerStatus.Text = "Vixen 3 Web Server is ENABLED";
             this.toolTip1.SetToolTip(this.WebServerStatus, "Click to Enable Vixen Web Server");
@@ -2011,7 +2123,9 @@
             // tabPageMain
             // 
             this.tabPageMain.BackColor = System.Drawing.Color.Azure;
-            this.tabPageMain.Controls.Add(this.buttonSaveLog);
+            this.tabPageMain.Controls.Add(this.label74);
+            this.tabPageMain.Controls.Add(this.numericUpDownIntervalMsgs);
+            this.tabPageMain.Controls.Add(this.label71);
             this.tabPageMain.Controls.Add(this.label66);
             this.tabPageMain.Controls.Add(this.comboBoxPlayMode);
             this.tabPageMain.Controls.Add(this.label14);
@@ -2030,7 +2144,7 @@
             // buttonSaveLog
             // 
             this.buttonSaveLog.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonSaveLog.Location = new System.Drawing.Point(644, 503);
+            this.buttonSaveLog.Location = new System.Drawing.Point(6, 991);
             this.buttonSaveLog.Name = "buttonSaveLog";
             this.buttonSaveLog.Size = new System.Drawing.Size(122, 41);
             this.buttonSaveLog.TabIndex = 60;
@@ -3052,13 +3166,103 @@
             // buttonStopSequence
             // 
             this.buttonStopSequence.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonStopSequence.Location = new System.Drawing.Point(77, 1001);
+            this.buttonStopSequence.Location = new System.Drawing.Point(159, 992);
             this.buttonStopSequence.Name = "buttonStopSequence";
             this.buttonStopSequence.Size = new System.Drawing.Size(293, 40);
             this.buttonStopSequence.TabIndex = 61;
             this.buttonStopSequence.Text = "Stop Currently Running Sequence";
             this.buttonStopSequence.UseVisualStyleBackColor = false;
             this.buttonStopSequence.Click += new System.EventHandler(this.buttonStopSequence_Click);
+            // 
+            // fileDialog
+            // 
+            this.fileDialog.FileName = "Select a File";
+            this.fileDialog.Title = "Select a File";
+            // 
+            // numericUpDownIntervalMsgs
+            // 
+            this.numericUpDownIntervalMsgs.Location = new System.Drawing.Point(579, 501);
+            this.numericUpDownIntervalMsgs.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.numericUpDownIntervalMsgs.Name = "numericUpDownIntervalMsgs";
+            this.numericUpDownIntervalMsgs.Size = new System.Drawing.Size(72, 26);
+            this.numericUpDownIntervalMsgs.TabIndex = 61;
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(534, 460);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(207, 20);
+            this.label71.TabIndex = 62;
+            this.label71.Text = "Interval between Messages:";
+            // 
+            // checkBoxRandom5
+            // 
+            this.checkBoxRandom5.AutoSize = true;
+            this.checkBoxRandom5.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxRandom5.Location = new System.Drawing.Point(10, 14);
+            this.checkBoxRandom5.Name = "checkBoxRandom5";
+            this.checkBoxRandom5.Size = new System.Drawing.Size(242, 24);
+            this.checkBoxRandom5.TabIndex = 50;
+            this.checkBoxRandom5.Text = "Include in Random Selection:";
+            this.checkBoxRandom5.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxRandom4
+            // 
+            this.checkBoxRandom4.AutoSize = true;
+            this.checkBoxRandom4.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxRandom4.Location = new System.Drawing.Point(483, 4);
+            this.checkBoxRandom4.Name = "checkBoxRandom4";
+            this.checkBoxRandom4.Size = new System.Drawing.Size(242, 24);
+            this.checkBoxRandom4.TabIndex = 69;
+            this.checkBoxRandom4.Text = "Include in Random Selection:";
+            this.checkBoxRandom4.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxRandom3
+            // 
+            this.checkBoxRandom3.AutoSize = true;
+            this.checkBoxRandom3.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxRandom3.Location = new System.Drawing.Point(483, 4);
+            this.checkBoxRandom3.Name = "checkBoxRandom3";
+            this.checkBoxRandom3.Size = new System.Drawing.Size(242, 24);
+            this.checkBoxRandom3.TabIndex = 82;
+            this.checkBoxRandom3.Text = "Include in Random Selection:";
+            this.checkBoxRandom3.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxRandom2
+            // 
+            this.checkBoxRandom2.AutoSize = true;
+            this.checkBoxRandom2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxRandom2.Location = new System.Drawing.Point(483, 4);
+            this.checkBoxRandom2.Name = "checkBoxRandom2";
+            this.checkBoxRandom2.Size = new System.Drawing.Size(242, 24);
+            this.checkBoxRandom2.TabIndex = 51;
+            this.checkBoxRandom2.Text = "Include in Random Selection:";
+            this.checkBoxRandom2.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxRandom1
+            // 
+            this.checkBoxRandom1.AutoSize = true;
+            this.checkBoxRandom1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxRandom1.Location = new System.Drawing.Point(483, 4);
+            this.checkBoxRandom1.Name = "checkBoxRandom1";
+            this.checkBoxRandom1.Size = new System.Drawing.Size(242, 24);
+            this.checkBoxRandom1.TabIndex = 82;
+            this.checkBoxRandom1.Text = "Include in Random Selection:";
+            this.checkBoxRandom1.UseVisualStyleBackColor = true;
+            // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.Location = new System.Drawing.Point(662, 504);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(37, 20);
+            this.label74.TabIndex = 63;
+            this.label74.Text = "Sec";
             // 
             // FormMain
             // 
@@ -3069,6 +3273,7 @@
             this.ClientSize = new System.Drawing.Size(784, 1044);
             this.Controls.Add(this.buttonStopSequence);
             this.Controls.Add(this.WebServerStatus);
+            this.Controls.Add(this.buttonSaveLog);
             this.Controls.Add(this.buttonHelp);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonStart);
@@ -3109,6 +3314,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSpeedTwinkles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTwinkleSteps)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTwinkleLights)).EndInit();
+            this.tabPageMovie.ResumeLayout(false);
+            this.tabPageMovie.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarMovieSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarThumbnail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMovie)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EffectTime)).EndInit();
             this.TabSeq1.ResumeLayout(false);
             this.TabSeq1.PerformLayout();
@@ -3153,6 +3363,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -3404,6 +3615,22 @@
         private System.Windows.Forms.Button buttonSaveLog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button buttonStopSequence;
+        private System.Windows.Forms.TabPage tabPageMovie;
+        private System.Windows.Forms.OpenFileDialog fileDialog;
+        private System.Windows.Forms.PictureBox pictureBoxMovie;
+        private System.Windows.Forms.TrackBar trackBarMovieSpeed;
+        private System.Windows.Forms.TrackBar trackBarThumbnail;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.Button buttonMovieDelete;
+        private System.Windows.Forms.NumericUpDown numericUpDownIntervalMsgs;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.CheckBox checkBoxRandom1;
+        private System.Windows.Forms.CheckBox checkBoxRandom2;
+        private System.Windows.Forms.CheckBox checkBoxRandom3;
+        private System.Windows.Forms.CheckBox checkBoxRandom4;
+        private System.Windows.Forms.CheckBox checkBoxRandom5;
+        private System.Windows.Forms.Label label74;
     }
 }
 

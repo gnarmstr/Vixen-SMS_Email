@@ -92,7 +92,23 @@ namespace Vixen_Messaging
                 var copyfile = File.ReadAllText(GlobalVar.LocalMessages + ".bkp");
                 File.WriteAllText(GlobalVar.LocalMessages, copyfile);
             }
-            
+
+            var vixenMovieFolder = textBoxVixenFolder.Text + "\\Module Data Files\\Nutcracker\\EEEEEEEE-EEEE-EEEE-EEEE-EEEEEEEEEEEE";
+            if (!Directory.Exists(vixenMovieFolder))
+            {
+                Directory.CreateDirectory(vixenMovieFolder);
+            }
+            GlobalVar.MovieFolder = vixenMovieFolder;
+            if (!File.Exists(GlobalVar.MovieFolder + "\\" + "0000000001.png"))
+            {
+                pictureBoxMovie.Image = Tools.ResizeImage(Resources.ClicktoOpen, 210, 200);
+            }
+            else
+            {
+                trackBarThumbnail.Maximum = Directory.GetFiles(GlobalVar.MovieFolder, "*.*", SearchOption.TopDirectoryOnly).Length;
+                pictureBoxMovie.ImageLocation = GlobalVar.MovieFolder + "\\" + (trackBarThumbnail.Value.ToString("D10")) + ".png";
+            }
+ 
             var content = File.ReadAllText(GlobalVar.Blacklistlocation);
             richTextBoxBlacklist.Text = content;
             var content1 = File.ReadAllText(GlobalVar.Whitelistlocation);
@@ -151,6 +167,8 @@ namespace Vixen_Messaging
             buttonHelp.Image = Tools.GetIcon(Resources.Help2, 30);
             pictureBoxSaveWhitelist.Image = Tools.ResizeImage(Resources.SaveWhitelist, 100, 60);
             pictureBoxSaveBlacklist.Image = Tools.ResizeImage(Resources.SaveBlacklist, 100, 60);
+            pictureBoxMovie.Image = Tools.ResizeImage(Resources.ClicktoOpen, 210, 200);
+            buttonMovieDelete.Image = Tools.GetIcon(Resources.delete, 16);
 
             try
             {
@@ -304,8 +322,16 @@ namespace Vixen_Messaging
             textBoxReturnBannedMSG.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxReturnBannedMSG", "You have been banned for the night for sending inappropiate words.");
             comboBoxPlayMode.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxPlayMode", "Play Only Incoming Msgs");
             checkBoxLocalRandom.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocalRandom", true);
+            checkBoxRandom1.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom1", true);
+            checkBoxRandom2.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom2", true);
+            checkBoxRandom3.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom3", true);
+            checkBoxRandom4.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom4", true);
+            checkBoxRandom5.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom5", false); 
             extraTime.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "extraTime", 0);
             extraTime.Enabled = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "extraTimeEnabled", false);
+            numericUpDownIntervalMsgs.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownIntervalMsgs", 0);
+            trackBarMovieSpeed.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarMovieSpeed", 0);
+            trackBarThumbnail.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarThumbnail", 1);
         }
         #endregion
 
@@ -343,7 +369,7 @@ namespace Vixen_Messaging
             {
             }
 
-			timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + 5) * 1000;
+            timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + 5 + numericUpDownIntervalMsgs.Value) * 1000;
             
 
             //Will only display after first run from install.
@@ -719,6 +745,7 @@ namespace Vixen_Messaging
                     }
                     
                     fileText = fileText.Replace("Speed_Change", trackBarTextSpeed.Value.ToString());
+                    fileText = fileText.Replace("Movie_Change", trackBarMovieSpeed.Value.ToString());
                     fileText = fileText.Replace("TextPosition_Change", trackBarTextPosition.Value.ToString());
 
                     string outputFileName;
@@ -803,14 +830,38 @@ namespace Vixen_Messaging
                         {
                             if (checkBoxRandomSeqSelection.Checked)
                             {
-
-                                var randomseq = new Random();
+                                var index = 0;
+                                var empty = 0;
+                                var randomString = new string[5];
+                                var seqRandom = new CheckBox[]
+                                {checkBoxRandom1, checkBoxRandom2, checkBoxRandom3, checkBoxRandom4, checkBoxRandom5};
                                 string[] mystrings =
                                 {
                                     tabPageSnowFlake.Text, tabPageFire.Text, tabPageMeteors.Text,
-                                    tabPageTwinkles.Text
+                                    tabPageTwinkles.Text, tabPageMovie.Text
                                 };
-                                selectedSeq = mystrings[randomseq.Next(mystrings.Length)];
+                                do
+                                {
+                                    if (seqRandom[index].Checked)
+                                    {
+                                        randomString[index] = mystrings[index];
+                                    }
+                                    else
+                                    {
+                                        randomString[index] = "";
+                                        empty++;
+                                    }
+                                } while (index++ < 4);
+
+                                do
+                                {
+                                    var randomseq = new Random();
+                                    selectedSeq = randomString[randomseq.Next(randomString.Length)];
+                                    if (empty == 5)
+                                    {
+                                        selectedSeq = "None";
+                                    }
+                                } while (selectedSeq == "");
                             }
                             else
                             {
@@ -824,6 +875,7 @@ namespace Vixen_Messaging
                         {
                             case "SnowFlakes":
                                 fileText = fileText.Replace("Speed_1Change", trackBarSpeedSnowFlakes.Value.ToString());
+                                fileText = fileText.Replace("MovieTime_Change", "0");
                                 fileText = fileText.Replace("SnowFlakeTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                                 fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
@@ -841,6 +893,7 @@ namespace Vixen_Messaging
                                 break;
                             case "Fire":
                                 fileText = fileText.Replace("Speed_1Change", "0");
+                                fileText = fileText.Replace("MovieTime_Change", "0");
                                 fileText = fileText.Replace("FireHeightTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                                 fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
@@ -854,6 +907,7 @@ namespace Vixen_Messaging
                                 break;
                             case "Meteors":
                                 fileText = fileText.Replace("Speed_1Change", trackBarSpeedMeteors.Value.ToString());
+                                fileText = fileText.Replace("MovieTime_Change", "0");
                                 fileText = fileText.Replace("MeteorTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                                 fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
@@ -872,6 +926,7 @@ namespace Vixen_Messaging
                                 break;
                             case "Twinkles":
                                 fileText = fileText.Replace("Speed_1Change", trackBarSpeedTwinkles.Value.ToString());
+                                fileText = fileText.Replace("MovieTime_Change", "0");
                                 fileText = fileText.Replace("TwinkleTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                                 fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
@@ -888,8 +943,23 @@ namespace Vixen_Messaging
                                     i++;
                                 } while (i < 7);
                                 break;
+                            case "Movie":
+                                fileText = fileText.Replace("Speed_1Change", "0");
+                                fileText = fileText.Replace("MovieTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
+                                fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
+                                fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
+                                fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
+                                fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
+                                do
+                                {
+                                    fileText = fileText.Replace("Colour" + i + "_Change", "0"); //Colour
+                                    fileText = fileText.Replace("CheckBox" + i + "_Change", "false"); //Colour Enabled true or False
+                                    i++;
+                                } while (i < 7);
+                                break;
                             case "None":
                                 fileText = fileText.Replace("Speed_1Change", "0");
+                                fileText = fileText.Replace("MovieTime_Change", "0");
                                 fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
@@ -906,7 +976,7 @@ namespace Vixen_Messaging
                         File.WriteAllText(outputFileName, fileText);
                         if (checkBoxVariableLength.Checked)
                         {
-                            timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime)*1000;
+                            timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + numericUpDownIntervalMsgs.Value)*1000;
                             timerCheckMail.Enabled = true;
                         }
                     }
@@ -1495,7 +1565,12 @@ namespace Vixen_Messaging
                 {
                     string[] mystrings = { textBoxVixenSeq1.Text, textBoxVixenSeq2.Text, textBoxVixenSeq3.Text, textBoxVixenSeq4.Text, textBoxVixenSeq5.Text, textBoxVixenSeq6.Text };
                     selectedSeq = mystrings[randomseq.Next(mystrings.Length)];
-                } while (selectedSeq == "" | iii++ < 200);
+                    if (iii == 400)
+                    {
+                        break;
+                    }
+                    iii++;
+                } while (selectedSeq == "");
 
                 string str;
                 var sequenceLength = "";
@@ -1648,10 +1723,113 @@ namespace Vixen_Messaging
             fileText = fileText.Replace("TextDirection_Change", textDirection.ToString());
             File.Delete(textBoxOutputSequence.Text);
             File.WriteAllText(textBoxOutputSequence.Text, fileText);
-			timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime) * 1000; 
+            timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + numericUpDownIntervalMsgs.Value) * 1000; 
 			timerCheckMail.Enabled = true;
         }
 #endregion
+
+#region Movie
+
+        private void pictureBoxMovie_Click(object sender, EventArgs e)
+        {
+            AddMovie();
+        }
+
+        private void AddMovie()
+        {
+            fileDialog.Filter = @"All Files|*.*";
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                // If this effect doesn't have working folder make one.
+                // TODO: delete the folder if the effect is removed from the timeline?
+
+      //          textBoxMovieLocation.Text = Guid.NewGuid().ToString();
+
+         //       var destFolder = GlobalVar.MovieFolder;
+                if (!Directory.Exists(GlobalVar.MovieFolder))
+                {
+                    Directory.CreateDirectory(GlobalVar.MovieFolder);
+                }
+                DeleteExistingMovieFiles(GlobalVar.MovieFolder);
+                ProcessMovie(fileDialog.FileName);
+            }
+        }
+        private void ProcessMovie(string movieFileName)
+        {
+            try
+            {
+                var f = new NutcrackerProcessingMovie();
+                f.Show();
+                var converter = new Ffmpeg(movieFileName);
+                converter.MakeThumbnails(GlobalVar.MovieFolder);
+                f.Close();
+                pictureBoxMovie.ImageLocation = GlobalVar.MovieFolder + @"\0000000001.png";
+                trackBarThumbnail.Maximum = Directory.GetFiles(GlobalVar.MovieFolder, "*.*", SearchOption.TopDirectoryOnly).Length;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(@"There was a problem converting " + movieFileName + ": " + ex.Message, @"Error Converting Movie",
+                                MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            }
+        }
+
+        private class Ffmpeg
+        {
+            private string _movieFile = string.Empty;
+
+            public Ffmpeg(string movieFile)
+            {
+                _movieFile = movieFile;
+            }
+
+            public void MakeThumbnails(string outputPath)
+            {
+                int width = 50;
+                int height = 50;
+                int framesPerSecond = 25;
+
+                //make arguements string
+                string args;
+                args = " -i \"" + _movieFile + "\"" +
+                       " -s " + width.ToString() + "x" + height.ToString() +
+                       " -vf " +
+                       " fps=" + framesPerSecond.ToString() + " \"" + outputPath + "\\%10d.png\"";
+                //create a process
+                var myProcess = new Process();
+                myProcess.StartInfo.UseShellExecute = false;
+                myProcess.StartInfo.RedirectStandardOutput = true;
+                //point ffmpeg location
+                string ffmpegPath = AppDomain.CurrentDomain.BaseDirectory;
+                ffmpegPath += "ffmpeg.exe";
+                myProcess.StartInfo.FileName = ffmpegPath;
+                //set arguements
+                myProcess.StartInfo.Arguments = args;
+                Console.WriteLine(ffmpegPath + " => " + args);
+                myProcess.Start();
+                //while (!myProcess.HasExited)
+                //{
+                //    Thread.Yield();
+                //}
+                myProcess.WaitForExit();
+            }
+        }
+
+        
+        private void DeleteExistingMovieFiles(string folder)
+        {
+            var folderInfo = new DirectoryInfo(folder);
+
+            foreach (FileInfo file in folderInfo.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (var dir in folderInfo.GetDirectories())
+            {
+                dir.Delete(true);
+            }
+            trackBarThumbnail.Value = 1;
+        }
+        #endregion
 
 #region Get Vixen Settings
 
@@ -1841,12 +2019,14 @@ namespace Vixen_Messaging
 
         private void StopSequence()
         {
-            using (var wc = new WebClient())
-            {
-                var stopSequence = textBoxVixenServer.Text.Replace("playSequence", "stopSequence");
-                wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
-                wc.UploadString(stopSequence, "");
-            }
+            bool vixenRunning = Process.GetProcesses().Any(clsProcess => clsProcess.ProcessName.Contains("VixenApplication"));
+            if (vixenRunning)
+                using (var wc = new WebClient())
+                {
+                    var stopSequence = textBoxVixenServer.Text.Replace("playSequence", "stopSequence");
+                    wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+                    wc.UploadString(stopSequence, "");
+                }
         }
         #endregion
 
@@ -2009,8 +2189,16 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxReturnBannedMSG", textBoxReturnBannedMSG.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxPlayMode", comboBoxPlayMode.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocalRandom", checkBoxLocalRandom.Checked.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom1", checkBoxRandom1.Checked.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom2", checkBoxRandom2.Checked.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom3", checkBoxRandom3.Checked.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom4", checkBoxRandom4.Checked.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom5", checkBoxRandom5.Checked.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "extraTime", extraTime.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "extraTimeEnabled", extraTime.Enabled.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownIntervalMsgs", numericUpDownIntervalMsgs.Value.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarMovieSpeed", trackBarMovieSpeed.Value.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarThumbnail", trackBarThumbnail.Value.ToString());
         }
 #endregion
 
@@ -2298,6 +2486,44 @@ namespace Vixen_Messaging
             }
         }
         #endregion   
+
+        private void trackBarThumbnail_Scroll(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarThumbnail, trackBarThumbnail.Value.ToString());
+            pictureBoxMovie.ImageLocation = GlobalVar.MovieFolder + "\\" + (trackBarThumbnail.Value.ToString("D10")) + ".png";
+        }
+
+        private void trackBarThumbnail_MouseDown(object sender, MouseEventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarThumbnail, trackBarThumbnail.Value.ToString());
+        }
+
+        private void trackBarThumbnail_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarThumbnail, trackBarThumbnail.Value.ToString());
+        }
+
+        private void trackBarMovieSpeed_Scroll(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
+        }
+
+        private void trackBarMovieSpeed_MouseDown(object sender, MouseEventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
+        }
+
+        private void trackBarMovieSpeed_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
+        }
+
+        private void buttonMovieDelete_Click(object sender, EventArgs e)
+        {
+            DeleteExistingMovieFiles(GlobalVar.MovieFolder);
+            pictureBoxMovie.Image = Tools.ResizeImage(Resources.ClicktoOpen, 210, 200);
+        }
+
     }
 }
 #endregion

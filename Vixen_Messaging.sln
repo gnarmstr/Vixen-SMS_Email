@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5BA691
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "Common\Resources\Resources.csproj", "{F7A80169-6310-4585-9D58-A6F6F5C5B380}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{0FA6F75A-D9C7-471E-BE91-3FF97D8D6BC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E} = {0FA6F75A-D9C7-471E-BE91-3FF97D8D6BC2}
 		{F7A80169-6310-4585-9D58-A6F6F5C5B380} = {5BA691E1-CC10-48A0-9E48-B6168CF78F24}
 	EndGlobalSection
 EndGlobal
