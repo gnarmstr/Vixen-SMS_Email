@@ -332,6 +332,8 @@ namespace Vixen_Messaging
             numericUpDownIntervalMsgs.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownIntervalMsgs", 0);
             trackBarMovieSpeed.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarMovieSpeed", 0);
             trackBarThumbnail.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarThumbnail", 1);
+            numericUpDownMatrixW.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMatrixW", 50);
+            numericUpDownMatrixH.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMatrixH", 50);
         }
         #endregion
 
@@ -1758,10 +1760,12 @@ namespace Vixen_Messaging
         {
             try
             {
+                int matrixW = Convert.ToInt16(numericUpDownMatrixW.Value);
+                int matrixH = Convert.ToInt16(numericUpDownMatrixH.Value);
                 var f = new NutcrackerProcessingMovie();
                 f.Show();
                 var converter = new Ffmpeg(movieFileName);
-                converter.MakeThumbnails(GlobalVar.MovieFolder);
+                converter.MakeThumbnails(matrixW, matrixH, GlobalVar.MovieFolder);
                 f.Close();
                 pictureBoxMovie.ImageLocation = GlobalVar.MovieFolder + @"\0000000001.png";
                 trackBarThumbnail.Maximum = Directory.GetFiles(GlobalVar.MovieFolder, "*.*", SearchOption.TopDirectoryOnly).Length;
@@ -1782,10 +1786,10 @@ namespace Vixen_Messaging
                 _movieFile = movieFile;
             }
 
-            public void MakeThumbnails(string outputPath)
+            public void MakeThumbnails(int matrixW, int matrixH, string outputPath)
             {
-                int width = 50;
-                int height = 50;
+                int width = matrixW;
+                int height = matrixH;
                 int framesPerSecond = 25;
 
                 //make arguements string
@@ -2199,6 +2203,8 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownIntervalMsgs", numericUpDownIntervalMsgs.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarMovieSpeed", trackBarMovieSpeed.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarThumbnail", trackBarThumbnail.Value.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMatrixW", numericUpDownMatrixW.Value.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMatrixH", numericUpDownMatrixH.Value.ToString());
         }
 #endregion
 
@@ -2522,6 +2528,16 @@ namespace Vixen_Messaging
         {
             DeleteExistingMovieFiles(GlobalVar.MovieFolder);
             pictureBoxMovie.Image = Tools.ResizeImage(Resources.ClicktoOpen, 210, 200);
+        }
+
+        private void tabPageMovie_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label76_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

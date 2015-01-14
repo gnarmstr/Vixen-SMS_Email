@@ -291,6 +291,11 @@
             this.checkBoxRandom2 = new System.Windows.Forms.CheckBox();
             this.checkBoxRandom1 = new System.Windows.Forms.CheckBox();
             this.label74 = new System.Windows.Forms.Label();
+            this.numericUpDownMatrixW = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownMatrixH = new System.Windows.Forms.NumericUpDown();
+            this.label75 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
+            this.label77 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxEffects.SuspendLayout();
@@ -346,6 +351,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixW)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixH)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -1493,6 +1500,11 @@
             // tabPageMovie
             // 
             this.tabPageMovie.BackColor = System.Drawing.Color.Azure;
+            this.tabPageMovie.Controls.Add(this.label77);
+            this.tabPageMovie.Controls.Add(this.label76);
+            this.tabPageMovie.Controls.Add(this.label75);
+            this.tabPageMovie.Controls.Add(this.numericUpDownMatrixH);
+            this.tabPageMovie.Controls.Add(this.numericUpDownMatrixW);
             this.tabPageMovie.Controls.Add(this.checkBoxRandom5);
             this.tabPageMovie.Controls.Add(this.buttonMovieDelete);
             this.tabPageMovie.Controls.Add(this.label72);
@@ -1506,6 +1518,7 @@
             this.tabPageMovie.Size = new System.Drawing.Size(736, 225);
             this.tabPageMovie.TabIndex = 4;
             this.tabPageMovie.Text = "Movie";
+            this.tabPageMovie.Click += new System.EventHandler(this.tabPageMovie_Click);
             // 
             // buttonMovieDelete
             // 
@@ -3264,6 +3277,83 @@
             this.label74.TabIndex = 63;
             this.label74.Text = "Sec";
             // 
+            // numericUpDownMatrixW
+            // 
+            this.numericUpDownMatrixW.Location = new System.Drawing.Point(273, 62);
+            this.numericUpDownMatrixW.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDownMatrixW.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownMatrixW.Name = "numericUpDownMatrixW";
+            this.numericUpDownMatrixW.Size = new System.Drawing.Size(68, 26);
+            this.numericUpDownMatrixW.TabIndex = 51;
+            this.toolTip1.SetToolTip(this.numericUpDownMatrixW, "Ensure you reload movie whenever you change the Matrix size");
+            this.numericUpDownMatrixW.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownMatrixH
+            // 
+            this.numericUpDownMatrixH.Location = new System.Drawing.Point(388, 62);
+            this.numericUpDownMatrixH.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDownMatrixH.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownMatrixH.Name = "numericUpDownMatrixH";
+            this.numericUpDownMatrixH.Size = new System.Drawing.Size(68, 26);
+            this.numericUpDownMatrixH.TabIndex = 52;
+            this.toolTip1.SetToolTip(this.numericUpDownMatrixH, "Ensure you reload movie whenever you change the Matrix size");
+            this.numericUpDownMatrixH.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(357, 64);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(25, 20);
+            this.label75.TabIndex = 53;
+            this.label75.Text = "H:";
+            this.toolTip1.SetToolTip(this.label75, "Height");
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(238, 64);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(28, 20);
+            this.label76.TabIndex = 54;
+            this.label76.Text = "W:";
+            this.toolTip1.SetToolTip(this.label76, "Width");
+            this.label76.Click += new System.EventHandler(this.label76_Click);
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(322, 39);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(86, 20);
+            this.label77.TabIndex = 55;
+            this.label77.Text = "Matrix Size";
+            this.toolTip1.SetToolTip(this.label77, "Ensure you reload movie whenever you change the Matrix size");
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -3364,6 +3454,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonStop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixW)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixH)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -3631,6 +3723,11 @@
         private System.Windows.Forms.CheckBox checkBoxRandom4;
         private System.Windows.Forms.CheckBox checkBoxRandom5;
         private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.NumericUpDown numericUpDownMatrixH;
+        private System.Windows.Forms.NumericUpDown numericUpDownMatrixW;
+        private System.Windows.Forms.Label label77;
     }
 }
 
