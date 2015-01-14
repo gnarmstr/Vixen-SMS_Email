@@ -298,6 +298,13 @@
             this.label77 = new System.Windows.Forms.Label();
             this.label78 = new System.Windows.Forms.Label();
             this.textBoxAccessPWD = new System.Windows.Forms.TextBox();
+            this.tabPageGlediator = new System.Windows.Forms.TabPage();
+            this.buttonGlediator = new System.Windows.Forms.Button();
+            this.textBoxGlediator = new System.Windows.Forms.TextBox();
+            this.checkBoxRandom6 = new System.Windows.Forms.CheckBox();
+            this.label79 = new System.Windows.Forms.Label();
+            this.trackBarGlediator = new System.Windows.Forms.TrackBar();
+            this.label80 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxEffects.SuspendLayout();
@@ -355,6 +362,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixW)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixH)).BeginInit();
+            this.tabPageGlediator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarGlediator)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -708,6 +717,7 @@
             this.tabControlEffects.Controls.Add(this.tabPageMeteors);
             this.tabControlEffects.Controls.Add(this.tabPageTwinkles);
             this.tabControlEffects.Controls.Add(this.tabPageMovie);
+            this.tabControlEffects.Controls.Add(this.tabPageGlediator);
             this.tabControlEffects.Location = new System.Drawing.Point(6, 64);
             this.tabControlEffects.Name = "tabControlEffects";
             this.tabControlEffects.SelectedIndex = 0;
@@ -1520,7 +1530,6 @@
             this.tabPageMovie.Size = new System.Drawing.Size(736, 225);
             this.tabPageMovie.TabIndex = 4;
             this.tabPageMovie.Text = "Movie";
-            this.tabPageMovie.Click += new System.EventHandler(this.tabPageMovie_Click);
             // 
             // buttonMovieDelete
             // 
@@ -3379,6 +3388,85 @@
             this.toolTip1.SetToolTip(this.textBoxAccessPWD, "Enter a password that you will use when you want to email setting to Messaging. I" +
         "n your subject heading for example you will type \"Messaging Northridge\"");
             // 
+            // tabPageGlediator
+            // 
+            this.tabPageGlediator.BackColor = System.Drawing.Color.Azure;
+            this.tabPageGlediator.Controls.Add(this.label80);
+            this.tabPageGlediator.Controls.Add(this.label79);
+            this.tabPageGlediator.Controls.Add(this.trackBarGlediator);
+            this.tabPageGlediator.Controls.Add(this.checkBoxRandom6);
+            this.tabPageGlediator.Controls.Add(this.textBoxGlediator);
+            this.tabPageGlediator.Controls.Add(this.buttonGlediator);
+            this.tabPageGlediator.Location = new System.Drawing.Point(4, 29);
+            this.tabPageGlediator.Name = "tabPageGlediator";
+            this.tabPageGlediator.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageGlediator.Size = new System.Drawing.Size(736, 225);
+            this.tabPageGlediator.TabIndex = 5;
+            this.tabPageGlediator.Text = "Glediator/Jinx";
+            // 
+            // buttonGlediator
+            // 
+            this.buttonGlediator.Location = new System.Drawing.Point(604, 120);
+            this.buttonGlediator.Name = "buttonGlediator";
+            this.buttonGlediator.Size = new System.Drawing.Size(115, 41);
+            this.buttonGlediator.TabIndex = 0;
+            this.buttonGlediator.Text = "Load Effect";
+            this.buttonGlediator.UseVisualStyleBackColor = true;
+            this.buttonGlediator.Click += new System.EventHandler(this.buttonGlediator_Click);
+            // 
+            // textBoxGlediator
+            // 
+            this.textBoxGlediator.Enabled = false;
+            this.textBoxGlediator.Location = new System.Drawing.Point(14, 182);
+            this.textBoxGlediator.Name = "textBoxGlediator";
+            this.textBoxGlediator.Size = new System.Drawing.Size(705, 26);
+            this.textBoxGlediator.TabIndex = 1;
+            // 
+            // checkBoxRandom6
+            // 
+            this.checkBoxRandom6.AutoSize = true;
+            this.checkBoxRandom6.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxRandom6.Location = new System.Drawing.Point(483, 4);
+            this.checkBoxRandom6.Name = "checkBoxRandom6";
+            this.checkBoxRandom6.Size = new System.Drawing.Size(242, 24);
+            this.checkBoxRandom6.TabIndex = 70;
+            this.checkBoxRandom6.Text = "Include in Random Selection:";
+            this.checkBoxRandom6.UseVisualStyleBackColor = true;
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Location = new System.Drawing.Point(23, 88);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(160, 20);
+            this.label79.TabIndex = 72;
+            this.label79.Text = "Glediator/Jinx Speed:";
+            this.toolTip1.SetToolTip(this.label79, "Speed of the output Glediator.");
+            // 
+            // trackBarGlediator
+            // 
+            this.trackBarGlediator.AutoSize = false;
+            this.trackBarGlediator.Location = new System.Drawing.Point(14, 120);
+            this.trackBarGlediator.Maximum = 20;
+            this.trackBarGlediator.Minimum = 1;
+            this.trackBarGlediator.Name = "trackBarGlediator";
+            this.trackBarGlediator.Size = new System.Drawing.Size(382, 40);
+            this.trackBarGlediator.TabIndex = 71;
+            this.trackBarGlediator.Value = 9;
+            this.trackBarGlediator.Scroll += new System.EventHandler(this.trackBarGlediator_Scroll);
+            this.trackBarGlediator.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarGlediator_MouseDown);
+            this.trackBarGlediator.MouseHover += new System.EventHandler(this.trackBarGlediator_MouseHover);
+            // 
+            // label80
+            // 
+            this.label80.Location = new System.Drawing.Point(23, 19);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(411, 51);
+            this.label80.TabIndex = 73;
+            this.label80.Text = "Note: Jinx effects need to be setup and recorder to a .gled file in the Jinx app " +
+    "to be imported to Vixen.";
+            this.toolTip1.SetToolTip(this.label80, "Speed of the output Glediator.");
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -3481,6 +3569,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixW)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixH)).EndInit();
+            this.tabPageGlediator.ResumeLayout(false);
+            this.tabPageGlediator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarGlediator)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -3755,6 +3846,13 @@
         private System.Windows.Forms.Label label77;
         private System.Windows.Forms.Label label78;
         private System.Windows.Forms.TextBox textBoxAccessPWD;
+        private System.Windows.Forms.TabPage tabPageGlediator;
+        private System.Windows.Forms.TextBox textBoxGlediator;
+        private System.Windows.Forms.Button buttonGlediator;
+        private System.Windows.Forms.CheckBox checkBoxRandom6;
+        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.TrackBar trackBarGlediator;
+        private System.Windows.Forms.Label label80;
     }
 }
 

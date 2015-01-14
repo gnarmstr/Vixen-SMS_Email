@@ -329,7 +329,8 @@ namespace Vixen_Messaging
             checkBoxRandom2.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom2", true);
             checkBoxRandom3.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom3", true);
             checkBoxRandom4.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom4", true);
-            checkBoxRandom5.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom5", false); 
+            checkBoxRandom5.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom5", false);
+            checkBoxRandom6.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom6", false); 
             extraTime.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "extraTime", 0);
             extraTime.Enabled = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "extraTimeEnabled", false);
             numericUpDownIntervalMsgs.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownIntervalMsgs", 0);
@@ -337,6 +338,8 @@ namespace Vixen_Messaging
             trackBarThumbnail.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarThumbnail", 1);
             numericUpDownMatrixW.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMatrixW", 50);
             numericUpDownMatrixH.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMatrixH", 50);
+            textBoxGlediator.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxGlediator", "");
+            trackBarGlediator.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarGlediator", 5);
         }
         #endregion
 
@@ -855,6 +858,11 @@ namespace Vixen_Messaging
                 checkBoxRandom5.Checked = !checkBoxRandom5.Checked;
                 messageBody = messageBody + "Movie included in Random = " + checkBoxRandom5.Checked + "\n";
             }
+            if (smsMessage.ToLower().Contains("glediatorrandom"))
+            {
+                checkBoxRandom6.Checked = !checkBoxRandom6.Checked;
+                messageBody = messageBody + "Glediator included in Random = " + checkBoxRandom6.Checked + "\n";
+            }
             if (smsMessage.ToLower().Contains("localrandom"))
             {
                 checkBoxLocalRandom.Checked = !checkBoxLocalRandom.Checked;
@@ -924,6 +932,7 @@ namespace Vixen_Messaging
                     
                     fileText = fileText.Replace("Speed_Change", trackBarTextSpeed.Value.ToString());
                     fileText = fileText.Replace("Movie_Change", trackBarMovieSpeed.Value.ToString());
+                    fileText = fileText.Replace("Glediator_Change", trackBarGlediator.Value.ToString());
                     fileText = fileText.Replace("TextPosition_Change", trackBarTextPosition.Value.ToString());
 
                     string outputFileName;
@@ -962,6 +971,7 @@ namespace Vixen_Messaging
                         fileText = fileText.Replace("FontSize_Change", textBoxFontSize.Text);
                         fileText = fileText.Replace("TwinkleLights_Change", trackBarTwinkleLights.Value.ToString());
                         fileText = fileText.Replace("TwinkleSteps_Change", trackBarTwinkleSteps.Value.ToString());
+                        fileText = fileText.Replace("GlediatorFolder_Change", textBoxGlediator.Text);
 
                         var meteorColourType = 0;
                         switch (MeteorColour.Text)
@@ -1010,13 +1020,13 @@ namespace Vixen_Messaging
                             {
                                 var index = 0;
                                 var empty = 0;
-                                var randomString = new string[5];
+                                var randomString = new string[6];
                                 var seqRandom = new CheckBox[]
-                                {checkBoxRandom1, checkBoxRandom2, checkBoxRandom3, checkBoxRandom4, checkBoxRandom5};
+                                {checkBoxRandom1, checkBoxRandom2, checkBoxRandom3, checkBoxRandom4, checkBoxRandom5, checkBoxRandom6};
                                 string[] mystrings =
                                 {
                                     tabPageSnowFlake.Text, tabPageFire.Text, tabPageMeteors.Text,
-                                    tabPageTwinkles.Text, tabPageMovie.Text
+                                    tabPageTwinkles.Text, tabPageMovie.Text, tabPageGlediator.Text
                                 };
                                 do
                                 {
@@ -1029,13 +1039,13 @@ namespace Vixen_Messaging
                                         randomString[index] = "";
                                         empty++;
                                     }
-                                } while (index++ < 4);
+                                } while (index++ < 5);
 
                                 do
                                 {
                                     var randomseq = new Random();
                                     selectedSeq = randomString[randomseq.Next(randomString.Length)];
-                                    if (empty == 5)
+                                    if (empty == 6)
                                     {
                                         selectedSeq = "None";
                                     }
@@ -1054,6 +1064,7 @@ namespace Vixen_Messaging
                             case "SnowFlakes":
                                 fileText = fileText.Replace("Speed_1Change", trackBarSpeedSnowFlakes.Value.ToString());
                                 fileText = fileText.Replace("MovieTime_Change", "0");
+                                fileText = fileText.Replace("GlediatorTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("SnowFlakeTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                                 fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
@@ -1072,6 +1083,7 @@ namespace Vixen_Messaging
                             case "Fire":
                                 fileText = fileText.Replace("Speed_1Change", "0");
                                 fileText = fileText.Replace("MovieTime_Change", "0");
+                                fileText = fileText.Replace("GlediatorTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("FireHeightTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                                 fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
@@ -1086,6 +1098,7 @@ namespace Vixen_Messaging
                             case "Meteors":
                                 fileText = fileText.Replace("Speed_1Change", trackBarSpeedMeteors.Value.ToString());
                                 fileText = fileText.Replace("MovieTime_Change", "0");
+                                fileText = fileText.Replace("GlediatorTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("MeteorTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                                 fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
@@ -1105,6 +1118,7 @@ namespace Vixen_Messaging
                             case "Twinkles":
                                 fileText = fileText.Replace("Speed_1Change", trackBarSpeedTwinkles.Value.ToString());
                                 fileText = fileText.Replace("MovieTime_Change", "0");
+                                fileText = fileText.Replace("GlediatorTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("TwinkleTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                                 fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
@@ -1124,6 +1138,22 @@ namespace Vixen_Messaging
                             case "Movie":
                                 fileText = fileText.Replace("Speed_1Change", "0");
                                 fileText = fileText.Replace("MovieTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
+                                fileText = fileText.Replace("GlediatorTime_Change", "0"); //Sequence time
+                                fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
+                                fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
+                                fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
+                                fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
+                                do
+                                {
+                                    fileText = fileText.Replace("Colour" + i + "_Change", "0"); //Colour
+                                    fileText = fileText.Replace("CheckBox" + i + "_Change", "false"); //Colour Enabled true or False
+                                    i++;
+                                } while (i < 7);
+                                break;
+                            case "Glediator/Jinx":
+                                fileText = fileText.Replace("Speed_1Change", "0");
+                                fileText = fileText.Replace("MovieTime_Change", "0"); //Sequence time
+                                fileText = fileText.Replace("GlediatorTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                                 fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
                                 fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
@@ -1918,12 +1948,8 @@ namespace Vixen_Messaging
             fileDialog.Filter = @"All Files|*.*";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
-                // If this effect doesn't have working folder make one.
-                // TODO: delete the folder if the effect is removed from the timeline?
-
       //          textBoxMovieLocation.Text = Guid.NewGuid().ToString();
 
-         //       var destFolder = GlobalVar.MovieFolder;
                 if (!Directory.Exists(GlobalVar.MovieFolder))
                 {
                     Directory.CreateDirectory(GlobalVar.MovieFolder);
@@ -2375,6 +2401,7 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom3", checkBoxRandom3.Checked.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom4", checkBoxRandom4.Checked.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom5", checkBoxRandom5.Checked.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom6", checkBoxRandom6.Checked.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "extraTime", extraTime.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "extraTimeEnabled", extraTime.Enabled.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownIntervalMsgs", numericUpDownIntervalMsgs.Value.ToString());
@@ -2382,6 +2409,8 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarThumbnail", trackBarThumbnail.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMatrixW", numericUpDownMatrixW.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMatrixH", numericUpDownMatrixH.Value.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxGlediator", textBoxGlediator.Text);
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarGlediator", trackBarGlediator.Value.ToString());
         }
 #endregion
 
@@ -2701,15 +2730,25 @@ namespace Vixen_Messaging
             toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
         }
 
+        private void trackBarGlediator_Scroll(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarGlediator, trackBarGlediator.Value.ToString());
+        }
+
+        private void trackBarGlediator_MouseDown(object sender, MouseEventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarGlediator, trackBarGlediator.Value.ToString());
+        }
+
+        private void trackBarGlediator_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarGlediator, trackBarGlediator.Value.ToString());
+        }
+
         private void buttonMovieDelete_Click(object sender, EventArgs e)
         {
             DeleteExistingMovieFiles(GlobalVar.MovieFolder);
             pictureBoxMovie.Image = Tools.ResizeImage(Resources.ClicktoOpen, 210, 200);
-        }
-
-        private void tabPageMovie_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void label76_Click(object sender, EventArgs e)
@@ -2717,6 +2756,14 @@ namespace Vixen_Messaging
 
         }
 
+        private void buttonGlediator_Click(object sender, EventArgs e)
+        {
+            fileDialog.Filter = @"Gled Files|*.gled";
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                textBoxGlediator.Text = fileDialog.FileName;
+            }
+        }
     }
 }
 #endregion
