@@ -1,4 +1,6 @@
-﻿#region System modules
+﻿using System.Runtime.Remoting.Messaging;
+
+#region System modules
 
 using System;
 using System.Collections.Generic;
@@ -215,6 +217,7 @@ namespace Vixen_Messaging
             textBoxServer.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "POP3Server", "pop.gmail.com");
             textBoxUID.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "UID", "");
             textBoxPWD.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "Password", "");
+            textBoxAccessPWD.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxAccessPWD", "Northridge");
             textBoxVixenFolder.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxVixenFolder", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3"));
             textBoxVixenServer.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "VixenServer", "http://localhost:8888/api/play/playSequence");
             GlobalVar.Blacklistlocation = Path.Combine(GlobalVar.SettingsPath + "\\Blacklist.txt");
@@ -442,9 +445,17 @@ namespace Vixen_Messaging
                         }
                         else
                         {
-                            if (header.Subject.Contains(textBoxSubjectHeader.Text))
+                        if (header.Subject.Contains(textBoxSubjectHeader.Text))
+                        {
+                            headerphone = header.Subject.Substring(textBoxSubjectHeader.Text.Length).Trim();
+                        }
+                        else
+                        {
+                            if (header.Subject.ToLower().Contains("messaging " + textBoxAccessPWD.Text.ToLower()))
                             {
-                                headerphone = header.Subject.Substring(textBoxSubjectHeader.Text.Length).Trim();
+                                VixenSettings(messageNum);
+                                break;
+
                             }
 
                             if (!CheckBlacklistMessage(header.From.Address, header.Subject, headerphone))
@@ -454,11 +465,10 @@ namespace Vixen_Messaging
                                 bool blacklist;
                                 bool notWhitemsg;
                                 if (header.Subject.Contains(textBoxSubjectHeader.Text))
-                                //grabs the SMS header details from the form
+                                    //grabs the SMS header details from the form
                                 {
 
-                                    var phoneNumber =
-                                        header.Subject.Substring(textBoxSubjectHeader.Text.Length).Trim();
+                                    var phoneNumber = header.Subject.Substring(textBoxSubjectHeader.Text.Length).Trim();
                                     var msg = _pop.GetMessage(messageNum);
 
                                     //To check if text is in the main body or subpart of body for example from an Hotmail account
@@ -534,7 +544,7 @@ namespace Vixen_Messaging
                                         SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
                                     }
                                 }
-                                #endregion
+                                    #endregion
 
                                 else
                                 #region Email
@@ -603,6 +613,7 @@ namespace Vixen_Messaging
                                 SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
                             }
                         }
+                    }
                         Application.DoEvents();
                     }
                 }
@@ -711,6 +722,171 @@ namespace Vixen_Messaging
             }
         }
         #endregion
+
+    #region Input message to Change Vixen Settings
+        private void VixenSettings(int messageNum)
+        {
+            string messageBody = "";
+            string smsMessage;
+            var msg = _pop.GetMessage(messageNum);
+            smsMessage = msg.MessagePart.MessageParts[0].GetBodyAsText();
+            smsMessage = Regex.Replace(smsMessage, @"\t", "");
+            smsMessage = smsMessage.TrimEnd(' ');
+
+            if (smsMessage.ToLower().Contains("stop"))
+            {
+                Stop_Vixen();
+            }
+            if (smsMessage.ToLower().Contains("blacklist"))
+            {
+                checkBoxBlacklist.Checked = true;
+                messageBody = messageBody + "Blacklist is enabled\n";
+            }
+            else
+            {
+                if (smsMessage.ToLower().Contains("whitelist"))
+                {
+                    checkBoxWhitelist.Checked = true;
+                    messageBody = messageBody + "Whitelist is enabled\n";
+                }
+            }
+            if (smsMessage.ToLower().Contains("interval"))
+            {
+                string result = smsMessage.Substring(smsMessage.LastIndexOf("interval=") + 9);
+                result = result.Substring(0, 2);
+                numericUpDownIntervalMsgs.Value = Convert.ToInt16(result);
+                messageBody = messageBody + "Message interval has be changed to " + numericUpDownIntervalMsgs.Value + "\n";
+            }
+            if (smsMessage.ToLower().Contains("randomcolour"))
+            {
+                checkBoxRandomCol.Checked = !checkBoxRandomCol.Checked;
+                messageBody = messageBody + "Random Text colour is enabled = " + checkBoxRandomCol.Checked + "\n";
+            }
+            if (smsMessage.ToLower().Contains("randomsequence"))
+            {
+                checkBoxRandomSeqSelection.Checked = !checkBoxRandomSeqSelection.Checked;
+                messageBody = messageBody + "Random Sequence is enabled = " + checkBoxRandomSeqSelection.Checked + "\n";
+            }
+            if (smsMessage.ToLower().Contains("disable"))
+            {
+                checkBoxDisableSeq.Checked = true;
+                messageBody = messageBody + "All Sequences have been disabled\n";
+            }
+            if (smsMessage.ToLower().Contains("enable"))
+            {
+                checkBoxDisableSeq.Checked = false;
+                messageBody = messageBody + "All Sequences have been enabled\n";
+            }
+
+            if (smsMessage.ToLower().Contains("snowflakeselect"))
+            {
+                checkBoxDisableSeq.Checked = false;
+                checkBoxEnableSqnctrl.Checked = false;
+                tabPageSnowFlake.Select();
+                checkBoxRandomSeqSelection.Checked = false;
+                messageBody = messageBody + "Snowflakes effect has been enabled\n";
+            }
+            else
+            {
+                if (smsMessage.ToLower().Contains("fireselect"))
+                {
+                    checkBoxDisableSeq.Checked = false;
+                    checkBoxEnableSqnctrl.Checked = false;
+                    tabPageFire.Select();
+                    checkBoxRandomSeqSelection.Checked = false;
+                    messageBody = messageBody + "Fire effect has been enabled\n";
+                }
+                else
+                {
+                    if (smsMessage.ToLower().Contains("meteorselect"))
+                    {
+                        checkBoxDisableSeq.Checked = false;
+                        checkBoxEnableSqnctrl.Checked = false;
+                        tabPageMeteors.Select();
+                        checkBoxRandomSeqSelection.Checked = false;
+                        messageBody = messageBody + "Metoer effect has been enabled\n";
+                    }
+                    else
+                    {
+                        if (smsMessage.ToLower().Contains("twinkleselect"))
+                        {
+                            checkBoxDisableSeq.Checked = false;
+                            checkBoxEnableSqnctrl.Checked = false;
+                            tabPageTwinkles.Select();
+                            checkBoxRandomSeqSelection.Checked = false;
+                            messageBody = messageBody + "Twinkle effect has been enabled\n";
+                        }
+                        else
+                        {
+                            if (smsMessage.ToLower().Contains("movieselect"))
+                            {
+                                checkBoxDisableSeq.Checked = false;
+                                checkBoxEnableSqnctrl.Checked = false;
+                                tabPageMovie.Select();
+                                checkBoxRandomSeqSelection.Checked = false;
+                                messageBody = messageBody + "Movie effect has been enabled\n";
+                            }
+                        }
+                    }
+                }
+            }
+            if (smsMessage.ToLower().Contains("snowflakerandom"))
+            {
+                checkBoxRandom1.Checked = !checkBoxRandom1.Checked;
+                messageBody = messageBody + "SnowFlake included in Random = " + checkBoxRandom1.Checked + "\n";
+            }
+            if (smsMessage.ToLower().Contains("firerandom"))
+            {
+                checkBoxRandom2.Checked = !checkBoxRandom2.Checked;
+                messageBody = messageBody + "Fire included in Random = " + checkBoxRandom2.Checked + "\n";
+            }
+            if (smsMessage.ToLower().Contains("metoerrandom"))
+            {
+                checkBoxRandom3.Checked = !checkBoxRandom3.Checked;
+                messageBody = messageBody + "Meteor included in Random = " + checkBoxRandom3.Checked + "\n";
+            }
+            if (smsMessage.ToLower().Contains("twinklerandom"))
+            {
+                checkBoxRandom4.Checked = !checkBoxRandom4.Checked;
+                messageBody = messageBody + "Twinkle included in Random = " + checkBoxRandom4.Checked + "\n";
+            }
+            if (smsMessage.ToLower().Contains("movierandom"))
+            {
+                checkBoxRandom5.Checked = !checkBoxRandom5.Checked;
+                messageBody = messageBody + "Movie included in Random = " + checkBoxRandom5.Checked + "\n";
+            }
+            if (smsMessage.ToLower().Contains("localrandom"))
+            {
+                checkBoxLocalRandom.Checked = !checkBoxLocalRandom.Checked;
+                messageBody = messageBody + "Local messages have been enabled = " + checkBoxLocalRandom.Checked + "\n";
+            }
+            if (smsMessage.ToLower().Contains("vixensequence"))
+            {
+                checkBoxEnableSqnctrl.Checked = !checkBoxEnableSqnctrl.Checked;
+                StopSequence();
+                messageBody = messageBody + "Vixen sequences are enabled " + checkBoxEnableSqnctrl.Checked + "\n";
+            }
+
+            
+
+
+            string rtnmsg;
+            if (messageBody == "")
+            {
+                rtnmsg = "You have either not sent any commands or they are spelt incorrectly.";
+            }
+            else
+            {
+                rtnmsg = ("The following Settings have been changed:\n\n" + messageBody);
+            }
+            LogDisplay(GlobalVar.LogMsg = ("SMS Message: " + "Settings have been changed."));
+            var header = _pop.GetMessageHeaders(messageNum);
+            _pop.DeleteMessage(messageNum);
+            _pop.Disconnect();
+            SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+        }
+
+#endregion
 
 #endregion
 
@@ -2089,6 +2265,7 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "POP3Server", textBoxServer.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "UID", textBoxUID.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "Password", textBoxPWD.Text);
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxAccessPWD", textBoxAccessPWD.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxVixenFolder", textBoxVixenFolder.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "VixenServer", textBoxVixenServer.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "SequenceTemplate", textBoxSequenceTemplate.Text);

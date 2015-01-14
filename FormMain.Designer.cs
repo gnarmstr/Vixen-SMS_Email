@@ -296,6 +296,8 @@
             this.label75 = new System.Windows.Forms.Label();
             this.label76 = new System.Windows.Forms.Label();
             this.label77 = new System.Windows.Forms.Label();
+            this.label78 = new System.Windows.Forms.Label();
+            this.textBoxAccessPWD = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxEffects.SuspendLayout();
@@ -1839,7 +1841,7 @@
             // 
             this.checkBoxManEnterSettings.AutoSize = true;
             this.checkBoxManEnterSettings.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxManEnterSettings.Location = new System.Drawing.Point(20, 92);
+            this.checkBoxManEnterSettings.Location = new System.Drawing.Point(20, 72);
             this.checkBoxManEnterSettings.Name = "checkBoxManEnterSettings";
             this.checkBoxManEnterSettings.Size = new System.Drawing.Size(248, 24);
             this.checkBoxManEnterSettings.TabIndex = 4;
@@ -2400,6 +2402,8 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.label78);
+            this.groupBox5.Controls.Add(this.textBoxAccessPWD);
             this.groupBox5.Controls.Add(this.textBoxReturnBannedMSG);
             this.groupBox5.Controls.Add(this.label9);
             this.groupBox5.Controls.Add(this.checkBoxManEnterSettings);
@@ -2426,7 +2430,7 @@
             // 
             this.checkBoxAutoStart.AutoSize = true;
             this.checkBoxAutoStart.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxAutoStart.Location = new System.Drawing.Point(20, 49);
+            this.checkBoxAutoStart.Location = new System.Drawing.Point(20, 32);
             this.checkBoxAutoStart.Name = "checkBoxAutoStart";
             this.checkBoxAutoStart.Size = new System.Drawing.Size(316, 24);
             this.checkBoxAutoStart.TabIndex = 3;
@@ -3354,6 +3358,27 @@
             this.label77.Text = "Matrix Size";
             this.toolTip1.SetToolTip(this.label77, "Ensure you reload movie whenever you change the Matrix size");
             // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Location = new System.Drawing.Point(16, 117);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(155, 20);
+            this.label78.TabIndex = 10;
+            this.label78.Text = "Remote Access PW:";
+            this.toolTip1.SetToolTip(this.label78, "Enter a password that you will use when you want to email setting to Messaging. I" +
+        "n your subject heading for example you will type \"Messaging Northridge\"");
+            // 
+            // textBoxAccessPWD
+            // 
+            this.textBoxAccessPWD.Location = new System.Drawing.Point(206, 114);
+            this.textBoxAccessPWD.Name = "textBoxAccessPWD";
+            this.textBoxAccessPWD.Size = new System.Drawing.Size(127, 26);
+            this.textBoxAccessPWD.TabIndex = 9;
+            this.textBoxAccessPWD.Text = "Northridge";
+            this.toolTip1.SetToolTip(this.textBoxAccessPWD, "Enter a password that you will use when you want to email setting to Messaging. I" +
+        "n your subject heading for example you will type \"Messaging Northridge\"");
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -3728,6 +3753,8 @@
         private System.Windows.Forms.NumericUpDown numericUpDownMatrixH;
         private System.Windows.Forms.NumericUpDown numericUpDownMatrixW;
         private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.Label label78;
+        private System.Windows.Forms.TextBox textBoxAccessPWD;
     }
 }
 
