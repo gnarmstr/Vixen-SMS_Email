@@ -305,6 +305,7 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.buttonStopSequence = new System.Windows.Forms.Button();
             this.fileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.buttonTwilio = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxEffects.SuspendLayout();
@@ -418,6 +419,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonTwilio);
             this.groupBox1.Controls.Add(this.label65);
             this.groupBox1.Controls.Add(this.label68);
             this.groupBox1.Controls.Add(this.textBoxComments);
@@ -2445,7 +2447,7 @@
             "Play Local Msgs when NO Incoming Msgs",
             "Play Incoming and Local Randomly",
             "Play Incoming and Local Alternating",
-            "Play Incoming from Twilio"});
+            "Play Only Incoming from Twilio account (SMS\'s)"});
             this.comboBoxPlayMode.Location = new System.Drawing.Point(141, 452);
             this.comboBoxPlayMode.Name = "comboBoxPlayMode";
             this.comboBoxPlayMode.Size = new System.Drawing.Size(366, 28);
@@ -3468,6 +3470,16 @@
             this.fileDialog.FileName = "Select a File";
             this.fileDialog.Title = "Select a File";
             // 
+            // buttonTwilio
+            // 
+            this.buttonTwilio.Location = new System.Drawing.Point(14, 363);
+            this.buttonTwilio.Name = "buttonTwilio";
+            this.buttonTwilio.Size = new System.Drawing.Size(141, 49);
+            this.buttonTwilio.TabIndex = 64;
+            this.buttonTwilio.Text = "Twilio Settings";
+            this.buttonTwilio.UseVisualStyleBackColor = true;
+            this.buttonTwilio.Click += new System.EventHandler(this.buttonTwilio_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -3854,6 +3866,7 @@
         private System.Windows.Forms.Label label79;
         private System.Windows.Forms.TrackBar trackBarGlediator;
         private System.Windows.Forms.Label label80;
+        private System.Windows.Forms.Button buttonTwilio;
     }
 }
 

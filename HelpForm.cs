@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Vixen_Messaging
@@ -8,6 +9,8 @@ namespace Vixen_Messaging
         private static HelpForm _helpForm;
         public HelpForm()
         {
+            if (ActiveForm != null)
+                Location = new Point(ActiveForm.Location.X + ActiveForm.MaximumSize.Width, ActiveForm.Location.Y);
             InitializeComponent();
         }
 

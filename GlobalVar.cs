@@ -17,6 +17,10 @@
 
             public static string MovieFolder { get; set; }
 
+            public static string TwilioSID { get; set; }
+
+            public static string TwilioToken { get; set; }
+
             public static decimal SeqIntervalTime { get; set; }
 
             /// <summary>

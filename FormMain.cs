@@ -342,6 +342,8 @@ namespace Vixen_Messaging
             numericUpDownMatrixH.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMatrixH", 50);
             textBoxGlediator.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxGlediator", "");
             trackBarGlediator.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarGlediator", 5);
+            GlobalVar.TwilioSID = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwilioSID", "");
+            GlobalVar.TwilioToken = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwilioToken", "");
         }
         #endregion
 
@@ -413,7 +415,7 @@ namespace Vixen_Messaging
                 case "Play Incoming and Local Alternating":
                     PlayAlternating();
                     break;
-                case "Play Incoming from Twilio":
+                case "Play Only Incoming from Twilio account (SMS's)":
                     Twilio();
                     break;
             }
@@ -731,63 +733,69 @@ namespace Vixen_Messaging
         }
         #endregion
 
-        #region Play with Twilio enabled
+    #region Play with Twilio enabled
         private void Twilio()
         {
             // Find your Account Sid and Auth Token at twilio.com/user/account 
-            string AccountSid = "AC29390b0fe3f4cb763862eefedb8afc41";
-            string AuthToken = "d68a401090af00f63bbecb4a3e502a7f";
+            string AccountSid = GlobalVar.TwilioSID; // "AC29390b0fe3f4cb763862eefedb8afc41";
+            string AuthToken = GlobalVar.TwilioToken; // "d68a401090af00f63bbecb4a3e502a7f";
             var twilio = new TwilioRestClient(AccountSid, AuthToken);
-
-            bool blacklist;
-            bool notWhitemsg;
 
             // Build the parameters 
             var options = new MessageListRequest();
             //options.DateSent = DateTime.Today;
 
             LogDisplay(GlobalVar.LogMsg = ("Checking Twilio Messages")); 
-    //        listBoxLog.Items.Insert(0, "Checking Twilio Messages");
             var messages = twilio.ListMessages(options);
-            
-                try
+            try
                 {
                     foreach (var message in messages.Messages)
                         if (!CheckBlacklistMessage("", message.Body, message.From))
-                    {
-                        //Console.WriteLine(message.From + " : " + message.Direction);
-                        if (message.Direction.Contains("inbound"))
                         {
-                            LogDisplay(GlobalVar.LogMsg = ("Found " + messages.Messages.Count() + " Messages"));
-                            LogDisplay(GlobalVar.LogMsg = ("Received: " + message.From + " -> " + message.Body));
-                            //               listBoxLog.Items.Insert(0, "Found " + messages.Messages.Count() + " Messages");
-                            //               listBoxLog.Items.Insert(0, "Received: " + message.From + " -> " + message.Body);
-                            var smsMessage = message.Body;
-                            //              if (!HasBadWords(smsMessage) && !IsBanned(message.From))
-                            //              {
-                            SendMessageToVixen(smsMessage, out blacklist, out notWhitemsg);
-                //            SendReturnText("", message.From, "", 0, message.Body);
+                            //Console.WriteLine(message.From + " : " + message.Direction);
+                            
+                            if (message.Direction.Contains("inbound"))
+                            {
+                                LogDisplay(GlobalVar.LogMsg = ("Found " + messages.Messages.Count() + " Messages"));
+                                LogDisplay(GlobalVar.LogMsg = ("Received: " + message.From + " -> " + message.Body));
+                                var smsMessage = "Fuck";//message.Body; change back after testing
 
-                            //           twilio.DeleteMessage(message.Sid);
-                            //                  return;
-                            //              }
-                            //              else
-                            //              {
-                            //                  SendReturnText(message.From, "Please keep it clean for the kids watching.");
-                            //           twilio.DeleteMessage(message.Sid);
-                            //              }
+                                bool blacklist;
+                                bool notWhitemsg;
+                                SendMessageToVixen(smsMessage, out blacklist, out notWhitemsg);
+                                string rtnmsg = "";
+                                if (blacklist && !notWhitemsg)
+                                {
+                                    rtnmsg = "Please reframe from using inappropiate words. If this happens again your email address will be banned for the night.";
+                                    using ( var file = new StreamWriter(@textBoxBlacklistEmailLog.Text, true))
+                                    {
+                                        file.WriteLine(message.From);
+                                    }
+            //                        SendReturnTextTwilio("", message.From, rtnmsg, 0);
+                                    return;
+                                }
+                                if (!notWhitemsg)
+                                {
+                                    MessageBox.Show("Your message will appear soon in lights.");
+                                    SendReturnTextTwilio(message.From, "Your message will appear soon in lights.");
+                                    return;
+                                }   
+                                rtnmsg = "Sorry one or more of the names you sent is not in the approved list!";
+                                SendReturnTextTwilio(message.From, "Sorry one or more of the names you sent is not in the approved list!");
+                                        
+                        //        twilio.DeleteMessage(message.Sid);
+                                return;
+                            }
                         }
-                    }
                 }
-                catch (Exception)
+                catch
                 {
 
                 }
-            
         }
         #endregion
 
-        #region Input message to Change Vixen Settings
+    #region Input message to Change Vixen Settings
         private void VixenSettings(int messageNum)
         {
             #region Get Message details and Body to process
@@ -1312,7 +1320,19 @@ namespace Vixen_Messaging
         }
         #endregion
 
-#region Word Lists
+        #region Sen Return Text to Twilio
+
+        private void SendReturnTextTwilio(string from, string msgBody)
+        {
+            string accountSid = GlobalVar.TwilioSID;  // "AC29390b0fe3f4cb763862eefedb8afc41";
+            string authToken = GlobalVar.TwilioToken;  // "d68a401090af00f63bbecb4a3e502a7f";
+            var twilio = new TwilioRestClient(accountSid, authToken);
+            var message = twilio.SendMessage("+15853600516", from, msgBody);
+        }
+
+        #endregion
+
+        #region Word Lists
         private bool HasBadWords(string msg, out bool notWhite)
         {
             string textLine;
@@ -2328,8 +2348,8 @@ namespace Vixen_Messaging
 #region Help Form
         private void buttonHelp_Click(object sender, EventArgs e)
         {
-            HelpForm.Instance.Show();
-            HelpForm.Instance.SetDesktopLocation(Location.X + Size.Width, Location.Y);
+            var helpform = new HelpForm();
+            helpform.ShowDialog();
         }
 #endregion
 
@@ -2479,6 +2499,8 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMatrixH", numericUpDownMatrixH.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxGlediator", textBoxGlediator.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarGlediator", trackBarGlediator.Value.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TwilioSID", GlobalVar.TwilioSID);
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TwilioToken", GlobalVar.TwilioToken);
         }
 #endregion
 
@@ -2814,6 +2836,12 @@ namespace Vixen_Messaging
             }
         }
         #endregion
+
+        private void buttonTwilio_Click(object sender, EventArgs e)
+        {
+            var twilio = new Twilio();
+            twilio.ShowDialog();
+        }
    
     }
 }

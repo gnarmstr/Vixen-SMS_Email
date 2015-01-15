@@ -129,6 +129,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Twilio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Twilio.Designer.cs">
+      <DependentUpon>Twilio.cs</DependentUpon>
+    </Compile>
     <Compile Include="GlobalVar.cs" />
     <Compile Include="NutcrackerProcessingMovie.cs">
       <SubType>Form</SubType>
@@ -157,6 +163,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XMLProfileSettings.cs" />
+    <EmbeddedResource Include="Twilio.resx">
+      <DependentUpon>Twilio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NutcrackerProcessingMovie.resx">
       <DependentUpon>NutcrackerProcessingMovie.cs</DependentUpon>
     </EmbeddedResource>
