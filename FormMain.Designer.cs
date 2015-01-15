@@ -66,6 +66,7 @@
             this.checkBoxVariableLength = new System.Windows.Forms.CheckBox();
             this.tabControlEffects = new System.Windows.Forms.TabControl();
             this.tabPageSnowFlake = new System.Windows.Forms.TabPage();
+            this.checkBoxRandom1 = new System.Windows.Forms.CheckBox();
             this.label56 = new System.Windows.Forms.Label();
             this.checkBoxSnowFlakeColour6 = new System.Windows.Forms.CheckBox();
             this.checkBoxSnowFlakeColour5 = new System.Windows.Forms.CheckBox();
@@ -86,9 +87,11 @@
             this.MaxSnowFlake = new System.Windows.Forms.NumericUpDown();
             this.label30 = new System.Windows.Forms.Label();
             this.tabPageFire = new System.Windows.Forms.TabPage();
+            this.checkBoxRandom2 = new System.Windows.Forms.CheckBox();
             this.FireHeight = new System.Windows.Forms.NumericUpDown();
             this.label31 = new System.Windows.Forms.Label();
             this.tabPageMeteors = new System.Windows.Forms.TabPage();
+            this.checkBoxRandom3 = new System.Windows.Forms.CheckBox();
             this.label55 = new System.Windows.Forms.Label();
             this.checkBoxMeteorColour6 = new System.Windows.Forms.CheckBox();
             this.checkBoxMeteorColour5 = new System.Windows.Forms.CheckBox();
@@ -111,6 +114,7 @@
             this.MeteorCount = new System.Windows.Forms.NumericUpDown();
             this.label33 = new System.Windows.Forms.Label();
             this.tabPageTwinkles = new System.Windows.Forms.TabPage();
+            this.checkBoxRandom4 = new System.Windows.Forms.CheckBox();
             this.label54 = new System.Windows.Forms.Label();
             this.checkBoxTwinkleColour6 = new System.Windows.Forms.CheckBox();
             this.checkBoxTwinkleColour5 = new System.Windows.Forms.CheckBox();
@@ -131,12 +135,25 @@
             this.trackBarTwinkleSteps = new System.Windows.Forms.TrackBar();
             this.trackBarTwinkleLights = new System.Windows.Forms.TrackBar();
             this.tabPageMovie = new System.Windows.Forms.TabPage();
+            this.label77 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
+            this.label75 = new System.Windows.Forms.Label();
+            this.numericUpDownMatrixH = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownMatrixW = new System.Windows.Forms.NumericUpDown();
+            this.checkBoxRandom5 = new System.Windows.Forms.CheckBox();
             this.buttonMovieDelete = new System.Windows.Forms.Button();
             this.label72 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
             this.trackBarMovieSpeed = new System.Windows.Forms.TrackBar();
             this.trackBarThumbnail = new System.Windows.Forms.TrackBar();
             this.pictureBoxMovie = new System.Windows.Forms.PictureBox();
+            this.tabPageGlediator = new System.Windows.Forms.TabPage();
+            this.label80 = new System.Windows.Forms.Label();
+            this.label79 = new System.Windows.Forms.Label();
+            this.trackBarGlediator = new System.Windows.Forms.TrackBar();
+            this.checkBoxRandom6 = new System.Windows.Forms.CheckBox();
+            this.textBoxGlediator = new System.Windows.Forms.TextBox();
+            this.buttonGlediator = new System.Windows.Forms.Button();
             this.label28 = new System.Windows.Forms.Label();
             this.EffectTime = new System.Windows.Forms.NumericUpDown();
             this.label37 = new System.Windows.Forms.Label();
@@ -182,9 +199,13 @@
             this.buttonRemoveSeq6 = new System.Windows.Forms.Button();
             this.checkBoxDisableSeq = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.label78 = new System.Windows.Forms.Label();
+            this.textBoxAccessPWD = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageMain = new System.Windows.Forms.TabPage();
-            this.buttonSaveLog = new System.Windows.Forms.Button();
+            this.label74 = new System.Windows.Forms.Label();
+            this.numericUpDownIntervalMsgs = new System.Windows.Forms.NumericUpDown();
+            this.label71 = new System.Windows.Forms.Label();
             this.label66 = new System.Windows.Forms.Label();
             this.comboBoxPlayMode = new System.Windows.Forms.ComboBox();
             this.checkBoxBlacklist = new System.Windows.Forms.CheckBox();
@@ -273,6 +294,7 @@
             this.tabPageWordLists = new System.Windows.Forms.TabPage();
             this.pictureBoxSaveBlacklist = new System.Windows.Forms.PictureBox();
             this.pictureBoxSaveWhitelist = new System.Windows.Forms.PictureBox();
+            this.buttonSaveLog = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.buttonStart = new System.Windows.Forms.PictureBox();
@@ -283,28 +305,6 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.buttonStopSequence = new System.Windows.Forms.Button();
             this.fileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.numericUpDownIntervalMsgs = new System.Windows.Forms.NumericUpDown();
-            this.label71 = new System.Windows.Forms.Label();
-            this.checkBoxRandom5 = new System.Windows.Forms.CheckBox();
-            this.checkBoxRandom4 = new System.Windows.Forms.CheckBox();
-            this.checkBoxRandom3 = new System.Windows.Forms.CheckBox();
-            this.checkBoxRandom2 = new System.Windows.Forms.CheckBox();
-            this.checkBoxRandom1 = new System.Windows.Forms.CheckBox();
-            this.label74 = new System.Windows.Forms.Label();
-            this.numericUpDownMatrixW = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownMatrixH = new System.Windows.Forms.NumericUpDown();
-            this.label75 = new System.Windows.Forms.Label();
-            this.label76 = new System.Windows.Forms.Label();
-            this.label77 = new System.Windows.Forms.Label();
-            this.label78 = new System.Windows.Forms.Label();
-            this.textBoxAccessPWD = new System.Windows.Forms.TextBox();
-            this.tabPageGlediator = new System.Windows.Forms.TabPage();
-            this.buttonGlediator = new System.Windows.Forms.Button();
-            this.textBoxGlediator = new System.Windows.Forms.TextBox();
-            this.checkBoxRandom6 = new System.Windows.Forms.CheckBox();
-            this.label79 = new System.Windows.Forms.Label();
-            this.trackBarGlediator = new System.Windows.Forms.TrackBar();
-            this.label80 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxEffects.SuspendLayout();
@@ -325,9 +325,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTwinkleSteps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTwinkleLights)).BeginInit();
             this.tabPageMovie.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixH)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixW)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarMovieSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarThumbnail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMovie)).BeginInit();
+            this.tabPageGlediator.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarGlediator)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EffectTime)).BeginInit();
             this.TabSeq1.SuspendLayout();
             this.TabSeq2.SuspendLayout();
@@ -335,6 +339,7 @@
             this.RandomColourSelection.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).BeginInit();
             this.tabPageMessagingSettings.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -359,11 +364,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixW)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixH)).BeginInit();
-            this.tabPageGlediator.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarGlediator)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -755,6 +755,17 @@
             this.tabPageSnowFlake.Tag = "1";
             this.tabPageSnowFlake.Text = "SnowFlakes";
             // 
+            // checkBoxRandom1
+            // 
+            this.checkBoxRandom1.AutoSize = true;
+            this.checkBoxRandom1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxRandom1.Location = new System.Drawing.Point(483, 4);
+            this.checkBoxRandom1.Name = "checkBoxRandom1";
+            this.checkBoxRandom1.Size = new System.Drawing.Size(242, 24);
+            this.checkBoxRandom1.TabIndex = 82;
+            this.checkBoxRandom1.Text = "Include in Random Selection:";
+            this.checkBoxRandom1.UseVisualStyleBackColor = true;
+            // 
             // label56
             // 
             this.label56.AutoSize = true;
@@ -984,6 +995,17 @@
             this.tabPageFire.TabIndex = 1;
             this.tabPageFire.Text = "Fire";
             // 
+            // checkBoxRandom2
+            // 
+            this.checkBoxRandom2.AutoSize = true;
+            this.checkBoxRandom2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxRandom2.Location = new System.Drawing.Point(483, 4);
+            this.checkBoxRandom2.Name = "checkBoxRandom2";
+            this.checkBoxRandom2.Size = new System.Drawing.Size(242, 24);
+            this.checkBoxRandom2.TabIndex = 51;
+            this.checkBoxRandom2.Text = "Include in Random Selection:";
+            this.checkBoxRandom2.UseVisualStyleBackColor = true;
+            // 
             // FireHeight
             // 
             this.FireHeight.Location = new System.Drawing.Point(164, 38);
@@ -1041,6 +1063,17 @@
             this.tabPageMeteors.Size = new System.Drawing.Size(736, 225);
             this.tabPageMeteors.TabIndex = 2;
             this.tabPageMeteors.Text = "Meteors";
+            // 
+            // checkBoxRandom3
+            // 
+            this.checkBoxRandom3.AutoSize = true;
+            this.checkBoxRandom3.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxRandom3.Location = new System.Drawing.Point(483, 4);
+            this.checkBoxRandom3.Name = "checkBoxRandom3";
+            this.checkBoxRandom3.Size = new System.Drawing.Size(242, 24);
+            this.checkBoxRandom3.TabIndex = 82;
+            this.checkBoxRandom3.Text = "Include in Random Selection:";
+            this.checkBoxRandom3.UseVisualStyleBackColor = true;
             // 
             // label55
             // 
@@ -1305,6 +1338,17 @@
             this.tabPageTwinkles.TabIndex = 3;
             this.tabPageTwinkles.Text = "Twinkles";
             // 
+            // checkBoxRandom4
+            // 
+            this.checkBoxRandom4.AutoSize = true;
+            this.checkBoxRandom4.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxRandom4.Location = new System.Drawing.Point(483, 4);
+            this.checkBoxRandom4.Name = "checkBoxRandom4";
+            this.checkBoxRandom4.Size = new System.Drawing.Size(242, 24);
+            this.checkBoxRandom4.TabIndex = 69;
+            this.checkBoxRandom4.Text = "Include in Random Selection:";
+            this.checkBoxRandom4.UseVisualStyleBackColor = true;
+            // 
             // label54
             // 
             this.label54.AutoSize = true;
@@ -1531,6 +1575,93 @@
             this.tabPageMovie.TabIndex = 4;
             this.tabPageMovie.Text = "Movie";
             // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(322, 39);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(86, 20);
+            this.label77.TabIndex = 55;
+            this.label77.Text = "Matrix Size";
+            this.toolTip1.SetToolTip(this.label77, "Ensure you reload movie whenever you change the Matrix size");
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(238, 64);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(28, 20);
+            this.label76.TabIndex = 54;
+            this.label76.Text = "W:";
+            this.toolTip1.SetToolTip(this.label76, "Width");
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(357, 64);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(25, 20);
+            this.label75.TabIndex = 53;
+            this.label75.Text = "H:";
+            this.toolTip1.SetToolTip(this.label75, "Height");
+            // 
+            // numericUpDownMatrixH
+            // 
+            this.numericUpDownMatrixH.Location = new System.Drawing.Point(388, 62);
+            this.numericUpDownMatrixH.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDownMatrixH.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownMatrixH.Name = "numericUpDownMatrixH";
+            this.numericUpDownMatrixH.Size = new System.Drawing.Size(68, 26);
+            this.numericUpDownMatrixH.TabIndex = 52;
+            this.toolTip1.SetToolTip(this.numericUpDownMatrixH, "Ensure you reload movie whenever you change the Matrix size");
+            this.numericUpDownMatrixH.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownMatrixW
+            // 
+            this.numericUpDownMatrixW.Location = new System.Drawing.Point(273, 62);
+            this.numericUpDownMatrixW.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDownMatrixW.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownMatrixW.Name = "numericUpDownMatrixW";
+            this.numericUpDownMatrixW.Size = new System.Drawing.Size(68, 26);
+            this.numericUpDownMatrixW.TabIndex = 51;
+            this.toolTip1.SetToolTip(this.numericUpDownMatrixW, "Ensure you reload movie whenever you change the Matrix size");
+            this.numericUpDownMatrixW.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // checkBoxRandom5
+            // 
+            this.checkBoxRandom5.AutoSize = true;
+            this.checkBoxRandom5.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxRandom5.Location = new System.Drawing.Point(10, 14);
+            this.checkBoxRandom5.Name = "checkBoxRandom5";
+            this.checkBoxRandom5.Size = new System.Drawing.Size(242, 24);
+            this.checkBoxRandom5.TabIndex = 50;
+            this.checkBoxRandom5.Text = "Include in Random Selection:";
+            this.checkBoxRandom5.UseVisualStyleBackColor = true;
+            // 
             // buttonMovieDelete
             // 
             this.buttonMovieDelete.Location = new System.Drawing.Point(473, 6);
@@ -1599,6 +1730,85 @@
             this.pictureBoxMovie.TabIndex = 2;
             this.pictureBoxMovie.TabStop = false;
             this.pictureBoxMovie.Click += new System.EventHandler(this.pictureBoxMovie_Click);
+            // 
+            // tabPageGlediator
+            // 
+            this.tabPageGlediator.BackColor = System.Drawing.Color.Azure;
+            this.tabPageGlediator.Controls.Add(this.label80);
+            this.tabPageGlediator.Controls.Add(this.label79);
+            this.tabPageGlediator.Controls.Add(this.trackBarGlediator);
+            this.tabPageGlediator.Controls.Add(this.checkBoxRandom6);
+            this.tabPageGlediator.Controls.Add(this.textBoxGlediator);
+            this.tabPageGlediator.Controls.Add(this.buttonGlediator);
+            this.tabPageGlediator.Location = new System.Drawing.Point(4, 29);
+            this.tabPageGlediator.Name = "tabPageGlediator";
+            this.tabPageGlediator.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageGlediator.Size = new System.Drawing.Size(736, 225);
+            this.tabPageGlediator.TabIndex = 5;
+            this.tabPageGlediator.Text = "Glediator/Jinx";
+            // 
+            // label80
+            // 
+            this.label80.Location = new System.Drawing.Point(23, 19);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(411, 51);
+            this.label80.TabIndex = 73;
+            this.label80.Text = "Note: Jinx effects need to be setup and recorder to a .gled file in the Jinx app " +
+    "to be imported to Vixen.";
+            this.toolTip1.SetToolTip(this.label80, "Speed of the output Glediator.");
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Location = new System.Drawing.Point(23, 88);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(160, 20);
+            this.label79.TabIndex = 72;
+            this.label79.Text = "Glediator/Jinx Speed:";
+            this.toolTip1.SetToolTip(this.label79, "Speed of the output Glediator.");
+            // 
+            // trackBarGlediator
+            // 
+            this.trackBarGlediator.AutoSize = false;
+            this.trackBarGlediator.Location = new System.Drawing.Point(14, 120);
+            this.trackBarGlediator.Maximum = 20;
+            this.trackBarGlediator.Minimum = 1;
+            this.trackBarGlediator.Name = "trackBarGlediator";
+            this.trackBarGlediator.Size = new System.Drawing.Size(382, 40);
+            this.trackBarGlediator.TabIndex = 71;
+            this.trackBarGlediator.Value = 9;
+            this.trackBarGlediator.Scroll += new System.EventHandler(this.trackBarGlediator_Scroll);
+            this.trackBarGlediator.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarGlediator_MouseDown);
+            this.trackBarGlediator.MouseHover += new System.EventHandler(this.trackBarGlediator_MouseHover);
+            // 
+            // checkBoxRandom6
+            // 
+            this.checkBoxRandom6.AutoSize = true;
+            this.checkBoxRandom6.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxRandom6.Location = new System.Drawing.Point(483, 4);
+            this.checkBoxRandom6.Name = "checkBoxRandom6";
+            this.checkBoxRandom6.Size = new System.Drawing.Size(242, 24);
+            this.checkBoxRandom6.TabIndex = 70;
+            this.checkBoxRandom6.Text = "Include in Random Selection:";
+            this.checkBoxRandom6.UseVisualStyleBackColor = true;
+            // 
+            // textBoxGlediator
+            // 
+            this.textBoxGlediator.Enabled = false;
+            this.textBoxGlediator.Location = new System.Drawing.Point(14, 182);
+            this.textBoxGlediator.Name = "textBoxGlediator";
+            this.textBoxGlediator.Size = new System.Drawing.Size(705, 26);
+            this.textBoxGlediator.TabIndex = 1;
+            // 
+            // buttonGlediator
+            // 
+            this.buttonGlediator.Location = new System.Drawing.Point(604, 120);
+            this.buttonGlediator.Name = "buttonGlediator";
+            this.buttonGlediator.Size = new System.Drawing.Size(115, 41);
+            this.buttonGlediator.TabIndex = 0;
+            this.buttonGlediator.Text = "Load Effect";
+            this.buttonGlediator.UseVisualStyleBackColor = true;
+            this.buttonGlediator.Click += new System.EventHandler(this.buttonGlediator_Click);
             // 
             // label28
             // 
@@ -2131,6 +2341,28 @@
             this.toolTip1.SetToolTip(this.label9, "This is used to check for agaist in th eincoming SMS messages from you SMS provid" +
         "er");
             // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Location = new System.Drawing.Point(16, 117);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(190, 20);
+            this.label78.TabIndex = 10;
+            this.label78.Text = "Remote Access Keyword:";
+            this.toolTip1.SetToolTip(this.label78, "Enter a keyword that you will use when you want to email setting to Messaging. In" +
+        " your subject heading for example you will type \"Messaging Northridge\". Can be l" +
+        "eft blank.");
+            // 
+            // textBoxAccessPWD
+            // 
+            this.textBoxAccessPWD.Location = new System.Drawing.Point(220, 114);
+            this.textBoxAccessPWD.Name = "textBoxAccessPWD";
+            this.textBoxAccessPWD.Size = new System.Drawing.Size(127, 26);
+            this.textBoxAccessPWD.TabIndex = 9;
+            this.textBoxAccessPWD.Text = "Northridge";
+            this.toolTip1.SetToolTip(this.textBoxAccessPWD, "Enter a password that you will use when you want to email setting to Messaging. I" +
+        "n your subject heading for example you will type \"Messaging Northridge\"");
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPageMain);
@@ -2165,16 +2397,35 @@
             this.tabPageMain.Tag = "2";
             this.tabPageMain.Text = "Main";
             // 
-            // buttonSaveLog
+            // label74
             // 
-            this.buttonSaveLog.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonSaveLog.Location = new System.Drawing.Point(6, 991);
-            this.buttonSaveLog.Name = "buttonSaveLog";
-            this.buttonSaveLog.Size = new System.Drawing.Size(122, 41);
-            this.buttonSaveLog.TabIndex = 60;
-            this.buttonSaveLog.Text = "Export Log";
-            this.buttonSaveLog.UseVisualStyleBackColor = false;
-            this.buttonSaveLog.Click += new System.EventHandler(this.buttonSaveLog_Click);
+            this.label74.AutoSize = true;
+            this.label74.Location = new System.Drawing.Point(662, 504);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(37, 20);
+            this.label74.TabIndex = 63;
+            this.label74.Text = "Sec";
+            // 
+            // numericUpDownIntervalMsgs
+            // 
+            this.numericUpDownIntervalMsgs.Location = new System.Drawing.Point(579, 501);
+            this.numericUpDownIntervalMsgs.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.numericUpDownIntervalMsgs.Name = "numericUpDownIntervalMsgs";
+            this.numericUpDownIntervalMsgs.Size = new System.Drawing.Size(72, 26);
+            this.numericUpDownIntervalMsgs.TabIndex = 61;
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(534, 460);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(207, 20);
+            this.label71.TabIndex = 62;
+            this.label71.Text = "Interval between Messages:";
             // 
             // label66
             // 
@@ -2573,7 +2824,7 @@
             // 
             // buttonFont
             // 
-            this.buttonFont.Location = new System.Drawing.Point(575, 28);
+            this.buttonFont.Location = new System.Drawing.Point(575, 30);
             this.buttonFont.Name = "buttonFont";
             this.buttonFont.Size = new System.Drawing.Size(148, 32);
             this.buttonFont.TabIndex = 5;
@@ -3146,6 +3397,17 @@
             this.pictureBoxSaveWhitelist.Tag = "1";
             this.pictureBoxSaveWhitelist.Click += new System.EventHandler(this.pictureBoxSaveWhitelist_Click);
             // 
+            // buttonSaveLog
+            // 
+            this.buttonSaveLog.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonSaveLog.Location = new System.Drawing.Point(6, 991);
+            this.buttonSaveLog.Name = "buttonSaveLog";
+            this.buttonSaveLog.Size = new System.Drawing.Size(122, 41);
+            this.buttonSaveLog.TabIndex = 60;
+            this.buttonSaveLog.Text = "Export Log";
+            this.buttonSaveLog.UseVisualStyleBackColor = false;
+            this.buttonSaveLog.Click += new System.EventHandler(this.buttonSaveLog_Click);
+            // 
             // colorDialog1
             // 
             this.colorDialog1.AnyColor = true;
@@ -3205,268 +3467,6 @@
             this.fileDialog.FileName = "Select a File";
             this.fileDialog.Title = "Select a File";
             // 
-            // numericUpDownIntervalMsgs
-            // 
-            this.numericUpDownIntervalMsgs.Location = new System.Drawing.Point(579, 501);
-            this.numericUpDownIntervalMsgs.Maximum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.numericUpDownIntervalMsgs.Name = "numericUpDownIntervalMsgs";
-            this.numericUpDownIntervalMsgs.Size = new System.Drawing.Size(72, 26);
-            this.numericUpDownIntervalMsgs.TabIndex = 61;
-            // 
-            // label71
-            // 
-            this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(534, 460);
-            this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(207, 20);
-            this.label71.TabIndex = 62;
-            this.label71.Text = "Interval between Messages:";
-            // 
-            // checkBoxRandom5
-            // 
-            this.checkBoxRandom5.AutoSize = true;
-            this.checkBoxRandom5.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxRandom5.Location = new System.Drawing.Point(10, 14);
-            this.checkBoxRandom5.Name = "checkBoxRandom5";
-            this.checkBoxRandom5.Size = new System.Drawing.Size(242, 24);
-            this.checkBoxRandom5.TabIndex = 50;
-            this.checkBoxRandom5.Text = "Include in Random Selection:";
-            this.checkBoxRandom5.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxRandom4
-            // 
-            this.checkBoxRandom4.AutoSize = true;
-            this.checkBoxRandom4.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxRandom4.Location = new System.Drawing.Point(483, 4);
-            this.checkBoxRandom4.Name = "checkBoxRandom4";
-            this.checkBoxRandom4.Size = new System.Drawing.Size(242, 24);
-            this.checkBoxRandom4.TabIndex = 69;
-            this.checkBoxRandom4.Text = "Include in Random Selection:";
-            this.checkBoxRandom4.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxRandom3
-            // 
-            this.checkBoxRandom3.AutoSize = true;
-            this.checkBoxRandom3.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxRandom3.Location = new System.Drawing.Point(483, 4);
-            this.checkBoxRandom3.Name = "checkBoxRandom3";
-            this.checkBoxRandom3.Size = new System.Drawing.Size(242, 24);
-            this.checkBoxRandom3.TabIndex = 82;
-            this.checkBoxRandom3.Text = "Include in Random Selection:";
-            this.checkBoxRandom3.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxRandom2
-            // 
-            this.checkBoxRandom2.AutoSize = true;
-            this.checkBoxRandom2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxRandom2.Location = new System.Drawing.Point(483, 4);
-            this.checkBoxRandom2.Name = "checkBoxRandom2";
-            this.checkBoxRandom2.Size = new System.Drawing.Size(242, 24);
-            this.checkBoxRandom2.TabIndex = 51;
-            this.checkBoxRandom2.Text = "Include in Random Selection:";
-            this.checkBoxRandom2.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxRandom1
-            // 
-            this.checkBoxRandom1.AutoSize = true;
-            this.checkBoxRandom1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxRandom1.Location = new System.Drawing.Point(483, 4);
-            this.checkBoxRandom1.Name = "checkBoxRandom1";
-            this.checkBoxRandom1.Size = new System.Drawing.Size(242, 24);
-            this.checkBoxRandom1.TabIndex = 82;
-            this.checkBoxRandom1.Text = "Include in Random Selection:";
-            this.checkBoxRandom1.UseVisualStyleBackColor = true;
-            // 
-            // label74
-            // 
-            this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(662, 504);
-            this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(37, 20);
-            this.label74.TabIndex = 63;
-            this.label74.Text = "Sec";
-            // 
-            // numericUpDownMatrixW
-            // 
-            this.numericUpDownMatrixW.Location = new System.Drawing.Point(273, 62);
-            this.numericUpDownMatrixW.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDownMatrixW.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownMatrixW.Name = "numericUpDownMatrixW";
-            this.numericUpDownMatrixW.Size = new System.Drawing.Size(68, 26);
-            this.numericUpDownMatrixW.TabIndex = 51;
-            this.toolTip1.SetToolTip(this.numericUpDownMatrixW, "Ensure you reload movie whenever you change the Matrix size");
-            this.numericUpDownMatrixW.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDownMatrixH
-            // 
-            this.numericUpDownMatrixH.Location = new System.Drawing.Point(388, 62);
-            this.numericUpDownMatrixH.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericUpDownMatrixH.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownMatrixH.Name = "numericUpDownMatrixH";
-            this.numericUpDownMatrixH.Size = new System.Drawing.Size(68, 26);
-            this.numericUpDownMatrixH.TabIndex = 52;
-            this.toolTip1.SetToolTip(this.numericUpDownMatrixH, "Ensure you reload movie whenever you change the Matrix size");
-            this.numericUpDownMatrixH.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            // 
-            // label75
-            // 
-            this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(357, 64);
-            this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(25, 20);
-            this.label75.TabIndex = 53;
-            this.label75.Text = "H:";
-            this.toolTip1.SetToolTip(this.label75, "Height");
-            // 
-            // label76
-            // 
-            this.label76.AutoSize = true;
-            this.label76.Location = new System.Drawing.Point(238, 64);
-            this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(28, 20);
-            this.label76.TabIndex = 54;
-            this.label76.Text = "W:";
-            this.toolTip1.SetToolTip(this.label76, "Width");
-            this.label76.Click += new System.EventHandler(this.label76_Click);
-            // 
-            // label77
-            // 
-            this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(322, 39);
-            this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(86, 20);
-            this.label77.TabIndex = 55;
-            this.label77.Text = "Matrix Size";
-            this.toolTip1.SetToolTip(this.label77, "Ensure you reload movie whenever you change the Matrix size");
-            // 
-            // label78
-            // 
-            this.label78.AutoSize = true;
-            this.label78.Location = new System.Drawing.Point(16, 117);
-            this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(155, 20);
-            this.label78.TabIndex = 10;
-            this.label78.Text = "Remote Access PW:";
-            this.toolTip1.SetToolTip(this.label78, "Enter a password that you will use when you want to email setting to Messaging. I" +
-        "n your subject heading for example you will type \"Messaging Northridge\"");
-            // 
-            // textBoxAccessPWD
-            // 
-            this.textBoxAccessPWD.Location = new System.Drawing.Point(206, 114);
-            this.textBoxAccessPWD.Name = "textBoxAccessPWD";
-            this.textBoxAccessPWD.Size = new System.Drawing.Size(127, 26);
-            this.textBoxAccessPWD.TabIndex = 9;
-            this.textBoxAccessPWD.Text = "Northridge";
-            this.toolTip1.SetToolTip(this.textBoxAccessPWD, "Enter a password that you will use when you want to email setting to Messaging. I" +
-        "n your subject heading for example you will type \"Messaging Northridge\"");
-            // 
-            // tabPageGlediator
-            // 
-            this.tabPageGlediator.BackColor = System.Drawing.Color.Azure;
-            this.tabPageGlediator.Controls.Add(this.label80);
-            this.tabPageGlediator.Controls.Add(this.label79);
-            this.tabPageGlediator.Controls.Add(this.trackBarGlediator);
-            this.tabPageGlediator.Controls.Add(this.checkBoxRandom6);
-            this.tabPageGlediator.Controls.Add(this.textBoxGlediator);
-            this.tabPageGlediator.Controls.Add(this.buttonGlediator);
-            this.tabPageGlediator.Location = new System.Drawing.Point(4, 29);
-            this.tabPageGlediator.Name = "tabPageGlediator";
-            this.tabPageGlediator.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGlediator.Size = new System.Drawing.Size(736, 225);
-            this.tabPageGlediator.TabIndex = 5;
-            this.tabPageGlediator.Text = "Glediator/Jinx";
-            // 
-            // buttonGlediator
-            // 
-            this.buttonGlediator.Location = new System.Drawing.Point(604, 120);
-            this.buttonGlediator.Name = "buttonGlediator";
-            this.buttonGlediator.Size = new System.Drawing.Size(115, 41);
-            this.buttonGlediator.TabIndex = 0;
-            this.buttonGlediator.Text = "Load Effect";
-            this.buttonGlediator.UseVisualStyleBackColor = true;
-            this.buttonGlediator.Click += new System.EventHandler(this.buttonGlediator_Click);
-            // 
-            // textBoxGlediator
-            // 
-            this.textBoxGlediator.Enabled = false;
-            this.textBoxGlediator.Location = new System.Drawing.Point(14, 182);
-            this.textBoxGlediator.Name = "textBoxGlediator";
-            this.textBoxGlediator.Size = new System.Drawing.Size(705, 26);
-            this.textBoxGlediator.TabIndex = 1;
-            // 
-            // checkBoxRandom6
-            // 
-            this.checkBoxRandom6.AutoSize = true;
-            this.checkBoxRandom6.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxRandom6.Location = new System.Drawing.Point(483, 4);
-            this.checkBoxRandom6.Name = "checkBoxRandom6";
-            this.checkBoxRandom6.Size = new System.Drawing.Size(242, 24);
-            this.checkBoxRandom6.TabIndex = 70;
-            this.checkBoxRandom6.Text = "Include in Random Selection:";
-            this.checkBoxRandom6.UseVisualStyleBackColor = true;
-            // 
-            // label79
-            // 
-            this.label79.AutoSize = true;
-            this.label79.Location = new System.Drawing.Point(23, 88);
-            this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(160, 20);
-            this.label79.TabIndex = 72;
-            this.label79.Text = "Glediator/Jinx Speed:";
-            this.toolTip1.SetToolTip(this.label79, "Speed of the output Glediator.");
-            // 
-            // trackBarGlediator
-            // 
-            this.trackBarGlediator.AutoSize = false;
-            this.trackBarGlediator.Location = new System.Drawing.Point(14, 120);
-            this.trackBarGlediator.Maximum = 20;
-            this.trackBarGlediator.Minimum = 1;
-            this.trackBarGlediator.Name = "trackBarGlediator";
-            this.trackBarGlediator.Size = new System.Drawing.Size(382, 40);
-            this.trackBarGlediator.TabIndex = 71;
-            this.trackBarGlediator.Value = 9;
-            this.trackBarGlediator.Scroll += new System.EventHandler(this.trackBarGlediator_Scroll);
-            this.trackBarGlediator.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarGlediator_MouseDown);
-            this.trackBarGlediator.MouseHover += new System.EventHandler(this.trackBarGlediator_MouseHover);
-            // 
-            // label80
-            // 
-            this.label80.Location = new System.Drawing.Point(23, 19);
-            this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(411, 51);
-            this.label80.TabIndex = 73;
-            this.label80.Text = "Note: Jinx effects need to be setup and recorder to a .gled file in the Jinx app " +
-    "to be imported to Vixen.";
-            this.toolTip1.SetToolTip(this.label80, "Speed of the output Glediator.");
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -3519,9 +3519,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTwinkleLights)).EndInit();
             this.tabPageMovie.ResumeLayout(false);
             this.tabPageMovie.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixH)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixW)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarMovieSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarThumbnail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMovie)).EndInit();
+            this.tabPageGlediator.ResumeLayout(false);
+            this.tabPageGlediator.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarGlediator)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EffectTime)).EndInit();
             this.TabSeq1.ResumeLayout(false);
             this.TabSeq1.PerformLayout();
@@ -3532,6 +3537,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageMain.ResumeLayout(false);
             this.tabPageMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).EndInit();
             this.tabPageMessagingSettings.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -3566,12 +3572,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixW)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMatrixH)).EndInit();
-            this.tabPageGlediator.ResumeLayout(false);
-            this.tabPageGlediator.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarGlediator)).EndInit();
             this.ResumeLayout(false);
 
         }

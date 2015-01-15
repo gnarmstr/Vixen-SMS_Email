@@ -1,6 +1,4 @@
-﻿using System.Runtime.Remoting.Messaging;
-
-#region System modules
+﻿#region System modules
 
 using System;
 using System.Collections.Generic;
@@ -15,6 +13,7 @@ using System.Text.RegularExpressions;
 using Common.Resources;
 using Common.Resources.Properties;
 using System.Diagnostics;
+using System.Threading;
 
 #endregion
 
@@ -26,16 +25,10 @@ namespace Vixen_Messaging
     public partial class FormMain : Form
     {
         readonly Pop3Client _pop = new Pop3Client();
-                
+
         public FormMain()
         {
             InitializeComponent();
-
-            bool vixenRunning = Process.GetProcesses().Any(clsProcess => clsProcess.ProcessName.Contains("VixenApplication"));
-            if (!vixenRunning)
-            {
-                MessageBox.Show(@"Vixen 3 is Not currently running and must be open when Messages are being retrieved.");
-            }
         }
 
         void StartChecking()
@@ -78,6 +71,7 @@ namespace Vixen_Messaging
             LoadData();
             EmailSettings();
 
+            //Ensures a backup of Whitelist, Blacklist and LocalMessages are made in the Appdata folder so a new installation does not remove them and users loose there changes.
             File.Create(textBoxBlacklistEmailLog.Text).Close();
             if (File.Exists(GlobalVar.Blacklistlocation + ".bkp"))
             {
@@ -121,6 +115,7 @@ namespace Vixen_Messaging
             GlobalVar.Msgindex = 0;
             GlobalVar.PlayMessage = false;
 
+            #region Initial Groups, Tab and Checkboxs are Visable/Enabled/Setup
             //Ensures correct groups are enabled or visable on first load.
             buttonStop.Enabled = false;
             if (checkBoxEnableSqnctrl.Checked)
@@ -143,14 +138,17 @@ namespace Vixen_Messaging
                 checkBoxEnableSqnctrl.Checked = false;
             }
 
-            //Changes Position and Size of Group boxs in the Sequence Tab
+            //Changes Position and Size of Groupboxs in the Sequence Tab
             groupBoxSeqControl.Location = new Point(6, 35);
             tabControlSequence.Size = new Size(505, 185);
             groupBoxSeqControl.Size = new Size(510, 210);
             label26.Location = new Point(60, 255);
             richTextBoxLog2.Location = new Point(6, 295);
             richTextBoxLog2.Size = new Size(505, 270);
+            #endregion
 
+            #region Setup Button images and Icons
+            //Setup Button images
             buttonRemoveSeq1.Image = Tools.GetIcon(Resources.delete, 16);
             buttonRemoveSeq1.Text = "";
             buttonRemoveSeq2.Image = Tools.GetIcon(Resources.delete, 16);
@@ -171,7 +169,9 @@ namespace Vixen_Messaging
             pictureBoxSaveBlacklist.Image = Tools.ResizeImage(Resources.SaveBlacklist, 100, 60);
             pictureBoxMovie.Image = Tools.ResizeImage(Resources.ClicktoOpen, 210, 200);
             buttonMovieDelete.Image = Tools.GetIcon(Resources.delete, 16);
+            #endregion
 
+            #region Check Vixen Port settings on startup
             try
             {
                 //checks Vixen for port setting and compare to Vixen messaging
@@ -201,6 +201,7 @@ namespace Vixen_Messaging
             {
                 MessageBox.Show(@"Vixen 3 User files do not appear to be in the default Documents folder or Vixen 3 is not Installed, Ensure you add the correct folder first or Install Vixen 3.");
             }
+            #endregion
 
             StartChecking();
             if (checkBoxAutoStart.Checked == false)
@@ -417,7 +418,7 @@ namespace Vixen_Messaging
 
 #region Play Mode
     
-    #region Play Only Incoming Messages
+    #region Play Incoming Messages
         private void PlayIncomingMsgs()
         {
             try
@@ -657,8 +658,8 @@ namespace Vixen_Messaging
                 bool notWhitemsg;
                 string msg;
 
-                string richTextBoxText = richTextBoxMessage.Text;
-                string[] phrases = richTextBoxText.Split('\n');
+                var richTextBoxText = richTextBoxMessage.Text;
+                var phrases = richTextBoxText.Split('\n');
                 var msgcount = phrases.Length;
 
                 if (checkBoxLocalRandom.Checked)
@@ -686,7 +687,7 @@ namespace Vixen_Messaging
         }
         #endregion
 
-    #region Play Random Local and Incoming
+    #region Play Random - Local and Incoming
         private void PlayRandom()
         {
             var randomplay = new Random();
@@ -694,7 +695,7 @@ namespace Vixen_Messaging
             {
                 "Play Local Msgs when NO Incoming Msgs", "Play Only Local Msgs"
             };
-            string selectedPlay = mystrings[randomplay.Next(mystrings.Length)];
+            var selectedPlay = mystrings[randomplay.Next(mystrings.Length)];
             
 
             switch (selectedPlay)
@@ -729,13 +730,15 @@ namespace Vixen_Messaging
     #region Input message to Change Vixen Settings
         private void VixenSettings(int messageNum)
         {
-            string messageBody = "";
-            string smsMessage;
+            #region Get Message details and Body to process
+            var messageBody = "";
             var msg = _pop.GetMessage(messageNum);
-            smsMessage = msg.MessagePart.MessageParts[0].GetBodyAsText();
+            string smsMessage = msg.MessagePart.MessageParts[0].GetBodyAsText();
             smsMessage = Regex.Replace(smsMessage, @"\t", "");
             smsMessage = smsMessage.TrimEnd(' ');
+            #endregion
 
+            #region Get settings and action
             if (smsMessage.ToLower().Contains("stop"))
             {
                 Stop_Vixen();
@@ -833,6 +836,7 @@ namespace Vixen_Messaging
                     }
                 }
             }
+ 
             if (smsMessage.ToLower().Contains("snowflakerandom"))
             {
                 checkBoxRandom1.Checked = !checkBoxRandom1.Checked;
@@ -874,10 +878,9 @@ namespace Vixen_Messaging
                 StopSequence();
                 messageBody = messageBody + "Vixen sequences are enabled " + checkBoxEnableSqnctrl.Checked + "\n";
             }
+            #endregion
 
-            
-
-
+            #region Return Email setting confirmation
             string rtnmsg;
             if (messageBody == "")
             {
@@ -892,6 +895,7 @@ namespace Vixen_Messaging
             _pop.DeleteMessage(messageNum);
             _pop.Disconnect();
             SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+            #endregion
         }
 
 #endregion
@@ -914,31 +918,10 @@ namespace Vixen_Messaging
                     //Write message to Vixen
                     msg = msg.Replace("&", "&amp;");
 
-                    switch (TextLineNumber.Value.ToString())
-                    {
-                        case "1":
-                            fileText = fileText.Replace("NamePlaceholder1", msg).Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", "");//replaces the text
-                            break;
-                        case "2":
-                            fileText = fileText.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", msg).Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", "");//replaces the text
-                            break;
-                        case "3":
-                            fileText = fileText.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", msg).Replace("NamePlaceholder4", "");//replaces the text
-                            break;
-                        case "4":
-                            fileText = fileText.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", msg);//replaces the text
-                            break;
-                    }
-                    
-                    fileText = fileText.Replace("Speed_Change", trackBarTextSpeed.Value.ToString());
-                    fileText = fileText.Replace("Movie_Change", trackBarMovieSpeed.Value.ToString());
-                    fileText = fileText.Replace("Glediator_Change", trackBarGlediator.Value.ToString());
-                    fileText = fileText.Replace("TextPosition_Change", trackBarTextPosition.Value.ToString());
-
                     string outputFileName;
                     if (!checkBoxEnableSqnctrl.Checked)
                     {
-              #region Custom Effects
+            #region Custom Effects
 
                         if (checkBoxVariableLength.Checked)
                         {
@@ -959,19 +942,12 @@ namespace Vixen_Messaging
                         }
 
                         outputFileName = textBoxOutputSequence.Text;
-                        fileText = fileText.Replace("NodeId_Change", textBoxNodeId.Text);//adds NodeId
-                        fileText = fileText.Replace("StringOrienation_Change", comboBoxString.Text);
-                        fileText = fileText.Replace("TextTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Text Sequence time
-                        fileText = fileText.Replace("SnowFlake_Change", EffectType.Value.ToString()); //Type
-                        fileText = fileText.Replace("SnowFlakeMax_Change", MaxSnowFlake.Value.ToString()); //Max number
-                        fileText = fileText.Replace("FireHeight_Change", FireHeight.Value.ToString()); //Fire height
-                        fileText = fileText.Replace("MeteorType_Change", MeteorCount.Value.ToString()); //Type
-                        fileText = fileText.Replace("MeteorTrailLength_Change", MeteorTrailLength.Value.ToString()); //Max number
-                        fileText = fileText.Replace("FontName_Change", textBoxFont.Text);
-                        fileText = fileText.Replace("FontSize_Change", textBoxFontSize.Text);
-                        fileText = fileText.Replace("TwinkleLights_Change", trackBarTwinkleLights.Value.ToString());
-                        fileText = fileText.Replace("TwinkleSteps_Change", trackBarTwinkleSteps.Value.ToString());
-                        fileText = fileText.Replace("GlediatorFolder_Change", textBoxGlediator.Text);
+                        
+
+                        string fileText1;
+                        TextSettings(fileText, msg, out fileText1);
+
+                        fileText = fileText1;
 
                         var meteorColourType = 0;
                         switch (MeteorColour.Text)
@@ -984,29 +960,19 @@ namespace Vixen_Messaging
                                 break;
                         }
                         fileText = fileText.Replace("MeteorColour_Change", meteorColourType.ToString()); //Range or Rainbow
-
-                        var textDirection = 0;
-                        switch (comboBoxTextDirection.Text)
-                        {
-                            case "Left": textDirection = 0;
-                                break;
-                            case "Right": textDirection = 1;
-                                break;
-                            case "Up": textDirection = 2;
-                                break;
-                            case "Down": textDirection = 3;
-                                break;
-                            case "None": textDirection = 4;
-                                break;
-                        }
-                        fileText = fileText.Replace("TextDirection_Change", textDirection.ToString());
-
-                        String hexValue;
-                        ColourSelect(out hexValue); //Colour Selection for Text. Random or Single
-                            
-                        var textColorNum = Convert.ToUInt32(hexValue, 16);
-                        fileText = fileText.Replace("Colour_Change1", textColorNum.ToString());
                         fileText = fileText.Replace("PT20S", "PT" + GlobalVar.SeqIntervalTime.ToString() + "S"); //Sequence time
+                        fileText = fileText.Replace("TextTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Text Sequence time
+                        fileText = fileText.Replace("EffectTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
+                        fileText = fileText.Replace("SnowFlake_Change", EffectType.Value.ToString()); //Type
+                        fileText = fileText.Replace("SnowFlakeMax_Change", MaxSnowFlake.Value.ToString()); //Max number
+                        fileText = fileText.Replace("FireHeight_Change", FireHeight.Value.ToString()); //Fire height
+                        fileText = fileText.Replace("MeteorType_Change", MeteorCount.Value.ToString()); //Type
+                        fileText = fileText.Replace("MeteorTrailLength_Change", MeteorTrailLength.Value.ToString()); //Max number
+                        fileText = fileText.Replace("TwinkleLights_Change", trackBarTwinkleLights.Value.ToString());
+                        fileText = fileText.Replace("TwinkleSteps_Change", trackBarTwinkleSteps.Value.ToString());
+                        fileText = fileText.Replace("Movie_Change", trackBarMovieSpeed.Value.ToString()); 
+                        fileText = fileText.Replace("GlediatorFolder_Change", textBoxGlediator.Text);
+                        fileText = fileText.Replace("Glediator_Change", trackBarGlediator.Value.ToString());
 
                         string selectedSeq;
                         //Random or selected Selection
@@ -1062,122 +1028,77 @@ namespace Vixen_Messaging
                         switch (selectedSeq)
                         {
                             case "SnowFlakes":
+                                fileText = fileText.Replace("Selected_Effect", "Snowflakes");
                                 fileText = fileText.Replace("Speed_1Change", trackBarSpeedSnowFlakes.Value.ToString());
-                                fileText = fileText.Replace("MovieTime_Change", "0");
-                                fileText = fileText.Replace("GlediatorTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("SnowFlakeTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
-                                fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
+                                //Colour selection
                                 do
                                 {
                                     var btn = new Button[] { null, SnowFlakeColour1, SnowFlakeColour2, SnowFlakeColour3, SnowFlakeColour4, SnowFlakeColour5, SnowFlakeColour6 };
                                     var ckb = new CheckBox[] { null, checkBoxSnowFlakeColour1, checkBoxSnowFlakeColour2, checkBoxSnowFlakeColour3, checkBoxSnowFlakeColour4, checkBoxSnowFlakeColour5, checkBoxSnowFlakeColour6 };
-                                    hexValue = btn[i].BackColor.A.ToString("x2") + btn[i].BackColor.R.ToString("x2") + btn[i].BackColor.G.ToString("x2") + btn[i].BackColor.B.ToString("x2");
-                                    textColorNum = Convert.ToUInt32(hexValue, 16);
-                                    fileText = fileText.Replace("Colour" + i + "_Change", textColorNum.ToString()); //Colour
-                                    fileText = fileText.Replace("CheckBox" + i + "_Change", ckb[i].Checked.ToString().ToLower()); //Colour Enabled true or False
+                                    FileSettingsColour(btn, ckb, i, fileText, out fileText1);
+                                    fileText = fileText1;
                                     i++;
                                 } while (i < 7);
                                 break;
-                            case "Fire":
-                                fileText = fileText.Replace("Speed_1Change", "0");
-                                fileText = fileText.Replace("MovieTime_Change", "0");
-                                fileText = fileText.Replace("GlediatorTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("FireHeightTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
-                                fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
-                                do
-                                {
-                                    fileText = fileText.Replace("Colour" + i + "_Change", "0"); //Colour
-                                    fileText = fileText.Replace("CheckBox" + i + "_Change", "false"); //Colour Enabled true or False
-                                    i++;
-                                } while (i < 7);
-                                break;
-                            case "Meteors":
-                                fileText = fileText.Replace("Speed_1Change", trackBarSpeedMeteors.Value.ToString());
-                                fileText = fileText.Replace("MovieTime_Change", "0");
-                                fileText = fileText.Replace("GlediatorTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("MeteorTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
-                                fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
 
+                            case "Fire":
+                                fileText = fileText.Replace("Selected_Effect", "Fire");
+                                fileText = fileText.Replace("Speed_1Change", "0");
+                                //Colour selection
+                                FileSettings(fileText, out fileText1);
+                                fileText = fileText1;
+                                break;
+
+                            case "Meteors":
+                                fileText = fileText.Replace("Selected_Effect", "Meteors");
+                                fileText = fileText.Replace("Speed_1Change", trackBarSpeedMeteors.Value.ToString());
+                                //Colour selection
                                 do
                                 {
                                     var btn = new Button[] { null, MeteorColour1, MeteorColour2, MeteorColour3, MeteorColour4, MeteorColour5, MeteorColour6 };
                                     var ckb = new CheckBox[] { null, checkBoxMeteorColour1, checkBoxMeteorColour2, checkBoxMeteorColour3, checkBoxMeteorColour4, checkBoxMeteorColour5, checkBoxMeteorColour6 };
-                                    hexValue = btn[i].BackColor.A.ToString("x2") + btn[i].BackColor.R.ToString("x2") + btn[i].BackColor.G.ToString("x2") + btn[i].BackColor.B.ToString("x2");
-                                    textColorNum = Convert.ToUInt32(hexValue, 16);
-                                    fileText = fileText.Replace("Colour" + i + "_Change", textColorNum.ToString()); //Colour
-                                    fileText = fileText.Replace("CheckBox" + i + "_Change", ckb[i].Checked.ToString().ToLower()); //Colour Enabled true or False
+                                    FileSettingsColour(btn, ckb, i, fileText, out fileText1);
+                                    fileText = fileText1;
                                     i++;
                                 } while (i < 7);
                                 break;
-                            case "Twinkles":
-                                fileText = fileText.Replace("Speed_1Change", trackBarSpeedTwinkles.Value.ToString());
-                                fileText = fileText.Replace("MovieTime_Change", "0");
-                                fileText = fileText.Replace("GlediatorTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("TwinkleTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
-                                fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
 
+                            case "Twinkles":
+                                fileText = fileText.Replace("Selected_Effect", "Twinkles");
+                                fileText = fileText.Replace("Speed_1Change", trackBarSpeedTwinkles.Value.ToString());
+                                //Colour selection
                                 do
                                 {
                                     var btn = new Button[] { null, TwinkleColour1, TwinkleColour2, TwinkleColour3, TwinkleColour4, TwinkleColour5, TwinkleColour6 };
                                     var ckb = new CheckBox[] { null, checkBoxTwinkleColour1, checkBoxTwinkleColour2, checkBoxTwinkleColour3, checkBoxTwinkleColour4, checkBoxTwinkleColour5, checkBoxTwinkleColour6 };
-                                    hexValue = btn[i].BackColor.A.ToString("x2") + btn[i].BackColor.R.ToString("x2") + btn[i].BackColor.G.ToString("x2") + btn[i].BackColor.B.ToString("x2");
-                                    textColorNum = Convert.ToUInt32(hexValue, 16);
-                                    fileText = fileText.Replace("Colour" + i + "_Change", textColorNum.ToString()); //Colour
-                                    fileText = fileText.Replace("CheckBox" + i + "_Change", ckb[i].Checked.ToString().ToLower()); //Colour Enabled true or False
+                                    FileSettingsColour(btn, ckb, i, fileText, out fileText1);
+                                    fileText = fileText1;
                                     i++;
                                 } while (i < 7);
                                 break;
+
                             case "Movie":
+                                fileText = fileText.Replace("Selected_Effect", "Movie");
                                 fileText = fileText.Replace("Speed_1Change", "0");
-                                fileText = fileText.Replace("MovieTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
-                                fileText = fileText.Replace("GlediatorTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
-                                do
-                                {
-                                    fileText = fileText.Replace("Colour" + i + "_Change", "0"); //Colour
-                                    fileText = fileText.Replace("CheckBox" + i + "_Change", "false"); //Colour Enabled true or False
-                                    i++;
-                                } while (i < 7);
+                                //Colour selection
+                                FileSettings(fileText, out fileText1);
+                                fileText = fileText1;
                                 break;
+
                             case "Glediator/Jinx":
-                                fileText = fileText.Replace("Speed_1Change", "0");
-                                fileText = fileText.Replace("MovieTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("GlediatorTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
-                                fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
-                                do
-                                {
-                                    fileText = fileText.Replace("Colour" + i + "_Change", "0"); //Colour
-                                    fileText = fileText.Replace("CheckBox" + i + "_Change", "false"); //Colour Enabled true or False
-                                    i++;
-                                } while (i < 7);
+                                fileText = fileText.Replace("Selected_Effect", "Glediator");
+                                fileText = fileText.Replace("Speed_1Change", trackBarGlediator.Value.ToString());
+                                //Colour selection
+                                FileSettings(fileText, out fileText1);
+                                fileText = fileText1;
                                 break;
+
                             case "None":
+                                fileText = fileText.Replace("Selected_Effect", "None");
                                 fileText = fileText.Replace("Speed_1Change", "0");
-                                fileText = fileText.Replace("MovieTime_Change", "0");
-                                fileText = fileText.Replace("TwinkleTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("SnowFlakeTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("FireHeightTime_Change", "0"); //Sequence time
-                                fileText = fileText.Replace("MeteorTime_Change", "0"); //Sequence time
-                                do
-                                {
-                                    fileText = fileText.Replace("Colour" + i + "_Change", "0"); //Colour
-                                    fileText = fileText.Replace("CheckBox" + i + "_Change", "false"); //Colour Enabled true or False
-                                    i++;
-                                } while (i < 7);
+                                //Colour selection
+                                FileSettings(fileText, out fileText1);
+                                fileText = fileText1;
                                 break;
                         }
                         File.Delete(outputFileName);
@@ -1190,23 +1111,28 @@ namespace Vixen_Messaging
                     }
               #endregion
                     else
+            #region Vixen Sequences
                     {
                         //For Vixen Sequences
                         Mod_Vixen_Seq(msg);
                         outputFileName = textBoxOutputSequence.Text;
                     }
-                    
+              #endregion
+
+            #region Send Play command to Vixen Web API
                     var url = textBoxVixenServer.Text + "?name=" + WebUtility.UrlEncode(outputFileName);
                     var result = new WebClient().DownloadString(url); //Used to output to Vixen WebClient
                     Cursor.Current = Cursors.Default; 
                     LogDisplay(GlobalVar.LogMsg = ("Vixen Started: + " + result));
                     Log(msg);
+            #endregion
                 }
                 else
                 {
                     blacklist = true;
                 }
             }
+            #region Main Exception
             catch (Exception ex)
             {
                 LogDisplay(GlobalVar.LogMsg = (ex.Message));
@@ -1216,8 +1142,85 @@ namespace Vixen_Messaging
                     MessageBox.Show(@"Warning - Check that Vixen Web Server is enabled and that Vixen 3 is running.", @"Warning");
                 }
             }
+            #endregion
+
             notWhitemsg = notWhite;
         }
+
+    #region Write to Sequence File Colour and Checkbox settings
+        private void FileSettingsColour(Button[] btn, CheckBox[] ckb, int i, string fileText1, out string fileText)
+        {
+            string hexValue = btn[i].BackColor.A.ToString("x2") + btn[i].BackColor.R.ToString("x2") + btn[i].BackColor.G.ToString("x2") + btn[i].BackColor.B.ToString("x2");
+            uint textColorNum = Convert.ToUInt32(hexValue, 16);
+            fileText1 = fileText1.Replace("Colour" + i + "_Change", textColorNum.ToString()); //Colour
+            fileText1 = fileText1.Replace("CheckBox" + i + "_Change", ckb[i].Checked.ToString().ToLower()); //Colour Enabled true or False
+            fileText = fileText1;
+        }
+        private void FileSettings(string fileText1, out string fileText)
+        {
+            var i = 1;
+            
+            do
+            {
+                fileText1 = fileText1.Replace("Colour" + i + "_Change", "0"); //Colour
+                fileText1 = fileText1.Replace("CheckBox" + i + "_Change", "false"); //Colour Enabled true or False
+                i++;
+            } while (i < 7);
+            fileText = fileText1;
+        }
+        #endregion
+
+    #region Write to Sequence File Text Settings
+        private void TextSettings(string fileText1, string msg, out string fileText)
+        {
+            //Text Colour Selection
+            String hexValue;
+            ColourSelect(out hexValue); //Colour Selection for Text. Random or Single
+            var textColorNum = Convert.ToUInt32(hexValue, 16);
+            
+            //Text Line Number
+            switch (TextLineNumber.Value.ToString())
+            {
+                case "1":
+                    fileText1 = fileText1.Replace("NamePlaceholder1", msg).Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", "");//replaces the text
+                    break;
+                case "2":
+                    fileText1 = fileText1.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", msg).Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", "");//replaces the text
+                    break;
+                case "3":
+                    fileText1 = fileText1.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", msg).Replace("NamePlaceholder4", "");//replaces the text
+                    break;
+                case "4":
+                    fileText1 = fileText1.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", msg);//replaces the text
+                    break;
+            }
+            //Text Direction
+            var textDirection = 0;
+            switch (comboBoxTextDirection.Text)
+            {
+                case "Left": textDirection = 0;
+                    break;
+                case "Right": textDirection = 1;
+                    break;
+                case "Up": textDirection = 2;
+                    break;
+                case "Down": textDirection = 3;
+                    break;
+                case "None": textDirection = 4;
+                    break;
+            }
+            fileText1 = fileText1.Replace("TextDirection_Change", textDirection.ToString());
+            fileText1 = fileText1.Replace("NodeId_Change", textBoxNodeId.Text);//adds NodeId
+            fileText1 = fileText1.Replace("StringOrienation_Change", comboBoxString.Text);
+            fileText1 = fileText1.Replace("Speed_Change", trackBarTextSpeed.Value.ToString());
+            fileText1 = fileText1.Replace("FontName_Change", textBoxFont.Text);
+            fileText1 = fileText1.Replace("FontSize_Change", textBoxFontSize.Text);
+            fileText1 = fileText1.Replace("TextPosition_Change", trackBarTextPosition.Value.ToString());
+            fileText1 = fileText1.Replace("Colour_Change1", textColorNum.ToString());
+            fileText = fileText1;
+        }
+#endregion
+
 #endregion
 
 #region Send Return Text
@@ -1252,8 +1255,9 @@ namespace Vixen_Messaging
         private bool HasBadWords(string msg, out bool notWhite)
         {
             string textLine;
-
             var rgx = new Regex("[^a-zA-Z0-9]");
+
+            #region Checks against Blacklist
             if (checkBoxBlacklist.Checked)
             {
                 //Check against your Blacklist
@@ -1261,7 +1265,6 @@ namespace Vixen_Messaging
                 {
                     do
                     {
-
                         textLine = file.ReadLine();
 
                         msg = rgx.Replace(msg, "");
@@ -1280,13 +1283,15 @@ namespace Vixen_Messaging
                     return false;
                 }
             }
+            #endregion
+
+            #region Checks against Whitelist
             //Checks against your Whitelist
             rgx = new Regex("[^a-zA-Z0-9 ]");
             msg = rgx.Replace(msg, ""); //creates an array of all the individual names.
             var splitmsg = msg.Split(' ');
             var i = 0;
             var splitmsgcount = splitmsg.Length; //to determine how many words are in the message.
-
             bool notWhiteCheck;
             do
             {
@@ -1316,6 +1321,8 @@ namespace Vixen_Messaging
                 notWhite = false;
                 return false;
             }
+            #endregion
+
             LogDisplay(GlobalVar.LogMsg = ("One or more Names are not in Whitelist."));
             Log((DateTime.Now.ToString("h:mm tt ")) + msg + ". One or more Names are not in Whitelist.");
             notWhite = true;
@@ -1323,7 +1330,7 @@ namespace Vixen_Messaging
         }
 #endregion
 
-#region Check List Message
+#region Check Banned List
         private bool CheckBlacklistMessage(string headerfrom, string headersms, string headerphone)
         {
             var maxaddress = 0;
@@ -1349,7 +1356,7 @@ namespace Vixen_Messaging
 
 #region Colour
 
-        #region Colour Dialog Box and colour settings
+        #region Colour Dialog Box and button colour settings
 
         private void TextColor1_Click(object sender, EventArgs e)
         {
@@ -1762,11 +1769,12 @@ namespace Vixen_Messaging
             var lineNumber = 1;
             var firstLineNumber = 0;
             var secondLineNumber = 0;
-            String hexValue;
             string selectedSeq;
-            var selectedSeqTime = "";
+            string selectedSeqTime;
             var iii = 0;
             var randomseq = new Random();
+
+            #region Gets sequence legnth and time 
             if (checkBoxRandomSeqSelection.Checked)
             {
                 do
@@ -1799,8 +1807,8 @@ namespace Vixen_Messaging
             else
             {
                 var selected = tabControlSequence.SelectedIndex;
-                var txtSeq = new TextBox[] { textBoxVixenSeq1, textBoxVixenSeq2, textBoxVixenSeq3, textBoxVixenSeq4};
-                var txtLen = new TextBox[] { textBoxSequenceLength1, textBoxSequenceLength2, textBoxSequenceLength3, textBoxSequenceLength4 };
+                var txtSeq = new TextBox[] { textBoxVixenSeq1, textBoxVixenSeq2, textBoxVixenSeq3, textBoxVixenSeq4, textBoxVixenSeq5, textBoxVixenSeq6 };
+                var txtLen = new TextBox[] { textBoxSequenceLength1, textBoxSequenceLength2, textBoxSequenceLength3, textBoxSequenceLength4, textBoxSequenceLength5, textBoxSequenceLength6 };
                 selectedSeq = txtSeq[selected].Text;
                 selectedSeqTime = txtLen[selected].Text;
             }
@@ -1835,11 +1843,12 @@ namespace Vixen_Messaging
 				seqTimeString = seqTimeString.Replace("S", "");
 				var newSeqTime = Convert.ToDecimal(seqTimeString);
 				GlobalVar.SeqIntervalTime = newSeqTime + 5; // add 5 seconds to allow for the Sequence to finish before another check for messages is performed.
-			}
+            }
+            #endregion
 
-			timerCheckMail.Enabled = false;
-			
+            timerCheckMail.Enabled = false;
 
+            #region Open Sequence templates 1 and 2 to be used to copy into Vixen Sequence
             //Open Sequence and determine Line numbers for the insert of Nutcracker files 1 and 2
             using (var file = new StreamReader(selectedSeq))
             {
@@ -1888,59 +1897,33 @@ namespace Vixen_Messaging
             } while (ii != l2.Count);
             //Save new file name as VixenOut.tim
             File.WriteAllLines(Path.Combine(textBoxOutputSequence.Text), l.ToArray());
+            #endregion
+
+            #region Modify Vixen Seqence and save new file to Vixen 3 Sequence folder. Filename called VixenOut.tim
             var fileText = File.ReadAllText(textBoxOutputSequence.Text);
-            switch (TextLineNumber.Value.ToString()) //need to check
-            {
-                case "1":
-                    fileText = fileText.Replace("NamePlaceholder1", msg).Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", "");//replaces the text
-                    break;
-                case "2":
-                    fileText = fileText.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", msg).Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", "");//replaces the text
-                    break;
-                case "3":
-                    fileText = fileText.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", msg).Replace("NamePlaceholder4", "");//replaces the text
-                    break;
-                case "4":
-                    fileText = fileText.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", msg);//replaces the text
-                    break;
-            }
-            ColourSelect(out hexValue); //Colour Selection for Text. Random or Single
-            var textColorNum = Convert.ToUInt32(hexValue, 16);
-            fileText = fileText.Replace("FontName_Change", textBoxFont.Text);
-            fileText = fileText.Replace("FontSize_Change", textBoxFontSize.Text);
-            fileText = fileText.Replace("Colour_Change1", textColorNum.ToString());
-            fileText = fileText.Replace("Speed_Change", trackBarTextSpeed.Value.ToString());
-            fileText = fileText.Replace("StringOrienation_Change", comboBoxString.Text);
-            fileText = fileText.Replace("TextPosition_Change", trackBarTextPosition.Value.ToString());
-            fileText = fileText.Replace("NodeId_Change", textBoxNodeId.Text);//adds NodeId
+            string fileText1;
+            TextSettings(fileText, msg, out fileText1);
+            fileText = fileText1;
             fileText = fileText.Replace("TimeSpan_Change", selectedSeqTime); //Adjust Text effect to match Sequence length
-            var textDirection = 0;
-            switch (comboBoxTextDirection.Text)
-            {
-                case "Left": textDirection = 0;
-                    break;
-                case "Right": textDirection = 1;
-                    break;
-                case "Up": textDirection = 2;
-                    break;
-                case "Down": textDirection = 3;
-                    break;
-                case "None": textDirection = 4;
-                    break;
-            }
-            fileText = fileText.Replace("TextDirection_Change", textDirection.ToString());
             File.Delete(textBoxOutputSequence.Text);
             File.WriteAllText(textBoxOutputSequence.Text, fileText);
             timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + numericUpDownIntervalMsgs.Value) * 1000; 
 			timerCheckMail.Enabled = true;
+            #endregion
         }
 #endregion
 
-#region Movie
+#region Movie Effect
 
         private void pictureBoxMovie_Click(object sender, EventArgs e)
         {
             AddMovie();
+        }
+
+        private void buttonMovieDelete_Click(object sender, EventArgs e)
+        {
+            DeleteExistingMovieFiles(GlobalVar.MovieFolder);
+            pictureBoxMovie.Image = Tools.ResizeImage(Resources.ClicktoOpen, 210, 200);
         }
 
         private void AddMovie()
@@ -1981,7 +1964,7 @@ namespace Vixen_Messaging
 
         private class Ffmpeg
         {
-            private string _movieFile = string.Empty;
+            private readonly string _movieFile = string.Empty;
 
             public Ffmpeg(string movieFile)
             {
@@ -1990,42 +1973,36 @@ namespace Vixen_Messaging
 
             public void MakeThumbnails(int matrixW, int matrixH, string outputPath)
             {
-                int width = matrixW;
-                int height = matrixH;
-                int framesPerSecond = 25;
+                var width = matrixW;
+                var height = matrixH;
+                var framesPerSecond = 25;
 
                 //make arguements string
-                string args;
-                args = " -i \"" + _movieFile + "\"" +
-                       " -s " + width.ToString() + "x" + height.ToString() +
-                       " -vf " +
-                       " fps=" + framesPerSecond.ToString() + " \"" + outputPath + "\\%10d.png\"";
+                var args = " -i \"" + _movieFile + "\"" +
+                              " -s " + width + "x" + height +
+                              " -vf " +
+                              " fps=" + framesPerSecond + " \"" + outputPath + "\\%10d.png\"";
                 //create a process
                 var myProcess = new Process();
                 myProcess.StartInfo.UseShellExecute = false;
                 myProcess.StartInfo.RedirectStandardOutput = true;
                 //point ffmpeg location
-                string ffmpegPath = AppDomain.CurrentDomain.BaseDirectory;
+                var ffmpegPath = AppDomain.CurrentDomain.BaseDirectory;
                 ffmpegPath += "ffmpeg.exe";
                 myProcess.StartInfo.FileName = ffmpegPath;
                 //set arguements
                 myProcess.StartInfo.Arguments = args;
                 Console.WriteLine(ffmpegPath + " => " + args);
                 myProcess.Start();
-                //while (!myProcess.HasExited)
-                //{
-                //    Thread.Yield();
-                //}
                 myProcess.WaitForExit();
             }
         }
-
         
         private void DeleteExistingMovieFiles(string folder)
         {
             var folderInfo = new DirectoryInfo(folder);
 
-            foreach (FileInfo file in folderInfo.GetFiles())
+            foreach (var file in folderInfo.GetFiles())
             {
                 file.Delete();
             }
@@ -2037,12 +2014,22 @@ namespace Vixen_Messaging
         }
         #endregion
 
+#region Glediator/Jinx
+        private void buttonGlediator_Click(object sender, EventArgs e)
+        {
+            fileDialog.Filter = @"Gled Files|*.gled";
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                textBoxGlediator.Text = fileDialog.FileName;
+            }
+        }
+        #endregion
+
 #region Get Vixen Settings
 
     #region Get Vixen Server Settings
         private void GetServerSettings()
         {
-         //   string str;
             var portResult = "";
             try
             {
@@ -2088,7 +2075,6 @@ namespace Vixen_Messaging
         {
             var retrieveVixenSettings = new RetrieveVixenSettings();
             retrieveVixenSettings.ShowDialog();
-        //    RetrieveVixenSettings.SetDesktopLocation(this.Location.X + this.Size.Width, this.Location.Y);
 
             if (retrieveVixenSettings.checkBoxVixenPath.Checked)
             {
@@ -2225,6 +2211,8 @@ namespace Vixen_Messaging
 
         private void StopSequence()
         {
+            try
+            {
             bool vixenRunning = Process.GetProcesses().Any(clsProcess => clsProcess.ProcessName.Contains("VixenApplication"));
             if (vixenRunning)
                 using (var wc = new WebClient())
@@ -2233,6 +2221,12 @@ namespace Vixen_Messaging
                     wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
                     wc.UploadString(stopSequence, "");
                 }
+            }
+            catch (Exception)
+            {
+                
+
+            }
         }
         #endregion
 
@@ -2254,6 +2248,7 @@ namespace Vixen_Messaging
             richTextBoxLog2.Text = richTextBoxLog.Text.Insert(0, (DateTime.Now.ToString("h:mm tt ")) + logMsg + "\n");
         }
         #endregion
+
 #endregion
 
 #region Help Form
@@ -2286,7 +2281,6 @@ namespace Vixen_Messaging
 #region Save Data
         private void SeqSave()
         {
-            int seqIntervalTime = decimal.ToInt16(GlobalVar.SeqIntervalTime);
             var profile = new XmlProfileSettings();
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "POP3Server", textBoxServer.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "UID", textBoxUID.Text);
@@ -2575,6 +2569,54 @@ namespace Vixen_Messaging
         }
         #endregion        
 
+        #region Trackbar Show Value on Tooltips
+        private void trackBarThumbnail_Scroll(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarThumbnail, trackBarThumbnail.Value.ToString());
+            pictureBoxMovie.ImageLocation = GlobalVar.MovieFolder + "\\" + (trackBarThumbnail.Value.ToString("D10")) + ".png";
+        }
+
+        private void trackBarThumbnail_MouseDown(object sender, MouseEventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarThumbnail, trackBarThumbnail.Value.ToString());
+        }
+
+        private void trackBarThumbnail_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarThumbnail, trackBarThumbnail.Value.ToString());
+        }
+
+        private void trackBarMovieSpeed_Scroll(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
+        }
+
+        private void trackBarMovieSpeed_MouseDown(object sender, MouseEventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
+        }
+
+        private void trackBarMovieSpeed_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
+        }
+
+        private void trackBarGlediator_Scroll(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarGlediator, trackBarGlediator.Value.ToString());
+        }
+
+        private void trackBarGlediator_MouseDown(object sender, MouseEventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarGlediator, trackBarGlediator.Value.ToString());
+        }
+
+        private void trackBarGlediator_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarGlediator, trackBarGlediator.Value.ToString());
+        }
+        #endregion
+
         #region Other
         private void checkBoxWhitelist_CheckedChanged(object sender, EventArgs e)
         {
@@ -2697,73 +2739,8 @@ namespace Vixen_Messaging
                 MessageBox.Show(@"Log is empty and will not be saved");
             }
         }
-        #endregion   
-
-        private void trackBarThumbnail_Scroll(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarThumbnail, trackBarThumbnail.Value.ToString());
-            pictureBoxMovie.ImageLocation = GlobalVar.MovieFolder + "\\" + (trackBarThumbnail.Value.ToString("D10")) + ".png";
-        }
-
-        private void trackBarThumbnail_MouseDown(object sender, MouseEventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarThumbnail, trackBarThumbnail.Value.ToString());
-        }
-
-        private void trackBarThumbnail_MouseHover(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarThumbnail, trackBarThumbnail.Value.ToString());
-        }
-
-        private void trackBarMovieSpeed_Scroll(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
-        }
-
-        private void trackBarMovieSpeed_MouseDown(object sender, MouseEventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
-        }
-
-        private void trackBarMovieSpeed_MouseHover(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
-        }
-
-        private void trackBarGlediator_Scroll(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarGlediator, trackBarGlediator.Value.ToString());
-        }
-
-        private void trackBarGlediator_MouseDown(object sender, MouseEventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarGlediator, trackBarGlediator.Value.ToString());
-        }
-
-        private void trackBarGlediator_MouseHover(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarGlediator, trackBarGlediator.Value.ToString());
-        }
-
-        private void buttonMovieDelete_Click(object sender, EventArgs e)
-        {
-            DeleteExistingMovieFiles(GlobalVar.MovieFolder);
-            pictureBoxMovie.Image = Tools.ResizeImage(Resources.ClicktoOpen, 210, 200);
-        }
-
-        private void label76_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonGlediator_Click(object sender, EventArgs e)
-        {
-            fileDialog.Filter = @"Gled Files|*.gled";
-            if (fileDialog.ShowDialog() == DialogResult.OK)
-            {
-                textBoxGlediator.Text = fileDialog.FileName;
-            }
-        }
+        #endregion
+   
     }
 }
 #endregion
