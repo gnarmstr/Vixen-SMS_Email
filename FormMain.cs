@@ -13,7 +13,8 @@ using System.Text.RegularExpressions;
 using Common.Resources;
 using Common.Resources.Properties;
 using System.Diagnostics;
-using System.Threading;
+using Twilio;
+using Application = System.Windows.Forms.Application;
 
 #endregion
 
@@ -412,6 +413,9 @@ namespace Vixen_Messaging
                 case "Play Incoming and Local Alternating":
                     PlayAlternating();
                     break;
+                case "Play Incoming from Twilio":
+                    Twilio();
+                    break;
             }
         }
 #endregion
@@ -727,7 +731,63 @@ namespace Vixen_Messaging
         }
         #endregion
 
-    #region Input message to Change Vixen Settings
+        #region Play with Twilio enabled
+        private void Twilio()
+        {
+            // Find your Account Sid and Auth Token at twilio.com/user/account 
+            string AccountSid = "AC29390b0fe3f4cb763862eefedb8afc41";
+            string AuthToken = "d68a401090af00f63bbecb4a3e502a7f";
+            var twilio = new TwilioRestClient(AccountSid, AuthToken);
+
+            bool blacklist;
+            bool notWhitemsg;
+
+            // Build the parameters 
+            var options = new MessageListRequest();
+            //options.DateSent = DateTime.Today;
+
+            LogDisplay(GlobalVar.LogMsg = ("Checking Twilio Messages")); 
+    //        listBoxLog.Items.Insert(0, "Checking Twilio Messages");
+            var messages = twilio.ListMessages(options);
+            
+                try
+                {
+                    foreach (var message in messages.Messages)
+                        if (!CheckBlacklistMessage("", message.Body, message.From))
+                    {
+                        //Console.WriteLine(message.From + " : " + message.Direction);
+                        if (message.Direction.Contains("inbound"))
+                        {
+                            LogDisplay(GlobalVar.LogMsg = ("Found " + messages.Messages.Count() + " Messages"));
+                            LogDisplay(GlobalVar.LogMsg = ("Received: " + message.From + " -> " + message.Body));
+                            //               listBoxLog.Items.Insert(0, "Found " + messages.Messages.Count() + " Messages");
+                            //               listBoxLog.Items.Insert(0, "Received: " + message.From + " -> " + message.Body);
+                            var smsMessage = message.Body;
+                            //              if (!HasBadWords(smsMessage) && !IsBanned(message.From))
+                            //              {
+                            SendMessageToVixen(smsMessage, out blacklist, out notWhitemsg);
+                //            SendReturnText("", message.From, "", 0, message.Body);
+
+                            //           twilio.DeleteMessage(message.Sid);
+                            //                  return;
+                            //              }
+                            //              else
+                            //              {
+                            //                  SendReturnText(message.From, "Please keep it clean for the kids watching.");
+                            //           twilio.DeleteMessage(message.Sid);
+                            //              }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            
+        }
+        #endregion
+
+        #region Input message to Change Vixen Settings
         private void VixenSettings(int messageNum)
         {
             #region Get Message details and Body to process
@@ -1843,7 +1903,6 @@ namespace Vixen_Messaging
 			    if (index > 0)
 			    {
 			        selectedSeqTime = selectedSeqTime.Substring(0, index);
-       //             selectedSeqTime = selectedSeqTime.TrimEnd('.');
 			    }
                 seqTimeString = selectedSeqTime.Replace("S", "");
 			    selectedSeqTime = seqTimeString;

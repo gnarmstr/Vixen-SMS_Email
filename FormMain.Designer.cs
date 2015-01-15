@@ -749,7 +749,7 @@
             this.tabPageSnowFlake.Controls.Add(this.label30);
             this.tabPageSnowFlake.Location = new System.Drawing.Point(4, 29);
             this.tabPageSnowFlake.Name = "tabPageSnowFlake";
-            this.tabPageSnowFlake.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageSnowFlake.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageSnowFlake.Size = new System.Drawing.Size(736, 225);
             this.tabPageSnowFlake.TabIndex = 0;
             this.tabPageSnowFlake.Tag = "1";
@@ -990,7 +990,7 @@
             this.tabPageFire.Controls.Add(this.label31);
             this.tabPageFire.Location = new System.Drawing.Point(4, 29);
             this.tabPageFire.Name = "tabPageFire";
-            this.tabPageFire.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageFire.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageFire.Size = new System.Drawing.Size(736, 225);
             this.tabPageFire.TabIndex = 1;
             this.tabPageFire.Text = "Fire";
@@ -1059,7 +1059,7 @@
             this.tabPageMeteors.Controls.Add(this.label33);
             this.tabPageMeteors.Location = new System.Drawing.Point(4, 29);
             this.tabPageMeteors.Name = "tabPageMeteors";
-            this.tabPageMeteors.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageMeteors.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageMeteors.Size = new System.Drawing.Size(736, 225);
             this.tabPageMeteors.TabIndex = 2;
             this.tabPageMeteors.Text = "Meteors";
@@ -1333,7 +1333,7 @@
             this.tabPageTwinkles.Controls.Add(this.trackBarTwinkleLights);
             this.tabPageTwinkles.Location = new System.Drawing.Point(4, 29);
             this.tabPageTwinkles.Name = "tabPageTwinkles";
-            this.tabPageTwinkles.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageTwinkles.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageTwinkles.Size = new System.Drawing.Size(736, 225);
             this.tabPageTwinkles.TabIndex = 3;
             this.tabPageTwinkles.Text = "Twinkles";
@@ -1570,7 +1570,7 @@
             this.tabPageMovie.Controls.Add(this.pictureBoxMovie);
             this.tabPageMovie.Location = new System.Drawing.Point(4, 29);
             this.tabPageMovie.Name = "tabPageMovie";
-            this.tabPageMovie.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageMovie.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageMovie.Size = new System.Drawing.Size(736, 225);
             this.tabPageMovie.TabIndex = 4;
             this.tabPageMovie.Text = "Movie";
@@ -1742,7 +1742,7 @@
             this.tabPageGlediator.Controls.Add(this.buttonGlediator);
             this.tabPageGlediator.Location = new System.Drawing.Point(4, 29);
             this.tabPageGlediator.Name = "tabPageGlediator";
-            this.tabPageGlediator.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageGlediator.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageGlediator.Size = new System.Drawing.Size(736, 225);
             this.tabPageGlediator.TabIndex = 5;
             this.tabPageGlediator.Text = "Glediator/Jinx";
@@ -1866,7 +1866,7 @@
             this.TabSeq1.Controls.Add(this.label19);
             this.TabSeq1.Location = new System.Drawing.Point(4, 29);
             this.TabSeq1.Name = "TabSeq1";
-            this.TabSeq1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TabSeq1.Padding = new System.Windows.Forms.Padding(3);
             this.TabSeq1.Size = new System.Drawing.Size(738, 209);
             this.TabSeq1.TabIndex = 0;
             this.TabSeq1.Text = "Seq 1";
@@ -1962,7 +1962,7 @@
             this.TabSeq2.Controls.Add(this.label20);
             this.TabSeq2.Location = new System.Drawing.Point(4, 29);
             this.TabSeq2.Name = "TabSeq2";
-            this.TabSeq2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TabSeq2.Padding = new System.Windows.Forms.Padding(3);
             this.TabSeq2.Size = new System.Drawing.Size(738, 209);
             this.TabSeq2.TabIndex = 1;
             this.TabSeq2.Text = "Seq 2";
@@ -2391,7 +2391,7 @@
             this.tabPageMain.Controls.Add(this.groupBox2);
             this.tabPageMain.Location = new System.Drawing.Point(4, 29);
             this.tabPageMain.Name = "tabPageMain";
-            this.tabPageMain.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageMain.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageMain.Size = new System.Drawing.Size(781, 887);
             this.tabPageMain.TabIndex = 0;
             this.tabPageMain.Tag = "2";
@@ -2444,7 +2444,8 @@
             "Play Only Local Msgs",
             "Play Local Msgs when NO Incoming Msgs",
             "Play Incoming and Local Randomly",
-            "Play Incoming and Local Alternating"});
+            "Play Incoming and Local Alternating",
+            "Play Incoming from Twilio"});
             this.comboBoxPlayMode.Location = new System.Drawing.Point(141, 452);
             this.comboBoxPlayMode.Name = "comboBoxPlayMode";
             this.comboBoxPlayMode.Size = new System.Drawing.Size(366, 28);
@@ -2489,7 +2490,7 @@
             this.tabPageMessagingSettings.Controls.Add(this.groupBox5);
             this.tabPageMessagingSettings.Location = new System.Drawing.Point(4, 29);
             this.tabPageMessagingSettings.Name = "tabPageMessagingSettings";
-            this.tabPageMessagingSettings.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageMessagingSettings.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageMessagingSettings.Size = new System.Drawing.Size(781, 887);
             this.tabPageMessagingSettings.TabIndex = 1;
             this.tabPageMessagingSettings.Text = "Messaging Settings";
@@ -2713,7 +2714,7 @@
             this.tabPageTextSetting.Controls.Add(this.groupBoxSeqSettings);
             this.tabPageTextSetting.Location = new System.Drawing.Point(4, 29);
             this.tabPageTextSetting.Name = "tabPageTextSetting";
-            this.tabPageTextSetting.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageTextSetting.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageTextSetting.Size = new System.Drawing.Size(781, 887);
             this.tabPageTextSetting.TabIndex = 5;
             this.tabPageTextSetting.Tag = "30";
@@ -2977,7 +2978,7 @@
             this.tabPageSeqSettings.Controls.Add(this.checkBoxEnableSqnctrl);
             this.tabPageSeqSettings.Location = new System.Drawing.Point(4, 29);
             this.tabPageSeqSettings.Name = "tabPageSeqSettings";
-            this.tabPageSeqSettings.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageSeqSettings.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageSeqSettings.Size = new System.Drawing.Size(781, 887);
             this.tabPageSeqSettings.TabIndex = 3;
             this.tabPageSeqSettings.Text = "Sequence  Settings";
@@ -3031,7 +3032,7 @@
             this.TabSeq3.Controls.Add(this.label23);
             this.TabSeq3.Location = new System.Drawing.Point(4, 29);
             this.TabSeq3.Name = "TabSeq3";
-            this.TabSeq3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TabSeq3.Padding = new System.Windows.Forms.Padding(3);
             this.TabSeq3.Size = new System.Drawing.Size(738, 209);
             this.TabSeq3.TabIndex = 2;
             this.TabSeq3.Text = "Seq 3";
@@ -3115,7 +3116,7 @@
             this.TabSeq4.Controls.Add(this.label43);
             this.TabSeq4.Location = new System.Drawing.Point(4, 29);
             this.TabSeq4.Name = "TabSeq4";
-            this.TabSeq4.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TabSeq4.Padding = new System.Windows.Forms.Padding(3);
             this.TabSeq4.Size = new System.Drawing.Size(738, 209);
             this.TabSeq4.TabIndex = 3;
             this.TabSeq4.Text = "Seq 4";
@@ -3199,7 +3200,7 @@
             this.TabSeq5.Controls.Add(this.label59);
             this.TabSeq5.Location = new System.Drawing.Point(4, 29);
             this.TabSeq5.Name = "TabSeq5";
-            this.TabSeq5.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TabSeq5.Padding = new System.Windows.Forms.Padding(3);
             this.TabSeq5.Size = new System.Drawing.Size(738, 209);
             this.TabSeq5.TabIndex = 4;
             this.TabSeq5.Text = "Seq 5";
@@ -3283,7 +3284,7 @@
             this.TabSeq6.Controls.Add(this.label63);
             this.TabSeq6.Location = new System.Drawing.Point(4, 29);
             this.TabSeq6.Name = "TabSeq6";
-            this.TabSeq6.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.TabSeq6.Padding = new System.Windows.Forms.Padding(3);
             this.TabSeq6.Size = new System.Drawing.Size(738, 209);
             this.TabSeq6.TabIndex = 5;
             this.TabSeq6.Text = "Seq 6";
@@ -3372,7 +3373,7 @@
             this.tabPageWordLists.Controls.Add(this.richTextBoxBlacklist);
             this.tabPageWordLists.Location = new System.Drawing.Point(4, 29);
             this.tabPageWordLists.Name = "tabPageWordLists";
-            this.tabPageWordLists.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageWordLists.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageWordLists.Size = new System.Drawing.Size(781, 887);
             this.tabPageWordLists.TabIndex = 4;
             this.tabPageWordLists.Text = "Word Lists";
