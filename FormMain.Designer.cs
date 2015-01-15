@@ -609,9 +609,9 @@
             // 
             // label16
             // 
-            this.label16.Location = new System.Drawing.Point(366, 61);
+            this.label16.Location = new System.Drawing.Point(366, 62);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(377, 88);
+            this.label16.Size = new System.Drawing.Size(376, 88);
             this.label16.TabIndex = 6;
             this.label16.Text = "Example: gmail will email the content of the SMS and insert \"SMS from\" in the Sub" +
     "ject line then the phone number. Check a email and insert above all text before " +
@@ -671,7 +671,7 @@
             // label70
             // 
             this.label70.AutoSize = true;
-            this.label70.Location = new System.Drawing.Point(254, 30);
+            this.label70.Location = new System.Drawing.Point(254, 29);
             this.label70.Name = "label70";
             this.label70.Size = new System.Drawing.Size(131, 20);
             this.label70.TabIndex = 41;
@@ -691,7 +691,7 @@
             // extraTime
             // 
             this.extraTime.Enabled = false;
-            this.extraTime.Location = new System.Drawing.Point(391, 28);
+            this.extraTime.Location = new System.Drawing.Point(392, 28);
             this.extraTime.Name = "extraTime";
             this.extraTime.Size = new System.Drawing.Size(68, 26);
             this.extraTime.TabIndex = 39;
@@ -718,7 +718,7 @@
             this.tabControlEffects.Controls.Add(this.tabPageTwinkles);
             this.tabControlEffects.Controls.Add(this.tabPageMovie);
             this.tabControlEffects.Controls.Add(this.tabPageGlediator);
-            this.tabControlEffects.Location = new System.Drawing.Point(6, 64);
+            this.tabControlEffects.Location = new System.Drawing.Point(6, 65);
             this.tabControlEffects.Name = "tabControlEffects";
             this.tabControlEffects.SelectedIndex = 0;
             this.tabControlEffects.Size = new System.Drawing.Size(744, 258);
@@ -749,7 +749,7 @@
             this.tabPageSnowFlake.Controls.Add(this.label30);
             this.tabPageSnowFlake.Location = new System.Drawing.Point(4, 29);
             this.tabPageSnowFlake.Name = "tabPageSnowFlake";
-            this.tabPageSnowFlake.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSnowFlake.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPageSnowFlake.Size = new System.Drawing.Size(736, 225);
             this.tabPageSnowFlake.TabIndex = 0;
             this.tabPageSnowFlake.Tag = "1";
@@ -759,7 +759,7 @@
             // 
             this.checkBoxRandom1.AutoSize = true;
             this.checkBoxRandom1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxRandom1.Location = new System.Drawing.Point(483, 4);
+            this.checkBoxRandom1.Location = new System.Drawing.Point(483, 5);
             this.checkBoxRandom1.Name = "checkBoxRandom1";
             this.checkBoxRandom1.Size = new System.Drawing.Size(242, 24);
             this.checkBoxRandom1.TabIndex = 82;
@@ -990,7 +990,7 @@
             this.tabPageFire.Controls.Add(this.label31);
             this.tabPageFire.Location = new System.Drawing.Point(4, 29);
             this.tabPageFire.Name = "tabPageFire";
-            this.tabPageFire.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageFire.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPageFire.Size = new System.Drawing.Size(736, 225);
             this.tabPageFire.TabIndex = 1;
             this.tabPageFire.Text = "Fire";
@@ -999,7 +999,7 @@
             // 
             this.checkBoxRandom2.AutoSize = true;
             this.checkBoxRandom2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxRandom2.Location = new System.Drawing.Point(483, 4);
+            this.checkBoxRandom2.Location = new System.Drawing.Point(483, 5);
             this.checkBoxRandom2.Name = "checkBoxRandom2";
             this.checkBoxRandom2.Size = new System.Drawing.Size(242, 24);
             this.checkBoxRandom2.TabIndex = 51;
@@ -1059,7 +1059,7 @@
             this.tabPageMeteors.Controls.Add(this.label33);
             this.tabPageMeteors.Location = new System.Drawing.Point(4, 29);
             this.tabPageMeteors.Name = "tabPageMeteors";
-            this.tabPageMeteors.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMeteors.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPageMeteors.Size = new System.Drawing.Size(736, 225);
             this.tabPageMeteors.TabIndex = 2;
             this.tabPageMeteors.Text = "Meteors";
@@ -1068,7 +1068,7 @@
             // 
             this.checkBoxRandom3.AutoSize = true;
             this.checkBoxRandom3.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxRandom3.Location = new System.Drawing.Point(483, 4);
+            this.checkBoxRandom3.Location = new System.Drawing.Point(483, 5);
             this.checkBoxRandom3.Name = "checkBoxRandom3";
             this.checkBoxRandom3.Size = new System.Drawing.Size(242, 24);
             this.checkBoxRandom3.TabIndex = 82;
@@ -1333,7 +1333,7 @@
             this.tabPageTwinkles.Controls.Add(this.trackBarTwinkleLights);
             this.tabPageTwinkles.Location = new System.Drawing.Point(4, 29);
             this.tabPageTwinkles.Name = "tabPageTwinkles";
-            this.tabPageTwinkles.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTwinkles.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPageTwinkles.Size = new System.Drawing.Size(736, 225);
             this.tabPageTwinkles.TabIndex = 3;
             this.tabPageTwinkles.Text = "Twinkles";
@@ -1342,7 +1342,7 @@
             // 
             this.checkBoxRandom4.AutoSize = true;
             this.checkBoxRandom4.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxRandom4.Location = new System.Drawing.Point(483, 4);
+            this.checkBoxRandom4.Location = new System.Drawing.Point(483, 5);
             this.checkBoxRandom4.Name = "checkBoxRandom4";
             this.checkBoxRandom4.Size = new System.Drawing.Size(242, 24);
             this.checkBoxRandom4.TabIndex = 69;
@@ -1570,7 +1570,7 @@
             this.tabPageMovie.Controls.Add(this.pictureBoxMovie);
             this.tabPageMovie.Location = new System.Drawing.Point(4, 29);
             this.tabPageMovie.Name = "tabPageMovie";
-            this.tabPageMovie.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMovie.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPageMovie.Size = new System.Drawing.Size(736, 225);
             this.tabPageMovie.TabIndex = 4;
             this.tabPageMovie.Text = "Movie";
@@ -1578,7 +1578,7 @@
             // label77
             // 
             this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(322, 39);
+            this.label77.Location = new System.Drawing.Point(322, 38);
             this.label77.Name = "label77";
             this.label77.Size = new System.Drawing.Size(86, 20);
             this.label77.TabIndex = 55;
@@ -1588,7 +1588,7 @@
             // label76
             // 
             this.label76.AutoSize = true;
-            this.label76.Location = new System.Drawing.Point(238, 64);
+            this.label76.Location = new System.Drawing.Point(238, 65);
             this.label76.Name = "label76";
             this.label76.Size = new System.Drawing.Size(28, 20);
             this.label76.TabIndex = 54;
@@ -1598,7 +1598,7 @@
             // label75
             // 
             this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(357, 64);
+            this.label75.Location = new System.Drawing.Point(357, 65);
             this.label75.Name = "label75";
             this.label75.Size = new System.Drawing.Size(25, 20);
             this.label75.TabIndex = 53;
@@ -1664,7 +1664,7 @@
             // 
             // buttonMovieDelete
             // 
-            this.buttonMovieDelete.Location = new System.Drawing.Point(473, 6);
+            this.buttonMovieDelete.Location = new System.Drawing.Point(472, 6);
             this.buttonMovieDelete.Name = "buttonMovieDelete";
             this.buttonMovieDelete.Size = new System.Drawing.Size(38, 38);
             this.buttonMovieDelete.TabIndex = 49;
@@ -1700,7 +1700,7 @@
             this.trackBarMovieSpeed.Maximum = 100;
             this.trackBarMovieSpeed.Minimum = -100;
             this.trackBarMovieSpeed.Name = "trackBarMovieSpeed";
-            this.trackBarMovieSpeed.Size = new System.Drawing.Size(497, 40);
+            this.trackBarMovieSpeed.Size = new System.Drawing.Size(496, 40);
             this.trackBarMovieSpeed.TabIndex = 45;
             this.trackBarMovieSpeed.Scroll += new System.EventHandler(this.trackBarMovieSpeed_Scroll);
             this.trackBarMovieSpeed.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarMovieSpeed_MouseDown);
@@ -1723,7 +1723,7 @@
             // pictureBoxMovie
             // 
             this.pictureBoxMovie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxMovie.Location = new System.Drawing.Point(517, 6);
+            this.pictureBoxMovie.Location = new System.Drawing.Point(518, 6);
             this.pictureBoxMovie.Name = "pictureBoxMovie";
             this.pictureBoxMovie.Size = new System.Drawing.Size(210, 200);
             this.pictureBoxMovie.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1742,14 +1742,14 @@
             this.tabPageGlediator.Controls.Add(this.buttonGlediator);
             this.tabPageGlediator.Location = new System.Drawing.Point(4, 29);
             this.tabPageGlediator.Name = "tabPageGlediator";
-            this.tabPageGlediator.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageGlediator.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPageGlediator.Size = new System.Drawing.Size(736, 225);
             this.tabPageGlediator.TabIndex = 5;
             this.tabPageGlediator.Text = "Glediator/Jinx";
             // 
             // label80
             // 
-            this.label80.Location = new System.Drawing.Point(23, 19);
+            this.label80.Location = new System.Drawing.Point(22, 18);
             this.label80.Name = "label80";
             this.label80.Size = new System.Drawing.Size(411, 51);
             this.label80.TabIndex = 73;
@@ -1760,7 +1760,7 @@
             // label79
             // 
             this.label79.AutoSize = true;
-            this.label79.Location = new System.Drawing.Point(23, 88);
+            this.label79.Location = new System.Drawing.Point(22, 88);
             this.label79.Name = "label79";
             this.label79.Size = new System.Drawing.Size(160, 20);
             this.label79.TabIndex = 72;
@@ -1785,7 +1785,7 @@
             // 
             this.checkBoxRandom6.AutoSize = true;
             this.checkBoxRandom6.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxRandom6.Location = new System.Drawing.Point(483, 4);
+            this.checkBoxRandom6.Location = new System.Drawing.Point(483, 5);
             this.checkBoxRandom6.Name = "checkBoxRandom6";
             this.checkBoxRandom6.Size = new System.Drawing.Size(242, 24);
             this.checkBoxRandom6.TabIndex = 70;
@@ -1797,14 +1797,14 @@
             this.textBoxGlediator.Enabled = false;
             this.textBoxGlediator.Location = new System.Drawing.Point(14, 182);
             this.textBoxGlediator.Name = "textBoxGlediator";
-            this.textBoxGlediator.Size = new System.Drawing.Size(705, 26);
+            this.textBoxGlediator.Size = new System.Drawing.Size(704, 26);
             this.textBoxGlediator.TabIndex = 1;
             // 
             // buttonGlediator
             // 
             this.buttonGlediator.Location = new System.Drawing.Point(604, 120);
             this.buttonGlediator.Name = "buttonGlediator";
-            this.buttonGlediator.Size = new System.Drawing.Size(115, 41);
+            this.buttonGlediator.Size = new System.Drawing.Size(116, 42);
             this.buttonGlediator.TabIndex = 0;
             this.buttonGlediator.Text = "Load Effect";
             this.buttonGlediator.UseVisualStyleBackColor = true;
@@ -1866,7 +1866,7 @@
             this.TabSeq1.Controls.Add(this.label19);
             this.TabSeq1.Location = new System.Drawing.Point(4, 29);
             this.TabSeq1.Name = "TabSeq1";
-            this.TabSeq1.Padding = new System.Windows.Forms.Padding(3);
+            this.TabSeq1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.TabSeq1.Size = new System.Drawing.Size(738, 209);
             this.TabSeq1.TabIndex = 0;
             this.TabSeq1.Text = "Seq 1";
@@ -1962,7 +1962,7 @@
             this.TabSeq2.Controls.Add(this.label20);
             this.TabSeq2.Location = new System.Drawing.Point(4, 29);
             this.TabSeq2.Name = "TabSeq2";
-            this.TabSeq2.Padding = new System.Windows.Forms.Padding(3);
+            this.TabSeq2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.TabSeq2.Size = new System.Drawing.Size(738, 209);
             this.TabSeq2.TabIndex = 1;
             this.TabSeq2.Text = "Seq 2";
@@ -2097,7 +2097,7 @@
             // SingleColourSelection
             // 
             this.SingleColourSelection.Controls.Add(this.SingleCol1);
-            this.SingleColourSelection.Location = new System.Drawing.Point(14, 261);
+            this.SingleColourSelection.Location = new System.Drawing.Point(14, 262);
             this.SingleColourSelection.Name = "SingleColourSelection";
             this.SingleColourSelection.Size = new System.Drawing.Size(144, 80);
             this.SingleColourSelection.TabIndex = 8;
@@ -2130,7 +2130,7 @@
             this.RandomColourSelection.Controls.Add(this.TextColor6);
             this.RandomColourSelection.Controls.Add(this.TextColor5);
             this.RandomColourSelection.Enabled = false;
-            this.RandomColourSelection.Location = new System.Drawing.Point(207, 261);
+            this.RandomColourSelection.Location = new System.Drawing.Point(207, 262);
             this.RandomColourSelection.Name = "RandomColourSelection";
             this.RandomColourSelection.Size = new System.Drawing.Size(534, 80);
             this.RandomColourSelection.TabIndex = 9;
@@ -2290,7 +2290,7 @@
             this.WebServerStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WebServerStatus.Location = new System.Drawing.Point(45, 938);
             this.WebServerStatus.Name = "WebServerStatus";
-            this.WebServerStatus.Size = new System.Drawing.Size(369, 47);
+            this.WebServerStatus.Size = new System.Drawing.Size(369, 48);
             this.WebServerStatus.TabIndex = 31;
             this.WebServerStatus.Text = "Vixen 3 Web Server is ENABLED";
             this.toolTip1.SetToolTip(this.WebServerStatus, "Click to Enable Vixen Web Server");
@@ -2391,7 +2391,7 @@
             this.tabPageMain.Controls.Add(this.groupBox2);
             this.tabPageMain.Location = new System.Drawing.Point(4, 29);
             this.tabPageMain.Name = "tabPageMain";
-            this.tabPageMain.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMain.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPageMain.Size = new System.Drawing.Size(781, 887);
             this.tabPageMain.TabIndex = 0;
             this.tabPageMain.Tag = "2";
@@ -2400,7 +2400,7 @@
             // label74
             // 
             this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(662, 504);
+            this.label74.Location = new System.Drawing.Point(662, 505);
             this.label74.Name = "label74";
             this.label74.Size = new System.Drawing.Size(37, 20);
             this.label74.TabIndex = 63;
@@ -2408,7 +2408,7 @@
             // 
             // numericUpDownIntervalMsgs
             // 
-            this.numericUpDownIntervalMsgs.Location = new System.Drawing.Point(579, 501);
+            this.numericUpDownIntervalMsgs.Location = new System.Drawing.Point(579, 502);
             this.numericUpDownIntervalMsgs.Maximum = new decimal(new int[] {
             300,
             0,
@@ -2447,7 +2447,7 @@
             "Play Incoming and Local Alternating"});
             this.comboBoxPlayMode.Location = new System.Drawing.Point(141, 452);
             this.comboBoxPlayMode.Name = "comboBoxPlayMode";
-            this.comboBoxPlayMode.Size = new System.Drawing.Size(365, 28);
+            this.comboBoxPlayMode.Size = new System.Drawing.Size(366, 28);
             this.comboBoxPlayMode.TabIndex = 58;
             // 
             // checkBoxBlacklist
@@ -2489,7 +2489,7 @@
             this.tabPageMessagingSettings.Controls.Add(this.groupBox5);
             this.tabPageMessagingSettings.Location = new System.Drawing.Point(4, 29);
             this.tabPageMessagingSettings.Name = "tabPageMessagingSettings";
-            this.tabPageMessagingSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMessagingSettings.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPageMessagingSettings.Size = new System.Drawing.Size(781, 887);
             this.tabPageMessagingSettings.TabIndex = 1;
             this.tabPageMessagingSettings.Text = "Messaging Settings";
@@ -2520,7 +2520,7 @@
             this.groupBox3.Controls.Add(this.textBoxSequenceTemplate);
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.textBoxVixenServer);
-            this.groupBox3.Location = new System.Drawing.Point(14, 247);
+            this.groupBox3.Location = new System.Drawing.Point(14, 248);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(753, 405);
             this.groupBox3.TabIndex = 2;
@@ -2630,7 +2630,7 @@
             this.groupBox6.Controls.Add(this.textBoxBlacklistEmailLog);
             this.groupBox6.Controls.Add(this.label8);
             this.groupBox6.Controls.Add(this.textBoxLogFileName);
-            this.groupBox6.Location = new System.Drawing.Point(12, 676);
+            this.groupBox6.Location = new System.Drawing.Point(12, 675);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(753, 112);
             this.groupBox6.TabIndex = 3;
@@ -2683,7 +2683,7 @@
             this.textBoxReturnBannedMSG.Location = new System.Drawing.Point(198, 158);
             this.textBoxReturnBannedMSG.Multiline = true;
             this.textBoxReturnBannedMSG.Name = "textBoxReturnBannedMSG";
-            this.textBoxReturnBannedMSG.Size = new System.Drawing.Size(545, 55);
+            this.textBoxReturnBannedMSG.Size = new System.Drawing.Size(546, 55);
             this.textBoxReturnBannedMSG.TabIndex = 8;
             // 
             // checkBoxAutoStart
@@ -2713,7 +2713,7 @@
             this.tabPageTextSetting.Controls.Add(this.groupBoxSeqSettings);
             this.tabPageTextSetting.Location = new System.Drawing.Point(4, 29);
             this.tabPageTextSetting.Name = "tabPageTextSetting";
-            this.tabPageTextSetting.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTextSetting.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPageTextSetting.Size = new System.Drawing.Size(781, 887);
             this.tabPageTextSetting.TabIndex = 5;
             this.tabPageTextSetting.Tag = "30";
@@ -2722,9 +2722,9 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.richTextBoxLog1);
-            this.groupBox4.Location = new System.Drawing.Point(3, 684);
+            this.groupBox4.Location = new System.Drawing.Point(3, 685);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(759, 207);
+            this.groupBox4.Size = new System.Drawing.Size(759, 208);
             this.groupBox4.TabIndex = 58;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Log";
@@ -2816,7 +2816,7 @@
             // 
             this.textBoxFontSize.BackColor = System.Drawing.Color.White;
             this.textBoxFontSize.Enabled = false;
-            this.textBoxFontSize.Location = new System.Drawing.Point(609, 113);
+            this.textBoxFontSize.Location = new System.Drawing.Point(609, 112);
             this.textBoxFontSize.Name = "textBoxFontSize";
             this.textBoxFontSize.Size = new System.Drawing.Size(86, 26);
             this.textBoxFontSize.TabIndex = 59;
@@ -2824,7 +2824,7 @@
             // 
             // buttonFont
             // 
-            this.buttonFont.Location = new System.Drawing.Point(575, 30);
+            this.buttonFont.Location = new System.Drawing.Point(574, 29);
             this.buttonFont.Name = "buttonFont";
             this.buttonFont.Size = new System.Drawing.Size(148, 32);
             this.buttonFont.TabIndex = 5;
@@ -2922,7 +2922,7 @@
             // trackBarTextPosition
             // 
             this.trackBarTextPosition.AutoSize = false;
-            this.trackBarTextPosition.Location = new System.Drawing.Point(116, 150);
+            this.trackBarTextPosition.Location = new System.Drawing.Point(116, 149);
             this.trackBarTextPosition.Maximum = 100;
             this.trackBarTextPosition.Minimum = 1;
             this.trackBarTextPosition.Name = "trackBarTextPosition";
@@ -2936,7 +2936,7 @@
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(15, 159);
+            this.label44.Location = new System.Drawing.Point(15, 158);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(103, 20);
             this.label44.TabIndex = 50;
@@ -2977,16 +2977,16 @@
             this.tabPageSeqSettings.Controls.Add(this.checkBoxEnableSqnctrl);
             this.tabPageSeqSettings.Location = new System.Drawing.Point(4, 29);
             this.tabPageSeqSettings.Name = "tabPageSeqSettings";
-            this.tabPageSeqSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSeqSettings.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPageSeqSettings.Size = new System.Drawing.Size(781, 887);
             this.tabPageSeqSettings.TabIndex = 3;
             this.tabPageSeqSettings.Text = "Sequence  Settings";
             // 
             // richTextBoxLog2
             // 
-            this.richTextBoxLog2.Location = new System.Drawing.Point(7, 718);
+            this.richTextBoxLog2.Location = new System.Drawing.Point(8, 718);
             this.richTextBoxLog2.Name = "richTextBoxLog2";
-            this.richTextBoxLog2.Size = new System.Drawing.Size(764, 163);
+            this.richTextBoxLog2.Size = new System.Drawing.Size(764, 162);
             this.richTextBoxLog2.TabIndex = 41;
             this.richTextBoxLog2.Text = "";
             // 
@@ -2998,7 +2998,7 @@
             this.groupBoxSeqControl.Controls.Add(this.tabControlSequence);
             this.groupBoxSeqControl.Location = new System.Drawing.Point(6, 377);
             this.groupBoxSeqControl.Name = "groupBoxSeqControl";
-            this.groupBoxSeqControl.Size = new System.Drawing.Size(765, 281);
+            this.groupBoxSeqControl.Size = new System.Drawing.Size(765, 282);
             this.groupBoxSeqControl.TabIndex = 39;
             this.groupBoxSeqControl.TabStop = false;
             this.groupBoxSeqControl.Text = "Vixen Sequences";
@@ -3031,7 +3031,7 @@
             this.TabSeq3.Controls.Add(this.label23);
             this.TabSeq3.Location = new System.Drawing.Point(4, 29);
             this.TabSeq3.Name = "TabSeq3";
-            this.TabSeq3.Padding = new System.Windows.Forms.Padding(3);
+            this.TabSeq3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.TabSeq3.Size = new System.Drawing.Size(738, 209);
             this.TabSeq3.TabIndex = 2;
             this.TabSeq3.Text = "Seq 3";
@@ -3115,7 +3115,7 @@
             this.TabSeq4.Controls.Add(this.label43);
             this.TabSeq4.Location = new System.Drawing.Point(4, 29);
             this.TabSeq4.Name = "TabSeq4";
-            this.TabSeq4.Padding = new System.Windows.Forms.Padding(3);
+            this.TabSeq4.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.TabSeq4.Size = new System.Drawing.Size(738, 209);
             this.TabSeq4.TabIndex = 3;
             this.TabSeq4.Text = "Seq 4";
@@ -3199,7 +3199,7 @@
             this.TabSeq5.Controls.Add(this.label59);
             this.TabSeq5.Location = new System.Drawing.Point(4, 29);
             this.TabSeq5.Name = "TabSeq5";
-            this.TabSeq5.Padding = new System.Windows.Forms.Padding(3);
+            this.TabSeq5.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.TabSeq5.Size = new System.Drawing.Size(738, 209);
             this.TabSeq5.TabIndex = 4;
             this.TabSeq5.Text = "Seq 5";
@@ -3283,7 +3283,7 @@
             this.TabSeq6.Controls.Add(this.label63);
             this.TabSeq6.Location = new System.Drawing.Point(4, 29);
             this.TabSeq6.Name = "TabSeq6";
-            this.TabSeq6.Padding = new System.Windows.Forms.Padding(3);
+            this.TabSeq6.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.TabSeq6.Size = new System.Drawing.Size(738, 209);
             this.TabSeq6.TabIndex = 5;
             this.TabSeq6.Text = "Seq 6";
@@ -3372,7 +3372,7 @@
             this.tabPageWordLists.Controls.Add(this.richTextBoxBlacklist);
             this.tabPageWordLists.Location = new System.Drawing.Point(4, 29);
             this.tabPageWordLists.Name = "tabPageWordLists";
-            this.tabPageWordLists.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageWordLists.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.tabPageWordLists.Size = new System.Drawing.Size(781, 887);
             this.tabPageWordLists.TabIndex = 4;
             this.tabPageWordLists.Text = "Word Lists";
@@ -3402,7 +3402,7 @@
             this.buttonSaveLog.BackColor = System.Drawing.Color.Honeydew;
             this.buttonSaveLog.Location = new System.Drawing.Point(6, 991);
             this.buttonSaveLog.Name = "buttonSaveLog";
-            this.buttonSaveLog.Size = new System.Drawing.Size(122, 41);
+            this.buttonSaveLog.Size = new System.Drawing.Size(122, 42);
             this.buttonSaveLog.TabIndex = 60;
             this.buttonSaveLog.Text = "Export Log";
             this.buttonSaveLog.UseVisualStyleBackColor = false;
@@ -3456,7 +3456,7 @@
             this.buttonStopSequence.BackColor = System.Drawing.Color.Honeydew;
             this.buttonStopSequence.Location = new System.Drawing.Point(159, 992);
             this.buttonStopSequence.Name = "buttonStopSequence";
-            this.buttonStopSequence.Size = new System.Drawing.Size(293, 40);
+            this.buttonStopSequence.Size = new System.Drawing.Size(292, 40);
             this.buttonStopSequence.TabIndex = 61;
             this.buttonStopSequence.Text = "Stop Currently Running Sequence";
             this.buttonStopSequence.UseVisualStyleBackColor = false;
@@ -3473,7 +3473,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Azure;
-            this.ClientSize = new System.Drawing.Size(784, 1044);
+            this.ClientSize = new System.Drawing.Size(782, 1035);
             this.Controls.Add(this.buttonStopSequence);
             this.Controls.Add(this.WebServerStatus);
             this.Controls.Add(this.buttonSaveLog);
@@ -3484,8 +3484,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(100, 100);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(806, 1100);
-            this.MinimumSize = new System.Drawing.Size(806, 1100);
+            this.MaximumSize = new System.Drawing.Size(804, 1091);
+            this.MinimumSize = new System.Drawing.Size(804, 1028);
             this.Name = "FormMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;

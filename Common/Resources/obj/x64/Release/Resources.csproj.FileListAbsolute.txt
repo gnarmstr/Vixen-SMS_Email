@@ -1,6 +1,5 @@
 C:\Users\Study\Documents\Visual Studio 2013\Projects\Vixen Messaging\Release64\Common\Resources.dll
 C:\Users\Study\Documents\Visual Studio 2013\Projects\Vixen Messaging\Release64\Common\Resources.pdb
-C:\Users\Study\Documents\Visual Studio 2013\Projects\Vixen Messaging\Common\Resources\obj\x64\Release\Resources.csprojResolveAssemblyReference.cache
 C:\Users\Study\Documents\Visual Studio 2013\Projects\Vixen Messaging\Common\Resources\obj\x64\Release\Common.Resources.Properties.Resources.resources
 C:\Users\Study\Documents\Visual Studio 2013\Projects\Vixen Messaging\Common\Resources\obj\x64\Release\Resources.csproj.GenerateResource.Cache
 C:\Users\Study\Documents\Visual Studio 2013\Projects\Vixen Messaging\Common\Resources\obj\x64\Release\Resources.dll

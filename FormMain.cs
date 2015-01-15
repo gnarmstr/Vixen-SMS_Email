@@ -962,7 +962,6 @@ namespace Vixen_Messaging
                         fileText = fileText.Replace("MeteorColour_Change", meteorColourType.ToString()); //Range or Rainbow
                         fileText = fileText.Replace("PT20S", "PT" + GlobalVar.SeqIntervalTime.ToString() + "S"); //Sequence time
                         fileText = fileText.Replace("TextTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Text Sequence time
-                        fileText = fileText.Replace("EffectTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                         fileText = fileText.Replace("SnowFlake_Change", EffectType.Value.ToString()); //Type
                         fileText = fileText.Replace("SnowFlakeMax_Change", MaxSnowFlake.Value.ToString()); //Max number
                         fileText = fileText.Replace("FireHeight_Change", FireHeight.Value.ToString()); //Fire height
@@ -979,9 +978,11 @@ namespace Vixen_Messaging
                         if (checkBoxDisableSeq.Checked)
                         {
                             selectedSeq = "None";
+                            fileText = fileText.Replace("EffectTime_Change", "0"); //Sequence time
                         }
                         else
                         {
+                            fileText = fileText.Replace("EffectTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
                             if (checkBoxRandomSeqSelection.Checked)
                             {
                                 var index = 0;
@@ -1094,7 +1095,7 @@ namespace Vixen_Messaging
                                 break;
 
                             case "None":
-                                fileText = fileText.Replace("Selected_Effect", "None");
+                                fileText = fileText.Replace("Selected_Effect", "Fire");
                                 fileText = fileText.Replace("Speed_1Change", "0");
                                 //Colour selection
                                 FileSettings(fileText, out fileText1);
@@ -1819,17 +1820,19 @@ namespace Vixen_Messaging
 			{
 				//get time string of 1M23.345S for example and convert to seconds then add to Time Interval box.
 				var index = selectedSeqTime.IndexOf(".");
-				
-				if (index > 0)
-					selectedSeqTime1 = selectedSeqTime.Substring(0, index);
-				seqTimeString = selectedSeqTime1.TrimEnd('.');
-				seqTimeString = selectedSeqTime1.Replace("M", "");
+
+			    if (index > 0)
+			    {
+			        selectedSeqTime = selectedSeqTime.Substring(0, index);
+			    }
+				seqTimeString = selectedSeqTime.Replace("M", "");
 				var length = seqTimeString.Length;
 				var seqTimeString1 = seqTimeString.Remove(1, length - 1);
 				int seqTimeString2 = Convert.ToInt16(seqTimeString1);
 				seqTimeString2 = seqTimeString2 * 60;
 				seqTimeString = seqTimeString.Remove(0, 1);
 				seqTimeString = seqTimeString.Replace("S", "");
+			    selectedSeqTime = seqTimeString;
 				int seqTimeString3 = Convert.ToInt16(seqTimeString);
 				var newSeqTime = Convert.ToDecimal(seqTimeString2 + seqTimeString3);
 				GlobalVar.SeqIntervalTime = newSeqTime + 15; // add 15 seconds to allow for the Sequence to finish before another check for messages is performed.
@@ -1837,10 +1840,13 @@ namespace Vixen_Messaging
 			else
 			{
 				var index = selectedSeqTime.IndexOf(".");
-				if (index > 0)
-					selectedSeqTime1 = selectedSeqTime.Substring(0, index);
-				seqTimeString = selectedSeqTime1.TrimEnd('.');
-				seqTimeString = seqTimeString.Replace("S", "");
+			    if (index > 0)
+			    {
+			        selectedSeqTime = selectedSeqTime.Substring(0, index);
+       //             selectedSeqTime = selectedSeqTime.TrimEnd('.');
+			    }
+                seqTimeString = selectedSeqTime.Replace("S", "");
+			    selectedSeqTime = seqTimeString;
 				var newSeqTime = Convert.ToDecimal(seqTimeString);
 				GlobalVar.SeqIntervalTime = newSeqTime + 5; // add 5 seconds to allow for the Sequence to finish before another check for messages is performed.
             }
@@ -1904,7 +1910,7 @@ namespace Vixen_Messaging
             string fileText1;
             TextSettings(fileText, msg, out fileText1);
             fileText = fileText1;
-            fileText = fileText.Replace("TimeSpan_Change", selectedSeqTime); //Adjust Text effect to match Sequence length
+            fileText = fileText.Replace("TimeSpan_Change", selectedSeqTime + "S"); //Adjust Text effect to match Sequence length
             File.Delete(textBoxOutputSequence.Text);
             File.WriteAllText(textBoxOutputSequence.Text, fileText);
             timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + numericUpDownIntervalMsgs.Value) * 1000; 
@@ -1952,8 +1958,17 @@ namespace Vixen_Messaging
                 var converter = new Ffmpeg(movieFileName);
                 converter.MakeThumbnails(matrixW, matrixH, GlobalVar.MovieFolder);
                 f.Close();
-                pictureBoxMovie.ImageLocation = GlobalVar.MovieFolder + @"\0000000001.png";
                 trackBarThumbnail.Maximum = Directory.GetFiles(GlobalVar.MovieFolder, "*.*", SearchOption.TopDirectoryOnly).Length;
+				if (trackBarThumbnail.Maximum == 0)
+				{
+					MessageBox.Show(@"There was a problem converting " + movieFileName + ".\nEnsure you have selected a movie format.");
+				    trackBarThumbnail.Maximum = 2000;
+				    trackBarThumbnail.Minimum = 1;
+				}
+				else
+				{
+                    pictureBoxMovie.ImageLocation = GlobalVar.MovieFolder + @"\0000000001.png";
+				}
             }
             catch (Exception ex)
             {
@@ -1973,28 +1988,28 @@ namespace Vixen_Messaging
 
             public void MakeThumbnails(int matrixW, int matrixH, string outputPath)
             {
-                var width = matrixW;
-                var height = matrixH;
-                var framesPerSecond = 25;
+					var width = matrixW;
+					var height = matrixH;
+					var framesPerSecond = 25;
 
-                //make arguements string
-                var args = " -i \"" + _movieFile + "\"" +
-                              " -s " + width + "x" + height +
-                              " -vf " +
-                              " fps=" + framesPerSecond + " \"" + outputPath + "\\%10d.png\"";
-                //create a process
-                var myProcess = new Process();
-                myProcess.StartInfo.UseShellExecute = false;
-                myProcess.StartInfo.RedirectStandardOutput = true;
-                //point ffmpeg location
-                var ffmpegPath = AppDomain.CurrentDomain.BaseDirectory;
-                ffmpegPath += "ffmpeg.exe";
-                myProcess.StartInfo.FileName = ffmpegPath;
-                //set arguements
-                myProcess.StartInfo.Arguments = args;
-                Console.WriteLine(ffmpegPath + " => " + args);
-                myProcess.Start();
-                myProcess.WaitForExit();
+					//make arguements string
+					var args = " -i \"" + _movieFile + "\"" +
+								  " -s " + width + "x" + height +
+								  " -vf " +
+								  " fps=" + framesPerSecond + " \"" + outputPath + "\\%10d.png\"";
+					//create a process
+					var myProcess = new Process();
+					myProcess.StartInfo.UseShellExecute = false;
+					myProcess.StartInfo.RedirectStandardOutput = true;
+					//point ffmpeg location
+					var ffmpegPath = AppDomain.CurrentDomain.BaseDirectory;
+					ffmpegPath += "ffmpeg.exe";
+					myProcess.StartInfo.FileName = ffmpegPath;
+					//set arguements
+					myProcess.StartInfo.Arguments = args;
+					Console.WriteLine(ffmpegPath + " => " + args);
+					myProcess.Start();
+					myProcess.WaitForExit();
             }
         }
         
