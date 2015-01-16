@@ -30,14 +30,14 @@ namespace Vixen_Messaging
         public FormMain()
         {
             InitializeComponent();
+            ClientSize = new Size(784, 1091);
         }
 
         void StartChecking()
         { 
             buttonStart.Enabled = false;
             buttonStop.Enabled = true;
-            timerCheckMail.Interval = 200;
-            timerCheckMail.Enabled = true;
+            ShortTimer();
         }
 
         private bool Pop3Login()
@@ -68,6 +68,7 @@ namespace Vixen_Messaging
 #region Load Form
         private void FormMain_Load(object sender, EventArgs e)
         {
+            GlobalVar.Sequential = 1; 
             GlobalVar.SettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Vixen Messaging");
             LoadData();
             EmailSettings();
@@ -104,6 +105,11 @@ namespace Vixen_Messaging
             {
                 trackBarThumbnail.Maximum = Directory.GetFiles(GlobalVar.MovieFolder, "*.*", SearchOption.TopDirectoryOnly).Length;
                 pictureBoxMovie.ImageLocation = GlobalVar.MovieFolder + "\\" + (trackBarThumbnail.Value.ToString("D10")) + ".png";
+            }
+
+            if (comboBoxPlayMode.Text != "Random" && comboBoxPlayMode.Text != "Sequential")
+            {
+                comboBoxPlayMode.Text = "Sequential";
             }
  
             var content = File.ReadAllText(GlobalVar.Blacklistlocation);
@@ -344,6 +350,10 @@ namespace Vixen_Messaging
             trackBarGlediator.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarGlediator", 5);
             GlobalVar.TwilioSID = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwilioSID", "");
             GlobalVar.TwilioToken = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwilioToken", "");
+            checkBoxEmail.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxEmail", true);
+            checkBoxLocal.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocal", true);
+            checkBoxTwilio.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwilio", false);
+            GlobalVar.TwilioPhoneNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwilioPhoneNumber", "");
         }
         #endregion
 
@@ -382,7 +392,6 @@ namespace Vixen_Messaging
             }
 
             timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + 5 + numericUpDownIntervalMsgs.Value) * 1000;
-            
 
             //Will only display after first run from install.
             var profile = new XmlProfileSettings();
@@ -397,33 +406,70 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "False");
             Cursor.Current = Cursors.WaitCursor;
 
-            switch (comboBoxPlayMode.Text)
-            {
-                case "Play Only Incoming Msgs":
-                    PlayIncomingMsgs();
-                    break;
-                case "Play Only Local Msgs":
-                    PlayLocalMsgs();
-                    break;
-                case "Play Local Msgs when NO Incoming Msgs":
-                    GlobalVar.PlayMessage = true;
-                    PlayIncomingMsgs();
-                    break;
-                case "Play Incoming and Local Randomly":
-                    PlayRandom();
-                    break;
-                case "Play Incoming and Local Alternating":
-                    PlayAlternating();
-                    break;
-                case "Play Only Incoming from Twilio account (SMS's)":
-                    Twilio();
-                    break;
-            }
+            PlayModes();
         }
 #endregion
 
 #region Play Mode
-    
+
+    #region Play Modes
+        private void PlayModes()
+        {
+            if (comboBoxPlayMode.Text == "Random")
+            {
+                var rnd = new Random();
+                GlobalVar.Sequential = rnd.Next(1, 4);
+            }
+            switch (GlobalVar.Sequential)
+            {
+                case 1:
+                    if (checkBoxEmail.Checked)
+                    {
+                        PlayIncomingMsgs(); 
+                    }
+                    else
+                    {
+                        timerCheckMail.Enabled = false;
+                        timerCheckMail.Interval = 1000;
+                        timerCheckMail.Enabled = true;
+                    }
+                    GlobalVar.Sequential++;
+                    break;
+                case 2:
+                    if (checkBoxLocal.Checked)
+                    {
+                        PlayLocalMsgs();
+                    }
+                    else
+                    {
+                        timerCheckMail.Enabled = false;
+                        timerCheckMail.Interval = 1000;
+                        timerCheckMail.Enabled = true;
+                    }
+                    GlobalVar.Sequential++;
+                    break;
+                case 3:
+                    if (checkBoxTwilio.Checked)
+                    {
+                        PlayTwilio();
+                    }
+                    else
+                    {
+                        timerCheckMail.Enabled = false;
+                        timerCheckMail.Interval = 1000;
+                        timerCheckMail.Enabled = true;
+                    }
+                    GlobalVar.Sequential++;
+                    break;
+
+            }
+            if (GlobalVar.Sequential == 4)
+            {
+                GlobalVar.Sequential = 1;                
+            }
+        }
+        #endregion
+
     #region Play Incoming Messages
         private void PlayIncomingMsgs()
         {
@@ -434,13 +480,13 @@ namespace Vixen_Messaging
                 {
                     int messageCount = _pop.GetMessageCount();
                     LogDisplay(GlobalVar.LogMsg = ("Message Count: " + messageCount));
-                    if (messageCount == 0 & GlobalVar.PlayMessage)
+                    if (messageCount == 0)
                     {
-                        PlayLocalMsgs();
+                        ShortTimer();
                         return;
                     }
                     
-                    GlobalVar.PlayMessage = false;
+                    //GlobalVar.PlayMessage = false;
                     
                     for (int messageNum = 1; messageNum <= messageCount; messageNum++)
                     {
@@ -463,6 +509,9 @@ namespace Vixen_Messaging
                         {
                             if (header.Subject.ToLower().Contains("messaging " + textBoxAccessPWD.Text.ToLower()))
                             {
+                                timerCheckMail.Enabled = false;
+                                timerCheckMail.Interval = 12000;
+                                timerCheckMail.Enabled = true;
                                 VixenSettings(messageNum);
                                 break;
 
@@ -628,13 +677,9 @@ namespace Vixen_Messaging
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                if (GlobalVar.PlayMessage)
-                {
-                    PlayLocalMsgs();
-                }
-                   LogDisplay(GlobalVar.LogMsg = (ex.Message)); 
+                
             }
             finally
             {
@@ -655,7 +700,7 @@ namespace Vixen_Messaging
         }
         #endregion
 
-    #region Play Local Only Msgs
+    #region Play Local Msgs
         private void PlayLocalMsgs()
         {
             if (richTextBoxMessage.Text != "")
@@ -693,48 +738,8 @@ namespace Vixen_Messaging
         }
         #endregion
 
-    #region Play Random - Local and Incoming
-        private void PlayRandom()
-        {
-            var randomplay = new Random();
-            string[] mystrings =
-            {
-                "Play Local Msgs when NO Incoming Msgs", "Play Only Local Msgs"
-            };
-            var selectedPlay = mystrings[randomplay.Next(mystrings.Length)];
-            
-
-            switch (selectedPlay)
-            {
-                case "Play Local Msgs when NO Incoming Msgs":
-                    GlobalVar.PlayMessage = true;
-                    PlayIncomingMsgs();
-                    break;
-                case "Play Only Local Msgs":
-                    PlayLocalMsgs();
-                    break;
-             }
-        }
-        #endregion
-
-    #region Play Incoming and Local Alternating
-        private void PlayAlternating()
-        {
-            GlobalVar.Alternating = !GlobalVar.Alternating;
-            if (GlobalVar.Alternating)
-            {
-                PlayLocalMsgs();
-            }
-            else
-            {
-                GlobalVar.PlayMessage = true;
-                PlayIncomingMsgs(); 
-            }
-        }
-        #endregion
-
     #region Play with Twilio enabled
-        private void Twilio()
+        private void PlayTwilio()
         {
             // Find your Account Sid and Auth Token at twilio.com/user/account 
             string AccountSid = GlobalVar.TwilioSID; // "AC29390b0fe3f4cb763862eefedb8afc41";
@@ -745,53 +750,74 @@ namespace Vixen_Messaging
             var options = new MessageListRequest();
             //options.DateSent = DateTime.Today;
 
-            LogDisplay(GlobalVar.LogMsg = ("Checking Twilio Messages")); 
             var messages = twilio.ListMessages(options);
             try
-                {
-                    foreach (var message in messages.Messages)
-                        if (!CheckBlacklistMessage("", message.Body, message.From))
+            {
+                LogDisplay(GlobalVar.LogMsg = ("Checking Twilio Messages"));
+                var messageBody = messages.Messages[messages.Messages.Count - 2].Body;
+                var messageFrom = messages.Messages[messages.Messages.Count - 2].From;
+                var messageDirection = messages.Messages[messages.Messages.Count - 2].Direction;
+                var messageSid = messages.Messages[messages.Messages.Count - 2].Sid;
+
+       //         foreach (var message in messages.Messages)
+                if (!CheckBlacklistMessage("", messageBody, messageFrom))
                         {
                             //Console.WriteLine(message.From + " : " + message.Direction);
-                            
-                            if (message.Direction.Contains("inbound"))
+
+                            if (messageDirection.Contains("inbound"))
                             {
                                 LogDisplay(GlobalVar.LogMsg = ("Found " + messages.Messages.Count() + " Messages"));
-                                LogDisplay(GlobalVar.LogMsg = ("Received: " + message.From + " -> " + message.Body));
-                                var smsMessage = "Fuck";//message.Body; change back after testing
+                                if (!messages.Messages.Any())
+                                {
+                                    ShortTimer();
+                                    return;
+                                }
+                                LogDisplay(GlobalVar.LogMsg = ("Received: " + messageFrom + " -> " + messageBody));
+                                var smsMessage = messageBody; //change this to a text for testing"Hello"
 
                                 bool blacklist;
                                 bool notWhitemsg;
                                 SendMessageToVixen(smsMessage, out blacklist, out notWhitemsg);
-                                string rtnmsg = "";
                                 if (blacklist && !notWhitemsg)
                                 {
-                                    rtnmsg = "Please reframe from using inappropiate words. If this happens again your email address will be banned for the night.";
                                     using ( var file = new StreamWriter(@textBoxBlacklistEmailLog.Text, true))
                                     {
-                                        file.WriteLine(message.From);
+                                        file.WriteLine(messageFrom);
                                     }
-            //                        SendReturnTextTwilio("", message.From, rtnmsg, 0);
+                                    SendReturnTextTwilio(messageFrom, "Please reframe from using inappropiate words. If this happens again your phone number will be banned for the night.");
+                                    twilio.DeleteMessage(messageSid);
+                                    ShortTimer();
                                     return;
                                 }
                                 if (!notWhitemsg)
                                 {
-                                    MessageBox.Show("Your message will appear soon in lights.");
-                                    SendReturnTextTwilio(message.From, "Your message will appear soon in lights.");
+                                    SendReturnTextTwilio(messageFrom, "Your message will appear soon in lights.");
+                                    twilio.DeleteMessage(messageSid);
                                     return;
-                                }   
-                                rtnmsg = "Sorry one or more of the names you sent is not in the approved list!";
-                                SendReturnTextTwilio(message.From, "Sorry one or more of the names you sent is not in the approved list!");
-                                        
-                        //        twilio.DeleteMessage(message.Sid);
+                                }
+                                SendReturnTextTwilio(messageFrom, "Sorry one or more of the names you sent is not in the approved list!");
+                                twilio.DeleteMessage(messageSid);
+                                ShortTimer();
                                 return;
                             }
+                            twilio.DeleteMessage(messageSid);
+                            ShortTimer();
                         }
                 }
                 catch
                 {
-
+                    LogDisplay(GlobalVar.LogMsg = ("Error - Unable to connect to the Twilio server."));
                 }
+        }
+        #endregion
+
+    #region Set Short Timer
+
+        private void ShortTimer()
+        {
+            timerCheckMail.Enabled = false;
+            timerCheckMail.Interval = 200;
+            timerCheckMail.Enabled = true;
         }
         #endregion
 
@@ -915,7 +941,7 @@ namespace Vixen_Messaging
                 checkBoxRandom2.Checked = !checkBoxRandom2.Checked;
                 messageBody = messageBody + "Fire included in Random = " + checkBoxRandom2.Checked + "\n";
             }
-            if (smsMessage.ToLower().Contains("metoerrandom"))
+            if (smsMessage.ToLower().Contains("meteorrandom"))
             {
                 checkBoxRandom3.Checked = !checkBoxRandom3.Checked;
                 messageBody = messageBody + "Meteor included in Random = " + checkBoxRandom3.Checked + "\n";
@@ -1292,7 +1318,7 @@ namespace Vixen_Messaging
 
 #endregion
 
-#region Send Return Text
+#region Send Return Text to Email
         private void SendReturnText(string phoneNumber, string msgTo, string rtnmsg, int messageNum)
         {
             //Only setup form Email at the moment
@@ -1320,19 +1346,20 @@ namespace Vixen_Messaging
         }
         #endregion
 
-        #region Sen Return Text to Twilio
+#region Send Return Text to Twilio
 
         private void SendReturnTextTwilio(string from, string msgBody)
         {
             string accountSid = GlobalVar.TwilioSID;  // "AC29390b0fe3f4cb763862eefedb8afc41";
             string authToken = GlobalVar.TwilioToken;  // "d68a401090af00f63bbecb4a3e502a7f";
             var twilio = new TwilioRestClient(accountSid, authToken);
-            var message = twilio.SendMessage("+15853600516", from, msgBody);
+            var message = twilio.SendMessage(GlobalVar.TwilioPhoneNumber, from, msgBody);
+            LogDisplay(GlobalVar.LogMsg = ("Return Message sent to " + from));
         }
 
         #endregion
 
-        #region Word Lists
+#region Word Lists
         private bool HasBadWords(string msg, out bool notWhite)
         {
             string textLine;
@@ -2501,6 +2528,10 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarGlediator", trackBarGlediator.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TwilioSID", GlobalVar.TwilioSID);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TwilioToken", GlobalVar.TwilioToken);
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxEmail", checkBoxEmail.Checked.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocal", checkBoxLocal.Checked.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwilio", checkBoxTwilio.Checked.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TwilioPhoneNumber", GlobalVar.TwilioPhoneNumber);
         }
 #endregion
 
@@ -2841,6 +2872,14 @@ namespace Vixen_Messaging
         {
             var twilio = new Twilio();
             twilio.ShowDialog();
+        }
+
+        private void comboBoxPlayMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxPlayMode.Text == "Sequential")
+            {
+                GlobalVar.Sequential = 1;
+            }
         }
    
     }

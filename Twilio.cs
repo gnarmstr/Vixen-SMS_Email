@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Common.Resources;
 using Common.Resources.Properties;
 using System.Windows.Forms;
@@ -30,13 +24,14 @@ namespace Vixen_Messaging
             pictureBoxCancel.Text = "";
             textBoxSID.Text = GlobalVar.TwilioSID;
             textBoxToken.Text = GlobalVar.TwilioToken;
-            pictureBoxOk.Text = "";
+            textBoxPhoneNumber.Text = GlobalVar.TwilioPhoneNumber;
         }
 
         private void pictureBoxOk_Click(object sender, EventArgs e)
         {
             GlobalVar.TwilioSID = textBoxSID.Text;
             GlobalVar.TwilioToken = textBoxToken.Text;
+            GlobalVar.TwilioPhoneNumber = textBoxPhoneNumber.Text;
             Close();
         }
 

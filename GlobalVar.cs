@@ -21,6 +21,8 @@
 
             public static string TwilioToken { get; set; }
 
+            public static string TwilioPhoneNumber { get; set; }
+
             public static decimal SeqIntervalTime { get; set; }
 
             /// <summary>
@@ -30,7 +32,7 @@
 
             public static bool PlayMessage;
 
-            public static bool Alternating;
+            public static int Sequential { get; set; }
 
     }
 }

@@ -123,6 +123,9 @@
   <metadata name="timerCheckMail.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>198, 17</value>
+  </metadata>
   <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>319, 17</value>
   </metadata>
@@ -141,6 +144,30 @@
   <metadata name="fileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1231, 17</value>
   </metadata>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>stop			Will stop the app from running and sending effects to Vixen 3 (Once stopped
+			you can't restart and you will not receive a return email)
+blacklist		              	Enables Blacklist
+whitelist		               	Enables Whitelist
+interval=xx		Changes the inverval between messages, xx is a number in seconds
+randomcolour		Alternates Random colour checkbox setting 
+randomsequence		Alternates Random sequence checkbox setting
+disable			Disables all sequences and just display messages on your matrix/megatree
+enable			Enables all sequences
+snowflakeselect		Will select the Snowflake effect and disable Random Sequence
+fireselect		              	Will select the Fire effect and disable Random Sequence
+meteorselect		Will select the Meteor effect and disable Random Sequence
+twinkleselect		Will select the Twinkle effect and disable Random Sequence
+movieselect		Will select the Movie effect and disable Random Sequence
+snowflakerandom		Will alternate the Random selection to inclusion
+firerandom		Will alternate the Random selection to inclusion
+meteorrandom		Will alternate the Random selection to inclusion
+twinklerandom		Will alternate the Random selection to inclusion
+moviewrandom		Will alternate the Random selection to inclusion
+glediatorrandom		Will alternate the Random selection to inclusion
+localrandom		Will alternate Playing of Local messages
+vixensequence		Will alternate using Vixen sequence or Custom sequences</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

@@ -37,6 +37,7 @@
             this.textBoxPWD = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonTwilio = new System.Windows.Forms.Button();
             this.label65 = new System.Windows.Forms.Label();
             this.label68 = new System.Windows.Forms.Label();
             this.textBoxComments = new System.Windows.Forms.TextBox();
@@ -201,13 +202,17 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label78 = new System.Windows.Forms.Label();
             this.textBoxAccessPWD = new System.Windows.Forms.TextBox();
+            this.label66 = new System.Windows.Forms.Label();
+            this.checkBoxEmail = new System.Windows.Forms.CheckBox();
+            this.checkBoxLocal = new System.Windows.Forms.CheckBox();
+            this.checkBoxTwilio = new System.Windows.Forms.CheckBox();
+            this.comboBoxPlayMode = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageMain = new System.Windows.Forms.TabPage();
+            this.groupBoxPlayOptions = new System.Windows.Forms.GroupBox();
             this.label74 = new System.Windows.Forms.Label();
             this.numericUpDownIntervalMsgs = new System.Windows.Forms.NumericUpDown();
             this.label71 = new System.Windows.Forms.Label();
-            this.label66 = new System.Windows.Forms.Label();
-            this.comboBoxPlayMode = new System.Windows.Forms.ComboBox();
             this.checkBoxBlacklist = new System.Windows.Forms.CheckBox();
             this.checkBoxWhitelist = new System.Windows.Forms.CheckBox();
             this.tabPageMessagingSettings = new System.Windows.Forms.TabPage();
@@ -305,7 +310,12 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.buttonStopSequence = new System.Windows.Forms.Button();
             this.fileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.buttonTwilio = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label81 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label82 = new System.Windows.Forms.Label();
+            this.label83 = new System.Windows.Forms.Label();
+            this.label84 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxEffects.SuspendLayout();
@@ -340,6 +350,7 @@
             this.RandomColourSelection.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageMain.SuspendLayout();
+            this.groupBoxPlayOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).BeginInit();
             this.tabPageMessagingSettings.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -365,6 +376,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).BeginInit();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -443,6 +455,19 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mail Server";
+            // 
+            // buttonTwilio
+            // 
+            this.buttonTwilio.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonTwilio.Location = new System.Drawing.Point(14, 363);
+            this.buttonTwilio.Name = "buttonTwilio";
+            this.buttonTwilio.Size = new System.Drawing.Size(141, 49);
+            this.buttonTwilio.TabIndex = 64;
+            this.buttonTwilio.Text = "Twilio Settings";
+            this.toolTip1.SetToolTip(this.buttonTwilio, "Only need to set these if you have a Twilio account that would be used to accept " +
+        "SMS\'s");
+            this.buttonTwilio.UseVisualStyleBackColor = false;
+            this.buttonTwilio.Click += new System.EventHandler(this.buttonTwilio_Click);
             // 
             // label65
             // 
@@ -550,9 +575,9 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.richTextBoxLog);
-            this.groupBox2.Location = new System.Drawing.Point(12, 542);
+            this.groupBox2.Location = new System.Drawing.Point(12, 582);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(754, 335);
+            this.groupBox2.Size = new System.Drawing.Size(754, 295);
             this.groupBox2.TabIndex = 30;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Log";
@@ -561,7 +586,7 @@
             // 
             this.richTextBoxLog.Location = new System.Drawing.Point(6, 25);
             this.richTextBoxLog.Name = "richTextBoxLog";
-            this.richTextBoxLog.Size = new System.Drawing.Size(742, 304);
+            this.richTextBoxLog.Size = new System.Drawing.Size(742, 264);
             this.richTextBoxLog.TabIndex = 1;
             this.richTextBoxLog.Text = "";
             // 
@@ -591,7 +616,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(22, 503);
+            this.label14.Location = new System.Drawing.Point(22, 550);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(264, 20);
             this.label14.TabIndex = 20;
@@ -2365,6 +2390,69 @@
             this.toolTip1.SetToolTip(this.textBoxAccessPWD, "Enter a password that you will use when you want to email setting to Messaging. I" +
         "n your subject heading for example you will type \"Messaging Northridge\"");
             // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(446, 37);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(86, 20);
+            this.label66.TabIndex = 59;
+            this.label66.Text = "Play Mode:";
+            // 
+            // checkBoxEmail
+            // 
+            this.checkBoxEmail.AutoSize = true;
+            this.checkBoxEmail.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxEmail.Location = new System.Drawing.Point(7, 36);
+            this.checkBoxEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.checkBoxEmail.Name = "checkBoxEmail";
+            this.checkBoxEmail.Size = new System.Drawing.Size(202, 24);
+            this.checkBoxEmail.TabIndex = 64;
+            this.checkBoxEmail.Tag = "4";
+            this.checkBoxEmail.Text = "Email/SMS (from Email)";
+            this.toolTip1.SetToolTip(this.checkBoxEmail, "Select to retrieve messages from an email address");
+            this.checkBoxEmail.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxLocal
+            // 
+            this.checkBoxLocal.AutoSize = true;
+            this.checkBoxLocal.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxLocal.Location = new System.Drawing.Point(223, 36);
+            this.checkBoxLocal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.checkBoxLocal.Name = "checkBoxLocal";
+            this.checkBoxLocal.Size = new System.Drawing.Size(73, 24);
+            this.checkBoxLocal.TabIndex = 65;
+            this.checkBoxLocal.Tag = "4";
+            this.checkBoxLocal.Text = "Local";
+            this.toolTip1.SetToolTip(this.checkBoxLocal, "Select to retrieve messages from local");
+            this.checkBoxLocal.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxTwilio
+            // 
+            this.checkBoxTwilio.AutoSize = true;
+            this.checkBoxTwilio.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxTwilio.Location = new System.Drawing.Point(309, 36);
+            this.checkBoxTwilio.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.checkBoxTwilio.Name = "checkBoxTwilio";
+            this.checkBoxTwilio.Size = new System.Drawing.Size(122, 24);
+            this.checkBoxTwilio.TabIndex = 66;
+            this.checkBoxTwilio.Tag = "4";
+            this.checkBoxTwilio.Text = "Twilio (SMS)";
+            this.toolTip1.SetToolTip(this.checkBoxTwilio, "Select to retrieve messages from Twilo. SMS accout.");
+            this.checkBoxTwilio.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxPlayMode
+            // 
+            this.comboBoxPlayMode.FormattingEnabled = true;
+            this.comboBoxPlayMode.Items.AddRange(new object[] {
+            "Random",
+            "Sequential"});
+            this.comboBoxPlayMode.Location = new System.Drawing.Point(536, 34);
+            this.comboBoxPlayMode.Name = "comboBoxPlayMode";
+            this.comboBoxPlayMode.Size = new System.Drawing.Size(178, 28);
+            this.comboBoxPlayMode.TabIndex = 67;
+            this.comboBoxPlayMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxPlayMode_SelectedIndexChanged);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPageMain);
@@ -2372,6 +2460,7 @@
             this.tabControl1.Controls.Add(this.tabPageTextSetting);
             this.tabControl1.Controls.Add(this.tabPageSeqSettings);
             this.tabControl1.Controls.Add(this.tabPageWordLists);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(-2, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -2381,11 +2470,10 @@
             // tabPageMain
             // 
             this.tabPageMain.BackColor = System.Drawing.Color.Azure;
+            this.tabPageMain.Controls.Add(this.groupBoxPlayOptions);
             this.tabPageMain.Controls.Add(this.label74);
             this.tabPageMain.Controls.Add(this.numericUpDownIntervalMsgs);
             this.tabPageMain.Controls.Add(this.label71);
-            this.tabPageMain.Controls.Add(this.label66);
-            this.tabPageMain.Controls.Add(this.comboBoxPlayMode);
             this.tabPageMain.Controls.Add(this.label14);
             this.tabPageMain.Controls.Add(this.checkBoxBlacklist);
             this.tabPageMain.Controls.Add(this.checkBoxWhitelist);
@@ -2399,10 +2487,24 @@
             this.tabPageMain.Tag = "2";
             this.tabPageMain.Text = "Main";
             // 
+            // groupBoxPlayOptions
+            // 
+            this.groupBoxPlayOptions.Controls.Add(this.comboBoxPlayMode);
+            this.groupBoxPlayOptions.Controls.Add(this.checkBoxEmail);
+            this.groupBoxPlayOptions.Controls.Add(this.checkBoxTwilio);
+            this.groupBoxPlayOptions.Controls.Add(this.checkBoxLocal);
+            this.groupBoxPlayOptions.Controls.Add(this.label66);
+            this.groupBoxPlayOptions.Location = new System.Drawing.Point(12, 438);
+            this.groupBoxPlayOptions.Name = "groupBoxPlayOptions";
+            this.groupBoxPlayOptions.Size = new System.Drawing.Size(728, 74);
+            this.groupBoxPlayOptions.TabIndex = 67;
+            this.groupBoxPlayOptions.TabStop = false;
+            this.groupBoxPlayOptions.Text = "Play Options";
+            // 
             // label74
             // 
             this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(662, 505);
+            this.label74.Location = new System.Drawing.Point(662, 552);
             this.label74.Name = "label74";
             this.label74.Size = new System.Drawing.Size(37, 20);
             this.label74.TabIndex = 63;
@@ -2410,7 +2512,7 @@
             // 
             // numericUpDownIntervalMsgs
             // 
-            this.numericUpDownIntervalMsgs.Location = new System.Drawing.Point(579, 502);
+            this.numericUpDownIntervalMsgs.Location = new System.Drawing.Point(579, 549);
             this.numericUpDownIntervalMsgs.Maximum = new decimal(new int[] {
             300,
             0,
@@ -2423,35 +2525,11 @@
             // label71
             // 
             this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(534, 460);
+            this.label71.Location = new System.Drawing.Point(522, 526);
             this.label71.Name = "label71";
             this.label71.Size = new System.Drawing.Size(207, 20);
             this.label71.TabIndex = 62;
             this.label71.Text = "Interval between Messages:";
-            // 
-            // label66
-            // 
-            this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(22, 455);
-            this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(93, 20);
-            this.label66.TabIndex = 59;
-            this.label66.Text = "Play Option:";
-            // 
-            // comboBoxPlayMode
-            // 
-            this.comboBoxPlayMode.FormattingEnabled = true;
-            this.comboBoxPlayMode.Items.AddRange(new object[] {
-            "Play Only Incoming Msgs",
-            "Play Only Local Msgs",
-            "Play Local Msgs when NO Incoming Msgs",
-            "Play Incoming and Local Randomly",
-            "Play Incoming and Local Alternating",
-            "Play Only Incoming from Twilio account (SMS\'s)"});
-            this.comboBoxPlayMode.Location = new System.Drawing.Point(141, 452);
-            this.comboBoxPlayMode.Name = "comboBoxPlayMode";
-            this.comboBoxPlayMode.Size = new System.Drawing.Size(366, 28);
-            this.comboBoxPlayMode.TabIndex = 58;
             // 
             // checkBoxBlacklist
             // 
@@ -2459,7 +2537,7 @@
             this.checkBoxBlacklist.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.checkBoxBlacklist.Checked = true;
             this.checkBoxBlacklist.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxBlacklist.Location = new System.Drawing.Point(294, 503);
+            this.checkBoxBlacklist.Location = new System.Drawing.Point(294, 550);
             this.checkBoxBlacklist.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBoxBlacklist.Name = "checkBoxBlacklist";
             this.checkBoxBlacklist.Size = new System.Drawing.Size(93, 24);
@@ -2473,7 +2551,7 @@
             // 
             this.checkBoxWhitelist.AutoSize = true;
             this.checkBoxWhitelist.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxWhitelist.Location = new System.Drawing.Point(411, 503);
+            this.checkBoxWhitelist.Location = new System.Drawing.Point(411, 550);
             this.checkBoxWhitelist.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBoxWhitelist.Name = "checkBoxWhitelist";
             this.checkBoxWhitelist.Size = new System.Drawing.Size(95, 24);
@@ -2763,12 +2841,13 @@
             // 
             // buttonSaveMessageList
             // 
+            this.buttonSaveMessageList.BackColor = System.Drawing.Color.Honeydew;
             this.buttonSaveMessageList.Location = new System.Drawing.Point(650, 18);
             this.buttonSaveMessageList.Name = "buttonSaveMessageList";
             this.buttonSaveMessageList.Size = new System.Drawing.Size(98, 37);
             this.buttonSaveMessageList.TabIndex = 59;
             this.buttonSaveMessageList.Text = "SaveList";
-            this.buttonSaveMessageList.UseVisualStyleBackColor = true;
+            this.buttonSaveMessageList.UseVisualStyleBackColor = false;
             this.buttonSaveMessageList.Click += new System.EventHandler(this.buttonSaveMessageList_Click);
             // 
             // checkBoxLocalRandom
@@ -3470,15 +3549,68 @@
             this.fileDialog.FileName = "Select a File";
             this.fileDialog.Title = "Select a File";
             // 
-            // buttonTwilio
+            // tabPage1
             // 
-            this.buttonTwilio.Location = new System.Drawing.Point(14, 363);
-            this.buttonTwilio.Name = "buttonTwilio";
-            this.buttonTwilio.Size = new System.Drawing.Size(141, 49);
-            this.buttonTwilio.TabIndex = 64;
-            this.buttonTwilio.Text = "Twilio Settings";
-            this.buttonTwilio.UseVisualStyleBackColor = true;
-            this.buttonTwilio.Click += new System.EventHandler(this.buttonTwilio_Click);
+            this.tabPage1.BackColor = System.Drawing.Color.Azure;
+            this.tabPage1.Controls.Add(this.label84);
+            this.tabPage1.Controls.Add(this.label83);
+            this.tabPage1.Controls.Add(this.label82);
+            this.tabPage1.Controls.Add(this.richTextBox1);
+            this.tabPage1.Controls.Add(this.label81);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(781, 887);
+            this.tabPage1.TabIndex = 6;
+            this.tabPage1.Text = "Remote Commands";
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label81.Location = new System.Drawing.Point(128, 18);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(519, 25);
+            this.label81.TabIndex = 0;
+            this.label81.Text = "Use these commands to control Vixen Meesaging settings.";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.Color.Azure;
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Location = new System.Drawing.Point(10, 184);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(765, 492);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(222, 147);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(55, 20);
+            this.label82.TabIndex = 3;
+            this.label82.Text = "Result";
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Location = new System.Drawing.Point(6, 147);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(90, 20);
+            this.label83.TabIndex = 4;
+            this.label83.Text = "Commands";
+            // 
+            // label84
+            // 
+            this.label84.Location = new System.Drawing.Point(6, 66);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(762, 48);
+            this.label84.TabIndex = 5;
+            this.label84.Text = "Enter the command into the body of an email and  trhe word \"Messaging\" plus your " +
+    "remote access keyword and then send to the email address you have set up.";
             // 
             // FormMain
             // 
@@ -3498,7 +3630,7 @@
             this.Location = new System.Drawing.Point(100, 100);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(804, 1091);
-            this.MinimumSize = new System.Drawing.Size(804, 1028);
+            this.MinimumSize = new System.Drawing.Size(804, 1091);
             this.Name = "FormMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -3550,6 +3682,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPageMain.ResumeLayout(false);
             this.tabPageMain.PerformLayout();
+            this.groupBoxPlayOptions.ResumeLayout(false);
+            this.groupBoxPlayOptions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).EndInit();
             this.tabPageMessagingSettings.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -3585,6 +3719,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3826,7 +3962,6 @@
         private System.Windows.Forms.Button buttonSaveMessageList;
         private System.Windows.Forms.RichTextBox richTextBoxMessage;
         private System.Windows.Forms.Label label66;
-        private System.Windows.Forms.ComboBox comboBoxPlayMode;
         private System.Windows.Forms.RichTextBox richTextBoxLog;
         private System.Windows.Forms.RichTextBox richTextBoxLog1;
         private System.Windows.Forms.RichTextBox richTextBoxLog2;
@@ -3867,6 +4002,17 @@
         private System.Windows.Forms.TrackBar trackBarGlediator;
         private System.Windows.Forms.Label label80;
         private System.Windows.Forms.Button buttonTwilio;
+        private System.Windows.Forms.GroupBox groupBoxPlayOptions;
+        private System.Windows.Forms.ComboBox comboBoxPlayMode;
+        private System.Windows.Forms.CheckBox checkBoxEmail;
+        private System.Windows.Forms.CheckBox checkBoxTwilio;
+        private System.Windows.Forms.CheckBox checkBoxLocal;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.Label label83;
+        private System.Windows.Forms.Label label82;
     }
 }
 

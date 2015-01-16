@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.textBoxSID = new System.Windows.Forms.TextBox();
             this.textBoxToken = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -35,6 +36,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBoxOk = new System.Windows.Forms.PictureBox();
             this.pictureBoxCancel = new System.Windows.Forms.PictureBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxPhoneNumber = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOk)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCancel)).BeginInit();
             this.SuspendLayout();
@@ -85,7 +89,7 @@
             // 
             // pictureBoxOk
             // 
-            this.pictureBoxOk.Location = new System.Drawing.Point(402, 228);
+            this.pictureBoxOk.Location = new System.Drawing.Point(402, 277);
             this.pictureBoxOk.Name = "pictureBoxOk";
             this.pictureBoxOk.Size = new System.Drawing.Size(80, 80);
             this.pictureBoxOk.TabIndex = 5;
@@ -95,7 +99,7 @@
             // 
             // pictureBoxCancel
             // 
-            this.pictureBoxCancel.Location = new System.Drawing.Point(535, 228);
+            this.pictureBoxCancel.Location = new System.Drawing.Point(535, 277);
             this.pictureBoxCancel.Name = "pictureBoxCancel";
             this.pictureBoxCancel.Size = new System.Drawing.Size(80, 80);
             this.pictureBoxCancel.TabIndex = 6;
@@ -103,12 +107,32 @@
             this.pictureBoxCancel.Tag = "7";
             this.pictureBoxCancel.Click += new System.EventHandler(this.pictureBoxCancel_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(64, 232);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(199, 20);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Your Twilio Phone Number:";
+            this.toolTip1.SetToolTip(this.label4, "Ensure you enter your exact number from Twilio ex. +1432615244");
+            // 
+            // textBoxPhoneNumber
+            // 
+            this.textBoxPhoneNumber.Location = new System.Drawing.Point(272, 229);
+            this.textBoxPhoneNumber.Name = "textBoxPhoneNumber";
+            this.textBoxPhoneNumber.Size = new System.Drawing.Size(343, 26);
+            this.textBoxPhoneNumber.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.textBoxPhoneNumber, "Ensure you enter your exact number from Twilio ex. +1432615244");
+            // 
             // Twilio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
-            this.ClientSize = new System.Drawing.Size(653, 342);
+            this.ClientSize = new System.Drawing.Size(653, 376);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBoxPhoneNumber);
             this.Controls.Add(this.pictureBoxCancel);
             this.Controls.Add(this.pictureBoxOk);
             this.Controls.Add(this.label3);
@@ -136,5 +160,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBoxOk;
         private System.Windows.Forms.PictureBox pictureBoxCancel;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxPhoneNumber;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
