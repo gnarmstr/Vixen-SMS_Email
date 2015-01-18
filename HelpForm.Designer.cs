@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelpForm));
-            this.label1 = new System.Windows.Forms.Label();
             this.buttonDemo = new System.Windows.Forms.Button();
             this.buttonInstallation = new System.Windows.Forms.Button();
             this.buttonGmail = new System.Windows.Forms.Button();
@@ -38,54 +37,52 @@
             this.buttonTwilio = new System.Windows.Forms.Button();
             this.buttonRemoteCommands = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.buttonLauncher = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(46, 43);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(696, 717);
-            this.label1.TabIndex = 0;
-            this.label1.Text = resources.GetString("label1.Text");
             // 
             // buttonDemo
             // 
+            this.buttonDemo.BackColor = System.Drawing.Color.Honeydew;
             this.buttonDemo.Location = new System.Drawing.Point(50, 831);
             this.buttonDemo.Name = "buttonDemo";
             this.buttonDemo.Size = new System.Drawing.Size(319, 33);
             this.buttonDemo.TabIndex = 3;
             this.buttonDemo.Text = "Demo";
-            this.buttonDemo.UseVisualStyleBackColor = true;
+            this.buttonDemo.UseVisualStyleBackColor = false;
             this.buttonDemo.Click += new System.EventHandler(this.buttonDemo_Click);
             // 
             // buttonInstallation
             // 
-            this.buttonInstallation.Location = new System.Drawing.Point(50, 886);
+            this.buttonInstallation.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonInstallation.Location = new System.Drawing.Point(50, 883);
             this.buttonInstallation.Name = "buttonInstallation";
             this.buttonInstallation.Size = new System.Drawing.Size(319, 33);
             this.buttonInstallation.TabIndex = 4;
             this.buttonInstallation.Text = "Installation";
-            this.buttonInstallation.UseVisualStyleBackColor = true;
+            this.buttonInstallation.UseVisualStyleBackColor = false;
             this.buttonInstallation.Click += new System.EventHandler(this.buttonInstallation_Click);
             // 
             // buttonGmail
             // 
+            this.buttonGmail.BackColor = System.Drawing.Color.Honeydew;
             this.buttonGmail.Location = new System.Drawing.Point(423, 831);
             this.buttonGmail.Name = "buttonGmail";
             this.buttonGmail.Size = new System.Drawing.Size(319, 33);
             this.buttonGmail.TabIndex = 5;
             this.buttonGmail.Text = "Setting up a Gmail account";
-            this.buttonGmail.UseVisualStyleBackColor = true;
+            this.buttonGmail.UseVisualStyleBackColor = false;
             this.buttonGmail.Click += new System.EventHandler(this.buttonGmail_Click);
             // 
             // buttonEmails
             // 
-            this.buttonEmails.Location = new System.Drawing.Point(50, 940);
+            this.buttonEmails.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonEmails.Location = new System.Drawing.Point(50, 938);
             this.buttonEmails.Name = "buttonEmails";
             this.buttonEmails.Size = new System.Drawing.Size(319, 33);
             this.buttonEmails.TabIndex = 6;
             this.buttonEmails.Text = "Retrieving Emails";
-            this.buttonEmails.UseVisualStyleBackColor = true;
+            this.buttonEmails.UseVisualStyleBackColor = false;
             this.buttonEmails.Click += new System.EventHandler(this.buttonEmails_Click);
             // 
             // label2
@@ -99,22 +96,24 @@
             // 
             // buttonTwilio
             // 
-            this.buttonTwilio.Location = new System.Drawing.Point(423, 886);
+            this.buttonTwilio.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonTwilio.Location = new System.Drawing.Point(423, 883);
             this.buttonTwilio.Name = "buttonTwilio";
             this.buttonTwilio.Size = new System.Drawing.Size(319, 33);
             this.buttonTwilio.TabIndex = 8;
             this.buttonTwilio.Text = "Setting up a Twilio account";
-            this.buttonTwilio.UseVisualStyleBackColor = true;
+            this.buttonTwilio.UseVisualStyleBackColor = false;
             this.buttonTwilio.Click += new System.EventHandler(this.buttonTwilio_Click);
             // 
             // buttonRemoteCommands
             // 
-            this.buttonRemoteCommands.Location = new System.Drawing.Point(423, 940);
+            this.buttonRemoteCommands.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonRemoteCommands.Location = new System.Drawing.Point(423, 938);
             this.buttonRemoteCommands.Name = "buttonRemoteCommands";
             this.buttonRemoteCommands.Size = new System.Drawing.Size(319, 33);
             this.buttonRemoteCommands.TabIndex = 9;
             this.buttonRemoteCommands.Text = "Using Remote Commands";
-            this.buttonRemoteCommands.UseVisualStyleBackColor = true;
+            this.buttonRemoteCommands.UseVisualStyleBackColor = false;
             this.buttonRemoteCommands.Click += new System.EventHandler(this.buttonRemoteCommands_Click);
             // 
             // label3
@@ -124,7 +123,31 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(102, 20);
             this.label3.TabIndex = 10;
-            this.label3.Text = "Version 3.1.1";
+            this.label3.Text = "Version 3.1.2";
+            // 
+            // buttonLauncher
+            // 
+            this.buttonLauncher.BackColor = System.Drawing.Color.Honeydew;
+            this.buttonLauncher.Location = new System.Drawing.Point(220, 990);
+            this.buttonLauncher.Name = "buttonLauncher";
+            this.buttonLauncher.Size = new System.Drawing.Size(354, 33);
+            this.buttonLauncher.TabIndex = 11;
+            this.buttonLauncher.Text = "Using the Vixen 3 Launcher with Messaging";
+            this.buttonLauncher.UseVisualStyleBackColor = false;
+            this.buttonLauncher.Click += new System.EventHandler(this.buttonLauncher_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.Color.Azure;
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Location = new System.Drawing.Point(16, 48);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.richTextBox1.Size = new System.Drawing.Size(756, 716);
+            this.richTextBox1.TabIndex = 12;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // HelpForm
             // 
@@ -132,6 +155,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(784, 1035);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.buttonLauncher);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.buttonRemoteCommands);
             this.Controls.Add(this.buttonTwilio);
@@ -140,7 +165,6 @@
             this.Controls.Add(this.buttonGmail);
             this.Controls.Add(this.buttonInstallation);
             this.Controls.Add(this.buttonDemo);
-            this.Controls.Add(this.label1);
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(806, 1091);
@@ -156,7 +180,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonDemo;
         private System.Windows.Forms.Button buttonInstallation;
         private System.Windows.Forms.Button buttonGmail;
@@ -165,5 +188,7 @@
         private System.Windows.Forms.Button buttonTwilio;
         private System.Windows.Forms.Button buttonRemoteCommands;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonLauncher;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

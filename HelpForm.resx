@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="label1.Text" xml:space="preserve">
+  <data name="richTextBox1.Text" xml:space="preserve">
     <value>Ensure the following has been completed or checked.
 
 1. Vixen Messaging is used to receive messages from the audience either via Email or SMS. Emails need to be sent to the email address stated in the settings. If you would like to accept SMS messages then you will need to get a Voice account with someone like Google voice or Twilio and set it up to forward any SMS's to the email address you have set up, you will also then need to ensure your SMS Subject heading is correct unless using Twilio. Once all settings have been entered Vixen Messaging can process any way automatically..

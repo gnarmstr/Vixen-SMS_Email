@@ -54,5 +54,15 @@ namespace Vixen_Messaging
             System.Diagnostics.Process.Start("https://www.dropbox.com/s/6ovb84iay123t8i/Vixen%20Messaging%20Remote%20Access%20Commands%20Pt6.mp4?dl=0");
         }
 
+        private void buttonLauncher_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.dropbox.com/s/2cidc5wqklz151u/Vixen%20Messaging%20Auto%20Launcher%20Pt7.mp4?dl=0");
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

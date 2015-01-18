@@ -611,9 +611,7 @@ namespace Vixen_Messaging
                                 {
                                     if (!CheckBlacklistMessage(header.From.Address, header.Subject, headerphone))
                                     {
-                                        LogDisplay(
-                                            GlobalVar.LogMsg =
-                                                ("Retrieved Header # " + messageNum + ": " + header.Subject));
+                                        LogDisplay(GlobalVar.LogMsg = ("Retrieved Header # " + messageNum + ": " + header.Subject));
                                         try
                                         {
                                             string emailMessage = header.Subject;
@@ -646,17 +644,14 @@ namespace Vixen_Messaging
                                                 }
                                                 else
                                                 {
-                                                    rtnmsg =
-                                                        "Sorry one or more of the names you sent is not in the approved list!";
-                                                    SendReturnText("", header.From.ToString(), rtnmsg,
-                                                        messageNum);
+                                                    rtnmsg = "Sorry one or more of the names you sent is not in the approved list!";
+                                                    SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
                                                 }
                                             }
                                         }
                                         catch (Exception ex)
                                         {
-                                            LogDisplay(
-                                                GlobalVar.LogMsg = ("Error Parsing Message Body: " + ex.Message));
+                                            LogDisplay(GlobalVar.LogMsg = ("Error Parsing Message Body: " + ex.Message));
                                         }
                                     }
                                 }
@@ -753,60 +748,72 @@ namespace Vixen_Messaging
             var messages = twilio.ListMessages(options);
             try
             {
+                var messageDirection = messages.Messages[messages.Messages.Count - 1].Direction;
+                var messageSid = messages.Messages[messages.Messages.Count - 1].Sid;
+                while (!messageDirection.Contains("inbound"))
+                {
+                    twilio.DeleteMessage(messageSid);
+                    twilio = new TwilioRestClient(AccountSid, AuthToken);
+                    options = new MessageListRequest();
+                    messages = twilio.ListMessages(options);
+                    messageDirection = messages.Messages[messages.Messages.Count - 1].Direction;
+                    messageSid = messages.Messages[messages.Messages.Count - 1].Sid;
+                }
+                var messageBody = messages.Messages[messages.Messages.Count - 1].Body;
+                var messageFrom = messages.Messages[messages.Messages.Count - 1].From;
+
                 LogDisplay(GlobalVar.LogMsg = ("Checking Twilio Messages"));
-                var messageBody = messages.Messages[messages.Messages.Count - 2].Body;
-                var messageFrom = messages.Messages[messages.Messages.Count - 2].From;
-                var messageDirection = messages.Messages[messages.Messages.Count - 2].Direction;
-                var messageSid = messages.Messages[messages.Messages.Count - 2].Sid;
-
        //         foreach (var message in messages.Messages)
-                if (!CheckBlacklistMessage("", messageBody, messageFrom))
+                if (!CheckBlacklistMessage(messageFrom, messageBody, ""))
+                {
+                     //Console.WriteLine(message.From + " : " + message.Direction);
+
+                    if (messageDirection.Contains("inbound"))
+                    {
+                        LogDisplay(GlobalVar.LogMsg = ("Found " + messages.Messages.Count() + " Messages"));
+                        if (!messages.Messages.Any())
                         {
-                            //Console.WriteLine(message.From + " : " + message.Direction);
+                            ShortTimer();
+                            return;
+                        }
+                        LogDisplay(GlobalVar.LogMsg = ("Received: " + messageFrom + " -> " + messageBody));
+                        var smsMessage = messageBody;
 
-                            if (messageDirection.Contains("inbound"))
+                        bool blacklist;
+                        bool notWhitemsg;
+                        SendMessageToVixen(smsMessage, out blacklist, out notWhitemsg);
+                        if (blacklist && !notWhitemsg)
+                        {
+                            using ( var file = new StreamWriter(@textBoxBlacklistEmailLog.Text, true))
                             {
-                                LogDisplay(GlobalVar.LogMsg = ("Found " + messages.Messages.Count() + " Messages"));
-                                if (!messages.Messages.Any())
-                                {
-                                    ShortTimer();
-                                    return;
-                                }
-                                LogDisplay(GlobalVar.LogMsg = ("Received: " + messageFrom + " -> " + messageBody));
-                                var smsMessage = messageBody; //change this to a text for testing"Hello"
-
-                                bool blacklist;
-                                bool notWhitemsg;
-                                SendMessageToVixen(smsMessage, out blacklist, out notWhitemsg);
-                                if (blacklist && !notWhitemsg)
-                                {
-                                    using ( var file = new StreamWriter(@textBoxBlacklistEmailLog.Text, true))
-                                    {
-                                        file.WriteLine(messageFrom);
-                                    }
-                                    SendReturnTextTwilio(messageFrom, "Please reframe from using inappropiate words. If this happens again your phone number will be banned for the night.");
-                                    twilio.DeleteMessage(messageSid);
-                                    ShortTimer();
-                                    return;
-                                }
-                                if (!notWhitemsg)
-                                {
-                                    SendReturnTextTwilio(messageFrom, "Your message will appear soon in lights.");
-                                    twilio.DeleteMessage(messageSid);
-                                    return;
-                                }
-                                SendReturnTextTwilio(messageFrom, "Sorry one or more of the names you sent is not in the approved list!");
-                                twilio.DeleteMessage(messageSid);
-                                ShortTimer();
-                                return;
+                                file.WriteLine(messageFrom);
                             }
+                            SendReturnTextTwilio(messageFrom, "Please reframe from using inappropiate words. If this happens again your phone number will be banned for the night.");
                             twilio.DeleteMessage(messageSid);
                             ShortTimer();
+                            return;
                         }
+                        if (!notWhitemsg)
+                        {
+                            SendReturnTextTwilio(messageFrom, "Your message will appear soon in lights.");
+                            twilio.DeleteMessage(messageSid);
+                            return;
+                        }
+                        SendReturnTextTwilio(messageFrom, "Sorry one or more of the names you sent is not in the approved list!");
+                        twilio.DeleteMessage(messageSid);
+                        ShortTimer();
+                        return;
+                    }
+                    twilio.DeleteMessage(messageSid);
+                    ShortTimer();
+                }
+                SendReturnTextTwilio(messageFrom, textBoxReturnBannedMSG.Text);
+                LogDisplay(GlobalVar.LogMsg = (messageFrom + " has been banned for sending inappropiate messages."));
                 }
                 catch
                 {
-                    LogDisplay(GlobalVar.LogMsg = ("Error - Unable to connect to the Twilio server."));
+                    LogDisplay(GlobalVar.LogMsg = ("Unable to connect to the Twilio server or there are no messages on the server."));
+                    ShortTimer();
                 }
         }
         #endregion
