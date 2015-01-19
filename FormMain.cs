@@ -111,7 +111,9 @@ namespace Vixen_Messaging
             {
                 comboBoxPlayMode.Text = "Sequential";
             }
- 
+
+            extraTime.Enabled = checkBoxVariableLength.Checked;
+
             var content = File.ReadAllText(GlobalVar.Blacklistlocation);
             richTextBoxBlacklist.Text = content;
             var content1 = File.ReadAllText(GlobalVar.Whitelistlocation);
@@ -415,7 +417,7 @@ namespace Vixen_Messaging
     #region Play Modes
         private void PlayModes()
         {
-            if (comboBoxPlayMode.Text == "Random")
+            if (comboBoxPlayMode.Text == @"Random")
             {
                 var rnd = new Random();
                 GlobalVar.Sequential = rnd.Next(1, 4);
@@ -429,9 +431,7 @@ namespace Vixen_Messaging
                     }
                     else
                     {
-                        timerCheckMail.Enabled = false;
-                        timerCheckMail.Interval = 1000;
-                        timerCheckMail.Enabled = true;
+                        ShortTimer(); ;
                     }
                     GlobalVar.Sequential++;
                     break;
@@ -442,9 +442,7 @@ namespace Vixen_Messaging
                     }
                     else
                     {
-                        timerCheckMail.Enabled = false;
-                        timerCheckMail.Interval = 1000;
-                        timerCheckMail.Enabled = true;
+                        ShortTimer();
                     }
                     GlobalVar.Sequential++;
                     break;
@@ -455,9 +453,7 @@ namespace Vixen_Messaging
                     }
                     else
                     {
-                        timerCheckMail.Enabled = false;
-                        timerCheckMail.Interval = 1000;
-                        timerCheckMail.Enabled = true;
+                        ShortTimer();
                     }
                     GlobalVar.Sequential++;
                     break;
@@ -507,6 +503,7 @@ namespace Vixen_Messaging
                         }
                         else
                         {
+                            // Capture incoming email change in requesting Messaging Settings. 
                             if (header.Subject.ToLower().Contains("messaging " + textBoxAccessPWD.Text.ToLower()))
                             {
                                 timerCheckMail.Enabled = false;
@@ -638,8 +635,7 @@ namespace Vixen_Messaging
                                                 if (!notWhitemsg)
                                                 {
                                                     rtnmsg = "Your message will appear soon in lights.";
-                                                    SendReturnText("", header.From.ToString(), rtnmsg,
-                                                        messageNum);
+                                                    SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
                                                     return;
                                                 }
                                                 else
@@ -733,7 +729,7 @@ namespace Vixen_Messaging
         }
         #endregion
 
-    #region Play with Twilio enabled
+    #region Play with Twilio
         private void PlayTwilio()
         {
             // Find your Account Sid and Auth Token at twilio.com/user/account 
@@ -809,6 +805,7 @@ namespace Vixen_Messaging
                 }
                 SendReturnTextTwilio(messageFrom, textBoxReturnBannedMSG.Text);
                 LogDisplay(GlobalVar.LogMsg = (messageFrom + " has been banned for sending inappropiate messages."));
+                Log(" " + messageFrom + " has been banned for sending inappropiate messages.");
                 }
                 catch
                 {
@@ -1226,7 +1223,7 @@ namespace Vixen_Messaging
                     var result = new WebClient().DownloadString(url); //Used to output to Vixen WebClient
                     Cursor.Current = Cursors.Default; 
                     LogDisplay(GlobalVar.LogMsg = ("Vixen Started: + " + result));
-                    Log(msg);
+                    Log(msg + " has been been displayed in lights");
             #endregion
                 }
                 else
@@ -1388,7 +1385,7 @@ namespace Vixen_Messaging
                         {
                             LogDisplay(GlobalVar.LogMsg = ("Bad Words Detected!"));
                             file.Close();
-                            Log((DateTime.Now.ToString("h:mm tt ")) + msg + ". Bad Words Detected!");
+                            Log(" " + msg + ". Bad Words Detected!");
                             notWhite = false;
                             return true;
                         }
@@ -1439,7 +1436,7 @@ namespace Vixen_Messaging
             #endregion
 
             LogDisplay(GlobalVar.LogMsg = ("One or more Names are not in Whitelist."));
-            Log((DateTime.Now.ToString("h:mm tt ")) + msg + ". One or more Names are not in Whitelist.");
+            Log(" " + msg + ". One or more Names are not in Whitelist.");
             notWhite = true;
             return true;
         }
@@ -2122,6 +2119,7 @@ namespace Vixen_Messaging
 					myProcess.StartInfo.Arguments = args;
 					Console.WriteLine(ffmpegPath + " => " + args);
 					myProcess.Start();
+
 					myProcess.WaitForExit();
             }
         }

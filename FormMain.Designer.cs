@@ -202,10 +202,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label78 = new System.Windows.Forms.Label();
             this.textBoxAccessPWD = new System.Windows.Forms.TextBox();
-            this.label66 = new System.Windows.Forms.Label();
             this.checkBoxEmail = new System.Windows.Forms.CheckBox();
             this.checkBoxLocal = new System.Windows.Forms.CheckBox();
             this.checkBoxTwilio = new System.Windows.Forms.CheckBox();
+            this.label66 = new System.Windows.Forms.Label();
             this.comboBoxPlayMode = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageMain = new System.Windows.Forms.TabPage();
@@ -299,6 +299,12 @@
             this.tabPageWordLists = new System.Windows.Forms.TabPage();
             this.pictureBoxSaveBlacklist = new System.Windows.Forms.PictureBox();
             this.pictureBoxSaveWhitelist = new System.Windows.Forms.PictureBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label84 = new System.Windows.Forms.Label();
+            this.label83 = new System.Windows.Forms.Label();
+            this.label82 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label81 = new System.Windows.Forms.Label();
             this.buttonSaveLog = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -310,12 +316,6 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.buttonStopSequence = new System.Windows.Forms.Button();
             this.fileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label81 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label82 = new System.Windows.Forms.Label();
-            this.label83 = new System.Windows.Forms.Label();
-            this.label84 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxEffects.SuspendLayout();
@@ -373,10 +373,10 @@
             this.tabPageWordLists.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSaveBlacklist)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSaveWhitelist)).BeginInit();
+            this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).BeginInit();
-            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -459,7 +459,7 @@
             // buttonTwilio
             // 
             this.buttonTwilio.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonTwilio.Location = new System.Drawing.Point(14, 363);
+            this.buttonTwilio.Location = new System.Drawing.Point(17, 360);
             this.buttonTwilio.Name = "buttonTwilio";
             this.buttonTwilio.Size = new System.Drawing.Size(141, 49);
             this.buttonTwilio.TabIndex = 64;
@@ -519,7 +519,7 @@
             this.label67.Size = new System.Drawing.Size(145, 20);
             this.label67.TabIndex = 17;
             this.label67.Text = "Select Email Client:";
-            this.toolTip1.SetToolTip(this.label67, "This will automaticlly populate your email settings for yur email client.");
+            this.toolTip1.SetToolTip(this.label67, "This will automatically populate your email settings for yur email client.");
             // 
             // label64
             // 
@@ -1718,7 +1718,7 @@
             this.label73.Size = new System.Drawing.Size(146, 20);
             this.label73.TabIndex = 47;
             this.label73.Text = "Thumbnail Position:";
-            this.toolTip1.SetToolTip(this.label73, "Viual only, has no effect on output.");
+            this.toolTip1.SetToolTip(this.label73, "Visual only, has no effect on output.");
             // 
             // trackBarMovieSpeed
             // 
@@ -2390,15 +2390,6 @@
             this.toolTip1.SetToolTip(this.textBoxAccessPWD, "Enter a password that you will use when you want to email setting to Messaging. I" +
         "n your subject heading for example you will type \"Messaging Northridge\"");
             // 
-            // label66
-            // 
-            this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(446, 37);
-            this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(86, 20);
-            this.label66.TabIndex = 59;
-            this.label66.Text = "Play Mode:";
-            // 
             // checkBoxEmail
             // 
             this.checkBoxEmail.AutoSize = true;
@@ -2441,15 +2432,24 @@
             this.toolTip1.SetToolTip(this.checkBoxTwilio, "Select to retrieve messages from Twilo. SMS accout.");
             this.checkBoxTwilio.UseVisualStyleBackColor = true;
             // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(492, 37);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(86, 20);
+            this.label66.TabIndex = 59;
+            this.label66.Text = "Play Mode:";
+            // 
             // comboBoxPlayMode
             // 
             this.comboBoxPlayMode.FormattingEnabled = true;
             this.comboBoxPlayMode.Items.AddRange(new object[] {
             "Random",
             "Sequential"});
-            this.comboBoxPlayMode.Location = new System.Drawing.Point(536, 34);
+            this.comboBoxPlayMode.Location = new System.Drawing.Point(584, 34);
             this.comboBoxPlayMode.Name = "comboBoxPlayMode";
-            this.comboBoxPlayMode.Size = new System.Drawing.Size(178, 28);
+            this.comboBoxPlayMode.Size = new System.Drawing.Size(130, 28);
             this.comboBoxPlayMode.TabIndex = 67;
             this.comboBoxPlayMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxPlayMode_SelectedIndexChanged);
             // 
@@ -2464,7 +2464,7 @@
             this.tabControl1.Location = new System.Drawing.Point(-2, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(789, 920);
+            this.tabControl1.Size = new System.Drawing.Size(787, 920);
             this.tabControl1.TabIndex = 5;
             // 
             // tabPageMain
@@ -2482,7 +2482,7 @@
             this.tabPageMain.Location = new System.Drawing.Point(4, 29);
             this.tabPageMain.Name = "tabPageMain";
             this.tabPageMain.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMain.Size = new System.Drawing.Size(781, 887);
+            this.tabPageMain.Size = new System.Drawing.Size(779, 887);
             this.tabPageMain.TabIndex = 0;
             this.tabPageMain.Tag = "2";
             this.tabPageMain.Text = "Main";
@@ -2504,7 +2504,7 @@
             // label74
             // 
             this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(662, 552);
+            this.label74.Location = new System.Drawing.Point(698, 552);
             this.label74.Name = "label74";
             this.label74.Size = new System.Drawing.Size(37, 20);
             this.label74.TabIndex = 63;
@@ -2512,7 +2512,7 @@
             // 
             // numericUpDownIntervalMsgs
             // 
-            this.numericUpDownIntervalMsgs.Location = new System.Drawing.Point(579, 549);
+            this.numericUpDownIntervalMsgs.Location = new System.Drawing.Point(615, 549);
             this.numericUpDownIntervalMsgs.Maximum = new decimal(new int[] {
             300,
             0,
@@ -2525,7 +2525,7 @@
             // label71
             // 
             this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(522, 526);
+            this.label71.Location = new System.Drawing.Point(558, 525);
             this.label71.Name = "label71";
             this.label71.Size = new System.Drawing.Size(207, 20);
             this.label71.TabIndex = 62;
@@ -2571,7 +2571,7 @@
             this.tabPageMessagingSettings.Location = new System.Drawing.Point(4, 29);
             this.tabPageMessagingSettings.Name = "tabPageMessagingSettings";
             this.tabPageMessagingSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMessagingSettings.Size = new System.Drawing.Size(781, 887);
+            this.tabPageMessagingSettings.Size = new System.Drawing.Size(779, 887);
             this.tabPageMessagingSettings.TabIndex = 1;
             this.tabPageMessagingSettings.Text = "Messaging Settings";
             // 
@@ -2795,7 +2795,7 @@
             this.tabPageTextSetting.Location = new System.Drawing.Point(4, 29);
             this.tabPageTextSetting.Name = "tabPageTextSetting";
             this.tabPageTextSetting.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTextSetting.Size = new System.Drawing.Size(781, 887);
+            this.tabPageTextSetting.Size = new System.Drawing.Size(779, 887);
             this.tabPageTextSetting.TabIndex = 5;
             this.tabPageTextSetting.Tag = "30";
             this.tabPageTextSetting.Text = "Text Settings";
@@ -3060,7 +3060,7 @@
             this.tabPageSeqSettings.Location = new System.Drawing.Point(4, 29);
             this.tabPageSeqSettings.Name = "tabPageSeqSettings";
             this.tabPageSeqSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSeqSettings.Size = new System.Drawing.Size(781, 887);
+            this.tabPageSeqSettings.Size = new System.Drawing.Size(779, 887);
             this.tabPageSeqSettings.TabIndex = 3;
             this.tabPageSeqSettings.Text = "Sequence  Settings";
             // 
@@ -3080,7 +3080,7 @@
             this.groupBoxSeqControl.Controls.Add(this.tabControlSequence);
             this.groupBoxSeqControl.Location = new System.Drawing.Point(6, 377);
             this.groupBoxSeqControl.Name = "groupBoxSeqControl";
-            this.groupBoxSeqControl.Size = new System.Drawing.Size(765, 282);
+            this.groupBoxSeqControl.Size = new System.Drawing.Size(763, 282);
             this.groupBoxSeqControl.TabIndex = 39;
             this.groupBoxSeqControl.TabStop = false;
             this.groupBoxSeqControl.Text = "Vixen Sequences";
@@ -3438,9 +3438,9 @@
             // 
             // label26
             // 
-            this.label26.Location = new System.Drawing.Point(64, 660);
+            this.label26.Location = new System.Drawing.Point(64, 662);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(660, 55);
+            this.label26.Size = new System.Drawing.Size(660, 53);
             this.label26.TabIndex = 22;
             this.label26.Text = "When \"Use Vixen Sequences\" is Enabled Vixen Messaging will use one of your Vixen " +
     "3 sequences and can be selected Randomly or whichever one is displayed.";
@@ -3455,7 +3455,7 @@
             this.tabPageWordLists.Location = new System.Drawing.Point(4, 29);
             this.tabPageWordLists.Name = "tabPageWordLists";
             this.tabPageWordLists.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageWordLists.Size = new System.Drawing.Size(781, 887);
+            this.tabPageWordLists.Size = new System.Drawing.Size(779, 887);
             this.tabPageWordLists.TabIndex = 4;
             this.tabPageWordLists.Text = "Word Lists";
             // 
@@ -3478,6 +3478,69 @@
             this.pictureBoxSaveWhitelist.TabStop = false;
             this.pictureBoxSaveWhitelist.Tag = "1";
             this.pictureBoxSaveWhitelist.Click += new System.EventHandler(this.pictureBoxSaveWhitelist_Click);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.BackColor = System.Drawing.Color.Azure;
+            this.tabPage1.Controls.Add(this.label84);
+            this.tabPage1.Controls.Add(this.label83);
+            this.tabPage1.Controls.Add(this.label82);
+            this.tabPage1.Controls.Add(this.richTextBox1);
+            this.tabPage1.Controls.Add(this.label81);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(779, 887);
+            this.tabPage1.TabIndex = 6;
+            this.tabPage1.Text = "Remote Commands";
+            // 
+            // label84
+            // 
+            this.label84.Location = new System.Drawing.Point(6, 66);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(762, 48);
+            this.label84.TabIndex = 5;
+            this.label84.Text = "Enter the command into the body of an email and  trhe word \"Messaging\" plus your " +
+    "remote access keyword and then send to the email address you have set up.";
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Location = new System.Drawing.Point(6, 147);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(90, 20);
+            this.label83.TabIndex = 4;
+            this.label83.Text = "Commands";
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(222, 147);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(55, 20);
+            this.label82.TabIndex = 3;
+            this.label82.Text = "Result";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.Color.Azure;
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Location = new System.Drawing.Point(10, 184);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(765, 492);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label81.Location = new System.Drawing.Point(128, 18);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(519, 25);
+            this.label81.TabIndex = 0;
+            this.label81.Text = "Use these commands to control Vixen Meesaging settings.";
             // 
             // buttonSaveLog
             // 
@@ -3549,69 +3612,6 @@
             this.fileDialog.FileName = "Select a File";
             this.fileDialog.Title = "Select a File";
             // 
-            // tabPage1
-            // 
-            this.tabPage1.BackColor = System.Drawing.Color.Azure;
-            this.tabPage1.Controls.Add(this.label84);
-            this.tabPage1.Controls.Add(this.label83);
-            this.tabPage1.Controls.Add(this.label82);
-            this.tabPage1.Controls.Add(this.richTextBox1);
-            this.tabPage1.Controls.Add(this.label81);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(781, 887);
-            this.tabPage1.TabIndex = 6;
-            this.tabPage1.Text = "Remote Commands";
-            // 
-            // label81
-            // 
-            this.label81.AutoSize = true;
-            this.label81.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label81.Location = new System.Drawing.Point(128, 18);
-            this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(519, 25);
-            this.label81.TabIndex = 0;
-            this.label81.Text = "Use these commands to control Vixen Meesaging settings.";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BackColor = System.Drawing.Color.Azure;
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Location = new System.Drawing.Point(10, 184);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(765, 492);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
-            // 
-            // label82
-            // 
-            this.label82.AutoSize = true;
-            this.label82.Location = new System.Drawing.Point(222, 147);
-            this.label82.Name = "label82";
-            this.label82.Size = new System.Drawing.Size(55, 20);
-            this.label82.TabIndex = 3;
-            this.label82.Text = "Result";
-            // 
-            // label83
-            // 
-            this.label83.AutoSize = true;
-            this.label83.Location = new System.Drawing.Point(6, 147);
-            this.label83.Name = "label83";
-            this.label83.Size = new System.Drawing.Size(90, 20);
-            this.label83.TabIndex = 4;
-            this.label83.Text = "Commands";
-            // 
-            // label84
-            // 
-            this.label84.Location = new System.Drawing.Point(6, 66);
-            this.label84.Name = "label84";
-            this.label84.Size = new System.Drawing.Size(762, 48);
-            this.label84.TabIndex = 5;
-            this.label84.Text = "Enter the command into the body of an email and  trhe word \"Messaging\" plus your " +
-    "remote access keyword and then send to the email address you have set up.";
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -3634,7 +3634,7 @@
             this.Name = "FormMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Vixen Messaging - v3.1.3";
+            this.Text = "Vixen Messaging - v3.1.4";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.groupBox1.ResumeLayout(false);
@@ -3716,11 +3716,11 @@
             this.tabPageWordLists.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSaveBlacklist)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSaveWhitelist)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).EndInit();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
 
         }
