@@ -2377,8 +2377,7 @@
             this.label78.TabIndex = 10;
             this.label78.Text = "Remote Access Keyword:";
             this.toolTip1.SetToolTip(this.label78, "Enter a keyword that you will use when you want to email setting to Messaging. In" +
-        " your subject heading for example you will type \"Messaging Northridge\". Can be l" +
-        "eft blank.");
+        " your subject heading for example you will type \"Messaging Northridge\".");
             // 
             // textBoxAccessPWD
             // 
@@ -2389,6 +2388,7 @@
             this.textBoxAccessPWD.Text = "Northridge";
             this.toolTip1.SetToolTip(this.textBoxAccessPWD, "Enter a password that you will use when you want to email setting to Messaging. I" +
         "n your subject heading for example you will type \"Messaging Northridge\"");
+            this.textBoxAccessPWD.TextChanged += new System.EventHandler(this.textBoxAccessPWD_TextChanged);
             // 
             // checkBoxEmail
             // 

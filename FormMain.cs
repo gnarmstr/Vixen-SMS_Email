@@ -1,4 +1,8 @@
-﻿#region System modules
+﻿using System.ComponentModel;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
+
+#region System modules
 
 using System;
 using System.Collections.Generic;
@@ -37,7 +41,8 @@ namespace Vixen_Messaging
         { 
             buttonStart.Enabled = false;
             buttonStop.Enabled = true;
-            ShortTimer();
+            timerCheckMail.Interval = 200;
+            timerCheckMail.Enabled = true;
         }
 
         private bool Pop3Login()
@@ -227,7 +232,7 @@ namespace Vixen_Messaging
             textBoxServer.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "POP3Server", "pop.gmail.com");
             textBoxUID.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "UID", "");
             textBoxPWD.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "Password", "");
-            textBoxAccessPWD.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxAccessPWD", "Northridge");
+            textBoxAccessPWD.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxAccessPWD", "Your Keyword");
             textBoxVixenFolder.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxVixenFolder", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3"));
             textBoxVixenServer.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "VixenServer", "http://localhost:8888/api/play/playSequence");
             GlobalVar.Blacklistlocation = Path.Combine(GlobalVar.SettingsPath + "\\Blacklist.txt");
@@ -501,18 +506,7 @@ namespace Vixen_Messaging
                         {
                             headerphone = header.Subject.Substring(textBoxSubjectHeader.Text.Length).Trim();
                         }
-                        else
-                        {
-                            // Capture incoming email change in requesting Messaging Settings. 
-                            if (header.Subject.ToLower().Contains("messaging " + textBoxAccessPWD.Text.ToLower()))
-                            {
-                                timerCheckMail.Enabled = false;
-                                timerCheckMail.Interval = 12000;
-                                timerCheckMail.Enabled = true;
-                                VixenSettings(messageNum);
-                                break;
 
-                            }
 
                             if (!CheckBlacklistMessage(header.From.Address, header.Subject, headerphone))
                             {
@@ -553,7 +547,7 @@ namespace Vixen_Messaging
                                             // We only want one message at a time so, disconnect and wait for next time.
                                             _pop.Disconnect();
                                             SendMessageToVixen(smsMessage, out blacklist, out notWhitemsg);
-                                            if (blacklist)
+                                            if (blacklist && !notWhitemsg)
                                             {
                                                 rtnmsg =
                                                     "Please reframe from using inappropiate words. If this happens again your phone number will be banned for the night.";
@@ -603,12 +597,28 @@ namespace Vixen_Messaging
                                     #endregion
 
                                 else
+                                    
+                        
+                                    // Capture incoming email change in requesting Messaging Settings. 
+                                    if (header.Subject.ToLower()
+                                        .Contains("messaging " + textBoxAccessPWD.Text.ToLower()))
+                                    {
+                                        timerCheckMail.Enabled = false;
+                                        timerCheckMail.Interval = 12000;
+                                        timerCheckMail.Enabled = true;
+                                        VixenSettings(messageNum);
+                                        break;
+
+                                    }
+
                                 #region Email
 
-                                {
+                                
                                     if (!CheckBlacklistMessage(header.From.Address, header.Subject, headerphone))
                                     {
-                                        LogDisplay(GlobalVar.LogMsg = ("Retrieved Header # " + messageNum + ": " + header.Subject));
+                                        LogDisplay(
+                                            GlobalVar.LogMsg =
+                                                ("Retrieved Header # " + messageNum + ": " + header.Subject));
                                         try
                                         {
                                             string emailMessage = header.Subject;
@@ -640,7 +650,8 @@ namespace Vixen_Messaging
                                                 }
                                                 else
                                                 {
-                                                    rtnmsg = "Sorry one or more of the names you sent is not in the approved list!";
+                                                    rtnmsg =
+                                                        "Sorry one or more of the names you sent is not in the approved list!";
                                                     SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
                                                 }
                                             }
@@ -650,7 +661,7 @@ namespace Vixen_Messaging
                                             LogDisplay(GlobalVar.LogMsg = ("Error Parsing Message Body: " + ex.Message));
                                         }
                                     }
-                                }
+                                
 
                                 #endregion
                             }
@@ -662,7 +673,7 @@ namespace Vixen_Messaging
                                 rtnmsg = textBoxReturnBannedMSG.Text;
                                 SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
                             }
-                        }
+                        
                     }
                         Application.DoEvents();
                     }
@@ -819,9 +830,7 @@ namespace Vixen_Messaging
 
         private void ShortTimer()
         {
-            timerCheckMail.Enabled = false;
             timerCheckMail.Interval = 200;
-            timerCheckMail.Enabled = true;
         }
         #endregion
 
@@ -1202,6 +1211,36 @@ namespace Vixen_Messaging
                         }
                         File.Delete(outputFileName);
                         File.WriteAllText(outputFileName, fileText);
+   
+                        //Bitmap objBmpImage = new Bitmap(1, 1);
+
+                        //int intWidth = 0;
+                        //int intHeight = 0;
+
+                        // // Create the Font object for the image text drawing.
+                        //  Font objFont = new Font("Arial", 20, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+
+                        // // Create a graphics object to measure the text's width and height.
+                        // Graphics objGraphics = Graphics.FromImage(objBmpImage);
+
+                        //// This is where the bitmap size is determined.
+                        //intWidth = (int)objGraphics.MeasureString(msg, objFont).Width;
+                        // intHeight = (int)objGraphics.MeasureString(msg, objFont).Height;
+
+                        //// Create the bmpImage again with the correct size for the text and font.
+                        //objBmpImage = new Bitmap(objBmpImage, new Size(intWidth, intHeight));
+
+                        ////Add the colors to the new bitmap.
+                        //objGraphics = Graphics.FromImage(objBmpImage);
+
+                        ////Set Background color
+                        //objGraphics.Clear(Color.White);
+                        //objGraphics.SmoothingMode = SmoothingMode.AntiAlias;
+                        //objGraphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+                        //objGraphics.DrawString(msg, objFont, new SolidBrush(Color.FromArgb(102, 102, 102)), 0, 0);
+                        //objGraphics.Flush();
+                        //pictureBoxMovie.Image = objBmpImage;
+
                         if (checkBoxVariableLength.Checked)
                         {
                             timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + numericUpDownIntervalMsgs.Value)*1000;
@@ -2884,6 +2923,15 @@ namespace Vixen_Messaging
             if (comboBoxPlayMode.Text == "Sequential")
             {
                 GlobalVar.Sequential = 1;
+            }
+        }
+
+        private void textBoxAccessPWD_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxAccessPWD.Text == "")
+            {
+                MessageBox.Show(@"Must contain a Remote Access Keyword");
+                textBoxAccessPWD.Text = @"Your Keyword";
             }
         }
    
