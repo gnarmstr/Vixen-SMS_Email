@@ -2838,6 +2838,8 @@
             this.richTextBoxMessage.Size = new System.Drawing.Size(740, 232);
             this.richTextBoxMessage.TabIndex = 60;
             this.richTextBoxMessage.Text = "";
+            this.toolTip1.SetToolTip(this.richTextBoxMessage, "The word COUNTDOWN will be replaced with the number of days. You can add any mess" +
+        "sage before or after the word COUNTDOWN or have multiple COUNTDOWNS.");
             // 
             // buttonSaveMessageList
             // 
@@ -2860,6 +2862,7 @@
             this.checkBoxLocalRandom.TabIndex = 58;
             this.checkBoxLocalRandom.Text = "Play Local Msgs Randomly:";
             this.checkBoxLocalRandom.UseVisualStyleBackColor = true;
+            this.checkBoxLocalRandom.CheckedChanged += new System.EventHandler(this.checkBoxLocalRandom_CheckedChanged);
             // 
             // label10
             // 
@@ -2868,6 +2871,7 @@
             this.label10.Size = new System.Drawing.Size(392, 32);
             this.label10.TabIndex = 54;
             this.label10.Text = "Messages to be displayed. Seperated by Newline.";
+            this.toolTip1.SetToolTip(this.label10, "The word COUNTDOWN will be replaced with the number of days.");
             // 
             // groupBoxSeqSettings
             // 
@@ -3634,7 +3638,7 @@
             this.Name = "FormMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Vixen Messaging - v3.1.4";
+            this.Text = "Vixen Messaging - v3.1.5";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.groupBox1.ResumeLayout(false);

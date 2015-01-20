@@ -711,15 +711,14 @@ namespace Vixen_Messaging
                 bool notWhitemsg;
                 string msg;
 
-                var richTextBoxText = richTextBoxMessage.Text;
-                var phrases = richTextBoxText.Split('\n');
+       //         var richTextBoxText = richTextBoxMessage.Text;
+                var phrases = richTextBoxMessage.Text.Split('\n');
                 var msgcount = phrases.Length;
-
                 if (checkBoxLocalRandom.Checked)
                 {
 
                     var rndLineNumber = new Random();
-                    var rndLineNumberResult = rndLineNumber.Next(0, msgcount - 1);
+                    var rndLineNumberResult = rndLineNumber.Next(0, msgcount);
                     msg = phrases[rndLineNumberResult];
                 }
                 else
@@ -734,6 +733,16 @@ namespace Vixen_Messaging
                         msg = phrases[0];
                         GlobalVar.Msgindex++;
                     }
+                }
+                if (msg.Contains("COUNTDOWN"))
+                {
+                    //   phrases[i] = phrases[i].Replace("COUNTDOWN", DateTime);
+                    DateTime daysLeft = DateTime.Parse("25/12/2015 12:00:01 AM");
+                    DateTime startDate = DateTime.Now;
+                    //Calculate countdown timer.
+                    TimeSpan t = daysLeft - startDate;
+                    string countDown = string.Format("{0}", t.Days);
+                    msg = msg.Replace("COUNTDOWN", countDown);
                 }
                 SendMessageToVixen(msg, out blacklist, out notWhitemsg);
             }
@@ -2932,6 +2941,14 @@ namespace Vixen_Messaging
             {
                 MessageBox.Show(@"Must contain a Remote Access Keyword");
                 textBoxAccessPWD.Text = @"Your Keyword";
+            }
+        }
+
+        private void checkBoxLocalRandom_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!checkBoxLocalRandom.Checked)
+            {
+                GlobalVar.Msgindex = 0;
             }
         }
    
