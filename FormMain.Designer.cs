@@ -205,6 +205,8 @@
             this.checkBoxEmail = new System.Windows.Forms.CheckBox();
             this.checkBoxLocal = new System.Windows.Forms.CheckBox();
             this.checkBoxTwilio = new System.Windows.Forms.CheckBox();
+            this.richTextBoxMessage = new System.Windows.Forms.RichTextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.label66 = new System.Windows.Forms.Label();
             this.comboBoxPlayMode = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -241,11 +243,11 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.richTextBoxLog1 = new System.Windows.Forms.RichTextBox();
             this.groupBoxMessages = new System.Windows.Forms.GroupBox();
-            this.richTextBoxMessage = new System.Windows.Forms.RichTextBox();
             this.buttonSaveMessageList = new System.Windows.Forms.Button();
             this.checkBoxLocalRandom = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.groupBoxSeqSettings = new System.Windows.Forms.GroupBox();
+            this.numericUpDownMultiLine = new System.Windows.Forms.NumericUpDown();
+            this.label85 = new System.Windows.Forms.Label();
             this.textBoxFontSize = new System.Windows.Forms.TextBox();
             this.buttonFont = new System.Windows.Forms.Button();
             this.textBoxFont = new System.Windows.Forms.TextBox();
@@ -316,6 +318,13 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.buttonStopSequence = new System.Windows.Forms.Button();
             this.fileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.checkBoxMultiLine = new System.Windows.Forms.CheckBox();
+            this.label87 = new System.Windows.Forms.Label();
+            this.dateCountDown = new System.Windows.Forms.DateTimePicker();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.label86 = new System.Windows.Forms.Label();
+            this.label88 = new System.Windows.Forms.Label();
+            this.numericUpDownMaxWords = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxEffects.SuspendLayout();
@@ -360,6 +369,7 @@
             this.groupBox4.SuspendLayout();
             this.groupBoxMessages.SuspendLayout();
             this.groupBoxSeqSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMultiLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TextLineNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTextPosition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTextSpeed)).BeginInit();
@@ -377,6 +387,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).BeginInit();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxWords)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -2124,7 +2136,7 @@
             // SingleColourSelection
             // 
             this.SingleColourSelection.Controls.Add(this.SingleCol1);
-            this.SingleColourSelection.Location = new System.Drawing.Point(14, 262);
+            this.SingleColourSelection.Location = new System.Drawing.Point(14, 272);
             this.SingleColourSelection.Name = "SingleColourSelection";
             this.SingleColourSelection.Size = new System.Drawing.Size(144, 80);
             this.SingleColourSelection.TabIndex = 8;
@@ -2157,7 +2169,7 @@
             this.RandomColourSelection.Controls.Add(this.TextColor6);
             this.RandomColourSelection.Controls.Add(this.TextColor5);
             this.RandomColourSelection.Enabled = false;
-            this.RandomColourSelection.Location = new System.Drawing.Point(207, 262);
+            this.RandomColourSelection.Location = new System.Drawing.Point(207, 272);
             this.RandomColourSelection.Name = "RandomColourSelection";
             this.RandomColourSelection.Size = new System.Drawing.Size(534, 80);
             this.RandomColourSelection.TabIndex = 9;
@@ -2289,7 +2301,7 @@
             // 
             this.checkBoxRandomCol.AutoSize = true;
             this.checkBoxRandomCol.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxRandomCol.Location = new System.Drawing.Point(20, 34);
+            this.checkBoxRandomCol.Location = new System.Drawing.Point(14, 34);
             this.checkBoxRandomCol.Name = "checkBoxRandomCol";
             this.checkBoxRandomCol.Size = new System.Drawing.Size(220, 24);
             this.checkBoxRandomCol.TabIndex = 1;
@@ -2431,6 +2443,25 @@
             this.checkBoxTwilio.Text = "Twilio (SMS)";
             this.toolTip1.SetToolTip(this.checkBoxTwilio, "Select to retrieve messages from Twilo. SMS accout.");
             this.checkBoxTwilio.UseVisualStyleBackColor = true;
+            // 
+            // richTextBoxMessage
+            // 
+            this.richTextBoxMessage.Location = new System.Drawing.Point(8, 45);
+            this.richTextBoxMessage.Name = "richTextBoxMessage";
+            this.richTextBoxMessage.Size = new System.Drawing.Size(559, 249);
+            this.richTextBoxMessage.TabIndex = 60;
+            this.richTextBoxMessage.Text = "";
+            this.toolTip1.SetToolTip(this.richTextBoxMessage, "The word COUNTDOWN will be replaced with the number of days. You can add any mess" +
+        "sage before or after the word COUNTDOWN or have multiple COUNTDOWNS.");
+            // 
+            // label10
+            // 
+            this.label10.Location = new System.Drawing.Point(164, 15);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(371, 27);
+            this.label10.TabIndex = 54;
+            this.label10.Text = "Messages to be displayed. Seperated by Newline.";
+            this.toolTip1.SetToolTip(this.label10, "The word COUNTDOWN will be replaced with the number of days.");
             // 
             // label66
             // 
@@ -2820,6 +2851,9 @@
             // 
             // groupBoxMessages
             // 
+            this.groupBoxMessages.Controls.Add(this.label86);
+            this.groupBoxMessages.Controls.Add(this.dateCountDown);
+            this.groupBoxMessages.Controls.Add(this.label87);
             this.groupBoxMessages.Controls.Add(this.richTextBoxMessage);
             this.groupBoxMessages.Controls.Add(this.buttonSaveMessageList);
             this.groupBoxMessages.Controls.Add(this.checkBoxLocalRandom);
@@ -2831,20 +2865,10 @@
             this.groupBoxMessages.TabStop = false;
             this.groupBoxMessages.Text = "Local Messages";
             // 
-            // richTextBoxMessage
-            // 
-            this.richTextBoxMessage.Location = new System.Drawing.Point(8, 62);
-            this.richTextBoxMessage.Name = "richTextBoxMessage";
-            this.richTextBoxMessage.Size = new System.Drawing.Size(740, 232);
-            this.richTextBoxMessage.TabIndex = 60;
-            this.richTextBoxMessage.Text = "";
-            this.toolTip1.SetToolTip(this.richTextBoxMessage, "The word COUNTDOWN will be replaced with the number of days. You can add any mess" +
-        "sage before or after the word COUNTDOWN or have multiple COUNTDOWNS.");
-            // 
             // buttonSaveMessageList
             // 
             this.buttonSaveMessageList.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonSaveMessageList.Location = new System.Drawing.Point(650, 18);
+            this.buttonSaveMessageList.Location = new System.Drawing.Point(615, 257);
             this.buttonSaveMessageList.Name = "buttonSaveMessageList";
             this.buttonSaveMessageList.Size = new System.Drawing.Size(98, 37);
             this.buttonSaveMessageList.TabIndex = 59;
@@ -2854,27 +2878,20 @@
             // 
             // checkBoxLocalRandom
             // 
-            this.checkBoxLocalRandom.AutoSize = true;
             this.checkBoxLocalRandom.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxLocalRandom.Location = new System.Drawing.Point(388, 31);
+            this.checkBoxLocalRandom.Location = new System.Drawing.Point(578, 48);
             this.checkBoxLocalRandom.Name = "checkBoxLocalRandom";
-            this.checkBoxLocalRandom.Size = new System.Drawing.Size(227, 24);
+            this.checkBoxLocalRandom.Size = new System.Drawing.Size(162, 64);
             this.checkBoxLocalRandom.TabIndex = 58;
             this.checkBoxLocalRandom.Text = "Play Local Msgs Randomly:";
             this.checkBoxLocalRandom.UseVisualStyleBackColor = true;
             this.checkBoxLocalRandom.CheckedChanged += new System.EventHandler(this.checkBoxLocalRandom_CheckedChanged);
             // 
-            // label10
-            // 
-            this.label10.Location = new System.Drawing.Point(10, 32);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(392, 32);
-            this.label10.TabIndex = 54;
-            this.label10.Text = "Messages to be displayed. Seperated by Newline.";
-            this.toolTip1.SetToolTip(this.label10, "The word COUNTDOWN will be replaced with the number of days.");
-            // 
             // groupBoxSeqSettings
             // 
+            this.groupBoxSeqSettings.Controls.Add(this.label88);
+            this.groupBoxSeqSettings.Controls.Add(this.numericUpDownMaxWords);
+            this.groupBoxSeqSettings.Controls.Add(this.groupBox7);
             this.groupBoxSeqSettings.Controls.Add(this.textBoxFontSize);
             this.groupBoxSeqSettings.Controls.Add(this.buttonFont);
             this.groupBoxSeqSettings.Controls.Add(this.textBoxFont);
@@ -2898,11 +2915,47 @@
             this.groupBoxSeqSettings.TabStop = false;
             this.groupBoxSeqSettings.Text = "Incoming Message / Text Settings";
             // 
+            // numericUpDownMultiLine
+            // 
+            this.numericUpDownMultiLine.Enabled = false;
+            this.numericUpDownMultiLine.Location = new System.Drawing.Point(291, 17);
+            this.numericUpDownMultiLine.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.numericUpDownMultiLine.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownMultiLine.Name = "numericUpDownMultiLine";
+            this.numericUpDownMultiLine.Size = new System.Drawing.Size(72, 26);
+            this.numericUpDownMultiLine.TabIndex = 60;
+            this.toolTip1.SetToolTip(this.numericUpDownMultiLine, "Vixen provides support for 4 lines of text. Select the total number of lines you " +
+        "would like to use.");
+            this.numericUpDownMultiLine.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label85
+            // 
+            this.label85.AutoSize = true;
+            this.label85.Location = new System.Drawing.Point(159, 19);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(126, 20);
+            this.label85.TabIndex = 61;
+            this.label85.Text = "No of lines used:";
+            this.toolTip1.SetToolTip(this.label85, "Vixen provides support for 4 lines of text. Select the total number of lines you " +
+        "would like to use.");
+            // 
             // textBoxFontSize
             // 
             this.textBoxFontSize.BackColor = System.Drawing.Color.White;
             this.textBoxFontSize.Enabled = false;
-            this.textBoxFontSize.Location = new System.Drawing.Point(609, 112);
+            this.textBoxFontSize.Location = new System.Drawing.Point(613, 131);
             this.textBoxFontSize.Name = "textBoxFontSize";
             this.textBoxFontSize.Size = new System.Drawing.Size(86, 26);
             this.textBoxFontSize.TabIndex = 59;
@@ -2910,7 +2963,7 @@
             // 
             // buttonFont
             // 
-            this.buttonFont.Location = new System.Drawing.Point(574, 29);
+            this.buttonFont.Location = new System.Drawing.Point(580, 29);
             this.buttonFont.Name = "buttonFont";
             this.buttonFont.Size = new System.Drawing.Size(148, 32);
             this.buttonFont.TabIndex = 5;
@@ -2923,7 +2976,7 @@
             this.textBoxFont.BackColor = System.Drawing.Color.White;
             this.textBoxFont.Enabled = false;
             this.textBoxFont.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.textBoxFont.Location = new System.Drawing.Point(555, 80);
+            this.textBoxFont.Location = new System.Drawing.Point(558, 80);
             this.textBoxFont.Name = "textBoxFont";
             this.textBoxFont.Size = new System.Drawing.Size(187, 26);
             this.textBoxFont.TabIndex = 57;
@@ -2990,7 +3043,7 @@
             "Up",
             "Down",
             "None"});
-            this.comboBoxTextDirection.Location = new System.Drawing.Point(387, 80);
+            this.comboBoxTextDirection.Location = new System.Drawing.Point(381, 80);
             this.comboBoxTextDirection.Name = "comboBoxTextDirection";
             this.comboBoxTextDirection.Size = new System.Drawing.Size(86, 28);
             this.comboBoxTextDirection.TabIndex = 4;
@@ -2999,7 +3052,7 @@
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(276, 83);
+            this.label45.Location = new System.Drawing.Point(270, 83);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(76, 20);
             this.label45.TabIndex = 51;
@@ -3008,7 +3061,7 @@
             // trackBarTextPosition
             // 
             this.trackBarTextPosition.AutoSize = false;
-            this.trackBarTextPosition.Location = new System.Drawing.Point(116, 149);
+            this.trackBarTextPosition.Location = new System.Drawing.Point(116, 169);
             this.trackBarTextPosition.Maximum = 100;
             this.trackBarTextPosition.Minimum = 1;
             this.trackBarTextPosition.Name = "trackBarTextPosition";
@@ -3022,7 +3075,7 @@
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(15, 158);
+            this.label44.Location = new System.Drawing.Point(15, 178);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(103, 20);
             this.label44.TabIndex = 50;
@@ -3031,7 +3084,7 @@
             // trackBarTextSpeed
             // 
             this.trackBarTextSpeed.AutoSize = false;
-            this.trackBarTextSpeed.Location = new System.Drawing.Point(114, 211);
+            this.trackBarTextSpeed.Location = new System.Drawing.Point(114, 221);
             this.trackBarTextSpeed.Maximum = 20;
             this.trackBarTextSpeed.Minimum = 1;
             this.trackBarTextSpeed.Name = "trackBarTextSpeed";
@@ -3045,7 +3098,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(15, 220);
+            this.label21.Location = new System.Drawing.Point(15, 229);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(94, 20);
             this.label21.TabIndex = 48;
@@ -3616,6 +3669,78 @@
             this.fileDialog.FileName = "Select a File";
             this.fileDialog.Title = "Select a File";
             // 
+            // checkBoxMultiLine
+            // 
+            this.checkBoxMultiLine.AutoSize = true;
+            this.checkBoxMultiLine.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxMultiLine.Location = new System.Drawing.Point(3, 18);
+            this.checkBoxMultiLine.Name = "checkBoxMultiLine";
+            this.checkBoxMultiLine.Size = new System.Drawing.Size(139, 24);
+            this.checkBoxMultiLine.TabIndex = 64;
+            this.checkBoxMultiLine.Text = "Multi Line Use:";
+            this.toolTip1.SetToolTip(this.checkBoxMultiLine, "Will allow text to be placed on more then one line of your Matrix/Megatree. Line " +
+        "number will change to 1 when Multiline is enabled.");
+            this.checkBoxMultiLine.UseVisualStyleBackColor = true;
+            this.checkBoxMultiLine.CheckedChanged += new System.EventHandler(this.checkBoxMultiLine_CheckedChanged);
+            // 
+            // label87
+            // 
+            this.label87.AutoSize = true;
+            this.label87.Location = new System.Drawing.Point(586, 143);
+            this.label87.Name = "label87";
+            this.label87.Size = new System.Drawing.Size(151, 20);
+            this.label87.TabIndex = 65;
+            this.label87.Text = "Countdown to Date:";
+            this.toolTip1.SetToolTip(this.label87, "Add the word COUNTDOWN to your message to display the number fo days.");
+            // 
+            // dateCountDown
+            // 
+            this.dateCountDown.CustomFormat = "";
+            this.dateCountDown.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateCountDown.Location = new System.Drawing.Point(590, 180);
+            this.dateCountDown.Name = "dateCountDown";
+            this.dateCountDown.Size = new System.Drawing.Size(138, 26);
+            this.dateCountDown.TabIndex = 66;
+            this.dateCountDown.Value = new System.DateTime(2015, 12, 25, 0, 0, 0, 0);
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label85);
+            this.groupBox7.Controls.Add(this.checkBoxMultiLine);
+            this.groupBox7.Controls.Add(this.numericUpDownMultiLine);
+            this.groupBox7.Location = new System.Drawing.Point(8, 114);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(376, 49);
+            this.groupBox7.TabIndex = 65;
+            this.groupBox7.TabStop = false;
+            // 
+            // label86
+            // 
+            this.label86.AutoSize = true;
+            this.label86.Location = new System.Drawing.Point(615, 213);
+            this.label86.Name = "label86";
+            this.label86.Size = new System.Drawing.Size(89, 20);
+            this.label86.TabIndex = 67;
+            this.label86.Text = "dd/mm/yyyy";
+            // 
+            // label88
+            // 
+            this.label88.AutoSize = true;
+            this.label88.Location = new System.Drawing.Point(403, 134);
+            this.label88.Name = "label88";
+            this.label88.Size = new System.Drawing.Size(92, 20);
+            this.label88.TabIndex = 66;
+            this.label88.Text = "Max Words:";
+            this.toolTip1.SetToolTip(this.label88, "Enter the Maximum number of words in a message or 0 for unlimited.");
+            // 
+            // numericUpDownMaxWords
+            // 
+            this.numericUpDownMaxWords.Location = new System.Drawing.Point(499, 132);
+            this.numericUpDownMaxWords.Name = "numericUpDownMaxWords";
+            this.numericUpDownMaxWords.Size = new System.Drawing.Size(72, 26);
+            this.numericUpDownMaxWords.TabIndex = 65;
+            this.toolTip1.SetToolTip(this.numericUpDownMaxWords, "Enter 0 for unlimited words.");
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -3638,7 +3763,7 @@
             this.Name = "FormMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Vixen Messaging - v3.1.5";
+            this.Text = "Vixen Messaging - v3.1.7";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.groupBox1.ResumeLayout(false);
@@ -3702,6 +3827,7 @@
             this.groupBoxMessages.PerformLayout();
             this.groupBoxSeqSettings.ResumeLayout(false);
             this.groupBoxSeqSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMultiLine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TextLineNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTextPosition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTextSpeed)).EndInit();
@@ -3725,6 +3851,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).EndInit();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxWords)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -4017,6 +4146,15 @@
         private System.Windows.Forms.Label label84;
         private System.Windows.Forms.Label label83;
         private System.Windows.Forms.Label label82;
+        private System.Windows.Forms.NumericUpDown numericUpDownMultiLine;
+        private System.Windows.Forms.Label label85;
+        private System.Windows.Forms.CheckBox checkBoxMultiLine;
+        private System.Windows.Forms.DateTimePicker dateCountDown;
+        private System.Windows.Forms.Label label87;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label label86;
+        private System.Windows.Forms.Label label88;
+        private System.Windows.Forms.NumericUpDown numericUpDownMaxWords;
     }
 }
 

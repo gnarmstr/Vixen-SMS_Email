@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Security.AccessControl;
+using System.Threading;
 
 #region System modules
 
@@ -19,6 +21,7 @@ using Common.Resources.Properties;
 using System.Diagnostics;
 using Twilio;
 using Application = System.Windows.Forms.Application;
+using System.Globalization;
 
 #endregion
 
@@ -150,6 +153,12 @@ namespace Vixen_Messaging
                 checkBoxEnableSqnctrl.Enabled = false;
                 checkBoxRandomSeqSelection.Enabled = false;
                 checkBoxEnableSqnctrl.Checked = false;
+            }
+
+            if (checkBoxMultiLine.Checked)
+            {
+                TextLineNumber.Enabled = false;
+                numericUpDownMultiLine.Enabled = true;
             }
 
             //Changes Position and Size of Groupboxs in the Sequence Tab
@@ -361,6 +370,11 @@ namespace Vixen_Messaging
             checkBoxLocal.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocal", true);
             checkBoxTwilio.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwilio", false);
             GlobalVar.TwilioPhoneNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwilioPhoneNumber", "");
+            checkBoxMultiLine.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMultiLine", false);
+            numericUpDownMultiLine.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMultiLine", 1);
+            numericUpDownMaxWords.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords", 0);
+            var dateCountDownString = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString", "25/12/15");
+            dateCountDown.Value = Convert.ToDateTime(dateCountDownString);
         }
         #endregion
 
@@ -514,6 +528,7 @@ namespace Vixen_Messaging
 
                                 bool blacklist;
                                 bool notWhitemsg;
+                                bool maxWordCount;
                                 if (header.Subject.Contains(textBoxSubjectHeader.Text))
                                     //grabs the SMS header details from the form
                                 {
@@ -546,37 +561,46 @@ namespace Vixen_Messaging
                                             _pop.DeleteMessage(messageNum);
                                             // We only want one message at a time so, disconnect and wait for next time.
                                             _pop.Disconnect();
-                                            SendMessageToVixen(smsMessage, out blacklist, out notWhitemsg);
-                                            if (blacklist && !notWhitemsg)
+                                            SendMessageToVixen(smsMessage, out blacklist, out notWhitemsg, out maxWordCount);
+                                            if (!maxWordCount)
                                             {
-                                                rtnmsg =
-                                                    "Please reframe from using inappropiate words. If this happens again your phone number will be banned for the night.";
-                                                using (
-                                                    var file = new StreamWriter(@textBoxBlacklistEmailLog.Text,
-                                                        true))
+                                                if (blacklist && !notWhitemsg)
                                                 {
-                                                    file.WriteLine(phoneNumber);
-                                                }
-                                                SendReturnText(phoneNumber, header.From.ToString(), rtnmsg,
-                                                    messageNum);
-                                                return;
-                                            }
-                                            else
-                                            {
-                                                if (!notWhitemsg)
-                                                {
-                                                    rtnmsg = "Your message will appear soon in lights.";
+                                                    rtnmsg =
+                                                        "Please reframe from using inappropiate words. If this happens again your phone number will be banned for the night.";
+                                                    using (
+                                                        var file = new StreamWriter(@textBoxBlacklistEmailLog.Text,
+                                                            true))
+                                                    {
+                                                        file.WriteLine(phoneNumber);
+                                                    }
                                                     SendReturnText(phoneNumber, header.From.ToString(), rtnmsg,
                                                         messageNum);
                                                     return;
                                                 }
                                                 else
                                                 {
-                                                    rtnmsg =
-                                                        "Sorry one or more of the names you sent is not in the approved list!";
-                                                    SendReturnText(phoneNumber, header.From.ToString(), rtnmsg,
-                                                        messageNum);
+                                                    if (!notWhitemsg)
+                                                    {
+                                                        rtnmsg = "Your message will appear soon in lights.";
+                                                        SendReturnText(phoneNumber, header.From.ToString(), rtnmsg,
+                                                            messageNum);
+                                                        return;
+                                                    }
+                                                    else
+                                                    {
+                                                        rtnmsg =
+                                                            "Sorry, one or more of the names you sent is not in the approved list or you are using unapproved abbriviations! You words have been recoreded and if found to be non offensive then they will be added to the list. Please try again on another day.";
+                                                        SendReturnText(phoneNumber, header.From.ToString(), rtnmsg,
+                                                            messageNum);
+                                                    }
                                                 }
+                                            }
+                                            else
+                                            {
+                                                rtnmsg = "Sorry, your message is too long and will not be display. Please reduce the number of words in your message to below " + (numericUpDownMaxWords.Value + 1) + " and resend. Thank you.";
+                                                SendReturnText(phoneNumber, header.From.ToString(), rtnmsg,
+                                                    messageNum);
                                             }
                                         }
                                         catch (Exception ex)
@@ -626,34 +650,42 @@ namespace Vixen_Messaging
                                             _pop.DeleteMessage(messageNum);
                                             // We only want one message at a time so, disconnect and wait for next time.
                                             _pop.Disconnect();
-                                            SendMessageToVixen(emailMessage, out blacklist, out notWhitemsg);
-                                            if (blacklist && !notWhitemsg)
+                                            SendMessageToVixen(emailMessage, out blacklist, out notWhitemsg, out maxWordCount);
+                                            if (!maxWordCount)
                                             {
-                                                rtnmsg =
-                                                    "Please reframe from using inappropiate words. If this happens again your email address will be banned for the night.";
-                                                using (
-                                                    var file = new StreamWriter(@textBoxBlacklistEmailLog.Text,
-                                                        true))
+                                                if (blacklist && !notWhitemsg)
                                                 {
-                                                    file.WriteLine(header.From.Address);
-                                                }
-                                                SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
-                                                return;
-                                            }
-                                            else
-                                            {
-                                                if (!notWhitemsg)
-                                                {
-                                                    rtnmsg = "Your message will appear soon in lights.";
+                                                    rtnmsg =
+                                                        "Please reframe from using inappropiate words. If this happens again your email address will be banned for the night.";
+                                                    using (
+                                                        var file = new StreamWriter(@textBoxBlacklistEmailLog.Text,
+                                                            true))
+                                                    {
+                                                        file.WriteLine(header.From.Address);
+                                                    }
                                                     SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
                                                     return;
                                                 }
                                                 else
                                                 {
-                                                    rtnmsg =
-                                                        "Sorry one or more of the names you sent is not in the approved list!";
-                                                    SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+                                                    if (!notWhitemsg)
+                                                    {
+                                                        rtnmsg = "Your message will appear soon in lights.";
+                                                        SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+                                                        return;
+                                                    }
+                                                    else
+                                                    {
+                                                        rtnmsg =
+                                                            "Sorry one or more of the names you sent is not in the approved list or you are using unapproved abbriviations! You words have been recoreded and if found to be non offensive then they will be added to the list. Please try again on another day.";
+                                                        SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+                                                    }
                                                 }
+                                            }
+                                            else
+                                            {
+                                                rtnmsg = "Sorry, your message is too long and will not be display. Please reduce the number of words in your message to below " + (numericUpDownMaxWords.Value + 1) + " and resend. Thank you.";
+                                                SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
                                             }
                                         }
                                         catch (Exception ex)
@@ -709,6 +741,7 @@ namespace Vixen_Messaging
             {
                 bool blacklist;
                 bool notWhitemsg;
+                bool maxWordCount;
                 string msg;
 
        //         var richTextBoxText = richTextBoxMessage.Text;
@@ -731,20 +764,25 @@ namespace Vixen_Messaging
                     else
                     {
                         msg = phrases[0];
-                        GlobalVar.Msgindex++;
+                        GlobalVar.Msgindex = 1;
                     }
                 }
                 if (msg.Contains("COUNTDOWN"))
                 {
-                    //   phrases[i] = phrases[i].Replace("COUNTDOWN", DateTime);
-                    DateTime daysLeft = DateTime.Parse("25/12/2015 12:00:01 AM");
-                    DateTime startDate = DateTime.Now;
+                    Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-AU");
+                    //var culture = new CultureInfo("en-US", true);
+                    //var daysLeft = DateTime.Parse(dateCountDown.Value.ToShortDateString(), culture);
+                    //var now = DateTime.Parse(DateTime.Now.ToShortDateString(), culture);
+                    var daysLeft = DateTime.Parse(dateCountDown.Value.ToShortDateString());
+                    var now = DateTime.Now;
+
+
                     //Calculate countdown timer.
-                    TimeSpan t = daysLeft - startDate;
+                    TimeSpan t = daysLeft - now;
                     string countDown = string.Format("{0}", t.Days);
                     msg = msg.Replace("COUNTDOWN", countDown);
                 }
-                SendMessageToVixen(msg, out blacklist, out notWhitemsg);
+                SendMessageToVixen(msg, out blacklist, out notWhitemsg, out maxWordCount);
             }
         }
         #endregion
@@ -778,6 +816,32 @@ namespace Vixen_Messaging
                 var messageBody = messages.Messages[messages.Messages.Count - 1].Body;
                 var messageFrom = messages.Messages[messages.Messages.Count - 1].From;
 
+                //var objBmpImage = new Bitmap(1, 1);
+
+                //// Create the Font object for the image text drawing.
+                //var objFont = new Font("Arial", 20, FontStyle.Bold, GraphicsUnit.Pixel);
+
+                //// Create a graphics object to measure the text's width and height.
+                //var objGraphics = Graphics.FromImage(objBmpImage);
+
+                //// This is where the bitmap size is determined.
+                //int intWidth = (int)objGraphics.MeasureString(messageBody, objFont).Width;
+                //int intHeight = (int)objGraphics.MeasureString(messageBody, objFont).Height;
+
+                //// Create the bmpImage again with the correct size for the text and font.
+                //objBmpImage = new Bitmap(objBmpImage, new Size(intWidth, intHeight));
+
+                ////Add the colors to the new bitmap.
+                //objGraphics = Graphics.FromImage(objBmpImage);
+
+                ////Set Background color
+                //objGraphics.Clear(Color.White);
+                //objGraphics.SmoothingMode = SmoothingMode.AntiAlias;
+                //objGraphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+                //objGraphics.DrawString(messageBody, objFont, new SolidBrush(Color.FromArgb(102, 102, 102)), 0, 0);
+                //objGraphics.Flush();
+                //pictureBoxMovie.Image = objBmpImage;
+
                 LogDisplay(GlobalVar.LogMsg = ("Checking Twilio Messages"));
        //         foreach (var message in messages.Messages)
                 if (!CheckBlacklistMessage(messageFrom, messageBody, ""))
@@ -797,25 +861,35 @@ namespace Vixen_Messaging
 
                         bool blacklist;
                         bool notWhitemsg;
-                        SendMessageToVixen(smsMessage, out blacklist, out notWhitemsg);
-                        if (blacklist && !notWhitemsg)
+                        bool maxWordCount;
+                        SendMessageToVixen(smsMessage, out blacklist, out notWhitemsg, out maxWordCount);
+                        if (!maxWordCount)
                         {
-                            using ( var file = new StreamWriter(@textBoxBlacklistEmailLog.Text, true))
+                            if (blacklist && !notWhitemsg)
                             {
-                                file.WriteLine(messageFrom);
+                                using (var file = new StreamWriter(@textBoxBlacklistEmailLog.Text, true))
+                                {
+                                    file.WriteLine(messageFrom);
+                                }
+                                SendReturnTextTwilio(messageFrom,
+                                    "Please reframe from using inappropiate words. If this happens again your phone number will be banned for the night.");
+                                twilio.DeleteMessage(messageSid);
+                                ShortTimer();
+                                return;
                             }
-                            SendReturnTextTwilio(messageFrom, "Please reframe from using inappropiate words. If this happens again your phone number will be banned for the night.");
-                            twilio.DeleteMessage(messageSid);
-                            ShortTimer();
-                            return;
+                            if (!notWhitemsg)
+                            {
+                                SendReturnTextTwilio(messageFrom, "Your message will appear soon in lights.");
+                                twilio.DeleteMessage(messageSid);
+                                return;
+                            }
                         }
-                        if (!notWhitemsg)
+                        else
                         {
-                            SendReturnTextTwilio(messageFrom, "Your message will appear soon in lights.");
+                            SendReturnTextTwilio(messageFrom, "Sorry, your message is too long and will not be display. Please reduce the number of words in your message to below " + (numericUpDownMaxWords.Value + 1) + " and resend. Thank you.");
                             twilio.DeleteMessage(messageSid);
-                            return;
                         }
-                        SendReturnTextTwilio(messageFrom, "Sorry one or more of the names you sent is not in the approved list!");
+                        SendReturnTextTwilio(messageFrom, "Sorry one or more of the names you sent is not in the approved list or you are using unapproved abbriviations! You words have been recoreded and if found to be non offensive then they will be added to the list. Please try again on another day.");
                         twilio.DeleteMessage(messageSid);
                         ShortTimer();
                         return;
@@ -1020,7 +1094,7 @@ namespace Vixen_Messaging
 
 #region Message to Vixen
 
-        private void SendMessageToVixen(string msg, out bool blacklist, out bool notWhitemsg)
+        private void SendMessageToVixen(string msg, out bool blacklist, out bool notWhitemsg, out bool maxWordCount)
         {
             var notWhite = false;
             blacklist = false;
@@ -1029,6 +1103,14 @@ namespace Vixen_Messaging
                 var inputFolderName = textBoxSequenceTemplate.Text;
                 var inputFileName = inputFolderName + "\\SequenceTemplate.tim";
                 var fileText = File.ReadAllText(inputFileName);
+                var msgWordCount = msg.Split(' ').Length;
+                if (numericUpDownMaxWords.Value != 0 & msgWordCount > numericUpDownMaxWords.Value)
+                {
+                    notWhitemsg = false;
+                    maxWordCount = true;
+                    ShortTimer();
+                    return;
+                }
                 if (!HasBadWords(msg, out notWhite) && !notWhite)
                 {
                     //Write message to Vixen
@@ -1050,7 +1132,16 @@ namespace Vixen_Messaging
                             selectedSeqTime = selectedSeqTime.TrimEnd('.');
                             selectedSeqTime = selectedSeqTime.Replace("S", "");
                             var newSeqTime = Convert.ToDecimal(selectedSeqTime);
-                            GlobalVar.SeqIntervalTime = newSeqTime + extraTime.Value + 1;
+                            if (checkBoxMultiLine.Checked)
+                            {
+                                int number = (int) ((newSeqTime + extraTime.Value)/numericUpDownMultiLine.Value + 2);
+                                GlobalVar.SeqIntervalTime = Convert.ToDecimal(number);
+                            }
+                            else
+                            {
+                                GlobalVar.SeqIntervalTime = newSeqTime + extraTime.Value + 1;
+                            }
+                            
                         }
                         else
                         {
@@ -1292,6 +1383,7 @@ namespace Vixen_Messaging
             #endregion
 
             notWhitemsg = notWhite;
+            maxWordCount = false;
         }
 
     #region Write to Sequence File Colour and Checkbox settings
@@ -1324,22 +1416,71 @@ namespace Vixen_Messaging
             String hexValue;
             ColourSelect(out hexValue); //Colour Selection for Text. Random or Single
             var textColorNum = Convert.ToUInt32(hexValue, 16);
-            
-            //Text Line Number
-            switch (TextLineNumber.Value.ToString())
+            var i = 0;
+            if (checkBoxMultiLine.Checked)
             {
-                case "1":
-                    fileText1 = fileText1.Replace("NamePlaceholder1", msg).Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", "");//replaces the text
-                    break;
-                case "2":
-                    fileText1 = fileText1.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", msg).Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", "");//replaces the text
-                    break;
-                case "3":
-                    fileText1 = fileText1.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", msg).Replace("NamePlaceholder4", "");//replaces the text
-                    break;
-                case "4":
-                    fileText1 = fileText1.Replace("NamePlaceholder1", "").Replace("NamePlaceholder2", "").Replace("NamePlaceholder3", "").Replace("NamePlaceholder4", msg);//replaces the text
-                    break;
+                var splitmsg = msg.Split(' ');
+                var splitmsgcount = splitmsg.Length;
+                var lineNumber = new[] { "", "", "", "" };
+                var lineWords = new [] { "", "", "", "" };
+                var ii = 0;
+                var wordsPerLine = (int)Math.Ceiling(splitmsgcount / numericUpDownMultiLine.Value);
+                do
+                {
+                    var iii = 0;
+                    try
+                    {
+                        do
+                        {
+                            lineWords[i] = lineWords[i] + splitmsg[ii] + " ";
+                            ii++;
+                        } while (iii++ < wordsPerLine - 1);
+                    }
+                    catch
+                    {
+                    }
+                    lineNumber[i] = lineWords[i];
+                } while (i++ < numericUpDownMultiLine.Value - 1);
+                fileText1 =
+                    fileText1.Replace("NamePlaceholder1", lineNumber[0])
+                        .Replace("NamePlaceholder2", lineNumber[1])
+                        .Replace("NamePlaceholder3", lineNumber[2])
+                        .Replace("NamePlaceholder4", lineNumber[3]);
+            }
+            else
+            {
+                //Text Line Number
+                switch (TextLineNumber.Value.ToString())
+                {
+                    case "1":
+                        fileText1 =
+                            fileText1.Replace("NamePlaceholder1", msg)
+                                .Replace("NamePlaceholder2", "")
+                                .Replace("NamePlaceholder3", "")
+                                .Replace("NamePlaceholder4", ""); //replaces the text
+                        break;
+                    case "2":
+                        fileText1 =
+                            fileText1.Replace("NamePlaceholder1", "")
+                                .Replace("NamePlaceholder2", msg)
+                                .Replace("NamePlaceholder3", "")
+                                .Replace("NamePlaceholder4", ""); //replaces the text
+                        break;
+                    case "3":
+                        fileText1 =
+                            fileText1.Replace("NamePlaceholder1", "")
+                                .Replace("NamePlaceholder2", "")
+                                .Replace("NamePlaceholder3", msg)
+                                .Replace("NamePlaceholder4", ""); //replaces the text
+                        break;
+                    case "4":
+                        fileText1 =
+                            fileText1.Replace("NamePlaceholder1", "")
+                                .Replace("NamePlaceholder2", "")
+                                .Replace("NamePlaceholder3", "")
+                                .Replace("NamePlaceholder4", msg); //replaces the text
+                        break;
+                }
             }
             //Text Direction
             var textDirection = 0;
@@ -2585,6 +2726,10 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocal", checkBoxLocal.Checked.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwilio", checkBoxTwilio.Checked.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TwilioPhoneNumber", GlobalVar.TwilioPhoneNumber);
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString", dateCountDown.Value.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMultiLine", checkBoxMultiLine.Checked.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMultiLine", numericUpDownMultiLine.Value.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords", numericUpDownMaxWords.Value.ToString());
         }
 #endregion
 
@@ -2826,6 +2971,7 @@ namespace Vixen_Messaging
 				buttonStart.Text = "";
 				buttonStop.Image = Tools.GetIcon(Resources.Stop, 40);
 				buttonStop.Text = "";
+                GlobalVar.Msgindex = 0;
 				StartChecking();
 			}
 			else
@@ -2950,6 +3096,12 @@ namespace Vixen_Messaging
             {
                 GlobalVar.Msgindex = 0;
             }
+        }
+
+        private void checkBoxMultiLine_CheckedChanged(object sender, EventArgs e)
+        {
+            TextLineNumber.Enabled = !TextLineNumber.Enabled;
+            numericUpDownMultiLine.Enabled = !numericUpDownMultiLine.Enabled;
         }
    
     }
