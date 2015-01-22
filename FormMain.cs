@@ -1,10 +1,4 @@
-﻿using System.ComponentModel;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
-using System.Security.AccessControl;
-using System.Threading;
-
-#region System modules
+﻿#region System modules
 
 using System;
 using System.Collections.Generic;
@@ -22,6 +16,7 @@ using System.Diagnostics;
 using Twilio;
 using Application = System.Windows.Forms.Application;
 using System.Globalization;
+using System.Threading;
 
 #endregion
 
@@ -163,11 +158,11 @@ namespace Vixen_Messaging
 
             //Changes Position and Size of Groupboxs in the Sequence Tab
             groupBoxSeqControl.Location = new Point(6, 35);
-            tabControlSequence.Size = new Size(505, 185);
-            groupBoxSeqControl.Size = new Size(510, 210);
+            tabControlSequence.Size = new Size(555, 185);
+            groupBoxSeqControl.Size = new Size(560, 210);
             label26.Location = new Point(60, 255);
             richTextBoxLog2.Location = new Point(6, 295);
-            richTextBoxLog2.Size = new Size(505, 270);
+            richTextBoxLog2.Size = new Size(560, 270);
             #endregion
 
             #region Setup Button images and Icons
@@ -373,6 +368,13 @@ namespace Vixen_Messaging
             checkBoxMultiLine.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMultiLine", false);
             numericUpDownMultiLine.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMultiLine", 1);
             numericUpDownMaxWords.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords", 0);
+            checkBoxCountDownEnable.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCountDownEnable", false);
+            comboBoxCountDownDirection.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxCountDownDirection", "None");
+            trackBarCountDownPosition.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarCountDownPosition", 20);
+            textBoxLine1.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine1", "  COUNTDOWN");
+            textBoxLine2.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine2", "days til");
+            textBoxLine3.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine3", "   Xmas");
+            textBoxLine4.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine4", "");
             var dateCountDownString = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString", "25/12/15");
             dateCountDown.Value = Convert.ToDateTime(dateCountDownString);
         }
@@ -737,50 +739,49 @@ namespace Vixen_Messaging
     #region Play Local Msgs
         private void PlayLocalMsgs()
         {
-            if (richTextBoxMessage.Text != "")
+            if (richTextBoxMessage.Text != "" | checkBoxCountDownEnable.Checked)
             {
                 bool blacklist;
                 bool notWhitemsg;
                 bool maxWordCount;
                 string msg;
 
-       //         var richTextBoxText = richTextBoxMessage.Text;
                 var phrases = richTextBoxMessage.Text.Split('\n');
                 var msgcount = phrases.Length;
                 if (checkBoxLocalRandom.Checked)
                 {
 
                     var rndLineNumber = new Random();
-                    var rndLineNumberResult = rndLineNumber.Next(0, msgcount);
-                    msg = phrases[rndLineNumberResult];
+                    var rndLineNumberResult = rndLineNumber.Next(0, msgcount+1);
+                    if (rndLineNumberResult == msgcount | richTextBoxMessage.Text == "")
+                    {
+                        msg = "play counter"; //Play counter is used as its in the Whitelist
+                    }
+                    else
+                    {
+                        msg = phrases[rndLineNumberResult];
+                    }
                 }
                 else
                 {
-                    if (GlobalVar.Msgindex < msgcount)
+                    if (GlobalVar.Msgindex < msgcount & richTextBoxMessage.Text != "")
                     {
                         msg = phrases[GlobalVar.Msgindex];
                         GlobalVar.Msgindex++;
                     }
                     else
                     {
-                        msg = phrases[0];
-                        GlobalVar.Msgindex = 1;
+                        if ((GlobalVar.Msgindex == msgcount | richTextBoxMessage.Text == "") & checkBoxCountDownEnable.Checked)
+                        {
+                            msg = "play counter"; //Play counter is used as its in the Whitelist
+                            GlobalVar.Msgindex++;
+                        }
+                        else
+                        {
+                            msg = phrases[0];
+                            GlobalVar.Msgindex = 1;
+                        }
                     }
-                }
-                if (msg.Contains("COUNTDOWN"))
-                {
-                    Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-AU");
-                    //var culture = new CultureInfo("en-US", true);
-                    //var daysLeft = DateTime.Parse(dateCountDown.Value.ToShortDateString(), culture);
-                    //var now = DateTime.Parse(DateTime.Now.ToShortDateString(), culture);
-                    var daysLeft = DateTime.Parse(dateCountDown.Value.ToShortDateString());
-                    var now = DateTime.Now;
-
-
-                    //Calculate countdown timer.
-                    TimeSpan t = daysLeft - now;
-                    string countDown = string.Format("{0}", t.Days);
-                    msg = msg.Replace("COUNTDOWN", countDown);
                 }
                 SendMessageToVixen(msg, out blacklist, out notWhitemsg, out maxWordCount);
             }
@@ -916,6 +917,26 @@ namespace Vixen_Messaging
             timerCheckMail.Interval = 200;
         }
         #endregion
+
+    #region Count Down time
+        private void CountDown(string msg, out string rtnmsg)
+        {
+            if (msg.Contains("COUNTDOWN"))
+            {
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-AU");
+                var daysLeft = DateTime.Parse(dateCountDown.Value.ToShortDateString());
+                var now = DateTime.Now;
+                //Calculate countdown timer.
+                TimeSpan t = daysLeft - now;
+                string countDown = string.Format("{0}", t.Days);
+                rtnmsg = msg.Replace("COUNTDOWN", countDown);
+            }
+            else
+            {
+                rtnmsg = msg;
+            }
+        }
+#endregion
 
     #region Input message to Change Vixen Settings
         private void VixenSettings(int messageNum)
@@ -1417,86 +1438,120 @@ namespace Vixen_Messaging
             ColourSelect(out hexValue); //Colour Selection for Text. Random or Single
             var textColorNum = Convert.ToUInt32(hexValue, 16);
             var i = 0;
-            if (checkBoxMultiLine.Checked)
+            var textDirection = 0;
+            if (msg == "play counter" & checkBoxCountDownEnable.Checked)
             {
-                var splitmsg = msg.Split(' ');
-                var splitmsgcount = splitmsg.Length;
-                var lineNumber = new[] { "", "", "", "" };
-                var lineWords = new [] { "", "", "", "" };
-                var ii = 0;
-                var wordsPerLine = (int)Math.Ceiling(splitmsgcount / numericUpDownMultiLine.Value);
-                do
+                var line1 = textBoxLine1.Text;
+                var line2 = textBoxLine2.Text;
+                var line3 = textBoxLine3.Text;
+                var line4 = textBoxLine4.Text;
+                CountDown(line1, out msg);
+                fileText1 = fileText1.Replace("NamePlaceholder1", msg);
+                CountDown(line2, out msg);
+                fileText1 = fileText1.Replace("NamePlaceholder2", msg);
+                CountDown(line3, out msg);
+                fileText1 = fileText1.Replace("NamePlaceholder3", msg);
+                CountDown(line4, out msg);
+                fileText1 = fileText1.Replace("NamePlaceholder4", msg);
+                //Text Direction
+                switch (comboBoxCountDownDirection.Text)
                 {
-                    var iii = 0;
-                    try
-                    {
-                        do
-                        {
-                            lineWords[i] = lineWords[i] + splitmsg[ii] + " ";
-                            ii++;
-                        } while (iii++ < wordsPerLine - 1);
-                    }
-                    catch
-                    {
-                    }
-                    lineNumber[i] = lineWords[i];
-                } while (i++ < numericUpDownMultiLine.Value - 1);
-                fileText1 =
-                    fileText1.Replace("NamePlaceholder1", lineNumber[0])
-                        .Replace("NamePlaceholder2", lineNumber[1])
-                        .Replace("NamePlaceholder3", lineNumber[2])
-                        .Replace("NamePlaceholder4", lineNumber[3]);
-            }
-            else
-            {
-                //Text Line Number
-                switch (TextLineNumber.Value.ToString())
-                {
-                    case "1":
-                        fileText1 =
-                            fileText1.Replace("NamePlaceholder1", msg)
-                                .Replace("NamePlaceholder2", "")
-                                .Replace("NamePlaceholder3", "")
-                                .Replace("NamePlaceholder4", ""); //replaces the text
+                    case "Left": textDirection = 0;
                         break;
-                    case "2":
-                        fileText1 =
-                            fileText1.Replace("NamePlaceholder1", "")
-                                .Replace("NamePlaceholder2", msg)
-                                .Replace("NamePlaceholder3", "")
-                                .Replace("NamePlaceholder4", ""); //replaces the text
+                    case "Right": textDirection = 1;
                         break;
-                    case "3":
-                        fileText1 =
-                            fileText1.Replace("NamePlaceholder1", "")
-                                .Replace("NamePlaceholder2", "")
-                                .Replace("NamePlaceholder3", msg)
-                                .Replace("NamePlaceholder4", ""); //replaces the text
+                    case "Up": textDirection = 2;
                         break;
-                    case "4":
-                        fileText1 =
-                            fileText1.Replace("NamePlaceholder1", "")
-                                .Replace("NamePlaceholder2", "")
-                                .Replace("NamePlaceholder3", "")
-                                .Replace("NamePlaceholder4", msg); //replaces the text
+                    case "Down": textDirection = 3;
+                        break;
+                    case "None": textDirection = 4;
                         break;
                 }
             }
-            //Text Direction
-            var textDirection = 0;
-            switch (comboBoxTextDirection.Text)
+            else
             {
-                case "Left": textDirection = 0;
-                    break;
-                case "Right": textDirection = 1;
-                    break;
-                case "Up": textDirection = 2;
-                    break;
-                case "Down": textDirection = 3;
-                    break;
-                case "None": textDirection = 4;
-                    break;
+                CountDown(msg, out msg);
+                if (checkBoxMultiLine.Checked)
+                {
+                    var splitmsg = msg.Split(' ');
+                    var splitmsgcount = splitmsg.Length;
+                    var lineNumber = new[] {"", "", "", ""};
+                    var lineWords = new[] {"", "", "", ""};
+                    var ii = 0;
+                    var wordsPerLine = (int) Math.Ceiling(splitmsgcount/numericUpDownMultiLine.Value);
+                    do
+                    {
+                        var iii = 0;
+                        try
+                        {
+                            do
+                            {
+                                lineWords[i] = lineWords[i] + splitmsg[ii] + " ";
+                                ii++;
+                            } while (iii++ < wordsPerLine - 1);
+                        }
+                        catch
+                        {
+                        }
+                        lineNumber[i] = lineWords[i];
+                    } while (i++ < numericUpDownMultiLine.Value - 1);
+                    fileText1 =
+                        fileText1.Replace("NamePlaceholder1", lineNumber[0])
+                            .Replace("NamePlaceholder2", lineNumber[1])
+                            .Replace("NamePlaceholder3", lineNumber[2])
+                            .Replace("NamePlaceholder4", lineNumber[3]);
+                }
+                else
+                {
+                    //Text Line Number
+                    switch (TextLineNumber.Value.ToString())
+                    {
+                        case "1":
+                            fileText1 =
+                                fileText1.Replace("NamePlaceholder1", msg)
+                                    .Replace("NamePlaceholder2", "")
+                                    .Replace("NamePlaceholder3", "")
+                                    .Replace("NamePlaceholder4", ""); //replaces the text
+                            break;
+                        case "2":
+                            fileText1 =
+                                fileText1.Replace("NamePlaceholder1", "")
+                                    .Replace("NamePlaceholder2", msg)
+                                    .Replace("NamePlaceholder3", "")
+                                    .Replace("NamePlaceholder4", ""); //replaces the text
+                            break;
+                        case "3":
+                            fileText1 =
+                                fileText1.Replace("NamePlaceholder1", "")
+                                    .Replace("NamePlaceholder2", "")
+                                    .Replace("NamePlaceholder3", msg)
+                                    .Replace("NamePlaceholder4", ""); //replaces the text
+                            break;
+                        case "4":
+                            fileText1 =
+                                fileText1.Replace("NamePlaceholder1", "")
+                                    .Replace("NamePlaceholder2", "")
+                                    .Replace("NamePlaceholder3", "")
+                                    .Replace("NamePlaceholder4", msg); //replaces the text
+                            break;
+                    }
+                }
+                //Text Direction
+                switch (comboBoxTextDirection.Text)
+                {
+                    case "Left": textDirection = 0;
+                        break;
+                    case "Right": textDirection = 1;
+                        break;
+                    case "Up": textDirection = 2;
+                        break;
+                    case "Down": textDirection = 3;
+                        break;
+                    case "None": textDirection = 4;
+                        break;
+                }
             }
+            
             fileText1 = fileText1.Replace("TextDirection_Change", textDirection.ToString());
             fileText1 = fileText1.Replace("NodeId_Change", textBoxNodeId.Text);//adds NodeId
             fileText1 = fileText1.Replace("StringOrienation_Change", comboBoxString.Text);
@@ -1552,7 +1607,7 @@ namespace Vixen_Messaging
 
         #endregion
 
-#region Word Lists
+#region Word List check for Blacklist and Whitelist
         private bool HasBadWords(string msg, out bool notWhite)
         {
             string textLine;
@@ -1602,6 +1657,11 @@ namespace Vixen_Messaging
                     {
                         textLine = file.ReadLine();
                         if (splitmsg[i].ToLower() == textLine)
+                        {
+                            notWhiteCheck = false;
+                            break;
+                        }
+                        if (splitmsg[i].ToLower() == "countdown")
                         {
                             notWhiteCheck = false;
                             break;
@@ -2730,6 +2790,13 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMultiLine", checkBoxMultiLine.Checked.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMultiLine", numericUpDownMultiLine.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords", numericUpDownMaxWords.Value.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCountDownEnable", checkBoxCountDownEnable.Checked.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxCountDownDirection", comboBoxCountDownDirection.Text);
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarCountDownPosition", trackBarCountDownPosition.Value.ToString());
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine1", textBoxLine1.Text);
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine2", textBoxLine2.Text);
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine3", textBoxLine3.Text);
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine4", textBoxLine4.Text);
         }
 #endregion
 
@@ -2840,6 +2907,65 @@ namespace Vixen_Messaging
         {
             toolTip1.SetToolTip(trackBarTextSpeed, trackBarTextSpeed.Value.ToString());
         }
+        private void trackBarThumbnail_Scroll(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarThumbnail, trackBarThumbnail.Value.ToString());
+            pictureBoxMovie.ImageLocation = GlobalVar.MovieFolder + "\\" + (trackBarThumbnail.Value.ToString("D10")) + ".png";
+        }
+
+        private void trackBarThumbnail_MouseDown(object sender, MouseEventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarThumbnail, trackBarThumbnail.Value.ToString());
+        }
+
+        private void trackBarThumbnail_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarThumbnail, trackBarThumbnail.Value.ToString());
+        }
+
+        private void trackBarMovieSpeed_Scroll(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
+        }
+
+        private void trackBarMovieSpeed_MouseDown(object sender, MouseEventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
+        }
+
+        private void trackBarMovieSpeed_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
+        }
+
+        private void trackBarGlediator_Scroll(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarGlediator, trackBarGlediator.Value.ToString());
+        }
+
+        private void trackBarGlediator_MouseDown(object sender, MouseEventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarGlediator, trackBarGlediator.Value.ToString());
+        }
+
+        private void trackBarGlediator_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarGlediator, trackBarGlediator.Value.ToString());
+        }
+        private void trackBarCountDownPosition_Scroll(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarCountDownPosition, trackBarCountDownPosition.Value.ToString());
+        }
+
+        private void trackBarCountDownPosition_MouseDown(object sender, MouseEventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarCountDownPosition, trackBarCountDownPosition.Value.ToString());
+        }
+
+        private void trackBarCountDownPosition_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarCountDownPosition, trackBarCountDownPosition.Value.ToString());
+        }
         #endregion
 
         #region Email Settings
@@ -2893,54 +3019,6 @@ namespace Vixen_Messaging
             }
         }
         #endregion        
-
-        #region Trackbar Show Value on Tooltips
-        private void trackBarThumbnail_Scroll(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarThumbnail, trackBarThumbnail.Value.ToString());
-            pictureBoxMovie.ImageLocation = GlobalVar.MovieFolder + "\\" + (trackBarThumbnail.Value.ToString("D10")) + ".png";
-        }
-
-        private void trackBarThumbnail_MouseDown(object sender, MouseEventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarThumbnail, trackBarThumbnail.Value.ToString());
-        }
-
-        private void trackBarThumbnail_MouseHover(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarThumbnail, trackBarThumbnail.Value.ToString());
-        }
-
-        private void trackBarMovieSpeed_Scroll(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
-        }
-
-        private void trackBarMovieSpeed_MouseDown(object sender, MouseEventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
-        }
-
-        private void trackBarMovieSpeed_MouseHover(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarMovieSpeed, trackBarMovieSpeed.Value.ToString());
-        }
-
-        private void trackBarGlediator_Scroll(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarGlediator, trackBarGlediator.Value.ToString());
-        }
-
-        private void trackBarGlediator_MouseDown(object sender, MouseEventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarGlediator, trackBarGlediator.Value.ToString());
-        }
-
-        private void trackBarGlediator_MouseHover(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(trackBarGlediator, trackBarGlediator.Value.ToString());
-        }
-        #endregion
 
         #region Other
         private void checkBoxWhitelist_CheckedChanged(object sender, EventArgs e)
@@ -3103,7 +3181,11 @@ namespace Vixen_Messaging
             TextLineNumber.Enabled = !TextLineNumber.Enabled;
             numericUpDownMultiLine.Enabled = !numericUpDownMultiLine.Enabled;
         }
-   
+
+        private void checkBoxCountDownEnable_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBoxCountDown.Enabled = !groupBoxCountDown.Enabled;
+        }
     }
 }
 #endregion
