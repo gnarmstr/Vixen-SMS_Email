@@ -533,7 +533,7 @@
             "Yahoo.com.au",
             "Zoho",
             "Yandex"});
-            this.comboBoxEmailSettings.Location = new System.Drawing.Point(216, 168);
+            this.comboBoxEmailSettings.Location = new System.Drawing.Point(216, 173);
             this.comboBoxEmailSettings.Name = "comboBoxEmailSettings";
             this.comboBoxEmailSettings.Size = new System.Drawing.Size(150, 28);
             this.comboBoxEmailSettings.TabIndex = 31;
@@ -542,7 +542,7 @@
             // label67
             // 
             this.label67.AutoSize = true;
-            this.label67.Location = new System.Drawing.Point(10, 169);
+            this.label67.Location = new System.Drawing.Point(10, 177);
             this.label67.Name = "label67";
             this.label67.Size = new System.Drawing.Size(145, 20);
             this.label67.TabIndex = 17;
@@ -654,7 +654,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(382, 25);
+            this.label15.Location = new System.Drawing.Point(453, 32);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(163, 20);
             this.label15.TabIndex = 5;
@@ -664,13 +664,11 @@
             // 
             // label16
             // 
-            this.label16.Location = new System.Drawing.Point(366, 62);
+            this.label16.Location = new System.Drawing.Point(388, 62);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(376, 88);
+            this.label16.Size = new System.Drawing.Size(436, 88);
             this.label16.TabIndex = 6;
-            this.label16.Text = "Example: gmail will email the content of the SMS and insert \"SMS from\" in the Sub" +
-    "ject line then the phone number. Check a email and insert above all text before " +
-    "the phone number.";
+            this.label16.Text = resources.GetString("label16.Text");
             this.toolTip1.SetToolTip(this.label16, "This is used to check for agaist in th eincoming SMS messages from you SMS provid" +
         "er");
             // 
@@ -1633,7 +1631,7 @@
             // label77
             // 
             this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(322, 38);
+            this.label77.Location = new System.Drawing.Point(438, 38);
             this.label77.Name = "label77";
             this.label77.Size = new System.Drawing.Size(86, 20);
             this.label77.TabIndex = 55;
@@ -1643,7 +1641,7 @@
             // label76
             // 
             this.label76.AutoSize = true;
-            this.label76.Location = new System.Drawing.Point(238, 65);
+            this.label76.Location = new System.Drawing.Point(354, 65);
             this.label76.Name = "label76";
             this.label76.Size = new System.Drawing.Size(28, 20);
             this.label76.TabIndex = 54;
@@ -1653,7 +1651,7 @@
             // label75
             // 
             this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(357, 65);
+            this.label75.Location = new System.Drawing.Point(473, 65);
             this.label75.Name = "label75";
             this.label75.Size = new System.Drawing.Size(25, 20);
             this.label75.TabIndex = 53;
@@ -1662,7 +1660,7 @@
             // 
             // numericUpDownMatrixH
             // 
-            this.numericUpDownMatrixH.Location = new System.Drawing.Point(388, 62);
+            this.numericUpDownMatrixH.Location = new System.Drawing.Point(504, 62);
             this.numericUpDownMatrixH.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1685,7 +1683,7 @@
             // 
             // numericUpDownMatrixW
             // 
-            this.numericUpDownMatrixW.Location = new System.Drawing.Point(273, 62);
+            this.numericUpDownMatrixW.Location = new System.Drawing.Point(389, 62);
             this.numericUpDownMatrixW.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -1719,7 +1717,7 @@
             // 
             // buttonMovieDelete
             // 
-            this.buttonMovieDelete.Location = new System.Drawing.Point(472, 6);
+            this.buttonMovieDelete.Location = new System.Drawing.Point(555, 6);
             this.buttonMovieDelete.Name = "buttonMovieDelete";
             this.buttonMovieDelete.Size = new System.Drawing.Size(38, 38);
             this.buttonMovieDelete.TabIndex = 49;
@@ -1731,7 +1729,7 @@
             // label72
             // 
             this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(10, 60);
+            this.label72.Location = new System.Drawing.Point(10, 66);
             this.label72.Name = "label72";
             this.label72.Size = new System.Drawing.Size(105, 20);
             this.label72.TabIndex = 48;
@@ -1755,7 +1753,7 @@
             this.trackBarMovieSpeed.Maximum = 100;
             this.trackBarMovieSpeed.Minimum = -100;
             this.trackBarMovieSpeed.Name = "trackBarMovieSpeed";
-            this.trackBarMovieSpeed.Size = new System.Drawing.Size(496, 40);
+            this.trackBarMovieSpeed.Size = new System.Drawing.Size(579, 40);
             this.trackBarMovieSpeed.TabIndex = 45;
             this.trackBarMovieSpeed.Scroll += new System.EventHandler(this.trackBarMovieSpeed_Scroll);
             this.trackBarMovieSpeed.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarMovieSpeed_MouseDown);
@@ -1768,7 +1766,7 @@
             this.trackBarThumbnail.Maximum = 20000;
             this.trackBarThumbnail.Minimum = 1;
             this.trackBarThumbnail.Name = "trackBarThumbnail";
-            this.trackBarThumbnail.Size = new System.Drawing.Size(501, 40);
+            this.trackBarThumbnail.Size = new System.Drawing.Size(583, 40);
             this.trackBarThumbnail.TabIndex = 44;
             this.trackBarThumbnail.Value = 1;
             this.trackBarThumbnail.Scroll += new System.EventHandler(this.trackBarThumbnail_Scroll);
@@ -1778,7 +1776,7 @@
             // pictureBoxMovie
             // 
             this.pictureBoxMovie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBoxMovie.Location = new System.Drawing.Point(518, 6);
+            this.pictureBoxMovie.Location = new System.Drawing.Point(601, 6);
             this.pictureBoxMovie.Name = "pictureBoxMovie";
             this.pictureBoxMovie.Size = new System.Drawing.Size(210, 200);
             this.pictureBoxMovie.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1852,12 +1850,12 @@
             this.textBoxGlediator.Enabled = false;
             this.textBoxGlediator.Location = new System.Drawing.Point(14, 182);
             this.textBoxGlediator.Name = "textBoxGlediator";
-            this.textBoxGlediator.Size = new System.Drawing.Size(704, 26);
+            this.textBoxGlediator.Size = new System.Drawing.Size(804, 26);
             this.textBoxGlediator.TabIndex = 1;
             // 
             // buttonGlediator
             // 
-            this.buttonGlediator.Location = new System.Drawing.Point(604, 120);
+            this.buttonGlediator.Location = new System.Drawing.Point(702, 120);
             this.buttonGlediator.Name = "buttonGlediator";
             this.buttonGlediator.Size = new System.Drawing.Size(116, 42);
             this.buttonGlediator.TabIndex = 0;
@@ -1931,7 +1929,7 @@
             // 
             this.label48.Location = new System.Drawing.Point(4, 152);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(729, 49);
+            this.label48.Size = new System.Drawing.Size(790, 49);
             this.label48.TabIndex = 33;
             this.label48.Text = "Note: This will not modify your Vixen 3 sequence in any way, Vixen Messaging will" +
     " create and modify a copy of your sequence to be used when a message has been re" +
@@ -1941,7 +1939,7 @@
             // 
             this.textBoxSequenceLength1.BackColor = System.Drawing.Color.White;
             this.textBoxSequenceLength1.Enabled = false;
-            this.textBoxSequenceLength1.Location = new System.Drawing.Point(542, 109);
+            this.textBoxSequenceLength1.Location = new System.Drawing.Point(666, 113);
             this.textBoxSequenceLength1.Name = "textBoxSequenceLength1";
             this.textBoxSequenceLength1.Size = new System.Drawing.Size(128, 26);
             this.textBoxSequenceLength1.TabIndex = 4;
@@ -1950,7 +1948,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(386, 112);
+            this.label22.Location = new System.Drawing.Point(510, 116);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(140, 20);
             this.label22.TabIndex = 28;
@@ -1958,7 +1956,7 @@
             // 
             // buttonRemoveSeq1
             // 
-            this.buttonRemoveSeq1.Location = new System.Drawing.Point(694, 15);
+            this.buttonRemoveSeq1.Location = new System.Drawing.Point(756, 15);
             this.buttonRemoveSeq1.Name = "buttonRemoveSeq1";
             this.buttonRemoveSeq1.Size = new System.Drawing.Size(38, 38);
             this.buttonRemoveSeq1.TabIndex = 2;
@@ -1971,7 +1969,7 @@
             // 
             this.label40.Location = new System.Drawing.Point(260, 58);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(436, 52);
+            this.label40.Size = new System.Drawing.Size(534, 52);
             this.label40.TabIndex = 26;
             this.label40.Text = "Select the Vixen Sequence you would like to use. Normally located in your Documen" +
     "ts\\Vixen 3\\Sequence\\ Folder.";
@@ -1982,7 +1980,7 @@
             this.textBoxVixenSeq1.Enabled = false;
             this.textBoxVixenSeq1.Location = new System.Drawing.Point(152, 18);
             this.textBoxVixenSeq1.Name = "textBoxVixenSeq1";
-            this.textBoxVixenSeq1.Size = new System.Drawing.Size(540, 26);
+            this.textBoxVixenSeq1.Size = new System.Drawing.Size(598, 26);
             this.textBoxVixenSeq1.TabIndex = 3;
             // 
             // buttonVixenSeq1
@@ -2018,7 +2016,7 @@
             this.TabSeq2.Location = new System.Drawing.Point(4, 29);
             this.TabSeq2.Name = "TabSeq2";
             this.TabSeq2.Padding = new System.Windows.Forms.Padding(3);
-            this.TabSeq2.Size = new System.Drawing.Size(738, 209);
+            this.TabSeq2.Size = new System.Drawing.Size(822, 209);
             this.TabSeq2.TabIndex = 1;
             this.TabSeq2.Text = "Seq 2";
             this.toolTip1.SetToolTip(this.TabSeq2, "Remove Sequence File Path");
@@ -2027,7 +2025,7 @@
             // 
             this.label49.Location = new System.Drawing.Point(4, 152);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(729, 49);
+            this.label49.Size = new System.Drawing.Size(790, 49);
             this.label49.TabIndex = 33;
             this.label49.Text = "Note: This will not modify your Vixen 3 sequence in any way, Vixen Messaging will" +
     " create and modify a copy of your sequence to be used when a message has been re" +
@@ -2037,7 +2035,7 @@
             // 
             this.textBoxSequenceLength2.BackColor = System.Drawing.Color.White;
             this.textBoxSequenceLength2.Enabled = false;
-            this.textBoxSequenceLength2.Location = new System.Drawing.Point(542, 109);
+            this.textBoxSequenceLength2.Location = new System.Drawing.Point(666, 113);
             this.textBoxSequenceLength2.Name = "textBoxSequenceLength2";
             this.textBoxSequenceLength2.Size = new System.Drawing.Size(128, 26);
             this.textBoxSequenceLength2.TabIndex = 4;
@@ -2046,7 +2044,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(386, 112);
+            this.label24.Location = new System.Drawing.Point(510, 116);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(140, 20);
             this.label24.TabIndex = 30;
@@ -2054,7 +2052,7 @@
             // 
             // buttonRemoveSeq2
             // 
-            this.buttonRemoveSeq2.Location = new System.Drawing.Point(694, 15);
+            this.buttonRemoveSeq2.Location = new System.Drawing.Point(756, 15);
             this.buttonRemoveSeq2.Name = "buttonRemoveSeq2";
             this.buttonRemoveSeq2.Size = new System.Drawing.Size(38, 38);
             this.buttonRemoveSeq2.TabIndex = 2;
@@ -2067,7 +2065,7 @@
             // 
             this.label39.Location = new System.Drawing.Point(260, 58);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(450, 52);
+            this.label39.Size = new System.Drawing.Size(534, 52);
             this.label39.TabIndex = 26;
             this.label39.Text = "Select the Vixen Sequence you would like to use. Normally located in your Documen" +
     "ts\\Vixen 3\\Sequence\\ Folder.";
@@ -2078,7 +2076,7 @@
             this.textBoxVixenSeq2.Enabled = false;
             this.textBoxVixenSeq2.Location = new System.Drawing.Point(152, 18);
             this.textBoxVixenSeq2.Name = "textBoxVixenSeq2";
-            this.textBoxVixenSeq2.Size = new System.Drawing.Size(540, 26);
+            this.textBoxVixenSeq2.Size = new System.Drawing.Size(598, 26);
             this.textBoxVixenSeq2.TabIndex = 3;
             // 
             // buttonVixenSeq2
@@ -2102,7 +2100,7 @@
             // 
             // buttonRemoveSeq3
             // 
-            this.buttonRemoveSeq3.Location = new System.Drawing.Point(694, 15);
+            this.buttonRemoveSeq3.Location = new System.Drawing.Point(756, 15);
             this.buttonRemoveSeq3.Name = "buttonRemoveSeq3";
             this.buttonRemoveSeq3.Size = new System.Drawing.Size(38, 38);
             this.buttonRemoveSeq3.TabIndex = 2;
@@ -2126,7 +2124,7 @@
             // 
             // buttonRemoveSeq4
             // 
-            this.buttonRemoveSeq4.Location = new System.Drawing.Point(694, 15);
+            this.buttonRemoveSeq4.Location = new System.Drawing.Point(756, 15);
             this.buttonRemoveSeq4.Name = "buttonRemoveSeq4";
             this.buttonRemoveSeq4.Size = new System.Drawing.Size(38, 38);
             this.buttonRemoveSeq4.TabIndex = 2;
@@ -2342,10 +2340,10 @@
             // WebServerStatus
             // 
             this.WebServerStatus.BackColor = System.Drawing.Color.OrangeRed;
-            this.WebServerStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WebServerStatus.Location = new System.Drawing.Point(45, 938);
+            this.WebServerStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.WebServerStatus.Location = new System.Drawing.Point(2, 992);
             this.WebServerStatus.Name = "WebServerStatus";
-            this.WebServerStatus.Size = new System.Drawing.Size(369, 48);
+            this.WebServerStatus.Size = new System.Drawing.Size(287, 43);
             this.WebServerStatus.TabIndex = 31;
             this.WebServerStatus.Text = "Vixen 3 Web Server is ENABLED";
             this.toolTip1.SetToolTip(this.WebServerStatus, "Click to Enable Vixen Web Server");
@@ -2353,7 +2351,7 @@
             // 
             // buttonRemoveSeq5
             // 
-            this.buttonRemoveSeq5.Location = new System.Drawing.Point(694, 15);
+            this.buttonRemoveSeq5.Location = new System.Drawing.Point(756, 15);
             this.buttonRemoveSeq5.Name = "buttonRemoveSeq5";
             this.buttonRemoveSeq5.Size = new System.Drawing.Size(38, 38);
             this.buttonRemoveSeq5.TabIndex = 41;
@@ -2364,7 +2362,7 @@
             // 
             // buttonRemoveSeq6
             // 
-            this.buttonRemoveSeq6.Location = new System.Drawing.Point(694, 15);
+            this.buttonRemoveSeq6.Location = new System.Drawing.Point(756, 15);
             this.buttonRemoveSeq6.Name = "buttonRemoveSeq6";
             this.buttonRemoveSeq6.Size = new System.Drawing.Size(38, 38);
             this.buttonRemoveSeq6.TabIndex = 41;
@@ -2382,7 +2380,7 @@
             this.checkBoxDisableSeq.Size = new System.Drawing.Size(198, 24);
             this.checkBoxDisableSeq.TabIndex = 40;
             this.checkBoxDisableSeq.Text = "Disable All Sequences:";
-            this.toolTip1.SetToolTip(this.checkBoxDisableSeq, "Will Disable all sequences and only display the incoming message.");
+            this.toolTip1.SetToolTip(this.checkBoxDisableSeq, "Will Disable all sequences and only display messages.");
             this.checkBoxDisableSeq.UseVisualStyleBackColor = true;
             this.checkBoxDisableSeq.CheckedChanged += new System.EventHandler(this.checkBoxDisableSeq_CheckedChanged);
             // 
@@ -2457,7 +2455,7 @@
             this.checkBoxTwilio.TabIndex = 66;
             this.checkBoxTwilio.Tag = "4";
             this.checkBoxTwilio.Text = "Twilio (SMS)";
-            this.toolTip1.SetToolTip(this.checkBoxTwilio, "Select to retrieve messages from Twilo. SMS accout.");
+            this.toolTip1.SetToolTip(this.checkBoxTwilio, "Select to retrieve messages from Twilio. SMS account.");
             this.checkBoxTwilio.UseVisualStyleBackColor = true;
             // 
             // richTextBoxMessage
@@ -2473,11 +2471,12 @@
             // label66
             // 
             this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(600, 37);
+            this.label66.Location = new System.Drawing.Point(600, 35);
             this.label66.Name = "label66";
             this.label66.Size = new System.Drawing.Size(86, 20);
             this.label66.TabIndex = 59;
             this.label66.Text = "Play Mode:";
+            this.toolTip1.SetToolTip(this.label66, "Changes between Selected Play options");
             // 
             // comboBoxPlayMode
             // 
@@ -2485,7 +2484,7 @@
             this.comboBoxPlayMode.Items.AddRange(new object[] {
             "Random",
             "Sequential"});
-            this.comboBoxPlayMode.Location = new System.Drawing.Point(692, 34);
+            this.comboBoxPlayMode.Location = new System.Drawing.Point(692, 32);
             this.comboBoxPlayMode.Name = "comboBoxPlayMode";
             this.comboBoxPlayMode.Size = new System.Drawing.Size(130, 28);
             this.comboBoxPlayMode.TabIndex = 67;
@@ -2542,7 +2541,7 @@
             // label74
             // 
             this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(698, 552);
+            this.label74.Location = new System.Drawing.Point(736, 552);
             this.label74.Name = "label74";
             this.label74.Size = new System.Drawing.Size(37, 20);
             this.label74.TabIndex = 63;
@@ -2550,7 +2549,7 @@
             // 
             // numericUpDownIntervalMsgs
             // 
-            this.numericUpDownIntervalMsgs.Location = new System.Drawing.Point(615, 549);
+            this.numericUpDownIntervalMsgs.Location = new System.Drawing.Point(653, 549);
             this.numericUpDownIntervalMsgs.Maximum = new decimal(new int[] {
             300,
             0,
@@ -2563,7 +2562,7 @@
             // label71
             // 
             this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(558, 525);
+            this.label71.Location = new System.Drawing.Point(596, 525);
             this.label71.Name = "label71";
             this.label71.Size = new System.Drawing.Size(207, 20);
             this.label71.TabIndex = 62;
@@ -2649,7 +2648,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(14, 91);
+            this.label7.Location = new System.Drawing.Point(15, 91);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(114, 20);
             this.label7.TabIndex = 7;
@@ -2818,7 +2817,7 @@
             // 
             // textBoxSubjectHeader
             // 
-            this.textBoxSubjectHeader.Location = new System.Drawing.Point(572, 22);
+            this.textBoxSubjectHeader.Location = new System.Drawing.Point(643, 29);
             this.textBoxSubjectHeader.Name = "textBoxSubjectHeader";
             this.textBoxSubjectHeader.Size = new System.Drawing.Size(127, 26);
             this.textBoxSubjectHeader.TabIndex = 2;
@@ -3175,7 +3174,7 @@
             this.TabSeq3.Location = new System.Drawing.Point(4, 29);
             this.TabSeq3.Name = "TabSeq3";
             this.TabSeq3.Padding = new System.Windows.Forms.Padding(3);
-            this.TabSeq3.Size = new System.Drawing.Size(738, 209);
+            this.TabSeq3.Size = new System.Drawing.Size(822, 209);
             this.TabSeq3.TabIndex = 2;
             this.TabSeq3.Text = "Seq 3";
             // 
@@ -3183,7 +3182,7 @@
             // 
             this.label47.Location = new System.Drawing.Point(4, 152);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(729, 49);
+            this.label47.Size = new System.Drawing.Size(790, 49);
             this.label47.TabIndex = 32;
             this.label47.Text = "Note: This will not modify your Vixen 3 sequence in any way, Vixen Messaging will" +
     " create and modify a copy of your sequence to be used when a message has been re" +
@@ -3193,7 +3192,7 @@
             // 
             this.textBoxSequenceLength3.BackColor = System.Drawing.Color.White;
             this.textBoxSequenceLength3.Enabled = false;
-            this.textBoxSequenceLength3.Location = new System.Drawing.Point(542, 109);
+            this.textBoxSequenceLength3.Location = new System.Drawing.Point(666, 113);
             this.textBoxSequenceLength3.Name = "textBoxSequenceLength3";
             this.textBoxSequenceLength3.Size = new System.Drawing.Size(128, 26);
             this.textBoxSequenceLength3.TabIndex = 4;
@@ -3202,7 +3201,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(386, 112);
+            this.label25.Location = new System.Drawing.Point(510, 116);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(140, 20);
             this.label25.TabIndex = 30;
@@ -3212,7 +3211,7 @@
             // 
             this.label38.Location = new System.Drawing.Point(260, 58);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(450, 52);
+            this.label38.Size = new System.Drawing.Size(534, 52);
             this.label38.TabIndex = 25;
             this.label38.Text = "Select the Vixen Sequence you would like to use. Normally located in your Documen" +
     "ts\\Vixen 3\\Sequence\\ Folder.";
@@ -3223,7 +3222,7 @@
             this.textBoxVixenSeq3.Enabled = false;
             this.textBoxVixenSeq3.Location = new System.Drawing.Point(152, 18);
             this.textBoxVixenSeq3.Name = "textBoxVixenSeq3";
-            this.textBoxVixenSeq3.Size = new System.Drawing.Size(540, 26);
+            this.textBoxVixenSeq3.Size = new System.Drawing.Size(599, 26);
             this.textBoxVixenSeq3.TabIndex = 3;
             // 
             // buttonVixenSeq3
@@ -3259,7 +3258,7 @@
             this.TabSeq4.Location = new System.Drawing.Point(4, 29);
             this.TabSeq4.Name = "TabSeq4";
             this.TabSeq4.Padding = new System.Windows.Forms.Padding(3);
-            this.TabSeq4.Size = new System.Drawing.Size(738, 209);
+            this.TabSeq4.Size = new System.Drawing.Size(822, 209);
             this.TabSeq4.TabIndex = 3;
             this.TabSeq4.Text = "Seq 4";
             // 
@@ -3267,7 +3266,7 @@
             // 
             this.label50.Location = new System.Drawing.Point(4, 152);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(729, 49);
+            this.label50.Size = new System.Drawing.Size(790, 49);
             this.label50.TabIndex = 39;
             this.label50.Text = "Note: This will not modify your Vixen 3 sequence in any way, Vixen Messaging will" +
     " create and modify a copy of your sequence to be used when a message has been re" +
@@ -3277,7 +3276,7 @@
             // 
             this.textBoxSequenceLength4.BackColor = System.Drawing.Color.White;
             this.textBoxSequenceLength4.Enabled = false;
-            this.textBoxSequenceLength4.Location = new System.Drawing.Point(542, 109);
+            this.textBoxSequenceLength4.Location = new System.Drawing.Point(666, 113);
             this.textBoxSequenceLength4.Name = "textBoxSequenceLength4";
             this.textBoxSequenceLength4.Size = new System.Drawing.Size(128, 26);
             this.textBoxSequenceLength4.TabIndex = 4;
@@ -3286,7 +3285,7 @@
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(386, 112);
+            this.label41.Location = new System.Drawing.Point(510, 116);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(140, 20);
             this.label41.TabIndex = 37;
@@ -3296,7 +3295,7 @@
             // 
             this.label42.Location = new System.Drawing.Point(260, 58);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(450, 52);
+            this.label42.Size = new System.Drawing.Size(534, 52);
             this.label42.TabIndex = 35;
             this.label42.Text = "Select the Vixen Sequence you would like to use. Normally located in your Documen" +
     "ts\\Vixen 3\\Sequence\\ Folder.";
@@ -3307,7 +3306,7 @@
             this.textBoxVixenSeq4.Enabled = false;
             this.textBoxVixenSeq4.Location = new System.Drawing.Point(152, 18);
             this.textBoxVixenSeq4.Name = "textBoxVixenSeq4";
-            this.textBoxVixenSeq4.Size = new System.Drawing.Size(540, 26);
+            this.textBoxVixenSeq4.Size = new System.Drawing.Size(598, 26);
             this.textBoxVixenSeq4.TabIndex = 3;
             // 
             // buttonVixenSeq4
@@ -3343,7 +3342,7 @@
             this.TabSeq5.Location = new System.Drawing.Point(4, 29);
             this.TabSeq5.Name = "TabSeq5";
             this.TabSeq5.Padding = new System.Windows.Forms.Padding(3);
-            this.TabSeq5.Size = new System.Drawing.Size(738, 209);
+            this.TabSeq5.Size = new System.Drawing.Size(822, 209);
             this.TabSeq5.TabIndex = 4;
             this.TabSeq5.Text = "Seq 5";
             // 
@@ -3351,7 +3350,7 @@
             // 
             this.label27.Location = new System.Drawing.Point(4, 152);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(729, 49);
+            this.label27.Size = new System.Drawing.Size(790, 49);
             this.label27.TabIndex = 47;
             this.label27.Text = "Note: This will not modify your Vixen 3 sequence in any way, Vixen Messaging will" +
     " create and modify a copy of your sequence to be used when a message has been re" +
@@ -3361,7 +3360,7 @@
             // 
             this.textBoxSequenceLength5.BackColor = System.Drawing.Color.White;
             this.textBoxSequenceLength5.Enabled = false;
-            this.textBoxSequenceLength5.Location = new System.Drawing.Point(542, 109);
+            this.textBoxSequenceLength5.Location = new System.Drawing.Point(666, 113);
             this.textBoxSequenceLength5.Name = "textBoxSequenceLength5";
             this.textBoxSequenceLength5.Size = new System.Drawing.Size(128, 26);
             this.textBoxSequenceLength5.TabIndex = 43;
@@ -3370,7 +3369,7 @@
             // label57
             // 
             this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(386, 112);
+            this.label57.Location = new System.Drawing.Point(510, 116);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(140, 20);
             this.label57.TabIndex = 46;
@@ -3380,7 +3379,7 @@
             // 
             this.label58.Location = new System.Drawing.Point(260, 58);
             this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(450, 52);
+            this.label58.Size = new System.Drawing.Size(534, 52);
             this.label58.TabIndex = 45;
             this.label58.Text = "Select the Vixen Sequence you would like to use. Normally located in your Documen" +
     "ts\\Vixen 3\\Sequence\\ Folder.";
@@ -3391,7 +3390,7 @@
             this.textBoxVixenSeq5.Enabled = false;
             this.textBoxVixenSeq5.Location = new System.Drawing.Point(152, 18);
             this.textBoxVixenSeq5.Name = "textBoxVixenSeq5";
-            this.textBoxVixenSeq5.Size = new System.Drawing.Size(540, 26);
+            this.textBoxVixenSeq5.Size = new System.Drawing.Size(598, 26);
             this.textBoxVixenSeq5.TabIndex = 42;
             // 
             // buttonVixenSeq5
@@ -3427,7 +3426,7 @@
             this.TabSeq6.Location = new System.Drawing.Point(4, 29);
             this.TabSeq6.Name = "TabSeq6";
             this.TabSeq6.Padding = new System.Windows.Forms.Padding(3);
-            this.TabSeq6.Size = new System.Drawing.Size(738, 209);
+            this.TabSeq6.Size = new System.Drawing.Size(822, 209);
             this.TabSeq6.TabIndex = 5;
             this.TabSeq6.Text = "Seq 6";
             // 
@@ -3435,7 +3434,7 @@
             // 
             this.label60.Location = new System.Drawing.Point(4, 152);
             this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(729, 49);
+            this.label60.Size = new System.Drawing.Size(790, 49);
             this.label60.TabIndex = 47;
             this.label60.Text = "Note: This will not modify your Vixen 3 sequence in any way, Vixen Messaging will" +
     " create and modify a copy of your sequence to be used when a message has been re" +
@@ -3445,7 +3444,7 @@
             // 
             this.textBoxSequenceLength6.BackColor = System.Drawing.Color.White;
             this.textBoxSequenceLength6.Enabled = false;
-            this.textBoxSequenceLength6.Location = new System.Drawing.Point(542, 109);
+            this.textBoxSequenceLength6.Location = new System.Drawing.Point(666, 113);
             this.textBoxSequenceLength6.Name = "textBoxSequenceLength6";
             this.textBoxSequenceLength6.Size = new System.Drawing.Size(128, 26);
             this.textBoxSequenceLength6.TabIndex = 43;
@@ -3454,7 +3453,7 @@
             // label61
             // 
             this.label61.AutoSize = true;
-            this.label61.Location = new System.Drawing.Point(386, 112);
+            this.label61.Location = new System.Drawing.Point(510, 116);
             this.label61.Name = "label61";
             this.label61.Size = new System.Drawing.Size(140, 20);
             this.label61.TabIndex = 46;
@@ -3464,7 +3463,7 @@
             // 
             this.label62.Location = new System.Drawing.Point(260, 58);
             this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(450, 52);
+            this.label62.Size = new System.Drawing.Size(534, 52);
             this.label62.TabIndex = 45;
             this.label62.Text = "Select the Vixen Sequence you would like to use. Normally located in your Documen" +
     "ts\\Vixen 3\\Sequence\\ Folder.";
@@ -3475,7 +3474,7 @@
             this.textBoxVixenSeq6.Enabled = false;
             this.textBoxVixenSeq6.Location = new System.Drawing.Point(152, 18);
             this.textBoxVixenSeq6.Name = "textBoxVixenSeq6";
-            this.textBoxVixenSeq6.Size = new System.Drawing.Size(540, 26);
+            this.textBoxVixenSeq6.Size = new System.Drawing.Size(598, 26);
             this.textBoxVixenSeq6.TabIndex = 42;
             // 
             // buttonVixenSeq6
@@ -3499,9 +3498,9 @@
             // 
             // label26
             // 
-            this.label26.Location = new System.Drawing.Point(64, 662);
+            this.label26.Location = new System.Drawing.Point(18, 662);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(660, 53);
+            this.label26.Size = new System.Drawing.Size(818, 53);
             this.label26.TabIndex = 22;
             this.label26.Text = "When \"Use Vixen Sequences\" is Enabled Vixen Messaging will use one of your Vixen " +
     "3 sequences and can be selected Randomly or whichever one is displayed.";
@@ -3561,8 +3560,9 @@
             this.label84.Name = "label84";
             this.label84.Size = new System.Drawing.Size(848, 48);
             this.label84.TabIndex = 5;
-            this.label84.Text = "Enter the command into the body of an email and  trhe word \"Messaging\" plus your " +
-    "remote access keyword and then send to the email address you have set up.";
+            this.label84.Text = "Enter the command into the body of an email and  the word \"Messaging\" plus your r" +
+    "emote access keyword in the subject line and then send the email to the address " +
+    "you have set up.";
             // 
             // label83
             // 
@@ -3606,7 +3606,7 @@
             // buttonSaveLog
             // 
             this.buttonSaveLog.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonSaveLog.Location = new System.Drawing.Point(6, 991);
+            this.buttonSaveLog.Location = new System.Drawing.Point(16, 943);
             this.buttonSaveLog.Name = "buttonSaveLog";
             this.buttonSaveLog.Size = new System.Drawing.Size(122, 42);
             this.buttonSaveLog.TabIndex = 60;
@@ -3660,7 +3660,7 @@
             // buttonStopSequence
             // 
             this.buttonStopSequence.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonStopSequence.Location = new System.Drawing.Point(239, 992);
+            this.buttonStopSequence.Location = new System.Drawing.Point(253, 943);
             this.buttonStopSequence.Name = "buttonStopSequence";
             this.buttonStopSequence.Size = new System.Drawing.Size(292, 40);
             this.buttonStopSequence.TabIndex = 61;
@@ -3682,8 +3682,8 @@
             this.checkBoxMultiLine.Size = new System.Drawing.Size(139, 24);
             this.checkBoxMultiLine.TabIndex = 64;
             this.checkBoxMultiLine.Text = "Multi Line Use:";
-            this.toolTip1.SetToolTip(this.checkBoxMultiLine, "Will allow text to be placed on more then one line of your Matrix/Megatree. Line " +
-        "number will change to 1 when Multiline is enabled.");
+            this.toolTip1.SetToolTip(this.checkBoxMultiLine, "Will allow text to be placed on more then one line of your Matrix/Megatree. Messa" +
+        "ges will be automaticall split evanly across the number of lines.");
             this.checkBoxMultiLine.UseVisualStyleBackColor = true;
             this.checkBoxMultiLine.CheckedChanged += new System.EventHandler(this.checkBoxMultiLine_CheckedChanged);
             // 
@@ -3815,7 +3815,7 @@
             this.checkBoxCountDownEnable.TabIndex = 74;
             this.checkBoxCountDownEnable.Text = "Enable:";
             this.toolTip1.SetToolTip(this.checkBoxCountDownEnable, "Enables Count Down message using Lines below and will be addded to the Random /Se" +
-        "quential play list. COUNTDOWN can still be used in the Local messages list.");
+        "quential play list.\r\nCOUNTDOWN can still be used in the Local messages list.");
             this.checkBoxCountDownEnable.UseVisualStyleBackColor = true;
             this.checkBoxCountDownEnable.CheckedChanged += new System.EventHandler(this.checkBoxCountDownEnable_CheckedChanged);
             // 

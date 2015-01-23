@@ -120,12 +120,18 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>198, 17</value>
   </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>198, 17</value>
+  </metadata>
   <metadata name="timerCheckMail.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>198, 17</value>
   </metadata>
+  <data name="label16.Text" xml:space="preserve">
+    <value>Example: gmail will email the content of the SMS and insert "SMS from" in the Subject line then the phone number. Check a email and insert above all text before the phone number. Not required if Twilio is used for SMS's.</value>
+  </data>
   <data name="richTextBox1.Text" xml:space="preserve">
     <value>stop			Will stop the app from running and sending effects to Vixen 3 (Once stopped
 			you can't restart and you will not receive a return email)

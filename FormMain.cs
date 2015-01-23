@@ -1394,12 +1394,23 @@ namespace Vixen_Messaging
             #region Main Exception
             catch (Exception ex)
             {
-                LogDisplay(GlobalVar.LogMsg = (ex.Message));
-                Log("Error: " + ex.Message);
+
+                if (checkBoxEnableSqnctrl.Checked & textBoxVixenSeq1.Text == "" & textBoxVixenSeq2.Text == "" & textBoxVixenSeq3.Text == "" & textBoxVixenSeq4.Text == "" & textBoxVixenSeq5.Text == "" & textBoxVixenSeq6.Text == "")
+                {
+                    LogDisplay(GlobalVar.LogMsg = "Error: You do not have any Vixen Sequences loaded or the selected one is empty.");
+                    Log("Error: You do not have any Vixen Sequences loaded or the selected one is empty.");
+                }
+                else
+                {
+                    Log("Error: " + ex.Message);
+                    LogDisplay(GlobalVar.LogMsg = (ex.Message));
+                }
+                
                 if (ex.Message.Contains("server"))
                 {
                     MessageBox.Show(@"Warning - Check that Vixen Web Server is enabled and that Vixen 3 is running.", @"Warning");
                 }
+                ShortTimer();
             }
             #endregion
 
@@ -2174,41 +2185,44 @@ namespace Vixen_Messaging
                 selectedSeqTime = txtLen[selected].Text;
             }
 
-			string seqTimeString;
-			var selectedSeqTime1 = "";
-			if (selectedSeqTime.Contains("M"))
-			{
-				//get time string of 1M23.345S for example and convert to seconds then add to Time Interval box.
-				var index = selectedSeqTime.IndexOf(".");
+                string seqTimeString;
+                var selectedSeqTime1 = "";
+                if (selectedSeqTime.Contains("M"))
+                {
+                    //get time string of 1M23.345S for example and convert to seconds then add to Time Interval box.
+                    var index = selectedSeqTime.IndexOf(".");
 
-			    if (index > 0)
-			    {
-			        selectedSeqTime = selectedSeqTime.Substring(0, index);
-			    }
-				seqTimeString = selectedSeqTime.Replace("M", "");
-				var length = seqTimeString.Length;
-				var seqTimeString1 = seqTimeString.Remove(1, length - 1);
-				int seqTimeString2 = Convert.ToInt16(seqTimeString1);
-				seqTimeString2 = seqTimeString2 * 60;
-				seqTimeString = seqTimeString.Remove(0, 1);
-				seqTimeString = seqTimeString.Replace("S", "");
-			    selectedSeqTime = seqTimeString;
-				int seqTimeString3 = Convert.ToInt16(seqTimeString);
-				var newSeqTime = Convert.ToDecimal(seqTimeString2 + seqTimeString3);
-				GlobalVar.SeqIntervalTime = newSeqTime + 15; // add 15 seconds to allow for the Sequence to finish before another check for messages is performed.
-			}
-			else
-			{
-				var index = selectedSeqTime.IndexOf(".");
-			    if (index > 0)
-			    {
-			        selectedSeqTime = selectedSeqTime.Substring(0, index);
-			    }
-                seqTimeString = selectedSeqTime.Replace("S", "");
-			    selectedSeqTime = seqTimeString;
-				var newSeqTime = Convert.ToDecimal(seqTimeString);
-				GlobalVar.SeqIntervalTime = newSeqTime + 5; // add 5 seconds to allow for the Sequence to finish before another check for messages is performed.
-            }
+                    if (index > 0)
+                    {
+                        selectedSeqTime = selectedSeqTime.Substring(0, index);
+                    }
+                    seqTimeString = selectedSeqTime.Replace("M", "");
+                    var length = seqTimeString.Length;
+                    var seqTimeString1 = seqTimeString.Remove(1, length - 1);
+                    int seqTimeString2 = Convert.ToInt16(seqTimeString1);
+                    seqTimeString2 = seqTimeString2*60;
+                    seqTimeString = seqTimeString.Remove(0, 1);
+                    seqTimeString = seqTimeString.Replace("S", "");
+                    selectedSeqTime = seqTimeString;
+                    int seqTimeString3 = Convert.ToInt16(seqTimeString);
+                    var newSeqTime = Convert.ToDecimal(seqTimeString2 + seqTimeString3);
+                    GlobalVar.SeqIntervalTime = newSeqTime + 15;
+                        // add 15 seconds to allow for the Sequence to finish before another check for messages is performed.
+                }
+                else
+                {
+                    var index = selectedSeqTime.IndexOf(".");
+                    if (index > 0)
+                    {
+                        selectedSeqTime = selectedSeqTime.Substring(0, index);
+                    }
+                    seqTimeString = selectedSeqTime.Replace("S", "");
+                    selectedSeqTime = seqTimeString;
+                    var newSeqTime = Convert.ToDecimal(seqTimeString);
+                    GlobalVar.SeqIntervalTime = newSeqTime + 5;
+                        // add 5 seconds to allow for the Sequence to finish before another check for messages is performed.
+                }
+
             #endregion
 
             timerCheckMail.Enabled = false;

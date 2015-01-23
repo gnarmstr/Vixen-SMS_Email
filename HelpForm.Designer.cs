@@ -44,7 +44,7 @@
             // buttonDemo
             // 
             this.buttonDemo.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonDemo.Location = new System.Drawing.Point(50, 831);
+            this.buttonDemo.Location = new System.Drawing.Point(50, 840);
             this.buttonDemo.Name = "buttonDemo";
             this.buttonDemo.Size = new System.Drawing.Size(319, 33);
             this.buttonDemo.TabIndex = 3;
@@ -55,7 +55,7 @@
             // buttonInstallation
             // 
             this.buttonInstallation.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonInstallation.Location = new System.Drawing.Point(50, 883);
+            this.buttonInstallation.Location = new System.Drawing.Point(50, 893);
             this.buttonInstallation.Name = "buttonInstallation";
             this.buttonInstallation.Size = new System.Drawing.Size(319, 33);
             this.buttonInstallation.TabIndex = 4;
@@ -66,7 +66,7 @@
             // buttonGmail
             // 
             this.buttonGmail.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonGmail.Location = new System.Drawing.Point(423, 831);
+            this.buttonGmail.Location = new System.Drawing.Point(423, 840);
             this.buttonGmail.Name = "buttonGmail";
             this.buttonGmail.Size = new System.Drawing.Size(319, 33);
             this.buttonGmail.TabIndex = 5;
@@ -77,7 +77,7 @@
             // buttonEmails
             // 
             this.buttonEmails.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonEmails.Location = new System.Drawing.Point(50, 938);
+            this.buttonEmails.Location = new System.Drawing.Point(50, 943);
             this.buttonEmails.Name = "buttonEmails";
             this.buttonEmails.Size = new System.Drawing.Size(319, 33);
             this.buttonEmails.TabIndex = 6;
@@ -88,16 +88,16 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(290, 778);
+            this.label2.Location = new System.Drawing.Point(290, 789);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(211, 50);
+            this.label2.Size = new System.Drawing.Size(211, 41);
             this.label2.TabIndex = 7;
             this.label2.Text = "Video links";
             // 
             // buttonTwilio
             // 
             this.buttonTwilio.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonTwilio.Location = new System.Drawing.Point(423, 883);
+            this.buttonTwilio.Location = new System.Drawing.Point(423, 893);
             this.buttonTwilio.Name = "buttonTwilio";
             this.buttonTwilio.Size = new System.Drawing.Size(319, 33);
             this.buttonTwilio.TabIndex = 8;
@@ -108,7 +108,7 @@
             // buttonRemoteCommands
             // 
             this.buttonRemoteCommands.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonRemoteCommands.Location = new System.Drawing.Point(423, 938);
+            this.buttonRemoteCommands.Location = new System.Drawing.Point(423, 943);
             this.buttonRemoteCommands.Name = "buttonRemoteCommands";
             this.buttonRemoteCommands.Size = new System.Drawing.Size(319, 33);
             this.buttonRemoteCommands.TabIndex = 9;
@@ -130,7 +130,7 @@
             this.buttonLauncher.BackColor = System.Drawing.Color.Honeydew;
             this.buttonLauncher.Location = new System.Drawing.Point(220, 990);
             this.buttonLauncher.Name = "buttonLauncher";
-            this.buttonLauncher.Size = new System.Drawing.Size(354, 33);
+            this.buttonLauncher.Size = new System.Drawing.Size(354, 42);
             this.buttonLauncher.TabIndex = 11;
             this.buttonLauncher.Text = "Using the Vixen 3 Launcher with Messaging";
             this.buttonLauncher.UseVisualStyleBackColor = false;
@@ -144,7 +144,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.richTextBox1.Size = new System.Drawing.Size(756, 716);
+            this.richTextBox1.Size = new System.Drawing.Size(756, 738);
             this.richTextBox1.TabIndex = 12;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
