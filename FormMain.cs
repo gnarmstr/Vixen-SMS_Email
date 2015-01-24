@@ -75,6 +75,7 @@ namespace Vixen_Messaging
             GlobalVar.SettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Vixen Messaging");
             LoadData();
             EmailSettings();
+            
 
             //Ensures a backup of Whitelist, Blacklist and LocalMessages are made in the Appdata folder so a new installation does not remove them and users loose there changes.
             File.Create(textBoxBlacklistEmailLog.Text).Close();
@@ -226,6 +227,16 @@ namespace Vixen_Messaging
             {
                 Stop_Vixen();
             }
+            //Will only display after first run from install.
+            var profile = new XmlProfileSettings();
+            string checkfirstload = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "True");
+            if (checkfirstload == "True")
+            {
+                MessageBox.Show(@"Welcome to Vixen Messaging, as this is the first time you have run Vixen Messaging you are required to enter in some information on the following Data form. Also it is recommended that you create a new Email account for use with Vixen Messaging as it will process every incoming email.");
+                Stop_Vixen();
+                GetVixenSettings();
+            }
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "False");
         }
 #endregion
     
@@ -377,13 +388,14 @@ namespace Vixen_Messaging
             textBoxLine4.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine4", "");
             var dateCountDownString = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString", "25/12/15");
             dateCountDown.Value = Convert.ToDateTime(dateCountDownString);
+            checkBoxVixenControl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", false);
         }
         #endregion
 
 #region Main Form
         private void timerCheckMail_Tick(object sender, EventArgs e)
         {
-            
+            timerCheckVixenEnabled.Enabled = true;
             //checks Vixen for port setting and compare to Vixen messaging
             try
             {
@@ -415,18 +427,6 @@ namespace Vixen_Messaging
             }
 
             timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + 5 + numericUpDownIntervalMsgs.Value) * 1000;
-
-            //Will only display after first run from install.
-            var profile = new XmlProfileSettings();
-            string checkfirstload = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "True");
-            if (checkfirstload == "True")
-            {
-                MessageBox.Show(@"Welcome to Vixen Messaging, as this is the first time you have run Vixen Messaging you are required to enter in some information on the following Data form. Also it is recommended that you create a new Email account for use with Vixen Messaging as it will process every incoming email.");
-                Stop_Vixen();
-                GetVixenSettings();
-            }
-
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "False");
             Cursor.Current = Cursors.WaitCursor;
 
             PlayModes();
@@ -2568,6 +2568,18 @@ namespace Vixen_Messaging
 #region Button Start and Stop checking for Messages
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            if (checkBoxVixenControl.Checked)
+            {
+                MessageBox.Show(@"You must have the Vixen Control disable to use this button");
+            }
+            else
+            {
+                Start_Vixen();
+            }
+        }
+
+        private void Start_Vixen()
+        {
             buttonStart.Image = Tools.GetIcon(Resources.StartB_W, 40);
             buttonStart.Text = "";
             buttonStop.Image = Tools.GetIcon(Resources.Stop, 40);
@@ -2577,18 +2589,25 @@ namespace Vixen_Messaging
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
-            Stop_Vixen();
+            if (checkBoxVixenControl.Checked)
+            {
+                MessageBox.Show(@"You must have the Vixen Control disable to use this button");
+            }
+            else
+            {
+                Stop_Vixen();
+            }
         }
 
         private void Stop_Vixen()
         {
-            buttonStart.Image = Tools.GetIcon(Resources.Start, 40);
-            buttonStart.Text = "";
-            buttonStop.Image = Tools.GetIcon(Resources.StopB_W, 40);
-            buttonStop.Text = "";
-            timerCheckMail.Enabled = false;
-            buttonStart.Enabled = true;
-            buttonStop.Enabled = false;
+             buttonStart.Image = Tools.GetIcon(Resources.Start, 40);
+             buttonStart.Text = "";
+             buttonStop.Image = Tools.GetIcon(Resources.StopB_W, 40);
+             buttonStop.Text = "";
+             timerCheckMail.Enabled = false;
+             buttonStart.Enabled = true;
+             buttonStop.Enabled = false;
         }
 #endregion
 
@@ -2811,6 +2830,7 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine2", textBoxLine2.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine3", textBoxLine3.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine4", textBoxLine4.Text);
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", checkBoxVixenControl.Checked.ToString());
         }
 #endregion
 
@@ -3034,6 +3054,39 @@ namespace Vixen_Messaging
         }
         #endregion        
 
+        #region Timer to Check Vixen
+        private void timerCheckVixenEnabled_Tick(object sender, EventArgs e)
+        {
+            if (checkBoxVixenControl.Checked)
+            {
+                if (File.Exists(textBoxSequenceTemplate.Text + "\\MessagingEnabled.txt"))
+                {
+                    if (buttonStart.Enabled)
+                    {
+                        Start_Vixen();
+                    }
+                }
+                else
+                {
+                    Stop_Vixen();
+                    StopSequence(); 
+                }
+            }
+        }
+        
+        private void checkBoxVixenControl_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxVixenControl.Checked)
+            {
+                timerCheckVixenEnabled.Enabled = true;
+            }
+            else
+            {
+                timerCheckVixenEnabled.Enabled = false;
+            } 
+        }
+        #endregion
+
         #region Other
         private void checkBoxWhitelist_CheckedChanged(object sender, EventArgs e)
         {
@@ -3200,6 +3253,9 @@ namespace Vixen_Messaging
         {
             groupBoxCountDown.Enabled = !groupBoxCountDown.Enabled;
         }
+
+        
+ 
     }
 }
 #endregion

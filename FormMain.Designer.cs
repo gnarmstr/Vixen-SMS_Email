@@ -338,6 +338,8 @@
             this.label92 = new System.Windows.Forms.Label();
             this.comboBoxCountDownDirection = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.timerCheckVixenEnabled = new System.Windows.Forms.Timer(this.components);
+            this.checkBoxVixenControl = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxEffects.SuspendLayout();
@@ -3627,7 +3629,7 @@
             // 
             this.buttonStart.Location = new System.Drawing.Point(573, 943);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(80, 80);
+            this.buttonStart.Size = new System.Drawing.Size(76, 75);
             this.buttonStart.TabIndex = 13;
             this.buttonStart.TabStop = false;
             this.buttonStart.Tag = "20";
@@ -3637,7 +3639,7 @@
             // 
             this.buttonStop.Location = new System.Drawing.Point(687, 943);
             this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(80, 80);
+            this.buttonStop.Size = new System.Drawing.Size(75, 75);
             this.buttonStop.TabIndex = 14;
             this.buttonStop.TabStop = false;
             this.buttonStop.Tag = "21";
@@ -3901,6 +3903,24 @@
             this.label10.TabIndex = 77;
             this.label10.Text = "Direction:";
             // 
+            // timerCheckVixenEnabled
+            // 
+            this.timerCheckVixenEnabled.Interval = 500;
+            this.timerCheckVixenEnabled.Tick += new System.EventHandler(this.timerCheckVixenEnabled_Tick);
+            // 
+            // checkBoxVixenControl
+            // 
+            this.checkBoxVixenControl.AutoSize = true;
+            this.checkBoxVixenControl.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxVixenControl.Location = new System.Drawing.Point(560, 1021);
+            this.checkBoxVixenControl.Name = "checkBoxVixenControl";
+            this.checkBoxVixenControl.Size = new System.Drawing.Size(196, 24);
+            this.checkBoxVixenControl.TabIndex = 68;
+            this.checkBoxVixenControl.Text = "Enable Vixen 3 Control";
+            this.toolTip1.SetToolTip(this.checkBoxVixenControl, resources.GetString("checkBoxVixenControl.ToolTip"));
+            this.checkBoxVixenControl.UseVisualStyleBackColor = true;
+            this.checkBoxVixenControl.CheckedChanged += new System.EventHandler(this.checkBoxVixenControl_CheckedChanged);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -3908,6 +3928,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(878, 1035);
+            this.Controls.Add(this.checkBoxVixenControl);
             this.Controls.Add(this.buttonStopSequence);
             this.Controls.Add(this.WebServerStatus);
             this.Controls.Add(this.buttonSaveLog);
@@ -4019,6 +4040,7 @@
             this.groupBoxCountDown.ResumeLayout(false);
             this.groupBoxCountDown.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -4332,6 +4354,8 @@
         private System.Windows.Forms.Label label91;
         private System.Windows.Forms.Label label90;
         private System.Windows.Forms.Label label89;
+        private System.Windows.Forms.Timer timerCheckVixenEnabled;
+        private System.Windows.Forms.CheckBox checkBoxVixenControl;
     }
 }
 
