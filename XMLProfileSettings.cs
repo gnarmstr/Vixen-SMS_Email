@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Policy;
 using System.Xml;
 
 namespace Vixen_Messaging
@@ -58,6 +61,11 @@ namespace Vixen_Messaging
         public void PutSetting(SettingType type, string xPath, bool value)
         {
             PutSetting(type, xPath, Convert.ToString(value));
+        }
+
+        public void PutSetting(SettingType type, string xPath, string[] value)
+        {
+                PutSetting(type, xPath, Convert.ToString(value));
         }
 
         public void PutSetting(SettingType type, string xPath, string value)

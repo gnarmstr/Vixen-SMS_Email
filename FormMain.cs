@@ -1,4 +1,8 @@
-﻿#region System modules
+﻿using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
+
+#region System modules
 
 using System;
 using System.Collections.Generic;
@@ -75,6 +79,7 @@ namespace Vixen_Messaging
             GlobalVar.SettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Vixen Messaging");
             LoadData();
             EmailSettings();
+
             
 
             //Ensures a backup of Whitelist, Blacklist and LocalMessages are made in the Appdata folder so a new installation does not remove them and users loose there changes.
@@ -188,6 +193,12 @@ namespace Vixen_Messaging
             pictureBoxSaveBlacklist.Image = Tools.ResizeImage(Resources.SaveBlacklist, 100, 60);
             pictureBoxMovie.Image = Tools.ResizeImage(Resources.ClicktoOpen, 210, 200);
             buttonMovieDelete.Image = Tools.GetIcon(Resources.delete, 16);
+            buttonModify.Image = Tools.GetIcon(Resources.accept, 16);
+            buttonModify.Text = "";
+            buttonAddMessage.Image = Tools.GetIcon(Resources.add, 16);
+            buttonAddMessage.Text = "";
+            buttonRemoveMessage.Image = Tools.GetIcon(Resources.delete, 16);
+            buttonAddMessage.Text = "";
             #endregion
 
             #region Check Vixen Port settings on startup
@@ -389,6 +400,34 @@ namespace Vixen_Messaging
             var dateCountDownString = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString", "25/12/15");
             dateCountDown.Value = Convert.ToDateTime(dateCountDownString);
             checkBoxVixenControl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", false);
+            GlobalVar.MessageNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MessageNumber", 0);
+            comboBoxName.Items.Clear();
+            var i = 0;
+            var line = "ListLine1-";
+            if (GlobalVar.MessageNumber > 0)
+            {
+                do
+                {
+                    GlobalVar.ListLine1.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+                    line = "ListLine2-";
+                    GlobalVar.ListLine2.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+                    line = "ListLine3-";
+                    GlobalVar.ListLine3.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+                    line = "ListLine4-";
+                    GlobalVar.ListLine4.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+                    line = "MessageDirection";
+                    GlobalVar.CountDirection.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+                    line = "MessagePosition";
+                    GlobalVar.Position.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, 10));
+                    line = "MessageEnabled";
+                    GlobalVar.MessageEnabled.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, false));
+                    line = "MessageName";
+                    comboBoxName.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+                    line = "ListLine1-";
+                    i++;
+                } while (i < GlobalVar.MessageNumber);
+                comboBoxName.SelectedIndex = 0;
+            }
         }
         #endregion
 
@@ -2831,6 +2870,42 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine3", textBoxLine3.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine4", textBoxLine4.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", checkBoxVixenControl.Checked.ToString());
+            GlobalVar.MessageNumber = GlobalVar.ListLine1.Count(); 
+            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "MessageNumber", GlobalVar.MessageNumber.ToString());
+            var i = 0;
+            var line = "ListLine1-";
+            do
+            {
+                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.ListLine1[i]);
+                line = "ListLine2-";
+                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.ListLine2[i]);
+                line = "ListLine3-";
+                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.ListLine3[i]);
+                line = "ListLine4-";
+                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.ListLine4[i]);
+                line = "MessageDirection";
+                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CountDirection[i]);
+                line = "MessagePosition";
+                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.Position[i]);
+                line = "MessageEnabled";
+                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.MessageEnabled[i]);
+                line = "MessageName";
+                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, Convert.ToString(comboBoxName.Items[i]));
+                line = "ListLine1-";
+            } while (i++ <= GlobalVar.ListLine1.Count());
+            
+
+
+
+            // Write the list of salesman objects to file.
+            //         WriteToXmlFile(GlobalVar.SettingsPath + "\\Messages.txt", GlobalVar.ListLine1);
+            //         WriteToXmlFile(GlobalVar.SettingsPath + "\\Messages.txt", GlobalVar.ListLine2);
+            //         var s = new XmlSerializer(typeof(List<string>));
+            //      StringBuilder sb = new StringBuilder();
+            //         XmlWriter wr = XmlWriter.Create(GlobalVar.SettingsPath + "\\Messages.txt");
+            //         s.Serialize(wr, GlobalVar.ListLine1);
+            //         s.Serialize(wr, GlobalVar.ListLine2);
+
         }
 #endregion
 
@@ -3254,8 +3329,94 @@ namespace Vixen_Messaging
             groupBoxCountDown.Enabled = !groupBoxCountDown.Enabled;
         }
 
-        
- 
+        private void buttonAddMessage_Click(object sender, EventArgs e)
+        {
+            var formMessages = new FormMessages();
+            formMessages.ShowDialog();
+
+            if (formMessages.textBoxName.Text != "")
+            {
+                GlobalVar.ListLine1.Add(formMessages.textBoxLine1.Text);
+                textBoxLine1.Text = formMessages.textBoxLine1.Text;
+                GlobalVar.ListLine2.Add(formMessages.textBoxLine2.Text);
+                textBoxLine2.Text = formMessages.textBoxLine2.Text;
+                GlobalVar.ListLine3.Add(formMessages.textBoxLine3.Text);
+                textBoxLine3.Text = formMessages.textBoxLine3.Text;
+                GlobalVar.ListLine4.Add(formMessages.textBoxLine4.Text);
+                textBoxLine4.Text = formMessages.textBoxLine4.Text;
+                GlobalVar.CountDirection.Add(formMessages.comboBoxCountDownDirection.Text);
+                comboBoxCountDownDirection.Text = formMessages.comboBoxCountDownDirection.Text;
+                GlobalVar.Position.Add(formMessages.trackBarCountDownPosition.Value);
+                trackBarCountDownPosition.Value = formMessages.trackBarCountDownPosition.Value;
+                GlobalVar.MessageEnabled.Add(formMessages.checkBoxMessageEnabled.Checked);
+                checkBoxMessageEnabled.Checked = formMessages.checkBoxMessageEnabled.Checked;
+                comboBoxName.Items.Add(formMessages.textBoxName.Text);
+                comboBoxName.SelectedIndex = comboBoxName.Items.Count - 1;
+            }
+        }
+
+        private void comboBoxName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedItem = comboBoxName.SelectedIndex;
+            textBoxLine1.Text = GlobalVar.ListLine1[selectedItem];
+            textBoxLine2.Text = GlobalVar.ListLine2[selectedItem];
+            textBoxLine3.Text = GlobalVar.ListLine3[selectedItem];
+            textBoxLine4.Text = GlobalVar.ListLine4[selectedItem];
+            comboBoxCountDownDirection.Text = GlobalVar.CountDirection[selectedItem];
+            trackBarCountDownPosition.Value = GlobalVar.Position[selectedItem];
+            checkBoxMessageEnabled.Checked = GlobalVar.MessageEnabled[selectedItem];
+        }
+
+        private void buttonRemoveMessage_Click(object sender, EventArgs e)
+        {
+            if (comboBoxName.Items.Count > 0)
+            {
+                GlobalVar.ListLine1.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.ListLine2.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.ListLine3.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.ListLine4.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.CountDirection.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.Position.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.MessageEnabled.RemoveAt(comboBoxName.SelectedIndex);
+                comboBoxName.Items.RemoveAt(comboBoxName.SelectedIndex);
+                if (comboBoxName.Items.Count > 0)
+                {
+                    comboBoxName.SelectedIndex = 0;
+                    textBoxLine1.Text = GlobalVar.ListLine1[0];
+                    textBoxLine2.Text = GlobalVar.ListLine2[0];
+                    textBoxLine3.Text = GlobalVar.ListLine3[0];
+                    textBoxLine4.Text = GlobalVar.ListLine4[0];
+                    comboBoxCountDownDirection.Text = GlobalVar.CountDirection[0];
+                    trackBarCountDownPosition.Value = GlobalVar.Position[0];
+                    checkBoxMessageEnabled.Checked = GlobalVar.MessageEnabled[0];
+                }
+                else
+                {
+                    comboBoxName.Items.Clear();
+                    textBoxLine1.Text = "";
+                    textBoxLine2.Text = "";
+                    textBoxLine3.Text = "";
+                    textBoxLine4.Text = "";
+                    comboBoxCountDownDirection.Text = @"None";
+                    trackBarCountDownPosition.Value = 10;
+                    checkBoxMessageEnabled.Checked = false;
+                }
+            }
+        }
+
+        private void buttonModify_Click(object sender, EventArgs e)
+        {
+            if (comboBoxName.SelectedIndex >= 0)
+            {
+                GlobalVar.ListLine1[comboBoxName.SelectedIndex] = textBoxLine1.Text;
+                GlobalVar.ListLine2[comboBoxName.SelectedIndex] = textBoxLine2.Text;
+                GlobalVar.ListLine3[comboBoxName.SelectedIndex] = textBoxLine3.Text;
+                GlobalVar.ListLine4[comboBoxName.SelectedIndex] = textBoxLine4.Text;
+                GlobalVar.CountDirection[comboBoxName.SelectedIndex] = comboBoxCountDownDirection.Text;
+                GlobalVar.Position[comboBoxName.SelectedIndex] = trackBarCountDownPosition.Value;
+                GlobalVar.MessageEnabled[comboBoxName.SelectedIndex] = checkBoxMessageEnabled.Checked;
+            }
+        }
     }
 }
 #endregion

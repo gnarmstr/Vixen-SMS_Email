@@ -1,4 +1,6 @@
-﻿namespace Vixen_Messaging
+﻿using System.Collections.Generic;
+
+namespace Vixen_Messaging
 {
     class GlobalVar
     {
@@ -24,6 +26,22 @@
             public static string TwilioPhoneNumber { get; set; }
 
             public static decimal SeqIntervalTime { get; set; }
+
+            public static List<string> ListLine1 = new List<string>();
+
+            public static List<string> ListLine2 = new List<string>();
+
+            public static List<string> ListLine3 = new List<string>();
+
+            public static List<string> ListLine4 = new List<string>();
+
+            public static List<string> CountDirection = new List<string>();
+
+            public static List<int> Position = new List<int>();
+
+            public static List<bool> MessageEnabled = new List<bool>();
+
+            public static int MessageNumber { get; set; }
 
             /// <summary>
             /// Static value protected by access routine.
