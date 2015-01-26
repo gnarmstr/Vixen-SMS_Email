@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.comboBoxCountDownDirection = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label92 = new System.Windows.Forms.Label();
@@ -45,6 +46,7 @@
             this.label86 = new System.Windows.Forms.Label();
             this.trackBarCountDownPosition = new System.Windows.Forms.TrackBar();
             this.checkBoxMessageEnabled = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarCountDownPosition)).BeginInit();
@@ -193,7 +195,10 @@
             this.trackBarCountDownPosition.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.trackBarCountDownPosition.Size = new System.Drawing.Size(40, 181);
             this.trackBarCountDownPosition.TabIndex = 8;
-            this.trackBarCountDownPosition.Value = 10;
+            this.trackBarCountDownPosition.Value = 65;
+            this.trackBarCountDownPosition.Scroll += new System.EventHandler(this.trackBarCountDownPosition_Scroll);
+            this.trackBarCountDownPosition.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarCountDownPosition_MouseDown);
+            this.trackBarCountDownPosition.MouseHover += new System.EventHandler(this.trackBarCountDownPosition_MouseHover);
             // 
             // checkBoxMessageEnabled
             // 
@@ -261,5 +266,6 @@
         private System.Windows.Forms.Label label86;
         public System.Windows.Forms.TrackBar trackBarCountDownPosition;
         public System.Windows.Forms.CheckBox checkBoxMessageEnabled;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

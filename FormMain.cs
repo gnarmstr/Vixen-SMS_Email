@@ -131,6 +131,7 @@ namespace Vixen_Messaging
             richTextBoxMessage.Text = content2;
 
             GlobalVar.Msgindex = 0;
+            GlobalVar.CustomMessageCount = 0;
             GlobalVar.PlayMessage = false;
 
             #region Initial Groups, Tab and Checkboxs are Visable/Enabled/Setup
@@ -193,8 +194,6 @@ namespace Vixen_Messaging
             pictureBoxSaveBlacklist.Image = Tools.ResizeImage(Resources.SaveBlacklist, 100, 60);
             pictureBoxMovie.Image = Tools.ResizeImage(Resources.ClicktoOpen, 210, 200);
             buttonMovieDelete.Image = Tools.GetIcon(Resources.delete, 16);
-            buttonModify.Image = Tools.GetIcon(Resources.accept, 16);
-            buttonModify.Text = "";
             buttonAddMessage.Image = Tools.GetIcon(Resources.add, 16);
             buttonAddMessage.Text = "";
             buttonRemoveMessage.Image = Tools.GetIcon(Resources.delete, 16);
@@ -391,12 +390,6 @@ namespace Vixen_Messaging
             numericUpDownMultiLine.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMultiLine", 1);
             numericUpDownMaxWords.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords", 0);
             checkBoxCountDownEnable.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCountDownEnable", false);
-            comboBoxCountDownDirection.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxCountDownDirection", "None");
-            trackBarCountDownPosition.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarCountDownPosition", 20);
-            textBoxLine1.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine1", "  COUNTDOWN");
-            textBoxLine2.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine2", "days til");
-            textBoxLine3.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine3", "   Xmas");
-            textBoxLine4.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine4", "");
             var dateCountDownString = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString", "25/12/15");
             dateCountDown.Value = Convert.ToDateTime(dateCountDownString);
             checkBoxVixenControl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", false);
@@ -418,7 +411,7 @@ namespace Vixen_Messaging
                     line = "MessageDirection";
                     GlobalVar.CountDirection.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
                     line = "MessagePosition";
-                    GlobalVar.Position.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, 10));
+                    GlobalVar.Position.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, 65));
                     line = "MessageEnabled";
                     GlobalVar.MessageEnabled.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, false));
                     line = "MessageName";
@@ -791,10 +784,28 @@ namespace Vixen_Messaging
                 {
 
                     var rndLineNumber = new Random();
-                    var rndLineNumberResult = rndLineNumber.Next(0, msgcount+1);
-                    if (rndLineNumberResult == msgcount | richTextBoxMessage.Text == "")
+                    var rndLineNumberResult = rndLineNumber.Next(0, msgcount + comboBoxName.Items.Count);
+                    if (rndLineNumberResult >= msgcount | richTextBoxMessage.Text == "")
                     {
-                        msg = "play counter"; //Play counter is used as its in the Whitelist
+                        var i = 0;
+                        do
+                        {
+                            var rndCustomMsg = new Random();
+                            var rndCustomMsgResult = rndCustomMsg.Next(0, comboBoxName.Items.Count -1);
+                            if (GlobalVar.MessageEnabled[rndCustomMsgResult])
+                            {
+                                comboBoxName.SelectedIndex = rndCustomMsgResult;
+                            }
+                        } while (!checkBoxMessageEnabled.Checked & i++ < 200 & checkBoxCountDownEnable.Checked);
+                        if (checkBoxMessageEnabled.Checked)
+                        {
+                            msg = "play counter"; //Play counter is used as its in the Whitelist
+                        }
+                        else
+                        {
+                            ShortTimer();
+                            return;
+                        }
                     }
                     else
                     {
@@ -810,14 +821,51 @@ namespace Vixen_Messaging
                     }
                     else
                     {
-                        if ((GlobalVar.Msgindex == msgcount | richTextBoxMessage.Text == "") & checkBoxCountDownEnable.Checked)
+                        if (((GlobalVar.Msgindex >= msgcount | richTextBoxMessage.Text == "") & GlobalVar.CustomMessageCount < comboBoxName.Items.Count) & checkBoxCountDownEnable.Checked)
                         {
-                            msg = "play counter"; //Play counter is used as its in the Whitelist
-                            GlobalVar.Msgindex++;
+                            do
+                            {
+                                comboBoxName.SelectedIndex = GlobalVar.CustomMessageCount;
+                                GlobalVar.CustomMessageCount ++;
+                            } while (!checkBoxMessageEnabled.Checked & GlobalVar.CustomMessageCount != comboBoxName.Items.Count);
+                            if (checkBoxMessageEnabled.Checked)
+                            {
+                                msg = "play counter"; //Play counter is used as its in the Whitelist
+                                GlobalVar.Msgindex++;
+                            }
+                            else
+                            {
+                                GlobalVar.Msgindex = 1;
+                                ShortTimer();
+                                return;
+                            }
                         }
                         else
                         {
-                            msg = phrases[0];
+                            GlobalVar.CustomMessageCount = 0;
+                            if (richTextBoxMessage.Text == "")
+                            {
+                                do
+                                {
+                                    comboBoxName.SelectedIndex = GlobalVar.CustomMessageCount;
+                                    GlobalVar.CustomMessageCount++;
+                                } while (!checkBoxMessageEnabled.Checked & GlobalVar.CustomMessageCount != comboBoxName.Items.Count);
+                                if (checkBoxMessageEnabled.Checked)
+                                {
+                                    msg = "play counter"; //Play counter is used as its in the Whitelist
+                                    GlobalVar.Msgindex++;
+                                }
+                                else
+                                {
+                                    GlobalVar.Msgindex = 1;
+                                    ShortTimer();
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                msg = phrases[0];
+                            }
                             GlobalVar.Msgindex = 1;
                         }
                     }
@@ -1517,6 +1565,7 @@ namespace Vixen_Messaging
                     case "None": textDirection = 4;
                         break;
                 }
+                fileText1 = fileText1.Replace("TextPosition_Change", trackBarCountDownPosition.Value.ToString());
             }
             else
             {
@@ -1600,6 +1649,7 @@ namespace Vixen_Messaging
                     case "None": textDirection = 4;
                         break;
                 }
+                fileText1 = fileText1.Replace("TextPosition_Change", trackBarTextPosition.Value.ToString());
             }
             
             fileText1 = fileText1.Replace("TextDirection_Change", textDirection.ToString());
@@ -1608,7 +1658,7 @@ namespace Vixen_Messaging
             fileText1 = fileText1.Replace("Speed_Change", trackBarTextSpeed.Value.ToString());
             fileText1 = fileText1.Replace("FontName_Change", textBoxFont.Text);
             fileText1 = fileText1.Replace("FontSize_Change", textBoxFontSize.Text);
-            fileText1 = fileText1.Replace("TextPosition_Change", trackBarTextPosition.Value.ToString());
+            
             fileText1 = fileText1.Replace("Colour_Change1", textColorNum.ToString());
             fileText = fileText1;
         }
@@ -2863,12 +2913,6 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMultiLine", numericUpDownMultiLine.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords", numericUpDownMaxWords.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCountDownEnable", checkBoxCountDownEnable.Checked.ToString());
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxCountDownDirection", comboBoxCountDownDirection.Text);
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarCountDownPosition", trackBarCountDownPosition.Value.ToString());
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine1", textBoxLine1.Text);
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine2", textBoxLine2.Text);
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine3", textBoxLine3.Text);
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxLine4", textBoxLine4.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", checkBoxVixenControl.Checked.ToString());
             GlobalVar.MessageNumber = GlobalVar.ListLine1.Count(); 
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "MessageNumber", GlobalVar.MessageNumber.ToString());
@@ -2892,7 +2936,8 @@ namespace Vixen_Messaging
                 line = "MessageName";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, Convert.ToString(comboBoxName.Items[i]));
                 line = "ListLine1-";
-            } while (i++ <= GlobalVar.ListLine1.Count());
+                i++;
+            } while (i < GlobalVar.ListLine1.Count());
             
 
 
@@ -3357,6 +3402,11 @@ namespace Vixen_Messaging
 
         private void comboBoxName_SelectedIndexChanged(object sender, EventArgs e)
         {
+            CustomMessage();
+        }
+
+        private void CustomMessage()
+        {
             var selectedItem = comboBoxName.SelectedIndex;
             textBoxLine1.Text = GlobalVar.ListLine1[selectedItem];
             textBoxLine2.Text = GlobalVar.ListLine2[selectedItem];
@@ -3404,9 +3454,44 @@ namespace Vixen_Messaging
             }
         }
 
-        private void buttonModify_Click(object sender, EventArgs e)
+        private void textBoxLine1_MouseLeave(object sender, EventArgs e)
         {
-            if (comboBoxName.SelectedIndex >= 0)
+            CustomMessageUpdate();
+        }
+
+        private void textBoxLine2_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void textBoxLine3_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void textBoxLine4_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void comboBoxCountDownDirection_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void checkBoxMessageEnabled_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void trackBarCountDownPosition_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void CustomMessageUpdate()
+        {
+            if (comboBoxName.Items.Count != 0)
             {
                 GlobalVar.ListLine1[comboBoxName.SelectedIndex] = textBoxLine1.Text;
                 GlobalVar.ListLine2[comboBoxName.SelectedIndex] = textBoxLine2.Text;
@@ -3417,6 +3502,15 @@ namespace Vixen_Messaging
                 GlobalVar.MessageEnabled[comboBoxName.SelectedIndex] = checkBoxMessageEnabled.Checked;
             }
         }
+
+        private void checkBoxEmail_CheckedChanged(object sender, EventArgs e)
+        {
+            textBoxFromEmailAddress.Enabled = !textBoxFromEmailAddress.Enabled;
+            textBoxUID.Enabled = !textBoxUID.Enabled;
+            textBoxPWD.Enabled = !textBoxPWD.Enabled;
+            comboBoxEmailSettings.Enabled = !comboBoxEmailSettings.Enabled;
+        }
+
     }
 }
 #endregion

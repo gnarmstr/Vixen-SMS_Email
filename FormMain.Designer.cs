@@ -213,15 +213,10 @@
             this.label87 = new System.Windows.Forms.Label();
             this.label88 = new System.Windows.Forms.Label();
             this.numericUpDownMaxWords = new System.Windows.Forms.NumericUpDown();
-            this.textBoxLine1 = new System.Windows.Forms.TextBox();
-            this.textBoxLine2 = new System.Windows.Forms.TextBox();
-            this.textBoxLine3 = new System.Windows.Forms.TextBox();
-            this.textBoxLine4 = new System.Windows.Forms.TextBox();
-            this.label86 = new System.Windows.Forms.Label();
             this.checkBoxCountDownEnable = new System.Windows.Forms.CheckBox();
+            this.checkBoxVixenControl = new System.Windows.Forms.CheckBox();
             this.groupBoxCountDown = new System.Windows.Forms.GroupBox();
             this.label93 = new System.Windows.Forms.Label();
-            this.buttonModify = new System.Windows.Forms.Button();
             this.comboBoxName = new System.Windows.Forms.ComboBox();
             this.checkBoxMessageEnabled = new System.Windows.Forms.CheckBox();
             this.buttonRemoveMessage = new System.Windows.Forms.Button();
@@ -232,8 +227,12 @@
             this.label91 = new System.Windows.Forms.Label();
             this.label90 = new System.Windows.Forms.Label();
             this.label89 = new System.Windows.Forms.Label();
+            this.textBoxLine1 = new System.Windows.Forms.TextBox();
+            this.textBoxLine2 = new System.Windows.Forms.TextBox();
+            this.label86 = new System.Windows.Forms.Label();
+            this.textBoxLine3 = new System.Windows.Forms.TextBox();
             this.trackBarCountDownPosition = new System.Windows.Forms.TrackBar();
-            this.checkBoxVixenControl = new System.Windows.Forms.CheckBox();
+            this.textBoxLine4 = new System.Windows.Forms.TextBox();
             this.comboBoxPlayMode = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageMain = new System.Windows.Forms.TabPage();
@@ -266,13 +265,13 @@
             this.checkBoxAutoStart = new System.Windows.Forms.CheckBox();
             this.textBoxSubjectHeader = new System.Windows.Forms.TextBox();
             this.tabPageTextSetting = new System.Windows.Forms.TabPage();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.dateCountDown = new System.Windows.Forms.DateTimePicker();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.richTextBoxLog1 = new System.Windows.Forms.RichTextBox();
             this.groupBoxMessages = new System.Windows.Forms.GroupBox();
-            this.buttonSaveMessageList = new System.Windows.Forms.Button();
             this.checkBoxLocalRandom = new System.Windows.Forms.CheckBox();
+            this.buttonSaveMessageList = new System.Windows.Forms.Button();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.dateCountDown = new System.Windows.Forms.DateTimePicker();
             this.groupBoxSeqSettings = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.textBoxFontSize = new System.Windows.Forms.TextBox();
@@ -346,6 +345,9 @@
             this.buttonStopSequence = new System.Windows.Forms.Button();
             this.fileDialog = new System.Windows.Forms.OpenFileDialog();
             this.timerCheckVixenEnabled = new System.Windows.Forms.Timer(this.components);
+            this.buttonCustomFont = new System.Windows.Forms.Button();
+            this.textBoxCustomFont = new System.Windows.Forms.TextBox();
+            this.textBoxCustomFontSize = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxEffects.SuspendLayout();
@@ -391,9 +393,9 @@
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.tabPageTextSetting.SuspendLayout();
-            this.groupBox8.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBoxMessages.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.groupBoxSeqSettings.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TextLineNumber)).BeginInit();
@@ -2158,7 +2160,7 @@
             // SingleColourSelection
             // 
             this.SingleColourSelection.Controls.Add(this.SingleCol1);
-            this.SingleColourSelection.Location = new System.Drawing.Point(14, 272);
+            this.SingleColourSelection.Location = new System.Drawing.Point(14, 212);
             this.SingleColourSelection.Name = "SingleColourSelection";
             this.SingleColourSelection.Size = new System.Drawing.Size(144, 80);
             this.SingleColourSelection.TabIndex = 8;
@@ -2191,18 +2193,18 @@
             this.RandomColourSelection.Controls.Add(this.TextColor6);
             this.RandomColourSelection.Controls.Add(this.TextColor5);
             this.RandomColourSelection.Enabled = false;
-            this.RandomColourSelection.Location = new System.Drawing.Point(207, 272);
+            this.RandomColourSelection.Location = new System.Drawing.Point(207, 212);
             this.RandomColourSelection.Name = "RandomColourSelection";
             this.RandomColourSelection.Size = new System.Drawing.Size(628, 80);
             this.RandomColourSelection.TabIndex = 9;
             this.RandomColourSelection.TabStop = false;
-            this.RandomColourSelection.Text = "Random Colour Selection";
+            this.RandomColourSelection.Text = "Random Colours";
             this.toolTip1.SetToolTip(this.RandomColourSelection, "Select a colour to edit.");
             // 
             // TextColor1
             // 
             this.TextColor1.BackColor = System.Drawing.Color.Red;
-            this.TextColor1.Location = new System.Drawing.Point(30, 32);
+            this.TextColor1.Location = new System.Drawing.Point(27, 32);
             this.TextColor1.Margin = new System.Windows.Forms.Padding(0);
             this.TextColor1.Name = "TextColor1";
             this.TextColor1.Size = new System.Drawing.Size(40, 40);
@@ -2214,7 +2216,7 @@
             // TextColor10
             // 
             this.TextColor10.BackColor = System.Drawing.Color.DodgerBlue;
-            this.TextColor10.Location = new System.Drawing.Point(466, 32);
+            this.TextColor10.Location = new System.Drawing.Point(564, 32);
             this.TextColor10.Margin = new System.Windows.Forms.Padding(0);
             this.TextColor10.Name = "TextColor10";
             this.TextColor10.Size = new System.Drawing.Size(40, 40);
@@ -2226,7 +2228,7 @@
             // TextColor8
             // 
             this.TextColor8.BackColor = System.Drawing.Color.Maroon;
-            this.TextColor8.Location = new System.Drawing.Point(368, 32);
+            this.TextColor8.Location = new System.Drawing.Point(446, 32);
             this.TextColor8.Margin = new System.Windows.Forms.Padding(0);
             this.TextColor8.Name = "TextColor8";
             this.TextColor8.Size = new System.Drawing.Size(40, 40);
@@ -2238,7 +2240,7 @@
             // TextColor9
             // 
             this.TextColor9.BackColor = System.Drawing.Color.Brown;
-            this.TextColor9.Location = new System.Drawing.Point(416, 32);
+            this.TextColor9.Location = new System.Drawing.Point(506, 32);
             this.TextColor9.Margin = new System.Windows.Forms.Padding(0);
             this.TextColor9.Name = "TextColor9";
             this.TextColor9.Size = new System.Drawing.Size(40, 40);
@@ -2250,7 +2252,7 @@
             // TextColor2
             // 
             this.TextColor2.BackColor = System.Drawing.Color.Lime;
-            this.TextColor2.Location = new System.Drawing.Point(75, 32);
+            this.TextColor2.Location = new System.Drawing.Point(86, 32);
             this.TextColor2.Margin = new System.Windows.Forms.Padding(0);
             this.TextColor2.Name = "TextColor2";
             this.TextColor2.Size = new System.Drawing.Size(40, 40);
@@ -2262,7 +2264,7 @@
             // TextColor3
             // 
             this.TextColor3.BackColor = System.Drawing.Color.Blue;
-            this.TextColor3.Location = new System.Drawing.Point(122, 32);
+            this.TextColor3.Location = new System.Drawing.Point(143, 32);
             this.TextColor3.Margin = new System.Windows.Forms.Padding(0);
             this.TextColor3.Name = "TextColor3";
             this.TextColor3.Size = new System.Drawing.Size(40, 40);
@@ -2274,7 +2276,7 @@
             // TextColor7
             // 
             this.TextColor7.BackColor = System.Drawing.Color.LightBlue;
-            this.TextColor7.Location = new System.Drawing.Point(320, 32);
+            this.TextColor7.Location = new System.Drawing.Point(386, 32);
             this.TextColor7.Margin = new System.Windows.Forms.Padding(0);
             this.TextColor7.Name = "TextColor7";
             this.TextColor7.Size = new System.Drawing.Size(40, 40);
@@ -2286,7 +2288,7 @@
             // TextColor4
             // 
             this.TextColor4.BackColor = System.Drawing.Color.Yellow;
-            this.TextColor4.Location = new System.Drawing.Point(171, 32);
+            this.TextColor4.Location = new System.Drawing.Point(203, 32);
             this.TextColor4.Margin = new System.Windows.Forms.Padding(0);
             this.TextColor4.Name = "TextColor4";
             this.TextColor4.Size = new System.Drawing.Size(40, 40);
@@ -2298,7 +2300,7 @@
             // TextColor6
             // 
             this.TextColor6.BackColor = System.Drawing.Color.Pink;
-            this.TextColor6.Location = new System.Drawing.Point(274, 32);
+            this.TextColor6.Location = new System.Drawing.Point(324, 32);
             this.TextColor6.Margin = new System.Windows.Forms.Padding(0);
             this.TextColor6.Name = "TextColor6";
             this.TextColor6.Size = new System.Drawing.Size(40, 40);
@@ -2310,7 +2312,7 @@
             // TextColor5
             // 
             this.TextColor5.BackColor = System.Drawing.Color.Orange;
-            this.TextColor5.Location = new System.Drawing.Point(220, 32);
+            this.TextColor5.Location = new System.Drawing.Point(263, 32);
             this.TextColor5.Margin = new System.Windows.Forms.Padding(0);
             this.TextColor5.Name = "TextColor5";
             this.TextColor5.Size = new System.Drawing.Size(40, 40);
@@ -2323,7 +2325,7 @@
             // 
             this.checkBoxRandomCol.AutoSize = true;
             this.checkBoxRandomCol.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxRandomCol.Location = new System.Drawing.Point(14, 34);
+            this.checkBoxRandomCol.Location = new System.Drawing.Point(12, 34);
             this.checkBoxRandomCol.Name = "checkBoxRandomCol";
             this.checkBoxRandomCol.Size = new System.Drawing.Size(220, 24);
             this.checkBoxRandomCol.TabIndex = 1;
@@ -2428,6 +2430,8 @@
             // 
             this.checkBoxEmail.AutoSize = true;
             this.checkBoxEmail.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxEmail.Checked = true;
+            this.checkBoxEmail.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxEmail.Location = new System.Drawing.Point(7, 36);
             this.checkBoxEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBoxEmail.Name = "checkBoxEmail";
@@ -2437,6 +2441,7 @@
             this.checkBoxEmail.Text = "Email/SMS (from Email)";
             this.toolTip1.SetToolTip(this.checkBoxEmail, "Select to retrieve messages from an email address");
             this.checkBoxEmail.UseVisualStyleBackColor = true;
+            this.checkBoxEmail.CheckedChanged += new System.EventHandler(this.checkBoxEmail_CheckedChanged);
             // 
             // checkBoxLocal
             // 
@@ -2468,13 +2473,12 @@
             // 
             // richTextBoxMessage
             // 
-            this.richTextBoxMessage.Location = new System.Drawing.Point(8, 70);
+            this.richTextBoxMessage.Location = new System.Drawing.Point(3, 17);
             this.richTextBoxMessage.Name = "richTextBoxMessage";
-            this.richTextBoxMessage.Size = new System.Drawing.Size(444, 224);
+            this.richTextBoxMessage.Size = new System.Drawing.Size(456, 277);
             this.richTextBoxMessage.TabIndex = 60;
             this.richTextBoxMessage.Text = "";
-            this.toolTip1.SetToolTip(this.richTextBoxMessage, "The word COUNTDOWN will be replaced with the number of days. You can add any mess" +
-        "sage before or after the word COUNTDOWN or have multiple COUNTDOWNS.");
+            this.toolTip1.SetToolTip(this.richTextBoxMessage, resources.GetString("richTextBoxMessage.ToolTip"));
             // 
             // label66
             // 
@@ -2538,18 +2542,18 @@
             // 
             // label87
             // 
-            this.label87.AutoSize = true;
-            this.label87.Location = new System.Drawing.Point(7, 27);
+            this.label87.Location = new System.Drawing.Point(114, 33);
             this.label87.Name = "label87";
-            this.label87.Size = new System.Drawing.Size(48, 20);
+            this.label87.Size = new System.Drawing.Size(149, 29);
             this.label87.TabIndex = 65;
-            this.label87.Text = "Date:";
+            this.label87.Text = "CountDown Date:";
+            this.label87.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.toolTip1.SetToolTip(this.label87, "Add the word COUNTDOWN to your message to display the number fo days.");
             // 
             // label88
             // 
             this.label88.AutoSize = true;
-            this.label88.Location = new System.Drawing.Point(447, 83);
+            this.label88.Location = new System.Drawing.Point(447, 74);
             this.label88.Name = "label88";
             this.label88.Size = new System.Drawing.Size(92, 20);
             this.label88.TabIndex = 66;
@@ -2558,72 +2562,45 @@
             // 
             // numericUpDownMaxWords
             // 
-            this.numericUpDownMaxWords.Location = new System.Drawing.Point(543, 81);
+            this.numericUpDownMaxWords.Location = new System.Drawing.Point(543, 72);
             this.numericUpDownMaxWords.Name = "numericUpDownMaxWords";
             this.numericUpDownMaxWords.Size = new System.Drawing.Size(72, 26);
             this.numericUpDownMaxWords.TabIndex = 65;
             this.toolTip1.SetToolTip(this.numericUpDownMaxWords, "Enter 0 for unlimited words.");
             // 
-            // textBoxLine1
-            // 
-            this.textBoxLine1.Location = new System.Drawing.Point(23, 118);
-            this.textBoxLine1.Name = "textBoxLine1";
-            this.textBoxLine1.Size = new System.Drawing.Size(294, 26);
-            this.textBoxLine1.TabIndex = 67;
-            this.toolTip1.SetToolTip(this.textBoxLine1, "Add the word COUNTDOWN to your message to display the number fo days.");
-            // 
-            // textBoxLine2
-            // 
-            this.textBoxLine2.Location = new System.Drawing.Point(23, 150);
-            this.textBoxLine2.Name = "textBoxLine2";
-            this.textBoxLine2.Size = new System.Drawing.Size(294, 26);
-            this.textBoxLine2.TabIndex = 68;
-            this.toolTip1.SetToolTip(this.textBoxLine2, "Add the word COUNTDOWN to your message to display the number fo days.");
-            // 
-            // textBoxLine3
-            // 
-            this.textBoxLine3.Location = new System.Drawing.Point(23, 182);
-            this.textBoxLine3.Name = "textBoxLine3";
-            this.textBoxLine3.Size = new System.Drawing.Size(294, 26);
-            this.textBoxLine3.TabIndex = 69;
-            this.toolTip1.SetToolTip(this.textBoxLine3, "Add the word COUNTDOWN to your message to display the number fo days.");
-            // 
-            // textBoxLine4
-            // 
-            this.textBoxLine4.Location = new System.Drawing.Point(23, 214);
-            this.textBoxLine4.Name = "textBoxLine4";
-            this.textBoxLine4.Size = new System.Drawing.Size(294, 26);
-            this.textBoxLine4.TabIndex = 70;
-            this.toolTip1.SetToolTip(this.textBoxLine4, "Add the word COUNTDOWN to your message to display the number fo days.");
-            // 
-            // label86
-            // 
-            this.label86.AutoSize = true;
-            this.label86.Location = new System.Drawing.Point(315, 19);
-            this.label86.Name = "label86";
-            this.label86.Size = new System.Drawing.Size(69, 20);
-            this.label86.TabIndex = 73;
-            this.label86.Text = "Position:";
-            this.toolTip1.SetToolTip(this.label86, "Text Position is for Countdown message using Lines below only");
-            // 
             // checkBoxCountDownEnable
             // 
-            this.checkBoxCountDownEnable.AutoSize = true;
             this.checkBoxCountDownEnable.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxCountDownEnable.Location = new System.Drawing.Point(228, 26);
+            this.checkBoxCountDownEnable.Location = new System.Drawing.Point(663, 12);
             this.checkBoxCountDownEnable.Name = "checkBoxCountDownEnable";
-            this.checkBoxCountDownEnable.Size = new System.Drawing.Size(89, 24);
+            this.checkBoxCountDownEnable.Size = new System.Drawing.Size(152, 52);
             this.checkBoxCountDownEnable.TabIndex = 74;
-            this.checkBoxCountDownEnable.Text = "Enable:";
-            this.toolTip1.SetToolTip(this.checkBoxCountDownEnable, "Enables Count Down message using Lines below and will be addded to the Random /Se" +
-        "quential play list.\r\nCOUNTDOWN can still be used in the Local messages list.");
+            this.checkBoxCountDownEnable.Text = "Enable Custom Messages:";
+            this.checkBoxCountDownEnable.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.checkBoxCountDownEnable, "Enables Custom messages using Lines below and will be added to the Random /Sequen" +
+        "tial play list.\r\nCOUNTDOWN can still be used in the Local messages list.");
             this.checkBoxCountDownEnable.UseVisualStyleBackColor = true;
             this.checkBoxCountDownEnable.CheckedChanged += new System.EventHandler(this.checkBoxCountDownEnable_CheckedChanged);
             // 
+            // checkBoxVixenControl
+            // 
+            this.checkBoxVixenControl.AutoSize = true;
+            this.checkBoxVixenControl.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxVixenControl.Location = new System.Drawing.Point(560, 1021);
+            this.checkBoxVixenControl.Name = "checkBoxVixenControl";
+            this.checkBoxVixenControl.Size = new System.Drawing.Size(196, 24);
+            this.checkBoxVixenControl.TabIndex = 68;
+            this.checkBoxVixenControl.Text = "Enable Vixen 3 Control";
+            this.toolTip1.SetToolTip(this.checkBoxVixenControl, resources.GetString("checkBoxVixenControl.ToolTip"));
+            this.checkBoxVixenControl.UseVisualStyleBackColor = true;
+            this.checkBoxVixenControl.CheckedChanged += new System.EventHandler(this.checkBoxVixenControl_CheckedChanged);
+            // 
             // groupBoxCountDown
             // 
+            this.groupBoxCountDown.Controls.Add(this.textBoxCustomFontSize);
+            this.groupBoxCountDown.Controls.Add(this.textBoxCustomFont);
+            this.groupBoxCountDown.Controls.Add(this.buttonCustomFont);
             this.groupBoxCountDown.Controls.Add(this.label93);
-            this.groupBoxCountDown.Controls.Add(this.buttonModify);
             this.groupBoxCountDown.Controls.Add(this.comboBoxName);
             this.groupBoxCountDown.Controls.Add(this.checkBoxMessageEnabled);
             this.groupBoxCountDown.Controls.Add(this.buttonRemoveMessage);
@@ -2641,12 +2618,13 @@
             this.groupBoxCountDown.Controls.Add(this.trackBarCountDownPosition);
             this.groupBoxCountDown.Controls.Add(this.textBoxLine4);
             this.groupBoxCountDown.Enabled = false;
-            this.groupBoxCountDown.Location = new System.Drawing.Point(0, 50);
+            this.groupBoxCountDown.Location = new System.Drawing.Point(468, 59);
             this.groupBoxCountDown.Name = "groupBoxCountDown";
-            this.groupBoxCountDown.Size = new System.Drawing.Size(390, 249);
-            this.groupBoxCountDown.TabIndex = 75;
+            this.groupBoxCountDown.Size = new System.Drawing.Size(390, 300);
+            this.groupBoxCountDown.TabIndex = 76;
             this.groupBoxCountDown.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBoxCountDown, "Add the word COUNTDOWN to your message to display the number fo days.");
+            this.toolTip1.SetToolTip(this.groupBoxCountDown, "Add the word COUNTDOWN to your message to display\r\nthe number fo days to the Coun" +
+        "tDown date.");
             // 
             // label93
             // 
@@ -2657,23 +2635,12 @@
             this.label93.TabIndex = 84;
             this.label93.Text = "Message Name:";
             // 
-            // buttonModify
-            // 
-            this.buttonModify.Location = new System.Drawing.Point(272, 32);
-            this.buttonModify.Name = "buttonModify";
-            this.buttonModify.Size = new System.Drawing.Size(38, 37);
-            this.buttonModify.TabIndex = 83;
-            this.buttonModify.Text = "M";
-            this.toolTip1.SetToolTip(this.buttonModify, "Click this to save when you make any changes to the selected settings.");
-            this.buttonModify.UseVisualStyleBackColor = true;
-            this.buttonModify.Click += new System.EventHandler(this.buttonModify_Click);
-            // 
             // comboBoxName
             // 
             this.comboBoxName.FormattingEnabled = true;
             this.comboBoxName.Location = new System.Drawing.Point(8, 37);
             this.comboBoxName.Name = "comboBoxName";
-            this.comboBoxName.Size = new System.Drawing.Size(163, 28);
+            this.comboBoxName.Size = new System.Drawing.Size(193, 28);
             this.comboBoxName.TabIndex = 82;
             this.comboBoxName.SelectedIndexChanged += new System.EventHandler(this.comboBoxName_SelectedIndexChanged);
             // 
@@ -2681,18 +2648,20 @@
             // 
             this.checkBoxMessageEnabled.AutoSize = true;
             this.checkBoxMessageEnabled.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxMessageEnabled.Location = new System.Drawing.Point(212, 85);
+            this.checkBoxMessageEnabled.Location = new System.Drawing.Point(8, 80);
             this.checkBoxMessageEnabled.Name = "checkBoxMessageEnabled";
-            this.checkBoxMessageEnabled.Size = new System.Drawing.Size(94, 24);
+            this.checkBoxMessageEnabled.Size = new System.Drawing.Size(119, 24);
             this.checkBoxMessageEnabled.TabIndex = 81;
-            this.checkBoxMessageEnabled.Text = "Enabled";
+            this.checkBoxMessageEnabled.Text = "Enable Msg";
+            this.toolTip1.SetToolTip(this.checkBoxMessageEnabled, "Enable this message to be included in the selection to display.");
             this.checkBoxMessageEnabled.UseVisualStyleBackColor = true;
+            this.checkBoxMessageEnabled.MouseLeave += new System.EventHandler(this.checkBoxMessageEnabled_MouseLeave);
             // 
             // buttonRemoveMessage
             // 
-            this.buttonRemoveMessage.Location = new System.Drawing.Point(225, 32);
+            this.buttonRemoveMessage.Location = new System.Drawing.Point(259, 32);
             this.buttonRemoveMessage.Name = "buttonRemoveMessage";
-            this.buttonRemoveMessage.Size = new System.Drawing.Size(38, 37);
+            this.buttonRemoveMessage.Size = new System.Drawing.Size(38, 38);
             this.buttonRemoveMessage.TabIndex = 79;
             this.buttonRemoveMessage.Text = "-";
             this.toolTip1.SetToolTip(this.buttonRemoveMessage, "Delete selected message.");
@@ -2701,9 +2670,9 @@
             // 
             // buttonAddMessage
             // 
-            this.buttonAddMessage.Location = new System.Drawing.Point(176, 32);
+            this.buttonAddMessage.Location = new System.Drawing.Point(210, 32);
             this.buttonAddMessage.Name = "buttonAddMessage";
-            this.buttonAddMessage.Size = new System.Drawing.Size(38, 37);
+            this.buttonAddMessage.Size = new System.Drawing.Size(38, 38);
             this.buttonAddMessage.TabIndex = 78;
             this.buttonAddMessage.Text = "+";
             this.toolTip1.SetToolTip(this.buttonAddMessage, "Create new message.");
@@ -2719,25 +2688,27 @@
             "Up",
             "Down",
             "None"});
-            this.comboBoxCountDownDirection.Location = new System.Drawing.Point(85, 83);
+            this.comboBoxCountDownDirection.Location = new System.Drawing.Point(246, 78);
             this.comboBoxCountDownDirection.Name = "comboBoxCountDownDirection";
             this.comboBoxCountDownDirection.Size = new System.Drawing.Size(86, 28);
             this.comboBoxCountDownDirection.TabIndex = 76;
             this.comboBoxCountDownDirection.Text = "None";
+            this.toolTip1.SetToolTip(this.comboBoxCountDownDirection, "Direction of Text");
+            this.comboBoxCountDownDirection.MouseLeave += new System.EventHandler(this.comboBoxCountDownDirection_MouseLeave);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(4, 86);
+            this.label10.Location = new System.Drawing.Point(133, 81);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(76, 20);
+            this.label10.Size = new System.Drawing.Size(110, 20);
             this.label10.TabIndex = 77;
-            this.label10.Text = "Direction:";
+            this.label10.Text = "Text Direction:";
             // 
             // label92
             // 
             this.label92.AutoSize = true;
-            this.label92.Location = new System.Drawing.Point(3, 217);
+            this.label92.Location = new System.Drawing.Point(3, 270);
             this.label92.Name = "label92";
             this.label92.Size = new System.Drawing.Size(18, 20);
             this.label92.TabIndex = 77;
@@ -2746,7 +2717,7 @@
             // label91
             // 
             this.label91.AutoSize = true;
-            this.label91.Location = new System.Drawing.Point(3, 185);
+            this.label91.Location = new System.Drawing.Point(3, 235);
             this.label91.Name = "label91";
             this.label91.Size = new System.Drawing.Size(18, 20);
             this.label91.TabIndex = 76;
@@ -2755,7 +2726,7 @@
             // label90
             // 
             this.label90.AutoSize = true;
-            this.label90.Location = new System.Drawing.Point(3, 153);
+            this.label90.Location = new System.Drawing.Point(3, 202);
             this.label90.Name = "label90";
             this.label90.Size = new System.Drawing.Size(18, 20);
             this.label90.TabIndex = 75;
@@ -2764,40 +2735,74 @@
             // label89
             // 
             this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(3, 121);
+            this.label89.Location = new System.Drawing.Point(3, 169);
             this.label89.Name = "label89";
             this.label89.Size = new System.Drawing.Size(18, 20);
             this.label89.TabIndex = 74;
             this.label89.Text = "1";
             // 
+            // textBoxLine1
+            // 
+            this.textBoxLine1.Location = new System.Drawing.Point(23, 166);
+            this.textBoxLine1.Name = "textBoxLine1";
+            this.textBoxLine1.Size = new System.Drawing.Size(308, 26);
+            this.textBoxLine1.TabIndex = 67;
+            this.toolTip1.SetToolTip(this.textBoxLine1, "Add the word COUNTDOWN to your message to display the number fo days.");
+            this.textBoxLine1.MouseLeave += new System.EventHandler(this.textBoxLine1_MouseLeave);
+            // 
+            // textBoxLine2
+            // 
+            this.textBoxLine2.Location = new System.Drawing.Point(23, 199);
+            this.textBoxLine2.Name = "textBoxLine2";
+            this.textBoxLine2.Size = new System.Drawing.Size(308, 26);
+            this.textBoxLine2.TabIndex = 68;
+            this.toolTip1.SetToolTip(this.textBoxLine2, "Add the word COUNTDOWN to your message to display the number fo days.");
+            this.textBoxLine2.MouseLeave += new System.EventHandler(this.textBoxLine2_MouseLeave);
+            // 
+            // label86
+            // 
+            this.label86.AutoSize = true;
+            this.label86.Location = new System.Drawing.Point(317, 27);
+            this.label86.Name = "label86";
+            this.label86.Size = new System.Drawing.Size(69, 20);
+            this.label86.TabIndex = 73;
+            this.label86.Text = "Position:";
+            this.toolTip1.SetToolTip(this.label86, "Text Position is for Countdown message using Lines below only");
+            // 
+            // textBoxLine3
+            // 
+            this.textBoxLine3.Location = new System.Drawing.Point(23, 232);
+            this.textBoxLine3.Name = "textBoxLine3";
+            this.textBoxLine3.Size = new System.Drawing.Size(308, 26);
+            this.textBoxLine3.TabIndex = 69;
+            this.toolTip1.SetToolTip(this.textBoxLine3, "Add the word COUNTDOWN to your message to display the number fo days.");
+            this.textBoxLine3.MouseLeave += new System.EventHandler(this.textBoxLine3_MouseLeave);
+            // 
             // trackBarCountDownPosition
             // 
             this.trackBarCountDownPosition.AutoSize = false;
-            this.trackBarCountDownPosition.Location = new System.Drawing.Point(337, 48);
+            this.trackBarCountDownPosition.Location = new System.Drawing.Point(338, 48);
             this.trackBarCountDownPosition.Maximum = 100;
             this.trackBarCountDownPosition.Minimum = 1;
             this.trackBarCountDownPosition.Name = "trackBarCountDownPosition";
             this.trackBarCountDownPosition.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBarCountDownPosition.Size = new System.Drawing.Size(40, 195);
+            this.trackBarCountDownPosition.Size = new System.Drawing.Size(40, 245);
             this.trackBarCountDownPosition.TabIndex = 72;
             this.toolTip1.SetToolTip(this.trackBarCountDownPosition, "Position of text on your Matrix/Megatree.");
-            this.trackBarCountDownPosition.Value = 30;
+            this.trackBarCountDownPosition.Value = 65;
             this.trackBarCountDownPosition.Scroll += new System.EventHandler(this.trackBarCountDownPosition_Scroll);
             this.trackBarCountDownPosition.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarCountDownPosition_MouseDown);
+            this.trackBarCountDownPosition.MouseLeave += new System.EventHandler(this.trackBarCountDownPosition_MouseLeave);
             this.trackBarCountDownPosition.MouseHover += new System.EventHandler(this.trackBarCountDownPosition_MouseHover);
             // 
-            // checkBoxVixenControl
+            // textBoxLine4
             // 
-            this.checkBoxVixenControl.AutoSize = true;
-            this.checkBoxVixenControl.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxVixenControl.Location = new System.Drawing.Point(560, 1021);
-            this.checkBoxVixenControl.Name = "checkBoxVixenControl";
-            this.checkBoxVixenControl.Size = new System.Drawing.Size(196, 24);
-            this.checkBoxVixenControl.TabIndex = 68;
-            this.checkBoxVixenControl.Text = "Enable Vixen 3 Control";
-            this.toolTip1.SetToolTip(this.checkBoxVixenControl, resources.GetString("checkBoxVixenControl.ToolTip"));
-            this.checkBoxVixenControl.UseVisualStyleBackColor = true;
-            this.checkBoxVixenControl.CheckedChanged += new System.EventHandler(this.checkBoxVixenControl_CheckedChanged);
+            this.textBoxLine4.Location = new System.Drawing.Point(23, 267);
+            this.textBoxLine4.Name = "textBoxLine4";
+            this.textBoxLine4.Size = new System.Drawing.Size(308, 26);
+            this.textBoxLine4.TabIndex = 70;
+            this.toolTip1.SetToolTip(this.textBoxLine4, "Add the word COUNTDOWN to your message to display the number fo days.");
+            this.textBoxLine4.MouseLeave += new System.EventHandler(this.textBoxLine4_MouseLeave);
             // 
             // comboBoxPlayMode
             // 
@@ -3147,7 +3152,6 @@
             // tabPageTextSetting
             // 
             this.tabPageTextSetting.BackColor = System.Drawing.Color.Azure;
-            this.tabPageTextSetting.Controls.Add(this.groupBox8);
             this.tabPageTextSetting.Controls.Add(this.groupBox4);
             this.tabPageTextSetting.Controls.Add(this.groupBoxMessages);
             this.tabPageTextSetting.Controls.Add(this.groupBoxSeqSettings);
@@ -3158,29 +3162,6 @@
             this.tabPageTextSetting.TabIndex = 5;
             this.tabPageTextSetting.Tag = "30";
             this.tabPageTextSetting.Text = "Text Settings";
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.groupBoxCountDown);
-            this.groupBox8.Controls.Add(this.checkBoxCountDownEnable);
-            this.groupBox8.Controls.Add(this.label87);
-            this.groupBox8.Controls.Add(this.dateCountDown);
-            this.groupBox8.Location = new System.Drawing.Point(464, 378);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(390, 299);
-            this.groupBox8.TabIndex = 68;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Count Down Message options";
-            // 
-            // dateCountDown
-            // 
-            this.dateCountDown.CustomFormat = "";
-            this.dateCountDown.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateCountDown.Location = new System.Drawing.Point(77, 24);
-            this.dateCountDown.Name = "dateCountDown";
-            this.dateCountDown.Size = new System.Drawing.Size(138, 26);
-            this.dateCountDown.TabIndex = 66;
-            this.dateCountDown.Value = new System.DateTime(2015, 12, 25, 0, 0, 0, 0);
             // 
             // groupBox4
             // 
@@ -3202,20 +3183,37 @@
             // 
             // groupBoxMessages
             // 
-            this.groupBoxMessages.Controls.Add(this.richTextBoxMessage);
-            this.groupBoxMessages.Controls.Add(this.buttonSaveMessageList);
             this.groupBoxMessages.Controls.Add(this.checkBoxLocalRandom);
-            this.groupBoxMessages.Location = new System.Drawing.Point(6, 378);
+            this.groupBoxMessages.Controls.Add(this.buttonSaveMessageList);
+            this.groupBoxMessages.Controls.Add(this.groupBoxCountDown);
+            this.groupBoxMessages.Controls.Add(this.groupBox9);
+            this.groupBoxMessages.Controls.Add(this.checkBoxCountDownEnable);
+            this.groupBoxMessages.Controls.Add(this.dateCountDown);
+            this.groupBoxMessages.Controls.Add(this.label87);
+            this.groupBoxMessages.Location = new System.Drawing.Point(0, 320);
             this.groupBoxMessages.Name = "groupBoxMessages";
-            this.groupBoxMessages.Size = new System.Drawing.Size(457, 300);
+            this.groupBoxMessages.Size = new System.Drawing.Size(864, 359);
             this.groupBoxMessages.TabIndex = 32;
             this.groupBoxMessages.TabStop = false;
-            this.groupBoxMessages.Text = "Local Messages: Seperate each message by Newline";
+            this.groupBoxMessages.Text = "Local Messages";
+            // 
+            // checkBoxLocalRandom
+            // 
+            this.checkBoxLocalRandom.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxLocalRandom.Location = new System.Drawing.Point(457, 12);
+            this.checkBoxLocalRandom.Name = "checkBoxLocalRandom";
+            this.checkBoxLocalRandom.Size = new System.Drawing.Size(165, 52);
+            this.checkBoxLocalRandom.TabIndex = 58;
+            this.checkBoxLocalRandom.Text = "Play Local Msgs Randomly:";
+            this.checkBoxLocalRandom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.checkBoxLocalRandom, "Select this to display random messages from either the Messages below.");
+            this.checkBoxLocalRandom.UseVisualStyleBackColor = true;
+            this.checkBoxLocalRandom.CheckedChanged += new System.EventHandler(this.checkBoxLocalRandom_CheckedChanged);
             // 
             // buttonSaveMessageList
             // 
             this.buttonSaveMessageList.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonSaveMessageList.Location = new System.Drawing.Point(342, 27);
+            this.buttonSaveMessageList.Location = new System.Drawing.Point(10, 25);
             this.buttonSaveMessageList.Name = "buttonSaveMessageList";
             this.buttonSaveMessageList.Size = new System.Drawing.Size(98, 37);
             this.buttonSaveMessageList.TabIndex = 59;
@@ -3223,16 +3221,24 @@
             this.buttonSaveMessageList.UseVisualStyleBackColor = false;
             this.buttonSaveMessageList.Click += new System.EventHandler(this.buttonSaveMessageList_Click);
             // 
-            // checkBoxLocalRandom
+            // groupBox9
             // 
-            this.checkBoxLocalRandom.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxLocalRandom.Location = new System.Drawing.Point(14, 27);
-            this.checkBoxLocalRandom.Name = "checkBoxLocalRandom";
-            this.checkBoxLocalRandom.Size = new System.Drawing.Size(240, 39);
-            this.checkBoxLocalRandom.TabIndex = 58;
-            this.checkBoxLocalRandom.Text = "Play Local Msgs Randomly:";
-            this.checkBoxLocalRandom.UseVisualStyleBackColor = true;
-            this.checkBoxLocalRandom.CheckedChanged += new System.EventHandler(this.checkBoxLocalRandom_CheckedChanged);
+            this.groupBox9.Controls.Add(this.richTextBoxMessage);
+            this.groupBox9.Location = new System.Drawing.Point(3, 59);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(465, 300);
+            this.groupBox9.TabIndex = 61;
+            this.groupBox9.TabStop = false;
+            // 
+            // dateCountDown
+            // 
+            this.dateCountDown.CustomFormat = "";
+            this.dateCountDown.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateCountDown.Location = new System.Drawing.Point(275, 29);
+            this.dateCountDown.Name = "dateCountDown";
+            this.dateCountDown.Size = new System.Drawing.Size(138, 26);
+            this.dateCountDown.TabIndex = 66;
+            this.dateCountDown.Value = new System.DateTime(2015, 12, 25, 0, 0, 0, 0);
             // 
             // groupBoxSeqSettings
             // 
@@ -3257,7 +3263,7 @@
             this.groupBoxSeqSettings.Controls.Add(this.checkBoxRandomCol);
             this.groupBoxSeqSettings.Location = new System.Drawing.Point(6, 15);
             this.groupBoxSeqSettings.Name = "groupBoxSeqSettings";
-            this.groupBoxSeqSettings.Size = new System.Drawing.Size(848, 357);
+            this.groupBoxSeqSettings.Size = new System.Drawing.Size(848, 299);
             this.groupBoxSeqSettings.TabIndex = 1;
             this.groupBoxSeqSettings.TabStop = false;
             this.groupBoxSeqSettings.Text = "Incoming Message / Text Settings";
@@ -3267,17 +3273,18 @@
             this.groupBox7.Controls.Add(this.label85);
             this.groupBox7.Controls.Add(this.checkBoxMultiLine);
             this.groupBox7.Controls.Add(this.numericUpDownMultiLine);
-            this.groupBox7.Location = new System.Drawing.Point(8, 114);
+            this.groupBox7.Location = new System.Drawing.Point(8, 105);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(376, 49);
             this.groupBox7.TabIndex = 65;
             this.groupBox7.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox7, "Not used on Custom messages.");
             // 
             // textBoxFontSize
             // 
             this.textBoxFontSize.BackColor = System.Drawing.Color.White;
             this.textBoxFontSize.Enabled = false;
-            this.textBoxFontSize.Location = new System.Drawing.Point(703, 123);
+            this.textBoxFontSize.Location = new System.Drawing.Point(703, 114);
             this.textBoxFontSize.Name = "textBoxFontSize";
             this.textBoxFontSize.Size = new System.Drawing.Size(86, 26);
             this.textBoxFontSize.TabIndex = 59;
@@ -3298,7 +3305,7 @@
             this.textBoxFont.BackColor = System.Drawing.Color.White;
             this.textBoxFont.Enabled = false;
             this.textBoxFont.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.textBoxFont.Location = new System.Drawing.Point(648, 80);
+            this.textBoxFont.Location = new System.Drawing.Point(648, 71);
             this.textBoxFont.Name = "textBoxFont";
             this.textBoxFont.Size = new System.Drawing.Size(187, 26);
             this.textBoxFont.TabIndex = 57;
@@ -3327,7 +3334,7 @@
             // 
             // TextLineNumber
             // 
-            this.TextLineNumber.Location = new System.Drawing.Point(125, 80);
+            this.TextLineNumber.Location = new System.Drawing.Point(125, 71);
             this.TextLineNumber.Maximum = new decimal(new int[] {
             4,
             0,
@@ -3350,7 +3357,7 @@
             // label46
             // 
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(15, 83);
+            this.label46.Location = new System.Drawing.Point(13, 74);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(103, 20);
             this.label46.TabIndex = 53;
@@ -3365,7 +3372,7 @@
             "Up",
             "Down",
             "None"});
-            this.comboBoxTextDirection.Location = new System.Drawing.Point(327, 80);
+            this.comboBoxTextDirection.Location = new System.Drawing.Point(327, 71);
             this.comboBoxTextDirection.Name = "comboBoxTextDirection";
             this.comboBoxTextDirection.Size = new System.Drawing.Size(86, 28);
             this.comboBoxTextDirection.TabIndex = 4;
@@ -3374,7 +3381,7 @@
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(246, 83);
+            this.label45.Location = new System.Drawing.Point(246, 74);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(76, 20);
             this.label45.TabIndex = 51;
@@ -3383,11 +3390,11 @@
             // trackBarTextPosition
             // 
             this.trackBarTextPosition.AutoSize = false;
-            this.trackBarTextPosition.Location = new System.Drawing.Point(116, 169);
+            this.trackBarTextPosition.Location = new System.Drawing.Point(112, 160);
             this.trackBarTextPosition.Maximum = 100;
             this.trackBarTextPosition.Minimum = 1;
             this.trackBarTextPosition.Name = "trackBarTextPosition";
-            this.trackBarTextPosition.Size = new System.Drawing.Size(719, 40);
+            this.trackBarTextPosition.Size = new System.Drawing.Size(309, 40);
             this.trackBarTextPosition.TabIndex = 6;
             this.trackBarTextPosition.Value = 10;
             this.trackBarTextPosition.Scroll += new System.EventHandler(this.trackBarTextPosition_Scroll);
@@ -3397,7 +3404,7 @@
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(15, 178);
+            this.label44.Location = new System.Drawing.Point(11, 169);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(103, 20);
             this.label44.TabIndex = 50;
@@ -3406,11 +3413,11 @@
             // trackBarTextSpeed
             // 
             this.trackBarTextSpeed.AutoSize = false;
-            this.trackBarTextSpeed.Location = new System.Drawing.Point(114, 221);
+            this.trackBarTextSpeed.Location = new System.Drawing.Point(526, 160);
             this.trackBarTextSpeed.Maximum = 20;
             this.trackBarTextSpeed.Minimum = 1;
             this.trackBarTextSpeed.Name = "trackBarTextSpeed";
-            this.trackBarTextSpeed.Size = new System.Drawing.Size(721, 40);
+            this.trackBarTextSpeed.Size = new System.Drawing.Size(311, 40);
             this.trackBarTextSpeed.TabIndex = 7;
             this.trackBarTextSpeed.Value = 5;
             this.trackBarTextSpeed.Scroll += new System.EventHandler(this.trackBarTextSpeed_Scroll);
@@ -3420,7 +3427,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(15, 229);
+            this.label21.Location = new System.Drawing.Point(430, 168);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(94, 20);
             this.label21.TabIndex = 48;
@@ -3997,6 +4004,36 @@
             this.timerCheckVixenEnabled.Interval = 500;
             this.timerCheckVixenEnabled.Tick += new System.EventHandler(this.timerCheckVixenEnabled_Tick);
             // 
+            // buttonCustomFont
+            // 
+            this.buttonCustomFont.Location = new System.Drawing.Point(10, 119);
+            this.buttonCustomFont.Name = "buttonCustomFont";
+            this.buttonCustomFont.Size = new System.Drawing.Size(65, 32);
+            this.buttonCustomFont.TabIndex = 85;
+            this.buttonCustomFont.Text = "Font";
+            this.buttonCustomFont.UseVisualStyleBackColor = true;
+            // 
+            // textBoxCustomFont
+            // 
+            this.textBoxCustomFont.BackColor = System.Drawing.Color.White;
+            this.textBoxCustomFont.Enabled = false;
+            this.textBoxCustomFont.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.textBoxCustomFont.Location = new System.Drawing.Point(86, 122);
+            this.textBoxCustomFont.Name = "textBoxCustomFont";
+            this.textBoxCustomFont.Size = new System.Drawing.Size(149, 26);
+            this.textBoxCustomFont.TabIndex = 67;
+            this.textBoxCustomFont.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBoxCustomFontSize
+            // 
+            this.textBoxCustomFontSize.BackColor = System.Drawing.Color.White;
+            this.textBoxCustomFontSize.Enabled = false;
+            this.textBoxCustomFontSize.Location = new System.Drawing.Point(245, 122);
+            this.textBoxCustomFontSize.Name = "textBoxCustomFontSize";
+            this.textBoxCustomFontSize.Size = new System.Drawing.Size(86, 26);
+            this.textBoxCustomFontSize.TabIndex = 86;
+            this.textBoxCustomFontSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -4020,7 +4057,7 @@
             this.Name = "FormMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Vixen Messaging - v3.1.9";
+            this.Text = "Vixen Messaging - v3.1.11";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.groupBox1.ResumeLayout(false);
@@ -4084,10 +4121,9 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.tabPageTextSetting.ResumeLayout(false);
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBoxMessages.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
             this.groupBoxSeqSettings.ResumeLayout(false);
             this.groupBoxSeqSettings.PerformLayout();
             this.groupBox7.ResumeLayout(false);
@@ -4415,29 +4451,31 @@
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label88;
         private System.Windows.Forms.NumericUpDown numericUpDownMaxWords;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.Label label86;
-        private System.Windows.Forms.TrackBar trackBarCountDownPosition;
-        private System.Windows.Forms.TextBox textBoxLine4;
-        private System.Windows.Forms.TextBox textBoxLine3;
-        private System.Windows.Forms.TextBox textBoxLine2;
-        private System.Windows.Forms.TextBox textBoxLine1;
-        private System.Windows.Forms.GroupBox groupBoxCountDown;
         private System.Windows.Forms.CheckBox checkBoxCountDownEnable;
+        private System.Windows.Forms.Timer timerCheckVixenEnabled;
+        private System.Windows.Forms.CheckBox checkBoxVixenControl;
+        private System.Windows.Forms.GroupBox groupBoxCountDown;
+        private System.Windows.Forms.Label label93;
+        private System.Windows.Forms.ComboBox comboBoxName;
+        private System.Windows.Forms.CheckBox checkBoxMessageEnabled;
+        private System.Windows.Forms.Button buttonRemoveMessage;
+        private System.Windows.Forms.Button buttonAddMessage;
         private System.Windows.Forms.ComboBox comboBoxCountDownDirection;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label92;
         private System.Windows.Forms.Label label91;
         private System.Windows.Forms.Label label90;
         private System.Windows.Forms.Label label89;
-        private System.Windows.Forms.Timer timerCheckVixenEnabled;
-        private System.Windows.Forms.CheckBox checkBoxVixenControl;
-        private System.Windows.Forms.CheckBox checkBoxMessageEnabled;
-        private System.Windows.Forms.Button buttonRemoveMessage;
-        private System.Windows.Forms.Button buttonAddMessage;
-        private System.Windows.Forms.ComboBox comboBoxName;
-        private System.Windows.Forms.Button buttonModify;
-        private System.Windows.Forms.Label label93;
+        private System.Windows.Forms.TextBox textBoxLine1;
+        private System.Windows.Forms.TextBox textBoxLine2;
+        private System.Windows.Forms.Label label86;
+        private System.Windows.Forms.TextBox textBoxLine3;
+        private System.Windows.Forms.TrackBar trackBarCountDownPosition;
+        private System.Windows.Forms.TextBox textBoxLine4;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.TextBox textBoxCustomFontSize;
+        private System.Windows.Forms.TextBox textBoxCustomFont;
+        private System.Windows.Forms.Button buttonCustomFont;
     }
 }
 

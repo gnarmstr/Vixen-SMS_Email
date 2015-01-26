@@ -43,6 +43,8 @@ namespace Vixen_Messaging
 
             public static int MessageNumber { get; set; }
 
+            public static int CustomMessageCount { get; set; }
+
             /// <summary>
             /// Static value protected by access routine.
             /// </summary>

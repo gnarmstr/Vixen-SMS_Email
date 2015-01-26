@@ -121,9 +121,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(102, 20);
+            this.label3.Size = new System.Drawing.Size(111, 20);
             this.label3.TabIndex = 10;
-            this.label3.Text = "Version 3.1.9";
+            this.label3.Text = "Version 3.1.11";
             // 
             // buttonLauncher
             // 

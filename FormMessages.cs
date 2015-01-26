@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Common.Resources;
 using Common.Resources.Properties;
 using System.Windows.Forms;
@@ -32,7 +26,7 @@ namespace Vixen_Messaging
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            if (textBoxName.Text == "" & (textBoxLine1.Text != "" | textBoxLine2.Text != "" | textBoxLine3.Text != "" | textBoxLine4.Text != "" | trackBarCountDownPosition.Value != 10))
+            if (textBoxName.Text == "" & (textBoxLine1.Text != "" | textBoxLine2.Text != "" | textBoxLine3.Text != "" | textBoxLine4.Text != "" | trackBarCountDownPosition.Value != 65))
             {
                 MessageBox.Show(@"Please enter a Name before selecting Ok or select Cancel");
             }
@@ -46,6 +40,21 @@ namespace Vixen_Messaging
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void trackBarCountDownPosition_Scroll(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarCountDownPosition, trackBarCountDownPosition.Value.ToString());
+        }
+
+        private void trackBarCountDownPosition_MouseDown(object sender, MouseEventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarCountDownPosition, trackBarCountDownPosition.Value.ToString());
+        }
+
+        private void trackBarCountDownPosition_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarCountDownPosition, trackBarCountDownPosition.Value.ToString());
         }
     }
 }
