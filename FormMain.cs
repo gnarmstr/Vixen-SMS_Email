@@ -414,6 +414,10 @@ namespace Vixen_Messaging
                     GlobalVar.Position.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, 65));
                     line = "MessageEnabled";
                     GlobalVar.MessageEnabled.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, false));
+                    line = "CustomFont";
+                    GlobalVar.CustomFont.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, "Arial Narrow"));
+                    line = "CustomFontSize";
+                    GlobalVar.CustomFontSize.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, "10"));
                     line = "MessageName";
                     comboBoxName.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
                     line = "ListLine1-";
@@ -780,7 +784,7 @@ namespace Vixen_Messaging
 
                 var phrases = richTextBoxMessage.Text.Split('\n');
                 var msgcount = phrases.Length;
-                if (checkBoxLocalRandom.Checked)
+                if (checkBoxLocalRandom.Checked) //Play Random
                 {
 
                     var rndLineNumber = new Random();
@@ -812,7 +816,7 @@ namespace Vixen_Messaging
                         msg = phrases[rndLineNumberResult];
                     }
                 }
-                else
+                else //Play Sequential
                 {
                     if (GlobalVar.Msgindex < msgcount & richTextBoxMessage.Text != "")
                     {
@@ -1566,6 +1570,8 @@ namespace Vixen_Messaging
                         break;
                 }
                 fileText1 = fileText1.Replace("TextPosition_Change", trackBarCountDownPosition.Value.ToString());
+                fileText1 = fileText1.Replace("FontName_Change", textBoxCustomFont.Text);
+                fileText1 = fileText1.Replace("FontSize_Change", textBoxCustomFontSize.Text);
             }
             else
             {
@@ -2935,22 +2941,13 @@ namespace Vixen_Messaging
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.MessageEnabled[i]);
                 line = "MessageName";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, Convert.ToString(comboBoxName.Items[i]));
+                line = "CustomFont"; 
+                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomFont[i]);
+                line = "CustomFontSize";
+                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomFontSize[i]);
                 line = "ListLine1-";
                 i++;
             } while (i < GlobalVar.ListLine1.Count());
-            
-
-
-
-            // Write the list of salesman objects to file.
-            //         WriteToXmlFile(GlobalVar.SettingsPath + "\\Messages.txt", GlobalVar.ListLine1);
-            //         WriteToXmlFile(GlobalVar.SettingsPath + "\\Messages.txt", GlobalVar.ListLine2);
-            //         var s = new XmlSerializer(typeof(List<string>));
-            //      StringBuilder sb = new StringBuilder();
-            //         XmlWriter wr = XmlWriter.Create(GlobalVar.SettingsPath + "\\Messages.txt");
-            //         s.Serialize(wr, GlobalVar.ListLine1);
-            //         s.Serialize(wr, GlobalVar.ListLine2);
-
         }
 #endregion
 
@@ -3395,6 +3392,10 @@ namespace Vixen_Messaging
                 trackBarCountDownPosition.Value = formMessages.trackBarCountDownPosition.Value;
                 GlobalVar.MessageEnabled.Add(formMessages.checkBoxMessageEnabled.Checked);
                 checkBoxMessageEnabled.Checked = formMessages.checkBoxMessageEnabled.Checked;
+                GlobalVar.CustomFont.Add(formMessages.textBoxCustomFont.Text);
+                textBoxCustomFont.Text = formMessages.textBoxCustomFont.Text;
+                GlobalVar.CustomFontSize.Add(formMessages.textBoxCustomFontSize.Text);
+                textBoxCustomFontSize.Text = formMessages.textBoxCustomFontSize.Text;
                 comboBoxName.Items.Add(formMessages.textBoxName.Text);
                 comboBoxName.SelectedIndex = comboBoxName.Items.Count - 1;
             }
@@ -3415,6 +3416,8 @@ namespace Vixen_Messaging
             comboBoxCountDownDirection.Text = GlobalVar.CountDirection[selectedItem];
             trackBarCountDownPosition.Value = GlobalVar.Position[selectedItem];
             checkBoxMessageEnabled.Checked = GlobalVar.MessageEnabled[selectedItem];
+            textBoxCustomFont.Text = GlobalVar.CustomFont[selectedItem];
+            textBoxCustomFontSize.Text = GlobalVar.CustomFontSize[selectedItem];
         }
 
         private void buttonRemoveMessage_Click(object sender, EventArgs e)
@@ -3428,6 +3431,8 @@ namespace Vixen_Messaging
                 GlobalVar.CountDirection.RemoveAt(comboBoxName.SelectedIndex);
                 GlobalVar.Position.RemoveAt(comboBoxName.SelectedIndex);
                 GlobalVar.MessageEnabled.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.CustomFont.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.CustomFontSize.RemoveAt(comboBoxName.SelectedIndex);
                 comboBoxName.Items.RemoveAt(comboBoxName.SelectedIndex);
                 if (comboBoxName.Items.Count > 0)
                 {
@@ -3439,6 +3444,8 @@ namespace Vixen_Messaging
                     comboBoxCountDownDirection.Text = GlobalVar.CountDirection[0];
                     trackBarCountDownPosition.Value = GlobalVar.Position[0];
                     checkBoxMessageEnabled.Checked = GlobalVar.MessageEnabled[0];
+                    textBoxCustomFont.Text = GlobalVar.CustomFont[0];
+                    textBoxCustomFontSize.Text = GlobalVar.CustomFontSize[0];
                 }
                 else
                 {
@@ -3450,6 +3457,8 @@ namespace Vixen_Messaging
                     comboBoxCountDownDirection.Text = @"None";
                     trackBarCountDownPosition.Value = 10;
                     checkBoxMessageEnabled.Checked = false;
+                    textBoxCustomFont.Text = "";
+                    textBoxCustomFontSize.Text = "";
                 }
             }
         }
@@ -3500,6 +3509,8 @@ namespace Vixen_Messaging
                 GlobalVar.CountDirection[comboBoxName.SelectedIndex] = comboBoxCountDownDirection.Text;
                 GlobalVar.Position[comboBoxName.SelectedIndex] = trackBarCountDownPosition.Value;
                 GlobalVar.MessageEnabled[comboBoxName.SelectedIndex] = checkBoxMessageEnabled.Checked;
+                GlobalVar.CustomFont[comboBoxName.SelectedIndex] = textBoxCustomFont.Text;
+                GlobalVar.CustomFontSize[comboBoxName.SelectedIndex] = textBoxCustomFontSize.Text;
             }
         }
 
@@ -3509,6 +3520,26 @@ namespace Vixen_Messaging
             textBoxUID.Enabled = !textBoxUID.Enabled;
             textBoxPWD.Enabled = !textBoxPWD.Enabled;
             comboBoxEmailSettings.Enabled = !comboBoxEmailSettings.Enabled;
+        }
+
+        private void buttonCustomFont_Click(object sender, EventArgs e)
+        {
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+                textBoxCustomFont.Text = string.Format(fontDialog1.Font.Name);
+                textBoxCustomFontSize.Text = string.Format(fontDialog1.Font.Size.ToString());
+                CustomMessageUpdate();
+            }
+        }
+
+        private void textBoxCustomFont_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void textBoxCustomFontSize_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
         }
 
     }

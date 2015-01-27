@@ -45,6 +45,10 @@ namespace Vixen_Messaging
 
             public static int CustomMessageCount { get; set; }
 
+            public static List<string> CustomFontSize = new List<string>();
+
+            public static List<string> CustomFont = new List<string>();
+
             /// <summary>
             /// Static value protected by access routine.
             /// </summary>

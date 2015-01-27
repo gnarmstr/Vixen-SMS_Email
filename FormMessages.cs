@@ -56,5 +56,14 @@ namespace Vixen_Messaging
         {
             toolTip1.SetToolTip(trackBarCountDownPosition, trackBarCountDownPosition.Value.ToString());
         }
+
+        private void buttonCustomFont_Click(object sender, EventArgs e)
+        {
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+                textBoxCustomFont.Text = string.Format(fontDialog1.Font.Name);
+                textBoxCustomFontSize.Text = string.Format(fontDialog1.Font.Size.ToString());
+            }
+        }
     }
 }
