@@ -41,6 +41,8 @@ namespace Vixen_Messaging
 
             public static List<bool> MessageEnabled = new List<bool>();
 
+            public static List<decimal> CustomMsgLength = new List<decimal>();
+
             public static int MessageNumber { get; set; }
 
             public static int CustomMessageCount { get; set; }

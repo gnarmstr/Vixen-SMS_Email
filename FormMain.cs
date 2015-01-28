@@ -80,8 +80,6 @@ namespace Vixen_Messaging
             LoadData();
             EmailSettings();
 
-            
-
             //Ensures a backup of Whitelist, Blacklist and LocalMessages are made in the Appdata folder so a new installation does not remove them and users loose there changes.
             File.Create(textBoxBlacklistEmailLog.Text).Close();
             if (File.Exists(GlobalVar.Blacklistlocation + ".bkp"))
@@ -420,6 +418,8 @@ namespace Vixen_Messaging
                     GlobalVar.CustomFontSize.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, "10"));
                     line = "MessageName";
                     comboBoxName.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+                    line = "CustomMsgLength";
+                    GlobalVar.CustomMsgLength.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, 10));
                     line = "ListLine1-";
                     i++;
                 } while (i < GlobalVar.MessageNumber);
@@ -1233,31 +1233,40 @@ namespace Vixen_Messaging
                     {
             #region Custom Effects
 
-                        if (checkBoxVariableLength.Checked)
+                        if (msg != "play counter")
                         {
-                            timerCheckMail.Enabled = false;
-                            var msgcount = msg.Length;
-                            string selectedSeqTime = (Convert.ToDecimal(msgcount) * Convert.ToDecimal(0.8) * (Convert.ToDecimal((double)5 / (double)trackBarTextSpeed.Value))).ToString();
-                            var index = selectedSeqTime.IndexOf(".");
-                            if (index > 0)
-                                selectedSeqTime = selectedSeqTime.Substring(0, index);
-                            selectedSeqTime = selectedSeqTime.TrimEnd('.');
-                            selectedSeqTime = selectedSeqTime.Replace("S", "");
-                            var newSeqTime = Convert.ToDecimal(selectedSeqTime);
-                            if (checkBoxMultiLine.Checked)
+                            if (checkBoxVariableLength.Checked)
                             {
-                                int number = (int) ((newSeqTime + extraTime.Value)/numericUpDownMultiLine.Value + 2);
-                                GlobalVar.SeqIntervalTime = Convert.ToDecimal(number);
+                                timerCheckMail.Enabled = false;
+                                var msgcount = msg.Length;
+                                string selectedSeqTime =
+                                    (Convert.ToDecimal(msgcount)*Convert.ToDecimal(0.8)*
+                                     (Convert.ToDecimal((double) 5/(double) trackBarTextSpeed.Value))).ToString();
+                                var index = selectedSeqTime.IndexOf(".");
+                                if (index > 0)
+                                    selectedSeqTime = selectedSeqTime.Substring(0, index);
+                                selectedSeqTime = selectedSeqTime.TrimEnd('.');
+                                selectedSeqTime = selectedSeqTime.Replace("S", "");
+                                var newSeqTime = Convert.ToDecimal(selectedSeqTime);
+                                if (checkBoxMultiLine.Checked)
+                                {
+                                    int number = (int) ((newSeqTime + extraTime.Value)/numericUpDownMultiLine.Value + 2);
+                                    GlobalVar.SeqIntervalTime = Convert.ToDecimal(number);
+                                }
+                                else
+                                {
+                                    GlobalVar.SeqIntervalTime = newSeqTime + extraTime.Value + 1;
+                                }
+
                             }
                             else
                             {
-                                GlobalVar.SeqIntervalTime = newSeqTime + extraTime.Value + 1;
+                                GlobalVar.SeqIntervalTime = Convert.ToDecimal(EffectTime.Value);
                             }
-                            
                         }
                         else
                         {
-                            GlobalVar.SeqIntervalTime = Convert.ToDecimal(EffectTime.Value);
+                            GlobalVar.SeqIntervalTime = Convert.ToDecimal(CustomMsgLength.Value);
                         }
 
                         outputFileName = textBoxOutputSequence.Text;
@@ -2945,6 +2954,8 @@ namespace Vixen_Messaging
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomFont[i]);
                 line = "CustomFontSize";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomFontSize[i]);
+                line = "CustomMsgLength";
+                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, Convert.ToString(GlobalVar.CustomMsgLength[i]));
                 line = "ListLine1-";
                 i++;
             } while (i < GlobalVar.ListLine1.Count());
@@ -3396,6 +3407,8 @@ namespace Vixen_Messaging
                 textBoxCustomFont.Text = formMessages.textBoxCustomFont.Text;
                 GlobalVar.CustomFontSize.Add(formMessages.textBoxCustomFontSize.Text);
                 textBoxCustomFontSize.Text = formMessages.textBoxCustomFontSize.Text;
+                GlobalVar.CustomMsgLength.Add(formMessages.CustomMsgLength.Value);
+                CustomMsgLength.Value = formMessages.CustomMsgLength.Value;
                 comboBoxName.Items.Add(formMessages.textBoxName.Text);
                 comboBoxName.SelectedIndex = comboBoxName.Items.Count - 1;
             }
@@ -3418,6 +3431,7 @@ namespace Vixen_Messaging
             checkBoxMessageEnabled.Checked = GlobalVar.MessageEnabled[selectedItem];
             textBoxCustomFont.Text = GlobalVar.CustomFont[selectedItem];
             textBoxCustomFontSize.Text = GlobalVar.CustomFontSize[selectedItem];
+            CustomMsgLength.Value = GlobalVar.CustomMsgLength[selectedItem];
         }
 
         private void buttonRemoveMessage_Click(object sender, EventArgs e)
@@ -3433,6 +3447,7 @@ namespace Vixen_Messaging
                 GlobalVar.MessageEnabled.RemoveAt(comboBoxName.SelectedIndex);
                 GlobalVar.CustomFont.RemoveAt(comboBoxName.SelectedIndex);
                 GlobalVar.CustomFontSize.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.CustomMsgLength.RemoveAt(comboBoxName.SelectedIndex);
                 comboBoxName.Items.RemoveAt(comboBoxName.SelectedIndex);
                 if (comboBoxName.Items.Count > 0)
                 {
@@ -3446,6 +3461,7 @@ namespace Vixen_Messaging
                     checkBoxMessageEnabled.Checked = GlobalVar.MessageEnabled[0];
                     textBoxCustomFont.Text = GlobalVar.CustomFont[0];
                     textBoxCustomFontSize.Text = GlobalVar.CustomFontSize[0];
+                    CustomMsgLength.Value = GlobalVar.CustomMsgLength[0];
                 }
                 else
                 {
@@ -3459,6 +3475,7 @@ namespace Vixen_Messaging
                     checkBoxMessageEnabled.Checked = false;
                     textBoxCustomFont.Text = "";
                     textBoxCustomFontSize.Text = "";
+                    CustomMsgLength.Value = 10;
                 }
             }
         }
@@ -3511,6 +3528,7 @@ namespace Vixen_Messaging
                 GlobalVar.MessageEnabled[comboBoxName.SelectedIndex] = checkBoxMessageEnabled.Checked;
                 GlobalVar.CustomFont[comboBoxName.SelectedIndex] = textBoxCustomFont.Text;
                 GlobalVar.CustomFontSize[comboBoxName.SelectedIndex] = textBoxCustomFontSize.Text;
+                GlobalVar.CustomMsgLength[comboBoxName.SelectedIndex] = CustomMsgLength.Value;
             }
         }
 
@@ -3538,6 +3556,16 @@ namespace Vixen_Messaging
         }
 
         private void textBoxCustomFontSize_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void CustomMsgLength_MouseClick(object sender, MouseEventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void CustomMsgLength_MouseDown(object sender, MouseEventArgs e)
         {
             CustomMessageUpdate();
         }

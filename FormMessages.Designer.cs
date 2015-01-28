@@ -51,9 +51,12 @@
             this.textBoxCustomFont = new System.Windows.Forms.TextBox();
             this.buttonCustomFont = new System.Windows.Forms.Button();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.CustomMsgLength = new System.Windows.Forms.NumericUpDown();
+            this.label94 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarCountDownPosition)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CustomMsgLength)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBoxCountDownDirection
@@ -183,7 +186,7 @@
             // label86
             // 
             this.label86.AutoSize = true;
-            this.label86.Location = new System.Drawing.Point(396, 29);
+            this.label86.Location = new System.Drawing.Point(403, 95);
             this.label86.Name = "label86";
             this.label86.Size = new System.Drawing.Size(69, 20);
             this.label86.TabIndex = 97;
@@ -192,12 +195,12 @@
             // trackBarCountDownPosition
             // 
             this.trackBarCountDownPosition.AutoSize = false;
-            this.trackBarCountDownPosition.Location = new System.Drawing.Point(416, 52);
+            this.trackBarCountDownPosition.Location = new System.Drawing.Point(416, 118);
             this.trackBarCountDownPosition.Maximum = 100;
             this.trackBarCountDownPosition.Minimum = 1;
             this.trackBarCountDownPosition.Name = "trackBarCountDownPosition";
             this.trackBarCountDownPosition.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBarCountDownPosition.Size = new System.Drawing.Size(40, 245);
+            this.trackBarCountDownPosition.Size = new System.Drawing.Size(40, 179);
             this.trackBarCountDownPosition.TabIndex = 8;
             this.trackBarCountDownPosition.Value = 65;
             this.trackBarCountDownPosition.Scroll += new System.EventHandler(this.trackBarCountDownPosition_Scroll);
@@ -208,7 +211,7 @@
             // 
             this.checkBoxMessageEnabled.AutoSize = true;
             this.checkBoxMessageEnabled.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxMessageEnabled.Location = new System.Drawing.Point(247, 75);
+            this.checkBoxMessageEnabled.Location = new System.Drawing.Point(392, 28);
             this.checkBoxMessageEnabled.Name = "checkBoxMessageEnabled";
             this.checkBoxMessageEnabled.Size = new System.Drawing.Size(94, 24);
             this.checkBoxMessageEnabled.TabIndex = 3;
@@ -248,12 +251,45 @@
             this.buttonCustomFont.UseVisualStyleBackColor = true;
             this.buttonCustomFont.Click += new System.EventHandler(this.buttonCustomFont_Click);
             // 
+            // CustomMsgLength
+            // 
+            this.CustomMsgLength.Location = new System.Drawing.Point(300, 80);
+            this.CustomMsgLength.Maximum = new decimal(new int[] {
+            600,
+            0,
+            0,
+            0});
+            this.CustomMsgLength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.CustomMsgLength.Name = "CustomMsgLength";
+            this.CustomMsgLength.Size = new System.Drawing.Size(72, 26);
+            this.CustomMsgLength.TabIndex = 102;
+            this.CustomMsgLength.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label94
+            // 
+            this.label94.Location = new System.Drawing.Point(226, 69);
+            this.label94.Name = "label94";
+            this.label94.Size = new System.Drawing.Size(80, 46);
+            this.label94.TabIndex = 101;
+            this.label94.Text = "Msg Length:";
+            this.toolTip1.SetToolTip(this.label94, "Time the message is displayed for in seconds");
+            // 
             // FormMessages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(509, 397);
+            this.Controls.Add(this.CustomMsgLength);
+            this.Controls.Add(this.label94);
             this.Controls.Add(this.textBoxCustomFontSize);
             this.Controls.Add(this.textBoxCustomFont);
             this.Controls.Add(this.buttonCustomFont);
@@ -282,6 +318,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarCountDownPosition)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CustomMsgLength)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -311,5 +348,7 @@
         public System.Windows.Forms.TextBox textBoxCustomFontSize;
         public System.Windows.Forms.TextBox textBoxCustomFont;
         private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.Label label94;
+        public System.Windows.Forms.NumericUpDown CustomMsgLength;
     }
 }
