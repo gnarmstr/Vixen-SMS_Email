@@ -216,6 +216,12 @@
             this.checkBoxCountDownEnable = new System.Windows.Forms.CheckBox();
             this.checkBoxVixenControl = new System.Windows.Forms.CheckBox();
             this.groupBoxCountDown = new System.Windows.Forms.GroupBox();
+            this.buttonPlay = new System.Windows.Forms.Button();
+            this.CustomMsgLength = new System.Windows.Forms.NumericUpDown();
+            this.label94 = new System.Windows.Forms.Label();
+            this.textBoxCustomFontSize = new System.Windows.Forms.TextBox();
+            this.textBoxCustomFont = new System.Windows.Forms.TextBox();
+            this.buttonCustomFont = new System.Windows.Forms.Button();
             this.label93 = new System.Windows.Forms.Label();
             this.comboBoxName = new System.Windows.Forms.ComboBox();
             this.checkBoxMessageEnabled = new System.Windows.Forms.CheckBox();
@@ -233,6 +239,9 @@
             this.textBoxLine3 = new System.Windows.Forms.TextBox();
             this.trackBarCountDownPosition = new System.Windows.Forms.TrackBar();
             this.textBoxLine4 = new System.Windows.Forms.TextBox();
+            this.checkBoxLocalRandom = new System.Windows.Forms.CheckBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.SaveAll = new System.Windows.Forms.PictureBox();
             this.comboBoxPlayMode = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageMain = new System.Windows.Forms.TabPage();
@@ -268,12 +277,9 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.richTextBoxLog1 = new System.Windows.Forms.RichTextBox();
             this.groupBoxMessages = new System.Windows.Forms.GroupBox();
-            this.checkBoxLocalRandom = new System.Windows.Forms.CheckBox();
-            this.buttonSaveMessageList = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.dateCountDown = new System.Windows.Forms.DateTimePicker();
             this.groupBoxSeqSettings = new System.Windows.Forms.GroupBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.textBoxFontSize = new System.Windows.Forms.TextBox();
             this.buttonFont = new System.Windows.Forms.Button();
             this.textBoxFont = new System.Windows.Forms.TextBox();
@@ -345,11 +351,6 @@
             this.buttonStopSequence = new System.Windows.Forms.Button();
             this.fileDialog = new System.Windows.Forms.OpenFileDialog();
             this.timerCheckVixenEnabled = new System.Windows.Forms.Timer(this.components);
-            this.buttonCustomFont = new System.Windows.Forms.Button();
-            this.textBoxCustomFont = new System.Windows.Forms.TextBox();
-            this.textBoxCustomFontSize = new System.Windows.Forms.TextBox();
-            this.label94 = new System.Windows.Forms.Label();
-            this.CustomMsgLength = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxEffects.SuspendLayout();
@@ -385,7 +386,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMultiLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxWords)).BeginInit();
             this.groupBoxCountDown.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CustomMsgLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarCountDownPosition)).BeginInit();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SaveAll)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPageMain.SuspendLayout();
             this.groupBoxPlayOptions.SuspendLayout();
@@ -399,7 +403,6 @@
             this.groupBoxMessages.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBoxSeqSettings.SuspendLayout();
-            this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TextLineNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTextPosition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTextSpeed)).BeginInit();
@@ -417,7 +420,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CustomMsgLength)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -2354,7 +2356,7 @@
             // 
             this.WebServerStatus.BackColor = System.Drawing.Color.OrangeRed;
             this.WebServerStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WebServerStatus.Location = new System.Drawing.Point(2, 992);
+            this.WebServerStatus.Location = new System.Drawing.Point(214, 940);
             this.WebServerStatus.Name = "WebServerStatus";
             this.WebServerStatus.Size = new System.Drawing.Size(287, 43);
             this.WebServerStatus.TabIndex = 31;
@@ -2545,7 +2547,7 @@
             // 
             // label87
             // 
-            this.label87.Location = new System.Drawing.Point(114, 33);
+            this.label87.Location = new System.Drawing.Point(50, 33);
             this.label87.Name = "label87";
             this.label87.Size = new System.Drawing.Size(149, 29);
             this.label87.TabIndex = 65;
@@ -2600,6 +2602,7 @@
             // 
             // groupBoxCountDown
             // 
+            this.groupBoxCountDown.Controls.Add(this.buttonPlay);
             this.groupBoxCountDown.Controls.Add(this.CustomMsgLength);
             this.groupBoxCountDown.Controls.Add(this.label94);
             this.groupBoxCountDown.Controls.Add(this.textBoxCustomFontSize);
@@ -2631,6 +2634,84 @@
             this.toolTip1.SetToolTip(this.groupBoxCountDown, "Add the word COUNTDOWN to your message to display\r\nthe number fo days to the Coun" +
         "tDown date.");
             // 
+            // buttonPlay
+            // 
+            this.buttonPlay.Location = new System.Drawing.Point(296, 31);
+            this.buttonPlay.Name = "buttonPlay";
+            this.buttonPlay.Size = new System.Drawing.Size(38, 38);
+            this.buttonPlay.TabIndex = 89;
+            this.buttonPlay.Text = "P";
+            this.toolTip1.SetToolTip(this.buttonPlay, "Used to Play selected message. Useful for testing current message\r\nor displaying " +
+        "an immediate message to the audience.");
+            this.buttonPlay.UseVisualStyleBackColor = true;
+            this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
+            // 
+            // CustomMsgLength
+            // 
+            this.CustomMsgLength.Location = new System.Drawing.Point(257, 84);
+            this.CustomMsgLength.Maximum = new decimal(new int[] {
+            600,
+            0,
+            0,
+            0});
+            this.CustomMsgLength.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.CustomMsgLength.Name = "CustomMsgLength";
+            this.CustomMsgLength.Size = new System.Drawing.Size(65, 26);
+            this.CustomMsgLength.TabIndex = 88;
+            this.CustomMsgLength.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.CustomMsgLength.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CustomMsgLength_MouseClick);
+            this.CustomMsgLength.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CustomMsgLength_MouseDown);
+            // 
+            // label94
+            // 
+            this.label94.Location = new System.Drawing.Point(183, 73);
+            this.label94.Name = "label94";
+            this.label94.Size = new System.Drawing.Size(80, 46);
+            this.label94.TabIndex = 87;
+            this.label94.Text = "Msg Length:";
+            this.toolTip1.SetToolTip(this.label94, "Time the message is displayed for in seconds");
+            // 
+            // textBoxCustomFontSize
+            // 
+            this.textBoxCustomFontSize.BackColor = System.Drawing.Color.White;
+            this.textBoxCustomFontSize.Enabled = false;
+            this.textBoxCustomFontSize.Location = new System.Drawing.Point(279, 128);
+            this.textBoxCustomFontSize.Name = "textBoxCustomFontSize";
+            this.textBoxCustomFontSize.Size = new System.Drawing.Size(86, 26);
+            this.textBoxCustomFontSize.TabIndex = 86;
+            this.textBoxCustomFontSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxCustomFontSize.MouseLeave += new System.EventHandler(this.textBoxCustomFontSize_MouseLeave);
+            // 
+            // textBoxCustomFont
+            // 
+            this.textBoxCustomFont.BackColor = System.Drawing.Color.White;
+            this.textBoxCustomFont.Enabled = false;
+            this.textBoxCustomFont.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.textBoxCustomFont.Location = new System.Drawing.Point(86, 128);
+            this.textBoxCustomFont.Name = "textBoxCustomFont";
+            this.textBoxCustomFont.Size = new System.Drawing.Size(177, 26);
+            this.textBoxCustomFont.TabIndex = 67;
+            this.textBoxCustomFont.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxCustomFont.MouseLeave += new System.EventHandler(this.textBoxCustomFont_MouseLeave);
+            // 
+            // buttonCustomFont
+            // 
+            this.buttonCustomFont.Location = new System.Drawing.Point(8, 125);
+            this.buttonCustomFont.Name = "buttonCustomFont";
+            this.buttonCustomFont.Size = new System.Drawing.Size(65, 32);
+            this.buttonCustomFont.TabIndex = 85;
+            this.buttonCustomFont.Text = "Font";
+            this.buttonCustomFont.UseVisualStyleBackColor = true;
+            this.buttonCustomFont.Click += new System.EventHandler(this.buttonCustomFont_Click);
+            // 
             // label93
             // 
             this.label93.AutoSize = true;
@@ -2645,14 +2726,14 @@
             this.comboBoxName.FormattingEnabled = true;
             this.comboBoxName.Location = new System.Drawing.Point(8, 37);
             this.comboBoxName.Name = "comboBoxName";
-            this.comboBoxName.Size = new System.Drawing.Size(220, 28);
+            this.comboBoxName.Size = new System.Drawing.Size(194, 28);
             this.comboBoxName.TabIndex = 82;
             this.comboBoxName.SelectedIndexChanged += new System.EventHandler(this.comboBoxName_SelectedIndexChanged);
             // 
             // checkBoxMessageEnabled
             // 
             this.checkBoxMessageEnabled.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxMessageEnabled.Location = new System.Drawing.Point(336, 25);
+            this.checkBoxMessageEnabled.Location = new System.Drawing.Point(337, 25);
             this.checkBoxMessageEnabled.Name = "checkBoxMessageEnabled";
             this.checkBoxMessageEnabled.Size = new System.Drawing.Size(88, 55);
             this.checkBoxMessageEnabled.TabIndex = 81;
@@ -2663,7 +2744,7 @@
             // 
             // buttonRemoveMessage
             // 
-            this.buttonRemoveMessage.Location = new System.Drawing.Point(284, 31);
+            this.buttonRemoveMessage.Location = new System.Drawing.Point(252, 31);
             this.buttonRemoveMessage.Name = "buttonRemoveMessage";
             this.buttonRemoveMessage.Size = new System.Drawing.Size(38, 38);
             this.buttonRemoveMessage.TabIndex = 79;
@@ -2674,7 +2755,7 @@
             // 
             // buttonAddMessage
             // 
-            this.buttonAddMessage.Location = new System.Drawing.Point(234, 31);
+            this.buttonAddMessage.Location = new System.Drawing.Point(208, 31);
             this.buttonAddMessage.Name = "buttonAddMessage";
             this.buttonAddMessage.Size = new System.Drawing.Size(38, 38);
             this.buttonAddMessage.TabIndex = 78;
@@ -2765,7 +2846,7 @@
             // label86
             // 
             this.label86.AutoSize = true;
-            this.label86.Location = new System.Drawing.Point(364, 95);
+            this.label86.Location = new System.Drawing.Point(364, 87);
             this.label86.Name = "label86";
             this.label86.Size = new System.Drawing.Size(69, 20);
             this.label86.TabIndex = 73;
@@ -2784,12 +2865,12 @@
             // trackBarCountDownPosition
             // 
             this.trackBarCountDownPosition.AutoSize = false;
-            this.trackBarCountDownPosition.Location = new System.Drawing.Point(380, 120);
+            this.trackBarCountDownPosition.Location = new System.Drawing.Point(380, 110);
             this.trackBarCountDownPosition.Maximum = 100;
             this.trackBarCountDownPosition.Minimum = 1;
             this.trackBarCountDownPosition.Name = "trackBarCountDownPosition";
             this.trackBarCountDownPosition.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBarCountDownPosition.Size = new System.Drawing.Size(40, 173);
+            this.trackBarCountDownPosition.Size = new System.Drawing.Size(40, 183);
             this.trackBarCountDownPosition.TabIndex = 72;
             this.toolTip1.SetToolTip(this.trackBarCountDownPosition, "Position of text on your Matrix/Megatree.");
             this.trackBarCountDownPosition.Value = 65;
@@ -2806,6 +2887,43 @@
             this.textBoxLine4.TabIndex = 70;
             this.toolTip1.SetToolTip(this.textBoxLine4, "Add the word COUNTDOWN to your message to display the number fo days.");
             this.textBoxLine4.MouseLeave += new System.EventHandler(this.textBoxLine4_MouseLeave);
+            // 
+            // checkBoxLocalRandom
+            // 
+            this.checkBoxLocalRandom.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxLocalRandom.Location = new System.Drawing.Point(448, 12);
+            this.checkBoxLocalRandom.Name = "checkBoxLocalRandom";
+            this.checkBoxLocalRandom.Size = new System.Drawing.Size(165, 52);
+            this.checkBoxLocalRandom.TabIndex = 58;
+            this.checkBoxLocalRandom.Text = "Play Local Msgs Randomly:";
+            this.checkBoxLocalRandom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.checkBoxLocalRandom, "Select this to display random messages from either the Messages below.");
+            this.checkBoxLocalRandom.UseVisualStyleBackColor = true;
+            this.checkBoxLocalRandom.CheckedChanged += new System.EventHandler(this.checkBoxLocalRandom_CheckedChanged);
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label85);
+            this.groupBox7.Controls.Add(this.checkBoxMultiLine);
+            this.groupBox7.Controls.Add(this.numericUpDownMultiLine);
+            this.groupBox7.Location = new System.Drawing.Point(8, 105);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(376, 49);
+            this.groupBox7.TabIndex = 65;
+            this.groupBox7.TabStop = false;
+            this.toolTip1.SetToolTip(this.groupBox7, "Not used on Custom messages.");
+            // 
+            // SaveAll
+            // 
+            this.SaveAll.Location = new System.Drawing.Point(337, 1000);
+            this.SaveAll.Name = "SaveAll";
+            this.SaveAll.Size = new System.Drawing.Size(200, 40);
+            this.SaveAll.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.SaveAll.TabIndex = 69;
+            this.SaveAll.TabStop = false;
+            this.SaveAll.Tag = "20";
+            this.toolTip1.SetToolTip(this.SaveAll, "This will Save all settings and lists. ");
+            this.SaveAll.Click += new System.EventHandler(this.SaveAll_Click);
             // 
             // comboBoxPlayMode
             // 
@@ -3187,7 +3305,6 @@
             // groupBoxMessages
             // 
             this.groupBoxMessages.Controls.Add(this.checkBoxLocalRandom);
-            this.groupBoxMessages.Controls.Add(this.buttonSaveMessageList);
             this.groupBoxMessages.Controls.Add(this.groupBoxCountDown);
             this.groupBoxMessages.Controls.Add(this.groupBox9);
             this.groupBoxMessages.Controls.Add(this.checkBoxCountDownEnable);
@@ -3199,30 +3316,6 @@
             this.groupBoxMessages.TabIndex = 32;
             this.groupBoxMessages.TabStop = false;
             this.groupBoxMessages.Text = "Local Messages";
-            // 
-            // checkBoxLocalRandom
-            // 
-            this.checkBoxLocalRandom.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxLocalRandom.Location = new System.Drawing.Point(448, 12);
-            this.checkBoxLocalRandom.Name = "checkBoxLocalRandom";
-            this.checkBoxLocalRandom.Size = new System.Drawing.Size(165, 52);
-            this.checkBoxLocalRandom.TabIndex = 58;
-            this.checkBoxLocalRandom.Text = "Play Local Msgs Randomly:";
-            this.checkBoxLocalRandom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTip1.SetToolTip(this.checkBoxLocalRandom, "Select this to display random messages from either the Messages below.");
-            this.checkBoxLocalRandom.UseVisualStyleBackColor = true;
-            this.checkBoxLocalRandom.CheckedChanged += new System.EventHandler(this.checkBoxLocalRandom_CheckedChanged);
-            // 
-            // buttonSaveMessageList
-            // 
-            this.buttonSaveMessageList.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonSaveMessageList.Location = new System.Drawing.Point(10, 25);
-            this.buttonSaveMessageList.Name = "buttonSaveMessageList";
-            this.buttonSaveMessageList.Size = new System.Drawing.Size(98, 37);
-            this.buttonSaveMessageList.TabIndex = 59;
-            this.buttonSaveMessageList.Text = "SaveList";
-            this.buttonSaveMessageList.UseVisualStyleBackColor = false;
-            this.buttonSaveMessageList.Click += new System.EventHandler(this.buttonSaveMessageList_Click);
             // 
             // groupBox9
             // 
@@ -3237,7 +3330,7 @@
             // 
             this.dateCountDown.CustomFormat = "";
             this.dateCountDown.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateCountDown.Location = new System.Drawing.Point(274, 29);
+            this.dateCountDown.Location = new System.Drawing.Point(217, 29);
             this.dateCountDown.Name = "dateCountDown";
             this.dateCountDown.Size = new System.Drawing.Size(138, 26);
             this.dateCountDown.TabIndex = 66;
@@ -3270,18 +3363,6 @@
             this.groupBoxSeqSettings.TabIndex = 1;
             this.groupBoxSeqSettings.TabStop = false;
             this.groupBoxSeqSettings.Text = "Incoming Message / Text Settings";
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.label85);
-            this.groupBox7.Controls.Add(this.checkBoxMultiLine);
-            this.groupBox7.Controls.Add(this.numericUpDownMultiLine);
-            this.groupBox7.Location = new System.Drawing.Point(8, 105);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(376, 49);
-            this.groupBox7.TabIndex = 65;
-            this.groupBox7.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox7, "Not used on Custom messages.");
             // 
             // textBoxFontSize
             // 
@@ -3935,7 +4016,7 @@
             // buttonSaveLog
             // 
             this.buttonSaveLog.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonSaveLog.Location = new System.Drawing.Point(16, 943);
+            this.buttonSaveLog.Location = new System.Drawing.Point(12, 943);
             this.buttonSaveLog.Name = "buttonSaveLog";
             this.buttonSaveLog.Size = new System.Drawing.Size(122, 42);
             this.buttonSaveLog.TabIndex = 60;
@@ -3989,7 +4070,7 @@
             // buttonStopSequence
             // 
             this.buttonStopSequence.BackColor = System.Drawing.Color.Honeydew;
-            this.buttonStopSequence.Location = new System.Drawing.Point(253, 943);
+            this.buttonStopSequence.Location = new System.Drawing.Point(12, 1003);
             this.buttonStopSequence.Name = "buttonStopSequence";
             this.buttonStopSequence.Size = new System.Drawing.Size(292, 40);
             this.buttonStopSequence.TabIndex = 61;
@@ -4007,72 +4088,6 @@
             this.timerCheckVixenEnabled.Interval = 500;
             this.timerCheckVixenEnabled.Tick += new System.EventHandler(this.timerCheckVixenEnabled_Tick);
             // 
-            // buttonCustomFont
-            // 
-            this.buttonCustomFont.Location = new System.Drawing.Point(8, 125);
-            this.buttonCustomFont.Name = "buttonCustomFont";
-            this.buttonCustomFont.Size = new System.Drawing.Size(65, 32);
-            this.buttonCustomFont.TabIndex = 85;
-            this.buttonCustomFont.Text = "Font";
-            this.buttonCustomFont.UseVisualStyleBackColor = true;
-            this.buttonCustomFont.Click += new System.EventHandler(this.buttonCustomFont_Click);
-            // 
-            // textBoxCustomFont
-            // 
-            this.textBoxCustomFont.BackColor = System.Drawing.Color.White;
-            this.textBoxCustomFont.Enabled = false;
-            this.textBoxCustomFont.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.textBoxCustomFont.Location = new System.Drawing.Point(86, 128);
-            this.textBoxCustomFont.Name = "textBoxCustomFont";
-            this.textBoxCustomFont.Size = new System.Drawing.Size(177, 26);
-            this.textBoxCustomFont.TabIndex = 67;
-            this.textBoxCustomFont.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxCustomFont.MouseLeave += new System.EventHandler(this.textBoxCustomFont_MouseLeave);
-            // 
-            // textBoxCustomFontSize
-            // 
-            this.textBoxCustomFontSize.BackColor = System.Drawing.Color.White;
-            this.textBoxCustomFontSize.Enabled = false;
-            this.textBoxCustomFontSize.Location = new System.Drawing.Point(279, 128);
-            this.textBoxCustomFontSize.Name = "textBoxCustomFontSize";
-            this.textBoxCustomFontSize.Size = new System.Drawing.Size(86, 26);
-            this.textBoxCustomFontSize.TabIndex = 86;
-            this.textBoxCustomFontSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxCustomFontSize.MouseLeave += new System.EventHandler(this.textBoxCustomFontSize_MouseLeave);
-            // 
-            // label94
-            // 
-            this.label94.Location = new System.Drawing.Point(183, 73);
-            this.label94.Name = "label94";
-            this.label94.Size = new System.Drawing.Size(80, 46);
-            this.label94.TabIndex = 87;
-            this.label94.Text = "Msg Length:";
-            this.toolTip1.SetToolTip(this.label94, "Time the message is displayed for in seconds");
-            // 
-            // CustomMsgLength
-            // 
-            this.CustomMsgLength.Location = new System.Drawing.Point(257, 84);
-            this.CustomMsgLength.Maximum = new decimal(new int[] {
-            600,
-            0,
-            0,
-            0});
-            this.CustomMsgLength.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.CustomMsgLength.Name = "CustomMsgLength";
-            this.CustomMsgLength.Size = new System.Drawing.Size(65, 26);
-            this.CustomMsgLength.TabIndex = 88;
-            this.CustomMsgLength.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.CustomMsgLength.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CustomMsgLength_MouseClick);
-            this.CustomMsgLength.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CustomMsgLength_MouseDown);
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -4080,6 +4095,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(878, 1035);
+            this.Controls.Add(this.SaveAll);
             this.Controls.Add(this.checkBoxVixenControl);
             this.Controls.Add(this.buttonStopSequence);
             this.Controls.Add(this.WebServerStatus);
@@ -4096,7 +4112,7 @@
             this.Name = "FormMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Vixen Messaging - v3.1.13";
+            this.Text = "Vixen Messaging - v3.1.16";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.groupBox1.ResumeLayout(false);
@@ -4145,7 +4161,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxWords)).EndInit();
             this.groupBoxCountDown.ResumeLayout(false);
             this.groupBoxCountDown.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CustomMsgLength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarCountDownPosition)).EndInit();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SaveAll)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPageMain.ResumeLayout(false);
             this.tabPageMain.PerformLayout();
@@ -4165,8 +4185,6 @@
             this.groupBox9.ResumeLayout(false);
             this.groupBoxSeqSettings.ResumeLayout(false);
             this.groupBoxSeqSettings.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TextLineNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTextPosition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTextSpeed)).EndInit();
@@ -4190,7 +4208,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonStop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CustomMsgLength)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4429,7 +4446,6 @@
         private System.Windows.Forms.GroupBox groupBoxMessages;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox checkBoxLocalRandom;
-        private System.Windows.Forms.Button buttonSaveMessageList;
         private System.Windows.Forms.RichTextBox richTextBoxMessage;
         private System.Windows.Forms.Label label66;
         private System.Windows.Forms.RichTextBox richTextBoxLog;
@@ -4518,6 +4534,8 @@
         private System.Windows.Forms.Button buttonCustomFont;
         private System.Windows.Forms.NumericUpDown CustomMsgLength;
         private System.Windows.Forms.Label label94;
+        private System.Windows.Forms.Button buttonPlay;
+        private System.Windows.Forms.PictureBox SaveAll;
     }
 }
 

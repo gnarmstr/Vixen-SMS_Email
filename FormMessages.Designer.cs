@@ -68,7 +68,7 @@
             "Up",
             "Down",
             "None"});
-            this.comboBoxCountDownDirection.Location = new System.Drawing.Point(121, 73);
+            this.comboBoxCountDownDirection.Location = new System.Drawing.Point(133, 73);
             this.comboBoxCountDownDirection.Name = "comboBoxCountDownDirection";
             this.comboBoxCountDownDirection.Size = new System.Drawing.Size(86, 28);
             this.comboBoxCountDownDirection.TabIndex = 2;
@@ -77,16 +77,16 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(40, 76);
+            this.label10.Location = new System.Drawing.Point(8, 76);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(76, 20);
+            this.label10.Size = new System.Drawing.Size(110, 20);
             this.label10.TabIndex = 89;
-            this.label10.Text = "Direction:";
+            this.label10.Text = "Text Direction:";
             // 
             // label92
             // 
             this.label92.AutoSize = true;
-            this.label92.Location = new System.Drawing.Point(39, 264);
+            this.label92.Location = new System.Drawing.Point(39, 292);
             this.label92.Name = "label92";
             this.label92.Size = new System.Drawing.Size(18, 20);
             this.label92.TabIndex = 90;
@@ -95,7 +95,7 @@
             // label91
             // 
             this.label91.AutoSize = true;
-            this.label91.Location = new System.Drawing.Point(39, 232);
+            this.label91.Location = new System.Drawing.Point(39, 253);
             this.label91.Name = "label91";
             this.label91.Size = new System.Drawing.Size(18, 20);
             this.label91.TabIndex = 88;
@@ -104,7 +104,7 @@
             // label90
             // 
             this.label90.AutoSize = true;
-            this.label90.Location = new System.Drawing.Point(39, 200);
+            this.label90.Location = new System.Drawing.Point(39, 210);
             this.label90.Name = "label90";
             this.label90.Size = new System.Drawing.Size(18, 20);
             this.label90.TabIndex = 86;
@@ -121,35 +121,35 @@
             // 
             // textBoxLine1
             // 
-            this.textBoxLine1.Location = new System.Drawing.Point(59, 165);
+            this.textBoxLine1.Location = new System.Drawing.Point(71, 165);
             this.textBoxLine1.Name = "textBoxLine1";
             this.textBoxLine1.Size = new System.Drawing.Size(313, 26);
             this.textBoxLine1.TabIndex = 4;
             // 
             // textBoxLine2
             // 
-            this.textBoxLine2.Location = new System.Drawing.Point(59, 197);
+            this.textBoxLine2.Location = new System.Drawing.Point(71, 207);
             this.textBoxLine2.Name = "textBoxLine2";
             this.textBoxLine2.Size = new System.Drawing.Size(313, 26);
             this.textBoxLine2.TabIndex = 5;
             // 
             // textBoxLine3
             // 
-            this.textBoxLine3.Location = new System.Drawing.Point(59, 229);
+            this.textBoxLine3.Location = new System.Drawing.Point(71, 250);
             this.textBoxLine3.Name = "textBoxLine3";
             this.textBoxLine3.Size = new System.Drawing.Size(313, 26);
             this.textBoxLine3.TabIndex = 6;
             // 
             // textBoxLine4
             // 
-            this.textBoxLine4.Location = new System.Drawing.Point(59, 261);
+            this.textBoxLine4.Location = new System.Drawing.Point(71, 289);
             this.textBoxLine4.Name = "textBoxLine4";
             this.textBoxLine4.Size = new System.Drawing.Size(313, 26);
             this.textBoxLine4.TabIndex = 7;
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(354, 303);
+            this.pictureBox2.Location = new System.Drawing.Point(354, 353);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(80, 80);
             this.pictureBox2.TabIndex = 92;
@@ -159,7 +159,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(230, 303);
+            this.pictureBox1.Location = new System.Drawing.Point(230, 353);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(80, 80);
             this.pictureBox1.TabIndex = 91;
@@ -170,15 +170,15 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 29);
+            this.label1.Location = new System.Drawing.Point(8, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 20);
+            this.label1.Size = new System.Drawing.Size(124, 20);
             this.label1.TabIndex = 94;
-            this.label1.Text = "Name:";
+            this.label1.Text = "Message Name:";
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(121, 29);
+            this.textBoxName.Location = new System.Drawing.Point(133, 28);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(251, 26);
             this.textBoxName.TabIndex = 1;
@@ -186,7 +186,7 @@
             // label86
             // 
             this.label86.AutoSize = true;
-            this.label86.Location = new System.Drawing.Point(403, 95);
+            this.label86.Location = new System.Drawing.Point(415, 95);
             this.label86.Name = "label86";
             this.label86.Size = new System.Drawing.Size(69, 20);
             this.label86.TabIndex = 97;
@@ -195,12 +195,12 @@
             // trackBarCountDownPosition
             // 
             this.trackBarCountDownPosition.AutoSize = false;
-            this.trackBarCountDownPosition.Location = new System.Drawing.Point(416, 118);
+            this.trackBarCountDownPosition.Location = new System.Drawing.Point(428, 118);
             this.trackBarCountDownPosition.Maximum = 100;
             this.trackBarCountDownPosition.Minimum = 1;
             this.trackBarCountDownPosition.Name = "trackBarCountDownPosition";
             this.trackBarCountDownPosition.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBarCountDownPosition.Size = new System.Drawing.Size(40, 179);
+            this.trackBarCountDownPosition.Size = new System.Drawing.Size(40, 206);
             this.trackBarCountDownPosition.TabIndex = 8;
             this.trackBarCountDownPosition.Value = 65;
             this.trackBarCountDownPosition.Scroll += new System.EventHandler(this.trackBarCountDownPosition_Scroll);
@@ -209,20 +209,19 @@
             // 
             // checkBoxMessageEnabled
             // 
-            this.checkBoxMessageEnabled.AutoSize = true;
             this.checkBoxMessageEnabled.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxMessageEnabled.Location = new System.Drawing.Point(392, 28);
+            this.checkBoxMessageEnabled.Location = new System.Drawing.Point(405, 28);
             this.checkBoxMessageEnabled.Name = "checkBoxMessageEnabled";
-            this.checkBoxMessageEnabled.Size = new System.Drawing.Size(94, 24);
+            this.checkBoxMessageEnabled.Size = new System.Drawing.Size(89, 48);
             this.checkBoxMessageEnabled.TabIndex = 3;
-            this.checkBoxMessageEnabled.Text = "Enabled";
+            this.checkBoxMessageEnabled.Text = "Enable Msg";
             this.checkBoxMessageEnabled.UseVisualStyleBackColor = true;
             // 
             // textBoxCustomFontSize
             // 
             this.textBoxCustomFontSize.BackColor = System.Drawing.Color.White;
             this.textBoxCustomFontSize.Enabled = false;
-            this.textBoxCustomFontSize.Location = new System.Drawing.Point(286, 121);
+            this.textBoxCustomFontSize.Location = new System.Drawing.Point(298, 121);
             this.textBoxCustomFontSize.Name = "textBoxCustomFontSize";
             this.textBoxCustomFontSize.Size = new System.Drawing.Size(86, 26);
             this.textBoxCustomFontSize.TabIndex = 100;
@@ -234,7 +233,7 @@
             this.textBoxCustomFont.BackColor = System.Drawing.Color.White;
             this.textBoxCustomFont.Enabled = false;
             this.textBoxCustomFont.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.textBoxCustomFont.Location = new System.Drawing.Point(103, 121);
+            this.textBoxCustomFont.Location = new System.Drawing.Point(115, 121);
             this.textBoxCustomFont.Name = "textBoxCustomFont";
             this.textBoxCustomFont.Size = new System.Drawing.Size(177, 26);
             this.textBoxCustomFont.TabIndex = 98;
@@ -243,7 +242,7 @@
             // 
             // buttonCustomFont
             // 
-            this.buttonCustomFont.Location = new System.Drawing.Point(17, 118);
+            this.buttonCustomFont.Location = new System.Drawing.Point(29, 118);
             this.buttonCustomFont.Name = "buttonCustomFont";
             this.buttonCustomFont.Size = new System.Drawing.Size(65, 32);
             this.buttonCustomFont.TabIndex = 99;
@@ -253,7 +252,7 @@
             // 
             // CustomMsgLength
             // 
-            this.CustomMsgLength.Location = new System.Drawing.Point(300, 80);
+            this.CustomMsgLength.Location = new System.Drawing.Point(312, 80);
             this.CustomMsgLength.Maximum = new decimal(new int[] {
             600,
             0,
@@ -275,7 +274,7 @@
             // 
             // label94
             // 
-            this.label94.Location = new System.Drawing.Point(226, 69);
+            this.label94.Location = new System.Drawing.Point(238, 69);
             this.label94.Name = "label94";
             this.label94.Size = new System.Drawing.Size(80, 46);
             this.label94.TabIndex = 101;
@@ -287,7 +286,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
-            this.ClientSize = new System.Drawing.Size(509, 397);
+            this.ClientSize = new System.Drawing.Size(509, 444);
             this.Controls.Add(this.CustomMsgLength);
             this.Controls.Add(this.label94);
             this.Controls.Add(this.textBoxCustomFontSize);
@@ -310,9 +309,10 @@
             this.Controls.Add(this.textBoxLine2);
             this.Controls.Add(this.textBoxLine3);
             this.Controls.Add(this.textBoxLine4);
-            this.MaximumSize = new System.Drawing.Size(531, 453);
-            this.MinimumSize = new System.Drawing.Size(531, 453);
+            this.MaximumSize = new System.Drawing.Size(531, 500);
+            this.MinimumSize = new System.Drawing.Size(531, 500);
             this.Name = "FormMessages";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Add new Message";
             this.Load += new System.EventHandler(this.FormMessages_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

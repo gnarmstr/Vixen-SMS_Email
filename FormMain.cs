@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.CodeDom;
+using System.ComponentModel;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -196,6 +198,9 @@ namespace Vixen_Messaging
             buttonAddMessage.Text = "";
             buttonRemoveMessage.Image = Tools.GetIcon(Resources.delete, 16);
             buttonAddMessage.Text = "";
+            buttonPlay.Image = Tools.GetIcon(Resources.Play, 16);
+            buttonPlay.Text = "";
+            SaveAll.Image = Tools.ResizeImage(Resources.Save, 130, 30);
             #endregion
 
             #region Check Vixen Port settings on startup
@@ -879,6 +884,35 @@ namespace Vixen_Messaging
         }
         #endregion
 
+    #region Play Custom Message Immediately
+
+        private void buttonPlay_Click(object sender, EventArgs e)
+        {
+            GlobalVar.PlayCustomMessage = true;
+            Stop_Vixen();
+            StopSequence();
+            if (timerCheckVixenEnabled.Enabled)
+            {
+                PlayCustomMessage();
+                Start_Vixen();
+            }
+            else
+            {
+                PlayCustomMessage();
+            }
+            GlobalVar.PlayCustomMessage = false;
+        }
+
+        private void PlayCustomMessage()
+        {
+            bool blacklist;
+            bool notWhitemsg;
+            bool maxWordCount;
+            string msg = "play counter"; 
+            SendMessageToVixen(msg, out blacklist, out notWhitemsg, out maxWordCount);
+        }
+        #endregion
+
     #region Play with Twilio
         private void PlayTwilio()
         {
@@ -1204,6 +1238,201 @@ namespace Vixen_Messaging
 
 #endregion
 
+#region Custom Local Message settings
+        private void checkBoxCountDownEnable_CheckedChanged(object sender, EventArgs e)
+        {
+            groupBoxCountDown.Enabled = !groupBoxCountDown.Enabled;
+        }
+
+        private void buttonAddMessage_Click(object sender, EventArgs e)
+        {
+            var formMessages = new FormMessages();
+            formMessages.ShowDialog();
+
+            if (formMessages.textBoxName.Text != "")
+            {
+                GlobalVar.ListLine1.Add(formMessages.textBoxLine1.Text);
+                textBoxLine1.Text = formMessages.textBoxLine1.Text;
+                GlobalVar.ListLine2.Add(formMessages.textBoxLine2.Text);
+                textBoxLine2.Text = formMessages.textBoxLine2.Text;
+                GlobalVar.ListLine3.Add(formMessages.textBoxLine3.Text);
+                textBoxLine3.Text = formMessages.textBoxLine3.Text;
+                GlobalVar.ListLine4.Add(formMessages.textBoxLine4.Text);
+                textBoxLine4.Text = formMessages.textBoxLine4.Text;
+                GlobalVar.CountDirection.Add(formMessages.comboBoxCountDownDirection.Text);
+                comboBoxCountDownDirection.Text = formMessages.comboBoxCountDownDirection.Text;
+                GlobalVar.Position.Add(formMessages.trackBarCountDownPosition.Value);
+                trackBarCountDownPosition.Value = formMessages.trackBarCountDownPosition.Value;
+                GlobalVar.MessageEnabled.Add(formMessages.checkBoxMessageEnabled.Checked);
+                checkBoxMessageEnabled.Checked = formMessages.checkBoxMessageEnabled.Checked;
+                GlobalVar.CustomFont.Add(formMessages.textBoxCustomFont.Text);
+                textBoxCustomFont.Text = formMessages.textBoxCustomFont.Text;
+                GlobalVar.CustomFontSize.Add(formMessages.textBoxCustomFontSize.Text);
+                textBoxCustomFontSize.Text = formMessages.textBoxCustomFontSize.Text;
+                GlobalVar.CustomMsgLength.Add(formMessages.CustomMsgLength.Value);
+                CustomMsgLength.Value = formMessages.CustomMsgLength.Value;
+                comboBoxName.Items.Add(formMessages.textBoxName.Text);
+                comboBoxName.SelectedIndex = comboBoxName.Items.Count - 1;
+            }
+        }
+
+        private void comboBoxName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CustomMessage();
+        }
+
+        private void CustomMessage()
+        {
+            var selectedItem = comboBoxName.SelectedIndex;
+            textBoxLine1.Text = GlobalVar.ListLine1[selectedItem];
+            textBoxLine2.Text = GlobalVar.ListLine2[selectedItem];
+            textBoxLine3.Text = GlobalVar.ListLine3[selectedItem];
+            textBoxLine4.Text = GlobalVar.ListLine4[selectedItem];
+            comboBoxCountDownDirection.Text = GlobalVar.CountDirection[selectedItem];
+            trackBarCountDownPosition.Value = GlobalVar.Position[selectedItem];
+            checkBoxMessageEnabled.Checked = GlobalVar.MessageEnabled[selectedItem];
+            textBoxCustomFont.Text = GlobalVar.CustomFont[selectedItem];
+            textBoxCustomFontSize.Text = GlobalVar.CustomFontSize[selectedItem];
+            CustomMsgLength.Value = GlobalVar.CustomMsgLength[selectedItem];
+        }
+
+        private void buttonRemoveMessage_Click(object sender, EventArgs e)
+        {
+            if (comboBoxName.Items.Count > 0)
+            {
+                GlobalVar.ListLine1.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.ListLine2.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.ListLine3.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.ListLine4.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.CountDirection.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.Position.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.MessageEnabled.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.CustomFont.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.CustomFontSize.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.CustomMsgLength.RemoveAt(comboBoxName.SelectedIndex);
+                comboBoxName.Items.RemoveAt(comboBoxName.SelectedIndex);
+                if (comboBoxName.Items.Count > 0)
+                {
+                    comboBoxName.SelectedIndex = 0;
+                    textBoxLine1.Text = GlobalVar.ListLine1[0];
+                    textBoxLine2.Text = GlobalVar.ListLine2[0];
+                    textBoxLine3.Text = GlobalVar.ListLine3[0];
+                    textBoxLine4.Text = GlobalVar.ListLine4[0];
+                    comboBoxCountDownDirection.Text = GlobalVar.CountDirection[0];
+                    trackBarCountDownPosition.Value = GlobalVar.Position[0];
+                    checkBoxMessageEnabled.Checked = GlobalVar.MessageEnabled[0];
+                    textBoxCustomFont.Text = GlobalVar.CustomFont[0];
+                    textBoxCustomFontSize.Text = GlobalVar.CustomFontSize[0];
+                    CustomMsgLength.Value = GlobalVar.CustomMsgLength[0];
+                }
+                else
+                {
+                    comboBoxName.Items.Clear();
+                    textBoxLine1.Text = "";
+                    textBoxLine2.Text = "";
+                    textBoxLine3.Text = "";
+                    textBoxLine4.Text = "";
+                    comboBoxCountDownDirection.Text = @"None";
+                    trackBarCountDownPosition.Value = 10;
+                    checkBoxMessageEnabled.Checked = false;
+                    textBoxCustomFont.Text = "";
+                    textBoxCustomFontSize.Text = "";
+                    CustomMsgLength.Value = 10;
+                }
+            }
+        }
+
+        private void textBoxLine1_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void textBoxLine2_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void textBoxLine3_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void textBoxLine4_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void comboBoxCountDownDirection_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void checkBoxMessageEnabled_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void trackBarCountDownPosition_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void CustomMessageUpdate()
+        {
+            if (comboBoxName.Items.Count != 0)
+            {
+                GlobalVar.ListLine1[comboBoxName.SelectedIndex] = textBoxLine1.Text;
+                GlobalVar.ListLine2[comboBoxName.SelectedIndex] = textBoxLine2.Text;
+                GlobalVar.ListLine3[comboBoxName.SelectedIndex] = textBoxLine3.Text;
+                GlobalVar.ListLine4[comboBoxName.SelectedIndex] = textBoxLine4.Text;
+                GlobalVar.CountDirection[comboBoxName.SelectedIndex] = comboBoxCountDownDirection.Text;
+                GlobalVar.Position[comboBoxName.SelectedIndex] = trackBarCountDownPosition.Value;
+                GlobalVar.MessageEnabled[comboBoxName.SelectedIndex] = checkBoxMessageEnabled.Checked;
+                GlobalVar.CustomFont[comboBoxName.SelectedIndex] = textBoxCustomFont.Text;
+                GlobalVar.CustomFontSize[comboBoxName.SelectedIndex] = textBoxCustomFontSize.Text;
+                GlobalVar.CustomMsgLength[comboBoxName.SelectedIndex] = CustomMsgLength.Value;
+            }
+        }
+
+        private void checkBoxEmail_CheckedChanged(object sender, EventArgs e)
+        {
+            textBoxFromEmailAddress.Enabled = !textBoxFromEmailAddress.Enabled;
+            textBoxUID.Enabled = !textBoxUID.Enabled;
+            textBoxPWD.Enabled = !textBoxPWD.Enabled;
+            comboBoxEmailSettings.Enabled = !comboBoxEmailSettings.Enabled;
+        }
+
+        private void buttonCustomFont_Click(object sender, EventArgs e)
+        {
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+                textBoxCustomFont.Text = string.Format(fontDialog1.Font.Name);
+                textBoxCustomFontSize.Text = string.Format(fontDialog1.Font.Size.ToString());
+                CustomMessageUpdate();
+            }
+        }
+
+        private void textBoxCustomFont_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void textBoxCustomFontSize_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void CustomMsgLength_MouseClick(object sender, MouseEventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+
+        private void CustomMsgLength_MouseDown(object sender, MouseEventArgs e)
+        {
+            CustomMessageUpdate();
+        }
+        #endregion
+
 #region Message to Vixen
 
         private void SendMessageToVixen(string msg, out bool blacklist, out bool notWhitemsg, out bool maxWordCount)
@@ -1261,12 +1490,12 @@ namespace Vixen_Messaging
                             }
                             else
                             {
-                                GlobalVar.SeqIntervalTime = Convert.ToDecimal(EffectTime.Value);
+                                GlobalVar.SeqIntervalTime = Convert.ToDecimal(EffectTime.Value) + 1;
                             }
                         }
                         else
                         {
-                            GlobalVar.SeqIntervalTime = Convert.ToDecimal(CustomMsgLength.Value);
+                            GlobalVar.SeqIntervalTime = Convert.ToDecimal(CustomMsgLength.Value) + 1;
                         }
 
                         outputFileName = textBoxOutputSequence.Text;
@@ -1462,7 +1691,7 @@ namespace Vixen_Messaging
                         //objGraphics.Flush();
                         //pictureBoxMovie.Image = objBmpImage;
 
-                        if (checkBoxVariableLength.Checked)
+                        if (checkBoxVariableLength.Checked & !GlobalVar.PlayCustomMessage)
                         {
                             timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + numericUpDownIntervalMsgs.Value)*1000;
                             timerCheckMail.Enabled = true;
@@ -2785,8 +3014,21 @@ namespace Vixen_Messaging
 #region Close Vixen Messaging
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SeqSave();
-            StopSequence();
+            e.Cancel = false;
+            var save = MessageBox.Show(@"Would you like to save all Settings and Lists on exit?", @"Save", MessageBoxButtons.YesNoCancel);
+            switch (save)
+            {
+                case DialogResult.Yes:
+                    Save();
+                    StopSequence();
+                    break;
+                case DialogResult.No:
+                    StopSequence();
+                    break;
+                case DialogResult.Cancel:
+                    e.Cancel = true;
+                    break;
+            }
         }
 #endregion
 
@@ -3276,22 +3518,32 @@ namespace Vixen_Messaging
 
         private void pictureBoxSaveBlacklist_Click(object sender, EventArgs e)
         {
+            SaveBlackList();
+            MessageBox.Show(@"Blacklist saved!");
+        }
+
+        private void SaveBlackList()
+        {
             richTextBoxBlacklist.SaveFile(GlobalVar.Blacklistlocation, RichTextBoxStreamType.PlainText);
             richTextBoxBlacklist.SaveFile(GlobalVar.Blacklistlocation + ".bkp", RichTextBoxStreamType.PlainText);
-            MessageBox.Show(@"Blacklist saved!");
         }
 
         private void pictureBoxSaveWhitelist_Click(object sender, EventArgs e)
         {
-            richTextBoxWhitelist.SaveFile(GlobalVar.Whitelistlocation, RichTextBoxStreamType.PlainText);
-            richTextBoxWhitelist.SaveFile(GlobalVar.Whitelistlocation + ".bkp", RichTextBoxStreamType.PlainText);
+            SaveWhiteList();
             MessageBox.Show(@"Whitelist saved!");
         }
-        private void buttonSaveMessageList_Click(object sender, EventArgs e)
+
+        private void SaveWhiteList()
+        {
+            richTextBoxWhitelist.SaveFile(GlobalVar.Whitelistlocation, RichTextBoxStreamType.PlainText);
+            richTextBoxWhitelist.SaveFile(GlobalVar.Whitelistlocation + ".bkp", RichTextBoxStreamType.PlainText);
+        }
+
+        private void SaveMessageList()
         {
             richTextBoxMessage.SaveFile(GlobalVar.LocalMessages, RichTextBoxStreamType.PlainText);
             richTextBoxMessage.SaveFile(GlobalVar.LocalMessages + ".bkp", RichTextBoxStreamType.PlainText);
-            MessageBox.Show(@"Messages saved!");
         }
 
         private void tabControlSequence_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -3377,197 +3629,18 @@ namespace Vixen_Messaging
             numericUpDownMultiLine.Enabled = !numericUpDownMultiLine.Enabled;
         }
 
-        private void checkBoxCountDownEnable_CheckedChanged(object sender, EventArgs e)
+        private void SaveAll_Click(object sender, EventArgs e)
         {
-            groupBoxCountDown.Enabled = !groupBoxCountDown.Enabled;
+            Save();
         }
 
-        private void buttonAddMessage_Click(object sender, EventArgs e)
+        private void Save()
         {
-            var formMessages = new FormMessages();
-            formMessages.ShowDialog();
-
-            if (formMessages.textBoxName.Text != "")
-            {
-                GlobalVar.ListLine1.Add(formMessages.textBoxLine1.Text);
-                textBoxLine1.Text = formMessages.textBoxLine1.Text;
-                GlobalVar.ListLine2.Add(formMessages.textBoxLine2.Text);
-                textBoxLine2.Text = formMessages.textBoxLine2.Text;
-                GlobalVar.ListLine3.Add(formMessages.textBoxLine3.Text);
-                textBoxLine3.Text = formMessages.textBoxLine3.Text;
-                GlobalVar.ListLine4.Add(formMessages.textBoxLine4.Text);
-                textBoxLine4.Text = formMessages.textBoxLine4.Text;
-                GlobalVar.CountDirection.Add(formMessages.comboBoxCountDownDirection.Text);
-                comboBoxCountDownDirection.Text = formMessages.comboBoxCountDownDirection.Text;
-                GlobalVar.Position.Add(formMessages.trackBarCountDownPosition.Value);
-                trackBarCountDownPosition.Value = formMessages.trackBarCountDownPosition.Value;
-                GlobalVar.MessageEnabled.Add(formMessages.checkBoxMessageEnabled.Checked);
-                checkBoxMessageEnabled.Checked = formMessages.checkBoxMessageEnabled.Checked;
-                GlobalVar.CustomFont.Add(formMessages.textBoxCustomFont.Text);
-                textBoxCustomFont.Text = formMessages.textBoxCustomFont.Text;
-                GlobalVar.CustomFontSize.Add(formMessages.textBoxCustomFontSize.Text);
-                textBoxCustomFontSize.Text = formMessages.textBoxCustomFontSize.Text;
-                GlobalVar.CustomMsgLength.Add(formMessages.CustomMsgLength.Value);
-                CustomMsgLength.Value = formMessages.CustomMsgLength.Value;
-                comboBoxName.Items.Add(formMessages.textBoxName.Text);
-                comboBoxName.SelectedIndex = comboBoxName.Items.Count - 1;
-            }
-        }
-
-        private void comboBoxName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CustomMessage();
-        }
-
-        private void CustomMessage()
-        {
-            var selectedItem = comboBoxName.SelectedIndex;
-            textBoxLine1.Text = GlobalVar.ListLine1[selectedItem];
-            textBoxLine2.Text = GlobalVar.ListLine2[selectedItem];
-            textBoxLine3.Text = GlobalVar.ListLine3[selectedItem];
-            textBoxLine4.Text = GlobalVar.ListLine4[selectedItem];
-            comboBoxCountDownDirection.Text = GlobalVar.CountDirection[selectedItem];
-            trackBarCountDownPosition.Value = GlobalVar.Position[selectedItem];
-            checkBoxMessageEnabled.Checked = GlobalVar.MessageEnabled[selectedItem];
-            textBoxCustomFont.Text = GlobalVar.CustomFont[selectedItem];
-            textBoxCustomFontSize.Text = GlobalVar.CustomFontSize[selectedItem];
-            CustomMsgLength.Value = GlobalVar.CustomMsgLength[selectedItem];
-        }
-
-        private void buttonRemoveMessage_Click(object sender, EventArgs e)
-        {
-            if (comboBoxName.Items.Count > 0)
-            {
-                GlobalVar.ListLine1.RemoveAt(comboBoxName.SelectedIndex);
-                GlobalVar.ListLine2.RemoveAt(comboBoxName.SelectedIndex);
-                GlobalVar.ListLine3.RemoveAt(comboBoxName.SelectedIndex);
-                GlobalVar.ListLine4.RemoveAt(comboBoxName.SelectedIndex);
-                GlobalVar.CountDirection.RemoveAt(comboBoxName.SelectedIndex);
-                GlobalVar.Position.RemoveAt(comboBoxName.SelectedIndex);
-                GlobalVar.MessageEnabled.RemoveAt(comboBoxName.SelectedIndex);
-                GlobalVar.CustomFont.RemoveAt(comboBoxName.SelectedIndex);
-                GlobalVar.CustomFontSize.RemoveAt(comboBoxName.SelectedIndex);
-                GlobalVar.CustomMsgLength.RemoveAt(comboBoxName.SelectedIndex);
-                comboBoxName.Items.RemoveAt(comboBoxName.SelectedIndex);
-                if (comboBoxName.Items.Count > 0)
-                {
-                    comboBoxName.SelectedIndex = 0;
-                    textBoxLine1.Text = GlobalVar.ListLine1[0];
-                    textBoxLine2.Text = GlobalVar.ListLine2[0];
-                    textBoxLine3.Text = GlobalVar.ListLine3[0];
-                    textBoxLine4.Text = GlobalVar.ListLine4[0];
-                    comboBoxCountDownDirection.Text = GlobalVar.CountDirection[0];
-                    trackBarCountDownPosition.Value = GlobalVar.Position[0];
-                    checkBoxMessageEnabled.Checked = GlobalVar.MessageEnabled[0];
-                    textBoxCustomFont.Text = GlobalVar.CustomFont[0];
-                    textBoxCustomFontSize.Text = GlobalVar.CustomFontSize[0];
-                    CustomMsgLength.Value = GlobalVar.CustomMsgLength[0];
-                }
-                else
-                {
-                    comboBoxName.Items.Clear();
-                    textBoxLine1.Text = "";
-                    textBoxLine2.Text = "";
-                    textBoxLine3.Text = "";
-                    textBoxLine4.Text = "";
-                    comboBoxCountDownDirection.Text = @"None";
-                    trackBarCountDownPosition.Value = 10;
-                    checkBoxMessageEnabled.Checked = false;
-                    textBoxCustomFont.Text = "";
-                    textBoxCustomFontSize.Text = "";
-                    CustomMsgLength.Value = 10;
-                }
-            }
-        }
-
-        private void textBoxLine1_MouseLeave(object sender, EventArgs e)
-        {
-            CustomMessageUpdate();
-        }
-
-        private void textBoxLine2_MouseLeave(object sender, EventArgs e)
-        {
-            CustomMessageUpdate();
-        }
-
-        private void textBoxLine3_MouseLeave(object sender, EventArgs e)
-        {
-            CustomMessageUpdate();
-        }
-
-        private void textBoxLine4_MouseLeave(object sender, EventArgs e)
-        {
-            CustomMessageUpdate();
-        }
-
-        private void comboBoxCountDownDirection_MouseLeave(object sender, EventArgs e)
-        {
-            CustomMessageUpdate();
-        }
-
-        private void checkBoxMessageEnabled_MouseLeave(object sender, EventArgs e)
-        {
-            CustomMessageUpdate();
-        }
-
-        private void trackBarCountDownPosition_MouseLeave(object sender, EventArgs e)
-        {
-            CustomMessageUpdate();
-        }
-
-        private void CustomMessageUpdate()
-        {
-            if (comboBoxName.Items.Count != 0)
-            {
-                GlobalVar.ListLine1[comboBoxName.SelectedIndex] = textBoxLine1.Text;
-                GlobalVar.ListLine2[comboBoxName.SelectedIndex] = textBoxLine2.Text;
-                GlobalVar.ListLine3[comboBoxName.SelectedIndex] = textBoxLine3.Text;
-                GlobalVar.ListLine4[comboBoxName.SelectedIndex] = textBoxLine4.Text;
-                GlobalVar.CountDirection[comboBoxName.SelectedIndex] = comboBoxCountDownDirection.Text;
-                GlobalVar.Position[comboBoxName.SelectedIndex] = trackBarCountDownPosition.Value;
-                GlobalVar.MessageEnabled[comboBoxName.SelectedIndex] = checkBoxMessageEnabled.Checked;
-                GlobalVar.CustomFont[comboBoxName.SelectedIndex] = textBoxCustomFont.Text;
-                GlobalVar.CustomFontSize[comboBoxName.SelectedIndex] = textBoxCustomFontSize.Text;
-                GlobalVar.CustomMsgLength[comboBoxName.SelectedIndex] = CustomMsgLength.Value;
-            }
-        }
-
-        private void checkBoxEmail_CheckedChanged(object sender, EventArgs e)
-        {
-            textBoxFromEmailAddress.Enabled = !textBoxFromEmailAddress.Enabled;
-            textBoxUID.Enabled = !textBoxUID.Enabled;
-            textBoxPWD.Enabled = !textBoxPWD.Enabled;
-            comboBoxEmailSettings.Enabled = !comboBoxEmailSettings.Enabled;
-        }
-
-        private void buttonCustomFont_Click(object sender, EventArgs e)
-        {
-            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
-            {
-                textBoxCustomFont.Text = string.Format(fontDialog1.Font.Name);
-                textBoxCustomFontSize.Text = string.Format(fontDialog1.Font.Size.ToString());
-                CustomMessageUpdate();
-            }
-        }
-
-        private void textBoxCustomFont_MouseLeave(object sender, EventArgs e)
-        {
-            CustomMessageUpdate();
-        }
-
-        private void textBoxCustomFontSize_MouseLeave(object sender, EventArgs e)
-        {
-            CustomMessageUpdate();
-        }
-
-        private void CustomMsgLength_MouseClick(object sender, MouseEventArgs e)
-        {
-            CustomMessageUpdate();
-        }
-
-        private void CustomMsgLength_MouseDown(object sender, MouseEventArgs e)
-        {
-            CustomMessageUpdate();
+            SaveBlackList();
+            SaveWhiteList();
+            SaveMessageList();
+            SeqSave();
+            MessageBox.Show(@"All Settings, Whitelist, Blacklist and Messagelists have been saved.");
         }
 
     }

@@ -58,6 +58,8 @@ namespace Vixen_Messaging
 
             public static bool PlayMessage;
 
+            public static bool PlayCustomMessage;
+
             public static int Sequential { get; set; }
 
     }

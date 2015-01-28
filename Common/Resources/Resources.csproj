@@ -89,6 +89,8 @@
     <None Include="SaveBlacklist.png" />
     <None Include="ClicktoOpen.png" />
     <None Include="Resources\accept.png" />
+    <None Include="Resources\control_play_blue.png" />
+    <None Include="Save.png" />
     <Content Include="Vixen Messaging.png" />
   </ItemGroup>
   <ItemGroup />
