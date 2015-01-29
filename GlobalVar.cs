@@ -51,6 +51,8 @@ namespace Vixen_Messaging
 
             public static List<string> CustomFont = new List<string>();
 
+            public static List<int> TrackBarCustomSpeed = new List<int>();
+
             /// <summary>
             /// Static value protected by access routine.
             /// </summary>

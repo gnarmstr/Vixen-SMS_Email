@@ -64,5 +64,20 @@ namespace Vixen_Messaging
                 textBoxCustomFontSize.Text = string.Format(fontDialog1.Font.Size.ToString());
             }
         }
+
+        private void trackBarCustomSpeed_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarCustomSpeed, trackBarCustomSpeed.Value.ToString());
+        }
+
+        private void trackBarCustomSpeed_Scroll(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarCustomSpeed, trackBarCustomSpeed.Value.ToString());
+        }
+
+        private void trackBarCustomSpeed_MouseDown(object sender, MouseEventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarCustomSpeed, trackBarCustomSpeed.Value.ToString());
+        }
     }
 }

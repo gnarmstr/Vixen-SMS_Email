@@ -53,10 +53,13 @@
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.CustomMsgLength = new System.Windows.Forms.NumericUpDown();
             this.label94 = new System.Windows.Forms.Label();
+            this.trackBarCustomSpeed = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarCountDownPosition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CustomMsgLength)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarCustomSpeed)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBoxCountDownDirection
@@ -186,7 +189,7 @@
             // label86
             // 
             this.label86.AutoSize = true;
-            this.label86.Location = new System.Drawing.Point(415, 95);
+            this.label86.Location = new System.Drawing.Point(458, 93);
             this.label86.Name = "label86";
             this.label86.Size = new System.Drawing.Size(69, 20);
             this.label86.TabIndex = 97;
@@ -195,7 +198,7 @@
             // trackBarCountDownPosition
             // 
             this.trackBarCountDownPosition.AutoSize = false;
-            this.trackBarCountDownPosition.Location = new System.Drawing.Point(428, 118);
+            this.trackBarCountDownPosition.Location = new System.Drawing.Point(476, 118);
             this.trackBarCountDownPosition.Maximum = 100;
             this.trackBarCountDownPosition.Minimum = 1;
             this.trackBarCountDownPosition.Name = "trackBarCountDownPosition";
@@ -242,12 +245,13 @@
             // 
             // buttonCustomFont
             // 
+            this.buttonCustomFont.BackColor = System.Drawing.Color.Honeydew;
             this.buttonCustomFont.Location = new System.Drawing.Point(29, 118);
             this.buttonCustomFont.Name = "buttonCustomFont";
             this.buttonCustomFont.Size = new System.Drawing.Size(65, 32);
             this.buttonCustomFont.TabIndex = 99;
             this.buttonCustomFont.Text = "Font";
-            this.buttonCustomFont.UseVisualStyleBackColor = true;
+            this.buttonCustomFont.UseVisualStyleBackColor = false;
             this.buttonCustomFont.Click += new System.EventHandler(this.buttonCustomFont_Click);
             // 
             // CustomMsgLength
@@ -281,12 +285,40 @@
             this.label94.Text = "Msg Length:";
             this.toolTip1.SetToolTip(this.label94, "Time the message is displayed for in seconds");
             // 
+            // trackBarCustomSpeed
+            // 
+            this.trackBarCustomSpeed.AutoSize = false;
+            this.trackBarCustomSpeed.Location = new System.Drawing.Point(405, 118);
+            this.trackBarCustomSpeed.Maximum = 20;
+            this.trackBarCustomSpeed.Minimum = 1;
+            this.trackBarCustomSpeed.Name = "trackBarCustomSpeed";
+            this.trackBarCustomSpeed.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBarCustomSpeed.Size = new System.Drawing.Size(40, 205);
+            this.trackBarCustomSpeed.TabIndex = 104;
+            this.toolTip1.SetToolTip(this.trackBarCustomSpeed, "Position of text on your Matrix/Megatree.");
+            this.trackBarCustomSpeed.Value = 5;
+            this.trackBarCustomSpeed.Scroll += new System.EventHandler(this.trackBarCustomSpeed_Scroll);
+            this.trackBarCustomSpeed.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarCustomSpeed_MouseDown);
+            this.trackBarCustomSpeed.MouseHover += new System.EventHandler(this.trackBarCustomSpeed_MouseHover);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(392, 93);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 20);
+            this.label2.TabIndex = 103;
+            this.label2.Text = "Speed:";
+            this.toolTip1.SetToolTip(this.label2, "Text Position is for Countdown message using Lines below only");
+            // 
             // FormMessages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
-            this.ClientSize = new System.Drawing.Size(509, 444);
+            this.ClientSize = new System.Drawing.Size(528, 444);
+            this.Controls.Add(this.trackBarCustomSpeed);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.CustomMsgLength);
             this.Controls.Add(this.label94);
             this.Controls.Add(this.textBoxCustomFontSize);
@@ -309,7 +341,7 @@
             this.Controls.Add(this.textBoxLine2);
             this.Controls.Add(this.textBoxLine3);
             this.Controls.Add(this.textBoxLine4);
-            this.MaximumSize = new System.Drawing.Size(531, 500);
+            this.MaximumSize = new System.Drawing.Size(550, 500);
             this.MinimumSize = new System.Drawing.Size(531, 500);
             this.Name = "FormMessages";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -319,6 +351,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarCountDownPosition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CustomMsgLength)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarCustomSpeed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -350,5 +383,7 @@
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.Label label94;
         public System.Windows.Forms.NumericUpDown CustomMsgLength;
+        public System.Windows.Forms.TrackBar trackBarCustomSpeed;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -423,6 +423,8 @@ namespace Vixen_Messaging
                     GlobalVar.CustomFontSize.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, "10"));
                     line = "MessageName";
                     comboBoxName.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+                    line = "CustomSpeed";
+                    GlobalVar.TrackBarCustomSpeed.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, 5));
                     line = "CustomMsgLength";
                     GlobalVar.CustomMsgLength.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, 10));
                     line = "ListLine1-";
@@ -1269,6 +1271,8 @@ namespace Vixen_Messaging
                 textBoxCustomFont.Text = formMessages.textBoxCustomFont.Text;
                 GlobalVar.CustomFontSize.Add(formMessages.textBoxCustomFontSize.Text);
                 textBoxCustomFontSize.Text = formMessages.textBoxCustomFontSize.Text;
+                GlobalVar.TrackBarCustomSpeed.Add(formMessages.trackBarCustomSpeed.Value);
+                trackBarCustomSpeed.Value = formMessages.trackBarCustomSpeed.Value;
                 GlobalVar.CustomMsgLength.Add(formMessages.CustomMsgLength.Value);
                 CustomMsgLength.Value = formMessages.CustomMsgLength.Value;
                 comboBoxName.Items.Add(formMessages.textBoxName.Text);
@@ -1293,6 +1297,7 @@ namespace Vixen_Messaging
             checkBoxMessageEnabled.Checked = GlobalVar.MessageEnabled[selectedItem];
             textBoxCustomFont.Text = GlobalVar.CustomFont[selectedItem];
             textBoxCustomFontSize.Text = GlobalVar.CustomFontSize[selectedItem];
+            trackBarCustomSpeed.Value = GlobalVar.TrackBarCustomSpeed[selectedItem];
             CustomMsgLength.Value = GlobalVar.CustomMsgLength[selectedItem];
         }
 
@@ -1310,6 +1315,7 @@ namespace Vixen_Messaging
                 GlobalVar.CustomFont.RemoveAt(comboBoxName.SelectedIndex);
                 GlobalVar.CustomFontSize.RemoveAt(comboBoxName.SelectedIndex);
                 GlobalVar.CustomMsgLength.RemoveAt(comboBoxName.SelectedIndex);
+                GlobalVar.TrackBarCustomSpeed.RemoveAt(comboBoxName.SelectedIndex);
                 comboBoxName.Items.RemoveAt(comboBoxName.SelectedIndex);
                 if (comboBoxName.Items.Count > 0)
                 {
@@ -1324,6 +1330,7 @@ namespace Vixen_Messaging
                     textBoxCustomFont.Text = GlobalVar.CustomFont[0];
                     textBoxCustomFontSize.Text = GlobalVar.CustomFontSize[0];
                     CustomMsgLength.Value = GlobalVar.CustomMsgLength[0];
+                    trackBarCustomSpeed.Value = GlobalVar.TrackBarCustomSpeed[0];
                 }
                 else
                 {
@@ -1338,6 +1345,7 @@ namespace Vixen_Messaging
                     textBoxCustomFont.Text = "";
                     textBoxCustomFontSize.Text = "";
                     CustomMsgLength.Value = 10;
+                    trackBarCustomSpeed.Value = 5;
                 }
             }
         }
@@ -1391,6 +1399,7 @@ namespace Vixen_Messaging
                 GlobalVar.CustomFont[comboBoxName.SelectedIndex] = textBoxCustomFont.Text;
                 GlobalVar.CustomFontSize[comboBoxName.SelectedIndex] = textBoxCustomFontSize.Text;
                 GlobalVar.CustomMsgLength[comboBoxName.SelectedIndex] = CustomMsgLength.Value;
+                GlobalVar.TrackBarCustomSpeed[comboBoxName.SelectedIndex] = trackBarCustomSpeed.Value;
             }
         }
 
@@ -1810,6 +1819,7 @@ namespace Vixen_Messaging
                 fileText1 = fileText1.Replace("TextPosition_Change", trackBarCountDownPosition.Value.ToString());
                 fileText1 = fileText1.Replace("FontName_Change", textBoxCustomFont.Text);
                 fileText1 = fileText1.Replace("FontSize_Change", textBoxCustomFontSize.Text);
+                fileText1 = fileText1.Replace("Speed_Change", trackBarCustomSpeed.Value.ToString());
             }
             else
             {
@@ -3194,6 +3204,8 @@ namespace Vixen_Messaging
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, Convert.ToString(comboBoxName.Items[i]));
                 line = "CustomFont"; 
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomFont[i]);
+                line = "CustomSpeed";
+                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.TrackBarCustomSpeed[i]);
                 line = "CustomFontSize";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomFontSize[i]);
                 line = "CustomMsgLength";
@@ -3369,6 +3381,21 @@ namespace Vixen_Messaging
         private void trackBarCountDownPosition_MouseHover(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(trackBarCountDownPosition, trackBarCountDownPosition.Value.ToString());
+        }
+
+        private void trackBarCustomSpeed_Scroll(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarCustomSpeed, trackBarCustomSpeed.Value.ToString());
+        }
+
+        private void trackBarCustomSpeed_MouseDown(object sender, MouseEventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarCustomSpeed, trackBarCustomSpeed.Value.ToString());
+        }
+
+        private void trackBarCustomSpeed_MouseHover(object sender, EventArgs e)
+        {
+            toolTip1.SetToolTip(trackBarCustomSpeed, trackBarCustomSpeed.Value.ToString());
         }
         #endregion
 
@@ -3643,6 +3670,10 @@ namespace Vixen_Messaging
             MessageBox.Show(@"All Settings, Whitelist, Blacklist and Messagelists have been saved.");
         }
 
+        private void trackBarCustomSpeed_MouseLeave(object sender, EventArgs e)
+        {
+            CustomMessageUpdate();
+        }
     }
 }
 #endregion
