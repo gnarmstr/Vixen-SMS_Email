@@ -35,11 +35,23 @@ namespace Vixen_Messaging
 
             public static List<string> ListLine4 = new List<string>();
 
+			public static List<int> Line1Colour = new List<int>();
+
+			public static List<int> Line2Colour = new List<int>();
+
+			public static List<int> Line3Colour = new List<int>();
+
+			public static List<int> Line4Colour = new List<int>();
+
             public static List<string> CountDirection = new List<string>();
+
+			public static List<int> MessageColourOption = new List<int>();
 
             public static List<int> Position = new List<int>();
 
             public static List<bool> MessageEnabled = new List<bool>();
+
+			public static List<bool> CheckBoxCentreStop = new List<bool>();
 
             public static List<decimal> CustomMsgLength = new List<decimal>();
 

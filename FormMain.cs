@@ -1,10 +1,4 @@
-﻿using System.CodeDom;
-using System.ComponentModel;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
-
-#region System modules
+﻿#region System modules
 
 using System;
 using System.Collections.Generic;
@@ -334,7 +328,7 @@ namespace Vixen_Messaging
             TwinkleColour4.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwinkleColour4", -32640)));
             TwinkleColour5.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwinkleColour5", -32513)));
             TwinkleColour6.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwinkleColour6", -16711681)));
-            checkBoxTwinkleColour1.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour1", true);
+			checkBoxTwinkleColour1.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour1", true);
             checkBoxTwinkleColour2.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour2", false);
             checkBoxTwinkleColour3.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour3", false);
             checkBoxTwinkleColour4.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour4", false);
@@ -396,7 +390,8 @@ namespace Vixen_Messaging
             var dateCountDownString = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString", "25/12/15");
             dateCountDown.Value = Convert.ToDateTime(dateCountDownString);
             checkBoxVixenControl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", false);
-            GlobalVar.MessageNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MessageNumber", 0);
+			messageColourOption.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "messageColourOption", "Single");
+			GlobalVar.MessageNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MessageNumber", 0);
             comboBoxName.Items.Clear();
             var i = 0;
             var line = "ListLine1-";
@@ -411,7 +406,15 @@ namespace Vixen_Messaging
                     GlobalVar.ListLine3.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
                     line = "ListLine4-";
                     GlobalVar.ListLine4.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
-                    line = "MessageDirection";
+					line = "Line1Colour";
+					GlobalVar.Line1Colour.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, -16776961));
+					line = "Line2Colour";
+					GlobalVar.Line2Colour.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, -65536));
+					line = "Line3Colour";
+					GlobalVar.Line3Colour.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, -16711936));
+					line = "Line4Colour";
+					GlobalVar.Line4Colour.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, -32640));
+					line = "MessageDirection";
                     GlobalVar.CountDirection.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
                     line = "MessagePosition";
                     GlobalVar.Position.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, 65));
@@ -421,9 +424,13 @@ namespace Vixen_Messaging
                     GlobalVar.CustomFont.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, "Arial Narrow"));
                     line = "CustomFontSize";
                     GlobalVar.CustomFontSize.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, "10"));
-                    line = "MessageName";
+					line = "MessageColourOption";
+					GlobalVar.MessageColourOption.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, 1));
+					line = "MessageName";
                     comboBoxName.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
-                    line = "CustomSpeed";
+					line = "CenterStop";
+					GlobalVar.CheckBoxCentreStop.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, false));
+					line = "CustomSpeed";
                     GlobalVar.TrackBarCustomSpeed.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, 5));
                     line = "CustomMsgLength";
                     GlobalVar.CustomMsgLength.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, 10));
@@ -1253,6 +1260,8 @@ namespace Vixen_Messaging
 
             if (formMessages.textBoxName.Text != "")
             {
+				GlobalVar.MessageColourOption.Add(formMessages.messageColourOption.SelectedIndex);
+				messageColourOption.SelectedIndex = formMessages.messageColourOption.SelectedIndex;
                 GlobalVar.ListLine1.Add(formMessages.textBoxLine1.Text);
                 textBoxLine1.Text = formMessages.textBoxLine1.Text;
                 GlobalVar.ListLine2.Add(formMessages.textBoxLine2.Text);
@@ -1261,6 +1270,14 @@ namespace Vixen_Messaging
                 textBoxLine3.Text = formMessages.textBoxLine3.Text;
                 GlobalVar.ListLine4.Add(formMessages.textBoxLine4.Text);
                 textBoxLine4.Text = formMessages.textBoxLine4.Text;
+				line1Colour.BackColor = Color.FromArgb(Convert.ToInt32(-16776961));
+				GlobalVar.Line1Colour.Add(Convert.ToInt32(-16776961));
+				line2Colour.BackColor = Color.FromArgb(Convert.ToInt32(-65536));
+				GlobalVar.Line2Colour.Add(Convert.ToInt32(-65536));
+				line3Colour.BackColor = Color.FromArgb(Convert.ToInt32(-16711936));
+				GlobalVar.Line3Colour.Add(Convert.ToInt32(-16711936));
+				line4Colour.BackColor = Color.FromArgb(Convert.ToInt32(-32640));
+				GlobalVar.Line4Colour.Add(Convert.ToInt32(-32640));
                 GlobalVar.CountDirection.Add(formMessages.comboBoxCountDownDirection.Text);
                 comboBoxCountDownDirection.Text = formMessages.comboBoxCountDownDirection.Text;
                 GlobalVar.Position.Add(formMessages.trackBarCountDownPosition.Value);
@@ -1273,6 +1290,8 @@ namespace Vixen_Messaging
                 textBoxCustomFontSize.Text = formMessages.textBoxCustomFontSize.Text;
                 GlobalVar.TrackBarCustomSpeed.Add(formMessages.trackBarCustomSpeed.Value);
                 trackBarCustomSpeed.Value = formMessages.trackBarCustomSpeed.Value;
+				GlobalVar.CheckBoxCentreStop.Add(formMessages.checkBoxCentreStop.Checked);
+				checkBoxCentreStop.Checked = formMessages.checkBoxCentreStop.Checked;
                 GlobalVar.CustomMsgLength.Add(formMessages.CustomMsgLength.Value);
                 CustomMsgLength.Value = formMessages.CustomMsgLength.Value;
                 comboBoxName.Items.Add(formMessages.textBoxName.Text);
@@ -1292,6 +1311,10 @@ namespace Vixen_Messaging
             textBoxLine2.Text = GlobalVar.ListLine2[selectedItem];
             textBoxLine3.Text = GlobalVar.ListLine3[selectedItem];
             textBoxLine4.Text = GlobalVar.ListLine4[selectedItem];
+			line1Colour.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.Line1Colour[selectedItem]));
+			line2Colour.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.Line2Colour[selectedItem]));
+			line3Colour.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.Line3Colour[selectedItem]));
+			line4Colour.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.Line4Colour[selectedItem]));
             comboBoxCountDownDirection.Text = GlobalVar.CountDirection[selectedItem];
             trackBarCountDownPosition.Value = GlobalVar.Position[selectedItem];
             checkBoxMessageEnabled.Checked = GlobalVar.MessageEnabled[selectedItem];
@@ -1299,6 +1322,8 @@ namespace Vixen_Messaging
             textBoxCustomFontSize.Text = GlobalVar.CustomFontSize[selectedItem];
             trackBarCustomSpeed.Value = GlobalVar.TrackBarCustomSpeed[selectedItem];
             CustomMsgLength.Value = GlobalVar.CustomMsgLength[selectedItem];
+			checkBoxCentreStop.Checked = GlobalVar.CheckBoxCentreStop[selectedItem];
+			messageColourOption.SelectedIndex = GlobalVar.MessageColourOption[selectedItem];
         }
 
         private void buttonRemoveMessage_Click(object sender, EventArgs e)
@@ -1309,6 +1334,10 @@ namespace Vixen_Messaging
                 GlobalVar.ListLine2.RemoveAt(comboBoxName.SelectedIndex);
                 GlobalVar.ListLine3.RemoveAt(comboBoxName.SelectedIndex);
                 GlobalVar.ListLine4.RemoveAt(comboBoxName.SelectedIndex);
+				GlobalVar.Line1Colour.RemoveAt(comboBoxName.SelectedIndex);
+				GlobalVar.Line2Colour.RemoveAt(comboBoxName.SelectedIndex);
+				GlobalVar.Line3Colour.RemoveAt(comboBoxName.SelectedIndex);
+				GlobalVar.Line4Colour.RemoveAt(comboBoxName.SelectedIndex);
                 GlobalVar.CountDirection.RemoveAt(comboBoxName.SelectedIndex);
                 GlobalVar.Position.RemoveAt(comboBoxName.SelectedIndex);
                 GlobalVar.MessageEnabled.RemoveAt(comboBoxName.SelectedIndex);
@@ -1316,6 +1345,8 @@ namespace Vixen_Messaging
                 GlobalVar.CustomFontSize.RemoveAt(comboBoxName.SelectedIndex);
                 GlobalVar.CustomMsgLength.RemoveAt(comboBoxName.SelectedIndex);
                 GlobalVar.TrackBarCustomSpeed.RemoveAt(comboBoxName.SelectedIndex);
+				GlobalVar.CheckBoxCentreStop.RemoveAt(comboBoxName.SelectedIndex);
+				GlobalVar.MessageColourOption.RemoveAt(comboBoxName.SelectedIndex);
                 comboBoxName.Items.RemoveAt(comboBoxName.SelectedIndex);
                 if (comboBoxName.Items.Count > 0)
                 {
@@ -1324,6 +1355,10 @@ namespace Vixen_Messaging
                     textBoxLine2.Text = GlobalVar.ListLine2[0];
                     textBoxLine3.Text = GlobalVar.ListLine3[0];
                     textBoxLine4.Text = GlobalVar.ListLine4[0];
+					line1Colour.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.Line1Colour[0]));
+					line2Colour.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.Line2Colour[0]));
+					line3Colour.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.Line3Colour[0]));
+					line4Colour.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.Line4Colour[0]));
                     comboBoxCountDownDirection.Text = GlobalVar.CountDirection[0];
                     trackBarCountDownPosition.Value = GlobalVar.Position[0];
                     checkBoxMessageEnabled.Checked = GlobalVar.MessageEnabled[0];
@@ -1331,6 +1366,8 @@ namespace Vixen_Messaging
                     textBoxCustomFontSize.Text = GlobalVar.CustomFontSize[0];
                     CustomMsgLength.Value = GlobalVar.CustomMsgLength[0];
                     trackBarCustomSpeed.Value = GlobalVar.TrackBarCustomSpeed[0];
+	                checkBoxCentreStop.Checked = GlobalVar.CheckBoxCentreStop[0];
+					messageColourOption.SelectedIndex = GlobalVar.MessageColourOption[0];
                 }
                 else
                 {
@@ -1346,6 +1383,12 @@ namespace Vixen_Messaging
                     textBoxCustomFontSize.Text = "";
                     CustomMsgLength.Value = 10;
                     trackBarCustomSpeed.Value = 5;
+	                checkBoxCentreStop.Checked = false;
+					line1Colour.BackColor = Color.FromArgb(-16776961);
+					line2Colour.BackColor = Color.FromArgb(-65536);
+					line3Colour.BackColor = Color.FromArgb(-16711936);
+					line4Colour.BackColor = Color.FromArgb(-32640);
+	                messageColourOption.SelectedIndex = 1;
                 }
             }
         }
@@ -1390,9 +1433,13 @@ namespace Vixen_Messaging
             if (comboBoxName.Items.Count != 0)
             {
                 GlobalVar.ListLine1[comboBoxName.SelectedIndex] = textBoxLine1.Text;
-                GlobalVar.ListLine2[comboBoxName.SelectedIndex] = textBoxLine2.Text;
-                GlobalVar.ListLine3[comboBoxName.SelectedIndex] = textBoxLine3.Text;
-                GlobalVar.ListLine4[comboBoxName.SelectedIndex] = textBoxLine4.Text;
+				GlobalVar.ListLine2[comboBoxName.SelectedIndex] = textBoxLine2.Text;
+				GlobalVar.ListLine3[comboBoxName.SelectedIndex] = textBoxLine3.Text;
+				GlobalVar.ListLine4[comboBoxName.SelectedIndex] = textBoxLine4.Text;
+				GlobalVar.Line1Colour[comboBoxName.SelectedIndex] = line1Colour.BackColor.ToArgb();
+				GlobalVar.Line2Colour[comboBoxName.SelectedIndex] = line2Colour.BackColor.ToArgb();
+				GlobalVar.Line3Colour[comboBoxName.SelectedIndex] = line3Colour.BackColor.ToArgb();
+				GlobalVar.Line4Colour[comboBoxName.SelectedIndex] = line4Colour.BackColor.ToArgb();
                 GlobalVar.CountDirection[comboBoxName.SelectedIndex] = comboBoxCountDownDirection.Text;
                 GlobalVar.Position[comboBoxName.SelectedIndex] = trackBarCountDownPosition.Value;
                 GlobalVar.MessageEnabled[comboBoxName.SelectedIndex] = checkBoxMessageEnabled.Checked;
@@ -1400,6 +1447,8 @@ namespace Vixen_Messaging
                 GlobalVar.CustomFontSize[comboBoxName.SelectedIndex] = textBoxCustomFontSize.Text;
                 GlobalVar.CustomMsgLength[comboBoxName.SelectedIndex] = CustomMsgLength.Value;
                 GlobalVar.TrackBarCustomSpeed[comboBoxName.SelectedIndex] = trackBarCustomSpeed.Value;
+				GlobalVar.CheckBoxCentreStop[comboBoxName.SelectedIndex] = checkBoxCentreStop.Checked;
+				GlobalVar.MessageColourOption[comboBoxName.SelectedIndex] = messageColourOption.SelectedIndex;
             }
         }
 
@@ -1788,6 +1837,8 @@ namespace Vixen_Messaging
             var textColorNum = Convert.ToUInt32(hexValue, 16);
             var i = 0;
             var textDirection = 0;
+	        string hexMultiValue;
+	        UInt32 multilineColour;
             if (msg == "play counter" & checkBoxCountDownEnable.Checked)
             {
                 var line1 = textBoxLine1.Text;
@@ -1820,7 +1871,52 @@ namespace Vixen_Messaging
                 fileText1 = fileText1.Replace("FontName_Change", textBoxCustomFont.Text);
                 fileText1 = fileText1.Replace("FontSize_Change", textBoxCustomFontSize.Text);
                 fileText1 = fileText1.Replace("Speed_Change", trackBarCustomSpeed.Value.ToString());
-            }
+				fileText1 = fileText1.Replace("CenterStop_Change", checkBoxCentreStop.Checked.ToString().ToLower());
+	            
+	            switch (messageColourOption.Text)
+	            {
+		            case "Single":
+						hexMultiValue = line1Colour.BackColor.A.ToString("x2") + line1Colour.BackColor.R.ToString("x2") + line1Colour.BackColor.G.ToString("x2") + line1Colour.BackColor.B.ToString("x2");
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change1", multilineColour.ToString());
+						fileText1 = fileText1.Replace("Colour_Change2", multilineColour.ToString());
+						fileText1 = fileText1.Replace("Colour_Change3", multilineColour.ToString());
+						fileText1 = fileText1.Replace("Colour_Change4", multilineColour.ToString());
+						break;
+					case "Multi":
+						hexMultiValue = line1Colour.BackColor.A.ToString("x2") + line1Colour.BackColor.R.ToString("x2") + line1Colour.BackColor.G.ToString("x2") + line1Colour.BackColor.B.ToString("x2");
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change1", multilineColour.ToString());
+						hexMultiValue = line2Colour.BackColor.A.ToString("x2") + line2Colour.BackColor.R.ToString("x2") + line2Colour.BackColor.G.ToString("x2") + line2Colour.BackColor.B.ToString("x2");
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change2", multilineColour.ToString());
+						hexMultiValue = line2Colour.BackColor.A.ToString("x2") + line3Colour.BackColor.R.ToString("x2") + line3Colour.BackColor.G.ToString("x2") + line3Colour.BackColor.B.ToString("x2");
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change3", multilineColour.ToString());
+						hexMultiValue = line2Colour.BackColor.A.ToString("x2") + line4Colour.BackColor.R.ToString("x2") + line4Colour.BackColor.G.ToString("x2") + line4Colour.BackColor.B.ToString("x2");
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change4", multilineColour.ToString());
+			            break;
+					case "Random":
+						RandomColourSelect(out hexMultiValue);
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change1", multilineColour.ToString());
+						Thread.Sleep(300);
+						RandomColourSelect(out hexMultiValue);
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change2", multilineColour.ToString());
+						Thread.Sleep(300);
+						RandomColourSelect(out hexMultiValue);
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change3", multilineColour.ToString());
+						Thread.Sleep(300);
+						RandomColourSelect(out hexMultiValue);
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change4", multilineColour.ToString());
+						Thread.Sleep(300);
+			            break;
+	            }
+			}
             else
             {
                 CountDown(msg, out msg);
@@ -1914,6 +2010,9 @@ namespace Vixen_Messaging
             fileText1 = fileText1.Replace("FontSize_Change", textBoxFontSize.Text);
             
             fileText1 = fileText1.Replace("Colour_Change1", textColorNum.ToString());
+			fileText1 = fileText1.Replace("Colour_Change2", textColorNum.ToString());
+			fileText1 = fileText1.Replace("Colour_Change3", textColorNum.ToString());
+			fileText1 = fileText1.Replace("Colour_Change4", textColorNum.ToString());
             fileText = fileText1;
         }
 #endregion
@@ -2256,7 +2355,7 @@ namespace Vixen_Messaging
         {
             colorDialog1.ShowDialog();
 
-            var btn = new Button[] { TextColor1, TextColor1, TextColor2, TextColor3, TextColor4, TextColor5, TextColor6, TextColor7, TextColor8, TextColor9, TextColor10, SingleCol1, SnowFlakeColour1, SnowFlakeColour2, SnowFlakeColour3, SnowFlakeColour4, SnowFlakeColour5, SnowFlakeColour6, MeteorColour1, MeteorColour2, MeteorColour3, MeteorColour4, MeteorColour5, MeteorColour6, TwinkleColour1, TwinkleColour2, TwinkleColour3, TwinkleColour4, TwinkleColour5, TwinkleColour6 };
+			var btn = new Button[] { TextColor1, TextColor1, TextColor2, TextColor3, TextColor4, TextColor5, TextColor6, TextColor7, TextColor8, TextColor9, TextColor10, SingleCol1, SnowFlakeColour1, SnowFlakeColour2, SnowFlakeColour3, SnowFlakeColour4, SnowFlakeColour5, SnowFlakeColour6, MeteorColour1, MeteorColour2, MeteorColour3, MeteorColour4, MeteorColour5, MeteorColour6, TwinkleColour1, TwinkleColour2, TwinkleColour3, TwinkleColour4, TwinkleColour5, TwinkleColour6, line1Colour, line2Colour, line3Colour, line4Colour };
             btn[colNum].BackColor = colorDialog1.Color;
             SeqSave();
         }
@@ -2265,13 +2364,12 @@ namespace Vixen_Messaging
         #region Colour Selection
         public void ColourSelect(out string hexValue)
         {
-            
             if (checkBoxRandomCol.Checked)
             {
                 do
                 {
                     var random = new Random(); 
-                    var randomCol = random.Next(1, 10);
+                    var randomCol = random.Next(0, 10);
                     var btn = new Button[] { TextColor1, TextColor2, TextColor3, TextColor4, TextColor5, TextColor6, TextColor7, TextColor8, TextColor9, TextColor10 };
                     hexValue = btn[randomCol].BackColor.A.ToString("x2") + btn[randomCol].BackColor.R.ToString("x2") + btn[randomCol].BackColor.G.ToString("x2") + btn[randomCol].BackColor.B.ToString("x2");
                 } while (hexValue == "ff000000");
@@ -2282,6 +2380,17 @@ namespace Vixen_Messaging
                 hexValue = SingleCol1.BackColor.A.ToString("x2") + SingleCol1.BackColor.R.ToString("x2") + SingleCol1.BackColor.G.ToString("x2") + SingleCol1.BackColor.B.ToString("x2");          
             }
         }
+
+		private void RandomColourSelect(out string hexValue)
+	    {
+			do
+			{
+				var random = new Random();
+				var randomCol = random.Next(0, 10);
+				var btn = new Button[] { TextColor1, TextColor2, TextColor3, TextColor4, TextColor5, TextColor6, TextColor7, TextColor8, TextColor9, TextColor10 };
+				hexValue = btn[randomCol].BackColor.A.ToString("x2") + btn[randomCol].BackColor.R.ToString("x2") + btn[randomCol].BackColor.G.ToString("x2") + btn[randomCol].BackColor.B.ToString("x2");
+			} while (hexValue == "ff000000");
+	    }
 #endregion
 
 #endregion
@@ -3126,7 +3235,7 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour4", checkBoxTwinkleColour4.Checked);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour5", checkBoxTwinkleColour5.Checked);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour6", checkBoxTwinkleColour6.Checked);
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextPosition", trackBarTextPosition.Value.ToString());
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextPosition", trackBarTextPosition.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextSpeed", trackBarTextSpeed.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarSpeedSnowFlakes", trackBarSpeedSnowFlakes.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarSpeedMeteors", trackBarSpeedMeteors.Value.ToString());
@@ -3181,7 +3290,8 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords", numericUpDownMaxWords.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCountDownEnable", checkBoxCountDownEnable.Checked.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", checkBoxVixenControl.Checked.ToString());
-            GlobalVar.MessageNumber = GlobalVar.ListLine1.Count(); 
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "messageColourOption", messageColourOption.Text);
+			GlobalVar.MessageNumber = GlobalVar.ListLine1.Count(); 
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "MessageNumber", GlobalVar.MessageNumber.ToString());
             var i = 0;
             var line = "ListLine1-";
@@ -3193,20 +3303,32 @@ namespace Vixen_Messaging
                 line = "ListLine3-";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.ListLine3[i]);
                 line = "ListLine4-";
-                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.ListLine4[i]);
-                line = "MessageDirection";
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.ListLine4[i]);
+				line = "Line1Colour";
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.Line1Colour[i]);
+				line = "Line2Colour";
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.Line2Colour[i]);
+				line = "Line3Colour";
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.Line3Colour[i]);
+				line = "Line4Colour";
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.Line4Colour[i]);
+				line = "MessageDirection";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CountDirection[i]);
                 line = "MessagePosition";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.Position[i]);
                 line = "MessageEnabled";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.MessageEnabled[i]);
-                line = "MessageName";
+				line = "MessageColourOption";
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.MessageColourOption[i]); 
+				line = "MessageName";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, Convert.ToString(comboBoxName.Items[i]));
                 line = "CustomFont"; 
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomFont[i]);
                 line = "CustomSpeed";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.TrackBarCustomSpeed[i]);
-                line = "CustomFontSize";
+				line = "CenterStop";
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CheckBoxCentreStop[i]);
+				line = "CustomFontSize";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomFontSize[i]);
                 line = "CustomMsgLength";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, Convert.ToString(GlobalVar.CustomMsgLength[i]));
@@ -3673,7 +3795,61 @@ namespace Vixen_Messaging
         private void trackBarCustomSpeed_MouseLeave(object sender, EventArgs e)
         {
             CustomMessageUpdate();
-        }
+		}
+
+		private void line1Colour_Click(object sender, EventArgs e)
+		{
+			int colNum = 30;
+			ColPal(colNum);
+		}
+
+		private void line2Colour_Click(object sender, EventArgs e)
+		{
+			int colNum = 31;
+			ColPal(colNum);
+		}
+
+		private void line3Colour_Click(object sender, EventArgs e)
+		{
+			int colNum = 32;
+			ColPal(colNum);
+		}
+
+		private void line4Colour_Click(object sender, EventArgs e)
+		{
+			int colNum = 33;
+			ColPal(colNum);
+		}
+
+		private void messageColourOption_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			switch (messageColourOption.Text)
+			{
+				case "Single":
+					line1Colour.Enabled = true;
+					line2Colour.Visible = false;
+					line3Colour.Visible = false;
+					line4Colour.Visible = false;
+					break;
+				case "Multi":
+					line1Colour.Visible = true;
+					line2Colour.Visible = true;
+					line3Colour.Visible = true;
+					line4Colour.Visible = true;
+					break;
+				case "Random":
+					line1Colour.Visible = false;
+					line2Colour.Visible = false;
+					line3Colour.Visible = false;
+					line4Colour.Visible = false;
+					break;
+			}
+		}
+
+		private void checkBoxCentreStop_Leave(object sender, EventArgs e)
+		{
+			CustomMessageUpdate();
+		}
     }
 }
 #endregion
