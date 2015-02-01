@@ -12,7 +12,7 @@ namespace Vixen_Messaging
             if (ActiveForm != null)
                 Location = new Point(ActiveForm.Location.X + ActiveForm.MaximumSize.Width, ActiveForm.Location.Y);
             InitializeComponent();
-            ClientSize = new Size(784, 1091);
+            ClientSize = new Size(806, 1091);
         }
 
         private void Help_Load(object sender, EventArgs e)

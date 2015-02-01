@@ -157,13 +157,17 @@ namespace Vixen_Messaging
                 numericUpDownMultiLine.Enabled = true;
             }
 
+			ColourVisible();
+
             //Changes Position and Size of Groupboxs in the Sequence Tab
             groupBoxSeqControl.Location = new Point(6, 35);
             tabControlSequence.Size = new Size(555, 185);
             groupBoxSeqControl.Size = new Size(560, 210);
             label26.Location = new Point(60, 255);
-            richTextBoxLog2.Location = new Point(6, 295);
-            richTextBoxLog2.Size = new Size(560, 270);
+			groupBoxLog.Location = new Point(4, 280);
+			groupBoxLog.Size = new Size(585, 290);
+            richTextBoxLog2.Location = new Point(6, 20);
+            richTextBoxLog2.Size = new Size(575, 265);
             #endregion
 
             #region Setup Button images and Icons
@@ -272,7 +276,7 @@ namespace Vixen_Messaging
             checkBoxBlacklist.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxBlack_list", true);
             textBoxNodeId.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxNodeId", "");
             checkBoxDisableSeq.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxDisableSeq", false);
-            checkBoxRandomCol.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandomCol", true);
+			incomingMessageColourOption.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "incomingMessageColourOption", "Random");
             EffectType.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "EffectType", 2);
             MaxSnowFlake.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MaxSnowFlake", 5);
             EffectTime.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "EffectTime", 15);
@@ -297,7 +301,6 @@ namespace Vixen_Messaging
             TextColor8.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor8", -8372160)));
             TextColor9.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor9", -65536)));
             TextColor10.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor10", -8388353)));
-            SingleCol1.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SingleCol1", -16776961)));
             SnowFlakeColour1.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour1", -16776961)));
             SnowFlakeColour2.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour2", -65536)));
             SnowFlakeColour3.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour3", -16711936)));
@@ -387,7 +390,7 @@ namespace Vixen_Messaging
             numericUpDownMultiLine.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMultiLine", 1);
             numericUpDownMaxWords.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords", 0);
             checkBoxCountDownEnable.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCountDownEnable", false);
-            var dateCountDownString = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString", "25/12/15");
+			var dateCountDownString = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString", "25/12/15");
             dateCountDown.Value = Convert.ToDateTime(dateCountDownString);
             checkBoxVixenControl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", false);
 			messageColourOption.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "messageColourOption", "Single");
@@ -425,7 +428,9 @@ namespace Vixen_Messaging
                     line = "CustomFontSize";
                     GlobalVar.CustomFontSize.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, "10"));
 					line = "MessageColourOption";
-					GlobalVar.MessageColourOption.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, 1));
+					GlobalVar.MessageColourOption.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, "Multi"));
+					line = "MessageSeqSel";
+					GlobalVar.CustomMessageSeqSel.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, "Automatically Assigned"));
 					line = "MessageName";
                     comboBoxName.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
 					line = "CenterStop";
@@ -897,10 +902,10 @@ namespace Vixen_Messaging
 
         private void buttonPlay_Click(object sender, EventArgs e)
         {
-            GlobalVar.PlayCustomMessage = true;
+      //      GlobalVar.PlayCustomMessage = true;
             Stop_Vixen();
             StopSequence();
-            if (timerCheckVixenEnabled.Enabled)
+			if (!GlobalVar.PlayCustomMessage)
             {
                 PlayCustomMessage();
                 Start_Vixen();
@@ -1110,8 +1115,8 @@ namespace Vixen_Messaging
             }
             if (smsMessage.ToLower().Contains("randomcolour"))
             {
-                checkBoxRandomCol.Checked = !checkBoxRandomCol.Checked;
-                messageBody = messageBody + "Random Text colour is enabled = " + checkBoxRandomCol.Checked + "\n";
+	            incomingMessageColourOption.Text = "Random";
+				messageBody = messageBody + "Random Text colour is enabled = " + incomingMessageColourOption.Text + "\n";
             }
             if (smsMessage.ToLower().Contains("randomsequence"))
             {
@@ -1260,7 +1265,9 @@ namespace Vixen_Messaging
 
             if (formMessages.textBoxName.Text != "")
             {
-				GlobalVar.MessageColourOption.Add(formMessages.messageColourOption.SelectedIndex);
+				GlobalVar.CustomMessageSeqSel.Add(formMessages.customMessageSeqSel.Text);
+				customMessageSeqSel.SelectedIndex = formMessages.customMessageSeqSel.SelectedIndex;
+				GlobalVar.MessageColourOption.Add(formMessages.messageColourOption.Text);
 				messageColourOption.SelectedIndex = formMessages.messageColourOption.SelectedIndex;
                 GlobalVar.ListLine1.Add(formMessages.textBoxLine1.Text);
                 textBoxLine1.Text = formMessages.textBoxLine1.Text;
@@ -1323,7 +1330,8 @@ namespace Vixen_Messaging
             trackBarCustomSpeed.Value = GlobalVar.TrackBarCustomSpeed[selectedItem];
             CustomMsgLength.Value = GlobalVar.CustomMsgLength[selectedItem];
 			checkBoxCentreStop.Checked = GlobalVar.CheckBoxCentreStop[selectedItem];
-			messageColourOption.SelectedIndex = GlobalVar.MessageColourOption[selectedItem];
+			messageColourOption.Text = GlobalVar.MessageColourOption[selectedItem];
+			customMessageSeqSel.Text = GlobalVar.CustomMessageSeqSel[selectedItem];
         }
 
         private void buttonRemoveMessage_Click(object sender, EventArgs e)
@@ -1347,6 +1355,7 @@ namespace Vixen_Messaging
                 GlobalVar.TrackBarCustomSpeed.RemoveAt(comboBoxName.SelectedIndex);
 				GlobalVar.CheckBoxCentreStop.RemoveAt(comboBoxName.SelectedIndex);
 				GlobalVar.MessageColourOption.RemoveAt(comboBoxName.SelectedIndex);
+				GlobalVar.CustomMessageSeqSel.RemoveAt(comboBoxName.SelectedIndex);
                 comboBoxName.Items.RemoveAt(comboBoxName.SelectedIndex);
                 if (comboBoxName.Items.Count > 0)
                 {
@@ -1367,7 +1376,9 @@ namespace Vixen_Messaging
                     CustomMsgLength.Value = GlobalVar.CustomMsgLength[0];
                     trackBarCustomSpeed.Value = GlobalVar.TrackBarCustomSpeed[0];
 	                checkBoxCentreStop.Checked = GlobalVar.CheckBoxCentreStop[0];
-					messageColourOption.SelectedIndex = GlobalVar.MessageColourOption[0];
+					messageColourOption.Text = GlobalVar.MessageColourOption[0];
+					customMessageSeqSel.Text = GlobalVar.CustomMessageSeqSel[0];
+
                 }
                 else
                 {
@@ -1389,6 +1400,7 @@ namespace Vixen_Messaging
 					line3Colour.BackColor = Color.FromArgb(-16711936);
 					line4Colour.BackColor = Color.FromArgb(-32640);
 	                messageColourOption.SelectedIndex = 1;
+					customMessageSeqSel.SelectedIndex = 1;;
                 }
             }
         }
@@ -1448,8 +1460,9 @@ namespace Vixen_Messaging
                 GlobalVar.CustomMsgLength[comboBoxName.SelectedIndex] = CustomMsgLength.Value;
                 GlobalVar.TrackBarCustomSpeed[comboBoxName.SelectedIndex] = trackBarCustomSpeed.Value;
 				GlobalVar.CheckBoxCentreStop[comboBoxName.SelectedIndex] = checkBoxCentreStop.Checked;
-				GlobalVar.MessageColourOption[comboBoxName.SelectedIndex] = messageColourOption.SelectedIndex;
-            }
+				GlobalVar.MessageColourOption[comboBoxName.SelectedIndex] = messageColourOption.Text;
+				GlobalVar.CustomMessageSeqSel[comboBoxName.SelectedIndex] = customMessageSeqSel.Text;
+			}
         }
 
         private void checkBoxEmail_CheckedChanged(object sender, EventArgs e)
@@ -1462,6 +1475,7 @@ namespace Vixen_Messaging
 
         private void buttonCustomFont_Click(object sender, EventArgs e)
         {
+			fontDialog1.Font = new Font(textBoxCustomFont.Text, (int)Math.Round(double.Parse(textBoxCustomFontSize.Text)));
             if (fontDialog1.ShowDialog() != DialogResult.Cancel)
             {
                 textBoxCustomFont.Text = string.Format(fontDialog1.Font.Name);
@@ -1590,56 +1604,73 @@ namespace Vixen_Messaging
 
                         string selectedSeq;
                         //Random or selected Selection
-                        if (checkBoxDisableSeq.Checked)
-                        {
-                            selectedSeq = "None";
-                            fileText = fileText.Replace("EffectTime_Change", "0"); //Sequence time
-                        }
-                        else
-                        {
-                            fileText = fileText.Replace("EffectTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Sequence time
-                            if (checkBoxRandomSeqSelection.Checked)
-                            {
-                                var index = 0;
-                                var empty = 0;
-                                var randomString = new string[6];
-                                var seqRandom = new CheckBox[]
-                                {checkBoxRandom1, checkBoxRandom2, checkBoxRandom3, checkBoxRandom4, checkBoxRandom5, checkBoxRandom6};
-                                string[] mystrings =
-                                {
-                                    tabPageSnowFlake.Text, tabPageFire.Text, tabPageMeteors.Text,
-                                    tabPageTwinkles.Text, tabPageMovie.Text, tabPageGlediator.Text
-                                };
-                                do
-                                {
-                                    if (seqRandom[index].Checked)
-                                    {
-                                        randomString[index] = mystrings[index];
-                                    }
-                                    else
-                                    {
-                                        randomString[index] = "";
-                                        empty++;
-                                    }
-                                } while (index++ < 5);
+						if (msg == "play counter" & customMessageSeqSel.Text != @"Automatically Assigned")
+						{
+							selectedSeq = customMessageSeqSel.Text;
+							if (customMessageSeqSel.Text == "None")
+							{
+								fileText = fileText.Replace("EffectTime_Change", "0"); //Sequence time
+							}
+							fileText = fileText.Replace("EffectTime_Change", GlobalVar.SeqIntervalTime.ToString());
+						}
+	                    else
+	                    {
+		                    if (checkBoxDisableSeq.Checked)
+		                    {
+			                    selectedSeq = "None";
+			                    fileText = fileText.Replace("EffectTime_Change", "0"); //Sequence time
+		                    }
+		                    else
+		                    {
+			                    fileText = fileText.Replace("EffectTime_Change", GlobalVar.SeqIntervalTime.ToString());
+				                    //Sequence time
+			                    if (checkBoxRandomSeqSelection.Checked)
+			                    {
+				                    var index = 0;
+				                    var empty = 0;
+				                    var randomString = new string[6];
+				                    var seqRandom = new CheckBox[]
+				                    {
+					                    checkBoxRandom1, checkBoxRandom2, checkBoxRandom3, checkBoxRandom4, checkBoxRandom5,
+					                    checkBoxRandom6
+				                    };
+				                    string[] mystrings =
+				                    {
+					                    tabPageSnowFlake.Text, tabPageFire.Text, tabPageMeteors.Text,
+					                    tabPageTwinkles.Text, tabPageMovie.Text, tabPageGlediator.Text
+				                    };
+				                    do
+				                    {
+					                    if (seqRandom[index].Checked)
+					                    {
+						                    randomString[index] = mystrings[index];
+					                    }
+					                    else
+					                    {
+						                    randomString[index] = "";
+						                    empty++;
+					                    }
+				                    } while (index++ < 5);
 
-                                do
-                                {
-                                    var randomseq = new Random();
-                                    selectedSeq = randomString[randomseq.Next(randomString.Length)];
-                                    if (empty == 6)
-                                    {
-                                        selectedSeq = "None";
-                                    }
-                                } while (selectedSeq == "");
-                            }
-                            else
-                            {
-                                selectedSeq = tabControlEffects.SelectedTab.Text;
-                            }
-                        }
+				                    do
+				                    {
+					                    var randomseq = new Random();
+					                    selectedSeq = randomString[randomseq.Next(randomString.Length)];
+					                    if (empty == 6)
+					                    {
+						                    selectedSeq = "None";
+											fileText = fileText.Replace("EffectTime_Change", "0"); //Sequence time
+					                    }
+				                    } while (selectedSeq == "");
+			                    }
+			                    else
+			                    {
+				                    selectedSeq = tabControlEffects.SelectedTab.Text;
+			                    }
+		                    }
+	                    }
 
-                        var i = 1;
+	                    var i = 1;
                         //Select an Effect
                         switch (selectedSeq)
                         {
@@ -1831,12 +1862,14 @@ namespace Vixen_Messaging
     #region Write to Sequence File Text Settings
         private void TextSettings(string fileText1, string msg, out string fileText)
         {
-            //Text Colour Selection
-            String hexValue;
-            ColourSelect(out hexValue); //Colour Selection for Text. Random or Single
-            var textColorNum = Convert.ToUInt32(hexValue, 16);
+			var colourOption = new ComboBox[] {messageColourOption, incomingMessageColourOption};
+			var colourOption1 = new Button[] { line1Colour, TextColor1 };
+			var colourOption2 = new Button[] { line2Colour, TextColor2 };
+			var colourOption3 = new Button[] { line3Colour, TextColor3 };
+			var colourOption4 = new Button[] { line4Colour, TextColor4 };
             var i = 0;
             var textDirection = 0;
+	        int messageSelection;
 	        string hexMultiValue;
 	        UInt32 multilineColour;
             if (msg == "play counter" & checkBoxCountDownEnable.Checked)
@@ -1872,51 +1905,8 @@ namespace Vixen_Messaging
                 fileText1 = fileText1.Replace("FontSize_Change", textBoxCustomFontSize.Text);
                 fileText1 = fileText1.Replace("Speed_Change", trackBarCustomSpeed.Value.ToString());
 				fileText1 = fileText1.Replace("CenterStop_Change", checkBoxCentreStop.Checked.ToString().ToLower());
-	            
-	            switch (messageColourOption.Text)
-	            {
-		            case "Single":
-						hexMultiValue = line1Colour.BackColor.A.ToString("x2") + line1Colour.BackColor.R.ToString("x2") + line1Colour.BackColor.G.ToString("x2") + line1Colour.BackColor.B.ToString("x2");
-						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
-						fileText1 = fileText1.Replace("Colour_Change1", multilineColour.ToString());
-						fileText1 = fileText1.Replace("Colour_Change2", multilineColour.ToString());
-						fileText1 = fileText1.Replace("Colour_Change3", multilineColour.ToString());
-						fileText1 = fileText1.Replace("Colour_Change4", multilineColour.ToString());
-						break;
-					case "Multi":
-						hexMultiValue = line1Colour.BackColor.A.ToString("x2") + line1Colour.BackColor.R.ToString("x2") + line1Colour.BackColor.G.ToString("x2") + line1Colour.BackColor.B.ToString("x2");
-						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
-						fileText1 = fileText1.Replace("Colour_Change1", multilineColour.ToString());
-						hexMultiValue = line2Colour.BackColor.A.ToString("x2") + line2Colour.BackColor.R.ToString("x2") + line2Colour.BackColor.G.ToString("x2") + line2Colour.BackColor.B.ToString("x2");
-						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
-						fileText1 = fileText1.Replace("Colour_Change2", multilineColour.ToString());
-						hexMultiValue = line2Colour.BackColor.A.ToString("x2") + line3Colour.BackColor.R.ToString("x2") + line3Colour.BackColor.G.ToString("x2") + line3Colour.BackColor.B.ToString("x2");
-						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
-						fileText1 = fileText1.Replace("Colour_Change3", multilineColour.ToString());
-						hexMultiValue = line2Colour.BackColor.A.ToString("x2") + line4Colour.BackColor.R.ToString("x2") + line4Colour.BackColor.G.ToString("x2") + line4Colour.BackColor.B.ToString("x2");
-						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
-						fileText1 = fileText1.Replace("Colour_Change4", multilineColour.ToString());
-			            break;
-					case "Random":
-						RandomColourSelect(out hexMultiValue);
-						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
-						fileText1 = fileText1.Replace("Colour_Change1", multilineColour.ToString());
-						Thread.Sleep(300);
-						RandomColourSelect(out hexMultiValue);
-						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
-						fileText1 = fileText1.Replace("Colour_Change2", multilineColour.ToString());
-						Thread.Sleep(300);
-						RandomColourSelect(out hexMultiValue);
-						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
-						fileText1 = fileText1.Replace("Colour_Change3", multilineColour.ToString());
-						Thread.Sleep(300);
-						RandomColourSelect(out hexMultiValue);
-						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
-						fileText1 = fileText1.Replace("Colour_Change4", multilineColour.ToString());
-						Thread.Sleep(300);
-			            break;
-	            }
-			}
+	            messageSelection = 0;
+            }
             else
             {
                 CountDown(msg, out msg);
@@ -2000,6 +1990,7 @@ namespace Vixen_Messaging
                         break;
                 }
                 fileText1 = fileText1.Replace("TextPosition_Change", trackBarTextPosition.Value.ToString());
+				messageSelection = 1;
             }
             
             fileText1 = fileText1.Replace("TextDirection_Change", textDirection.ToString());
@@ -2009,10 +2000,50 @@ namespace Vixen_Messaging
             fileText1 = fileText1.Replace("FontName_Change", textBoxFont.Text);
             fileText1 = fileText1.Replace("FontSize_Change", textBoxFontSize.Text);
             
-            fileText1 = fileText1.Replace("Colour_Change1", textColorNum.ToString());
-			fileText1 = fileText1.Replace("Colour_Change2", textColorNum.ToString());
-			fileText1 = fileText1.Replace("Colour_Change3", textColorNum.ToString());
-			fileText1 = fileText1.Replace("Colour_Change4", textColorNum.ToString());
+            switch (colourOption[messageSelection].Text)
+	            {
+		            case "Single":
+						hexMultiValue = colourOption1[messageSelection].BackColor.A.ToString("x2") + colourOption1[messageSelection].BackColor.R.ToString("x2") + colourOption1[messageSelection].BackColor.G.ToString("x2") + colourOption1[messageSelection].BackColor.B.ToString("x2");
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change1", multilineColour.ToString());
+						fileText1 = fileText1.Replace("Colour_Change2", multilineColour.ToString());
+						fileText1 = fileText1.Replace("Colour_Change3", multilineColour.ToString());
+						fileText1 = fileText1.Replace("Colour_Change4", multilineColour.ToString());
+						break;
+					case "Multi":
+						hexMultiValue = colourOption1[messageSelection].BackColor.A.ToString("x2") + colourOption1[messageSelection].BackColor.R.ToString("x2") + colourOption1[messageSelection].BackColor.G.ToString("x2") + colourOption1[messageSelection].BackColor.B.ToString("x2");
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change1", multilineColour.ToString());
+						hexMultiValue = colourOption2[messageSelection].BackColor.A.ToString("x2") + colourOption2[messageSelection].BackColor.R.ToString("x2") + colourOption2[messageSelection].BackColor.G.ToString("x2") + colourOption2[messageSelection].BackColor.B.ToString("x2");
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change2", multilineColour.ToString());
+						hexMultiValue = colourOption3[messageSelection].BackColor.A.ToString("x2") + colourOption3[messageSelection].BackColor.R.ToString("x2") + colourOption3[messageSelection].BackColor.G.ToString("x2") + colourOption3[messageSelection].BackColor.B.ToString("x2");
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change3", multilineColour.ToString());
+						hexMultiValue = colourOption4[messageSelection].BackColor.A.ToString("x2") + colourOption4[messageSelection].BackColor.R.ToString("x2") + colourOption4[messageSelection].BackColor.G.ToString("x2") + colourOption4[messageSelection].BackColor.B.ToString("x2");
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change4", multilineColour.ToString());
+			            break;
+					case "Random":
+						RandomColourSelect(out hexMultiValue);
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change1", multilineColour.ToString());
+						Thread.Sleep(300);
+						RandomColourSelect(out hexMultiValue);
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change2", multilineColour.ToString());
+						Thread.Sleep(300);
+						RandomColourSelect(out hexMultiValue);
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change3", multilineColour.ToString());
+						Thread.Sleep(300);
+						RandomColourSelect(out hexMultiValue);
+						multilineColour = Convert.ToUInt32(hexMultiValue, 16);
+						fileText1 = fileText1.Replace("Colour_Change4", multilineColour.ToString());
+						Thread.Sleep(300);
+			            break;
+	            }
+			fileText1 = fileText1.Replace("CenterStop_Change", "false");
             fileText = fileText1;
         }
 #endregion
@@ -2175,211 +2206,250 @@ namespace Vixen_Messaging
         private void TextColor1_Click(object sender, EventArgs e)
         {
             int colNum = 1;
-            ColPal(colNum);
+			ColPal(colNum, TextColor1.BackColor);
         }
 
         private void TextColor2_Click(object sender, EventArgs e)
         {
             int colNum = 2;
-            ColPal(colNum);
+			ColPal(colNum, TextColor2.BackColor);
         }
 
         private void TextColor3_Click(object sender, EventArgs e)
         {
             int colNum = 3;
-            ColPal(colNum);
+			ColPal(colNum, TextColor3.BackColor);
         }
 
         private void TextColor4_Click(object sender, EventArgs e)
         {
             int colNum = 4;
-            ColPal(colNum);
+			ColPal(colNum, TextColor4.BackColor);
         }
 
         private void TextColor5_Click(object sender, EventArgs e)
         {
             int colNum = 5;
-            ColPal(colNum);
+			ColPal(colNum, TextColor5.BackColor);
         }
 
         private void TextColor6_Click(object sender, EventArgs e)
         {
             int colNum = 6;
-            ColPal(colNum);
+			ColPal(colNum, TextColor6.BackColor);
         }
 
         private void TextColor7_Click(object sender, EventArgs e)
         {
             int colNum = 7;
-            ColPal(colNum);
+			ColPal(colNum, TextColor7.BackColor);
         }
 
         private void TextColor8_Click(object sender, EventArgs e)
         {
             int colNum = 8;
-            ColPal(colNum);
+			ColPal(colNum, TextColor8.BackColor);
         }
 
         private void TextColor9_Click(object sender, EventArgs e)
         {
             int colNum = 9;
-            ColPal(colNum);
+			ColPal(colNum, TextColor9.BackColor);
         }
 
         private void TextColor10_Click(object sender, EventArgs e)
         {
             int colNum = 10;
-            ColPal(colNum);
-        }
-        private void SingleCol1_Click(object sender, EventArgs e)
-        {
-            int colNum = 11;
-            ColPal(colNum);
+			ColPal(colNum, TextColor10.BackColor);
         }
 
         private void SnowFlakeColour1_Click(object sender, EventArgs e)
         {
-            int colNum = 12;
-            ColPal(colNum);
+            int colNum = 11;
+			ColPal(colNum, SnowFlakeColour1.BackColor);
         }
 
         private void SnowFlakeColour2_Click(object sender, EventArgs e)
         {
-            int colNum = 13;
-            ColPal(colNum);
+            int colNum = 12;
+			ColPal(colNum, SnowFlakeColour2.BackColor);
         }
 
         private void SnowFlakeColour3_Click(object sender, EventArgs e)
         {
-            int colNum = 14;
-            ColPal(colNum);
+            int colNum = 13;
+			ColPal(colNum, SnowFlakeColour3.BackColor);
         }
 
         private void SnowFlakeColour4_Click(object sender, EventArgs e)
         {
-            int colNum = 15;
-            ColPal(colNum);
+            int colNum = 14;
+			ColPal(colNum, SnowFlakeColour4.BackColor);
         }
 
         private void SnowFlakeColour5_Click(object sender, EventArgs e)
         {
-            int colNum = 16;
-            ColPal(colNum);
+            int colNum = 15;
+			ColPal(colNum, SnowFlakeColour5.BackColor);
         }
 
         private void SnowFlakeColour6_Click(object sender, EventArgs e)
         {
-            int colNum = 17;
-            ColPal(colNum);
+            int colNum = 16;
+			ColPal(colNum, SnowFlakeColour6.BackColor);
         }
 
         private void MeteorColour1_Click(object sender, EventArgs e)
         {
-            int colNum = 18;
-            ColPal(colNum);
+            int colNum = 17;
+			ColPal(colNum, MeteorColour1.BackColor);
         }
 
         private void MeteorColour2_Click(object sender, EventArgs e)
         {
-            int colNum = 19;
-            ColPal(colNum);
+            int colNum = 18;
+			ColPal(colNum, MeteorColour2.BackColor);
         }
 
         private void MeteorColour3_Click(object sender, EventArgs e)
         {
-            int colNum = 20;
-            ColPal(colNum);
+            int colNum = 19;
+			ColPal(colNum, MeteorColour3.BackColor);
         }
 
         private void MeteorColour4_Click(object sender, EventArgs e)
         {
-            int colNum = 21;
-            ColPal(colNum);
+            int colNum = 20;
+			ColPal(colNum, MeteorColour4.BackColor);
         }
 
         private void MeteorColour5_Click(object sender, EventArgs e)
         {
-            int colNum = 22;
-            ColPal(colNum);
+            int colNum = 21;
+			ColPal(colNum, MeteorColour5.BackColor);
         }
 
         private void MeteorColour6_Click(object sender, EventArgs e)
         {
-            int colNum = 23;
-            ColPal(colNum);
+            int colNum = 22;
+			ColPal(colNum, MeteorColour6.BackColor);
         }
 
         private void TwinkleColour1_Click(object sender, EventArgs e)
         {
-            int colNum = 24;
-            ColPal(colNum);
+            int colNum = 23;
+			ColPal(colNum, TwinkleColour1.BackColor);
         }
 
         private void TwinkleColour2_Click(object sender, EventArgs e)
         {
-            int colNum = 25;
-            ColPal(colNum);
+            int colNum = 24;
+			ColPal(colNum, TwinkleColour2.BackColor);
         }
 
         private void TwinkleColour3_Click(object sender, EventArgs e)
         {
-            int colNum = 26;
-            ColPal(colNum);
+            int colNum = 25;
+			ColPal(colNum, TwinkleColour3.BackColor);
         }
 
         private void TwinkleColour4_Click(object sender, EventArgs e)
         {
-            int colNum = 27;
-            ColPal(colNum);
+            int colNum = 26;
+			ColPal(colNum, TwinkleColour4.BackColor);
         }
 
         private void TwinkleColour5_Click(object sender, EventArgs e)
         {
-            int colNum = 28;
-            ColPal(colNum);
+            int colNum = 27;
+			ColPal(colNum, TwinkleColour5.BackColor);
         }
 
         private void TwinkleColour6_Click(object sender, EventArgs e)
         {
-            int colNum = 29;
-            ColPal(colNum);
+            int colNum = 28;
+			ColPal(colNum, TwinkleColour6.BackColor);
         }
 
-        private void checkBoxRandomCol_CheckedChanged(object sender, EventArgs e)
-        {
-            SingleColourSelection.Enabled = !SingleColourSelection.Enabled;
-            RandomColourSelection.Enabled = !RandomColourSelection.Enabled;
-        }
+		private void line1Colour_Click(object sender, EventArgs e)
+		{
+			int colNum = 29;
+			ColPal(colNum, line1Colour.BackColor);
+		}
 
-        private void ColPal(int colNum)
-        {
-            colorDialog1.ShowDialog();
+		private void line2Colour_Click(object sender, EventArgs e)
+		{
+			int colNum = 30;
+			ColPal(colNum, line2Colour.BackColor);
+		}
 
-			var btn = new Button[] { TextColor1, TextColor1, TextColor2, TextColor3, TextColor4, TextColor5, TextColor6, TextColor7, TextColor8, TextColor9, TextColor10, SingleCol1, SnowFlakeColour1, SnowFlakeColour2, SnowFlakeColour3, SnowFlakeColour4, SnowFlakeColour5, SnowFlakeColour6, MeteorColour1, MeteorColour2, MeteorColour3, MeteorColour4, MeteorColour5, MeteorColour6, TwinkleColour1, TwinkleColour2, TwinkleColour3, TwinkleColour4, TwinkleColour5, TwinkleColour6, line1Colour, line2Colour, line3Colour, line4Colour };
+		private void line3Colour_Click(object sender, EventArgs e)
+		{
+			int colNum = 31;
+			ColPal(colNum, line3Colour.BackColor);
+		}
+
+		private void line4Colour_Click(object sender, EventArgs e)
+		{
+			int colNum = 32;
+			ColPal(colNum, line4Colour.BackColor);
+		}
+
+	    private void ColourVisible()
+	    {
+			var colourVisible = new Label[]
+			{
+				labelColour1, labelColour2, labelColour3, labelColour4, labelColour5, labelColour6, labelColour7, labelColour8,
+				labelColour9, labelColour10
+			};
+			var i = 0;
+			switch (incomingMessageColourOption.Text)
+			{
+				case "Single":
+					RandomColourSelection.Text = @"Single Colour Selection";
+					colourVisible[i].Visible = true;
+					do
+					{
+						i++;
+						colourVisible[i].Visible = false;
+					} while (i < 9);
+					break;
+				case "Multi":
+					RandomColourSelection.Text = @"Multiple Colour Selection";
+					do
+					{
+						colourVisible[i].Visible = true;
+						i++;
+					} while (i < 4);
+					do
+					{
+						colourVisible[i].Visible = false;
+						i++;
+					} while (i < 10);
+					break;
+				case "Random":
+					RandomColourSelection.Text = @"Random Colour Selection";
+					do
+					{
+						colourVisible[i].Visible = true;
+						i++;
+					} while (i < 10);
+					break;
+			}
+	    }
+
+	    private void ColPal(int colNum, Color current)
+	    {
+		    colorDialog1.Color = current;
+			colorDialog1.ShowDialog();
+
+			var btn = new Button[] { TextColor1, TextColor1, TextColor2, TextColor3, TextColor4, TextColor5, TextColor6, TextColor7, TextColor8, TextColor9, TextColor10, SnowFlakeColour1, SnowFlakeColour2, SnowFlakeColour3, SnowFlakeColour4, SnowFlakeColour5, SnowFlakeColour6, MeteorColour1, MeteorColour2, MeteorColour3, MeteorColour4, MeteorColour5, MeteorColour6, TwinkleColour1, TwinkleColour2, TwinkleColour3, TwinkleColour4, TwinkleColour5, TwinkleColour6, line1Colour, line2Colour, line3Colour, line4Colour };
             btn[colNum].BackColor = colorDialog1.Color;
             SeqSave();
         }
         #endregion
 
         #region Colour Selection
-        public void ColourSelect(out string hexValue)
-        {
-            if (checkBoxRandomCol.Checked)
-            {
-                do
-                {
-                    var random = new Random(); 
-                    var randomCol = random.Next(0, 10);
-                    var btn = new Button[] { TextColor1, TextColor2, TextColor3, TextColor4, TextColor5, TextColor6, TextColor7, TextColor8, TextColor9, TextColor10 };
-                    hexValue = btn[randomCol].BackColor.A.ToString("x2") + btn[randomCol].BackColor.R.ToString("x2") + btn[randomCol].BackColor.G.ToString("x2") + btn[randomCol].BackColor.B.ToString("x2");
-                } while (hexValue == "ff000000");
-            }
-            else
-            {
-                // Replace for Single Colour
-                hexValue = SingleCol1.BackColor.A.ToString("x2") + SingleCol1.BackColor.R.ToString("x2") + SingleCol1.BackColor.G.ToString("x2") + SingleCol1.BackColor.B.ToString("x2");          
-            }
-        }
 
 		private void RandomColourSelect(out string hexValue)
 	    {
@@ -3036,6 +3106,7 @@ namespace Vixen_Messaging
             buttonStart.Text = "";
             buttonStop.Image = Tools.GetIcon(Resources.Stop, 40);
             buttonStop.Text = "";
+			GlobalVar.PlayCustomMessage = false;
             StartChecking();
         }
 
@@ -3060,6 +3131,7 @@ namespace Vixen_Messaging
              timerCheckMail.Enabled = false;
              buttonStart.Enabled = true;
              buttonStop.Enabled = false;
+			 GlobalVar.PlayCustomMessage = true;
         }
 #endregion
 
@@ -3173,7 +3245,7 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxBlack_list", checkBoxBlacklist.Checked);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxNodeId", textBoxNodeId.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxDisableSeq", checkBoxDisableSeq.Checked);
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandomCol", checkBoxRandomCol.Checked);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "incomingMessageColourOption", incomingMessageColourOption.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "EffectType", EffectType.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "MaxSnowFlake", MaxSnowFlake.Value.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "MeteorColour", MeteorColour.Text);
@@ -3198,7 +3270,6 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor8", TextColor8.BackColor.ToArgb());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor9", TextColor9.BackColor.ToArgb());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor10", TextColor10.BackColor.ToArgb());
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "SingleCol1", SingleCol1.BackColor.ToArgb());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour1", SnowFlakeColour1.BackColor.ToArgb());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour2", SnowFlakeColour2.BackColor.ToArgb());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour3", SnowFlakeColour3.BackColor.ToArgb());
@@ -3319,7 +3390,9 @@ namespace Vixen_Messaging
                 line = "MessageEnabled";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.MessageEnabled[i]);
 				line = "MessageColourOption";
-				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.MessageColourOption[i]); 
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.MessageColourOption[i]);
+				line = "MessageSeqSel";
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomMessageSeqSel[i]); 
 				line = "MessageName";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, Convert.ToString(comboBoxName.Items[i]));
                 line = "CustomFont"; 
@@ -3653,16 +3726,19 @@ namespace Vixen_Messaging
 
         private void FontSelection ()
         {
-            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+			fontDialog1.Font = new Font(textBoxFont.Text, (int)Math.Round(double.Parse(textBoxFontSize.Text)));
+			if (fontDialog1.ShowDialog() != DialogResult.Cancel)
             {
-                textBoxFont.Text = string.Format(fontDialog1.Font.Name);
+				
+				textBoxFont.Text = string.Format(fontDialog1.Font.Name);
                 textBoxFontSize.Text = string.Format(fontDialog1.Font.Size.ToString());
             }
         }
 
         private void buttonFont_Click(object sender, EventArgs e)
         {
-            FontSelection();
+			
+			FontSelection();
         }
 
         private void pictureBoxSaveBlacklist_Click(object sender, EventArgs e)
@@ -3764,18 +3840,11 @@ namespace Vixen_Messaging
             }
         }
 
-        private void checkBoxLocalRandom_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!checkBoxLocalRandom.Checked)
-            {
-                GlobalVar.Msgindex = 0;
-            }
-        }
-
         private void checkBoxMultiLine_CheckedChanged(object sender, EventArgs e)
         {
             TextLineNumber.Enabled = !TextLineNumber.Enabled;
             numericUpDownMultiLine.Enabled = !numericUpDownMultiLine.Enabled;
+			ColourVisible();
         }
 
         private void SaveAll_Click(object sender, EventArgs e)
@@ -3797,36 +3866,12 @@ namespace Vixen_Messaging
             CustomMessageUpdate();
 		}
 
-		private void line1Colour_Click(object sender, EventArgs e)
-		{
-			int colNum = 30;
-			ColPal(colNum);
-		}
-
-		private void line2Colour_Click(object sender, EventArgs e)
-		{
-			int colNum = 31;
-			ColPal(colNum);
-		}
-
-		private void line3Colour_Click(object sender, EventArgs e)
-		{
-			int colNum = 32;
-			ColPal(colNum);
-		}
-
-		private void line4Colour_Click(object sender, EventArgs e)
-		{
-			int colNum = 33;
-			ColPal(colNum);
-		}
-
 		private void messageColourOption_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			switch (messageColourOption.Text)
 			{
 				case "Single":
-					line1Colour.Enabled = true;
+					line1Colour.Visible = true;
 					line2Colour.Visible = false;
 					line3Colour.Visible = false;
 					line4Colour.Visible = false;
@@ -3847,6 +3892,26 @@ namespace Vixen_Messaging
 		}
 
 		private void checkBoxCentreStop_Leave(object sender, EventArgs e)
+		{
+			CustomMessageUpdate();
+		}
+
+		private void incomingMessageColourOption_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			ColourVisible();
+		}
+
+		private void messageColourOption_MouseLeave(object sender, EventArgs e)
+		{
+			CustomMessageUpdate();
+		}
+
+		private void customMessageSeqSel_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			CustomMessageUpdate();
+		}
+
+		private void customMessageSeqSel_MouseLeave(object sender, EventArgs e)
 		{
 			CustomMessageUpdate();
 		}

@@ -45,7 +45,9 @@ namespace Vixen_Messaging
 
             public static List<string> CountDirection = new List<string>();
 
-			public static List<int> MessageColourOption = new List<int>();
+			public static List<string> MessageColourOption = new List<string>();
+
+			public static List<string> CustomMessageSeqSel = new List<string>();
 
             public static List<int> Position = new List<int>();
 

@@ -50,14 +50,16 @@
 			this.label94 = new System.Windows.Forms.Label();
 			this.trackBarCustomSpeed = new System.Windows.Forms.TrackBar();
 			this.label2 = new System.Windows.Forms.Label();
+			this.checkBoxCentreStop = new System.Windows.Forms.CheckBox();
 			this.textBoxCustomFontSize = new System.Windows.Forms.TextBox();
 			this.textBoxCustomFont = new System.Windows.Forms.TextBox();
 			this.buttonCustomFont = new System.Windows.Forms.Button();
 			this.fontDialog1 = new System.Windows.Forms.FontDialog();
 			this.CustomMsgLength = new System.Windows.Forms.NumericUpDown();
-			this.checkBoxCentreStop = new System.Windows.Forms.CheckBox();
 			this.label97 = new System.Windows.Forms.Label();
 			this.messageColourOption = new System.Windows.Forms.ComboBox();
+			this.label99 = new System.Windows.Forms.Label();
+			this.customMessageSeqSel = new System.Windows.Forms.ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarCountDownPosition)).BeginInit();
@@ -155,7 +157,7 @@
 			// 
 			// pictureBox2
 			// 
-			this.pictureBox2.Location = new System.Drawing.Point(436, 352);
+			this.pictureBox2.Location = new System.Drawing.Point(436, 424);
 			this.pictureBox2.Name = "pictureBox2";
 			this.pictureBox2.Size = new System.Drawing.Size(80, 80);
 			this.pictureBox2.TabIndex = 92;
@@ -165,7 +167,7 @@
 			// 
 			// pictureBox1
 			// 
-			this.pictureBox1.Location = new System.Drawing.Point(312, 352);
+			this.pictureBox1.Location = new System.Drawing.Point(312, 424);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(80, 80);
 			this.pictureBox1.TabIndex = 91;
@@ -206,7 +208,7 @@
 			this.trackBarCountDownPosition.Minimum = 1;
 			this.trackBarCountDownPosition.Name = "trackBarCountDownPosition";
 			this.trackBarCountDownPosition.Orientation = System.Windows.Forms.Orientation.Vertical;
-			this.trackBarCountDownPosition.Size = new System.Drawing.Size(40, 206);
+			this.trackBarCountDownPosition.Size = new System.Drawing.Size(40, 285);
 			this.trackBarCountDownPosition.TabIndex = 8;
 			this.trackBarCountDownPosition.Value = 65;
 			this.trackBarCountDownPosition.Scroll += new System.EventHandler(this.trackBarCountDownPosition_Scroll);
@@ -240,7 +242,7 @@
 			this.trackBarCustomSpeed.Minimum = 1;
 			this.trackBarCustomSpeed.Name = "trackBarCustomSpeed";
 			this.trackBarCustomSpeed.Orientation = System.Windows.Forms.Orientation.Vertical;
-			this.trackBarCustomSpeed.Size = new System.Drawing.Size(40, 205);
+			this.trackBarCustomSpeed.Size = new System.Drawing.Size(40, 284);
 			this.trackBarCustomSpeed.TabIndex = 104;
 			this.toolTip1.SetToolTip(this.trackBarCustomSpeed, "Position of text on your Matrix/Megatree.");
 			this.trackBarCustomSpeed.Value = 5;
@@ -257,6 +259,18 @@
 			this.label2.TabIndex = 103;
 			this.label2.Text = "Speed:";
 			this.toolTip1.SetToolTip(this.label2, "Text Position is for Countdown message using Lines below only");
+			// 
+			// checkBoxCentreStop
+			// 
+			this.checkBoxCentreStop.AutoSize = true;
+			this.checkBoxCentreStop.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.checkBoxCentreStop.Location = new System.Drawing.Point(40, 434);
+			this.checkBoxCentreStop.Name = "checkBoxCentreStop";
+			this.checkBoxCentreStop.Size = new System.Drawing.Size(125, 24);
+			this.checkBoxCentreStop.TabIndex = 105;
+			this.checkBoxCentreStop.Text = "Center Stop:";
+			this.toolTip1.SetToolTip(this.checkBoxCentreStop, "Enable this message to be included in the selection to display.");
+			this.checkBoxCentreStop.UseVisualStyleBackColor = true;
 			// 
 			// textBoxCustomFontSize
 			// 
@@ -314,22 +328,10 @@
             0,
             0});
 			// 
-			// checkBoxCentreStop
-			// 
-			this.checkBoxCentreStop.AutoSize = true;
-			this.checkBoxCentreStop.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxCentreStop.Location = new System.Drawing.Point(43, 408);
-			this.checkBoxCentreStop.Name = "checkBoxCentreStop";
-			this.checkBoxCentreStop.Size = new System.Drawing.Size(125, 24);
-			this.checkBoxCentreStop.TabIndex = 105;
-			this.checkBoxCentreStop.Text = "Center Stop:";
-			this.toolTip1.SetToolTip(this.checkBoxCentreStop, "Enable this message to be included in the selection to display.");
-			this.checkBoxCentreStop.UseVisualStyleBackColor = true;
-			// 
 			// label97
 			// 
 			this.label97.AutoSize = true;
-			this.label97.Location = new System.Drawing.Point(39, 334);
+			this.label97.Location = new System.Drawing.Point(39, 382);
 			this.label97.Name = "label97";
 			this.label97.Size = new System.Drawing.Size(110, 20);
 			this.label97.TabIndex = 107;
@@ -342,18 +344,49 @@
             "Single",
             "Multi",
             "Random"});
-			this.messageColourOption.Location = new System.Drawing.Point(43, 365);
+			this.messageColourOption.Location = new System.Drawing.Point(155, 376);
 			this.messageColourOption.Name = "messageColourOption";
-			this.messageColourOption.Size = new System.Drawing.Size(178, 28);
+			this.messageColourOption.Size = new System.Drawing.Size(182, 28);
 			this.messageColourOption.TabIndex = 106;
 			this.messageColourOption.Text = "Multi";
+			// 
+			// label99
+			// 
+			this.label99.AutoSize = true;
+			this.label99.Location = new System.Drawing.Point(41, 338);
+			this.label99.Name = "label99";
+			this.label99.Size = new System.Drawing.Size(86, 20);
+			this.label99.TabIndex = 109;
+			this.label99.Text = "Sequence:";
+			this.toolTip1.SetToolTip(this.label99, "Automatically Assigned - Will select an effect based on selection Sequence settin" +
+        "gs you have set up.");
+			// 
+			// customMessageSeqSel
+			// 
+			this.customMessageSeqSel.FormattingEnabled = true;
+			this.customMessageSeqSel.Items.AddRange(new object[] {
+            "Automatically Assigned",
+            "SnowFlakes",
+            "Fire",
+            "Meteors",
+            "Twinkles",
+            "Movie",
+            "Glediator/Jinx",
+            "None"});
+			this.customMessageSeqSel.Location = new System.Drawing.Point(133, 335);
+			this.customMessageSeqSel.Name = "customMessageSeqSel";
+			this.customMessageSeqSel.Size = new System.Drawing.Size(204, 28);
+			this.customMessageSeqSel.TabIndex = 108;
+			this.customMessageSeqSel.Text = "Automatically Assigned";
 			// 
 			// FormMessages
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.Azure;
-			this.ClientSize = new System.Drawing.Size(528, 444);
+			this.ClientSize = new System.Drawing.Size(528, 514);
+			this.Controls.Add(this.label99);
+			this.Controls.Add(this.customMessageSeqSel);
 			this.Controls.Add(this.label97);
 			this.Controls.Add(this.messageColourOption);
 			this.Controls.Add(this.checkBoxCentreStop);
@@ -381,8 +414,8 @@
 			this.Controls.Add(this.textBoxLine2);
 			this.Controls.Add(this.textBoxLine3);
 			this.Controls.Add(this.textBoxLine4);
-			this.MaximumSize = new System.Drawing.Size(550, 500);
-			this.MinimumSize = new System.Drawing.Size(531, 500);
+			this.MaximumSize = new System.Drawing.Size(550, 570);
+			this.MinimumSize = new System.Drawing.Size(550, 570);
 			this.Name = "FormMessages";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Add new Message";
@@ -428,5 +461,7 @@
 		public System.Windows.Forms.CheckBox checkBoxCentreStop;
 		private System.Windows.Forms.Label label97;
 		public System.Windows.Forms.ComboBox messageColourOption;
+		private System.Windows.Forms.Label label99;
+		public System.Windows.Forms.ComboBox customMessageSeqSel;
     }
 }
