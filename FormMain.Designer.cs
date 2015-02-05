@@ -226,6 +226,8 @@ namespace Vixen_Messaging
 			this.SaveAll = new System.Windows.Forms.PictureBox();
 			this.checkBoxLocalRandom = new System.Windows.Forms.CheckBox();
 			this.groupBoxCountDown = new System.Windows.Forms.GroupBox();
+			this.label99 = new System.Windows.Forms.Label();
+			this.customMessageSeqSel = new System.Windows.Forms.ComboBox();
 			this.checkBoxCentreStop = new System.Windows.Forms.CheckBox();
 			this.label97 = new System.Windows.Forms.Label();
 			this.messageColourOption = new System.Windows.Forms.ComboBox();
@@ -268,7 +270,7 @@ namespace Vixen_Messaging
 			this.label46 = new System.Windows.Forms.Label();
 			this.label45 = new System.Windows.Forms.Label();
 			this.comboBoxPlayMode = new System.Windows.Forms.ComboBox();
-			this.tabControl1 = new System.Windows.Forms.TabControl();
+			this.tabControlMain = new System.Windows.Forms.TabControl();
 			this.tabPageMain = new System.Windows.Forms.TabPage();
 			this.groupBoxPlayOptions = new System.Windows.Forms.GroupBox();
 			this.label74 = new System.Windows.Forms.Label();
@@ -375,8 +377,6 @@ namespace Vixen_Messaging
 			this.fileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.timerCheckVixenEnabled = new System.Windows.Forms.Timer(this.components);
 			this.fontDialog1 = new System.Windows.Forms.FontDialog();
-			this.label99 = new System.Windows.Forms.Label();
-			this.customMessageSeqSel = new System.Windows.Forms.ComboBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBoxEffects.SuspendLayout();
@@ -416,7 +416,7 @@ namespace Vixen_Messaging
 			((System.ComponentModel.ISupportInitialize)(this.trackBarCustomSpeed)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.CustomMsgLength)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarCountDownPosition)).BeginInit();
-			this.tabControl1.SuspendLayout();
+			this.tabControlMain.SuspendLayout();
 			this.tabPageMain.SuspendLayout();
 			this.groupBoxPlayOptions.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).BeginInit();
@@ -464,14 +464,14 @@ namespace Vixen_Messaging
 			this.textBoxServer.Location = new System.Drawing.Point(218, 222);
 			this.textBoxServer.Name = "textBoxServer";
 			this.textBoxServer.Size = new System.Drawing.Size(651, 26);
-			this.textBoxServer.TabIndex = 0;
+			this.textBoxServer.TabIndex = 5;
 			// 
 			// textBoxUID
 			// 
 			this.textBoxUID.Location = new System.Drawing.Point(218, 92);
 			this.textBoxUID.Name = "textBoxUID";
 			this.textBoxUID.Size = new System.Drawing.Size(650, 26);
-			this.textBoxUID.TabIndex = 1;
+			this.textBoxUID.TabIndex = 2;
 			// 
 			// label2
 			// 
@@ -489,7 +489,7 @@ namespace Vixen_Messaging
 			this.textBoxPWD.Name = "textBoxPWD";
 			this.textBoxPWD.PasswordChar = '*';
 			this.textBoxPWD.Size = new System.Drawing.Size(650, 26);
-			this.textBoxPWD.TabIndex = 2;
+			this.textBoxPWD.TabIndex = 3;
 			// 
 			// label3
 			// 
@@ -533,7 +533,7 @@ namespace Vixen_Messaging
 			this.buttonTwilio.Location = new System.Drawing.Point(17, 360);
 			this.buttonTwilio.Name = "buttonTwilio";
 			this.buttonTwilio.Size = new System.Drawing.Size(141, 49);
-			this.buttonTwilio.TabIndex = 64;
+			this.buttonTwilio.TabIndex = 8;
 			this.buttonTwilio.Text = "Twilio Settings";
 			this.toolTip1.SetToolTip(this.buttonTwilio, "Only need to select this if you have a Twilio account that would be used to accep" +
         "t SMS\'s.");
@@ -564,7 +564,7 @@ namespace Vixen_Messaging
 			this.textBoxComments.Multiline = true;
 			this.textBoxComments.Name = "textBoxComments";
 			this.textBoxComments.Size = new System.Drawing.Size(650, 110);
-			this.textBoxComments.TabIndex = 32;
+			this.textBoxComments.TabIndex = 7;
 			// 
 			// comboBoxEmailSettings
 			// 
@@ -579,7 +579,7 @@ namespace Vixen_Messaging
 			this.comboBoxEmailSettings.Location = new System.Drawing.Point(216, 173);
 			this.comboBoxEmailSettings.Name = "comboBoxEmailSettings";
 			this.comboBoxEmailSettings.Size = new System.Drawing.Size(150, 28);
-			this.comboBoxEmailSettings.TabIndex = 31;
+			this.comboBoxEmailSettings.TabIndex = 4;
 			this.comboBoxEmailSettings.SelectedIndexChanged += new System.EventHandler(this.comboBoxEmailSettings_SelectedIndexChanged);
 			// 
 			// label67
@@ -607,7 +607,7 @@ namespace Vixen_Messaging
 			this.textBoxSMTP.Location = new System.Drawing.Point(218, 258);
 			this.textBoxSMTP.Name = "textBoxSMTP";
 			this.textBoxSMTP.Size = new System.Drawing.Size(650, 26);
-			this.textBoxSMTP.TabIndex = 9;
+			this.textBoxSMTP.TabIndex = 6;
 			// 
 			// label13
 			// 
@@ -634,14 +634,14 @@ namespace Vixen_Messaging
 			this.textBoxReturnSubjectHeading.Location = new System.Drawing.Point(218, 18);
 			this.textBoxReturnSubjectHeading.Name = "textBoxReturnSubjectHeading";
 			this.textBoxReturnSubjectHeading.Size = new System.Drawing.Size(648, 26);
-			this.textBoxReturnSubjectHeading.TabIndex = 6;
+			this.textBoxReturnSubjectHeading.TabIndex = 0;
 			// 
 			// textBoxFromEmailAddress
 			// 
 			this.textBoxFromEmailAddress.Location = new System.Drawing.Point(218, 55);
 			this.textBoxFromEmailAddress.Name = "textBoxFromEmailAddress";
 			this.textBoxFromEmailAddress.Size = new System.Drawing.Size(648, 26);
-			this.textBoxFromEmailAddress.TabIndex = 5;
+			this.textBoxFromEmailAddress.TabIndex = 1;
 			// 
 			// groupBox2
 			// 
@@ -791,7 +791,7 @@ namespace Vixen_Messaging
 			this.extraTime.Location = new System.Drawing.Point(392, 28);
 			this.extraTime.Name = "extraTime";
 			this.extraTime.Size = new System.Drawing.Size(68, 26);
-			this.extraTime.TabIndex = 39;
+			this.extraTime.TabIndex = 1;
 			// 
 			// checkBoxVariableLength
 			// 
@@ -800,7 +800,7 @@ namespace Vixen_Messaging
 			this.checkBoxVariableLength.Location = new System.Drawing.Point(12, 29);
 			this.checkBoxVariableLength.Name = "checkBoxVariableLength";
 			this.checkBoxVariableLength.Size = new System.Drawing.Size(203, 24);
-			this.checkBoxVariableLength.TabIndex = 38;
+			this.checkBoxVariableLength.TabIndex = 0;
 			this.checkBoxVariableLength.Text = "Auto Adjust Seq length:";
 			this.toolTip1.SetToolTip(this.checkBoxVariableLength, "Sequence length is determained by the number of characters in the message and spe" +
         "ed of the Text selected. This ensures maximum usage of time.");
@@ -819,7 +819,7 @@ namespace Vixen_Messaging
 			this.tabControlEffects.Name = "tabControlEffects";
 			this.tabControlEffects.SelectedIndex = 0;
 			this.tabControlEffects.Size = new System.Drawing.Size(866, 258);
-			this.tabControlEffects.TabIndex = 4;
+			this.tabControlEffects.TabIndex = 2;
 			// 
 			// tabPageSnowFlake
 			// 
@@ -859,7 +859,7 @@ namespace Vixen_Messaging
 			this.checkBoxRandom1.Location = new System.Drawing.Point(483, 5);
 			this.checkBoxRandom1.Name = "checkBoxRandom1";
 			this.checkBoxRandom1.Size = new System.Drawing.Size(242, 24);
-			this.checkBoxRandom1.TabIndex = 82;
+			this.checkBoxRandom1.TabIndex = 4;
 			this.checkBoxRandom1.Text = "Include in Random Selection:";
 			this.checkBoxRandom1.UseVisualStyleBackColor = true;
 			// 
@@ -878,7 +878,7 @@ namespace Vixen_Messaging
 			this.checkBoxSnowFlakeColour6.Location = new System.Drawing.Point(702, 82);
 			this.checkBoxSnowFlakeColour6.Name = "checkBoxSnowFlakeColour6";
 			this.checkBoxSnowFlakeColour6.Size = new System.Drawing.Size(22, 23);
-			this.checkBoxSnowFlakeColour6.TabIndex = 80;
+			this.checkBoxSnowFlakeColour6.TabIndex = 10;
 			this.checkBoxSnowFlakeColour6.UseVisualStyleBackColor = true;
 			// 
 			// checkBoxSnowFlakeColour5
@@ -887,7 +887,7 @@ namespace Vixen_Messaging
 			this.checkBoxSnowFlakeColour5.Location = new System.Drawing.Point(648, 82);
 			this.checkBoxSnowFlakeColour5.Name = "checkBoxSnowFlakeColour5";
 			this.checkBoxSnowFlakeColour5.Size = new System.Drawing.Size(22, 23);
-			this.checkBoxSnowFlakeColour5.TabIndex = 79;
+			this.checkBoxSnowFlakeColour5.TabIndex = 9;
 			this.checkBoxSnowFlakeColour5.UseVisualStyleBackColor = true;
 			// 
 			// checkBoxSnowFlakeColour4
@@ -896,7 +896,7 @@ namespace Vixen_Messaging
 			this.checkBoxSnowFlakeColour4.Location = new System.Drawing.Point(598, 82);
 			this.checkBoxSnowFlakeColour4.Name = "checkBoxSnowFlakeColour4";
 			this.checkBoxSnowFlakeColour4.Size = new System.Drawing.Size(22, 23);
-			this.checkBoxSnowFlakeColour4.TabIndex = 78;
+			this.checkBoxSnowFlakeColour4.TabIndex = 8;
 			this.checkBoxSnowFlakeColour4.UseVisualStyleBackColor = true;
 			// 
 			// SnowFlakeColour5
@@ -906,7 +906,7 @@ namespace Vixen_Messaging
 			this.SnowFlakeColour5.Margin = new System.Windows.Forms.Padding(0);
 			this.SnowFlakeColour5.Name = "SnowFlakeColour5";
 			this.SnowFlakeColour5.Size = new System.Drawing.Size(40, 40);
-			this.SnowFlakeColour5.TabIndex = 73;
+			this.SnowFlakeColour5.TabIndex = 15;
 			this.toolTip1.SetToolTip(this.SnowFlakeColour5, "Select a colour to edit.");
 			this.SnowFlakeColour5.UseVisualStyleBackColor = false;
 			this.SnowFlakeColour5.Click += new System.EventHandler(this.SnowFlakeColour5_Click);
@@ -917,7 +917,7 @@ namespace Vixen_Messaging
 			this.checkBoxSnowFlakeColour3.Location = new System.Drawing.Point(549, 82);
 			this.checkBoxSnowFlakeColour3.Name = "checkBoxSnowFlakeColour3";
 			this.checkBoxSnowFlakeColour3.Size = new System.Drawing.Size(22, 23);
-			this.checkBoxSnowFlakeColour3.TabIndex = 77;
+			this.checkBoxSnowFlakeColour3.TabIndex = 7;
 			this.checkBoxSnowFlakeColour3.UseVisualStyleBackColor = true;
 			// 
 			// SnowFlakeColour6
@@ -927,7 +927,7 @@ namespace Vixen_Messaging
 			this.SnowFlakeColour6.Margin = new System.Windows.Forms.Padding(0);
 			this.SnowFlakeColour6.Name = "SnowFlakeColour6";
 			this.SnowFlakeColour6.Size = new System.Drawing.Size(40, 40);
-			this.SnowFlakeColour6.TabIndex = 74;
+			this.SnowFlakeColour6.TabIndex = 16;
 			this.toolTip1.SetToolTip(this.SnowFlakeColour6, "Select a colour to edit.");
 			this.SnowFlakeColour6.UseVisualStyleBackColor = false;
 			this.SnowFlakeColour6.Click += new System.EventHandler(this.SnowFlakeColour6_Click);
@@ -938,7 +938,7 @@ namespace Vixen_Messaging
 			this.checkBoxSnowFlakeColour2.Location = new System.Drawing.Point(502, 82);
 			this.checkBoxSnowFlakeColour2.Name = "checkBoxSnowFlakeColour2";
 			this.checkBoxSnowFlakeColour2.Size = new System.Drawing.Size(22, 23);
-			this.checkBoxSnowFlakeColour2.TabIndex = 76;
+			this.checkBoxSnowFlakeColour2.TabIndex = 6;
 			this.checkBoxSnowFlakeColour2.UseVisualStyleBackColor = true;
 			// 
 			// SnowFlakeColour4
@@ -948,7 +948,7 @@ namespace Vixen_Messaging
 			this.SnowFlakeColour4.Margin = new System.Windows.Forms.Padding(0);
 			this.SnowFlakeColour4.Name = "SnowFlakeColour4";
 			this.SnowFlakeColour4.Size = new System.Drawing.Size(40, 40);
-			this.SnowFlakeColour4.TabIndex = 72;
+			this.SnowFlakeColour4.TabIndex = 14;
 			this.toolTip1.SetToolTip(this.SnowFlakeColour4, "Select a colour to edit.");
 			this.SnowFlakeColour4.UseVisualStyleBackColor = false;
 			this.SnowFlakeColour4.Click += new System.EventHandler(this.SnowFlakeColour4_Click);
@@ -959,7 +959,7 @@ namespace Vixen_Messaging
 			this.checkBoxSnowFlakeColour1.Location = new System.Drawing.Point(458, 82);
 			this.checkBoxSnowFlakeColour1.Name = "checkBoxSnowFlakeColour1";
 			this.checkBoxSnowFlakeColour1.Size = new System.Drawing.Size(22, 23);
-			this.checkBoxSnowFlakeColour1.TabIndex = 75;
+			this.checkBoxSnowFlakeColour1.TabIndex = 5;
 			this.checkBoxSnowFlakeColour1.UseVisualStyleBackColor = true;
 			// 
 			// SnowFlakeColour3
@@ -969,7 +969,7 @@ namespace Vixen_Messaging
 			this.SnowFlakeColour3.Margin = new System.Windows.Forms.Padding(0);
 			this.SnowFlakeColour3.Name = "SnowFlakeColour3";
 			this.SnowFlakeColour3.Size = new System.Drawing.Size(40, 40);
-			this.SnowFlakeColour3.TabIndex = 71;
+			this.SnowFlakeColour3.TabIndex = 13;
 			this.toolTip1.SetToolTip(this.SnowFlakeColour3, "Select a colour to edit.");
 			this.SnowFlakeColour3.UseVisualStyleBackColor = false;
 			this.SnowFlakeColour3.Click += new System.EventHandler(this.SnowFlakeColour3_Click);
@@ -981,7 +981,7 @@ namespace Vixen_Messaging
 			this.SnowFlakeColour1.Margin = new System.Windows.Forms.Padding(0);
 			this.SnowFlakeColour1.Name = "SnowFlakeColour1";
 			this.SnowFlakeColour1.Size = new System.Drawing.Size(40, 40);
-			this.SnowFlakeColour1.TabIndex = 69;
+			this.SnowFlakeColour1.TabIndex = 11;
 			this.toolTip1.SetToolTip(this.SnowFlakeColour1, "Select a colour to edit.");
 			this.SnowFlakeColour1.UseVisualStyleBackColor = false;
 			this.SnowFlakeColour1.Click += new System.EventHandler(this.SnowFlakeColour1_Click);
@@ -993,7 +993,7 @@ namespace Vixen_Messaging
 			this.SnowFlakeColour2.Margin = new System.Windows.Forms.Padding(0);
 			this.SnowFlakeColour2.Name = "SnowFlakeColour2";
 			this.SnowFlakeColour2.Size = new System.Drawing.Size(40, 40);
-			this.SnowFlakeColour2.TabIndex = 70;
+			this.SnowFlakeColour2.TabIndex = 12;
 			this.toolTip1.SetToolTip(this.SnowFlakeColour2, "Select a colour to edit.");
 			this.SnowFlakeColour2.UseVisualStyleBackColor = false;
 			this.SnowFlakeColour2.Click += new System.EventHandler(this.SnowFlakeColour2_Click);
@@ -1041,7 +1041,7 @@ namespace Vixen_Messaging
             0});
 			this.EffectType.Name = "EffectType";
 			this.EffectType.Size = new System.Drawing.Size(72, 26);
-			this.EffectType.TabIndex = 1;
+			this.EffectType.TabIndex = 0;
 			this.EffectType.Value = new decimal(new int[] {
             2,
             0,
@@ -1063,7 +1063,7 @@ namespace Vixen_Messaging
             0});
 			this.MaxSnowFlake.Name = "MaxSnowFlake";
 			this.MaxSnowFlake.Size = new System.Drawing.Size(72, 26);
-			this.MaxSnowFlake.TabIndex = 2;
+			this.MaxSnowFlake.TabIndex = 1;
 			this.MaxSnowFlake.Value = new decimal(new int[] {
             3,
             0,
@@ -1932,7 +1932,7 @@ namespace Vixen_Messaging
             0});
 			this.EffectTime.Name = "EffectTime";
 			this.EffectTime.Size = new System.Drawing.Size(72, 26);
-			this.EffectTime.TabIndex = 4;
+			this.EffectTime.TabIndex = 2;
 			this.EffectTime.Value = new decimal(new int[] {
             25,
             0,
@@ -2004,7 +2004,7 @@ namespace Vixen_Messaging
 			this.buttonRemoveSeq1.Location = new System.Drawing.Point(756, 15);
 			this.buttonRemoveSeq1.Name = "buttonRemoveSeq1";
 			this.buttonRemoveSeq1.Size = new System.Drawing.Size(38, 38);
-			this.buttonRemoveSeq1.TabIndex = 2;
+			this.buttonRemoveSeq1.TabIndex = 4;
 			this.buttonRemoveSeq1.Text = "-";
 			this.toolTip1.SetToolTip(this.buttonRemoveSeq1, "Remove Sequence File Path");
 			this.buttonRemoveSeq1.UseVisualStyleBackColor = true;
@@ -2033,7 +2033,7 @@ namespace Vixen_Messaging
 			this.buttonVixenSeq1.Location = new System.Drawing.Point(6, 62);
 			this.buttonVixenSeq1.Name = "buttonVixenSeq1";
 			this.buttonVixenSeq1.Size = new System.Drawing.Size(214, 42);
-			this.buttonVixenSeq1.TabIndex = 1;
+			this.buttonVixenSeq1.TabIndex = 5;
 			this.buttonVixenSeq1.Text = "Set Vixen Sequence Path";
 			this.buttonVixenSeq1.UseVisualStyleBackColor = true;
 			this.buttonVixenSeq1.Click += new System.EventHandler(this.buttonVixenSeq1_Click);
@@ -2161,7 +2161,7 @@ namespace Vixen_Messaging
 			this.checkBoxManEnterSettings.Location = new System.Drawing.Point(20, 72);
 			this.checkBoxManEnterSettings.Name = "checkBoxManEnterSettings";
 			this.checkBoxManEnterSettings.Size = new System.Drawing.Size(248, 24);
-			this.checkBoxManEnterSettings.TabIndex = 4;
+			this.checkBoxManEnterSettings.TabIndex = 2;
 			this.checkBoxManEnterSettings.Text = "Manually enter Vixen Settings:";
 			this.toolTip1.SetToolTip(this.checkBoxManEnterSettings, "Not normally required, use the Get \"Vixen Data Setting\" button below.");
 			this.checkBoxManEnterSettings.UseVisualStyleBackColor = true;
@@ -2330,7 +2330,7 @@ namespace Vixen_Messaging
 			this.TextColor1.Margin = new System.Windows.Forms.Padding(0);
 			this.TextColor1.Name = "TextColor1";
 			this.TextColor1.Size = new System.Drawing.Size(40, 40);
-			this.TextColor1.TabIndex = 9;
+			this.TextColor1.TabIndex = 10;
 			this.toolTip1.SetToolTip(this.TextColor1, "Select a colour to edit.");
 			this.TextColor1.UseVisualStyleBackColor = false;
 			this.TextColor1.Click += new System.EventHandler(this.TextColor1_Click);
@@ -2342,7 +2342,7 @@ namespace Vixen_Messaging
 			this.TextColor10.Margin = new System.Windows.Forms.Padding(0);
 			this.TextColor10.Name = "TextColor10";
 			this.TextColor10.Size = new System.Drawing.Size(40, 40);
-			this.TextColor10.TabIndex = 18;
+			this.TextColor10.TabIndex = 19;
 			this.toolTip1.SetToolTip(this.TextColor10, "Select a colour to edit.");
 			this.TextColor10.UseVisualStyleBackColor = false;
 			this.TextColor10.Click += new System.EventHandler(this.TextColor10_Click);
@@ -2354,7 +2354,7 @@ namespace Vixen_Messaging
 			this.TextColor8.Margin = new System.Windows.Forms.Padding(0);
 			this.TextColor8.Name = "TextColor8";
 			this.TextColor8.Size = new System.Drawing.Size(40, 40);
-			this.TextColor8.TabIndex = 16;
+			this.TextColor8.TabIndex = 17;
 			this.toolTip1.SetToolTip(this.TextColor8, "Select a colour to edit.");
 			this.TextColor8.UseVisualStyleBackColor = false;
 			this.TextColor8.Click += new System.EventHandler(this.TextColor8_Click);
@@ -2366,7 +2366,7 @@ namespace Vixen_Messaging
 			this.TextColor9.Margin = new System.Windows.Forms.Padding(0);
 			this.TextColor9.Name = "TextColor9";
 			this.TextColor9.Size = new System.Drawing.Size(40, 40);
-			this.TextColor9.TabIndex = 17;
+			this.TextColor9.TabIndex = 18;
 			this.toolTip1.SetToolTip(this.TextColor9, "Select a colour to edit.");
 			this.TextColor9.UseVisualStyleBackColor = false;
 			this.TextColor9.Click += new System.EventHandler(this.TextColor9_Click);
@@ -2378,7 +2378,7 @@ namespace Vixen_Messaging
 			this.TextColor2.Margin = new System.Windows.Forms.Padding(0);
 			this.TextColor2.Name = "TextColor2";
 			this.TextColor2.Size = new System.Drawing.Size(40, 40);
-			this.TextColor2.TabIndex = 10;
+			this.TextColor2.TabIndex = 11;
 			this.toolTip1.SetToolTip(this.TextColor2, "Select a colour to edit.");
 			this.TextColor2.UseVisualStyleBackColor = false;
 			this.TextColor2.Click += new System.EventHandler(this.TextColor2_Click);
@@ -2390,7 +2390,7 @@ namespace Vixen_Messaging
 			this.TextColor3.Margin = new System.Windows.Forms.Padding(0);
 			this.TextColor3.Name = "TextColor3";
 			this.TextColor3.Size = new System.Drawing.Size(40, 40);
-			this.TextColor3.TabIndex = 11;
+			this.TextColor3.TabIndex = 12;
 			this.toolTip1.SetToolTip(this.TextColor3, "Select a colour to edit.");
 			this.TextColor3.UseVisualStyleBackColor = false;
 			this.TextColor3.Click += new System.EventHandler(this.TextColor3_Click);
@@ -2402,7 +2402,7 @@ namespace Vixen_Messaging
 			this.TextColor7.Margin = new System.Windows.Forms.Padding(0);
 			this.TextColor7.Name = "TextColor7";
 			this.TextColor7.Size = new System.Drawing.Size(40, 40);
-			this.TextColor7.TabIndex = 15;
+			this.TextColor7.TabIndex = 16;
 			this.toolTip1.SetToolTip(this.TextColor7, "Select a colour to edit.");
 			this.TextColor7.UseVisualStyleBackColor = false;
 			this.TextColor7.Click += new System.EventHandler(this.TextColor7_Click);
@@ -2414,7 +2414,7 @@ namespace Vixen_Messaging
 			this.TextColor4.Margin = new System.Windows.Forms.Padding(0);
 			this.TextColor4.Name = "TextColor4";
 			this.TextColor4.Size = new System.Drawing.Size(40, 40);
-			this.TextColor4.TabIndex = 12;
+			this.TextColor4.TabIndex = 13;
 			this.toolTip1.SetToolTip(this.TextColor4, "Select a colour to edit.");
 			this.TextColor4.UseVisualStyleBackColor = false;
 			this.TextColor4.Click += new System.EventHandler(this.TextColor4_Click);
@@ -2426,7 +2426,7 @@ namespace Vixen_Messaging
 			this.TextColor6.Margin = new System.Windows.Forms.Padding(0);
 			this.TextColor6.Name = "TextColor6";
 			this.TextColor6.Size = new System.Drawing.Size(40, 40);
-			this.TextColor6.TabIndex = 14;
+			this.TextColor6.TabIndex = 15;
 			this.toolTip1.SetToolTip(this.TextColor6, "Select a colour to edit.");
 			this.TextColor6.UseVisualStyleBackColor = false;
 			this.TextColor6.Click += new System.EventHandler(this.TextColor6_Click);
@@ -2438,7 +2438,7 @@ namespace Vixen_Messaging
 			this.TextColor5.Margin = new System.Windows.Forms.Padding(0);
 			this.TextColor5.Name = "TextColor5";
 			this.TextColor5.Size = new System.Drawing.Size(40, 40);
-			this.TextColor5.TabIndex = 13;
+			this.TextColor5.TabIndex = 14;
 			this.toolTip1.SetToolTip(this.TextColor5, "Select a colour to edit.");
 			this.TextColor5.UseVisualStyleBackColor = false;
 			this.TextColor5.Click += new System.EventHandler(this.TextColor5_Click);
@@ -2497,7 +2497,7 @@ namespace Vixen_Messaging
 			this.checkBoxDisableSeq.Location = new System.Drawing.Point(68, 22);
 			this.checkBoxDisableSeq.Name = "checkBoxDisableSeq";
 			this.checkBoxDisableSeq.Size = new System.Drawing.Size(198, 24);
-			this.checkBoxDisableSeq.TabIndex = 40;
+			this.checkBoxDisableSeq.TabIndex = 0;
 			this.checkBoxDisableSeq.Text = "Disable All Sequences:";
 			this.toolTip1.SetToolTip(this.checkBoxDisableSeq, "Will Disable all sequences and only display messages.");
 			this.checkBoxDisableSeq.UseVisualStyleBackColor = true;
@@ -2529,7 +2529,7 @@ namespace Vixen_Messaging
 			this.textBoxAccessPWD.Location = new System.Drawing.Point(220, 114);
 			this.textBoxAccessPWD.Name = "textBoxAccessPWD";
 			this.textBoxAccessPWD.Size = new System.Drawing.Size(165, 26);
-			this.textBoxAccessPWD.TabIndex = 9;
+			this.textBoxAccessPWD.TabIndex = 3;
 			this.textBoxAccessPWD.Text = "Northridge";
 			this.toolTip1.SetToolTip(this.textBoxAccessPWD, "Enter a password that you will use when you want to email setting to Messaging. I" +
         "n your subject heading for example you will type \"Messaging Northridge\"");
@@ -2545,7 +2545,7 @@ namespace Vixen_Messaging
 			this.checkBoxEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.checkBoxEmail.Name = "checkBoxEmail";
 			this.checkBoxEmail.Size = new System.Drawing.Size(202, 24);
-			this.checkBoxEmail.TabIndex = 64;
+			this.checkBoxEmail.TabIndex = 9;
 			this.checkBoxEmail.Tag = "4";
 			this.checkBoxEmail.Text = "Email/SMS (from Email)";
 			this.toolTip1.SetToolTip(this.checkBoxEmail, "Select to retrieve messages from an email address");
@@ -2560,7 +2560,7 @@ namespace Vixen_Messaging
 			this.checkBoxLocal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.checkBoxLocal.Name = "checkBoxLocal";
 			this.checkBoxLocal.Size = new System.Drawing.Size(73, 24);
-			this.checkBoxLocal.TabIndex = 65;
+			this.checkBoxLocal.TabIndex = 10;
 			this.checkBoxLocal.Tag = "4";
 			this.checkBoxLocal.Text = "Local";
 			this.toolTip1.SetToolTip(this.checkBoxLocal, "Select to display Locally created messages.");
@@ -2574,7 +2574,7 @@ namespace Vixen_Messaging
 			this.checkBoxTwilio.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.checkBoxTwilio.Name = "checkBoxTwilio";
 			this.checkBoxTwilio.Size = new System.Drawing.Size(122, 24);
-			this.checkBoxTwilio.TabIndex = 66;
+			this.checkBoxTwilio.TabIndex = 11;
 			this.checkBoxTwilio.Tag = "4";
 			this.checkBoxTwilio.Text = "Twilio (SMS)";
 			this.toolTip1.SetToolTip(this.checkBoxTwilio, "Select to retrieve messages from Twilio (SMS account).");
@@ -2606,7 +2606,7 @@ namespace Vixen_Messaging
             0});
 			this.numericUpDownMultiLine.Name = "numericUpDownMultiLine";
 			this.numericUpDownMultiLine.Size = new System.Drawing.Size(72, 26);
-			this.numericUpDownMultiLine.TabIndex = 60;
+			this.numericUpDownMultiLine.TabIndex = 7;
 			this.toolTip1.SetToolTip(this.numericUpDownMultiLine, "Vixen provides support for 4 lines of text. Select the total number of lines you " +
         "would like to use.");
 			this.numericUpDownMultiLine.Value = new decimal(new int[] {
@@ -2633,7 +2633,7 @@ namespace Vixen_Messaging
 			this.checkBoxMultiLine.Location = new System.Drawing.Point(3, 18);
 			this.checkBoxMultiLine.Name = "checkBoxMultiLine";
 			this.checkBoxMultiLine.Size = new System.Drawing.Size(139, 24);
-			this.checkBoxMultiLine.TabIndex = 64;
+			this.checkBoxMultiLine.TabIndex = 6;
 			this.checkBoxMultiLine.Text = "Multi Line Use:";
 			this.toolTip1.SetToolTip(this.checkBoxMultiLine, "Will automatically split the message over the selected number of lines.");
 			this.checkBoxMultiLine.UseVisualStyleBackColor = true;
@@ -2655,7 +2655,7 @@ namespace Vixen_Messaging
 			this.numericUpDownMaxWords.Location = new System.Drawing.Point(543, 87);
 			this.numericUpDownMaxWords.Name = "numericUpDownMaxWords";
 			this.numericUpDownMaxWords.Size = new System.Drawing.Size(72, 26);
-			this.numericUpDownMaxWords.TabIndex = 65;
+			this.numericUpDownMaxWords.TabIndex = 5;
 			this.toolTip1.SetToolTip(this.numericUpDownMaxWords, "Enter 0 for unlimited words.");
 			// 
 			// checkBoxVixenControl
@@ -2702,7 +2702,7 @@ namespace Vixen_Messaging
 			this.checkBoxLocalRandom.Location = new System.Drawing.Point(371, 43);
 			this.checkBoxLocalRandom.Name = "checkBoxLocalRandom";
 			this.checkBoxLocalRandom.Size = new System.Drawing.Size(227, 24);
-			this.checkBoxLocalRandom.TabIndex = 58;
+			this.checkBoxLocalRandom.TabIndex = 1;
 			this.checkBoxLocalRandom.Text = "Play Local Msgs Randomly:";
 			this.checkBoxLocalRandom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			this.toolTip1.SetToolTip(this.checkBoxLocalRandom, "Select this to display random Local messages. Ensure messages that you want displ" +
@@ -2749,20 +2749,50 @@ namespace Vixen_Messaging
 			this.groupBoxCountDown.Location = new System.Drawing.Point(7, 74);
 			this.groupBoxCountDown.Name = "groupBoxCountDown";
 			this.groupBoxCountDown.Size = new System.Drawing.Size(877, 397);
-			this.groupBoxCountDown.TabIndex = 76;
+			this.groupBoxCountDown.TabIndex = 1;
 			this.groupBoxCountDown.TabStop = false;
 			this.groupBoxCountDown.Text = "Custom Messages";
 			this.toolTip1.SetToolTip(this.groupBoxCountDown, "Add the word COUNTDOWN to your message to display\r\nthe number fo days to the Coun" +
         "tDown date.");
 			// 
+			// label99
+			// 
+			this.label99.AutoSize = true;
+			this.label99.Location = new System.Drawing.Point(10, 84);
+			this.label99.Name = "label99";
+			this.label99.Size = new System.Drawing.Size(137, 20);
+			this.label99.TabIndex = 100;
+			this.label99.Text = "Sequence Option:";
+			this.toolTip1.SetToolTip(this.label99, "Automatically Assigned - Will select an effect based on the selection you have se" +
+        "t up on the Sequence settings tab.\r\nOther selections are as per selection.");
+			// 
+			// customMessageSeqSel
+			// 
+			this.customMessageSeqSel.FormattingEnabled = true;
+			this.customMessageSeqSel.Items.AddRange(new object[] {
+            "Automatically Assigned",
+            "SnowFlakes",
+            "Fire",
+            "Meteors",
+            "Twinkles",
+            "Movie",
+            "Glediator/Jinx",
+            "None"});
+			this.customMessageSeqSel.Location = new System.Drawing.Point(153, 81);
+			this.customMessageSeqSel.Name = "customMessageSeqSel";
+			this.customMessageSeqSel.Size = new System.Drawing.Size(204, 28);
+			this.customMessageSeqSel.TabIndex = 8;
+			this.customMessageSeqSel.SelectedIndexChanged += new System.EventHandler(this.customMessageSeqSel_SelectedIndexChanged);
+			this.customMessageSeqSel.MouseLeave += new System.EventHandler(this.customMessageSeqSel_MouseLeave);
+			// 
 			// checkBoxCentreStop
 			// 
 			this.checkBoxCentreStop.AutoSize = true;
 			this.checkBoxCentreStop.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxCentreStop.Location = new System.Drawing.Point(590, 180);
+			this.checkBoxCentreStop.Location = new System.Drawing.Point(455, 169);
 			this.checkBoxCentreStop.Name = "checkBoxCentreStop";
 			this.checkBoxCentreStop.Size = new System.Drawing.Size(125, 24);
-			this.checkBoxCentreStop.TabIndex = 98;
+			this.checkBoxCentreStop.TabIndex = 13;
 			this.checkBoxCentreStop.Text = "Center Stop:";
 			this.toolTip1.SetToolTip(this.checkBoxCentreStop, "Enable this message to be included in the selection to display.");
 			this.checkBoxCentreStop.UseVisualStyleBackColor = true;
@@ -2771,7 +2801,7 @@ namespace Vixen_Messaging
 			// label97
 			// 
 			this.label97.AutoSize = true;
-			this.label97.Location = new System.Drawing.Point(605, 81);
+			this.label97.Location = new System.Drawing.Point(10, 126);
 			this.label97.Name = "label97";
 			this.label97.Size = new System.Drawing.Size(110, 20);
 			this.label97.TabIndex = 97;
@@ -2785,10 +2815,10 @@ namespace Vixen_Messaging
             "Single",
             "Multi",
             "Random"});
-			this.messageColourOption.Location = new System.Drawing.Point(722, 78);
+			this.messageColourOption.Location = new System.Drawing.Point(153, 123);
 			this.messageColourOption.Name = "messageColourOption";
 			this.messageColourOption.Size = new System.Drawing.Size(131, 28);
-			this.messageColourOption.TabIndex = 96;
+			this.messageColourOption.TabIndex = 9;
 			this.messageColourOption.SelectedIndexChanged += new System.EventHandler(this.messageColourOption_SelectedIndexChanged);
 			this.messageColourOption.MouseLeave += new System.EventHandler(this.messageColourOption_MouseLeave);
 			// 
@@ -2801,7 +2831,7 @@ namespace Vixen_Messaging
 			this.line1Colour.Margin = new System.Windows.Forms.Padding(0);
 			this.line1Colour.Name = "line1Colour";
 			this.line1Colour.Size = new System.Drawing.Size(40, 40);
-			this.line1Colour.TabIndex = 92;
+			this.line1Colour.TabIndex = 18;
 			this.toolTip1.SetToolTip(this.line1Colour, "Select a colour to edit.");
 			this.line1Colour.UseVisualStyleBackColor = false;
 			this.line1Colour.Click += new System.EventHandler(this.line1Colour_Click);
@@ -2815,7 +2845,7 @@ namespace Vixen_Messaging
 			this.line2Colour.Margin = new System.Windows.Forms.Padding(0);
 			this.line2Colour.Name = "line2Colour";
 			this.line2Colour.Size = new System.Drawing.Size(40, 40);
-			this.line2Colour.TabIndex = 93;
+			this.line2Colour.TabIndex = 19;
 			this.toolTip1.SetToolTip(this.line2Colour, "Select a colour to edit.");
 			this.line2Colour.UseVisualStyleBackColor = false;
 			this.line2Colour.Click += new System.EventHandler(this.line2Colour_Click);
@@ -2829,7 +2859,7 @@ namespace Vixen_Messaging
 			this.line3Colour.Margin = new System.Windows.Forms.Padding(0);
 			this.line3Colour.Name = "line3Colour";
 			this.line3Colour.Size = new System.Drawing.Size(40, 40);
-			this.line3Colour.TabIndex = 94;
+			this.line3Colour.TabIndex = 20;
 			this.toolTip1.SetToolTip(this.line3Colour, "Select a colour to edit.");
 			this.line3Colour.UseVisualStyleBackColor = false;
 			this.line3Colour.Click += new System.EventHandler(this.line3Colour_Click);
@@ -2843,7 +2873,7 @@ namespace Vixen_Messaging
 			this.line4Colour.Margin = new System.Windows.Forms.Padding(0);
 			this.line4Colour.Name = "line4Colour";
 			this.line4Colour.Size = new System.Drawing.Size(40, 40);
-			this.line4Colour.TabIndex = 95;
+			this.line4Colour.TabIndex = 21;
 			this.toolTip1.SetToolTip(this.line4Colour, "Select a colour to edit.");
 			this.line4Colour.UseVisualStyleBackColor = false;
 			this.line4Colour.Click += new System.EventHandler(this.line4Colour_Click);
@@ -2865,7 +2895,7 @@ namespace Vixen_Messaging
 			this.trackBarCustomSpeed.Minimum = 1;
 			this.trackBarCustomSpeed.Name = "trackBarCustomSpeed";
 			this.trackBarCustomSpeed.Size = new System.Drawing.Size(420, 40);
-			this.trackBarCustomSpeed.TabIndex = 90;
+			this.trackBarCustomSpeed.TabIndex = 22;
 			this.trackBarCustomSpeed.Value = 5;
 			this.trackBarCustomSpeed.Scroll += new System.EventHandler(this.trackBarCustomSpeed_Scroll);
 			this.trackBarCustomSpeed.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarCustomSpeed_MouseDown);
@@ -2879,11 +2909,11 @@ namespace Vixen_Messaging
 			this.buttonPlay.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
 			this.buttonPlay.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 			this.buttonPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonPlay.Location = new System.Drawing.Point(645, 22);
+			this.buttonPlay.Location = new System.Drawing.Point(617, 22);
 			this.buttonPlay.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonPlay.Name = "buttonPlay";
 			this.buttonPlay.Size = new System.Drawing.Size(38, 38);
-			this.buttonPlay.TabIndex = 89;
+			this.buttonPlay.TabIndex = 6;
 			this.buttonPlay.Text = "P";
 			this.toolTip1.SetToolTip(this.buttonPlay, "Play selected message. Useful for testing current message\r\nor displaying an immed" +
         "iate message to the audience.");
@@ -2892,7 +2922,7 @@ namespace Vixen_Messaging
 			// 
 			// CustomMsgLength
 			// 
-			this.CustomMsgLength.Location = new System.Drawing.Point(788, 132);
+			this.CustomMsgLength.Location = new System.Drawing.Point(573, 124);
 			this.CustomMsgLength.Maximum = new decimal(new int[] {
             600,
             0,
@@ -2905,7 +2935,7 @@ namespace Vixen_Messaging
             0});
 			this.CustomMsgLength.Name = "CustomMsgLength";
 			this.CustomMsgLength.Size = new System.Drawing.Size(65, 26);
-			this.CustomMsgLength.TabIndex = 88;
+			this.CustomMsgLength.TabIndex = 12;
 			this.CustomMsgLength.Value = new decimal(new int[] {
             10,
             0,
@@ -2916,9 +2946,10 @@ namespace Vixen_Messaging
 			// 
 			// label94
 			// 
-			this.label94.Location = new System.Drawing.Point(718, 121);
+			this.label94.AutoSize = true;
+			this.label94.Location = new System.Drawing.Point(456, 126);
 			this.label94.Name = "label94";
-			this.label94.Size = new System.Drawing.Size(68, 46);
+			this.label94.Size = new System.Drawing.Size(97, 20);
 			this.label94.TabIndex = 87;
 			this.label94.Text = "Msg Length:";
 			this.toolTip1.SetToolTip(this.label94, "Time the message is displayed for in seconds.");
@@ -2927,7 +2958,7 @@ namespace Vixen_Messaging
 			// 
 			this.textBoxCustomFontSize.BackColor = System.Drawing.Color.White;
 			this.textBoxCustomFontSize.Enabled = false;
-			this.textBoxCustomFontSize.Location = new System.Drawing.Point(342, 131);
+			this.textBoxCustomFontSize.Location = new System.Drawing.Point(734, 167);
 			this.textBoxCustomFontSize.Name = "textBoxCustomFontSize";
 			this.textBoxCustomFontSize.Size = new System.Drawing.Size(86, 26);
 			this.textBoxCustomFontSize.TabIndex = 86;
@@ -2939,7 +2970,7 @@ namespace Vixen_Messaging
 			this.textBoxCustomFont.BackColor = System.Drawing.Color.White;
 			this.textBoxCustomFont.Enabled = false;
 			this.textBoxCustomFont.ForeColor = System.Drawing.SystemColors.InfoText;
-			this.textBoxCustomFont.Location = new System.Drawing.Point(134, 131);
+			this.textBoxCustomFont.Location = new System.Drawing.Point(688, 123);
 			this.textBoxCustomFont.Name = "textBoxCustomFont";
 			this.textBoxCustomFont.Size = new System.Drawing.Size(177, 26);
 			this.textBoxCustomFont.TabIndex = 67;
@@ -2949,10 +2980,10 @@ namespace Vixen_Messaging
 			// buttonCustomFont
 			// 
 			this.buttonCustomFont.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonCustomFont.Location = new System.Drawing.Point(10, 128);
+			this.buttonCustomFont.Location = new System.Drawing.Point(721, 78);
 			this.buttonCustomFont.Name = "buttonCustomFont";
 			this.buttonCustomFont.Size = new System.Drawing.Size(108, 32);
-			this.buttonCustomFont.TabIndex = 85;
+			this.buttonCustomFont.TabIndex = 11;
 			this.buttonCustomFont.Text = "Font";
 			this.buttonCustomFont.UseVisualStyleBackColor = false;
 			this.buttonCustomFont.Click += new System.EventHandler(this.buttonCustomFont_Click);
@@ -2960,7 +2991,7 @@ namespace Vixen_Messaging
 			// label93
 			// 
 			this.label93.AutoSize = true;
-			this.label93.Location = new System.Drawing.Point(175, 31);
+			this.label93.Location = new System.Drawing.Point(147, 31);
 			this.label93.Name = "label93";
 			this.label93.Size = new System.Drawing.Size(124, 20);
 			this.label93.TabIndex = 84;
@@ -2969,10 +3000,10 @@ namespace Vixen_Messaging
 			// comboBoxName
 			// 
 			this.comboBoxName.FormattingEnabled = true;
-			this.comboBoxName.Location = new System.Drawing.Point(307, 28);
+			this.comboBoxName.Location = new System.Drawing.Point(279, 28);
 			this.comboBoxName.Name = "comboBoxName";
 			this.comboBoxName.Size = new System.Drawing.Size(218, 28);
-			this.comboBoxName.TabIndex = 82;
+			this.comboBoxName.TabIndex = 3;
 			this.toolTip1.SetToolTip(this.comboBoxName, "List all messages that have been created.");
 			this.comboBoxName.SelectedIndexChanged += new System.EventHandler(this.comboBoxName_SelectedIndexChanged);
 			// 
@@ -2980,10 +3011,10 @@ namespace Vixen_Messaging
 			// 
 			this.checkBoxMessageEnabled.AutoSize = true;
 			this.checkBoxMessageEnabled.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxMessageEnabled.Location = new System.Drawing.Point(402, 80);
+			this.checkBoxMessageEnabled.Location = new System.Drawing.Point(712, 30);
 			this.checkBoxMessageEnabled.Name = "checkBoxMessageEnabled";
 			this.checkBoxMessageEnabled.Size = new System.Drawing.Size(123, 24);
-			this.checkBoxMessageEnabled.TabIndex = 81;
+			this.checkBoxMessageEnabled.TabIndex = 7;
 			this.checkBoxMessageEnabled.Text = "Enable Msg:";
 			this.toolTip1.SetToolTip(this.checkBoxMessageEnabled, "Enable this message to be included in the selection to be displayed.");
 			this.checkBoxMessageEnabled.UseVisualStyleBackColor = true;
@@ -2996,11 +3027,11 @@ namespace Vixen_Messaging
 			this.buttonRemoveMessage.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
 			this.buttonRemoveMessage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 			this.buttonRemoveMessage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonRemoveMessage.Location = new System.Drawing.Point(594, 22);
+			this.buttonRemoveMessage.Location = new System.Drawing.Point(566, 22);
 			this.buttonRemoveMessage.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonRemoveMessage.Name = "buttonRemoveMessage";
 			this.buttonRemoveMessage.Size = new System.Drawing.Size(38, 38);
-			this.buttonRemoveMessage.TabIndex = 79;
+			this.buttonRemoveMessage.TabIndex = 5;
 			this.buttonRemoveMessage.Text = "-";
 			this.toolTip1.SetToolTip(this.buttonRemoveMessage, "Delete selected message.");
 			this.buttonRemoveMessage.UseVisualStyleBackColor = false;
@@ -3013,11 +3044,11 @@ namespace Vixen_Messaging
 			this.buttonAddMessage.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
 			this.buttonAddMessage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 			this.buttonAddMessage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonAddMessage.Location = new System.Drawing.Point(543, 22);
+			this.buttonAddMessage.Location = new System.Drawing.Point(515, 22);
 			this.buttonAddMessage.Margin = new System.Windows.Forms.Padding(0);
 			this.buttonAddMessage.Name = "buttonAddMessage";
 			this.buttonAddMessage.Size = new System.Drawing.Size(38, 38);
-			this.buttonAddMessage.TabIndex = 78;
+			this.buttonAddMessage.TabIndex = 4;
 			this.buttonAddMessage.Text = "+";
 			this.toolTip1.SetToolTip(this.buttonAddMessage, "Create new message.");
 			this.buttonAddMessage.UseVisualStyleBackColor = false;
@@ -3032,19 +3063,20 @@ namespace Vixen_Messaging
             "Up",
             "Down",
             "None"});
-			this.comboBoxCountDownDirection.Location = new System.Drawing.Point(574, 131);
+			this.comboBoxCountDownDirection.Location = new System.Drawing.Point(573, 81);
 			this.comboBoxCountDownDirection.Name = "comboBoxCountDownDirection";
 			this.comboBoxCountDownDirection.Size = new System.Drawing.Size(86, 28);
-			this.comboBoxCountDownDirection.TabIndex = 76;
+			this.comboBoxCountDownDirection.TabIndex = 10;
 			this.comboBoxCountDownDirection.Text = "None";
 			this.toolTip1.SetToolTip(this.comboBoxCountDownDirection, "Direction of Text");
 			this.comboBoxCountDownDirection.MouseLeave += new System.EventHandler(this.comboBoxCountDownDirection_MouseLeave);
 			// 
 			// label10
 			// 
-			this.label10.Location = new System.Drawing.Point(495, 121);
+			this.label10.AutoSize = true;
+			this.label10.Location = new System.Drawing.Point(456, 84);
 			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(80, 46);
+			this.label10.Size = new System.Drawing.Size(110, 20);
 			this.label10.TabIndex = 77;
 			this.label10.Text = "Text Direction:";
 			// 
@@ -3089,7 +3121,7 @@ namespace Vixen_Messaging
 			this.textBoxLine1.Location = new System.Drawing.Point(30, 193);
 			this.textBoxLine1.Name = "textBoxLine1";
 			this.textBoxLine1.Size = new System.Drawing.Size(320, 26);
-			this.textBoxLine1.TabIndex = 67;
+			this.textBoxLine1.TabIndex = 14;
 			this.toolTip1.SetToolTip(this.textBoxLine1, "Add the word COUNTDOWN to your message to display the number of days until select" +
         "ed date.");
 			this.textBoxLine1.Leave += new System.EventHandler(this.textBoxLine1_MouseLeave);
@@ -3099,7 +3131,7 @@ namespace Vixen_Messaging
 			this.textBoxLine2.Location = new System.Drawing.Point(30, 244);
 			this.textBoxLine2.Name = "textBoxLine2";
 			this.textBoxLine2.Size = new System.Drawing.Size(320, 26);
-			this.textBoxLine2.TabIndex = 68;
+			this.textBoxLine2.TabIndex = 15;
 			this.toolTip1.SetToolTip(this.textBoxLine2, "Add the word COUNTDOWN to your message to display the number of days until select" +
         "ed date.");
 			this.textBoxLine2.Leave += new System.EventHandler(this.textBoxLine2_MouseLeave);
@@ -3118,7 +3150,7 @@ namespace Vixen_Messaging
 			this.textBoxLine3.Location = new System.Drawing.Point(30, 296);
 			this.textBoxLine3.Name = "textBoxLine3";
 			this.textBoxLine3.Size = new System.Drawing.Size(320, 26);
-			this.textBoxLine3.TabIndex = 69;
+			this.textBoxLine3.TabIndex = 16;
 			this.toolTip1.SetToolTip(this.textBoxLine3, "Add the word COUNTDOWN to your message to display the number of days until select" +
         "ed date.");
 			this.textBoxLine3.Leave += new System.EventHandler(this.textBoxLine3_MouseLeave);
@@ -3131,7 +3163,7 @@ namespace Vixen_Messaging
 			this.trackBarCountDownPosition.Minimum = 1;
 			this.trackBarCountDownPosition.Name = "trackBarCountDownPosition";
 			this.trackBarCountDownPosition.Size = new System.Drawing.Size(420, 40);
-			this.trackBarCountDownPosition.TabIndex = 72;
+			this.trackBarCountDownPosition.TabIndex = 23;
 			this.trackBarCountDownPosition.Value = 65;
 			this.trackBarCountDownPosition.Scroll += new System.EventHandler(this.trackBarCountDownPosition_Scroll);
 			this.trackBarCountDownPosition.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarCountDownPosition_MouseDown);
@@ -3143,7 +3175,7 @@ namespace Vixen_Messaging
 			this.textBoxLine4.Location = new System.Drawing.Point(30, 347);
 			this.textBoxLine4.Name = "textBoxLine4";
 			this.textBoxLine4.Size = new System.Drawing.Size(320, 26);
-			this.textBoxLine4.TabIndex = 70;
+			this.textBoxLine4.TabIndex = 17;
 			this.toolTip1.SetToolTip(this.textBoxLine4, "Add the word COUNTDOWN to your message to display the number of days until select" +
         "ed date.");
 			this.textBoxLine4.Leave += new System.EventHandler(this.textBoxLine4_MouseLeave);
@@ -3164,7 +3196,7 @@ namespace Vixen_Messaging
 			this.checkBoxCountDownEnable.Location = new System.Drawing.Point(632, 43);
 			this.checkBoxCountDownEnable.Name = "checkBoxCountDownEnable";
 			this.checkBoxCountDownEnable.Size = new System.Drawing.Size(225, 24);
-			this.checkBoxCountDownEnable.TabIndex = 74;
+			this.checkBoxCountDownEnable.TabIndex = 2;
 			this.checkBoxCountDownEnable.Text = "Enable Custom Messages:";
 			this.checkBoxCountDownEnable.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			this.toolTip1.SetToolTip(this.checkBoxCountDownEnable, "Enables Custom messages using Lines below and will be added to the Random/Sequent" +
@@ -3203,7 +3235,7 @@ namespace Vixen_Messaging
 			this.checkBoxBlacklist.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.checkBoxBlacklist.Name = "checkBoxBlacklist";
 			this.checkBoxBlacklist.Size = new System.Drawing.Size(93, 24);
-			this.checkBoxBlacklist.TabIndex = 18;
+			this.checkBoxBlacklist.TabIndex = 13;
 			this.checkBoxBlacklist.Tag = "3";
 			this.checkBoxBlacklist.Text = "Blacklist";
 			this.toolTip1.SetToolTip(this.checkBoxBlacklist, "Checks for dirty words against a Blacklist and rejects any that match.");
@@ -3218,7 +3250,7 @@ namespace Vixen_Messaging
 			this.checkBoxWhitelist.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.checkBoxWhitelist.Name = "checkBoxWhitelist";
 			this.checkBoxWhitelist.Size = new System.Drawing.Size(95, 24);
-			this.checkBoxWhitelist.TabIndex = 19;
+			this.checkBoxWhitelist.TabIndex = 14;
 			this.checkBoxWhitelist.Tag = "4";
 			this.checkBoxWhitelist.Text = "Whitelist";
 			this.toolTip1.SetToolTip(this.checkBoxWhitelist, "Will only display incoming messages if all words are in the whitelist.");
@@ -3264,23 +3296,23 @@ namespace Vixen_Messaging
 			this.comboBoxPlayMode.Location = new System.Drawing.Point(692, 32);
 			this.comboBoxPlayMode.Name = "comboBoxPlayMode";
 			this.comboBoxPlayMode.Size = new System.Drawing.Size(174, 28);
-			this.comboBoxPlayMode.TabIndex = 67;
+			this.comboBoxPlayMode.TabIndex = 12;
 			this.comboBoxPlayMode.SelectedIndexChanged += new System.EventHandler(this.comboBoxPlayMode_SelectedIndexChanged);
 			// 
-			// tabControl1
+			// tabControlMain
 			// 
-			this.tabControl1.Controls.Add(this.tabPageMain);
-			this.tabControl1.Controls.Add(this.tabPageMessagingSettings);
-			this.tabControl1.Controls.Add(this.tabPageTextSetting);
-			this.tabControl1.Controls.Add(this.localMsgs);
-			this.tabControl1.Controls.Add(this.tabPageSeqSettings);
-			this.tabControl1.Controls.Add(this.tabPageWordLists);
-			this.tabControl1.Controls.Add(this.remoteCmds);
-			this.tabControl1.Location = new System.Drawing.Point(-2, 12);
-			this.tabControl1.Name = "tabControl1";
-			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(901, 920);
-			this.tabControl1.TabIndex = 5;
+			this.tabControlMain.Controls.Add(this.tabPageMain);
+			this.tabControlMain.Controls.Add(this.tabPageMessagingSettings);
+			this.tabControlMain.Controls.Add(this.tabPageTextSetting);
+			this.tabControlMain.Controls.Add(this.localMsgs);
+			this.tabControlMain.Controls.Add(this.tabPageSeqSettings);
+			this.tabControlMain.Controls.Add(this.tabPageWordLists);
+			this.tabControlMain.Controls.Add(this.remoteCmds);
+			this.tabControlMain.Location = new System.Drawing.Point(-2, 12);
+			this.tabControlMain.Name = "tabControlMain";
+			this.tabControlMain.SelectedIndex = 0;
+			this.tabControlMain.Size = new System.Drawing.Size(901, 920);
+			this.tabControlMain.TabIndex = 5;
 			// 
 			// tabPageMain
 			// 
@@ -3335,7 +3367,7 @@ namespace Vixen_Messaging
             0});
 			this.numericUpDownIntervalMsgs.Name = "numericUpDownIntervalMsgs";
 			this.numericUpDownIntervalMsgs.Size = new System.Drawing.Size(72, 26);
-			this.numericUpDownIntervalMsgs.TabIndex = 61;
+			this.numericUpDownIntervalMsgs.TabIndex = 15;
 			// 
 			// tabPageMessagingSettings
 			// 
@@ -3357,7 +3389,7 @@ namespace Vixen_Messaging
 			this.buttonResetToDefault.Location = new System.Drawing.Point(657, 817);
 			this.buttonResetToDefault.Name = "buttonResetToDefault";
 			this.buttonResetToDefault.Size = new System.Drawing.Size(206, 42);
-			this.buttonResetToDefault.TabIndex = 16;
+			this.buttonResetToDefault.TabIndex = 14;
 			this.buttonResetToDefault.Text = "Reset to Default Setting";
 			this.buttonResetToDefault.UseVisualStyleBackColor = false;
 			this.buttonResetToDefault.Click += new System.EventHandler(this.buttonResetToDefault_Click);
@@ -3541,7 +3573,7 @@ namespace Vixen_Messaging
 			this.textBoxReturnBannedMSG.Multiline = true;
 			this.textBoxReturnBannedMSG.Name = "textBoxReturnBannedMSG";
 			this.textBoxReturnBannedMSG.Size = new System.Drawing.Size(648, 55);
-			this.textBoxReturnBannedMSG.TabIndex = 8;
+			this.textBoxReturnBannedMSG.TabIndex = 4;
 			// 
 			// checkBoxAutoStart
 			// 
@@ -3550,7 +3582,7 @@ namespace Vixen_Messaging
 			this.checkBoxAutoStart.Location = new System.Drawing.Point(20, 32);
 			this.checkBoxAutoStart.Name = "checkBoxAutoStart";
 			this.checkBoxAutoStart.Size = new System.Drawing.Size(316, 24);
-			this.checkBoxAutoStart.TabIndex = 3;
+			this.checkBoxAutoStart.TabIndex = 0;
 			this.checkBoxAutoStart.Text = "Auto Start Message retrieval on startup:";
 			this.checkBoxAutoStart.UseVisualStyleBackColor = true;
 			// 
@@ -3559,7 +3591,7 @@ namespace Vixen_Messaging
 			this.textBoxSubjectHeader.Location = new System.Drawing.Point(643, 29);
 			this.textBoxSubjectHeader.Name = "textBoxSubjectHeader";
 			this.textBoxSubjectHeader.Size = new System.Drawing.Size(203, 26);
-			this.textBoxSubjectHeader.TabIndex = 2;
+			this.textBoxSubjectHeader.TabIndex = 1;
 			this.textBoxSubjectHeader.Text = "SMS from";
 			// 
 			// tabPageTextSetting
@@ -3640,7 +3672,7 @@ namespace Vixen_Messaging
 			this.incomingMessageColourOption.Location = new System.Drawing.Point(125, 36);
 			this.incomingMessageColourOption.Name = "incomingMessageColourOption";
 			this.incomingMessageColourOption.Size = new System.Drawing.Size(178, 28);
-			this.incomingMessageColourOption.TabIndex = 98;
+			this.incomingMessageColourOption.TabIndex = 0;
 			this.incomingMessageColourOption.Text = "Random";
 			this.incomingMessageColourOption.SelectedIndexChanged += new System.EventHandler(this.incomingMessageColourOption_SelectedIndexChanged);
 			// 
@@ -3659,7 +3691,7 @@ namespace Vixen_Messaging
 			this.buttonFont.Location = new System.Drawing.Point(691, 34);
 			this.buttonFont.Name = "buttonFont";
 			this.buttonFont.Size = new System.Drawing.Size(148, 32);
-			this.buttonFont.TabIndex = 5;
+			this.buttonFont.TabIndex = 2;
 			this.buttonFont.Text = "Font Selection";
 			this.buttonFont.UseVisualStyleBackColor = true;
 			this.buttonFont.Click += new System.EventHandler(this.buttonFont_Click);
@@ -3684,7 +3716,7 @@ namespace Vixen_Messaging
 			this.comboBoxString.Location = new System.Drawing.Point(487, 36);
 			this.comboBoxString.Name = "comboBoxString";
 			this.comboBoxString.Size = new System.Drawing.Size(128, 28);
-			this.comboBoxString.TabIndex = 2;
+			this.comboBoxString.TabIndex = 1;
 			this.comboBoxString.Text = "Horizontal";
 			// 
 			// TextLineNumber
@@ -3732,7 +3764,7 @@ namespace Vixen_Messaging
 			this.trackBarTextPosition.Minimum = 1;
 			this.trackBarTextPosition.Name = "trackBarTextPosition";
 			this.trackBarTextPosition.Size = new System.Drawing.Size(338, 40);
-			this.trackBarTextPosition.TabIndex = 6;
+			this.trackBarTextPosition.TabIndex = 8;
 			this.trackBarTextPosition.Value = 10;
 			this.trackBarTextPosition.Scroll += new System.EventHandler(this.trackBarTextPosition_Scroll);
 			this.trackBarTextPosition.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextPosition_MouseDown);
@@ -3755,7 +3787,7 @@ namespace Vixen_Messaging
 			this.trackBarTextSpeed.Minimum = 1;
 			this.trackBarTextSpeed.Name = "trackBarTextSpeed";
 			this.trackBarTextSpeed.Size = new System.Drawing.Size(311, 40);
-			this.trackBarTextSpeed.TabIndex = 7;
+			this.trackBarTextSpeed.TabIndex = 9;
 			this.trackBarTextSpeed.Value = 5;
 			this.trackBarTextSpeed.Scroll += new System.EventHandler(this.trackBarTextSpeed_Scroll);
 			this.trackBarTextSpeed.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextSpeed_MouseDown);
@@ -3793,7 +3825,7 @@ namespace Vixen_Messaging
 			this.groupBoxMessages.Location = new System.Drawing.Point(3, 6);
 			this.groupBoxMessages.Name = "groupBoxMessages";
 			this.groupBoxMessages.Size = new System.Drawing.Size(887, 875);
-			this.groupBoxMessages.TabIndex = 33;
+			this.groupBoxMessages.TabIndex = 0;
 			this.groupBoxMessages.TabStop = false;
 			this.groupBoxMessages.Text = "Local Messages";
 			// 
@@ -3824,7 +3856,7 @@ namespace Vixen_Messaging
 			this.dateCountDown.Location = new System.Drawing.Point(189, 39);
 			this.dateCountDown.Name = "dateCountDown";
 			this.dateCountDown.Size = new System.Drawing.Size(138, 26);
-			this.dateCountDown.TabIndex = 66;
+			this.dateCountDown.TabIndex = 0;
 			this.dateCountDown.Value = new System.DateTime(2015, 12, 25, 0, 0, 0, 0);
 			// 
 			// tabPageSeqSettings
@@ -3842,7 +3874,7 @@ namespace Vixen_Messaging
 			this.tabPageSeqSettings.Padding = new System.Windows.Forms.Padding(3);
 			this.tabPageSeqSettings.Size = new System.Drawing.Size(893, 887);
 			this.tabPageSeqSettings.TabIndex = 3;
-			this.tabPageSeqSettings.Text = "Sequence  Settings";
+			this.tabPageSeqSettings.Text = "Sequence Settings";
 			// 
 			// groupBoxLog
 			// 
@@ -3887,7 +3919,7 @@ namespace Vixen_Messaging
 			this.tabControlSequence.Name = "tabControlSequence";
 			this.tabControlSequence.SelectedIndex = 0;
 			this.tabControlSequence.Size = new System.Drawing.Size(864, 242);
-			this.tabControlSequence.TabIndex = 6;
+			this.tabControlSequence.TabIndex = 3;
 			this.tabControlSequence.SelectedIndexChanged += new System.EventHandler(this.tabControlSequence_SelectedIndexChanged_1);
 			// 
 			// TabSeq3
@@ -4408,36 +4440,6 @@ namespace Vixen_Messaging
 			// 
 			this.fontDialog1.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			// 
-			// label99
-			// 
-			this.label99.AutoSize = true;
-			this.label99.Location = new System.Drawing.Point(15, 81);
-			this.label99.Name = "label99";
-			this.label99.Size = new System.Drawing.Size(86, 20);
-			this.label99.TabIndex = 100;
-			this.label99.Text = "Sequence:";
-			this.toolTip1.SetToolTip(this.label99, "Automatically Assigned - Will select an effect based on the selection you have se" +
-        "t up on the Sequence settings tab.\r\nOther selections are as per selection.");
-			// 
-			// customMessageSeqSel
-			// 
-			this.customMessageSeqSel.FormattingEnabled = true;
-			this.customMessageSeqSel.Items.AddRange(new object[] {
-            "Automatically Assigned",
-            "SnowFlakes",
-            "Fire",
-            "Meteors",
-            "Twinkles",
-            "Movie",
-            "Glediator/Jinx",
-            "None"});
-			this.customMessageSeqSel.Location = new System.Drawing.Point(107, 78);
-			this.customMessageSeqSel.Name = "customMessageSeqSel";
-			this.customMessageSeqSel.Size = new System.Drawing.Size(204, 28);
-			this.customMessageSeqSel.TabIndex = 99;
-			this.customMessageSeqSel.SelectedIndexChanged += new System.EventHandler(this.customMessageSeqSel_SelectedIndexChanged);
-			this.customMessageSeqSel.MouseLeave += new System.EventHandler(this.customMessageSeqSel_MouseLeave);
-			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -4453,7 +4455,7 @@ namespace Vixen_Messaging
 			this.Controls.Add(this.buttonHelp);
 			this.Controls.Add(this.buttonStop);
 			this.Controls.Add(this.buttonStart);
-			this.Controls.Add(this.tabControl1);
+			this.Controls.Add(this.tabControlMain);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Location = new System.Drawing.Point(100, 100);
 			this.MaximizeBox = false;
@@ -4517,7 +4519,7 @@ namespace Vixen_Messaging
 			((System.ComponentModel.ISupportInitialize)(this.trackBarCustomSpeed)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.CustomMsgLength)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarCountDownPosition)).EndInit();
-			this.tabControl1.ResumeLayout(false);
+			this.tabControlMain.ResumeLayout(false);
 			this.tabPageMain.ResumeLayout(false);
 			this.tabPageMain.PerformLayout();
 			this.groupBoxPlayOptions.ResumeLayout(false);
@@ -4579,7 +4581,7 @@ namespace Vixen_Messaging
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Timer timerCheckMail;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControlMain;
         private System.Windows.Forms.TabPage tabPageMain;
         private System.Windows.Forms.TabPage tabPageMessagingSettings;
         private System.Windows.Forms.GroupBox groupBox5;

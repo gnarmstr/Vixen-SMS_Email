@@ -348,6 +348,7 @@ namespace Vixen_Messaging
             textBoxSequenceLength5.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength5", "");
             textBoxSequenceLength6.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength6", "");
             tabControlSequence.SelectedIndex = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "tabControlSequence", 0);
+			tabControlMain.SelectedIndex = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "tabControlMain", 0);
             tabControlEffects.SelectedIndex = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "tabControlEffects", 0);
             textBoxFont.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFont", "Arial");
             textBoxFontSize.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFontSize", "10");
@@ -902,7 +903,6 @@ namespace Vixen_Messaging
 
         private void buttonPlay_Click(object sender, EventArgs e)
         {
-      //      GlobalVar.PlayCustomMessage = true;
             Stop_Vixen();
             StopSequence();
 			if (!GlobalVar.PlayCustomMessage)
@@ -3318,6 +3318,7 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength6", textBoxSequenceLength6.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "tabControlSequence", tabControlSequence.SelectedIndex);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "tabControlEffects", tabControlEffects.SelectedIndex);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "tabControlMain", tabControlMain.SelectedIndex);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "SeqIntervalTime", GlobalVar.SeqIntervalTime.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFont", textBoxFont.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFontSize", textBoxFontSize.Text);
