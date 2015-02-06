@@ -49,6 +49,12 @@ namespace Vixen_Messaging
 
 			public static List<string> CustomMessageSeqSel = new List<string>();
 
+			public static List<string> CustomMessageNodeSel = new List<string>();
+
+			public static List<string> GroupNodeID = new List<string>();
+
+			public static List<string> GroupNameID = new List<string>();
+
             public static List<int> Position = new List<int>();
 
             public static List<bool> MessageEnabled = new List<bool>();
@@ -76,7 +82,11 @@ namespace Vixen_Messaging
 
             public static bool PlayCustomMessage;
 
-            public static int Sequential { get; set; }
+			public static bool NoNodeID;
+
+			public static int GroupIDNumber;
+
+			public static int Sequential { get; set; }
 
     }
 }

@@ -160,7 +160,6 @@ namespace Vixen_Messaging
 			this.buttonGlediator = new System.Windows.Forms.Button();
 			this.label28 = new System.Windows.Forms.Label();
 			this.EffectTime = new System.Windows.Forms.NumericUpDown();
-			this.label37 = new System.Windows.Forms.Label();
 			this.TabSeq1 = new System.Windows.Forms.TabPage();
 			this.label48 = new System.Windows.Forms.Label();
 			this.textBoxSequenceLength1 = new System.Windows.Forms.TextBox();
@@ -226,6 +225,8 @@ namespace Vixen_Messaging
 			this.SaveAll = new System.Windows.Forms.PictureBox();
 			this.checkBoxLocalRandom = new System.Windows.Forms.CheckBox();
 			this.groupBoxCountDown = new System.Windows.Forms.GroupBox();
+			this.label37 = new System.Windows.Forms.Label();
+			this.customMessageNodeSel = new System.Windows.Forms.ComboBox();
 			this.label99 = new System.Windows.Forms.Label();
 			this.customMessageSeqSel = new System.Windows.Forms.ComboBox();
 			this.checkBoxCentreStop = new System.Windows.Forms.CheckBox();
@@ -269,6 +270,9 @@ namespace Vixen_Messaging
 			this.label36 = new System.Windows.Forms.Label();
 			this.label46 = new System.Windows.Forms.Label();
 			this.label45 = new System.Windows.Forms.Label();
+			this.comboBoxNodeID = new System.Windows.Forms.ComboBox();
+			this.buttonRemoveNodeID = new System.Windows.Forms.Button();
+			this.buttonAddNodeID = new System.Windows.Forms.Button();
 			this.comboBoxPlayMode = new System.Windows.Forms.ComboBox();
 			this.tabControlMain = new System.Windows.Forms.TabControl();
 			this.tabPageMain = new System.Windows.Forms.TabPage();
@@ -276,12 +280,11 @@ namespace Vixen_Messaging
 			this.label74 = new System.Windows.Forms.Label();
 			this.numericUpDownIntervalMsgs = new System.Windows.Forms.NumericUpDown();
 			this.tabPageMessagingSettings = new System.Windows.Forms.TabPage();
-			this.buttonResetToDefault = new System.Windows.Forms.Button();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.label100 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.buttonGetVixenData = new System.Windows.Forms.Button();
 			this.textBoxVixenFolder = new System.Windows.Forms.TextBox();
-			this.textBoxGroupName = new System.Windows.Forms.TextBox();
 			this.textBoxNodeId = new System.Windows.Forms.TextBox();
 			this.label6 = new System.Windows.Forms.Label();
 			this.textBoxOutputSequence = new System.Windows.Forms.TextBox();
@@ -297,6 +300,7 @@ namespace Vixen_Messaging
 			this.textBoxReturnBannedMSG = new System.Windows.Forms.TextBox();
 			this.checkBoxAutoStart = new System.Windows.Forms.CheckBox();
 			this.textBoxSubjectHeader = new System.Windows.Forms.TextBox();
+			this.buttonResetToDefault = new System.Windows.Forms.Button();
 			this.tabPageTextSetting = new System.Windows.Forms.TabPage();
 			this.groupBox4 = new System.Windows.Forms.GroupBox();
 			this.richTextBoxLog1 = new System.Windows.Forms.RichTextBox();
@@ -542,9 +546,9 @@ namespace Vixen_Messaging
 			// 
 			// label65
 			// 
-			this.label65.Location = new System.Drawing.Point(394, 168);
+			this.label65.Location = new System.Drawing.Point(394, 177);
 			this.label65.Name = "label65";
-			this.label65.Size = new System.Drawing.Size(321, 51);
+			this.label65.Size = new System.Drawing.Size(454, 33);
 			this.label65.TabIndex = 34;
 			this.label65.Text = "Listed Email Clients have been tested and are supported.";
 			// 
@@ -576,7 +580,7 @@ namespace Vixen_Messaging
             "Yahoo.com.au",
             "Zoho",
             "Yandex"});
-			this.comboBoxEmailSettings.Location = new System.Drawing.Point(216, 173);
+			this.comboBoxEmailSettings.Location = new System.Drawing.Point(218, 174);
 			this.comboBoxEmailSettings.Name = "comboBoxEmailSettings";
 			this.comboBoxEmailSettings.Size = new System.Drawing.Size(150, 28);
 			this.comboBoxEmailSettings.TabIndex = 4;
@@ -595,7 +599,7 @@ namespace Vixen_Messaging
 			// label64
 			// 
 			this.label64.AutoSize = true;
-			this.label64.Location = new System.Drawing.Point(10, 262);
+			this.label64.Location = new System.Drawing.Point(10, 265);
 			this.label64.Name = "label64";
 			this.label64.Size = new System.Drawing.Size(99, 20);
 			this.label64.TabIndex = 10;
@@ -604,7 +608,7 @@ namespace Vixen_Messaging
 			// 
 			// textBoxSMTP
 			// 
-			this.textBoxSMTP.Location = new System.Drawing.Point(218, 258);
+			this.textBoxSMTP.Location = new System.Drawing.Point(218, 261);
 			this.textBoxSMTP.Name = "textBoxSMTP";
 			this.textBoxSMTP.Size = new System.Drawing.Size(650, 26);
 			this.textBoxSMTP.TabIndex = 6;
@@ -697,7 +701,7 @@ namespace Vixen_Messaging
 			// label15
 			// 
 			this.label15.AutoSize = true;
-			this.label15.Location = new System.Drawing.Point(453, 32);
+			this.label15.Location = new System.Drawing.Point(453, 38);
 			this.label15.Name = "label15";
 			this.label15.Size = new System.Drawing.Size(163, 20);
 			this.label15.TabIndex = 5;
@@ -707,7 +711,7 @@ namespace Vixen_Messaging
 			// 
 			// label16
 			// 
-			this.label16.Location = new System.Drawing.Point(407, 62);
+			this.label16.Location = new System.Drawing.Point(424, 84);
 			this.label16.Name = "label16";
 			this.label16.Size = new System.Drawing.Size(436, 88);
 			this.label16.TabIndex = 6;
@@ -740,7 +744,7 @@ namespace Vixen_Messaging
 			// label32
 			// 
 			this.label32.AutoSize = true;
-			this.label32.Location = new System.Drawing.Point(16, 289);
+			this.label32.Location = new System.Drawing.Point(14, 91);
 			this.label32.Name = "label32";
 			this.label32.Size = new System.Drawing.Size(114, 20);
 			this.label32.TabIndex = 10;
@@ -768,7 +772,7 @@ namespace Vixen_Messaging
 			// label70
 			// 
 			this.label70.AutoSize = true;
-			this.label70.Location = new System.Drawing.Point(254, 29);
+			this.label70.Location = new System.Drawing.Point(291, 29);
 			this.label70.Name = "label70";
 			this.label70.Size = new System.Drawing.Size(131, 20);
 			this.label70.TabIndex = 41;
@@ -778,7 +782,7 @@ namespace Vixen_Messaging
 			// label69
 			// 
 			this.label69.AutoSize = true;
-			this.label69.Location = new System.Drawing.Point(464, 31);
+			this.label69.Location = new System.Drawing.Point(501, 31);
 			this.label69.Name = "label69";
 			this.label69.Size = new System.Drawing.Size(37, 20);
 			this.label69.TabIndex = 40;
@@ -788,7 +792,7 @@ namespace Vixen_Messaging
 			// extraTime
 			// 
 			this.extraTime.Enabled = false;
-			this.extraTime.Location = new System.Drawing.Point(392, 28);
+			this.extraTime.Location = new System.Drawing.Point(429, 28);
 			this.extraTime.Name = "extraTime";
 			this.extraTime.Size = new System.Drawing.Size(68, 26);
 			this.extraTime.TabIndex = 1;
@@ -1910,7 +1914,7 @@ namespace Vixen_Messaging
 			// label28
 			// 
 			this.label28.AutoSize = true;
-			this.label28.Location = new System.Drawing.Point(525, 31);
+			this.label28.Location = new System.Drawing.Point(609, 31);
 			this.label28.Name = "label28";
 			this.label28.Size = new System.Drawing.Size(140, 20);
 			this.label28.TabIndex = 37;
@@ -1919,7 +1923,7 @@ namespace Vixen_Messaging
 			// 
 			// EffectTime
 			// 
-			this.EffectTime.Location = new System.Drawing.Point(676, 28);
+			this.EffectTime.Location = new System.Drawing.Point(760, 28);
 			this.EffectTime.Maximum = new decimal(new int[] {
             6000,
             0,
@@ -1939,17 +1943,6 @@ namespace Vixen_Messaging
             0,
             0});
 			this.EffectTime.ValueChanged += new System.EventHandler(this.EffectTime_ValueChanged);
-			// 
-			// label37
-			// 
-			this.label37.AutoSize = true;
-			this.label37.Location = new System.Drawing.Point(16, 42);
-			this.label37.Name = "label37";
-			this.label37.Size = new System.Drawing.Size(147, 20);
-			this.label37.TabIndex = 18;
-			this.label37.Text = "Vixen Group Name:";
-			this.toolTip1.SetToolTip(this.label37, "Ensure this is the exact name used in Vixen 3 for your Matrix or Megatree. Is cas" +
-        "e sensitive.");
 			// 
 			// TabSeq1
 			// 
@@ -2001,6 +1994,8 @@ namespace Vixen_Messaging
 			// 
 			// buttonRemoveSeq1
 			// 
+			this.buttonRemoveSeq1.FlatAppearance.BorderSize = 0;
+			this.buttonRemoveSeq1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonRemoveSeq1.Location = new System.Drawing.Point(756, 15);
 			this.buttonRemoveSeq1.Name = "buttonRemoveSeq1";
 			this.buttonRemoveSeq1.Size = new System.Drawing.Size(38, 38);
@@ -2097,6 +2092,8 @@ namespace Vixen_Messaging
 			// 
 			// buttonRemoveSeq2
 			// 
+			this.buttonRemoveSeq2.FlatAppearance.BorderSize = 0;
+			this.buttonRemoveSeq2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonRemoveSeq2.Location = new System.Drawing.Point(756, 15);
 			this.buttonRemoveSeq2.Name = "buttonRemoveSeq2";
 			this.buttonRemoveSeq2.Size = new System.Drawing.Size(38, 38);
@@ -2145,6 +2142,8 @@ namespace Vixen_Messaging
 			// 
 			// buttonRemoveSeq3
 			// 
+			this.buttonRemoveSeq3.FlatAppearance.BorderSize = 0;
+			this.buttonRemoveSeq3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonRemoveSeq3.Location = new System.Drawing.Point(756, 15);
 			this.buttonRemoveSeq3.Name = "buttonRemoveSeq3";
 			this.buttonRemoveSeq3.Size = new System.Drawing.Size(38, 38);
@@ -2158,7 +2157,7 @@ namespace Vixen_Messaging
 			// 
 			this.checkBoxManEnterSettings.AutoSize = true;
 			this.checkBoxManEnterSettings.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxManEnterSettings.Location = new System.Drawing.Point(20, 72);
+			this.checkBoxManEnterSettings.Location = new System.Drawing.Point(16, 84);
 			this.checkBoxManEnterSettings.Name = "checkBoxManEnterSettings";
 			this.checkBoxManEnterSettings.Size = new System.Drawing.Size(248, 24);
 			this.checkBoxManEnterSettings.TabIndex = 2;
@@ -2169,6 +2168,8 @@ namespace Vixen_Messaging
 			// 
 			// buttonRemoveSeq4
 			// 
+			this.buttonRemoveSeq4.FlatAppearance.BorderSize = 0;
+			this.buttonRemoveSeq4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonRemoveSeq4.Location = new System.Drawing.Point(756, 15);
 			this.buttonRemoveSeq4.Name = "buttonRemoveSeq4";
 			this.buttonRemoveSeq4.Size = new System.Drawing.Size(38, 38);
@@ -2182,7 +2183,7 @@ namespace Vixen_Messaging
 			// 
 			this.checkBoxEnableSqnctrl.AutoSize = true;
 			this.checkBoxEnableSqnctrl.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxEnableSqnctrl.Location = new System.Drawing.Point(321, 22);
+			this.checkBoxEnableSqnctrl.Location = new System.Drawing.Point(372, 22);
 			this.checkBoxEnableSqnctrl.Name = "checkBoxEnableSqnctrl";
 			this.checkBoxEnableSqnctrl.Size = new System.Drawing.Size(196, 24);
 			this.checkBoxEnableSqnctrl.TabIndex = 1;
@@ -2447,7 +2448,7 @@ namespace Vixen_Messaging
 			// 
 			this.checkBoxRandomSeqSelection.AutoSize = true;
 			this.checkBoxRandomSeqSelection.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxRandomSeqSelection.Location = new System.Drawing.Point(579, 22);
+			this.checkBoxRandomSeqSelection.Location = new System.Drawing.Point(661, 22);
 			this.checkBoxRandomSeqSelection.Name = "checkBoxRandomSeqSelection";
 			this.checkBoxRandomSeqSelection.Size = new System.Drawing.Size(177, 24);
 			this.checkBoxRandomSeqSelection.TabIndex = 2;
@@ -2470,6 +2471,8 @@ namespace Vixen_Messaging
 			// 
 			// buttonRemoveSeq5
 			// 
+			this.buttonRemoveSeq5.FlatAppearance.BorderSize = 0;
+			this.buttonRemoveSeq5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonRemoveSeq5.Location = new System.Drawing.Point(756, 15);
 			this.buttonRemoveSeq5.Name = "buttonRemoveSeq5";
 			this.buttonRemoveSeq5.Size = new System.Drawing.Size(38, 38);
@@ -2481,6 +2484,8 @@ namespace Vixen_Messaging
 			// 
 			// buttonRemoveSeq6
 			// 
+			this.buttonRemoveSeq6.FlatAppearance.BorderSize = 0;
+			this.buttonRemoveSeq6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.buttonRemoveSeq6.Location = new System.Drawing.Point(756, 15);
 			this.buttonRemoveSeq6.Name = "buttonRemoveSeq6";
 			this.buttonRemoveSeq6.Size = new System.Drawing.Size(38, 38);
@@ -2494,7 +2499,7 @@ namespace Vixen_Messaging
 			// 
 			this.checkBoxDisableSeq.AutoSize = true;
 			this.checkBoxDisableSeq.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxDisableSeq.Location = new System.Drawing.Point(68, 22);
+			this.checkBoxDisableSeq.Location = new System.Drawing.Point(62, 22);
 			this.checkBoxDisableSeq.Name = "checkBoxDisableSeq";
 			this.checkBoxDisableSeq.Size = new System.Drawing.Size(198, 24);
 			this.checkBoxDisableSeq.TabIndex = 0;
@@ -2505,7 +2510,7 @@ namespace Vixen_Messaging
 			// 
 			// label9
 			// 
-			this.label9.Location = new System.Drawing.Point(16, 158);
+			this.label9.Location = new System.Drawing.Point(16, 194);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(176, 52);
 			this.label9.TabIndex = 7;
@@ -2516,7 +2521,7 @@ namespace Vixen_Messaging
 			// label78
 			// 
 			this.label78.AutoSize = true;
-			this.label78.Location = new System.Drawing.Point(16, 117);
+			this.label78.Location = new System.Drawing.Point(16, 140);
 			this.label78.Name = "label78";
 			this.label78.Size = new System.Drawing.Size(190, 20);
 			this.label78.TabIndex = 10;
@@ -2526,7 +2531,7 @@ namespace Vixen_Messaging
 			// 
 			// textBoxAccessPWD
 			// 
-			this.textBoxAccessPWD.Location = new System.Drawing.Point(220, 114);
+			this.textBoxAccessPWD.Location = new System.Drawing.Point(220, 137);
 			this.textBoxAccessPWD.Name = "textBoxAccessPWD";
 			this.textBoxAccessPWD.Size = new System.Drawing.Size(165, 26);
 			this.textBoxAccessPWD.TabIndex = 3;
@@ -2556,7 +2561,7 @@ namespace Vixen_Messaging
 			// 
 			this.checkBoxLocal.AutoSize = true;
 			this.checkBoxLocal.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxLocal.Location = new System.Drawing.Point(223, 36);
+			this.checkBoxLocal.Location = new System.Drawing.Point(250, 36);
 			this.checkBoxLocal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.checkBoxLocal.Name = "checkBoxLocal";
 			this.checkBoxLocal.Size = new System.Drawing.Size(73, 24);
@@ -2570,7 +2575,7 @@ namespace Vixen_Messaging
 			// 
 			this.checkBoxTwilio.AutoSize = true;
 			this.checkBoxTwilio.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxTwilio.Location = new System.Drawing.Point(309, 36);
+			this.checkBoxTwilio.Location = new System.Drawing.Point(358, 36);
 			this.checkBoxTwilio.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.checkBoxTwilio.Name = "checkBoxTwilio";
 			this.checkBoxTwilio.Size = new System.Drawing.Size(122, 24);
@@ -2711,6 +2716,8 @@ namespace Vixen_Messaging
 			// 
 			// groupBoxCountDown
 			// 
+			this.groupBoxCountDown.Controls.Add(this.label37);
+			this.groupBoxCountDown.Controls.Add(this.customMessageNodeSel);
 			this.groupBoxCountDown.Controls.Add(this.label99);
 			this.groupBoxCountDown.Controls.Add(this.customMessageSeqSel);
 			this.groupBoxCountDown.Controls.Add(this.checkBoxCentreStop);
@@ -2755,10 +2762,30 @@ namespace Vixen_Messaging
 			this.toolTip1.SetToolTip(this.groupBoxCountDown, "Add the word COUNTDOWN to your message to display\r\nthe number fo days to the Coun" +
         "tDown date.");
 			// 
+			// label37
+			// 
+			this.label37.AutoSize = true;
+			this.label37.Location = new System.Drawing.Point(10, 74);
+			this.label37.Name = "label37";
+			this.label37.Size = new System.Drawing.Size(100, 20);
+			this.label37.TabIndex = 102;
+			this.label37.Text = "Group Node:";
+			this.toolTip1.SetToolTip(this.label37, "Select the Group Node to use for this message.");
+			// 
+			// customMessageNodeSel
+			// 
+			this.customMessageNodeSel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.customMessageNodeSel.FormattingEnabled = true;
+			this.customMessageNodeSel.Location = new System.Drawing.Point(153, 71);
+			this.customMessageNodeSel.Name = "customMessageNodeSel";
+			this.customMessageNodeSel.Size = new System.Drawing.Size(204, 28);
+			this.customMessageNodeSel.TabIndex = 101;
+			this.customMessageNodeSel.SelectionChangeCommitted += new System.EventHandler(this.customMessageNodeSel_SelectionChangeCommitted);
+			// 
 			// label99
 			// 
 			this.label99.AutoSize = true;
-			this.label99.Location = new System.Drawing.Point(10, 84);
+			this.label99.Location = new System.Drawing.Point(10, 115);
 			this.label99.Name = "label99";
 			this.label99.Size = new System.Drawing.Size(137, 20);
 			this.label99.TabIndex = 100;
@@ -2768,6 +2795,7 @@ namespace Vixen_Messaging
 			// 
 			// customMessageSeqSel
 			// 
+			this.customMessageSeqSel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.customMessageSeqSel.FormattingEnabled = true;
 			this.customMessageSeqSel.Items.AddRange(new object[] {
             "Automatically Assigned",
@@ -2778,12 +2806,11 @@ namespace Vixen_Messaging
             "Movie",
             "Glediator/Jinx",
             "None"});
-			this.customMessageSeqSel.Location = new System.Drawing.Point(153, 81);
+			this.customMessageSeqSel.Location = new System.Drawing.Point(153, 112);
 			this.customMessageSeqSel.Name = "customMessageSeqSel";
 			this.customMessageSeqSel.Size = new System.Drawing.Size(204, 28);
 			this.customMessageSeqSel.TabIndex = 8;
-			this.customMessageSeqSel.SelectedIndexChanged += new System.EventHandler(this.customMessageSeqSel_SelectedIndexChanged);
-			this.customMessageSeqSel.MouseLeave += new System.EventHandler(this.customMessageSeqSel_MouseLeave);
+			this.customMessageSeqSel.SelectionChangeCommitted += new System.EventHandler(this.customMessageSeqSel_SelectionChangeCommitted);
 			// 
 			// checkBoxCentreStop
 			// 
@@ -2801,7 +2828,7 @@ namespace Vixen_Messaging
 			// label97
 			// 
 			this.label97.AutoSize = true;
-			this.label97.Location = new System.Drawing.Point(10, 126);
+			this.label97.Location = new System.Drawing.Point(10, 157);
 			this.label97.Name = "label97";
 			this.label97.Size = new System.Drawing.Size(110, 20);
 			this.label97.TabIndex = 97;
@@ -2810,24 +2837,24 @@ namespace Vixen_Messaging
 			// 
 			// messageColourOption
 			// 
+			this.messageColourOption.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.messageColourOption.FormattingEnabled = true;
 			this.messageColourOption.Items.AddRange(new object[] {
             "Single",
             "Multi",
             "Random"});
-			this.messageColourOption.Location = new System.Drawing.Point(153, 123);
+			this.messageColourOption.Location = new System.Drawing.Point(153, 154);
 			this.messageColourOption.Name = "messageColourOption";
 			this.messageColourOption.Size = new System.Drawing.Size(131, 28);
 			this.messageColourOption.TabIndex = 9;
-			this.messageColourOption.SelectedIndexChanged += new System.EventHandler(this.messageColourOption_SelectedIndexChanged);
-			this.messageColourOption.MouseLeave += new System.EventHandler(this.messageColourOption_MouseLeave);
+			this.messageColourOption.SelectionChangeCommitted += new System.EventHandler(this.messageColourOption_SelectionChangeCommitted);
 			// 
 			// line1Colour
 			// 
 			this.line1Colour.BackColor = System.Drawing.Color.Red;
 			this.line1Colour.FlatAppearance.BorderSize = 0;
 			this.line1Colour.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-			this.line1Colour.Location = new System.Drawing.Point(388, 186);
+			this.line1Colour.Location = new System.Drawing.Point(388, 192);
 			this.line1Colour.Margin = new System.Windows.Forms.Padding(0);
 			this.line1Colour.Name = "line1Colour";
 			this.line1Colour.Size = new System.Drawing.Size(40, 40);
@@ -2841,7 +2868,7 @@ namespace Vixen_Messaging
 			this.line2Colour.BackColor = System.Drawing.Color.Lime;
 			this.line2Colour.FlatAppearance.BorderSize = 0;
 			this.line2Colour.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-			this.line2Colour.Location = new System.Drawing.Point(389, 237);
+			this.line2Colour.Location = new System.Drawing.Point(389, 242);
 			this.line2Colour.Margin = new System.Windows.Forms.Padding(0);
 			this.line2Colour.Name = "line2Colour";
 			this.line2Colour.Size = new System.Drawing.Size(40, 40);
@@ -2855,7 +2882,7 @@ namespace Vixen_Messaging
 			this.line3Colour.BackColor = System.Drawing.Color.Blue;
 			this.line3Colour.FlatAppearance.BorderSize = 0;
 			this.line3Colour.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-			this.line3Colour.Location = new System.Drawing.Point(389, 289);
+			this.line3Colour.Location = new System.Drawing.Point(389, 293);
 			this.line3Colour.Margin = new System.Windows.Forms.Padding(0);
 			this.line3Colour.Name = "line3Colour";
 			this.line3Colour.Size = new System.Drawing.Size(40, 40);
@@ -2869,7 +2896,7 @@ namespace Vixen_Messaging
 			this.line4Colour.BackColor = System.Drawing.Color.Yellow;
 			this.line4Colour.FlatAppearance.BorderSize = 0;
 			this.line4Colour.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-			this.line4Colour.Location = new System.Drawing.Point(389, 340);
+			this.line4Colour.Location = new System.Drawing.Point(389, 343);
 			this.line4Colour.Margin = new System.Windows.Forms.Padding(0);
 			this.line4Colour.Name = "line4Colour";
 			this.line4Colour.Size = new System.Drawing.Size(40, 40);
@@ -2980,11 +3007,11 @@ namespace Vixen_Messaging
 			// buttonCustomFont
 			// 
 			this.buttonCustomFont.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonCustomFont.Location = new System.Drawing.Point(721, 78);
+			this.buttonCustomFont.Location = new System.Drawing.Point(710, 78);
 			this.buttonCustomFont.Name = "buttonCustomFont";
-			this.buttonCustomFont.Size = new System.Drawing.Size(108, 32);
+			this.buttonCustomFont.Size = new System.Drawing.Size(129, 32);
 			this.buttonCustomFont.TabIndex = 11;
-			this.buttonCustomFont.Text = "Font";
+			this.buttonCustomFont.Text = "Font Selection";
 			this.buttonCustomFont.UseVisualStyleBackColor = false;
 			this.buttonCustomFont.Click += new System.EventHandler(this.buttonCustomFont_Click);
 			// 
@@ -2999,6 +3026,7 @@ namespace Vixen_Messaging
 			// 
 			// comboBoxName
 			// 
+			this.comboBoxName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxName.FormattingEnabled = true;
 			this.comboBoxName.Location = new System.Drawing.Point(279, 28);
 			this.comboBoxName.Name = "comboBoxName";
@@ -3056,6 +3084,7 @@ namespace Vixen_Messaging
 			// 
 			// comboBoxCountDownDirection
 			// 
+			this.comboBoxCountDownDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxCountDownDirection.FormattingEnabled = true;
 			this.comboBoxCountDownDirection.Items.AddRange(new object[] {
             "Left",
@@ -3067,9 +3096,8 @@ namespace Vixen_Messaging
 			this.comboBoxCountDownDirection.Name = "comboBoxCountDownDirection";
 			this.comboBoxCountDownDirection.Size = new System.Drawing.Size(86, 28);
 			this.comboBoxCountDownDirection.TabIndex = 10;
-			this.comboBoxCountDownDirection.Text = "None";
 			this.toolTip1.SetToolTip(this.comboBoxCountDownDirection, "Direction of Text");
-			this.comboBoxCountDownDirection.MouseLeave += new System.EventHandler(this.comboBoxCountDownDirection_MouseLeave);
+			this.comboBoxCountDownDirection.SelectionChangeCommitted += new System.EventHandler(this.comboBoxCountDownDirection_SelectionChangeCommitted);
 			// 
 			// label10
 			// 
@@ -3083,7 +3111,7 @@ namespace Vixen_Messaging
 			// label92
 			// 
 			this.label92.AutoSize = true;
-			this.label92.Location = new System.Drawing.Point(10, 353);
+			this.label92.Location = new System.Drawing.Point(10, 356);
 			this.label92.Name = "label92";
 			this.label92.Size = new System.Drawing.Size(18, 20);
 			this.label92.TabIndex = 77;
@@ -3092,7 +3120,7 @@ namespace Vixen_Messaging
 			// label91
 			// 
 			this.label91.AutoSize = true;
-			this.label91.Location = new System.Drawing.Point(10, 302);
+			this.label91.Location = new System.Drawing.Point(10, 306);
 			this.label91.Name = "label91";
 			this.label91.Size = new System.Drawing.Size(18, 20);
 			this.label91.TabIndex = 76;
@@ -3101,7 +3129,7 @@ namespace Vixen_Messaging
 			// label90
 			// 
 			this.label90.AutoSize = true;
-			this.label90.Location = new System.Drawing.Point(10, 250);
+			this.label90.Location = new System.Drawing.Point(10, 255);
 			this.label90.Name = "label90";
 			this.label90.Size = new System.Drawing.Size(18, 20);
 			this.label90.TabIndex = 75;
@@ -3110,7 +3138,7 @@ namespace Vixen_Messaging
 			// label89
 			// 
 			this.label89.AutoSize = true;
-			this.label89.Location = new System.Drawing.Point(10, 197);
+			this.label89.Location = new System.Drawing.Point(10, 203);
 			this.label89.Name = "label89";
 			this.label89.Size = new System.Drawing.Size(18, 20);
 			this.label89.TabIndex = 74;
@@ -3118,7 +3146,7 @@ namespace Vixen_Messaging
 			// 
 			// textBoxLine1
 			// 
-			this.textBoxLine1.Location = new System.Drawing.Point(30, 193);
+			this.textBoxLine1.Location = new System.Drawing.Point(30, 199);
 			this.textBoxLine1.Name = "textBoxLine1";
 			this.textBoxLine1.Size = new System.Drawing.Size(320, 26);
 			this.textBoxLine1.TabIndex = 14;
@@ -3128,7 +3156,7 @@ namespace Vixen_Messaging
 			// 
 			// textBoxLine2
 			// 
-			this.textBoxLine2.Location = new System.Drawing.Point(30, 244);
+			this.textBoxLine2.Location = new System.Drawing.Point(30, 249);
 			this.textBoxLine2.Name = "textBoxLine2";
 			this.textBoxLine2.Size = new System.Drawing.Size(320, 26);
 			this.textBoxLine2.TabIndex = 15;
@@ -3147,7 +3175,7 @@ namespace Vixen_Messaging
 			// 
 			// textBoxLine3
 			// 
-			this.textBoxLine3.Location = new System.Drawing.Point(30, 296);
+			this.textBoxLine3.Location = new System.Drawing.Point(30, 300);
 			this.textBoxLine3.Name = "textBoxLine3";
 			this.textBoxLine3.Size = new System.Drawing.Size(320, 26);
 			this.textBoxLine3.TabIndex = 16;
@@ -3172,7 +3200,7 @@ namespace Vixen_Messaging
 			// 
 			// textBoxLine4
 			// 
-			this.textBoxLine4.Location = new System.Drawing.Point(30, 347);
+			this.textBoxLine4.Location = new System.Drawing.Point(30, 350);
 			this.textBoxLine4.Name = "textBoxLine4";
 			this.textBoxLine4.Size = new System.Drawing.Size(320, 26);
 			this.textBoxLine4.TabIndex = 17;
@@ -3287,8 +3315,55 @@ namespace Vixen_Messaging
 			this.label45.Text = "Direction:";
 			this.toolTip1.SetToolTip(this.label45, "Text direction");
 			// 
+			// comboBoxNodeID
+			// 
+			this.comboBoxNodeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxNodeID.FormattingEnabled = true;
+			this.comboBoxNodeID.Location = new System.Drawing.Point(173, 43);
+			this.comboBoxNodeID.Name = "comboBoxNodeID";
+			this.comboBoxNodeID.Size = new System.Drawing.Size(300, 28);
+			this.comboBoxNodeID.TabIndex = 85;
+			this.toolTip1.SetToolTip(this.comboBoxNodeID, "List of NodeID\'s");
+			this.comboBoxNodeID.SelectedIndexChanged += new System.EventHandler(this.comboBoxNodeID_SelectedIndexChanged);
+			// 
+			// buttonRemoveNodeID
+			// 
+			this.buttonRemoveNodeID.BackColor = System.Drawing.Color.Azure;
+			this.buttonRemoveNodeID.FlatAppearance.BorderSize = 0;
+			this.buttonRemoveNodeID.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonRemoveNodeID.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonRemoveNodeID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonRemoveNodeID.Location = new System.Drawing.Point(545, 37);
+			this.buttonRemoveNodeID.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonRemoveNodeID.Name = "buttonRemoveNodeID";
+			this.buttonRemoveNodeID.Size = new System.Drawing.Size(38, 38);
+			this.buttonRemoveNodeID.TabIndex = 87;
+			this.buttonRemoveNodeID.Text = "-";
+			this.toolTip1.SetToolTip(this.buttonRemoveNodeID, "Delete selected NodeID.");
+			this.buttonRemoveNodeID.UseVisualStyleBackColor = false;
+			this.buttonRemoveNodeID.Click += new System.EventHandler(this.buttonRemoveNodeID_Click);
+			// 
+			// buttonAddNodeID
+			// 
+			this.buttonAddNodeID.BackColor = System.Drawing.Color.Azure;
+			this.buttonAddNodeID.FlatAppearance.BorderSize = 0;
+			this.buttonAddNodeID.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonAddNodeID.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonAddNodeID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonAddNodeID.Location = new System.Drawing.Point(494, 37);
+			this.buttonAddNodeID.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonAddNodeID.Name = "buttonAddNodeID";
+			this.buttonAddNodeID.Size = new System.Drawing.Size(38, 38);
+			this.buttonAddNodeID.TabIndex = 86;
+			this.buttonAddNodeID.Text = "+";
+			this.toolTip1.SetToolTip(this.buttonAddNodeID, "Add new NodeID.");
+			this.buttonAddNodeID.UseVisualStyleBackColor = false;
+			this.buttonAddNodeID.Click += new System.EventHandler(this.buttonAddNodeID_Click);
+			// 
 			// comboBoxPlayMode
 			// 
+			this.comboBoxPlayMode.BackColor = System.Drawing.SystemColors.Window;
+			this.comboBoxPlayMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxPlayMode.FormattingEnabled = true;
 			this.comboBoxPlayMode.Items.AddRange(new object[] {
             "Random",
@@ -3372,10 +3447,10 @@ namespace Vixen_Messaging
 			// tabPageMessagingSettings
 			// 
 			this.tabPageMessagingSettings.BackColor = System.Drawing.Color.Azure;
-			this.tabPageMessagingSettings.Controls.Add(this.buttonResetToDefault);
 			this.tabPageMessagingSettings.Controls.Add(this.groupBox3);
 			this.tabPageMessagingSettings.Controls.Add(this.groupBox6);
 			this.tabPageMessagingSettings.Controls.Add(this.groupBox5);
+			this.tabPageMessagingSettings.Controls.Add(this.buttonResetToDefault);
 			this.tabPageMessagingSettings.Location = new System.Drawing.Point(4, 29);
 			this.tabPageMessagingSettings.Name = "tabPageMessagingSettings";
 			this.tabPageMessagingSettings.Padding = new System.Windows.Forms.Padding(3);
@@ -3383,24 +3458,15 @@ namespace Vixen_Messaging
 			this.tabPageMessagingSettings.TabIndex = 1;
 			this.tabPageMessagingSettings.Text = "Messaging Settings";
 			// 
-			// buttonResetToDefault
-			// 
-			this.buttonResetToDefault.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonResetToDefault.Location = new System.Drawing.Point(657, 817);
-			this.buttonResetToDefault.Name = "buttonResetToDefault";
-			this.buttonResetToDefault.Size = new System.Drawing.Size(206, 42);
-			this.buttonResetToDefault.TabIndex = 14;
-			this.buttonResetToDefault.Text = "Reset to Default Setting";
-			this.buttonResetToDefault.UseVisualStyleBackColor = false;
-			this.buttonResetToDefault.Click += new System.EventHandler(this.buttonResetToDefault_Click);
-			// 
 			// groupBox3
 			// 
+			this.groupBox3.Controls.Add(this.label100);
+			this.groupBox3.Controls.Add(this.comboBoxNodeID);
+			this.groupBox3.Controls.Add(this.buttonRemoveNodeID);
+			this.groupBox3.Controls.Add(this.buttonAddNodeID);
 			this.groupBox3.Controls.Add(this.label7);
 			this.groupBox3.Controls.Add(this.buttonGetVixenData);
 			this.groupBox3.Controls.Add(this.textBoxVixenFolder);
-			this.groupBox3.Controls.Add(this.label37);
-			this.groupBox3.Controls.Add(this.textBoxGroupName);
 			this.groupBox3.Controls.Add(this.label32);
 			this.groupBox3.Controls.Add(this.textBoxNodeId);
 			this.groupBox3.Controls.Add(this.label6);
@@ -3409,17 +3475,27 @@ namespace Vixen_Messaging
 			this.groupBox3.Controls.Add(this.textBoxSequenceTemplate);
 			this.groupBox3.Controls.Add(this.label4);
 			this.groupBox3.Controls.Add(this.textBoxVixenServer);
-			this.groupBox3.Location = new System.Drawing.Point(14, 248);
+			this.groupBox3.Location = new System.Drawing.Point(14, 301);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(870, 405);
+			this.groupBox3.Size = new System.Drawing.Size(870, 402);
 			this.groupBox3.TabIndex = 2;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Vixen Settings";
 			// 
+			// label100
+			// 
+			this.label100.AutoSize = true;
+			this.label100.Location = new System.Drawing.Point(13, 46);
+			this.label100.Name = "label100";
+			this.label100.Size = new System.Drawing.Size(121, 20);
+			this.label100.TabIndex = 89;
+			this.label100.Text = "Group Node ID:";
+			this.toolTip1.SetToolTip(this.label100, "Displayed Group ID will be the one used for Incoming Messages.");
+			// 
 			// label7
 			// 
 			this.label7.AutoSize = true;
-			this.label7.Location = new System.Drawing.Point(15, 91);
+			this.label7.Location = new System.Drawing.Point(11, 139);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(114, 20);
 			this.label7.TabIndex = 7;
@@ -3431,7 +3507,7 @@ namespace Vixen_Messaging
 			this.buttonGetVixenData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.buttonGetVixenData.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonGetVixenData.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-			this.buttonGetVixenData.Location = new System.Drawing.Point(370, 343);
+			this.buttonGetVixenData.Location = new System.Drawing.Point(361, 341);
 			this.buttonGetVixenData.Name = "buttonGetVixenData";
 			this.buttonGetVixenData.Size = new System.Drawing.Size(286, 40);
 			this.buttonGetVixenData.TabIndex = 11;
@@ -3442,30 +3518,23 @@ namespace Vixen_Messaging
 			// textBoxVixenFolder
 			// 
 			this.textBoxVixenFolder.Enabled = false;
-			this.textBoxVixenFolder.Location = new System.Drawing.Point(176, 89);
+			this.textBoxVixenFolder.Location = new System.Drawing.Point(173, 137);
 			this.textBoxVixenFolder.Name = "textBoxVixenFolder";
-			this.textBoxVixenFolder.Size = new System.Drawing.Size(670, 26);
+			this.textBoxVixenFolder.Size = new System.Drawing.Size(673, 26);
 			this.textBoxVixenFolder.TabIndex = 6;
-			// 
-			// textBoxGroupName
-			// 
-			this.textBoxGroupName.Location = new System.Drawing.Point(178, 40);
-			this.textBoxGroupName.Name = "textBoxGroupName";
-			this.textBoxGroupName.Size = new System.Drawing.Size(670, 26);
-			this.textBoxGroupName.TabIndex = 5;
 			// 
 			// textBoxNodeId
 			// 
 			this.textBoxNodeId.Enabled = false;
-			this.textBoxNodeId.Location = new System.Drawing.Point(178, 288);
+			this.textBoxNodeId.Location = new System.Drawing.Point(173, 90);
 			this.textBoxNodeId.Name = "textBoxNodeId";
-			this.textBoxNodeId.Size = new System.Drawing.Size(670, 26);
+			this.textBoxNodeId.Size = new System.Drawing.Size(673, 26);
 			this.textBoxNodeId.TabIndex = 10;
 			// 
 			// label6
 			// 
 			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(14, 242);
+			this.label6.Location = new System.Drawing.Point(9, 299);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(139, 20);
 			this.label6.TabIndex = 6;
@@ -3474,15 +3543,15 @@ namespace Vixen_Messaging
 			// textBoxOutputSequence
 			// 
 			this.textBoxOutputSequence.Enabled = false;
-			this.textBoxOutputSequence.Location = new System.Drawing.Point(176, 238);
+			this.textBoxOutputSequence.Location = new System.Drawing.Point(173, 295);
 			this.textBoxOutputSequence.Name = "textBoxOutputSequence";
-			this.textBoxOutputSequence.Size = new System.Drawing.Size(670, 26);
+			this.textBoxOutputSequence.Size = new System.Drawing.Size(673, 26);
 			this.textBoxOutputSequence.TabIndex = 9;
 			// 
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(14, 191);
+			this.label5.Location = new System.Drawing.Point(11, 242);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(139, 20);
 			this.label5.TabIndex = 4;
@@ -3491,15 +3560,15 @@ namespace Vixen_Messaging
 			// textBoxSequenceTemplate
 			// 
 			this.textBoxSequenceTemplate.Enabled = false;
-			this.textBoxSequenceTemplate.Location = new System.Drawing.Point(176, 188);
+			this.textBoxSequenceTemplate.Location = new System.Drawing.Point(173, 239);
 			this.textBoxSequenceTemplate.Name = "textBoxSequenceTemplate";
-			this.textBoxSequenceTemplate.Size = new System.Drawing.Size(670, 26);
+			this.textBoxSequenceTemplate.Size = new System.Drawing.Size(673, 26);
 			this.textBoxSequenceTemplate.TabIndex = 8;
 			// 
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(16, 142);
+			this.label4.Location = new System.Drawing.Point(11, 187);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(102, 20);
 			this.label4.TabIndex = 2;
@@ -3508,9 +3577,9 @@ namespace Vixen_Messaging
 			// textBoxVixenServer
 			// 
 			this.textBoxVixenServer.Enabled = false;
-			this.textBoxVixenServer.Location = new System.Drawing.Point(178, 142);
+			this.textBoxVixenServer.Location = new System.Drawing.Point(173, 187);
 			this.textBoxVixenServer.Name = "textBoxVixenServer";
-			this.textBoxVixenServer.Size = new System.Drawing.Size(668, 26);
+			this.textBoxVixenServer.Size = new System.Drawing.Size(673, 26);
 			this.textBoxVixenServer.TabIndex = 7;
 			// 
 			// groupBox6
@@ -3519,7 +3588,7 @@ namespace Vixen_Messaging
 			this.groupBox6.Controls.Add(this.textBoxBlacklistEmailLog);
 			this.groupBox6.Controls.Add(this.label8);
 			this.groupBox6.Controls.Add(this.textBoxLogFileName);
-			this.groupBox6.Location = new System.Drawing.Point(12, 675);
+			this.groupBox6.Location = new System.Drawing.Point(10, 709);
 			this.groupBox6.Name = "groupBox6";
 			this.groupBox6.Size = new System.Drawing.Size(872, 112);
 			this.groupBox6.TabIndex = 3;
@@ -3562,14 +3631,14 @@ namespace Vixen_Messaging
 			this.groupBox5.Controls.Add(this.textBoxSubjectHeader);
 			this.groupBox5.Location = new System.Drawing.Point(14, 18);
 			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(870, 223);
+			this.groupBox5.Size = new System.Drawing.Size(870, 265);
 			this.groupBox5.TabIndex = 1;
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "Vixen Messaging Options";
 			// 
 			// textBoxReturnBannedMSG
 			// 
-			this.textBoxReturnBannedMSG.Location = new System.Drawing.Point(198, 158);
+			this.textBoxReturnBannedMSG.Location = new System.Drawing.Point(198, 194);
 			this.textBoxReturnBannedMSG.Multiline = true;
 			this.textBoxReturnBannedMSG.Name = "textBoxReturnBannedMSG";
 			this.textBoxReturnBannedMSG.Size = new System.Drawing.Size(648, 55);
@@ -3579,7 +3648,7 @@ namespace Vixen_Messaging
 			// 
 			this.checkBoxAutoStart.AutoSize = true;
 			this.checkBoxAutoStart.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxAutoStart.Location = new System.Drawing.Point(20, 32);
+			this.checkBoxAutoStart.Location = new System.Drawing.Point(16, 37);
 			this.checkBoxAutoStart.Name = "checkBoxAutoStart";
 			this.checkBoxAutoStart.Size = new System.Drawing.Size(316, 24);
 			this.checkBoxAutoStart.TabIndex = 0;
@@ -3588,11 +3657,22 @@ namespace Vixen_Messaging
 			// 
 			// textBoxSubjectHeader
 			// 
-			this.textBoxSubjectHeader.Location = new System.Drawing.Point(643, 29);
+			this.textBoxSubjectHeader.Location = new System.Drawing.Point(643, 35);
 			this.textBoxSubjectHeader.Name = "textBoxSubjectHeader";
 			this.textBoxSubjectHeader.Size = new System.Drawing.Size(203, 26);
 			this.textBoxSubjectHeader.TabIndex = 1;
 			this.textBoxSubjectHeader.Text = "SMS from";
+			// 
+			// buttonResetToDefault
+			// 
+			this.buttonResetToDefault.BackColor = System.Drawing.Color.Honeydew;
+			this.buttonResetToDefault.Location = new System.Drawing.Point(678, 839);
+			this.buttonResetToDefault.Name = "buttonResetToDefault";
+			this.buttonResetToDefault.Size = new System.Drawing.Size(206, 42);
+			this.buttonResetToDefault.TabIndex = 14;
+			this.buttonResetToDefault.Text = "Reset to Default Setting";
+			this.buttonResetToDefault.UseVisualStyleBackColor = false;
+			this.buttonResetToDefault.Click += new System.EventHandler(this.buttonResetToDefault_Click);
 			// 
 			// tabPageTextSetting
 			// 
@@ -3664,6 +3744,7 @@ namespace Vixen_Messaging
 			// 
 			// incomingMessageColourOption
 			// 
+			this.incomingMessageColourOption.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.incomingMessageColourOption.FormattingEnabled = true;
 			this.incomingMessageColourOption.Items.AddRange(new object[] {
             "Single",
@@ -3673,7 +3754,6 @@ namespace Vixen_Messaging
 			this.incomingMessageColourOption.Name = "incomingMessageColourOption";
 			this.incomingMessageColourOption.Size = new System.Drawing.Size(178, 28);
 			this.incomingMessageColourOption.TabIndex = 0;
-			this.incomingMessageColourOption.Text = "Random";
 			this.incomingMessageColourOption.SelectedIndexChanged += new System.EventHandler(this.incomingMessageColourOption_SelectedIndexChanged);
 			// 
 			// textBoxFontSize
@@ -3688,7 +3768,7 @@ namespace Vixen_Messaging
 			// 
 			// buttonFont
 			// 
-			this.buttonFont.Location = new System.Drawing.Point(691, 34);
+			this.buttonFont.Location = new System.Drawing.Point(689, 34);
 			this.buttonFont.Name = "buttonFont";
 			this.buttonFont.Size = new System.Drawing.Size(148, 32);
 			this.buttonFont.TabIndex = 2;
@@ -3709,6 +3789,7 @@ namespace Vixen_Messaging
 			// 
 			// comboBoxString
 			// 
+			this.comboBoxString.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxString.FormattingEnabled = true;
 			this.comboBoxString.Items.AddRange(new object[] {
             "Horizontal",
@@ -3717,7 +3798,6 @@ namespace Vixen_Messaging
 			this.comboBoxString.Name = "comboBoxString";
 			this.comboBoxString.Size = new System.Drawing.Size(128, 28);
 			this.comboBoxString.TabIndex = 1;
-			this.comboBoxString.Text = "Horizontal";
 			// 
 			// TextLineNumber
 			// 
@@ -3743,6 +3823,7 @@ namespace Vixen_Messaging
 			// 
 			// comboBoxTextDirection
 			// 
+			this.comboBoxTextDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxTextDirection.FormattingEnabled = true;
 			this.comboBoxTextDirection.Items.AddRange(new object[] {
             "Left",
@@ -3754,7 +3835,6 @@ namespace Vixen_Messaging
 			this.comboBoxTextDirection.Name = "comboBoxTextDirection";
 			this.comboBoxTextDirection.Size = new System.Drawing.Size(86, 28);
 			this.comboBoxTextDirection.TabIndex = 4;
-			this.comboBoxTextDirection.Text = "Left";
 			// 
 			// trackBarTextPosition
 			// 
@@ -4637,9 +4717,7 @@ namespace Vixen_Messaging
         private System.Windows.Forms.NumericUpDown MeteorCount;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.ComboBox MeteorColour;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.TextBox textBoxGroupName;
+		private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Button buttonVixenSeq1;
         private System.Windows.Forms.TextBox textBoxVixenSeq1;
         private System.Windows.Forms.TextBox textBoxVixenSeq2;
@@ -4915,6 +4993,12 @@ namespace Vixen_Messaging
 		private System.Windows.Forms.FontDialog fontDialog1;
 		private System.Windows.Forms.Label label99;
 		private System.Windows.Forms.ComboBox customMessageSeqSel;
+		private System.Windows.Forms.Label label100;
+		private System.Windows.Forms.ComboBox comboBoxNodeID;
+		private System.Windows.Forms.Button buttonRemoveNodeID;
+		private System.Windows.Forms.Button buttonAddNodeID;
+		private System.Windows.Forms.Label label37;
+		private System.Windows.Forms.ComboBox customMessageNodeSel;
     }
 }
 

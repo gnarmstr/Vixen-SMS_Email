@@ -15,12 +15,22 @@ namespace Vixen_Messaging
             ClientSize = new Size(531, 453);
         }
 
-        private void FormMessages_Load(object sender, EventArgs e)
-        {
-            pictureBox1.Image = Tools.GetIcon(Resources.Ok, 40);
-            pictureBox1.Text = "";
-            pictureBox2.Image = Tools.GetIcon(Resources.Cancel, 40);
-            pictureBox2.Text = "";
+	    private void FormMessages_Load(object sender, EventArgs e)
+	    {
+		    pictureBox1.Image = Tools.GetIcon(Resources.Ok, 40);
+		    pictureBox1.Text = "";
+		    pictureBox2.Image = Tools.GetIcon(Resources.Cancel, 40);
+		    pictureBox2.Text = "";
+		    for (int i = 0; i < GlobalVar.GroupNameID.Count; i++)
+		    {
+			    customMessageNodeSel.Items.Add(GlobalVar.GroupNameID[i]);
+		    }
+		    if (customMessageNodeSel.Items.Count > 0)
+			{
+			    customMessageNodeSel.SelectedIndex = 0;
+			}
+			messageColourOption.SelectedIndex = 1;
+			customMessageSeqSel.SelectedIndex = 0;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -33,7 +43,6 @@ namespace Vixen_Messaging
             {
                 Close();
             }
-           
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -78,6 +87,6 @@ namespace Vixen_Messaging
         private void trackBarCustomSpeed_MouseDown(object sender, MouseEventArgs e)
         {
             toolTip1.SetToolTip(trackBarCustomSpeed, trackBarCustomSpeed.Value.ToString());
-        }
+		}
     }
 }

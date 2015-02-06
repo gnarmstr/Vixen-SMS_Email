@@ -61,6 +61,8 @@
 			this.messageColourOption = new System.Windows.Forms.ComboBox();
 			this.label99 = new System.Windows.Forms.Label();
 			this.customMessageSeqSel = new System.Windows.Forms.ComboBox();
+			this.label37 = new System.Windows.Forms.Label();
+			this.customMessageNodeSel = new System.Windows.Forms.ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarCountDownPosition)).BeginInit();
@@ -95,7 +97,7 @@
 			// label92
 			// 
 			this.label92.AutoSize = true;
-			this.label92.Location = new System.Drawing.Point(12, 340);
+			this.label92.Location = new System.Drawing.Point(12, 374);
 			this.label92.Name = "label92";
 			this.label92.Size = new System.Drawing.Size(18, 20);
 			this.label92.TabIndex = 90;
@@ -104,7 +106,7 @@
 			// label91
 			// 
 			this.label91.AutoSize = true;
-			this.label91.Location = new System.Drawing.Point(12, 301);
+			this.label91.Location = new System.Drawing.Point(12, 335);
 			this.label91.Name = "label91";
 			this.label91.Size = new System.Drawing.Size(18, 20);
 			this.label91.TabIndex = 88;
@@ -113,7 +115,7 @@
 			// label90
 			// 
 			this.label90.AutoSize = true;
-			this.label90.Location = new System.Drawing.Point(12, 258);
+			this.label90.Location = new System.Drawing.Point(12, 292);
 			this.label90.Name = "label90";
 			this.label90.Size = new System.Drawing.Size(18, 20);
 			this.label90.TabIndex = 86;
@@ -122,7 +124,7 @@
 			// label89
 			// 
 			this.label89.AutoSize = true;
-			this.label89.Location = new System.Drawing.Point(12, 216);
+			this.label89.Location = new System.Drawing.Point(12, 250);
 			this.label89.Name = "label89";
 			this.label89.Size = new System.Drawing.Size(18, 20);
 			this.label89.TabIndex = 85;
@@ -130,35 +132,35 @@
 			// 
 			// textBoxLine1
 			// 
-			this.textBoxLine1.Location = new System.Drawing.Point(44, 213);
+			this.textBoxLine1.Location = new System.Drawing.Point(44, 247);
 			this.textBoxLine1.Name = "textBoxLine1";
 			this.textBoxLine1.Size = new System.Drawing.Size(313, 26);
 			this.textBoxLine1.TabIndex = 8;
 			// 
 			// textBoxLine2
 			// 
-			this.textBoxLine2.Location = new System.Drawing.Point(44, 255);
+			this.textBoxLine2.Location = new System.Drawing.Point(44, 289);
 			this.textBoxLine2.Name = "textBoxLine2";
 			this.textBoxLine2.Size = new System.Drawing.Size(313, 26);
 			this.textBoxLine2.TabIndex = 9;
 			// 
 			// textBoxLine3
 			// 
-			this.textBoxLine3.Location = new System.Drawing.Point(44, 298);
+			this.textBoxLine3.Location = new System.Drawing.Point(44, 332);
 			this.textBoxLine3.Name = "textBoxLine3";
 			this.textBoxLine3.Size = new System.Drawing.Size(313, 26);
 			this.textBoxLine3.TabIndex = 10;
 			// 
 			// textBoxLine4
 			// 
-			this.textBoxLine4.Location = new System.Drawing.Point(44, 337);
+			this.textBoxLine4.Location = new System.Drawing.Point(44, 371);
 			this.textBoxLine4.Name = "textBoxLine4";
 			this.textBoxLine4.Size = new System.Drawing.Size(313, 26);
 			this.textBoxLine4.TabIndex = 11;
 			// 
 			// pictureBox2
 			// 
-			this.pictureBox2.Location = new System.Drawing.Point(525, 291);
+			this.pictureBox2.Location = new System.Drawing.Point(525, 305);
 			this.pictureBox2.Name = "pictureBox2";
 			this.pictureBox2.Size = new System.Drawing.Size(80, 80);
 			this.pictureBox2.TabIndex = 92;
@@ -168,7 +170,7 @@
 			// 
 			// pictureBox1
 			// 
-			this.pictureBox1.Location = new System.Drawing.Point(420, 291);
+			this.pictureBox1.Location = new System.Drawing.Point(420, 305);
 			this.pictureBox1.Name = "pictureBox1";
 			this.pictureBox1.Size = new System.Drawing.Size(80, 80);
 			this.pictureBox1.TabIndex = 91;
@@ -239,7 +241,7 @@
 			// trackBarCustomSpeed
 			// 
 			this.trackBarCustomSpeed.AutoSize = false;
-			this.trackBarCustomSpeed.Location = new System.Drawing.Point(108, 393);
+			this.trackBarCustomSpeed.Location = new System.Drawing.Point(108, 407);
 			this.trackBarCustomSpeed.Maximum = 20;
 			this.trackBarCustomSpeed.Minimum = 1;
 			this.trackBarCustomSpeed.Name = "trackBarCustomSpeed";
@@ -254,7 +256,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(29, 402);
+			this.label2.Location = new System.Drawing.Point(29, 416);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(60, 20);
 			this.label2.TabIndex = 103;
@@ -332,7 +334,7 @@
 			// label97
 			// 
 			this.label97.AutoSize = true;
-			this.label97.Location = new System.Drawing.Point(12, 176);
+			this.label97.Location = new System.Drawing.Point(12, 206);
 			this.label97.Name = "label97";
 			this.label97.Size = new System.Drawing.Size(110, 20);
 			this.label97.TabIndex = 107;
@@ -340,21 +342,21 @@
 			// 
 			// messageColourOption
 			// 
+			this.messageColourOption.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.messageColourOption.FormattingEnabled = true;
 			this.messageColourOption.Items.AddRange(new object[] {
             "Single",
             "Multi",
             "Random"});
-			this.messageColourOption.Location = new System.Drawing.Point(128, 170);
+			this.messageColourOption.Location = new System.Drawing.Point(128, 200);
 			this.messageColourOption.Name = "messageColourOption";
-			this.messageColourOption.Size = new System.Drawing.Size(182, 28);
+			this.messageColourOption.Size = new System.Drawing.Size(204, 28);
 			this.messageColourOption.TabIndex = 5;
-			this.messageColourOption.Text = "Multi";
 			// 
 			// label99
 			// 
 			this.label99.AutoSize = true;
-			this.label99.Location = new System.Drawing.Point(12, 121);
+			this.label99.Location = new System.Drawing.Point(12, 160);
 			this.label99.Name = "label99";
 			this.label99.Size = new System.Drawing.Size(86, 20);
 			this.label99.TabIndex = 109;
@@ -364,6 +366,7 @@
 			// 
 			// customMessageSeqSel
 			// 
+			this.customMessageSeqSel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.customMessageSeqSel.FormattingEnabled = true;
 			this.customMessageSeqSel.Items.AddRange(new object[] {
             "Automatically Assigned",
@@ -374,11 +377,28 @@
             "Movie",
             "Glediator/Jinx",
             "None"});
-			this.customMessageSeqSel.Location = new System.Drawing.Point(104, 118);
+			this.customMessageSeqSel.Location = new System.Drawing.Point(128, 157);
 			this.customMessageSeqSel.Name = "customMessageSeqSel";
 			this.customMessageSeqSel.Size = new System.Drawing.Size(204, 28);
 			this.customMessageSeqSel.TabIndex = 3;
-			this.customMessageSeqSel.Text = "Automatically Assigned";
+			// 
+			// label37
+			// 
+			this.label37.AutoSize = true;
+			this.label37.Location = new System.Drawing.Point(10, 116);
+			this.label37.Name = "label37";
+			this.label37.Size = new System.Drawing.Size(100, 20);
+			this.label37.TabIndex = 111;
+			this.label37.Text = "Group Node:";
+			// 
+			// customMessageNodeSel
+			// 
+			this.customMessageNodeSel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.customMessageNodeSel.FormattingEnabled = true;
+			this.customMessageNodeSel.Location = new System.Drawing.Point(128, 113);
+			this.customMessageNodeSel.Name = "customMessageNodeSel";
+			this.customMessageNodeSel.Size = new System.Drawing.Size(204, 28);
+			this.customMessageNodeSel.TabIndex = 110;
 			// 
 			// FormMessages
 			// 
@@ -386,6 +406,8 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.Azure;
 			this.ClientSize = new System.Drawing.Size(628, 524);
+			this.Controls.Add(this.label37);
+			this.Controls.Add(this.customMessageNodeSel);
 			this.Controls.Add(this.label99);
 			this.Controls.Add(this.customMessageSeqSel);
 			this.Controls.Add(this.label97);
@@ -465,5 +487,7 @@
 		public System.Windows.Forms.ComboBox messageColourOption;
 		private System.Windows.Forms.Label label99;
 		public System.Windows.Forms.ComboBox customMessageSeqSel;
+		private System.Windows.Forms.Label label37;
+		public System.Windows.Forms.ComboBox customMessageNodeSel;
     }
 }

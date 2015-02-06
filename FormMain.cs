@@ -17,6 +17,7 @@ using Twilio;
 using Application = System.Windows.Forms.Application;
 using System.Globalization;
 using System.Threading;
+using Microsoft.VisualBasic;
 
 #endregion
 
@@ -198,7 +199,11 @@ namespace Vixen_Messaging
             buttonAddMessage.Text = "";
             buttonPlay.Image = Tools.GetIcon(Resources.Play, 16);
             buttonPlay.Text = "";
-            SaveAll.Image = Tools.ResizeImage(Resources.Save, 130, 30);
+			SaveAll.Image = Tools.ResizeImage(Resources.Save, 130, 30);
+			buttonAddNodeID.Image = Tools.GetIcon(Resources.add, 16);
+			buttonAddNodeID.Text = "";
+			buttonRemoveNodeID.Image = Tools.GetIcon(Resources.delete, 16);
+			buttonRemoveNodeID.Text = "";
             #endregion
 
             #region Check Vixen Port settings on startup
@@ -266,7 +271,6 @@ namespace Vixen_Messaging
             GlobalVar.LocalMessages = Path.Combine(GlobalVar.SettingsPath + "\\LocalMessages.txt");
             textBoxSequenceTemplate.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SequenceTemplate", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3 Messaging"));
             textBoxOutputSequence.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "OutputSequence", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Sequence\\VixenOut.tim"));
-            textBoxGroupName.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", "Front Matrix");
             comboBoxString.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "StringOrienation", "Horizontal");
             textBoxLogFileName.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "LogMessageFile", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3 Messaging\\Logs\\Message.log"));
             textBoxBlacklistEmailLog.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "LogBlacklistFile", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3 Messaging\\Logs\\Blacklist.log"));
@@ -274,7 +278,6 @@ namespace Vixen_Messaging
             checkBoxEnableSqnctrl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxSqnEnable", false);
             checkBoxAutoStart.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", false);
             checkBoxBlacklist.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxBlack_list", true);
-            textBoxNodeId.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxNodeId", "");
             checkBoxDisableSeq.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxDisableSeq", false);
 			incomingMessageColourOption.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "incomingMessageColourOption", "Random");
             EffectType.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "EffectType", 2);
@@ -396,9 +399,27 @@ namespace Vixen_Messaging
             checkBoxVixenControl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", false);
 			messageColourOption.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "messageColourOption", "Single");
 			GlobalVar.MessageNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MessageNumber", 0);
-            comboBoxName.Items.Clear();
-            var i = 0;
-            var line = "ListLine1-";
+			var groupIDNumberSel = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumberSel", 0);
+			GlobalVar.GroupIDNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumber", 0);
+			var i = 0;
+			var line = "GroupNameID";
+			if (GlobalVar.GroupIDNumber > 0)
+			{
+				do
+				{
+					comboBoxNodeID.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+					GlobalVar.GroupNameID.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+					customMessageNodeSel.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+					line = "GroupNodeID";
+					GlobalVar.GroupNodeID.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+					line = "GroupNameID";
+					i++;
+				} while (i < GlobalVar.GroupIDNumber);
+				comboBoxNodeID.SelectedIndex = groupIDNumberSel;
+			} 
+			comboBoxName.Items.Clear();
+            i = 0;
+            line = "ListLine1-";
             if (GlobalVar.MessageNumber > 0)
             {
                 do
@@ -432,6 +453,8 @@ namespace Vixen_Messaging
 					GlobalVar.MessageColourOption.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, "Multi"));
 					line = "MessageSeqSel";
 					GlobalVar.CustomMessageSeqSel.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, "Automatically Assigned"));
+					line = "MessageNodeSel";
+					GlobalVar.CustomMessageNodeSel.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
 					line = "MessageName";
                     comboBoxName.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
 					line = "CenterStop";
@@ -903,10 +926,10 @@ namespace Vixen_Messaging
 
         private void buttonPlay_Click(object sender, EventArgs e)
         {
-            Stop_Vixen();
             StopSequence();
 			if (!GlobalVar.PlayCustomMessage)
             {
+				Stop_Vixen();
                 PlayCustomMessage();
                 Start_Vixen();
             }
@@ -914,7 +937,6 @@ namespace Vixen_Messaging
             {
                 PlayCustomMessage();
             }
-            GlobalVar.PlayCustomMessage = false;
         }
 
         private void PlayCustomMessage()
@@ -1267,6 +1289,8 @@ namespace Vixen_Messaging
             {
 				GlobalVar.CustomMessageSeqSel.Add(formMessages.customMessageSeqSel.Text);
 				customMessageSeqSel.SelectedIndex = formMessages.customMessageSeqSel.SelectedIndex;
+				GlobalVar.CustomMessageNodeSel.Add(formMessages.customMessageNodeSel.Text);
+				customMessageNodeSel.SelectedIndex = formMessages.customMessageNodeSel.SelectedIndex;
 				GlobalVar.MessageColourOption.Add(formMessages.messageColourOption.Text);
 				messageColourOption.SelectedIndex = formMessages.messageColourOption.SelectedIndex;
                 GlobalVar.ListLine1.Add(formMessages.textBoxLine1.Text);
@@ -1332,6 +1356,7 @@ namespace Vixen_Messaging
 			checkBoxCentreStop.Checked = GlobalVar.CheckBoxCentreStop[selectedItem];
 			messageColourOption.Text = GlobalVar.MessageColourOption[selectedItem];
 			customMessageSeqSel.Text = GlobalVar.CustomMessageSeqSel[selectedItem];
+			customMessageNodeSel.Text = GlobalVar.CustomMessageNodeSel[selectedItem];
         }
 
         private void buttonRemoveMessage_Click(object sender, EventArgs e)
@@ -1356,6 +1381,7 @@ namespace Vixen_Messaging
 				GlobalVar.CheckBoxCentreStop.RemoveAt(comboBoxName.SelectedIndex);
 				GlobalVar.MessageColourOption.RemoveAt(comboBoxName.SelectedIndex);
 				GlobalVar.CustomMessageSeqSel.RemoveAt(comboBoxName.SelectedIndex);
+				GlobalVar.CustomMessageNodeSel.RemoveAt(comboBoxName.SelectedIndex);
                 comboBoxName.Items.RemoveAt(comboBoxName.SelectedIndex);
                 if (comboBoxName.Items.Count > 0)
                 {
@@ -1378,7 +1404,7 @@ namespace Vixen_Messaging
 	                checkBoxCentreStop.Checked = GlobalVar.CheckBoxCentreStop[0];
 					messageColourOption.Text = GlobalVar.MessageColourOption[0];
 					customMessageSeqSel.Text = GlobalVar.CustomMessageSeqSel[0];
-
+					customMessageNodeSel.Text = GlobalVar.CustomMessageNodeSel[0];
                 }
                 else
                 {
@@ -1400,7 +1426,8 @@ namespace Vixen_Messaging
 					line3Colour.BackColor = Color.FromArgb(-16711936);
 					line4Colour.BackColor = Color.FromArgb(-32640);
 	                messageColourOption.SelectedIndex = 1;
-					customMessageSeqSel.SelectedIndex = 1;;
+					customMessageSeqSel.SelectedIndex = 1;
+					customMessageNodeSel.SelectedIndex = 1;
                 }
             }
         }
@@ -1462,6 +1489,7 @@ namespace Vixen_Messaging
 				GlobalVar.CheckBoxCentreStop[comboBoxName.SelectedIndex] = checkBoxCentreStop.Checked;
 				GlobalVar.MessageColourOption[comboBoxName.SelectedIndex] = messageColourOption.Text;
 				GlobalVar.CustomMessageSeqSel[comboBoxName.SelectedIndex] = customMessageSeqSel.Text;
+				GlobalVar.CustomMessageNodeSel[comboBoxName.SelectedIndex] = customMessageNodeSel.Text;
 			}
         }
 
@@ -1905,7 +1933,8 @@ namespace Vixen_Messaging
                 fileText1 = fileText1.Replace("FontSize_Change", textBoxCustomFontSize.Text);
                 fileText1 = fileText1.Replace("Speed_Change", trackBarCustomSpeed.Value.ToString());
 				fileText1 = fileText1.Replace("CenterStop_Change", checkBoxCentreStop.Checked.ToString().ToLower());
-	            messageSelection = 0;
+				fileText1 = fileText1.Replace("NodeId_Change", GlobalVar.GroupNodeID[customMessageNodeSel.SelectedIndex]);//adds NodeId
+				messageSelection = 0;
             }
             else
             {
@@ -3011,12 +3040,14 @@ namespace Vixen_Messaging
 
             if (retrieveVixenSettings.textBoxVixenGroupName.Text != "")
             {
-                textBoxGroupName.Text = retrieveVixenSettings.textBoxVixenGroupName.Text;
+				comboBoxNodeID.Items.Add(retrieveVixenSettings.textBoxVixenGroupName.Text);
             }
 
             if (retrieveVixenSettings.checkBoxNodeID.Checked)
             {
-                GetNodeId();
+				GetNodeId(retrieveVixenSettings.textBoxVixenGroupName.Text);
+				textBoxNodeId.Text = GlobalVar.GroupNodeID[0];
+				comboBoxNodeID.SelectedIndex = comboBoxNodeID.Items.Count - 1;
             }
 
             if (retrieveVixenSettings.textBoxServer.Text != "")
@@ -3037,7 +3068,7 @@ namespace Vixen_Messaging
 #endregion
 
     #region Get Nod ID
-        private void GetNodeId()
+        private void GetNodeId(string addGroupName)
         {
             var nodeResult = "";
 
@@ -3048,23 +3079,25 @@ namespace Vixen_Messaging
                 string str;
                 while ((str = reading.ReadLine()) != null)
                 {
-                    if (str.Contains("<Node name=\"" + textBoxGroupName.Text + "\" id=\""))
+					if (str.Contains("<Node name=\"" + addGroupName + "\" id=\""))
                     {
                         nodeResult = str;
                     }
                 }
 
-                nodeResult = nodeResult.Replace("<Node name=\"" + textBoxGroupName.Text + "\" id=\"", "");
+				nodeResult = nodeResult.Replace("<Node name=\"" + addGroupName + "\" id=\"", "");
                 nodeResult = nodeResult.Trim(new Char[] { '\"', '>', ' ' });
                 reading.Close();
 
                 if (nodeResult == "")
                 {
-                    MessageBox.Show(@"Unable to find NodeId for your Group, please ensure you have entered the correct Group Name above and it is case sensitive", @"WARNING");
+	                MessageBox.Show(@"Unable to find NodeId for your Group, please ensure you have entered the correct Group Name above and it is case sensitive", @"WARNING");
+	                GlobalVar.NoNodeID = true;
                 }
                 else
                 {
-                    textBoxNodeId.Text = nodeResult;
+	                GlobalVar.GroupNodeID.Add(nodeResult);
+					GlobalVar.NoNodeID = false;
                 }
             }
             // ReSharper disable once EmptyGeneralCatchClause
@@ -3235,7 +3268,6 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "VixenServer", textBoxVixenServer.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "SequenceTemplate", textBoxSequenceTemplate.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "OutputSequence", textBoxOutputSequence.Text);
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", textBoxGroupName.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "StringOrienation", comboBoxString.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "LogMessageFile", textBoxLogFileName.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "LogBlacklistFile", textBoxBlacklistEmailLog.Text);
@@ -3243,7 +3275,6 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxSqnEnable", checkBoxEnableSqnctrl.Checked);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", checkBoxAutoStart.Checked);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxBlack_list", checkBoxBlacklist.Checked);
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxNodeId", textBoxNodeId.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxDisableSeq", checkBoxDisableSeq.Checked);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "incomingMessageColourOption", incomingMessageColourOption.Text);
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "EffectType", EffectType.Value.ToString());
@@ -3363,7 +3394,9 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCountDownEnable", checkBoxCountDownEnable.Checked.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", checkBoxVixenControl.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "messageColourOption", messageColourOption.Text);
-			GlobalVar.MessageNumber = GlobalVar.ListLine1.Count(); 
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumberSel", comboBoxNodeID.SelectedIndex);
+	        profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumber", comboBoxNodeID.Items.Count);
+			GlobalVar.MessageNumber = GlobalVar.ListLine1.Count();
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "MessageNumber", GlobalVar.MessageNumber.ToString());
             var i = 0;
             var line = "ListLine1-";
@@ -3393,7 +3426,9 @@ namespace Vixen_Messaging
 				line = "MessageColourOption";
 				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.MessageColourOption[i]);
 				line = "MessageSeqSel";
-				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomMessageSeqSel[i]); 
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomMessageSeqSel[i]);
+				line = "MessageNodeSel";
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomMessageNodeSel[i]);
 				line = "MessageName";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, Convert.ToString(comboBoxName.Items[i]));
                 line = "CustomFont"; 
@@ -3409,6 +3444,16 @@ namespace Vixen_Messaging
                 line = "ListLine1-";
                 i++;
             } while (i < GlobalVar.ListLine1.Count());
+			i = 0;
+            line = "GroupNameID";
+            do
+            {
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, Convert.ToString(comboBoxNodeID.Items[i]));
+				line = "GroupNodeID";
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.GroupNodeID[i]);
+				line = "GroupNameID";
+				i++;
+			} while (i < GlobalVar.GroupNodeID.Count());
         }
 #endregion
 
@@ -3907,12 +3952,102 @@ namespace Vixen_Messaging
 			CustomMessageUpdate();
 		}
 
-		private void customMessageSeqSel_SelectedIndexChanged(object sender, EventArgs e)
+		private void customMessageSeqSel_MouseLeave(object sender, EventArgs e)
 		{
 			CustomMessageUpdate();
 		}
 
-		private void customMessageSeqSel_MouseLeave(object sender, EventArgs e)
+		private void buttonAddNodeID_Click(object sender, EventArgs e)
+		{
+			string addGroupName;
+			addGroupName = Interaction.InputBox("New Group Name");
+			if (addGroupName != "")
+			{
+				comboBoxNodeID.Items.Add(addGroupName);
+				
+				GetNodeId(addGroupName);
+				if (!GlobalVar.NoNodeID)
+				{
+					GlobalVar.GroupNameID.Add(addGroupName);
+					textBoxNodeId.Text = GlobalVar.GroupNodeID[comboBoxNodeID.Items.Count - 1];
+					comboBoxNodeID.SelectedIndex = comboBoxNodeID.Items.Count - 1;
+					customMessageNodeSel.Items.Add(addGroupName);
+				}
+				else
+				{
+					comboBoxNodeID.Items.RemoveAt(comboBoxNodeID.Items.Count -1);
+				}
+			}
+		}
+
+		private void comboBoxNodeID_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			var selectedItem = comboBoxNodeID.SelectedIndex;
+			textBoxNodeId.Text = GlobalVar.GroupNodeID[selectedItem];
+		}
+
+	    private void buttonRemoveNodeID_Click(object sender, EventArgs e)
+	    {
+		    if (comboBoxNodeID.Items.Count > 0)
+		    {
+				GlobalVar.GroupNodeID.RemoveAt(comboBoxNodeID.SelectedIndex);
+				GlobalVar.GroupNameID.RemoveAt(comboBoxNodeID.SelectedIndex);
+				customMessageNodeSel.Items.RemoveAt(comboBoxNodeID.SelectedIndex);
+				comboBoxNodeID.Items.RemoveAt(comboBoxNodeID.SelectedIndex);
+				if (comboBoxNodeID.Items.Count > 0)
+			    {
+					comboBoxNodeID.SelectedIndex = 0;
+					textBoxNodeId.Text = GlobalVar.GroupNodeID[0];
+				    customMessageNodeSel.SelectedIndex = 0;
+			    }
+			    else
+			    {
+					comboBoxNodeID.Items.Clear();
+				    comboBoxNodeID.Text = "";
+					textBoxNodeId.Text = "";
+					customMessageNodeSel.Items.Clear();
+				    customMessageNodeSel.Text = "";
+			    }
+		    }
+	    }
+
+		private void customMessageNodeSel_SelectionChangeCommitted(object sender, EventArgs e)
+		{
+			CustomMessageUpdate();
+		}
+
+		private void customMessageSeqSel_SelectionChangeCommitted(object sender, EventArgs e)
+		{
+			CustomMessageUpdate();
+		}
+
+		private void messageColourOption_SelectionChangeCommitted(object sender, EventArgs e)
+		{
+			switch (messageColourOption.Text)
+			{
+				case "Single":
+					line1Colour.Visible = true;
+					line2Colour.Visible = false;
+					line3Colour.Visible = false;
+					line4Colour.Visible = false;
+					break;
+				case "Multi":
+					line1Colour.Visible = true;
+					line2Colour.Visible = true;
+					line3Colour.Visible = true;
+					line4Colour.Visible = true;
+					break;
+				case "Random":
+					line1Colour.Visible = false;
+					line2Colour.Visible = false;
+					line3Colour.Visible = false;
+					line4Colour.Visible = false;
+					break;
+			}
+			CustomMessageUpdate();
+		}
+
+		private void comboBoxCountDownDirection_SelectionChangeCommitted(object sender, EventArgs e)
 		{
 			CustomMessageUpdate();
 		}
