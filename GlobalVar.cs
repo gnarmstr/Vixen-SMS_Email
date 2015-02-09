@@ -73,7 +73,85 @@ namespace Vixen_Messaging
 
             public static List<int> TrackBarCustomSpeed = new List<int>();
 
-            /// <summary>
+			#region Custom SnowFlakes
+
+			public static List<int> SnowFlakeEffectType = new List<int>();
+
+			public static List<int> SnowFlakeMax = new List<int>();
+
+			public static List<int> SnowFlakeSpeed = new List<int>();
+
+			public static List<bool> SnowFlakeRandomEnable = new List<bool>();
+
+			public static List<bool> SnowFlakeColourEnable1 = new List<bool>();
+
+			public static List<bool> SnowFlakeColourEnable2 = new List<bool>();
+
+			public static List<bool> SnowFlakeColourEnable3 = new List<bool>();
+
+			public static List<bool> SnowFlakeColourEnable4 = new List<bool>();
+
+			public static List<bool> SnowFlakeColourEnable5 = new List<bool>();
+
+			public static List<bool> SnowFlakeColourEnable6 = new List<bool>();
+
+			public static List<int> SnowFlakeColour1 = new List<int>();
+
+			public static List<int> SnowFlakeColour2 = new List<int>();
+
+			public static List<int> SnowFlakeColour3 = new List<int>();
+
+			public static List<int> SnowFlakeColour4 = new List<int>();
+
+			public static List<int> SnowFlakeColour5 = new List<int>();
+
+			public static List<int> SnowFlakeColour6 = new List<int>();
+
+			public static int SnowFlakeNumber { get; set; }
+
+			#endregion
+
+			#region Custom Meteors
+
+			public static List<int> MeteorColourType = new List<int>();
+
+			public static List<int> MeteorCount = new List<int>();
+
+			public static List<int> MeteorSpeed = new List<int>();
+
+			public static List<int> MeteorTrailLength = new List<int>();
+
+			public static List<bool> MeteorRandomEnable = new List<bool>();
+
+			public static List<bool> MeteorColourEnable1 = new List<bool>();
+
+			public static List<bool> MeteorColourEnable2 = new List<bool>();
+
+			public static List<bool> MeteorColourEnable3 = new List<bool>();
+
+			public static List<bool> MeteorColourEnable4 = new List<bool>();
+
+			public static List<bool> MeteorColourEnable5 = new List<bool>();
+
+			public static List<bool> MeteorColourEnable6 = new List<bool>();
+
+			public static List<int> MeteorColour1 = new List<int>();
+
+			public static List<int> MeteorColour2 = new List<int>();
+
+			public static List<int> MeteorColour3 = new List<int>();
+
+			public static List<int> MeteorColour4 = new List<int>();
+
+			public static List<int> MeteorColour5 = new List<int>();
+
+			public static List<int> MeteorColour6 = new List<int>();
+
+			public static int MeteorNumber { get; set; }
+
+			#endregion
+
+			/// <summary>
             /// Static value protected by access routine.
             /// </summary>
             public static int Msgindex;

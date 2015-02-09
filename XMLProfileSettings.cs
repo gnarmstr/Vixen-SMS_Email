@@ -122,7 +122,8 @@ namespace Vixen_Messaging
         {
             Profiles,
             AppSettings,
-            Preferences
+            Preferences,
+			SnowFlakes
         };
 
     }

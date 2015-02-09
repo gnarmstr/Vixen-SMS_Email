@@ -204,6 +204,18 @@ namespace Vixen_Messaging
 			buttonAddNodeID.Text = "";
 			buttonRemoveNodeID.Image = Tools.GetIcon(Resources.delete, 16);
 			buttonRemoveNodeID.Text = "";
+			buttonPlaySnowFlake.Image = Tools.GetIcon(Resources.Play, 16);
+            buttonPlaySnowFlake.Text = "";
+			buttonAddSnowFlake.Image = Tools.GetIcon(Resources.add, 16);
+			buttonAddSnowFlake.Text = "";
+			buttonRemoveSnowFlake.Image = Tools.GetIcon(Resources.delete, 16);
+			buttonRemoveSnowFlake.Text = "";
+			buttonPlayMeteor.Image = Tools.GetIcon(Resources.Play, 16);
+			buttonPlayMeteor.Text = "";
+			buttonAddMeteor.Image = Tools.GetIcon(Resources.add, 16);
+			buttonAddMeteor.Text = "";
+			buttonRemoveMeteor.Image = Tools.GetIcon(Resources.delete, 16);
+			buttonRemoveMeteor.Text = "";
             #endregion
 
             #region Check Vixen Port settings on startup
@@ -399,6 +411,7 @@ namespace Vixen_Messaging
             checkBoxVixenControl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", false);
 			messageColourOption.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "messageColourOption", "Single");
 			GlobalVar.MessageNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MessageNumber", 0);
+			GlobalVar.SnowFlakeNumber = profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, "SnowFlakeNumber", 0);
 			var groupIDNumberSel = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumberSel", 0);
 			GlobalVar.GroupIDNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumber", 0);
 			var i = 0;
@@ -468,6 +481,58 @@ namespace Vixen_Messaging
                 } while (i < GlobalVar.MessageNumber);
                 comboBoxName.SelectedIndex = 0;
             }
+			comboBoxSnowFlakeName.Items.Clear();
+            i = 0;
+			line = "SnowFlakeName";
+			if (GlobalVar.SnowFlakeNumber > 0)
+	        {
+		        do
+		        {
+					customMessageSeqSel.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, ""));
+					comboBoxSnowFlakeName.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, "")); 
+					line = "SnowFlakeEffectType";
+					GlobalVar.SnowFlakeEffectType.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, 2));
+					line = "SnowFlakeMax";
+					GlobalVar.SnowFlakeMax.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, 3));
+					line = "SnowFlakeSpeed";
+					GlobalVar.SnowFlakeSpeed.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, 5));
+					line = "SnowFlakeRandomEnable";
+					GlobalVar.SnowFlakeRandomEnable.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, true));
+					line = "SnowFlakeColourEnable1";
+					GlobalVar.SnowFlakeColourEnable1.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, true));
+					line = "SnowFlakeColourEnable2";
+					GlobalVar.SnowFlakeColourEnable2.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, false));
+					line = "SnowFlakeColourEnable3";
+					GlobalVar.SnowFlakeColourEnable3.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, false));
+					line = "SnowFlakeColourEnable4";
+					GlobalVar.SnowFlakeColourEnable4.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, false));
+					line = "SnowFlakeColourEnable5";
+					GlobalVar.SnowFlakeColourEnable5.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, false));
+					line = "SnowFlakeColourEnable6";
+					GlobalVar.SnowFlakeColourEnable6.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, false));
+					line = "SnowFlakeColour1";
+					GlobalVar.SnowFlakeColour1.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, -16776961));
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour1[i]);
+					line = "SnowFlakeColour2";
+					GlobalVar.SnowFlakeColour2.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, -65536));
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour2[i]);
+					line = "SnowFlakeColour3";
+					GlobalVar.SnowFlakeColour3.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, -16711936));
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour3[i]);
+					line = "SnowFlakeColour4";
+					GlobalVar.SnowFlakeColour4.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, -32640));
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour4[i]);
+					line = "SnowFlakeColour5";
+					GlobalVar.SnowFlakeColour5.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, -16776961));
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour5[i]);
+					line = "SnowFlakeColour6";
+					GlobalVar.SnowFlakeColour6.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, -65536));
+					line = "SnowFlakeName";
+			        i++;
+				} while (i < GlobalVar.SnowFlakeNumber);
+				comboBoxSnowFlakeName.SelectedIndex = 0;
+	        }
+		        customMessageSeqSel.SelectedIndex = 1;
         }
         #endregion
 
@@ -1591,9 +1656,23 @@ namespace Vixen_Messaging
                                 break;
                         }
                         fileText = fileText.Replace("MeteorColour_Change", meteorColourType.ToString()); //Range or Rainbow
-                        fileText = fileText.Replace("PT20S", "PT" + GlobalVar.SeqIntervalTime.ToString() + "S"); //Sequence time
+                        fileText = fileText.Replace("PT20S", "PT" + GlobalVar.SeqIntervalTime + "S"); //Sequence time
                         fileText = fileText.Replace("TextTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Text Sequence time
-                        fileText = fileText.Replace("SnowFlake_Change", EffectType.Value.ToString()); //Type
+						if (checkBoxRandomSeqSelection.Checked)
+	                    {
+							int selectedSnowFlake;
+		                    var randomSnowFlake = new Random();
+							selectedSnowFlake = randomSnowFlake.Next(0, comboBoxSnowFlakeName.Items.Count);
+		                    try
+		                    {
+								comboBoxSnowFlakeName.SelectedIndex = selectedSnowFlake;
+								CustomSnowFlakes();
+		                    }
+		                    catch
+		                    {
+		                    }
+	                    }
+						fileText = fileText.Replace("SnowFlake_Change", EffectType.Value.ToString()); //Type
                         fileText = fileText.Replace("SnowFlakeMax_Change", MaxSnowFlake.Value.ToString()); //Max number
                         fileText = fileText.Replace("FireHeight_Change", FireHeight.Value.ToString()); //Fire height
                         fileText = fileText.Replace("MeteorType_Change", MeteorCount.Value.ToString()); //Type
@@ -1603,9 +1682,9 @@ namespace Vixen_Messaging
                         fileText = fileText.Replace("Movie_Change", trackBarMovieSpeed.Value.ToString()); 
                         fileText = fileText.Replace("GlediatorFolder_Change", textBoxGlediator.Text);
                         fileText = fileText.Replace("Glediator_Change", trackBarGlediator.Value.ToString());
-
-                        string selectedSeq;
+                        
                         //Random or selected Selection
+	                    string selectedSeq;
 						if (msg == "play counter" & customMessageSeqSel.Text != @"Automatically Assigned")
 						{
 							selectedSeq = customMessageSeqSel.Text;
@@ -1617,6 +1696,7 @@ namespace Vixen_Messaging
 						}
 	                    else
 	                    {
+
 		                    if (checkBoxDisableSeq.Checked)
 		                    {
 			                    selectedSeq = "None";
@@ -1674,83 +1754,139 @@ namespace Vixen_Messaging
 
 	                    var i = 1;
                         //Select an Effect
-                        switch (selectedSeq)
-                        {
-                            case "SnowFlakes":
-                                fileText = fileText.Replace("Selected_Effect", "Snowflakes");
-                                fileText = fileText.Replace("Speed_1Change", trackBarSpeedSnowFlakes.Value.ToString());
-                                //Colour selection
-                                do
-                                {
-                                    var btn = new Button[] { null, SnowFlakeColour1, SnowFlakeColour2, SnowFlakeColour3, SnowFlakeColour4, SnowFlakeColour5, SnowFlakeColour6 };
-                                    var ckb = new CheckBox[] { null, checkBoxSnowFlakeColour1, checkBoxSnowFlakeColour2, checkBoxSnowFlakeColour3, checkBoxSnowFlakeColour4, checkBoxSnowFlakeColour5, checkBoxSnowFlakeColour6 };
-                                    FileSettingsColour(btn, ckb, i, fileText, out fileText1);
-                                    fileText = fileText1;
-                                    i++;
-                                } while (i < 7);
-                                break;
+	                    if (selectedSeq.Contains("SnowFlake - "))
+	                    {
+		                    comboBoxSnowFlakeName.SelectedItem = customMessageSeqSel.Text;
+							fileText = fileText.Replace("Selected_Effect", "Snowflakes");
+							fileText = fileText.Replace("Speed_1Change", trackBarSpeedSnowFlakes.Value.ToString());
+							//Colour selection
+							do
+							{
+								var btn = new Button[]
+					                    {
+						                    null, SnowFlakeColour1, SnowFlakeColour2, SnowFlakeColour3, SnowFlakeColour4, SnowFlakeColour5,
+						                    SnowFlakeColour6
+					                    };
+								var ckb = new CheckBox[]
+					                    {
+						                    null, checkBoxSnowFlakeColour1, checkBoxSnowFlakeColour2, checkBoxSnowFlakeColour3,
+						                    checkBoxSnowFlakeColour4, checkBoxSnowFlakeColour5, checkBoxSnowFlakeColour6
+					                    };
+								FileSettingsColour(btn, ckb, i, fileText, out fileText1);
+								fileText = fileText1;
+								i++;
+							} while (i < 7);
+	                    }
+	                    else
+	                    {
+		                    switch (selectedSeq)
+		                    {
+								case "SnowFlakes":
+									fileText = fileText.Replace("Selected_Effect", "Snowflakes");
+									fileText = fileText.Replace("Speed_1Change", trackBarSpeedSnowFlakes.Value.ToString());
+									//Colour selection
+									do
+									{
+										var btn = new Button[]
+										{
+											null, SnowFlakeColour1, SnowFlakeColour2, SnowFlakeColour3, SnowFlakeColour4, SnowFlakeColour5,
+											SnowFlakeColour6
+										};
+										var ckb = new CheckBox[]
+										{
+											null, checkBoxSnowFlakeColour1, checkBoxSnowFlakeColour2, checkBoxSnowFlakeColour3,
+											checkBoxSnowFlakeColour4, checkBoxSnowFlakeColour5, checkBoxSnowFlakeColour6
+										};
+										FileSettingsColour(btn, ckb, i, fileText, out fileText1);
+										fileText = fileText1;
+										i++;
+									} while (i < 7);
+									break;
 
-                            case "Fire":
-                                fileText = fileText.Replace("Selected_Effect", "Fire");
-                                fileText = fileText.Replace("Speed_1Change", "0");
-                                //Colour selection
-                                FileSettings(fileText, out fileText1);
-                                fileText = fileText1;
-                                break;
+			                    case "Fire":
+				                    fileText = fileText.Replace("Selected_Effect", "Fire");
+				                    fileText = fileText.Replace("Speed_1Change", "0");
+				                    //Colour selection
+				                    FileSettings(fileText, out fileText1);
+				                    fileText = fileText1;
+				                    break;
 
-                            case "Meteors":
-                                fileText = fileText.Replace("Selected_Effect", "Meteors");
-                                fileText = fileText.Replace("Speed_1Change", trackBarSpeedMeteors.Value.ToString());
-                                //Colour selection
-                                do
-                                {
-                                    var btn = new Button[] { null, MeteorColour1, MeteorColour2, MeteorColour3, MeteorColour4, MeteorColour5, MeteorColour6 };
-                                    var ckb = new CheckBox[] { null, checkBoxMeteorColour1, checkBoxMeteorColour2, checkBoxMeteorColour3, checkBoxMeteorColour4, checkBoxMeteorColour5, checkBoxMeteorColour6 };
-                                    FileSettingsColour(btn, ckb, i, fileText, out fileText1);
-                                    fileText = fileText1;
-                                    i++;
-                                } while (i < 7);
-                                break;
+			                    case "Meteors":
+				                    fileText = fileText.Replace("Selected_Effect", "Meteors");
+				                    fileText = fileText.Replace("Speed_1Change", trackBarSpeedMeteors.Value.ToString());
+				                    //Colour selection
+				                    do
+				                    {
+					                    var btn = new Button[]
+					                    {
+						                    null, MeteorColour1, MeteorColour2, MeteorColour3, MeteorColour4, MeteorColour5, MeteorColour6
+					                    };
+					                    var ckb = new CheckBox[]
+					                    {
+						                    null, checkBoxMeteorColour1, checkBoxMeteorColour2, checkBoxMeteorColour3,
+						                    checkBoxMeteorColour4, checkBoxMeteorColour5, checkBoxMeteorColour6
+					                    };
+					                    FileSettingsColour(btn, ckb, i, fileText, out fileText1);
+					                    fileText = fileText1;
+					                    i++;
+				                    } while (i < 7);
+				                    break;
 
-                            case "Twinkles":
-                                fileText = fileText.Replace("Selected_Effect", "Twinkles");
-                                fileText = fileText.Replace("Speed_1Change", trackBarSpeedTwinkles.Value.ToString());
-                                //Colour selection
-                                do
-                                {
-                                    var btn = new Button[] { null, TwinkleColour1, TwinkleColour2, TwinkleColour3, TwinkleColour4, TwinkleColour5, TwinkleColour6 };
-                                    var ckb = new CheckBox[] { null, checkBoxTwinkleColour1, checkBoxTwinkleColour2, checkBoxTwinkleColour3, checkBoxTwinkleColour4, checkBoxTwinkleColour5, checkBoxTwinkleColour6 };
-                                    FileSettingsColour(btn, ckb, i, fileText, out fileText1);
-                                    fileText = fileText1;
-                                    i++;
-                                } while (i < 7);
-                                break;
+			                    case "Twinkles":
+				                    fileText = fileText.Replace("Selected_Effect", "Twinkles");
+				                    fileText = fileText.Replace("Speed_1Change", trackBarSpeedTwinkles.Value.ToString());
+				                    //Colour selection
+				                    do
+				                    {
+					                    var btn = new Button[]
+					                    {
+						                    null, TwinkleColour1, TwinkleColour2, TwinkleColour3, TwinkleColour4, TwinkleColour5,
+						                    TwinkleColour6
+					                    };
+					                    var ckb = new CheckBox[]
+					                    {
+						                    null, checkBoxTwinkleColour1, checkBoxTwinkleColour2, checkBoxTwinkleColour3,
+						                    checkBoxTwinkleColour4, checkBoxTwinkleColour5, checkBoxTwinkleColour6
+					                    };
+					                    FileSettingsColour(btn, ckb, i, fileText, out fileText1);
+					                    fileText = fileText1;
+					                    i++;
+				                    } while (i < 7);
+				                    break;
 
-                            case "Movie":
-                                fileText = fileText.Replace("Selected_Effect", "Movie");
-                                fileText = fileText.Replace("Speed_1Change", "0");
-                                //Colour selection
-                                FileSettings(fileText, out fileText1);
-                                fileText = fileText1;
-                                break;
+			                    case "Movie":
+				                    fileText = fileText.Replace("Selected_Effect", "Movie");
+				                    fileText = fileText.Replace("Speed_1Change", "0");
+				                    //Colour selection
+				                    FileSettings(fileText, out fileText1);
+				                    fileText = fileText1;
+				                    break;
 
-                            case "Glediator/Jinx":
-                                fileText = fileText.Replace("Selected_Effect", "Glediator");
-                                fileText = fileText.Replace("Speed_1Change", trackBarGlediator.Value.ToString());
-                                //Colour selection
-                                FileSettings(fileText, out fileText1);
-                                fileText = fileText1;
-                                break;
+			                    case "Glediator/Jinx":
+				                    fileText = fileText.Replace("Selected_Effect", "Glediator");
+				                    fileText = fileText.Replace("Speed_1Change", trackBarGlediator.Value.ToString());
+				                    //Colour selection
+				                    FileSettings(fileText, out fileText1);
+				                    fileText = fileText1;
+				                    break;
 
-                            case "None":
-                                fileText = fileText.Replace("Selected_Effect", "Fire");
-                                fileText = fileText.Replace("Speed_1Change", "0");
-                                //Colour selection
-                                FileSettings(fileText, out fileText1);
-                                fileText = fileText1;
-                                break;
-                        }
-                        File.Delete(outputFileName);
+			                    case "None":
+				                    fileText = fileText.Replace("Selected_Effect", "Fire");
+				                    fileText = fileText.Replace("Speed_1Change", "0");
+				                    //Colour selection
+				                    FileSettings(fileText, out fileText1);
+				                    fileText = fileText1;
+				                    break;
+								default:
+									fileText = fileText.Replace("Selected_Effect", "Fire");
+				                    fileText = fileText.Replace("Speed_1Change", "0");
+				                    //Colour selection
+				                    FileSettings(fileText, out fileText1);
+				                    fileText = fileText1;
+				                    break;
+		                    }
+	                    }
+	                    File.Delete(outputFileName);
                         File.WriteAllText(outputFileName, fileText);
    
                         //Bitmap objBmpImage = new Bitmap(1, 1);
@@ -3372,6 +3508,8 @@ namespace Vixen_Messaging
 	        profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumber", comboBoxNodeID.Items.Count);
 			GlobalVar.MessageNumber = GlobalVar.ListLine1.Count();
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "MessageNumber", GlobalVar.MessageNumber.ToString());
+			GlobalVar.SnowFlakeNumber = GlobalVar.SnowFlakeEffectType.Count();
+			profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, "SnowFlakeNumber", GlobalVar.SnowFlakeNumber.ToString());
             var i = 0;
             var line = "ListLine1-";
             do
@@ -3405,7 +3543,7 @@ namespace Vixen_Messaging
 				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomMessageNodeSel[i]);
 				line = "MessageName";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, Convert.ToString(comboBoxName.Items[i]));
-                line = "CustomFont"; 
+                line = "CustomFont";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomFont[i]);
                 line = "CustomSpeed";
                 profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.TrackBarCustomSpeed[i]);
@@ -3428,6 +3566,46 @@ namespace Vixen_Messaging
 				line = "GroupNameID";
 				i++;
 			} while (i < GlobalVar.GroupNodeID.Count());
+			i = 0;
+			line = "SnowFlakeName";
+			do
+			{
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, Convert.ToString(comboBoxSnowFlakeName.Items[i]));
+				line = "SnowFlakeEffectType";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeEffectType[i]);
+				line = "SnowFlakeMax";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeMax[i]);
+				line = "SnowFlakeSpeed";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeSpeed[i]);
+				line = "SnowFlakeRandomEnable";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeRandomEnable[i]);
+				line = "SnowFlakeColourEnable1";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable1[i]);
+				line = "SnowFlakeColourEnable2";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable2[i]);
+				line = "SnowFlakeColourEnable3";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable3[i]);
+				line = "SnowFlakeColourEnable4";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable4[i]);
+				line = "SnowFlakeColourEnable5";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable5[i]);
+				line = "SnowFlakeColourEnable6";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable6[i]);
+				line = "SnowFlakeColour1";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour1[i]);
+				line = "SnowFlakeColour2";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour2[i]);
+				line = "SnowFlakeColour3";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour3[i]);
+				line = "SnowFlakeColour4";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour4[i]);
+				line = "SnowFlakeColour5";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour5[i]);
+				line = "SnowFlakeColour6";
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour6[i]);
+				line = "SnowFlakeName";
+				i++;
+			} while (i < GlobalVar.SnowFlakeEffectType.Count());
         }
 #endregion
 
@@ -3990,6 +4168,248 @@ namespace Vixen_Messaging
 		{
 			CustomMessageUpdate();
 		}
-    }
-}
 #endregion
+
+#region Multiple SnowFlakes
+		private void comboBoxSnowFlakeName_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			CustomSnowFlakes();
+		}
+
+		private void CustomSnowFlakes()
+		{
+			var selectedItem = comboBoxSnowFlakeName.SelectedIndex;
+			EffectType.Value = GlobalVar.SnowFlakeEffectType[selectedItem];
+			MaxSnowFlake.Value = GlobalVar.SnowFlakeMax[selectedItem];
+			trackBarSpeedSnowFlakes.Value = GlobalVar.SnowFlakeSpeed[selectedItem];
+			checkBoxRandom1.Checked = GlobalVar.SnowFlakeRandomEnable[selectedItem];
+			checkBoxSnowFlakeColour1.Checked = GlobalVar.SnowFlakeColourEnable1[selectedItem];
+			checkBoxSnowFlakeColour2.Checked = GlobalVar.SnowFlakeColourEnable2[selectedItem];
+			checkBoxSnowFlakeColour3.Checked = GlobalVar.SnowFlakeColourEnable3[selectedItem];
+			checkBoxSnowFlakeColour4.Checked = GlobalVar.SnowFlakeColourEnable4[selectedItem];
+			checkBoxSnowFlakeColour5.Checked = GlobalVar.SnowFlakeColourEnable5[selectedItem];
+			checkBoxSnowFlakeColour6.Checked = GlobalVar.SnowFlakeColourEnable6[selectedItem];
+			SnowFlakeColour1.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.SnowFlakeColour1[selectedItem]));
+			SnowFlakeColour2.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.SnowFlakeColour2[selectedItem]));
+			SnowFlakeColour3.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.SnowFlakeColour3[selectedItem]));
+			SnowFlakeColour4.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.SnowFlakeColour4[selectedItem]));
+			SnowFlakeColour5.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.SnowFlakeColour5[selectedItem]));
+			SnowFlakeColour6.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.SnowFlakeColour6[selectedItem]));
+		}
+
+		private void buttonAddSnowFlake_Click(object sender, EventArgs e)
+		{
+			var addCustomMsg = "SnowFlake - " + Interaction.InputBox("Enter a Name for your Custom SnowFlakes", "Custom SnowFlake");
+			if (addCustomMsg != "")
+			{
+				GlobalVar.SnowFlakeEffectType.Add(2);
+				GlobalVar.SnowFlakeMax.Add(3);
+				GlobalVar.SnowFlakeSpeed.Add(5);
+				GlobalVar.SnowFlakeRandomEnable.Add(true);
+				GlobalVar.SnowFlakeColourEnable1.Add(true);
+				GlobalVar.SnowFlakeColourEnable2.Add(false);
+				GlobalVar.SnowFlakeColourEnable3.Add(false);
+				GlobalVar.SnowFlakeColourEnable4.Add(false);
+				GlobalVar.SnowFlakeColourEnable5.Add(false);
+				GlobalVar.SnowFlakeColourEnable6.Add(false);
+				GlobalVar.SnowFlakeColour1.Add(Convert.ToInt32(-16776961));
+				GlobalVar.SnowFlakeColour2.Add(Convert.ToInt32(-65536));
+				GlobalVar.SnowFlakeColour3.Add(Convert.ToInt32(-16711936));
+				GlobalVar.SnowFlakeColour4.Add(Convert.ToInt32(-32640));
+				GlobalVar.SnowFlakeColour5.Add(Convert.ToInt32(-16711936));
+				GlobalVar.SnowFlakeColour6.Add(Convert.ToInt32(-32640));
+				comboBoxSnowFlakeName.Items.Add(addCustomMsg);
+				comboBoxSnowFlakeName.SelectedIndex = comboBoxSnowFlakeName.Items.Count - 1;
+				customMessageSeqSel.Items.Add(addCustomMsg);
+			}
+		}
+		
+		private void buttonRemoveSnowFlake_Click(object sender, EventArgs e)
+		{
+			if (comboBoxSnowFlakeName.Items.Count > 0)
+			{
+				customMessageSeqSel.Items.Remove(comboBoxSnowFlakeName.SelectedItem);
+				GlobalVar.SnowFlakeEffectType.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				GlobalVar.SnowFlakeMax.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				GlobalVar.SnowFlakeSpeed.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				GlobalVar.SnowFlakeRandomEnable.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				GlobalVar.SnowFlakeColourEnable1.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				GlobalVar.SnowFlakeColourEnable2.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				GlobalVar.SnowFlakeColourEnable3.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				GlobalVar.SnowFlakeColourEnable4.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				GlobalVar.SnowFlakeColourEnable5.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				GlobalVar.SnowFlakeColourEnable6.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				GlobalVar.SnowFlakeColour1.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				GlobalVar.SnowFlakeColour2.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				GlobalVar.SnowFlakeColour3.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				GlobalVar.SnowFlakeColour4.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				GlobalVar.SnowFlakeColour5.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				GlobalVar.SnowFlakeColour6.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+                comboBoxSnowFlakeName.Items.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				customMessageSeqSel.SelectedIndex = 0;
+                if (comboBoxSnowFlakeName.Items.Count > 0)
+                {
+                    comboBoxSnowFlakeName.SelectedIndex = 0;
+					EffectType.Value = GlobalVar.SnowFlakeEffectType[0];
+					MaxSnowFlake.Value = GlobalVar.SnowFlakeMax[0];
+					trackBarSpeedSnowFlakes.Value = GlobalVar.SnowFlakeSpeed[0];
+					checkBoxRandom1.Checked = GlobalVar.SnowFlakeRandomEnable[0];
+					checkBoxSnowFlakeColour1.Checked = GlobalVar.SnowFlakeColourEnable1[0];
+					checkBoxSnowFlakeColour2.Checked = GlobalVar.SnowFlakeColourEnable2[0];
+					checkBoxSnowFlakeColour3.Checked = GlobalVar.SnowFlakeColourEnable3[0];
+					checkBoxSnowFlakeColour4.Checked = GlobalVar.SnowFlakeColourEnable4[0];
+					checkBoxSnowFlakeColour5.Checked = GlobalVar.SnowFlakeColourEnable5[0];
+					checkBoxSnowFlakeColour6.Checked = GlobalVar.SnowFlakeColourEnable6[0];
+					SnowFlakeColour1.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.SnowFlakeColour1[0]));
+					SnowFlakeColour2.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.SnowFlakeColour2[0]));
+					SnowFlakeColour3.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.SnowFlakeColour3[0]));
+					SnowFlakeColour4.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.SnowFlakeColour4[0]));
+					SnowFlakeColour5.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.SnowFlakeColour5[0]));
+					SnowFlakeColour6.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.SnowFlakeColour6[0]));
+				}
+                else
+                {
+                    comboBoxSnowFlakeName.Items.Clear();
+					EffectType.Value = 2;
+					MaxSnowFlake.Value = 3;
+					trackBarSpeedSnowFlakes.Value = 5;
+					checkBoxRandom1.Checked = true;
+					checkBoxSnowFlakeColour1.Checked = true;
+					checkBoxSnowFlakeColour2.Checked = false;
+					checkBoxSnowFlakeColour3.Checked = false;
+					checkBoxSnowFlakeColour4.Checked = false;
+					checkBoxSnowFlakeColour5.Checked = false;
+					checkBoxSnowFlakeColour6.Checked = false;
+					SnowFlakeColour1.BackColor = Color.FromArgb(-16776961);
+					SnowFlakeColour2.BackColor = Color.FromArgb(-65536);
+					SnowFlakeColour3.BackColor = Color.FromArgb(-16711936);
+					SnowFlakeColour4.BackColor = Color.FromArgb(-32640);
+					SnowFlakeColour5.BackColor = Color.FromArgb(-16776961);
+					SnowFlakeColour6.BackColor = Color.FromArgb(-65536);
+                }
+			}
+			else
+			{
+				comboBoxSnowFlakeName.Items.Clear();
+				EffectType.Value = 2;
+				MaxSnowFlake.Value = 3;
+				trackBarSpeedSnowFlakes.Value = 5;
+				checkBoxRandom1.Checked = true;
+				checkBoxSnowFlakeColour1.Checked = true;
+				checkBoxSnowFlakeColour2.Checked = false;
+				checkBoxSnowFlakeColour3.Checked = false;
+				checkBoxSnowFlakeColour4.Checked = false;
+				checkBoxSnowFlakeColour5.Checked = false;
+				checkBoxSnowFlakeColour6.Checked = false;
+				SnowFlakeColour1.BackColor = Color.FromArgb(-16776961);
+				SnowFlakeColour2.BackColor = Color.FromArgb(-65536);
+				SnowFlakeColour3.BackColor = Color.FromArgb(-16711936);
+				SnowFlakeColour4.BackColor = Color.FromArgb(-32640);
+				SnowFlakeColour5.BackColor = Color.FromArgb(-16776961);
+				SnowFlakeColour6.BackColor = Color.FromArgb(-65536);
+			}
+        }
+
+		private void EffectType_MouseDown(object sender, MouseEventArgs e)
+		{
+			CustomSnowFlakeUpdate();
+		}
+
+	    private void CustomSnowFlakeUpdate()
+	    {
+			if (comboBoxSnowFlakeName.Items.Count != 0)
+			{
+				GlobalVar.SnowFlakeEffectType[comboBoxSnowFlakeName.SelectedIndex] = Convert.ToInt16(EffectType.Value);
+				GlobalVar.SnowFlakeMax[comboBoxSnowFlakeName.SelectedIndex] = Convert.ToInt16(MaxSnowFlake.Value);
+				GlobalVar.SnowFlakeSpeed[comboBoxSnowFlakeName.SelectedIndex] = trackBarSpeedSnowFlakes.Value;
+				GlobalVar.SnowFlakeRandomEnable[comboBoxSnowFlakeName.SelectedIndex] = checkBoxRandom1.Checked;
+				GlobalVar.SnowFlakeColourEnable1[comboBoxSnowFlakeName.SelectedIndex] = checkBoxSnowFlakeColour1.Checked;
+				GlobalVar.SnowFlakeColourEnable2[comboBoxSnowFlakeName.SelectedIndex] = checkBoxSnowFlakeColour2.Checked;
+				GlobalVar.SnowFlakeColourEnable3[comboBoxSnowFlakeName.SelectedIndex] = checkBoxSnowFlakeColour3.Checked;
+				GlobalVar.SnowFlakeColourEnable4[comboBoxSnowFlakeName.SelectedIndex] = checkBoxSnowFlakeColour4.Checked;
+				GlobalVar.SnowFlakeColourEnable5[comboBoxSnowFlakeName.SelectedIndex] = checkBoxSnowFlakeColour5.Checked;
+				GlobalVar.SnowFlakeColourEnable6[comboBoxSnowFlakeName.SelectedIndex] = checkBoxSnowFlakeColour6.Checked;
+				GlobalVar.SnowFlakeColour1[comboBoxSnowFlakeName.SelectedIndex] = SnowFlakeColour1.BackColor.ToArgb();
+				GlobalVar.SnowFlakeColour2[comboBoxSnowFlakeName.SelectedIndex] = SnowFlakeColour2.BackColor.ToArgb();
+				GlobalVar.SnowFlakeColour3[comboBoxSnowFlakeName.SelectedIndex] = SnowFlakeColour3.BackColor.ToArgb();
+				GlobalVar.SnowFlakeColour4[comboBoxSnowFlakeName.SelectedIndex] = SnowFlakeColour4.BackColor.ToArgb();
+				GlobalVar.SnowFlakeColour5[comboBoxSnowFlakeName.SelectedIndex] = SnowFlakeColour5.BackColor.ToArgb();
+				GlobalVar.SnowFlakeColour6[comboBoxSnowFlakeName.SelectedIndex] = SnowFlakeColour6.BackColor.ToArgb();
+			}
+	    }
+
+		private void EffectType_MouseClick(object sender, MouseEventArgs e)
+		{
+			CustomSnowFlakeUpdate();
+		}
+
+		private void MaxSnowFlake_MouseDown(object sender, MouseEventArgs e)
+		{
+			CustomSnowFlakeUpdate();
+		}
+
+		private void MaxSnowFlake_MouseClick(object sender, MouseEventArgs e)
+		{
+			CustomSnowFlakeUpdate();
+		}
+
+		private void checkBoxSnowFlakeColour1_Leave(object sender, EventArgs e)
+		{
+			CustomSnowFlakeUpdate();
+		}
+
+		private void checkBoxSnowFlakeColour2_Leave(object sender, EventArgs e)
+		{
+			CustomSnowFlakeUpdate();
+		}
+
+		private void checkBoxSnowFlakeColour3_Leave(object sender, EventArgs e)
+		{
+			CustomSnowFlakeUpdate();
+		}
+
+		private void checkBoxSnowFlakeColour4_Leave(object sender, EventArgs e)
+		{
+			CustomSnowFlakeUpdate();
+		}
+
+		private void checkBoxSnowFlakeColour5_Leave(object sender, EventArgs e)
+		{
+			CustomSnowFlakeUpdate();
+		}
+
+		private void checkBoxSnowFlakeColour6_Leave(object sender, EventArgs e)
+		{
+			CustomSnowFlakeUpdate();
+		}
+
+		private void checkBoxRandom1_Leave(object sender, EventArgs e)
+		{
+			CustomSnowFlakeUpdate();
+		}
+
+		private void trackBarSpeedSnowFlakes_MouseLeave(object sender, EventArgs e)
+		{
+			CustomSnowFlakeUpdate();
+		}
+
+		private void buttonPlaySnowFlake_Click(object sender, EventArgs e)
+		{
+			StopSequence();
+			if (!GlobalVar.PlayCustomMessage)
+			{
+				Stop_Vixen();
+				PlayCustomMessage();
+				Start_Vixen();
+			}
+			else
+			{
+				PlayCustomMessage();
+			}
+		}
+
+#endregion
+
+
+	}
+}
