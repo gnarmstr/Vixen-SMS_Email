@@ -1282,50 +1282,29 @@ namespace Vixen_Messaging
 
         private void buttonAddMessage_Click(object sender, EventArgs e)
         {
-            var formMessages = new FormMessages();
-            formMessages.ShowDialog();
-
-            if (formMessages.textBoxName.Text != "")
-            {
-				GlobalVar.CustomMessageSeqSel.Add(formMessages.customMessageSeqSel.Text);
-				customMessageSeqSel.SelectedIndex = formMessages.customMessageSeqSel.SelectedIndex;
-				GlobalVar.CustomMessageNodeSel.Add(formMessages.customMessageNodeSel.Text);
-				customMessageNodeSel.SelectedIndex = formMessages.customMessageNodeSel.SelectedIndex;
-				GlobalVar.MessageColourOption.Add(formMessages.messageColourOption.Text);
-				messageColourOption.SelectedIndex = formMessages.messageColourOption.SelectedIndex;
-                GlobalVar.ListLine1.Add(formMessages.textBoxLine1.Text);
-                textBoxLine1.Text = formMessages.textBoxLine1.Text;
-                GlobalVar.ListLine2.Add(formMessages.textBoxLine2.Text);
-                textBoxLine2.Text = formMessages.textBoxLine2.Text;
-                GlobalVar.ListLine3.Add(formMessages.textBoxLine3.Text);
-                textBoxLine3.Text = formMessages.textBoxLine3.Text;
-                GlobalVar.ListLine4.Add(formMessages.textBoxLine4.Text);
-                textBoxLine4.Text = formMessages.textBoxLine4.Text;
-				line1Colour.BackColor = Color.FromArgb(Convert.ToInt32(-16776961));
+			var	addCustomMsg = Interaction.InputBox("Enter a Name for your Custom Message", "Custom Message");
+			if (addCustomMsg != "")
+			{
+				GlobalVar.CustomMessageSeqSel.Add("Automatically Assigned");
+				GlobalVar.CustomMessageNodeSel.Add(customMessageNodeSel.Items[0].ToString());
+				GlobalVar.MessageColourOption.Add("Multi");
+				GlobalVar.ListLine1.Add("");
+				GlobalVar.ListLine2.Add("");
+				GlobalVar.ListLine3.Add("");
+				GlobalVar.ListLine4.Add("");
 				GlobalVar.Line1Colour.Add(Convert.ToInt32(-16776961));
-				line2Colour.BackColor = Color.FromArgb(Convert.ToInt32(-65536));
 				GlobalVar.Line2Colour.Add(Convert.ToInt32(-65536));
-				line3Colour.BackColor = Color.FromArgb(Convert.ToInt32(-16711936));
 				GlobalVar.Line3Colour.Add(Convert.ToInt32(-16711936));
-				line4Colour.BackColor = Color.FromArgb(Convert.ToInt32(-32640));
 				GlobalVar.Line4Colour.Add(Convert.ToInt32(-32640));
-                GlobalVar.CountDirection.Add(formMessages.comboBoxCountDownDirection.Text);
-                comboBoxCountDownDirection.Text = formMessages.comboBoxCountDownDirection.Text;
-                GlobalVar.Position.Add(formMessages.trackBarCountDownPosition.Value);
-                trackBarCountDownPosition.Value = formMessages.trackBarCountDownPosition.Value;
-                GlobalVar.MessageEnabled.Add(formMessages.checkBoxMessageEnabled.Checked);
-                checkBoxMessageEnabled.Checked = formMessages.checkBoxMessageEnabled.Checked;
-                GlobalVar.CustomFont.Add(formMessages.textBoxCustomFont.Text);
-                textBoxCustomFont.Text = formMessages.textBoxCustomFont.Text;
-                GlobalVar.CustomFontSize.Add(formMessages.textBoxCustomFontSize.Text);
-                textBoxCustomFontSize.Text = formMessages.textBoxCustomFontSize.Text;
-                GlobalVar.TrackBarCustomSpeed.Add(formMessages.trackBarCustomSpeed.Value);
-                trackBarCustomSpeed.Value = formMessages.trackBarCustomSpeed.Value;
-				GlobalVar.CheckBoxCentreStop.Add(formMessages.checkBoxCentreStop.Checked);
-				checkBoxCentreStop.Checked = formMessages.checkBoxCentreStop.Checked;
-                GlobalVar.CustomMsgLength.Add(formMessages.CustomMsgLength.Value);
-                CustomMsgLength.Value = formMessages.CustomMsgLength.Value;
-                comboBoxName.Items.Add(formMessages.textBoxName.Text);
+				GlobalVar.CountDirection.Add("Left");
+				GlobalVar.Position.Add(65);
+				GlobalVar.MessageEnabled.Add(true);
+				GlobalVar.CustomFont.Add("Arial Narrow");
+				GlobalVar.CustomFontSize.Add("10");
+				GlobalVar.TrackBarCustomSpeed.Add(5);
+				GlobalVar.CheckBoxCentreStop.Add(false);
+				GlobalVar.CustomMsgLength.Add(10);
+				comboBoxName.Items.Add(addCustomMsg);
                 comboBoxName.SelectedIndex = comboBoxName.Items.Count - 1;
             }
         }
@@ -1448,11 +1427,6 @@ namespace Vixen_Messaging
         }
 
         private void textBoxLine4_MouseLeave(object sender, EventArgs e)
-        {
-            CustomMessageUpdate();
-        }
-
-        private void comboBoxCountDownDirection_MouseLeave(object sender, EventArgs e)
         {
             CustomMessageUpdate();
         }
@@ -3912,31 +3886,6 @@ namespace Vixen_Messaging
             CustomMessageUpdate();
 		}
 
-		private void messageColourOption_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			switch (messageColourOption.Text)
-			{
-				case "Single":
-					line1Colour.Visible = true;
-					line2Colour.Visible = false;
-					line3Colour.Visible = false;
-					line4Colour.Visible = false;
-					break;
-				case "Multi":
-					line1Colour.Visible = true;
-					line2Colour.Visible = true;
-					line3Colour.Visible = true;
-					line4Colour.Visible = true;
-					break;
-				case "Random":
-					line1Colour.Visible = false;
-					line2Colour.Visible = false;
-					line3Colour.Visible = false;
-					line4Colour.Visible = false;
-					break;
-			}
-		}
-
 		private void checkBoxCentreStop_Leave(object sender, EventArgs e)
 		{
 			CustomMessageUpdate();
@@ -3947,20 +3896,10 @@ namespace Vixen_Messaging
 			ColourVisible();
 		}
 
-		private void messageColourOption_MouseLeave(object sender, EventArgs e)
-		{
-			CustomMessageUpdate();
-		}
-
-		private void customMessageSeqSel_MouseLeave(object sender, EventArgs e)
-		{
-			CustomMessageUpdate();
-		}
-
 		private void buttonAddNodeID_Click(object sender, EventArgs e)
 		{
 			string addGroupName;
-			addGroupName = Interaction.InputBox("New Group Name");
+			addGroupName = Interaction.InputBox("Enter a Group Name of your Matrix/Megatree/Grid. Ensure it matches your Vixen Group Name exactly.", "Group Node ID");
 			if (addGroupName != "")
 			{
 				comboBoxNodeID.Items.Add(addGroupName);

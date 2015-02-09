@@ -273,6 +273,7 @@ namespace Vixen_Messaging
 			this.comboBoxNodeID = new System.Windows.Forms.ComboBox();
 			this.buttonRemoveNodeID = new System.Windows.Forms.Button();
 			this.buttonAddNodeID = new System.Windows.Forms.Button();
+			this.label100 = new System.Windows.Forms.Label();
 			this.comboBoxPlayMode = new System.Windows.Forms.ComboBox();
 			this.tabControlMain = new System.Windows.Forms.TabControl();
 			this.tabPageMain = new System.Windows.Forms.TabPage();
@@ -281,7 +282,6 @@ namespace Vixen_Messaging
 			this.numericUpDownIntervalMsgs = new System.Windows.Forms.NumericUpDown();
 			this.tabPageMessagingSettings = new System.Windows.Forms.TabPage();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
-			this.label100 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.buttonGetVixenData = new System.Windows.Forms.Button();
 			this.textBoxVixenFolder = new System.Windows.Forms.TextBox();
@@ -3360,6 +3360,16 @@ namespace Vixen_Messaging
 			this.buttonAddNodeID.UseVisualStyleBackColor = false;
 			this.buttonAddNodeID.Click += new System.EventHandler(this.buttonAddNodeID_Click);
 			// 
+			// label100
+			// 
+			this.label100.AutoSize = true;
+			this.label100.Location = new System.Drawing.Point(13, 46);
+			this.label100.Name = "label100";
+			this.label100.Size = new System.Drawing.Size(121, 20);
+			this.label100.TabIndex = 89;
+			this.label100.Text = "Group Node ID:";
+			this.toolTip1.SetToolTip(this.label100, "Displayed Group ID will be the one used for Incoming Messages.");
+			// 
 			// comboBoxPlayMode
 			// 
 			this.comboBoxPlayMode.BackColor = System.Drawing.SystemColors.Window;
@@ -3481,16 +3491,6 @@ namespace Vixen_Messaging
 			this.groupBox3.TabIndex = 2;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Vixen Settings";
-			// 
-			// label100
-			// 
-			this.label100.AutoSize = true;
-			this.label100.Location = new System.Drawing.Point(13, 46);
-			this.label100.Name = "label100";
-			this.label100.Size = new System.Drawing.Size(121, 20);
-			this.label100.TabIndex = 89;
-			this.label100.Text = "Group Node ID:";
-			this.toolTip1.SetToolTip(this.label100, "Displayed Group ID will be the one used for Incoming Messages.");
 			// 
 			// label7
 			// 
