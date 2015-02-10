@@ -113,7 +113,7 @@ namespace Vixen_Messaging
 
 			#region Custom Meteors
 
-			public static List<int> MeteorColourType = new List<int>();
+			public static List<string> MeteorColourType = new List<string>();
 
 			public static List<int> MeteorCount = new List<int>();
 

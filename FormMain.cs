@@ -269,7 +269,9 @@ namespace Vixen_Messaging
 #endregion
     
 #region Load Data
-        private void LoadData()
+
+		#region General Settings
+		private void LoadData()
         {
             var profile = new XmlProfileSettings();
             textBoxServer.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "POP3Server", "pop.gmail.com");
@@ -410,8 +412,9 @@ namespace Vixen_Messaging
             dateCountDown.Value = Convert.ToDateTime(dateCountDownString);
             checkBoxVixenControl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", false);
 			messageColourOption.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "messageColourOption", "Single");
-			GlobalVar.MessageNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MessageNumber", 0);
-			GlobalVar.SnowFlakeNumber = profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, "SnowFlakeNumber", 0);
+		#endregion
+
+		#region Group ID Settings
 			var groupIDNumberSel = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumberSel", 0);
 			GlobalVar.GroupIDNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumber", 0);
 			var i = 0;
@@ -420,16 +423,20 @@ namespace Vixen_Messaging
 			{
 				do
 				{
-					comboBoxNodeID.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
-					GlobalVar.GroupNameID.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
-					customMessageNodeSel.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+					comboBoxNodeID.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, ""));
+					GlobalVar.GroupNameID.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, ""));
+					customMessageNodeSel.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, ""));
 					line = "GroupNodeID";
-					GlobalVar.GroupNodeID.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+					GlobalVar.GroupNodeID.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, ""));
 					line = "GroupNameID";
 					i++;
 				} while (i < GlobalVar.GroupIDNumber);
 				comboBoxNodeID.SelectedIndex = groupIDNumberSel;
-			} 
+			}
+#endregion
+
+		#region Custom Message Settings
+			GlobalVar.MessageNumber = profile.GetSetting(XmlProfileSettings.SettingType.Message, "MessageNumber", 0);
 			comboBoxName.Items.Clear();
             i = 0;
             line = "ListLine1-";
@@ -437,50 +444,55 @@ namespace Vixen_Messaging
             {
                 do
                 {
-                    GlobalVar.ListLine1.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+					GlobalVar.ListLine1.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, ""));
                     line = "ListLine2-";
-                    GlobalVar.ListLine2.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+					GlobalVar.ListLine2.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, ""));
                     line = "ListLine3-";
-                    GlobalVar.ListLine3.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+					GlobalVar.ListLine3.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, ""));
                     line = "ListLine4-";
-                    GlobalVar.ListLine4.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+					GlobalVar.ListLine4.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, ""));
 					line = "Line1Colour";
-					GlobalVar.Line1Colour.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, -16776961));
+					GlobalVar.Line1Colour.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, -16776961));
 					line = "Line2Colour";
-					GlobalVar.Line2Colour.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, -65536));
+					GlobalVar.Line2Colour.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, -65536));
 					line = "Line3Colour";
-					GlobalVar.Line3Colour.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, -16711936));
+					GlobalVar.Line3Colour.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, -16711936));
 					line = "Line4Colour";
-					GlobalVar.Line4Colour.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, -32640));
+					GlobalVar.Line4Colour.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, -32640));
 					line = "MessageDirection";
-                    GlobalVar.CountDirection.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+					GlobalVar.CountDirection.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, ""));
                     line = "MessagePosition";
-                    GlobalVar.Position.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, 65));
+					GlobalVar.Position.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, 65));
                     line = "MessageEnabled";
-                    GlobalVar.MessageEnabled.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, false));
+					GlobalVar.MessageEnabled.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, false));
                     line = "CustomFont";
-                    GlobalVar.CustomFont.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, "Arial Narrow"));
+					GlobalVar.CustomFont.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, "Arial Narrow"));
                     line = "CustomFontSize";
-                    GlobalVar.CustomFontSize.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, "10"));
+					GlobalVar.CustomFontSize.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, "10"));
 					line = "MessageColourOption";
-					GlobalVar.MessageColourOption.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, "Multi"));
+					GlobalVar.MessageColourOption.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, "Multi"));
 					line = "MessageSeqSel";
-					GlobalVar.CustomMessageSeqSel.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, "Automatically Assigned"));
+					GlobalVar.CustomMessageSeqSel.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, "Automatically Assigned"));
 					line = "MessageNodeSel";
-					GlobalVar.CustomMessageNodeSel.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+					GlobalVar.CustomMessageNodeSel.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, ""));
 					line = "MessageName";
-                    comboBoxName.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, ""));
+					comboBoxName.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, ""));
 					line = "CenterStop";
-					GlobalVar.CheckBoxCentreStop.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, false));
+					GlobalVar.CheckBoxCentreStop.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, false));
 					line = "CustomSpeed";
-                    GlobalVar.TrackBarCustomSpeed.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, 5));
+					GlobalVar.TrackBarCustomSpeed.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, 5));
                     line = "CustomMsgLength";
-                    GlobalVar.CustomMsgLength.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, line + i, 10));
+					GlobalVar.CustomMsgLength.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, 10));
                     line = "ListLine1-";
                     i++;
                 } while (i < GlobalVar.MessageNumber);
                 comboBoxName.SelectedIndex = 0;
-            }
+			}
+			#endregion
+
+		#region SnowFlake Settings
+
+			GlobalVar.SnowFlakeNumber = profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, "SnowFlakeNumber", 0);
 			comboBoxSnowFlakeName.Items.Clear();
             i = 0;
 			line = "SnowFlakeName";
@@ -531,8 +543,68 @@ namespace Vixen_Messaging
 			        i++;
 				} while (i < GlobalVar.SnowFlakeNumber);
 				comboBoxSnowFlakeName.SelectedIndex = 0;
-	        }
-		        customMessageSeqSel.SelectedIndex = 1;
+			}
+			#endregion
+
+		#region Meteor Settings
+
+			GlobalVar.MeteorNumber = profile.GetSetting(XmlProfileSettings.SettingType.Meteor, "MeteorNumber", 0);
+			comboBoxMeteorName.Items.Clear();
+			i = 0;
+			line = "MeteorName";
+			if (GlobalVar.MeteorNumber > 0)
+			{
+				do
+				{
+					customMessageSeqSel.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, ""));
+					comboBoxMeteorName.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, ""));
+					line = "MeteorColourType";
+					GlobalVar.MeteorColourType.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, "Range"));
+					line = "MeteorCount";
+					GlobalVar.MeteorCount.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, 11));
+					line = "MeteorTrailLength";
+					GlobalVar.MeteorTrailLength.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, 12));
+					line = "MeteorSpeed";
+					GlobalVar.MeteorSpeed.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, 5));
+					line = "MeteorRandomEnable";
+					GlobalVar.MeteorRandomEnable.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, true));
+					line = "MeteorColourEnable1";
+					GlobalVar.MeteorColourEnable1.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, true));
+					line = "MeteorColourEnable2";
+					GlobalVar.MeteorColourEnable2.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, false));
+					line = "MeteorColourEnable3";
+					GlobalVar.MeteorColourEnable3.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, false));
+					line = "MeteorColourEnable4";
+					GlobalVar.MeteorColourEnable4.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, false));
+					line = "MeteorColourEnable5";
+					GlobalVar.MeteorColourEnable5.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, false));
+					line = "MeteorColourEnable6";
+					GlobalVar.MeteorColourEnable6.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, false));
+					line = "MeteorColour1";
+					GlobalVar.MeteorColour1.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, -16776961));
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour1[i]);
+					line = "MeteorColour2";
+					GlobalVar.MeteorColour2.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, -65536));
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour2[i]);
+					line = "MeteorColour3";
+					GlobalVar.MeteorColour3.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, -16711936));
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour3[i]);
+					line = "MeteorColour4";
+					GlobalVar.MeteorColour4.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, -32640));
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour4[i]);
+					line = "MeteorColour5";
+					GlobalVar.MeteorColour5.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, -16776961));
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour5[i]);
+					line = "MeteorColour6";
+					GlobalVar.MeteorColour6.Add(profile.GetSetting(XmlProfileSettings.SettingType.Meteor, line + i, -65536));
+					line = "MeteorName";
+					i++;
+				} while (i < GlobalVar.MeteorNumber);
+				comboBoxMeteorName.SelectedIndex = 0;
+			}
+			#endregion
+
+			customMessageSeqSel.SelectedIndex = 1;
         }
         #endregion
 
@@ -1663,10 +1735,15 @@ namespace Vixen_Messaging
 							int selectedSnowFlake;
 		                    var randomSnowFlake = new Random();
 							selectedSnowFlake = randomSnowFlake.Next(0, comboBoxSnowFlakeName.Items.Count);
+							int selectedMeteor;
+							var randomMeteor = new Random();
+							selectedMeteor = randomMeteor.Next(0, comboBoxMeteorName.Items.Count);
 		                    try
 		                    {
 								comboBoxSnowFlakeName.SelectedIndex = selectedSnowFlake;
 								CustomSnowFlakes();
+								comboBoxMeteorName.SelectedIndex = selectedMeteor;
+								CustomMeteor();
 		                    }
 		                    catch
 		                    {
@@ -1777,31 +1854,53 @@ namespace Vixen_Messaging
 								i++;
 							} while (i < 7);
 	                    }
+						if (selectedSeq.Contains("Meteor - "))
+	                    {
+							comboBoxMeteorName.SelectedItem = customMessageSeqSel.Text;
+							fileText = fileText.Replace("Selected_Effect", "Meteors");
+							fileText = fileText.Replace("Speed_1Change", trackBarSpeedMeteors.Value.ToString());
+							//Colour selection
+							do
+							{
+								var btn = new Button[]
+					                    {
+						                    null, MeteorColour1, MeteorColour2, MeteorColour3, MeteorColour4, MeteorColour5, MeteorColour6
+					                    };
+								var ckb = new CheckBox[]
+					                    {
+						                    null, checkBoxMeteorColour1, checkBoxMeteorColour2, checkBoxMeteorColour3,
+						                    checkBoxMeteorColour4, checkBoxMeteorColour5, checkBoxMeteorColour6
+					                    };
+								FileSettingsColour(btn, ckb, i, fileText, out fileText1);
+								fileText = fileText1;
+								i++;
+							} while (i < 7);
+	                    }
 	                    else
 	                    {
 		                    switch (selectedSeq)
 		                    {
-								case "SnowFlakes":
-									fileText = fileText.Replace("Selected_Effect", "Snowflakes");
-									fileText = fileText.Replace("Speed_1Change", trackBarSpeedSnowFlakes.Value.ToString());
-									//Colour selection
-									do
-									{
-										var btn = new Button[]
-										{
-											null, SnowFlakeColour1, SnowFlakeColour2, SnowFlakeColour3, SnowFlakeColour4, SnowFlakeColour5,
-											SnowFlakeColour6
-										};
-										var ckb = new CheckBox[]
-										{
-											null, checkBoxSnowFlakeColour1, checkBoxSnowFlakeColour2, checkBoxSnowFlakeColour3,
-											checkBoxSnowFlakeColour4, checkBoxSnowFlakeColour5, checkBoxSnowFlakeColour6
-										};
-										FileSettingsColour(btn, ckb, i, fileText, out fileText1);
-										fileText = fileText1;
-										i++;
-									} while (i < 7);
-									break;
+			                    case "SnowFlakes":
+				                    fileText = fileText.Replace("Selected_Effect", "Snowflakes");
+				                    fileText = fileText.Replace("Speed_1Change", trackBarSpeedSnowFlakes.Value.ToString());
+				                    //Colour selection
+				                    do
+				                    {
+					                    var btn = new Button[]
+					                    {
+						                    null, SnowFlakeColour1, SnowFlakeColour2, SnowFlakeColour3, SnowFlakeColour4, SnowFlakeColour5,
+						                    SnowFlakeColour6
+					                    };
+					                    var ckb = new CheckBox[]
+					                    {
+						                    null, checkBoxSnowFlakeColour1, checkBoxSnowFlakeColour2, checkBoxSnowFlakeColour3,
+						                    checkBoxSnowFlakeColour4, checkBoxSnowFlakeColour5, checkBoxSnowFlakeColour6
+					                    };
+					                    FileSettingsColour(btn, ckb, i, fileText, out fileText1);
+					                    fileText = fileText1;
+					                    i++;
+				                    } while (i < 7);
+				                    break;
 
 			                    case "Fire":
 				                    fileText = fileText.Replace("Selected_Effect", "Fire");
@@ -1877,8 +1976,8 @@ namespace Vixen_Messaging
 				                    FileSettings(fileText, out fileText1);
 				                    fileText = fileText1;
 				                    break;
-								default:
-									fileText = fileText.Replace("Selected_Effect", "Fire");
+			                    default:
+				                    fileText = fileText.Replace("Selected_Effect", "Fire");
 				                    fileText = fileText.Replace("Speed_1Change", "0");
 				                    //Colour selection
 				                    FileSettings(fileText, out fileText1);
@@ -3367,7 +3466,9 @@ namespace Vixen_Messaging
 #endregion
 
 #region Save Data
-        private void SeqSave()
+
+			#region General Settings
+		private void SeqSave()
         {
             var profile = new XmlProfileSettings();
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "POP3Server", textBoxServer.Text);
@@ -3504,68 +3605,80 @@ namespace Vixen_Messaging
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCountDownEnable", checkBoxCountDownEnable.Checked.ToString());
             profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", checkBoxVixenControl.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "messageColourOption", messageColourOption.Text);
+#endregion
+
+			#region Group ID Settings
+
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumberSel", comboBoxNodeID.SelectedIndex);
-	        profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumber", comboBoxNodeID.Items.Count);
-			GlobalVar.MessageNumber = GlobalVar.ListLine1.Count();
-            profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "MessageNumber", GlobalVar.MessageNumber.ToString());
-			GlobalVar.SnowFlakeNumber = GlobalVar.SnowFlakeEffectType.Count();
-			profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, "SnowFlakeNumber", GlobalVar.SnowFlakeNumber.ToString());
-            var i = 0;
-            var line = "ListLine1-";
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumber", comboBoxNodeID.Items.Count);
+			var i = 0;
+            var line = "GroupNameID";
             do
             {
-                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.ListLine1[i]);
-                line = "ListLine2-";
-                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.ListLine2[i]);
-                line = "ListLine3-";
-                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.ListLine3[i]);
-                line = "ListLine4-";
-				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.ListLine4[i]);
-				line = "Line1Colour";
-				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.Line1Colour[i]);
-				line = "Line2Colour";
-				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.Line2Colour[i]);
-				line = "Line3Colour";
-				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.Line3Colour[i]);
-				line = "Line4Colour";
-				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.Line4Colour[i]);
-				line = "MessageDirection";
-                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CountDirection[i]);
-                line = "MessagePosition";
-                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.Position[i]);
-                line = "MessageEnabled";
-                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.MessageEnabled[i]);
-				line = "MessageColourOption";
-				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.MessageColourOption[i]);
-				line = "MessageSeqSel";
-				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomMessageSeqSel[i]);
-				line = "MessageNodeSel";
-				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomMessageNodeSel[i]);
-				line = "MessageName";
-                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, Convert.ToString(comboBoxName.Items[i]));
-                line = "CustomFont";
-                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomFont[i]);
-                line = "CustomSpeed";
-                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.TrackBarCustomSpeed[i]);
-				line = "CenterStop";
-				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CheckBoxCentreStop[i]);
-				line = "CustomFontSize";
-                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.CustomFontSize[i]);
-                line = "CustomMsgLength";
-                profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, Convert.ToString(GlobalVar.CustomMsgLength[i]));
-                line = "ListLine1-";
-                i++;
-            } while (i < GlobalVar.ListLine1.Count());
-			i = 0;
-            line = "GroupNameID";
-            do
-            {
-				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, Convert.ToString(comboBoxNodeID.Items[i]));
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, Convert.ToString(comboBoxNodeID.Items[i]));
 				line = "GroupNodeID";
-				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, line + i, GlobalVar.GroupNodeID[i]);
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.GroupNodeID[i]);
 				line = "GroupNameID";
 				i++;
 			} while (i < GlobalVar.GroupNodeID.Count());
+			#endregion
+
+			#region Custom Message Settings
+
+			GlobalVar.MessageNumber = GlobalVar.ListLine1.Count();
+			profile.PutSetting(XmlProfileSettings.SettingType.Message, "MessageNumber", GlobalVar.MessageNumber.ToString());
+			i = 0;
+            line = "ListLine1-";
+            do
+            {
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.ListLine1[i]);
+                line = "ListLine2-";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.ListLine2[i]);
+                line = "ListLine3-";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.ListLine3[i]);
+                line = "ListLine4-";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.ListLine4[i]);
+				line = "Line1Colour";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.Line1Colour[i]);
+				line = "Line2Colour";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.Line2Colour[i]);
+				line = "Line3Colour";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.Line3Colour[i]);
+				line = "Line4Colour";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.Line4Colour[i]);
+				line = "MessageDirection";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CountDirection[i]);
+                line = "MessagePosition";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.Position[i]);
+                line = "MessageEnabled";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.MessageEnabled[i]);
+				line = "MessageColourOption";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.MessageColourOption[i]);
+				line = "MessageSeqSel";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CustomMessageSeqSel[i]);
+				line = "MessageNodeSel";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CustomMessageNodeSel[i]);
+				line = "MessageName";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, Convert.ToString(comboBoxName.Items[i]));
+                line = "CustomFont";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CustomFont[i]);
+                line = "CustomSpeed";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.TrackBarCustomSpeed[i]);
+				line = "CenterStop";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CheckBoxCentreStop[i]);
+				line = "CustomFontSize";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CustomFontSize[i]);
+                line = "CustomMsgLength";
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, Convert.ToString(GlobalVar.CustomMsgLength[i]));
+                line = "ListLine1-";
+                i++;
+            } while (i < GlobalVar.ListLine1.Count());
+			#endregion
+
+			#region SnowFlake Settings
+
+			GlobalVar.SnowFlakeNumber = GlobalVar.SnowFlakeEffectType.Count();
+			profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, "SnowFlakeNumber", GlobalVar.SnowFlakeNumber.ToString());
 			i = 0;
 			line = "SnowFlakeName";
 			do
@@ -3606,7 +3719,56 @@ namespace Vixen_Messaging
 				line = "SnowFlakeName";
 				i++;
 			} while (i < GlobalVar.SnowFlakeEffectType.Count());
-        }
+			#endregion
+
+			#region Meteor Settings
+
+			GlobalVar.MeteorNumber = GlobalVar.MeteorColourType.Count();
+			profile.PutSetting(XmlProfileSettings.SettingType.Meteor, "MeteorNumber", GlobalVar.MeteorNumber.ToString());
+			i = 0;
+			line = "MeteorName";
+			do
+			{
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, Convert.ToString(comboBoxMeteorName.Items[i]));
+				line = "MeteorColourType";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourType[i]);
+				line = "MeteorCount";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorCount[i]);
+				line = "MeteorTrailLength";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorTrailLength[i]);
+				line = "MeteorSpeed";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorSpeed[i]);
+				line = "MeteorRandomEnable";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorRandomEnable[i]);
+				line = "MeteorColourEnable1";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable1[i]);
+				line = "MeteorColourEnable2";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable2[i]);
+				line = "MeteorColourEnable3";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable3[i]);
+				line = "MeteorColourEnable4";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable4[i]);
+				line = "MeteorColourEnable5";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable5[i]);
+				line = "MeteorColourEnable6";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable6[i]);
+				line = "MeteorColour1";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour1[i]);
+				line = "MeteorColour2";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour2[i]);
+				line = "MeteorColour3";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour3[i]);
+				line = "MeteorColour4";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour4[i]);
+				line = "MeteorColour5";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour5[i]);
+				line = "MeteorColour6";
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour6[i]);
+				line = "MeteorName";
+				i++;
+			} while (i < GlobalVar.MeteorColourType.Count());
+			#endregion
+		}
 #endregion
 
 #region Misc Area
@@ -4170,6 +4332,247 @@ namespace Vixen_Messaging
 		}
 #endregion
 
+#region Multiple Meteors
+		private void comboBoxMeteorName_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			CustomMeteor();
+		}
+
+		private void CustomMeteor()
+		{
+			var selectedItem = comboBoxMeteorName.SelectedIndex;
+			EffectType.Text = GlobalVar.MeteorColourType[selectedItem];
+			MeteorCount.Value = GlobalVar.MeteorCount[selectedItem];
+			MeteorTrailLength.Value = GlobalVar.MeteorTrailLength[selectedItem];
+			trackBarSpeedMeteors.Value = GlobalVar.MeteorSpeed[selectedItem];
+			checkBoxRandom3.Checked = GlobalVar.MeteorRandomEnable[selectedItem];
+			checkBoxMeteorColour1.Checked = GlobalVar.MeteorColourEnable1[selectedItem];
+			checkBoxMeteorColour2.Checked = GlobalVar.MeteorColourEnable2[selectedItem];
+			checkBoxMeteorColour3.Checked = GlobalVar.MeteorColourEnable3[selectedItem];
+			checkBoxMeteorColour4.Checked = GlobalVar.MeteorColourEnable4[selectedItem];
+			checkBoxMeteorColour5.Checked = GlobalVar.MeteorColourEnable5[selectedItem];
+			checkBoxMeteorColour6.Checked = GlobalVar.MeteorColourEnable6[selectedItem];
+			MeteorColour1.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.MeteorColour1[selectedItem]));
+			MeteorColour2.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.MeteorColour2[selectedItem]));
+			MeteorColour3.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.MeteorColour3[selectedItem]));
+			MeteorColour4.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.MeteorColour4[selectedItem]));
+			MeteorColour5.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.MeteorColour5[selectedItem]));
+			MeteorColour6.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.MeteorColour6[selectedItem]));
+		}
+
+		private void buttonAddMeteor_Click(object sender, EventArgs e)
+		{
+			var addCustomMsg = "Meteor - " + Interaction.InputBox("Enter a Name for your Custom Meteor", "Custom Meteor");
+			if (addCustomMsg != "")
+			{
+				GlobalVar.MeteorColourType.Add("Range");
+				GlobalVar.MeteorCount.Add(11);
+				GlobalVar.MeteorTrailLength.Add(12);
+				GlobalVar.MeteorSpeed.Add(5);
+				GlobalVar.MeteorRandomEnable.Add(true);
+				GlobalVar.MeteorColourEnable1.Add(true);
+				GlobalVar.MeteorColourEnable2.Add(false);
+				GlobalVar.MeteorColourEnable3.Add(false);
+				GlobalVar.MeteorColourEnable4.Add(false);
+				GlobalVar.MeteorColourEnable5.Add(false);
+				GlobalVar.MeteorColourEnable6.Add(false);
+				GlobalVar.MeteorColour1.Add(Convert.ToInt32(-16776961));
+				GlobalVar.MeteorColour2.Add(Convert.ToInt32(-65536));
+				GlobalVar.MeteorColour3.Add(Convert.ToInt32(-16711936));
+				GlobalVar.MeteorColour4.Add(Convert.ToInt32(-32640));
+				GlobalVar.MeteorColour5.Add(Convert.ToInt32(-16711936));
+				GlobalVar.MeteorColour6.Add(Convert.ToInt32(-32640));
+				comboBoxMeteorName.Items.Add(addCustomMsg);
+				comboBoxMeteorName.SelectedIndex = comboBoxMeteorName.Items.Count - 1;
+				customMessageSeqSel.Items.Add(addCustomMsg);
+			}
+		}
+
+		private void buttonRemoveMeteor_Click(object sender, EventArgs e)
+		{
+			if (comboBoxMeteorName.Items.Count > 0)
+			{
+				customMessageSeqSel.Items.Remove(comboBoxMeteorName.SelectedItem);
+				GlobalVar.MeteorColourType.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorCount.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorTrailLength.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorSpeed.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorRandomEnable.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorColourEnable1.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorColourEnable2.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorColourEnable3.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorColourEnable4.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorColourEnable5.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorColourEnable6.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorColour1.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorColour2.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorColour3.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorColour4.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorColour5.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				GlobalVar.MeteorColour6.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				comboBoxMeteorName.Items.RemoveAt(comboBoxMeteorName.SelectedIndex);
+				customMessageSeqSel.SelectedIndex = 0;
+				if (comboBoxMeteorName.Items.Count > 0)
+                {
+					comboBoxMeteorName.SelectedIndex = 0;
+					MeteorColour.Text = GlobalVar.MeteorColourType[0];
+					MeteorCount.Value = GlobalVar.SnowFlakeMax[0];
+					MeteorTrailLength.Value = GlobalVar.MeteorTrailLength[0];
+					trackBarSpeedSnowFlakes.Value = GlobalVar.MeteorSpeed[0];
+					checkBoxRandom3.Checked = GlobalVar.MeteorRandomEnable[0];
+					checkBoxMeteorColour1.Checked = GlobalVar.MeteorColourEnable1[0];
+					checkBoxMeteorColour2.Checked = GlobalVar.MeteorColourEnable2[0];
+					checkBoxMeteorColour3.Checked = GlobalVar.MeteorColourEnable3[0];
+					checkBoxMeteorColour4.Checked = GlobalVar.MeteorColourEnable4[0];
+					checkBoxMeteorColour5.Checked = GlobalVar.MeteorColourEnable5[0];
+					checkBoxMeteorColour6.Checked = GlobalVar.MeteorColourEnable6[0];
+					MeteorColour1.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.MeteorColour1[0]));
+					MeteorColour2.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.MeteorColour2[0]));
+					MeteorColour3.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.MeteorColour3[0]));
+					MeteorColour4.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.MeteorColour4[0]));
+					MeteorColour5.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.MeteorColour5[0]));
+					MeteorColour6.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.MeteorColour6[0]));
+				}
+                else
+                {
+					comboBoxMeteorName.Items.Clear();
+					MeteorColour.Text = "Range";
+					MeteorCount.Value = 11;
+	                MeteorTrailLength.Value = 5;
+					trackBarSpeedMeteors.Value = 5;
+					checkBoxRandom3.Checked = true;
+					checkBoxMeteorColour1.Checked = true;
+					checkBoxMeteorColour2.Checked = false;
+					checkBoxMeteorColour3.Checked = false;
+					checkBoxMeteorColour4.Checked = false;
+					checkBoxMeteorColour5.Checked = false;
+					checkBoxMeteorColour6.Checked = false;
+					MeteorColour1.BackColor = Color.FromArgb(-16776961);
+					MeteorColour2.BackColor = Color.FromArgb(-65536);
+					MeteorColour3.BackColor = Color.FromArgb(-16711936);
+					MeteorColour4.BackColor = Color.FromArgb(-32640);
+					MeteorColour5.BackColor = Color.FromArgb(-16776961);
+					MeteorColour6.BackColor = Color.FromArgb(-65536);
+                }
+			}
+			else
+			{
+				comboBoxMeteorName.Items.Clear();
+				MeteorColour.Text = "Range";
+				MeteorCount.Value = 11;
+				MeteorTrailLength.Value = 12;
+				trackBarSpeedMeteors.Value = 5;
+				checkBoxRandom3.Checked = true;
+				checkBoxMeteorColour1.Checked = true;
+				checkBoxMeteorColour2.Checked = false;
+				checkBoxMeteorColour3.Checked = false;
+				checkBoxMeteorColour4.Checked = false;
+				checkBoxMeteorColour5.Checked = false;
+				checkBoxMeteorColour6.Checked = false;
+				MeteorColour1.BackColor = Color.FromArgb(-16776961);
+				MeteorColour2.BackColor = Color.FromArgb(-65536);
+				MeteorColour3.BackColor = Color.FromArgb(-16711936);
+				MeteorColour4.BackColor = Color.FromArgb(-32640);
+				MeteorColour5.BackColor = Color.FromArgb(-16776961);
+				MeteorColour6.BackColor = Color.FromArgb(-65536);
+			}
+        }
+
+		private void CustomMeteorUpdate()
+	    {
+			if (comboBoxMeteorName.Items.Count != 0)
+			{
+				GlobalVar.MeteorColourType[comboBoxMeteorName.SelectedIndex] = MeteorColour.Text;
+				GlobalVar.MeteorCount[comboBoxMeteorName.SelectedIndex] = Convert.ToInt16(MeteorCount.Value);
+				GlobalVar.MeteorTrailLength[comboBoxMeteorName.SelectedIndex] = Convert.ToInt16(MeteorTrailLength.Value);
+				GlobalVar.MeteorSpeed[comboBoxMeteorName.SelectedIndex] = trackBarSpeedMeteors.Value;
+				GlobalVar.MeteorRandomEnable[comboBoxMeteorName.SelectedIndex] = checkBoxRandom3.Checked;
+				GlobalVar.MeteorColourEnable1[comboBoxMeteorName.SelectedIndex] = checkBoxMeteorColour1.Checked;
+				GlobalVar.MeteorColourEnable2[comboBoxMeteorName.SelectedIndex] = checkBoxMeteorColour2.Checked;
+				GlobalVar.MeteorColourEnable3[comboBoxMeteorName.SelectedIndex] = checkBoxMeteorColour3.Checked;
+				GlobalVar.MeteorColourEnable4[comboBoxMeteorName.SelectedIndex] = checkBoxMeteorColour4.Checked;
+				GlobalVar.MeteorColourEnable5[comboBoxMeteorName.SelectedIndex] = checkBoxMeteorColour5.Checked;
+				GlobalVar.MeteorColourEnable6[comboBoxMeteorName.SelectedIndex] = checkBoxMeteorColour6.Checked;
+				GlobalVar.MeteorColour1[comboBoxMeteorName.SelectedIndex] = MeteorColour1.BackColor.ToArgb();
+				GlobalVar.MeteorColour2[comboBoxMeteorName.SelectedIndex] = MeteorColour2.BackColor.ToArgb();
+				GlobalVar.MeteorColour3[comboBoxMeteorName.SelectedIndex] = MeteorColour3.BackColor.ToArgb();
+				GlobalVar.MeteorColour4[comboBoxMeteorName.SelectedIndex] = MeteorColour4.BackColor.ToArgb();
+				GlobalVar.MeteorColour5[comboBoxMeteorName.SelectedIndex] = MeteorColour5.BackColor.ToArgb();
+				GlobalVar.MeteorColour6[comboBoxMeteorName.SelectedIndex] = MeteorColour6.BackColor.ToArgb();
+			}
+	    }
+		private void MeteorColour_SelectionChangeCommitted(object sender, EventArgs e)
+		{
+			CustomMeteorUpdate();
+		}
+
+		private void MeteorCount_MouseDown(object sender, MouseEventArgs e)
+		{
+			CustomMeteorUpdate();
+		}
+
+		private void MeteorCount_MouseClick(object sender, MouseEventArgs e)
+		{
+			CustomMeteorUpdate();
+		}
+
+		private void checkBoxMeteorColour1_Leave(object sender, EventArgs e)
+		{
+			CustomMeteorUpdate();
+		}
+
+		private void checkBoxMeteorColour2_Leave(object sender, EventArgs e)
+		{
+			CustomMeteorUpdate();
+		}
+
+		private void checkBoxMeteorColour3_Leave(object sender, EventArgs e)
+		{
+			CustomMeteorUpdate();
+		}
+
+		private void checkBoxMeteorColour4_Leave(object sender, EventArgs e)
+		{
+			CustomMeteorUpdate();
+		}
+
+		private void checkBoxMeteoreColour5_Leave(object sender, EventArgs e)
+		{
+			CustomMeteorUpdate();
+		}
+
+		private void checkBoxMeteorColour6_Leave(object sender, EventArgs e)
+		{
+			CustomMeteorUpdate();
+		}
+
+		private void checkBoxRandom3_Leave(object sender, EventArgs e)
+		{
+			CustomMeteorUpdate();
+		}
+
+		private void trackBarSpeedMeteors_MouseLeave(object sender, EventArgs e)
+		{
+			CustomMeteorUpdate();
+		}
+
+		private void buttonPlayMeteor_Click(object sender, EventArgs e)
+		{
+			StopSequence();
+			if (!GlobalVar.PlayCustomMessage)
+			{
+				Stop_Vixen();
+				PlayCustomMessage();
+				Start_Vixen();
+			}
+			else
+			{
+				PlayCustomMessage();
+			}
+		}
+
+#endregion
+
 #region Multiple SnowFlakes
 		private void comboBoxSnowFlakeName_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -4223,7 +4626,7 @@ namespace Vixen_Messaging
 				customMessageSeqSel.Items.Add(addCustomMsg);
 			}
 		}
-		
+
 		private void buttonRemoveSnowFlake_Click(object sender, EventArgs e)
 		{
 			if (comboBoxSnowFlakeName.Items.Count > 0)
@@ -4245,11 +4648,11 @@ namespace Vixen_Messaging
 				GlobalVar.SnowFlakeColour4.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
 				GlobalVar.SnowFlakeColour5.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
 				GlobalVar.SnowFlakeColour6.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
-                comboBoxSnowFlakeName.Items.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
+				comboBoxSnowFlakeName.Items.RemoveAt(comboBoxSnowFlakeName.SelectedIndex);
 				customMessageSeqSel.SelectedIndex = 0;
-                if (comboBoxSnowFlakeName.Items.Count > 0)
-                {
-                    comboBoxSnowFlakeName.SelectedIndex = 0;
+				if (comboBoxSnowFlakeName.Items.Count > 0)
+				{
+					comboBoxSnowFlakeName.SelectedIndex = 0;
 					EffectType.Value = GlobalVar.SnowFlakeEffectType[0];
 					MaxSnowFlake.Value = GlobalVar.SnowFlakeMax[0];
 					trackBarSpeedSnowFlakes.Value = GlobalVar.SnowFlakeSpeed[0];
@@ -4267,9 +4670,9 @@ namespace Vixen_Messaging
 					SnowFlakeColour5.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.SnowFlakeColour5[0]));
 					SnowFlakeColour6.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.SnowFlakeColour6[0]));
 				}
-                else
-                {
-                    comboBoxSnowFlakeName.Items.Clear();
+				else
+				{
+					comboBoxSnowFlakeName.Items.Clear();
 					EffectType.Value = 2;
 					MaxSnowFlake.Value = 3;
 					trackBarSpeedSnowFlakes.Value = 5;
@@ -4286,7 +4689,7 @@ namespace Vixen_Messaging
 					SnowFlakeColour4.BackColor = Color.FromArgb(-32640);
 					SnowFlakeColour5.BackColor = Color.FromArgb(-16776961);
 					SnowFlakeColour6.BackColor = Color.FromArgb(-65536);
-                }
+				}
 			}
 			else
 			{
@@ -4308,15 +4711,15 @@ namespace Vixen_Messaging
 				SnowFlakeColour5.BackColor = Color.FromArgb(-16776961);
 				SnowFlakeColour6.BackColor = Color.FromArgb(-65536);
 			}
-        }
+		}
 
 		private void EffectType_MouseDown(object sender, MouseEventArgs e)
 		{
 			CustomSnowFlakeUpdate();
 		}
 
-	    private void CustomSnowFlakeUpdate()
-	    {
+		private void CustomSnowFlakeUpdate()
+		{
 			if (comboBoxSnowFlakeName.Items.Count != 0)
 			{
 				GlobalVar.SnowFlakeEffectType[comboBoxSnowFlakeName.SelectedIndex] = Convert.ToInt16(EffectType.Value);
@@ -4336,7 +4739,7 @@ namespace Vixen_Messaging
 				GlobalVar.SnowFlakeColour5[comboBoxSnowFlakeName.SelectedIndex] = SnowFlakeColour5.BackColor.ToArgb();
 				GlobalVar.SnowFlakeColour6[comboBoxSnowFlakeName.SelectedIndex] = SnowFlakeColour6.BackColor.ToArgb();
 			}
-	    }
+		}
 
 		private void EffectType_MouseClick(object sender, MouseEventArgs e)
 		{
@@ -4392,7 +4795,6 @@ namespace Vixen_Messaging
 		{
 			CustomSnowFlakeUpdate();
 		}
-
 		private void buttonPlaySnowFlake_Click(object sender, EventArgs e)
 		{
 			StopSequence();
@@ -4408,8 +4810,7 @@ namespace Vixen_Messaging
 			}
 		}
 
-#endregion
-
+		#endregion
 
 	}
 }

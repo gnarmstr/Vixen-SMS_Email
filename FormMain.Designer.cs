@@ -1207,6 +1207,7 @@ namespace Vixen_Messaging
 			this.checkBoxRandom3.TabIndex = 82;
 			this.checkBoxRandom3.Text = "Include in Random Selection:";
 			this.checkBoxRandom3.UseVisualStyleBackColor = true;
+			this.checkBoxRandom3.Leave += new System.EventHandler(this.checkBoxRandom3_Leave);
 			// 
 			// label55
 			// 
@@ -1225,6 +1226,7 @@ namespace Vixen_Messaging
 			this.checkBoxMeteorColour6.Size = new System.Drawing.Size(22, 23);
 			this.checkBoxMeteorColour6.TabIndex = 80;
 			this.checkBoxMeteorColour6.UseVisualStyleBackColor = true;
+			this.checkBoxMeteorColour6.Leave += new System.EventHandler(this.checkBoxMeteorColour6_Leave);
 			// 
 			// checkBoxMeteorColour5
 			// 
@@ -1234,6 +1236,7 @@ namespace Vixen_Messaging
 			this.checkBoxMeteorColour5.Size = new System.Drawing.Size(22, 23);
 			this.checkBoxMeteorColour5.TabIndex = 79;
 			this.checkBoxMeteorColour5.UseVisualStyleBackColor = true;
+			this.checkBoxMeteorColour5.Leave += new System.EventHandler(this.checkBoxMeteoreColour5_Leave);
 			// 
 			// checkBoxMeteorColour4
 			// 
@@ -1243,6 +1246,7 @@ namespace Vixen_Messaging
 			this.checkBoxMeteorColour4.Size = new System.Drawing.Size(22, 23);
 			this.checkBoxMeteorColour4.TabIndex = 78;
 			this.checkBoxMeteorColour4.UseVisualStyleBackColor = true;
+			this.checkBoxMeteorColour4.Leave += new System.EventHandler(this.checkBoxMeteorColour4_Leave);
 			// 
 			// MeteorColour5
 			// 
@@ -1264,6 +1268,7 @@ namespace Vixen_Messaging
 			this.checkBoxMeteorColour3.Size = new System.Drawing.Size(22, 23);
 			this.checkBoxMeteorColour3.TabIndex = 77;
 			this.checkBoxMeteorColour3.UseVisualStyleBackColor = true;
+			this.checkBoxMeteorColour3.Leave += new System.EventHandler(this.checkBoxMeteorColour3_Leave);
 			// 
 			// MeteorColour6
 			// 
@@ -1285,6 +1290,7 @@ namespace Vixen_Messaging
 			this.checkBoxMeteorColour2.Size = new System.Drawing.Size(22, 23);
 			this.checkBoxMeteorColour2.TabIndex = 76;
 			this.checkBoxMeteorColour2.UseVisualStyleBackColor = true;
+			this.checkBoxMeteorColour2.Leave += new System.EventHandler(this.checkBoxMeteorColour2_Leave);
 			// 
 			// MeteorColour4
 			// 
@@ -1306,6 +1312,7 @@ namespace Vixen_Messaging
 			this.checkBoxMeteorColour1.Size = new System.Drawing.Size(22, 23);
 			this.checkBoxMeteorColour1.TabIndex = 75;
 			this.checkBoxMeteorColour1.UseVisualStyleBackColor = true;
+			this.checkBoxMeteorColour1.Leave += new System.EventHandler(this.checkBoxMeteorColour1_Leave);
 			// 
 			// MeteorColour3
 			// 
@@ -1365,6 +1372,7 @@ namespace Vixen_Messaging
 			this.trackBarSpeedMeteors.Value = 5;
 			this.trackBarSpeedMeteors.Scroll += new System.EventHandler(this.trackBarSpeedMeteors_Scroll);
 			this.trackBarSpeedMeteors.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarSpeedMeteors_MouseDown);
+			this.trackBarSpeedMeteors.MouseLeave += new System.EventHandler(this.trackBarSpeedMeteors_MouseLeave);
 			this.trackBarSpeedMeteors.MouseHover += new System.EventHandler(this.trackBarSpeedMeteors_MouseHover);
 			// 
 			// MeteorColour
@@ -1379,6 +1387,7 @@ namespace Vixen_Messaging
 			this.MeteorColour.Size = new System.Drawing.Size(134, 28);
 			this.MeteorColour.TabIndex = 1;
 			this.MeteorColour.Text = "Range";
+			this.MeteorColour.SelectionChangeCommitted += new System.EventHandler(this.MeteorColour_SelectionChangeCommitted);
 			// 
 			// label35
 			// 
@@ -1431,6 +1440,8 @@ namespace Vixen_Messaging
             0,
             0,
             0});
+			this.MeteorCount.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MeteorCount_MouseClick);
+			this.MeteorCount.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MeteorCount_MouseDown);
 			// 
 			// label33
 			// 
@@ -4633,6 +4644,7 @@ namespace Vixen_Messaging
 			this.toolTip1.SetToolTip(this.buttonPlayMeteor, "Play selected message. Useful for testing current message\r\nor displaying an immed" +
         "iate message to the audience.");
 			this.buttonPlayMeteor.UseVisualStyleBackColor = false;
+			this.buttonPlayMeteor.Click += new System.EventHandler(this.buttonPlayMeteor_Click);
 			// 
 			// label102
 			// 
@@ -4652,6 +4664,7 @@ namespace Vixen_Messaging
 			this.comboBoxMeteorName.Size = new System.Drawing.Size(285, 28);
 			this.comboBoxMeteorName.TabIndex = 90;
 			this.toolTip1.SetToolTip(this.comboBoxMeteorName, "List all messages that have been created.");
+			this.comboBoxMeteorName.SelectedIndexChanged += new System.EventHandler(this.comboBoxMeteorName_SelectedIndexChanged);
 			// 
 			// buttonRemoveMeteor
 			// 
@@ -4668,6 +4681,7 @@ namespace Vixen_Messaging
 			this.buttonRemoveMeteor.Text = "-";
 			this.toolTip1.SetToolTip(this.buttonRemoveMeteor, "Delete selected message.");
 			this.buttonRemoveMeteor.UseVisualStyleBackColor = false;
+			this.buttonRemoveMeteor.Click += new System.EventHandler(this.buttonRemoveMeteor_Click);
 			// 
 			// buttonAddMeteor
 			// 
@@ -4684,6 +4698,7 @@ namespace Vixen_Messaging
 			this.buttonAddMeteor.Text = "+";
 			this.toolTip1.SetToolTip(this.buttonAddMeteor, "Create new message.");
 			this.buttonAddMeteor.UseVisualStyleBackColor = false;
+			this.buttonAddMeteor.Click += new System.EventHandler(this.buttonAddMeteor_Click);
 			// 
 			// FormMain
 			// 
