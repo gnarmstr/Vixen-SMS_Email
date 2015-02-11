@@ -125,7 +125,8 @@ namespace Vixen_Messaging
             Preferences,
 			Message,
 			SnowFlakes,
-			Meteor
+			Meteor,
+			Twinkle
         };
 
     }

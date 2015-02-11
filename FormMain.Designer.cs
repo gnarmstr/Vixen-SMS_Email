@@ -70,6 +70,11 @@ namespace Vixen_Messaging
 			this.checkBoxVariableLength = new System.Windows.Forms.CheckBox();
 			this.tabControlEffects = new System.Windows.Forms.TabControl();
 			this.tabPageSnowFlake = new System.Windows.Forms.TabPage();
+			this.buttonPlaySnowFlake = new System.Windows.Forms.Button();
+			this.label101 = new System.Windows.Forms.Label();
+			this.comboBoxSnowFlakeName = new System.Windows.Forms.ComboBox();
+			this.buttonRemoveSnowFlake = new System.Windows.Forms.Button();
+			this.buttonAddSnowFlake = new System.Windows.Forms.Button();
 			this.checkBoxRandom1 = new System.Windows.Forms.CheckBox();
 			this.label56 = new System.Windows.Forms.Label();
 			this.checkBoxSnowFlakeColour6 = new System.Windows.Forms.CheckBox();
@@ -95,6 +100,11 @@ namespace Vixen_Messaging
 			this.FireHeight = new System.Windows.Forms.NumericUpDown();
 			this.label31 = new System.Windows.Forms.Label();
 			this.tabPageMeteors = new System.Windows.Forms.TabPage();
+			this.buttonPlayMeteor = new System.Windows.Forms.Button();
+			this.label102 = new System.Windows.Forms.Label();
+			this.comboBoxMeteorName = new System.Windows.Forms.ComboBox();
+			this.buttonRemoveMeteor = new System.Windows.Forms.Button();
+			this.buttonAddMeteor = new System.Windows.Forms.Button();
 			this.checkBoxRandom3 = new System.Windows.Forms.CheckBox();
 			this.label55 = new System.Windows.Forms.Label();
 			this.checkBoxMeteorColour6 = new System.Windows.Forms.CheckBox();
@@ -118,6 +128,11 @@ namespace Vixen_Messaging
 			this.MeteorCount = new System.Windows.Forms.NumericUpDown();
 			this.label33 = new System.Windows.Forms.Label();
 			this.tabPageTwinkles = new System.Windows.Forms.TabPage();
+			this.buttonPlayTwinkle = new System.Windows.Forms.Button();
+			this.label103 = new System.Windows.Forms.Label();
+			this.comboBoxTwinkleName = new System.Windows.Forms.ComboBox();
+			this.buttonRemoveTwinkle = new System.Windows.Forms.Button();
+			this.buttonAddTwinkle = new System.Windows.Forms.Button();
 			this.checkBoxRandom4 = new System.Windows.Forms.CheckBox();
 			this.label54 = new System.Windows.Forms.Label();
 			this.checkBoxTwinkleColour6 = new System.Windows.Forms.CheckBox();
@@ -381,16 +396,9 @@ namespace Vixen_Messaging
 			this.fileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.timerCheckVixenEnabled = new System.Windows.Forms.Timer(this.components);
 			this.fontDialog1 = new System.Windows.Forms.FontDialog();
-			this.buttonPlaySnowFlake = new System.Windows.Forms.Button();
-			this.label101 = new System.Windows.Forms.Label();
-			this.comboBoxSnowFlakeName = new System.Windows.Forms.ComboBox();
-			this.buttonRemoveSnowFlake = new System.Windows.Forms.Button();
-			this.buttonAddSnowFlake = new System.Windows.Forms.Button();
-			this.buttonPlayMeteor = new System.Windows.Forms.Button();
-			this.label102 = new System.Windows.Forms.Label();
-			this.comboBoxMeteorName = new System.Windows.Forms.ComboBox();
-			this.buttonRemoveMeteor = new System.Windows.Forms.Button();
-			this.buttonAddMeteor = new System.Windows.Forms.Button();
+			this.buttonPlayFire = new System.Windows.Forms.Button();
+			this.buttonPlayMovie = new System.Windows.Forms.Button();
+			this.buttonPlayGled = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBoxEffects.SuspendLayout();
@@ -871,6 +879,78 @@ namespace Vixen_Messaging
 			this.tabPageSnowFlake.Tag = "1";
 			this.tabPageSnowFlake.Text = "SnowFlakes";
 			// 
+			// buttonPlaySnowFlake
+			// 
+			this.buttonPlaySnowFlake.BackColor = System.Drawing.Color.Azure;
+			this.buttonPlaySnowFlake.FlatAppearance.BorderSize = 0;
+			this.buttonPlaySnowFlake.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonPlaySnowFlake.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonPlaySnowFlake.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonPlaySnowFlake.Location = new System.Drawing.Point(415, 34);
+			this.buttonPlaySnowFlake.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonPlaySnowFlake.Name = "buttonPlaySnowFlake";
+			this.buttonPlaySnowFlake.Size = new System.Drawing.Size(38, 38);
+			this.buttonPlaySnowFlake.TabIndex = 88;
+			this.buttonPlaySnowFlake.Text = "P";
+			this.toolTip1.SetToolTip(this.buttonPlaySnowFlake, "Play selected message. Useful for testing current message\r\nor displaying an immed" +
+        "iate message to the audience.");
+			this.buttonPlaySnowFlake.UseVisualStyleBackColor = false;
+			this.buttonPlaySnowFlake.Click += new System.EventHandler(this.buttonPlaySnowFlake_Click);
+			// 
+			// label101
+			// 
+			this.label101.AutoSize = true;
+			this.label101.Location = new System.Drawing.Point(10, 10);
+			this.label101.Name = "label101";
+			this.label101.Size = new System.Drawing.Size(138, 20);
+			this.label101.TabIndex = 89;
+			this.label101.Text = "SnowFlake Name:";
+			// 
+			// comboBoxSnowFlakeName
+			// 
+			this.comboBoxSnowFlakeName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxSnowFlakeName.FormattingEnabled = true;
+			this.comboBoxSnowFlakeName.Location = new System.Drawing.Point(14, 40);
+			this.comboBoxSnowFlakeName.Name = "comboBoxSnowFlakeName";
+			this.comboBoxSnowFlakeName.Size = new System.Drawing.Size(285, 28);
+			this.comboBoxSnowFlakeName.TabIndex = 85;
+			this.toolTip1.SetToolTip(this.comboBoxSnowFlakeName, "List all messages that have been created.");
+			this.comboBoxSnowFlakeName.SelectedIndexChanged += new System.EventHandler(this.comboBoxSnowFlakeName_SelectedIndexChanged);
+			// 
+			// buttonRemoveSnowFlake
+			// 
+			this.buttonRemoveSnowFlake.BackColor = System.Drawing.Color.Azure;
+			this.buttonRemoveSnowFlake.FlatAppearance.BorderSize = 0;
+			this.buttonRemoveSnowFlake.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonRemoveSnowFlake.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonRemoveSnowFlake.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonRemoveSnowFlake.Location = new System.Drawing.Point(364, 34);
+			this.buttonRemoveSnowFlake.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonRemoveSnowFlake.Name = "buttonRemoveSnowFlake";
+			this.buttonRemoveSnowFlake.Size = new System.Drawing.Size(38, 38);
+			this.buttonRemoveSnowFlake.TabIndex = 87;
+			this.buttonRemoveSnowFlake.Text = "-";
+			this.toolTip1.SetToolTip(this.buttonRemoveSnowFlake, "Delete selected message.");
+			this.buttonRemoveSnowFlake.UseVisualStyleBackColor = false;
+			this.buttonRemoveSnowFlake.Click += new System.EventHandler(this.buttonRemoveSnowFlake_Click);
+			// 
+			// buttonAddSnowFlake
+			// 
+			this.buttonAddSnowFlake.BackColor = System.Drawing.Color.Azure;
+			this.buttonAddSnowFlake.FlatAppearance.BorderSize = 0;
+			this.buttonAddSnowFlake.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonAddSnowFlake.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonAddSnowFlake.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonAddSnowFlake.Location = new System.Drawing.Point(313, 34);
+			this.buttonAddSnowFlake.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonAddSnowFlake.Name = "buttonAddSnowFlake";
+			this.buttonAddSnowFlake.Size = new System.Drawing.Size(38, 38);
+			this.buttonAddSnowFlake.TabIndex = 86;
+			this.buttonAddSnowFlake.Text = "+";
+			this.toolTip1.SetToolTip(this.buttonAddSnowFlake, "Create new message.");
+			this.buttonAddSnowFlake.UseVisualStyleBackColor = false;
+			this.buttonAddSnowFlake.Click += new System.EventHandler(this.buttonAddSnowFlake_Click);
+			// 
 			// checkBoxRandom1
 			// 
 			this.checkBoxRandom1.AutoSize = true;
@@ -1113,6 +1193,7 @@ namespace Vixen_Messaging
 			// tabPageFire
 			// 
 			this.tabPageFire.BackColor = System.Drawing.Color.Azure;
+			this.tabPageFire.Controls.Add(this.buttonPlayFire);
 			this.tabPageFire.Controls.Add(this.checkBoxRandom2);
 			this.tabPageFire.Controls.Add(this.FireHeight);
 			this.tabPageFire.Controls.Add(this.label31);
@@ -1127,7 +1208,7 @@ namespace Vixen_Messaging
 			// 
 			this.checkBoxRandom2.AutoSize = true;
 			this.checkBoxRandom2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxRandom2.Location = new System.Drawing.Point(483, 5);
+			this.checkBoxRandom2.Location = new System.Drawing.Point(568, 6);
 			this.checkBoxRandom2.Name = "checkBoxRandom2";
 			this.checkBoxRandom2.Size = new System.Drawing.Size(242, 24);
 			this.checkBoxRandom2.TabIndex = 51;
@@ -1197,6 +1278,78 @@ namespace Vixen_Messaging
 			this.tabPageMeteors.TabIndex = 2;
 			this.tabPageMeteors.Text = "Meteors";
 			// 
+			// buttonPlayMeteor
+			// 
+			this.buttonPlayMeteor.BackColor = System.Drawing.Color.Azure;
+			this.buttonPlayMeteor.FlatAppearance.BorderSize = 0;
+			this.buttonPlayMeteor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonPlayMeteor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonPlayMeteor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonPlayMeteor.Location = new System.Drawing.Point(415, 34);
+			this.buttonPlayMeteor.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonPlayMeteor.Name = "buttonPlayMeteor";
+			this.buttonPlayMeteor.Size = new System.Drawing.Size(38, 38);
+			this.buttonPlayMeteor.TabIndex = 93;
+			this.buttonPlayMeteor.Text = "P";
+			this.toolTip1.SetToolTip(this.buttonPlayMeteor, "Play selected message. Useful for testing current message\r\nor displaying an immed" +
+        "iate message to the audience.");
+			this.buttonPlayMeteor.UseVisualStyleBackColor = false;
+			this.buttonPlayMeteor.Click += new System.EventHandler(this.buttonPlayMeteor_Click);
+			// 
+			// label102
+			// 
+			this.label102.AutoSize = true;
+			this.label102.Location = new System.Drawing.Point(10, 10);
+			this.label102.Name = "label102";
+			this.label102.Size = new System.Drawing.Size(109, 20);
+			this.label102.TabIndex = 94;
+			this.label102.Text = "Meteor Name:";
+			// 
+			// comboBoxMeteorName
+			// 
+			this.comboBoxMeteorName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxMeteorName.FormattingEnabled = true;
+			this.comboBoxMeteorName.Location = new System.Drawing.Point(14, 40);
+			this.comboBoxMeteorName.Name = "comboBoxMeteorName";
+			this.comboBoxMeteorName.Size = new System.Drawing.Size(285, 28);
+			this.comboBoxMeteorName.TabIndex = 90;
+			this.toolTip1.SetToolTip(this.comboBoxMeteorName, "List all messages that have been created.");
+			this.comboBoxMeteorName.SelectedIndexChanged += new System.EventHandler(this.comboBoxMeteorName_SelectedIndexChanged);
+			// 
+			// buttonRemoveMeteor
+			// 
+			this.buttonRemoveMeteor.BackColor = System.Drawing.Color.Azure;
+			this.buttonRemoveMeteor.FlatAppearance.BorderSize = 0;
+			this.buttonRemoveMeteor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonRemoveMeteor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonRemoveMeteor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonRemoveMeteor.Location = new System.Drawing.Point(364, 34);
+			this.buttonRemoveMeteor.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonRemoveMeteor.Name = "buttonRemoveMeteor";
+			this.buttonRemoveMeteor.Size = new System.Drawing.Size(38, 38);
+			this.buttonRemoveMeteor.TabIndex = 92;
+			this.buttonRemoveMeteor.Text = "-";
+			this.toolTip1.SetToolTip(this.buttonRemoveMeteor, "Delete selected message.");
+			this.buttonRemoveMeteor.UseVisualStyleBackColor = false;
+			this.buttonRemoveMeteor.Click += new System.EventHandler(this.buttonRemoveMeteor_Click);
+			// 
+			// buttonAddMeteor
+			// 
+			this.buttonAddMeteor.BackColor = System.Drawing.Color.Azure;
+			this.buttonAddMeteor.FlatAppearance.BorderSize = 0;
+			this.buttonAddMeteor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonAddMeteor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonAddMeteor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonAddMeteor.Location = new System.Drawing.Point(313, 34);
+			this.buttonAddMeteor.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonAddMeteor.Name = "buttonAddMeteor";
+			this.buttonAddMeteor.Size = new System.Drawing.Size(38, 38);
+			this.buttonAddMeteor.TabIndex = 91;
+			this.buttonAddMeteor.Text = "+";
+			this.toolTip1.SetToolTip(this.buttonAddMeteor, "Create new message.");
+			this.buttonAddMeteor.UseVisualStyleBackColor = false;
+			this.buttonAddMeteor.Click += new System.EventHandler(this.buttonAddMeteor_Click);
+			// 
 			// checkBoxRandom3
 			// 
 			this.checkBoxRandom3.AutoSize = true;
@@ -1236,7 +1389,7 @@ namespace Vixen_Messaging
 			this.checkBoxMeteorColour5.Size = new System.Drawing.Size(22, 23);
 			this.checkBoxMeteorColour5.TabIndex = 79;
 			this.checkBoxMeteorColour5.UseVisualStyleBackColor = true;
-			this.checkBoxMeteorColour5.Leave += new System.EventHandler(this.checkBoxMeteoreColour5_Leave);
+			this.checkBoxMeteorColour5.Leave += new System.EventHandler(this.checkBoxMeteorColour5_Leave);
 			// 
 			// checkBoxMeteorColour4
 			// 
@@ -1455,6 +1608,11 @@ namespace Vixen_Messaging
 			// tabPageTwinkles
 			// 
 			this.tabPageTwinkles.BackColor = System.Drawing.Color.Azure;
+			this.tabPageTwinkles.Controls.Add(this.buttonPlayTwinkle);
+			this.tabPageTwinkles.Controls.Add(this.label103);
+			this.tabPageTwinkles.Controls.Add(this.comboBoxTwinkleName);
+			this.tabPageTwinkles.Controls.Add(this.buttonRemoveTwinkle);
+			this.tabPageTwinkles.Controls.Add(this.buttonAddTwinkle);
 			this.tabPageTwinkles.Controls.Add(this.checkBoxRandom4);
 			this.tabPageTwinkles.Controls.Add(this.label54);
 			this.tabPageTwinkles.Controls.Add(this.checkBoxTwinkleColour6);
@@ -1482,21 +1640,94 @@ namespace Vixen_Messaging
 			this.tabPageTwinkles.TabIndex = 3;
 			this.tabPageTwinkles.Text = "Twinkles";
 			// 
+			// buttonPlayTwinkle
+			// 
+			this.buttonPlayTwinkle.BackColor = System.Drawing.Color.Azure;
+			this.buttonPlayTwinkle.FlatAppearance.BorderSize = 0;
+			this.buttonPlayTwinkle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonPlayTwinkle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonPlayTwinkle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonPlayTwinkle.Location = new System.Drawing.Point(415, 34);
+			this.buttonPlayTwinkle.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonPlayTwinkle.Name = "buttonPlayTwinkle";
+			this.buttonPlayTwinkle.Size = new System.Drawing.Size(38, 38);
+			this.buttonPlayTwinkle.TabIndex = 98;
+			this.buttonPlayTwinkle.Text = "P";
+			this.toolTip1.SetToolTip(this.buttonPlayTwinkle, "Play selected message. Useful for testing current message\r\nor displaying an immed" +
+        "iate message to the audience.");
+			this.buttonPlayTwinkle.UseVisualStyleBackColor = false;
+			this.buttonPlayTwinkle.Click += new System.EventHandler(this.buttonPlayTwinkle_Click);
+			// 
+			// label103
+			// 
+			this.label103.AutoSize = true;
+			this.label103.Location = new System.Drawing.Point(10, 10);
+			this.label103.Name = "label103";
+			this.label103.Size = new System.Drawing.Size(111, 20);
+			this.label103.TabIndex = 99;
+			this.label103.Text = "Twinkle Name:";
+			// 
+			// comboBoxTwinkleName
+			// 
+			this.comboBoxTwinkleName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxTwinkleName.FormattingEnabled = true;
+			this.comboBoxTwinkleName.Location = new System.Drawing.Point(14, 40);
+			this.comboBoxTwinkleName.Name = "comboBoxTwinkleName";
+			this.comboBoxTwinkleName.Size = new System.Drawing.Size(285, 28);
+			this.comboBoxTwinkleName.TabIndex = 95;
+			this.toolTip1.SetToolTip(this.comboBoxTwinkleName, "List all messages that have been created.");
+			this.comboBoxTwinkleName.SelectedIndexChanged += new System.EventHandler(this.comboBoxTwinkleName_SelectedIndexChanged);
+			// 
+			// buttonRemoveTwinkle
+			// 
+			this.buttonRemoveTwinkle.BackColor = System.Drawing.Color.Azure;
+			this.buttonRemoveTwinkle.FlatAppearance.BorderSize = 0;
+			this.buttonRemoveTwinkle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonRemoveTwinkle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonRemoveTwinkle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonRemoveTwinkle.Location = new System.Drawing.Point(364, 34);
+			this.buttonRemoveTwinkle.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonRemoveTwinkle.Name = "buttonRemoveTwinkle";
+			this.buttonRemoveTwinkle.Size = new System.Drawing.Size(38, 38);
+			this.buttonRemoveTwinkle.TabIndex = 97;
+			this.buttonRemoveTwinkle.Text = "-";
+			this.toolTip1.SetToolTip(this.buttonRemoveTwinkle, "Delete selected message.");
+			this.buttonRemoveTwinkle.UseVisualStyleBackColor = false;
+			this.buttonRemoveTwinkle.Click += new System.EventHandler(this.buttonRemoveTwinkle_Click);
+			// 
+			// buttonAddTwinkle
+			// 
+			this.buttonAddTwinkle.BackColor = System.Drawing.Color.Azure;
+			this.buttonAddTwinkle.FlatAppearance.BorderSize = 0;
+			this.buttonAddTwinkle.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonAddTwinkle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonAddTwinkle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonAddTwinkle.Location = new System.Drawing.Point(313, 34);
+			this.buttonAddTwinkle.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonAddTwinkle.Name = "buttonAddTwinkle";
+			this.buttonAddTwinkle.Size = new System.Drawing.Size(38, 38);
+			this.buttonAddTwinkle.TabIndex = 96;
+			this.buttonAddTwinkle.Text = "+";
+			this.toolTip1.SetToolTip(this.buttonAddTwinkle, "Create new message.");
+			this.buttonAddTwinkle.UseVisualStyleBackColor = false;
+			this.buttonAddTwinkle.Click += new System.EventHandler(this.buttonAddTwinkle_Click);
+			// 
 			// checkBoxRandom4
 			// 
 			this.checkBoxRandom4.AutoSize = true;
 			this.checkBoxRandom4.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxRandom4.Location = new System.Drawing.Point(483, 5);
+			this.checkBoxRandom4.Location = new System.Drawing.Point(568, 6);
 			this.checkBoxRandom4.Name = "checkBoxRandom4";
 			this.checkBoxRandom4.Size = new System.Drawing.Size(242, 24);
 			this.checkBoxRandom4.TabIndex = 69;
 			this.checkBoxRandom4.Text = "Include in Random Selection:";
 			this.checkBoxRandom4.UseVisualStyleBackColor = true;
+			this.checkBoxRandom4.Leave += new System.EventHandler(this.checkBoxRandom4_Leave);
 			// 
 			// label54
 			// 
 			this.label54.AutoSize = true;
-			this.label54.Location = new System.Drawing.Point(544, 48);
+			this.label54.Location = new System.Drawing.Point(654, 113);
 			this.label54.Name = "label54";
 			this.label54.Size = new System.Drawing.Size(106, 20);
 			this.label54.TabIndex = 68;
@@ -1505,7 +1736,7 @@ namespace Vixen_Messaging
 			// checkBoxTwinkleColour6
 			// 
 			this.checkBoxTwinkleColour6.CheckAlign = System.Drawing.ContentAlignment.TopRight;
-			this.checkBoxTwinkleColour6.Location = new System.Drawing.Point(702, 82);
+			this.checkBoxTwinkleColour6.Location = new System.Drawing.Point(812, 147);
 			this.checkBoxTwinkleColour6.Name = "checkBoxTwinkleColour6";
 			this.checkBoxTwinkleColour6.Size = new System.Drawing.Size(22, 23);
 			this.checkBoxTwinkleColour6.TabIndex = 67;
@@ -1514,7 +1745,7 @@ namespace Vixen_Messaging
 			// checkBoxTwinkleColour5
 			// 
 			this.checkBoxTwinkleColour5.CheckAlign = System.Drawing.ContentAlignment.TopRight;
-			this.checkBoxTwinkleColour5.Location = new System.Drawing.Point(648, 82);
+			this.checkBoxTwinkleColour5.Location = new System.Drawing.Point(758, 147);
 			this.checkBoxTwinkleColour5.Name = "checkBoxTwinkleColour5";
 			this.checkBoxTwinkleColour5.Size = new System.Drawing.Size(22, 23);
 			this.checkBoxTwinkleColour5.TabIndex = 66;
@@ -1523,7 +1754,7 @@ namespace Vixen_Messaging
 			// checkBoxTwinkleColour4
 			// 
 			this.checkBoxTwinkleColour4.CheckAlign = System.Drawing.ContentAlignment.TopRight;
-			this.checkBoxTwinkleColour4.Location = new System.Drawing.Point(598, 82);
+			this.checkBoxTwinkleColour4.Location = new System.Drawing.Point(708, 147);
 			this.checkBoxTwinkleColour4.Name = "checkBoxTwinkleColour4";
 			this.checkBoxTwinkleColour4.Size = new System.Drawing.Size(22, 23);
 			this.checkBoxTwinkleColour4.TabIndex = 65;
@@ -1532,7 +1763,7 @@ namespace Vixen_Messaging
 			// TwinkleColour5
 			// 
 			this.TwinkleColour5.BackColor = System.Drawing.Color.Orange;
-			this.TwinkleColour5.Location = new System.Drawing.Point(640, 109);
+			this.TwinkleColour5.Location = new System.Drawing.Point(750, 174);
 			this.TwinkleColour5.Margin = new System.Windows.Forms.Padding(0);
 			this.TwinkleColour5.Name = "TwinkleColour5";
 			this.TwinkleColour5.Size = new System.Drawing.Size(40, 40);
@@ -1540,11 +1771,12 @@ namespace Vixen_Messaging
 			this.toolTip1.SetToolTip(this.TwinkleColour5, "Select a colour to edit.");
 			this.TwinkleColour5.UseVisualStyleBackColor = false;
 			this.TwinkleColour5.Click += new System.EventHandler(this.TwinkleColour5_Click);
+			this.TwinkleColour5.Leave += new System.EventHandler(this.checkBoxTwinkleColour5_Leave);
 			// 
 			// checkBoxTwinkleColour3
 			// 
 			this.checkBoxTwinkleColour3.CheckAlign = System.Drawing.ContentAlignment.TopRight;
-			this.checkBoxTwinkleColour3.Location = new System.Drawing.Point(549, 82);
+			this.checkBoxTwinkleColour3.Location = new System.Drawing.Point(659, 147);
 			this.checkBoxTwinkleColour3.Name = "checkBoxTwinkleColour3";
 			this.checkBoxTwinkleColour3.Size = new System.Drawing.Size(22, 23);
 			this.checkBoxTwinkleColour3.TabIndex = 64;
@@ -1553,7 +1785,7 @@ namespace Vixen_Messaging
 			// TwinkleColour6
 			// 
 			this.TwinkleColour6.BackColor = System.Drawing.Color.Pink;
-			this.TwinkleColour6.Location = new System.Drawing.Point(694, 109);
+			this.TwinkleColour6.Location = new System.Drawing.Point(804, 174);
 			this.TwinkleColour6.Margin = new System.Windows.Forms.Padding(0);
 			this.TwinkleColour6.Name = "TwinkleColour6";
 			this.TwinkleColour6.Size = new System.Drawing.Size(40, 40);
@@ -1561,11 +1793,12 @@ namespace Vixen_Messaging
 			this.toolTip1.SetToolTip(this.TwinkleColour6, "Select a colour to edit.");
 			this.TwinkleColour6.UseVisualStyleBackColor = false;
 			this.TwinkleColour6.Click += new System.EventHandler(this.TwinkleColour6_Click);
+			this.TwinkleColour6.Leave += new System.EventHandler(this.checkBoxTwinkleColour6_Leave);
 			// 
 			// checkBoxTwinkleColour2
 			// 
 			this.checkBoxTwinkleColour2.CheckAlign = System.Drawing.ContentAlignment.TopRight;
-			this.checkBoxTwinkleColour2.Location = new System.Drawing.Point(502, 82);
+			this.checkBoxTwinkleColour2.Location = new System.Drawing.Point(612, 147);
 			this.checkBoxTwinkleColour2.Name = "checkBoxTwinkleColour2";
 			this.checkBoxTwinkleColour2.Size = new System.Drawing.Size(22, 23);
 			this.checkBoxTwinkleColour2.TabIndex = 63;
@@ -1574,7 +1807,7 @@ namespace Vixen_Messaging
 			// TwinkleColour4
 			// 
 			this.TwinkleColour4.BackColor = System.Drawing.Color.Yellow;
-			this.TwinkleColour4.Location = new System.Drawing.Point(590, 109);
+			this.TwinkleColour4.Location = new System.Drawing.Point(700, 174);
 			this.TwinkleColour4.Margin = new System.Windows.Forms.Padding(0);
 			this.TwinkleColour4.Name = "TwinkleColour4";
 			this.TwinkleColour4.Size = new System.Drawing.Size(40, 40);
@@ -1582,11 +1815,12 @@ namespace Vixen_Messaging
 			this.toolTip1.SetToolTip(this.TwinkleColour4, "Select a colour to edit.");
 			this.TwinkleColour4.UseVisualStyleBackColor = false;
 			this.TwinkleColour4.Click += new System.EventHandler(this.TwinkleColour4_Click);
+			this.TwinkleColour4.Leave += new System.EventHandler(this.checkBoxTwinkleColour4_Leave);
 			// 
 			// checkBoxTwinkleColour1
 			// 
 			this.checkBoxTwinkleColour1.CheckAlign = System.Drawing.ContentAlignment.TopRight;
-			this.checkBoxTwinkleColour1.Location = new System.Drawing.Point(458, 82);
+			this.checkBoxTwinkleColour1.Location = new System.Drawing.Point(568, 147);
 			this.checkBoxTwinkleColour1.Name = "checkBoxTwinkleColour1";
 			this.checkBoxTwinkleColour1.Size = new System.Drawing.Size(22, 23);
 			this.checkBoxTwinkleColour1.TabIndex = 62;
@@ -1595,7 +1829,7 @@ namespace Vixen_Messaging
 			// TwinkleColour3
 			// 
 			this.TwinkleColour3.BackColor = System.Drawing.Color.Blue;
-			this.TwinkleColour3.Location = new System.Drawing.Point(542, 109);
+			this.TwinkleColour3.Location = new System.Drawing.Point(652, 174);
 			this.TwinkleColour3.Margin = new System.Windows.Forms.Padding(0);
 			this.TwinkleColour3.Name = "TwinkleColour3";
 			this.TwinkleColour3.Size = new System.Drawing.Size(40, 40);
@@ -1603,11 +1837,12 @@ namespace Vixen_Messaging
 			this.toolTip1.SetToolTip(this.TwinkleColour3, "Select a colour to edit.");
 			this.TwinkleColour3.UseVisualStyleBackColor = false;
 			this.TwinkleColour3.Click += new System.EventHandler(this.TwinkleColour3_Click);
+			this.TwinkleColour3.Leave += new System.EventHandler(this.checkBoxTwinkleColour3_Leave);
 			// 
 			// TwinkleColour1
 			// 
 			this.TwinkleColour1.BackColor = System.Drawing.Color.Red;
-			this.TwinkleColour1.Location = new System.Drawing.Point(448, 109);
+			this.TwinkleColour1.Location = new System.Drawing.Point(558, 174);
 			this.TwinkleColour1.Margin = new System.Windows.Forms.Padding(0);
 			this.TwinkleColour1.Name = "TwinkleColour1";
 			this.TwinkleColour1.Size = new System.Drawing.Size(40, 40);
@@ -1615,11 +1850,12 @@ namespace Vixen_Messaging
 			this.toolTip1.SetToolTip(this.TwinkleColour1, "Select a colour to edit.");
 			this.TwinkleColour1.UseVisualStyleBackColor = false;
 			this.TwinkleColour1.Click += new System.EventHandler(this.TwinkleColour1_Click);
+			this.TwinkleColour1.Leave += new System.EventHandler(this.checkBoxTwinkleColour1_Leave);
 			// 
 			// TwinkleColour2
 			// 
 			this.TwinkleColour2.BackColor = System.Drawing.Color.Lime;
-			this.TwinkleColour2.Location = new System.Drawing.Point(494, 109);
+			this.TwinkleColour2.Location = new System.Drawing.Point(604, 174);
 			this.TwinkleColour2.Margin = new System.Windows.Forms.Padding(0);
 			this.TwinkleColour2.Name = "TwinkleColour2";
 			this.TwinkleColour2.Size = new System.Drawing.Size(40, 40);
@@ -1627,11 +1863,12 @@ namespace Vixen_Messaging
 			this.toolTip1.SetToolTip(this.TwinkleColour2, "Select a colour to edit.");
 			this.TwinkleColour2.UseVisualStyleBackColor = false;
 			this.TwinkleColour2.Click += new System.EventHandler(this.TwinkleColour2_Click);
+			this.TwinkleColour2.Leave += new System.EventHandler(this.checkBoxTwinkleColour2_Leave);
 			// 
 			// label53
 			// 
 			this.label53.AutoSize = true;
-			this.label53.Location = new System.Drawing.Point(2, 146);
+			this.label53.Location = new System.Drawing.Point(422, 163);
 			this.label53.Name = "label53";
 			this.label53.Size = new System.Drawing.Size(60, 20);
 			this.label53.TabIndex = 55;
@@ -1640,21 +1877,23 @@ namespace Vixen_Messaging
 			// trackBarSpeedTwinkles
 			// 
 			this.trackBarSpeedTwinkles.AutoSize = false;
-			this.trackBarSpeedTwinkles.Location = new System.Drawing.Point(6, 175);
+			this.trackBarSpeedTwinkles.Location = new System.Drawing.Point(488, 5);
 			this.trackBarSpeedTwinkles.Maximum = 20;
 			this.trackBarSpeedTwinkles.Minimum = 1;
 			this.trackBarSpeedTwinkles.Name = "trackBarSpeedTwinkles";
-			this.trackBarSpeedTwinkles.Size = new System.Drawing.Size(396, 40);
+			this.trackBarSpeedTwinkles.Orientation = System.Windows.Forms.Orientation.Vertical;
+			this.trackBarSpeedTwinkles.Size = new System.Drawing.Size(40, 214);
 			this.trackBarSpeedTwinkles.TabIndex = 3;
 			this.trackBarSpeedTwinkles.Value = 1;
 			this.trackBarSpeedTwinkles.Scroll += new System.EventHandler(this.trackBarSpeedTwinkles_Scroll);
 			this.trackBarSpeedTwinkles.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarSpeedTwinkles_MouseDown);
+			this.trackBarSpeedTwinkles.MouseLeave += new System.EventHandler(this.trackBarSpeedTwinkles_MouseLeave);
 			this.trackBarSpeedTwinkles.MouseHover += new System.EventHandler(this.trackBarSpeedTwinkles_MouseHover);
 			// 
 			// label52
 			// 
 			this.label52.AutoSize = true;
-			this.label52.Location = new System.Drawing.Point(2, 8);
+			this.label52.Location = new System.Drawing.Point(4, 82);
 			this.label52.Name = "label52";
 			this.label52.Size = new System.Drawing.Size(81, 20);
 			this.label52.TabIndex = 53;
@@ -1663,7 +1902,7 @@ namespace Vixen_Messaging
 			// label51
 			// 
 			this.label51.AutoSize = true;
-			this.label51.Location = new System.Drawing.Point(2, 78);
+			this.label51.Location = new System.Drawing.Point(4, 152);
 			this.label51.Name = "label51";
 			this.label51.Size = new System.Drawing.Size(111, 20);
 			this.label51.TabIndex = 52;
@@ -1672,7 +1911,7 @@ namespace Vixen_Messaging
 			// trackBarTwinkleSteps
 			// 
 			this.trackBarTwinkleSteps.AutoSize = false;
-			this.trackBarTwinkleSteps.Location = new System.Drawing.Point(4, 105);
+			this.trackBarTwinkleSteps.Location = new System.Drawing.Point(6, 179);
 			this.trackBarTwinkleSteps.Maximum = 50;
 			this.trackBarTwinkleSteps.Minimum = 1;
 			this.trackBarTwinkleSteps.Name = "trackBarTwinkleSteps";
@@ -1681,12 +1920,13 @@ namespace Vixen_Messaging
 			this.trackBarTwinkleSteps.Value = 20;
 			this.trackBarTwinkleSteps.Scroll += new System.EventHandler(this.trackBarTwinkleSteps_Scroll);
 			this.trackBarTwinkleSteps.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTwinkleSteps_MouseDown);
+			this.trackBarTwinkleSteps.MouseLeave += new System.EventHandler(this.trackBarStepsTwinkles_MouseLeave);
 			this.trackBarTwinkleSteps.MouseHover += new System.EventHandler(this.trackBarTwinkleSteps_MouseHover);
 			// 
 			// trackBarTwinkleLights
 			// 
 			this.trackBarTwinkleLights.AutoSize = false;
-			this.trackBarTwinkleLights.Location = new System.Drawing.Point(3, 32);
+			this.trackBarTwinkleLights.Location = new System.Drawing.Point(5, 106);
 			this.trackBarTwinkleLights.Maximum = 100;
 			this.trackBarTwinkleLights.Minimum = 1;
 			this.trackBarTwinkleLights.Name = "trackBarTwinkleLights";
@@ -1695,11 +1935,13 @@ namespace Vixen_Messaging
 			this.trackBarTwinkleLights.Value = 25;
 			this.trackBarTwinkleLights.Scroll += new System.EventHandler(this.trackBarTwinkleLights_Scroll);
 			this.trackBarTwinkleLights.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTwinkleLights_MouseDown);
+			this.trackBarTwinkleLights.MouseLeave += new System.EventHandler(this.trackBarLightsTwinkles_MouseLeave);
 			this.trackBarTwinkleLights.MouseHover += new System.EventHandler(this.trackBarTwinkleLights_MouseHover);
 			// 
 			// tabPageMovie
 			// 
 			this.tabPageMovie.BackColor = System.Drawing.Color.Azure;
+			this.tabPageMovie.Controls.Add(this.buttonPlayMovie);
 			this.tabPageMovie.Controls.Add(this.label77);
 			this.tabPageMovie.Controls.Add(this.label76);
 			this.tabPageMovie.Controls.Add(this.label75);
@@ -1878,6 +2120,7 @@ namespace Vixen_Messaging
 			// tabPageGlediator
 			// 
 			this.tabPageGlediator.BackColor = System.Drawing.Color.Azure;
+			this.tabPageGlediator.Controls.Add(this.buttonPlayGled);
 			this.tabPageGlediator.Controls.Add(this.label80);
 			this.tabPageGlediator.Controls.Add(this.label79);
 			this.tabPageGlediator.Controls.Add(this.trackBarGlediator);
@@ -2841,7 +3084,10 @@ namespace Vixen_Messaging
 			this.customMessageSeqSel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.customMessageSeqSel.FormattingEnabled = true;
 			this.customMessageSeqSel.Items.AddRange(new object[] {
-            "Automatically Assigned"});
+            "Automatically Assigned",
+            "Fire",
+            "Movie",
+            "Glediator/Jinx"});
 			this.customMessageSeqSel.Location = new System.Drawing.Point(153, 112);
 			this.customMessageSeqSel.Name = "customMessageSeqSel";
 			this.customMessageSeqSel.Size = new System.Drawing.Size(275, 28);
@@ -4556,149 +4802,59 @@ namespace Vixen_Messaging
 			// 
 			this.fontDialog1.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			// 
-			// buttonPlaySnowFlake
+			// buttonPlayFire
 			// 
-			this.buttonPlaySnowFlake.BackColor = System.Drawing.Color.Azure;
-			this.buttonPlaySnowFlake.FlatAppearance.BorderSize = 0;
-			this.buttonPlaySnowFlake.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-			this.buttonPlaySnowFlake.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-			this.buttonPlaySnowFlake.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonPlaySnowFlake.Location = new System.Drawing.Point(415, 34);
-			this.buttonPlaySnowFlake.Margin = new System.Windows.Forms.Padding(0);
-			this.buttonPlaySnowFlake.Name = "buttonPlaySnowFlake";
-			this.buttonPlaySnowFlake.Size = new System.Drawing.Size(38, 38);
-			this.buttonPlaySnowFlake.TabIndex = 88;
-			this.buttonPlaySnowFlake.Text = "P";
-			this.toolTip1.SetToolTip(this.buttonPlaySnowFlake, "Play selected message. Useful for testing current message\r\nor displaying an immed" +
+			this.buttonPlayFire.BackColor = System.Drawing.Color.Azure;
+			this.buttonPlayFire.FlatAppearance.BorderSize = 0;
+			this.buttonPlayFire.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonPlayFire.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonPlayFire.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonPlayFire.Location = new System.Drawing.Point(269, 36);
+			this.buttonPlayFire.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonPlayFire.Name = "buttonPlayFire";
+			this.buttonPlayFire.Size = new System.Drawing.Size(38, 38);
+			this.buttonPlayFire.TabIndex = 89;
+			this.buttonPlayFire.Text = "P";
+			this.toolTip1.SetToolTip(this.buttonPlayFire, "Play selected message. Useful for testing current message\r\nor displaying an immed" +
         "iate message to the audience.");
-			this.buttonPlaySnowFlake.UseVisualStyleBackColor = false;
-			this.buttonPlaySnowFlake.Click += new System.EventHandler(this.buttonPlaySnowFlake_Click);
+			this.buttonPlayFire.UseVisualStyleBackColor = false;
+			this.buttonPlayFire.Click += new System.EventHandler(this.buttonPlayFire_Click);
 			// 
-			// label101
+			// buttonPlayMovie
 			// 
-			this.label101.AutoSize = true;
-			this.label101.Location = new System.Drawing.Point(10, 10);
-			this.label101.Name = "label101";
-			this.label101.Size = new System.Drawing.Size(138, 20);
-			this.label101.TabIndex = 89;
-			this.label101.Text = "SnowFlake Name:";
-			// 
-			// comboBoxSnowFlakeName
-			// 
-			this.comboBoxSnowFlakeName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBoxSnowFlakeName.FormattingEnabled = true;
-			this.comboBoxSnowFlakeName.Location = new System.Drawing.Point(14, 40);
-			this.comboBoxSnowFlakeName.Name = "comboBoxSnowFlakeName";
-			this.comboBoxSnowFlakeName.Size = new System.Drawing.Size(285, 28);
-			this.comboBoxSnowFlakeName.TabIndex = 85;
-			this.toolTip1.SetToolTip(this.comboBoxSnowFlakeName, "List all messages that have been created.");
-			this.comboBoxSnowFlakeName.SelectedIndexChanged += new System.EventHandler(this.comboBoxSnowFlakeName_SelectedIndexChanged);
-			// 
-			// buttonRemoveSnowFlake
-			// 
-			this.buttonRemoveSnowFlake.BackColor = System.Drawing.Color.Azure;
-			this.buttonRemoveSnowFlake.FlatAppearance.BorderSize = 0;
-			this.buttonRemoveSnowFlake.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-			this.buttonRemoveSnowFlake.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-			this.buttonRemoveSnowFlake.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonRemoveSnowFlake.Location = new System.Drawing.Point(364, 34);
-			this.buttonRemoveSnowFlake.Margin = new System.Windows.Forms.Padding(0);
-			this.buttonRemoveSnowFlake.Name = "buttonRemoveSnowFlake";
-			this.buttonRemoveSnowFlake.Size = new System.Drawing.Size(38, 38);
-			this.buttonRemoveSnowFlake.TabIndex = 87;
-			this.buttonRemoveSnowFlake.Text = "-";
-			this.toolTip1.SetToolTip(this.buttonRemoveSnowFlake, "Delete selected message.");
-			this.buttonRemoveSnowFlake.UseVisualStyleBackColor = false;
-			this.buttonRemoveSnowFlake.Click += new System.EventHandler(this.buttonRemoveSnowFlake_Click);
-			// 
-			// buttonAddSnowFlake
-			// 
-			this.buttonAddSnowFlake.BackColor = System.Drawing.Color.Azure;
-			this.buttonAddSnowFlake.FlatAppearance.BorderSize = 0;
-			this.buttonAddSnowFlake.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-			this.buttonAddSnowFlake.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-			this.buttonAddSnowFlake.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonAddSnowFlake.Location = new System.Drawing.Point(313, 34);
-			this.buttonAddSnowFlake.Margin = new System.Windows.Forms.Padding(0);
-			this.buttonAddSnowFlake.Name = "buttonAddSnowFlake";
-			this.buttonAddSnowFlake.Size = new System.Drawing.Size(38, 38);
-			this.buttonAddSnowFlake.TabIndex = 86;
-			this.buttonAddSnowFlake.Text = "+";
-			this.toolTip1.SetToolTip(this.buttonAddSnowFlake, "Create new message.");
-			this.buttonAddSnowFlake.UseVisualStyleBackColor = false;
-			this.buttonAddSnowFlake.Click += new System.EventHandler(this.buttonAddSnowFlake_Click);
-			// 
-			// buttonPlayMeteor
-			// 
-			this.buttonPlayMeteor.BackColor = System.Drawing.Color.Azure;
-			this.buttonPlayMeteor.FlatAppearance.BorderSize = 0;
-			this.buttonPlayMeteor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-			this.buttonPlayMeteor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-			this.buttonPlayMeteor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonPlayMeteor.Location = new System.Drawing.Point(415, 34);
-			this.buttonPlayMeteor.Margin = new System.Windows.Forms.Padding(0);
-			this.buttonPlayMeteor.Name = "buttonPlayMeteor";
-			this.buttonPlayMeteor.Size = new System.Drawing.Size(38, 38);
-			this.buttonPlayMeteor.TabIndex = 93;
-			this.buttonPlayMeteor.Text = "P";
-			this.toolTip1.SetToolTip(this.buttonPlayMeteor, "Play selected message. Useful for testing current message\r\nor displaying an immed" +
+			this.buttonPlayMovie.BackColor = System.Drawing.Color.Azure;
+			this.buttonPlayMovie.FlatAppearance.BorderSize = 0;
+			this.buttonPlayMovie.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonPlayMovie.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonPlayMovie.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonPlayMovie.Location = new System.Drawing.Point(275, 6);
+			this.buttonPlayMovie.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonPlayMovie.Name = "buttonPlayMovie";
+			this.buttonPlayMovie.Size = new System.Drawing.Size(38, 38);
+			this.buttonPlayMovie.TabIndex = 89;
+			this.buttonPlayMovie.Text = "P";
+			this.toolTip1.SetToolTip(this.buttonPlayMovie, "Play selected message. Useful for testing current message\r\nor displaying an immed" +
         "iate message to the audience.");
-			this.buttonPlayMeteor.UseVisualStyleBackColor = false;
-			this.buttonPlayMeteor.Click += new System.EventHandler(this.buttonPlayMeteor_Click);
+			this.buttonPlayMovie.UseVisualStyleBackColor = false;
+			this.buttonPlayMovie.Click += new System.EventHandler(this.buttonPlayMovie_Click);
 			// 
-			// label102
+			// buttonPlayGled
 			// 
-			this.label102.AutoSize = true;
-			this.label102.Location = new System.Drawing.Point(10, 10);
-			this.label102.Name = "label102";
-			this.label102.Size = new System.Drawing.Size(109, 20);
-			this.label102.TabIndex = 94;
-			this.label102.Text = "Meteor Name:";
-			// 
-			// comboBoxMeteorName
-			// 
-			this.comboBoxMeteorName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBoxMeteorName.FormattingEnabled = true;
-			this.comboBoxMeteorName.Location = new System.Drawing.Point(14, 40);
-			this.comboBoxMeteorName.Name = "comboBoxMeteorName";
-			this.comboBoxMeteorName.Size = new System.Drawing.Size(285, 28);
-			this.comboBoxMeteorName.TabIndex = 90;
-			this.toolTip1.SetToolTip(this.comboBoxMeteorName, "List all messages that have been created.");
-			this.comboBoxMeteorName.SelectedIndexChanged += new System.EventHandler(this.comboBoxMeteorName_SelectedIndexChanged);
-			// 
-			// buttonRemoveMeteor
-			// 
-			this.buttonRemoveMeteor.BackColor = System.Drawing.Color.Azure;
-			this.buttonRemoveMeteor.FlatAppearance.BorderSize = 0;
-			this.buttonRemoveMeteor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-			this.buttonRemoveMeteor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-			this.buttonRemoveMeteor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonRemoveMeteor.Location = new System.Drawing.Point(364, 34);
-			this.buttonRemoveMeteor.Margin = new System.Windows.Forms.Padding(0);
-			this.buttonRemoveMeteor.Name = "buttonRemoveMeteor";
-			this.buttonRemoveMeteor.Size = new System.Drawing.Size(38, 38);
-			this.buttonRemoveMeteor.TabIndex = 92;
-			this.buttonRemoveMeteor.Text = "-";
-			this.toolTip1.SetToolTip(this.buttonRemoveMeteor, "Delete selected message.");
-			this.buttonRemoveMeteor.UseVisualStyleBackColor = false;
-			this.buttonRemoveMeteor.Click += new System.EventHandler(this.buttonRemoveMeteor_Click);
-			// 
-			// buttonAddMeteor
-			// 
-			this.buttonAddMeteor.BackColor = System.Drawing.Color.Azure;
-			this.buttonAddMeteor.FlatAppearance.BorderSize = 0;
-			this.buttonAddMeteor.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-			this.buttonAddMeteor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-			this.buttonAddMeteor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonAddMeteor.Location = new System.Drawing.Point(313, 34);
-			this.buttonAddMeteor.Margin = new System.Windows.Forms.Padding(0);
-			this.buttonAddMeteor.Name = "buttonAddMeteor";
-			this.buttonAddMeteor.Size = new System.Drawing.Size(38, 38);
-			this.buttonAddMeteor.TabIndex = 91;
-			this.buttonAddMeteor.Text = "+";
-			this.toolTip1.SetToolTip(this.buttonAddMeteor, "Create new message.");
-			this.buttonAddMeteor.UseVisualStyleBackColor = false;
-			this.buttonAddMeteor.Click += new System.EventHandler(this.buttonAddMeteor_Click);
+			this.buttonPlayGled.BackColor = System.Drawing.Color.Azure;
+			this.buttonPlayGled.FlatAppearance.BorderSize = 0;
+			this.buttonPlayGled.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonPlayGled.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonPlayGled.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonPlayGled.Location = new System.Drawing.Point(445, 120);
+			this.buttonPlayGled.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonPlayGled.Name = "buttonPlayGled";
+			this.buttonPlayGled.Size = new System.Drawing.Size(38, 38);
+			this.buttonPlayGled.TabIndex = 90;
+			this.buttonPlayGled.Text = "P";
+			this.toolTip1.SetToolTip(this.buttonPlayGled, "Play selected message. Useful for testing current message\r\nor displaying an immed" +
+        "iate message to the audience.");
+			this.buttonPlayGled.UseVisualStyleBackColor = false;
+			this.buttonPlayGled.Click += new System.EventHandler(this.buttonPlayGled_Click);
 			// 
 			// FormMain
 			// 
@@ -5189,6 +5345,14 @@ namespace Vixen_Messaging
 		private System.Windows.Forms.ComboBox comboBoxMeteorName;
 		private System.Windows.Forms.Button buttonRemoveMeteor;
 		private System.Windows.Forms.Button buttonAddMeteor;
+		private System.Windows.Forms.Button buttonPlayTwinkle;
+		private System.Windows.Forms.Label label103;
+		private System.Windows.Forms.ComboBox comboBoxTwinkleName;
+		private System.Windows.Forms.Button buttonRemoveTwinkle;
+		private System.Windows.Forms.Button buttonAddTwinkle;
+		private System.Windows.Forms.Button buttonPlayFire;
+		private System.Windows.Forms.Button buttonPlayMovie;
+		private System.Windows.Forms.Button buttonPlayGled;
     }
 }
 

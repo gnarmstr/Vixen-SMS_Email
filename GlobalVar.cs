@@ -151,6 +151,44 @@ namespace Vixen_Messaging
 
 			#endregion
 
+			#region Custom Twinkle
+
+			public static List<int> TwinkleLights = new List<int>();
+
+			public static List<int> TwinkleSteps = new List<int>();
+
+			public static List<int> TwinkleSpeed = new List<int>();
+
+			public static List<bool> TwinkleRandomEnable = new List<bool>();
+
+			public static List<bool> TwinkleColourEnable1 = new List<bool>();
+
+			public static List<bool> TwinkleColourEnable2 = new List<bool>();
+
+			public static List<bool> TwinkleColourEnable3 = new List<bool>();
+
+			public static List<bool> TwinkleColourEnable4 = new List<bool>();
+
+			public static List<bool> TwinkleColourEnable5 = new List<bool>();
+
+			public static List<bool> TwinkleColourEnable6 = new List<bool>();
+
+			public static List<int> TwinkleColour1 = new List<int>();
+
+			public static List<int> TwinkleColour2 = new List<int>();
+
+			public static List<int> TwinkleColour3 = new List<int>();
+
+			public static List<int> TwinkleColour4 = new List<int>();
+
+			public static List<int> TwinkleColour5 = new List<int>();
+
+			public static List<int> TwinkleColour6 = new List<int>();
+
+			public static int TwinkleNumber { get; set; }
+
+			#endregion
+
 			/// <summary>
             /// Static value protected by access routine.
             /// </summary>

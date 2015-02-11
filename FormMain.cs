@@ -216,6 +216,18 @@ namespace Vixen_Messaging
 			buttonAddMeteor.Text = "";
 			buttonRemoveMeteor.Image = Tools.GetIcon(Resources.delete, 16);
 			buttonRemoveMeteor.Text = "";
+			buttonPlayTwinkle.Image = Tools.GetIcon(Resources.Play, 16);
+			buttonPlayTwinkle.Text = "";
+			buttonAddTwinkle.Image = Tools.GetIcon(Resources.add, 16);
+			buttonAddTwinkle.Text = "";
+			buttonRemoveTwinkle.Image = Tools.GetIcon(Resources.delete, 16);
+			buttonRemoveTwinkle.Text = "";
+			buttonPlayFire.Image = Tools.GetIcon(Resources.Play, 16);
+			buttonPlayFire.Text = "";
+			buttonPlayMovie.Image = Tools.GetIcon(Resources.Play, 16);
+			buttonPlayMovie.Text = "";
+			buttonPlayGled.Image = Tools.GetIcon(Resources.Play, 16);
+			buttonPlayGled.Text = "";
             #endregion
 
             #region Check Vixen Port settings on startup
@@ -486,7 +498,7 @@ namespace Vixen_Messaging
                     line = "ListLine1-";
                     i++;
                 } while (i < GlobalVar.MessageNumber);
-                comboBoxName.SelectedIndex = 0;
+                comboBoxName.SelectedIndex = 1;
 			}
 			#endregion
 
@@ -604,7 +616,63 @@ namespace Vixen_Messaging
 			}
 			#endregion
 
-			customMessageSeqSel.SelectedIndex = 1;
+		#region Twinkle Settings
+
+			GlobalVar.TwinkleNumber = profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, "TwinkleNumber", 0);
+			comboBoxTwinkleName.Items.Clear();
+			i = 0;
+			line = "TwinkleName";
+			if (GlobalVar.TwinkleNumber > 0)
+			{
+				do
+				{
+					customMessageSeqSel.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, ""));
+					comboBoxTwinkleName.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, ""));
+					line = "TwinkleLights";
+					GlobalVar.TwinkleLights.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, 25));
+					line = "TwinkleSteps";
+					GlobalVar.TwinkleSteps.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, 20));
+					line = "TwinkleSpeed";
+					GlobalVar.TwinkleSpeed.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, 1));
+					line = "TwinkleRandomEnable";
+					GlobalVar.TwinkleRandomEnable.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, true));
+					line = "TwinkleColourEnable1";
+					GlobalVar.TwinkleColourEnable1.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, true));
+					line = "TwinkleColourEnable2";
+					GlobalVar.TwinkleColourEnable2.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, false));
+					line = "TwinkleColourEnable3";
+					GlobalVar.TwinkleColourEnable3.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, false));
+					line = "TwinkleColourEnable4";
+					GlobalVar.TwinkleColourEnable4.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, false));
+					line = "TwinkleColourEnable5";
+					GlobalVar.TwinkleColourEnable5.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, false));
+					line = "TwinkleColourEnable6";
+					GlobalVar.TwinkleColourEnable6.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, false));
+					line = "TwinkleColour1";
+					GlobalVar.TwinkleColour1.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, -16776961));
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour1[i]);
+					line = "TwinkleColour2";
+					GlobalVar.TwinkleColour2.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, -65536));
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour2[i]);
+					line = "TwinkleColour3";
+					GlobalVar.TwinkleColour3.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, -16711936));
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour3[i]);
+					line = "TwinkleColour4";
+					GlobalVar.TwinkleColour4.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, -32640));
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour4[i]);
+					line = "TwinkleColour5";
+					GlobalVar.TwinkleColour5.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, -16776961));
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour5[i]);
+					line = "TwinkleColour6";
+					GlobalVar.TwinkleColour6.Add(profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, line + i, -65536));
+					line = "TwinkleName";
+					i++;
+				} while (i < GlobalVar.TwinkleNumber);
+				comboBoxTwinkleName.SelectedIndex = 0;
+			}
+			#endregion
+
+			comboBoxName.SelectedIndex = 0;
         }
         #endregion
 
@@ -1673,7 +1741,7 @@ namespace Vixen_Messaging
                     {
             #region Custom Effects
 
-                        if (msg != "play counter")
+                        if (msg != "play counter" & msg != "play sequence")
                         {
                             if (checkBoxVariableLength.Checked)
                             {
@@ -1738,12 +1806,17 @@ namespace Vixen_Messaging
 							int selectedMeteor;
 							var randomMeteor = new Random();
 							selectedMeteor = randomMeteor.Next(0, comboBoxMeteorName.Items.Count);
+							int selectedTwinkle;
+							var randomTwinkle = new Random();
+							selectedTwinkle = randomTwinkle.Next(0, comboBoxTwinkleName.Items.Count);
 		                    try
 		                    {
 								comboBoxSnowFlakeName.SelectedIndex = selectedSnowFlake;
 								CustomSnowFlakes();
 								comboBoxMeteorName.SelectedIndex = selectedMeteor;
 								CustomMeteor();
+								comboBoxTwinkleName.SelectedIndex = selectedTwinkle;
+								CustomTwinkle();
 		                    }
 		                    catch
 		                    {
@@ -1761,74 +1834,104 @@ namespace Vixen_Messaging
                         fileText = fileText.Replace("Glediator_Change", trackBarGlediator.Value.ToString());
                         
                         //Random or selected Selection
-	                    string selectedSeq;
-						if (msg == "play counter" & customMessageSeqSel.Text != @"Automatically Assigned")
+	                    string selectedSeq = "";
+						if (msg == "play sequence")
 						{
-							selectedSeq = customMessageSeqSel.Text;
-							if (customMessageSeqSel.Text == "None")
+							var selectedTab = tabControlEffects.SelectedTab.Text;
+							switch (selectedTab)
 							{
-								fileText = fileText.Replace("EffectTime_Change", "0"); //Sequence time
+								case "SnowFlakes":
+									selectedSeq = comboBoxSnowFlakeName.Text;
+									break;
+								case "Meteors":
+									selectedSeq = comboBoxMeteorName.Text;
+									break;
+								case "Twinkles":
+									selectedSeq = comboBoxTwinkleName.Text;
+									break;
+								case "Movie":
+									selectedSeq = "Movie";
+									break;
+								case "Fire":
+									selectedSeq = "Fire";
+									break;
+								case "Glediator/Jinx":
+									selectedSeq = "Glediator/Jinx";
+									break;
 							}
 							fileText = fileText.Replace("EffectTime_Change", GlobalVar.SeqIntervalTime.ToString());
 						}
-	                    else
-	                    {
+						else
+						{
+							if (msg == "play counter" & customMessageSeqSel.Text != @"Automatically Assigned")
+							{
+								selectedSeq = customMessageSeqSel.Text;
+								if (customMessageSeqSel.Text == "None")
+								{
+									fileText = fileText.Replace("EffectTime_Change", "0"); //Sequence time
+								}
+								fileText = fileText.Replace("EffectTime_Change", GlobalVar.SeqIntervalTime.ToString());
+							}
 
-		                    if (checkBoxDisableSeq.Checked)
-		                    {
-			                    selectedSeq = "None";
-			                    fileText = fileText.Replace("EffectTime_Change", "0"); //Sequence time
-		                    }
-		                    else
-		                    {
-			                    fileText = fileText.Replace("EffectTime_Change", GlobalVar.SeqIntervalTime.ToString());
-				                    //Sequence time
-			                    if (checkBoxRandomSeqSelection.Checked)
-			                    {
-				                    var index = 0;
-				                    var empty = 0;
-				                    var randomString = new string[6];
-				                    var seqRandom = new CheckBox[]
-				                    {
-					                    checkBoxRandom1, checkBoxRandom2, checkBoxRandom3, checkBoxRandom4, checkBoxRandom5,
-					                    checkBoxRandom6
-				                    };
-				                    string[] mystrings =
-				                    {
-					                    tabPageSnowFlake.Text, tabPageFire.Text, tabPageMeteors.Text,
-					                    tabPageTwinkles.Text, tabPageMovie.Text, tabPageGlediator.Text
-				                    };
-				                    do
-				                    {
-					                    if (seqRandom[index].Checked)
-					                    {
-						                    randomString[index] = mystrings[index];
-					                    }
-					                    else
-					                    {
-						                    randomString[index] = "";
-						                    empty++;
-					                    }
-				                    } while (index++ < 5);
 
-				                    do
-				                    {
-					                    var randomseq = new Random();
-					                    selectedSeq = randomString[randomseq.Next(randomString.Length)];
-					                    if (empty == 6)
-					                    {
-						                    selectedSeq = "None";
-											fileText = fileText.Replace("EffectTime_Change", "0"); //Sequence time
-					                    }
-				                    } while (selectedSeq == "");
-			                    }
-			                    else
-			                    {
-				                    selectedSeq = tabControlEffects.SelectedTab.Text;
-			                    }
-		                    }
-	                    }
+							else
+							{
 
+								if (checkBoxDisableSeq.Checked)
+								{
+									selectedSeq = "None";
+									fileText = fileText.Replace("EffectTime_Change", "0"); //Sequence time
+								}
+								else
+								{
+									fileText = fileText.Replace("EffectTime_Change", GlobalVar.SeqIntervalTime.ToString());
+									//Sequence time
+									if (checkBoxRandomSeqSelection.Checked)
+									{
+										var index = 0;
+										var empty = 0;
+										var randomString = new string[6];
+										var seqRandom = new CheckBox[]
+										{
+											checkBoxRandom1, checkBoxRandom2, checkBoxRandom3, checkBoxRandom4, checkBoxRandom5,
+											checkBoxRandom6
+										};
+										string[] mystrings =
+										{
+											tabPageSnowFlake.Text, tabPageFire.Text, tabPageMeteors.Text,
+											tabPageTwinkles.Text, tabPageMovie.Text, tabPageGlediator.Text
+										};
+										do
+										{
+											if (seqRandom[index].Checked)
+											{
+												randomString[index] = mystrings[index];
+											}
+											else
+											{
+												randomString[index] = "";
+												empty++;
+											}
+										} while (index++ < 5);
+
+										do
+										{
+											var randomseq = new Random();
+											selectedSeq = randomString[randomseq.Next(randomString.Length)];
+											if (empty == 6)
+											{
+												selectedSeq = "None";
+												fileText = fileText.Replace("EffectTime_Change", "0"); //Sequence time
+											}
+										} while (selectedSeq == "");
+									}
+									else
+									{
+										selectedSeq = tabControlEffects.SelectedTab.Text;
+									}
+								}
+							}
+						}
 	                    var i = 1;
                         //Select an Effect
 	                    if (selectedSeq.Contains("SnowFlake - "))
@@ -1870,6 +1973,29 @@ namespace Vixen_Messaging
 					                    {
 						                    null, checkBoxMeteorColour1, checkBoxMeteorColour2, checkBoxMeteorColour3,
 						                    checkBoxMeteorColour4, checkBoxMeteorColour5, checkBoxMeteorColour6
+					                    };
+								FileSettingsColour(btn, ckb, i, fileText, out fileText1);
+								fileText = fileText1;
+								i++;
+							} while (i < 7);
+	                    }
+	                    if (selectedSeq.Contains("Twinkle - "))
+	                    {
+							comboBoxTwinkleName.SelectedItem = customMessageSeqSel.Text;
+							fileText = fileText.Replace("Selected_Effect", "Twinkles");
+							fileText = fileText.Replace("Speed_1Change", trackBarSpeedTwinkles.Value.ToString());
+							//Colour selection
+							do
+							{
+								var btn = new Button[]
+					                    {
+						                    null, TwinkleColour1, TwinkleColour2, TwinkleColour3, TwinkleColour4, TwinkleColour5,
+						                    TwinkleColour6
+					                    };
+								var ckb = new CheckBox[]
+					                    {
+						                    null, checkBoxTwinkleColour1, checkBoxTwinkleColour2, checkBoxTwinkleColour3,
+						                    checkBoxTwinkleColour4, checkBoxTwinkleColour5, checkBoxTwinkleColour6
 					                    };
 								FileSettingsColour(btn, ckb, i, fileText, out fileText1);
 								fileText = fileText1;
@@ -2146,74 +2272,90 @@ namespace Vixen_Messaging
 				messageSelection = 0;
             }
             else
-            {
-                CountDown(msg, out msg);
-                if (checkBoxMultiLine.Checked)
-                {
-                    var splitmsg = msg.Split(' ');
-                    var splitmsgcount = splitmsg.Length;
-                    var lineNumber = new[] {"", "", "", ""};
-                    var lineWords = new[] {"", "", "", ""};
-                    var ii = 0;
-                    var wordsPerLine = (int) Math.Ceiling(splitmsgcount/numericUpDownMultiLine.Value);
-                    do
-                    {
-                        var iii = 0;
-                        try
-                        {
-                            do
-                            {
-                                lineWords[i] = lineWords[i] + splitmsg[ii] + " ";
-                                ii++;
-                            } while (iii++ < wordsPerLine - 1);
-                        }
-                        catch
-                        {
-                        }
-                        lineNumber[i] = lineWords[i];
-                    } while (i++ < numericUpDownMultiLine.Value - 1);
-                    fileText1 =
-                        fileText1.Replace("NamePlaceholder1", lineNumber[0])
-                            .Replace("NamePlaceholder2", lineNumber[1])
-                            .Replace("NamePlaceholder3", lineNumber[2])
-                            .Replace("NamePlaceholder4", lineNumber[3]);
-                }
-                else
-                {
-                    //Text Line Number
-                    switch (TextLineNumber.Value.ToString())
-                    {
-                        case "1":
-                            fileText1 =
-                                fileText1.Replace("NamePlaceholder1", msg)
-                                    .Replace("NamePlaceholder2", "")
-                                    .Replace("NamePlaceholder3", "")
-                                    .Replace("NamePlaceholder4", ""); //replaces the text
-                            break;
-                        case "2":
-                            fileText1 =
-                                fileText1.Replace("NamePlaceholder1", "")
-                                    .Replace("NamePlaceholder2", msg)
-                                    .Replace("NamePlaceholder3", "")
-                                    .Replace("NamePlaceholder4", ""); //replaces the text
-                            break;
-                        case "3":
-                            fileText1 =
-                                fileText1.Replace("NamePlaceholder1", "")
-                                    .Replace("NamePlaceholder2", "")
-                                    .Replace("NamePlaceholder3", msg)
-                                    .Replace("NamePlaceholder4", ""); //replaces the text
-                            break;
-                        case "4":
-                            fileText1 =
-                                fileText1.Replace("NamePlaceholder1", "")
-                                    .Replace("NamePlaceholder2", "")
-                                    .Replace("NamePlaceholder3", "")
-                                    .Replace("NamePlaceholder4", msg); //replaces the text
-                            break;
-                    }
-                }
-                //Text Direction
+			{
+				if (msg == "play sequence")
+				{
+					fileText1 = fileText1.Replace("NamePlaceholder1", "");
+					fileText1 = fileText1.Replace("NamePlaceholder2", "");
+					fileText1 = fileText1.Replace("NamePlaceholder3", "");
+					fileText1 = fileText1.Replace("NamePlaceholder4", "");
+					fileText1 = fileText1.Replace("TextPosition_Change", trackBarCountDownPosition.Value.ToString());
+					fileText1 = fileText1.Replace("FontName_Change", textBoxCustomFont.Text);
+					fileText1 = fileText1.Replace("FontSize_Change", textBoxCustomFontSize.Text);
+					fileText1 = fileText1.Replace("Speed_Change", trackBarCustomSpeed.Value.ToString());
+					fileText1 = fileText1.Replace("CenterStop_Change", checkBoxCentreStop.Checked.ToString().ToLower());
+					fileText1 = fileText1.Replace("NodeId_Change", textBoxNodeId.Text);
+				}
+				else
+				{
+					CountDown(msg, out msg);
+					if (checkBoxMultiLine.Checked)
+					{
+						var splitmsg = msg.Split(' ');
+						var splitmsgcount = splitmsg.Length;
+						var lineNumber = new[] {"", "", "", ""};
+						var lineWords = new[] {"", "", "", ""};
+						var ii = 0;
+						var wordsPerLine = (int) Math.Ceiling(splitmsgcount/numericUpDownMultiLine.Value);
+						do
+						{
+							var iii = 0;
+							try
+							{
+								do
+								{
+									lineWords[i] = lineWords[i] + splitmsg[ii] + " ";
+									ii++;
+								} while (iii++ < wordsPerLine - 1);
+							}
+							catch
+							{
+							}
+							lineNumber[i] = lineWords[i];
+						} while (i++ < numericUpDownMultiLine.Value - 1);
+						fileText1 =
+							fileText1.Replace("NamePlaceholder1", lineNumber[0])
+								.Replace("NamePlaceholder2", lineNumber[1])
+								.Replace("NamePlaceholder3", lineNumber[2])
+								.Replace("NamePlaceholder4", lineNumber[3]);
+					}
+					else
+					{
+						//Text Line Number
+						switch (TextLineNumber.Value.ToString())
+						{
+							case "1":
+								fileText1 =
+									fileText1.Replace("NamePlaceholder1", msg)
+										.Replace("NamePlaceholder2", "")
+										.Replace("NamePlaceholder3", "")
+										.Replace("NamePlaceholder4", ""); //replaces the text
+								break;
+							case "2":
+								fileText1 =
+									fileText1.Replace("NamePlaceholder1", "")
+										.Replace("NamePlaceholder2", msg)
+										.Replace("NamePlaceholder3", "")
+										.Replace("NamePlaceholder4", ""); //replaces the text
+								break;
+							case "3":
+								fileText1 =
+									fileText1.Replace("NamePlaceholder1", "")
+										.Replace("NamePlaceholder2", "")
+										.Replace("NamePlaceholder3", msg)
+										.Replace("NamePlaceholder4", ""); //replaces the text
+								break;
+							case "4":
+								fileText1 =
+									fileText1.Replace("NamePlaceholder1", "")
+										.Replace("NamePlaceholder2", "")
+										.Replace("NamePlaceholder3", "")
+										.Replace("NamePlaceholder4", msg); //replaces the text
+								break;
+						}
+					}
+				}
+				//Text Direction
                 switch (comboBoxTextDirection.Text)
                 {
                     case "Left": textDirection = 0;
@@ -3768,6 +3910,52 @@ namespace Vixen_Messaging
 				i++;
 			} while (i < GlobalVar.MeteorColourType.Count());
 			#endregion
+
+			#region Twinkle Settings
+
+			GlobalVar.TwinkleNumber = GlobalVar.TwinkleLights.Count();
+			profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, "TwinkleNumber", GlobalVar.TwinkleNumber.ToString());
+			i = 0;
+			line = "TwinkleName";
+			do
+			{
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, Convert.ToString(comboBoxTwinkleName.Items[i]));
+				line = "TwinkleLights";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleLights[i]);
+				line = "TwinkleSteps";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleSteps[i]);
+				line = "TwinkleSpeed";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleSpeed[i]);
+				line = "TwinkleRandomEnable";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleRandomEnable[i]);
+				line = "TwinkleColourEnable1";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable1[i]);
+				line = "TwinkleColourEnable2";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable2[i]);
+				line = "TwinkleColourEnable3";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable3[i]);
+				line = "TwinkleColourEnable4";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable4[i]);
+				line = "TwinkleColourEnable5";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable5[i]);
+				line = "TwinkleColourEnable6";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable6[i]);
+				line = "TwinkleColour1";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour1[i]);
+				line = "TwinkleColour2";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour2[i]);
+				line = "TwinkleColour3";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour3[i]);
+				line = "TwinkleColour4";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour4[i]);
+				line = "TwinkleColour5";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour5[i]);
+				line = "TwinkleColour6";
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour6[i]);
+				line = "TwinkleName";
+				i++;
+			} while (i < GlobalVar.TwinkleLights.Count());
+			#endregion
 		}
 #endregion
 
@@ -4536,7 +4724,7 @@ namespace Vixen_Messaging
 			CustomMeteorUpdate();
 		}
 
-		private void checkBoxMeteoreColour5_Leave(object sender, EventArgs e)
+		private void checkBoxMeteorColour5_Leave(object sender, EventArgs e)
 		{
 			CustomMeteorUpdate();
 		}
@@ -4562,12 +4750,12 @@ namespace Vixen_Messaging
 			if (!GlobalVar.PlayCustomMessage)
 			{
 				Stop_Vixen();
-				PlayCustomMessage();
+				PlayCustomSeq();
 				Start_Vixen();
 			}
 			else
 			{
-				PlayCustomMessage();
+				PlayCustomSeq();
 			}
 		}
 
@@ -4801,15 +4989,301 @@ namespace Vixen_Messaging
 			if (!GlobalVar.PlayCustomMessage)
 			{
 				Stop_Vixen();
-				PlayCustomMessage();
+				PlayCustomSeq();
 				Start_Vixen();
 			}
 			else
 			{
-				PlayCustomMessage();
+				PlayCustomSeq();
 			}
 		}
 
+	    #endregion
+
+#region Multiple Twinkles
+		private void comboBoxTwinkleName_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			CustomTwinkle();
+		}
+
+		private void CustomTwinkle()
+		{
+			var selectedItem = comboBoxTwinkleName.SelectedIndex;
+			trackBarTwinkleLights.Value = GlobalVar.TwinkleLights[selectedItem];
+			trackBarTwinkleSteps.Value = GlobalVar.TwinkleSteps[selectedItem];
+			trackBarSpeedTwinkles.Value = GlobalVar.TwinkleSpeed[selectedItem];
+			checkBoxRandom4.Checked = GlobalVar.TwinkleRandomEnable[selectedItem];
+			checkBoxTwinkleColour1.Checked = GlobalVar.TwinkleColourEnable1[selectedItem];
+			checkBoxTwinkleColour2.Checked = GlobalVar.TwinkleColourEnable2[selectedItem];
+			checkBoxTwinkleColour3.Checked = GlobalVar.TwinkleColourEnable3[selectedItem];
+			checkBoxTwinkleColour4.Checked = GlobalVar.TwinkleColourEnable4[selectedItem];
+			checkBoxTwinkleColour5.Checked = GlobalVar.TwinkleColourEnable5[selectedItem];
+			checkBoxTwinkleColour6.Checked = GlobalVar.TwinkleColourEnable6[selectedItem];
+			TwinkleColour1.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.TwinkleColour1[selectedItem]));
+			TwinkleColour2.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.TwinkleColour2[selectedItem]));
+			TwinkleColour3.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.TwinkleColour3[selectedItem]));
+			TwinkleColour4.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.TwinkleColour4[selectedItem]));
+			TwinkleColour5.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.TwinkleColour5[selectedItem]));
+			TwinkleColour6.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.TwinkleColour6[selectedItem]));
+		}
+
+		private void buttonAddTwinkle_Click(object sender, EventArgs e)
+		{
+			var addCustomMsg = "Twinkle - " + Interaction.InputBox("Enter a Name for your Custom Twinkle", "Custom Twinkle");
+			if (addCustomMsg != "")
+			{
+				GlobalVar.TwinkleLights.Add(25);
+				GlobalVar.TwinkleSteps.Add(20);
+				GlobalVar.TwinkleSpeed.Add(1);
+				GlobalVar.TwinkleRandomEnable.Add(true);
+				GlobalVar.TwinkleColourEnable1.Add(true);
+				GlobalVar.TwinkleColourEnable2.Add(false);
+				GlobalVar.TwinkleColourEnable3.Add(false);
+				GlobalVar.TwinkleColourEnable4.Add(false);
+				GlobalVar.TwinkleColourEnable5.Add(false);
+				GlobalVar.TwinkleColourEnable6.Add(false);
+				GlobalVar.TwinkleColour1.Add(Convert.ToInt32(-16776961));
+				GlobalVar.TwinkleColour2.Add(Convert.ToInt32(-65536));
+				GlobalVar.TwinkleColour3.Add(Convert.ToInt32(-16711936));
+				GlobalVar.TwinkleColour4.Add(Convert.ToInt32(-32640));
+				GlobalVar.TwinkleColour5.Add(Convert.ToInt32(-16711936));
+				GlobalVar.TwinkleColour6.Add(Convert.ToInt32(-32640));
+				comboBoxTwinkleName.Items.Add(addCustomMsg);
+				comboBoxTwinkleName.SelectedIndex = comboBoxTwinkleName.Items.Count - 1;
+				customMessageSeqSel.Items.Add(addCustomMsg);
+			}
+		}
+
+		private void buttonRemoveTwinkle_Click(object sender, EventArgs e)
+		{
+			if (comboBoxTwinkleName.Items.Count > 0)
+			{
+				customMessageSeqSel.Items.Remove(comboBoxTwinkleName.SelectedItem);
+				GlobalVar.TwinkleLights.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				GlobalVar.TwinkleSteps.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				GlobalVar.TwinkleSpeed.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				GlobalVar.TwinkleRandomEnable.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				GlobalVar.TwinkleColourEnable1.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				GlobalVar.TwinkleColourEnable2.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				GlobalVar.TwinkleColourEnable3.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				GlobalVar.TwinkleColourEnable4.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				GlobalVar.TwinkleColourEnable5.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				GlobalVar.TwinkleColourEnable6.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				GlobalVar.TwinkleColour1.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				GlobalVar.TwinkleColour2.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				GlobalVar.TwinkleColour3.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				GlobalVar.TwinkleColour4.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				GlobalVar.TwinkleColour5.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				GlobalVar.TwinkleColour6.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				comboBoxTwinkleName.Items.RemoveAt(comboBoxTwinkleName.SelectedIndex);
+				customMessageSeqSel.SelectedIndex = 0;
+				if (comboBoxTwinkleName.Items.Count > 0)
+				{
+					comboBoxTwinkleName.SelectedIndex = 0;
+					trackBarTwinkleLights.Value = GlobalVar.SnowFlakeMax[0];
+					trackBarTwinkleSteps.Value = GlobalVar.TwinkleSteps[0];
+					trackBarSpeedSnowFlakes.Value = GlobalVar.TwinkleSpeed[0];
+					checkBoxRandom4.Checked = GlobalVar.TwinkleRandomEnable[0];
+					checkBoxTwinkleColour1.Checked = GlobalVar.TwinkleColourEnable1[0];
+					checkBoxTwinkleColour2.Checked = GlobalVar.TwinkleColourEnable2[0];
+					checkBoxTwinkleColour3.Checked = GlobalVar.TwinkleColourEnable3[0];
+					checkBoxTwinkleColour4.Checked = GlobalVar.TwinkleColourEnable4[0];
+					checkBoxTwinkleColour5.Checked = GlobalVar.TwinkleColourEnable5[0];
+					checkBoxTwinkleColour6.Checked = GlobalVar.TwinkleColourEnable6[0];
+					TwinkleColour1.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.TwinkleColour1[0]));
+					TwinkleColour2.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.TwinkleColour2[0]));
+					TwinkleColour3.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.TwinkleColour3[0]));
+					TwinkleColour4.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.TwinkleColour4[0]));
+					TwinkleColour5.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.TwinkleColour5[0]));
+					TwinkleColour6.BackColor = Color.FromArgb(Convert.ToInt32(GlobalVar.TwinkleColour6[0]));
+				}
+				else
+				{
+					comboBoxTwinkleName.Items.Clear();
+					trackBarTwinkleLights.Value = 25;
+					trackBarTwinkleSteps.Value = 20;
+					trackBarSpeedTwinkles.Value = 1;
+					checkBoxRandom4.Checked = true;
+					checkBoxTwinkleColour1.Checked = true;
+					checkBoxTwinkleColour2.Checked = false;
+					checkBoxTwinkleColour3.Checked = false;
+					checkBoxTwinkleColour4.Checked = false;
+					checkBoxTwinkleColour5.Checked = false;
+					checkBoxTwinkleColour6.Checked = false;
+					TwinkleColour1.BackColor = Color.FromArgb(-16776961);
+					TwinkleColour2.BackColor = Color.FromArgb(-65536);
+					TwinkleColour3.BackColor = Color.FromArgb(-16711936);
+					TwinkleColour4.BackColor = Color.FromArgb(-32640);
+					TwinkleColour5.BackColor = Color.FromArgb(-16776961);
+					TwinkleColour6.BackColor = Color.FromArgb(-65536);
+				}
+			}
+			else
+			{
+				comboBoxTwinkleName.Items.Clear();
+				trackBarTwinkleLights.Value = 25;
+				trackBarTwinkleSteps.Value = 20;
+				trackBarSpeedTwinkles.Value = 1;
+				checkBoxRandom4.Checked = true;
+				checkBoxTwinkleColour1.Checked = true;
+				checkBoxTwinkleColour2.Checked = false;
+				checkBoxTwinkleColour3.Checked = false;
+				checkBoxTwinkleColour4.Checked = false;
+				checkBoxTwinkleColour5.Checked = false;
+				checkBoxTwinkleColour6.Checked = false;
+				TwinkleColour1.BackColor = Color.FromArgb(-16776961);
+				TwinkleColour2.BackColor = Color.FromArgb(-65536);
+				TwinkleColour3.BackColor = Color.FromArgb(-16711936);
+				TwinkleColour4.BackColor = Color.FromArgb(-32640);
+				TwinkleColour5.BackColor = Color.FromArgb(-16776961);
+				TwinkleColour6.BackColor = Color.FromArgb(-65536);
+			}
+		}
+
+		private void CustomTwinkleUpdate()
+		{
+			if (comboBoxTwinkleName.Items.Count != 0)
+			{
+				GlobalVar.TwinkleLights[comboBoxTwinkleName.SelectedIndex] = Convert.ToInt16(trackBarTwinkleLights.Value);
+				GlobalVar.TwinkleSteps[comboBoxTwinkleName.SelectedIndex] = Convert.ToInt16(trackBarTwinkleSteps.Value);
+				GlobalVar.TwinkleSpeed[comboBoxTwinkleName.SelectedIndex] = trackBarSpeedTwinkles.Value;
+				GlobalVar.TwinkleRandomEnable[comboBoxTwinkleName.SelectedIndex] = checkBoxRandom4.Checked;
+				GlobalVar.TwinkleColourEnable1[comboBoxTwinkleName.SelectedIndex] = checkBoxTwinkleColour1.Checked;
+				GlobalVar.TwinkleColourEnable2[comboBoxTwinkleName.SelectedIndex] = checkBoxTwinkleColour2.Checked;
+				GlobalVar.TwinkleColourEnable3[comboBoxTwinkleName.SelectedIndex] = checkBoxTwinkleColour3.Checked;
+				GlobalVar.TwinkleColourEnable4[comboBoxTwinkleName.SelectedIndex] = checkBoxTwinkleColour4.Checked;
+				GlobalVar.TwinkleColourEnable5[comboBoxTwinkleName.SelectedIndex] = checkBoxTwinkleColour5.Checked;
+				GlobalVar.TwinkleColourEnable6[comboBoxTwinkleName.SelectedIndex] = checkBoxTwinkleColour6.Checked;
+				GlobalVar.TwinkleColour1[comboBoxTwinkleName.SelectedIndex] = TwinkleColour1.BackColor.ToArgb();
+				GlobalVar.TwinkleColour2[comboBoxTwinkleName.SelectedIndex] = TwinkleColour2.BackColor.ToArgb();
+				GlobalVar.TwinkleColour3[comboBoxTwinkleName.SelectedIndex] = TwinkleColour3.BackColor.ToArgb();
+				GlobalVar.TwinkleColour4[comboBoxTwinkleName.SelectedIndex] = TwinkleColour4.BackColor.ToArgb();
+				GlobalVar.TwinkleColour5[comboBoxTwinkleName.SelectedIndex] = TwinkleColour5.BackColor.ToArgb();
+				GlobalVar.TwinkleColour6[comboBoxTwinkleName.SelectedIndex] = TwinkleColour6.BackColor.ToArgb();
+			}
+		}
+
+		private void checkBoxTwinkleColour1_Leave(object sender, EventArgs e)
+		{
+			CustomTwinkleUpdate();
+		}
+
+		private void checkBoxTwinkleColour2_Leave(object sender, EventArgs e)
+		{
+			CustomTwinkleUpdate();
+		}
+
+		private void checkBoxTwinkleColour3_Leave(object sender, EventArgs e)
+		{
+			CustomTwinkleUpdate();
+		}
+
+		private void checkBoxTwinkleColour4_Leave(object sender, EventArgs e)
+		{
+			CustomTwinkleUpdate();
+		}
+
+		private void checkBoxTwinkleColour5_Leave(object sender, EventArgs e)
+		{
+			CustomTwinkleUpdate();
+		}
+
+		private void checkBoxTwinkleColour6_Leave(object sender, EventArgs e)
+		{
+			CustomTwinkleUpdate();
+		}
+
+		private void checkBoxRandom4_Leave(object sender, EventArgs e)
+		{
+			CustomTwinkleUpdate();
+		}
+
+		private void trackBarLightsTwinkles_MouseLeave(object sender, EventArgs e)
+		{
+			CustomTwinkleUpdate();
+		}
+
+		private void trackBarStepsTwinkles_MouseLeave(object sender, EventArgs e)
+		{
+			CustomTwinkleUpdate();
+		}
+
+		private void trackBarSpeedTwinkles_MouseLeave(object sender, EventArgs e)
+		{
+			CustomTwinkleUpdate();
+		}
+
+		private void buttonPlayTwinkle_Click(object sender, EventArgs e)
+		{
+			StopSequence();
+			if (!GlobalVar.PlayCustomMessage)
+			{
+				Stop_Vixen();
+				PlayCustomSeq();
+				Start_Vixen();
+			}
+			else
+			{
+				PlayCustomSeq();
+			}
+		}
+
+		#endregion
+
+#region Play Custom Sequence
+		private void buttonPlayFire_Click(object sender, EventArgs e)
+		{
+			StopSequence();
+			if (!GlobalVar.PlayCustomMessage)
+			{
+				Stop_Vixen();
+				PlayCustomSeq();
+				Start_Vixen();
+			}
+			else
+			{
+				PlayCustomSeq();
+			}
+		}
+
+		private void buttonPlayMovie_Click(object sender, EventArgs e)
+		{
+			StopSequence();
+			if (!GlobalVar.PlayCustomMessage)
+			{
+				Stop_Vixen();
+				PlayCustomSeq();
+				Start_Vixen();
+			}
+			else
+			{
+				PlayCustomSeq();
+			}
+		}
+
+		private void buttonPlayGled_Click(object sender, EventArgs e)
+		{
+			StopSequence();
+			if (!GlobalVar.PlayCustomMessage)
+			{
+				Stop_Vixen();
+				PlayCustomSeq();
+				Start_Vixen();
+			}
+			else
+			{
+				PlayCustomSeq();
+			}
+		}
+
+		private void PlayCustomSeq()
+		{
+			bool blacklist;
+			bool notWhitemsg;
+			bool maxWordCount;
+			string msg = "play sequence";
+			SendMessageToVixen(msg, out blacklist, out notWhitemsg, out maxWordCount);
+		}
 		#endregion
 
 	}
