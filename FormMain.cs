@@ -1,4 +1,8 @@
-﻿#region System modules
+﻿using System.Collections.Specialized;
+using System.ComponentModel;
+using RestSharp;
+
+#region System modules
 
 using System;
 using System.Collections.Generic;
@@ -18,6 +22,10 @@ using Application = System.Windows.Forms.Application;
 using System.Globalization;
 using System.Threading;
 using Microsoft.VisualBasic;
+using System.Text;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.Xml.Linq;
 
 #endregion
 
@@ -226,6 +234,10 @@ namespace Vixen_Messaging
 			buttonPlayFire.Text = "";
 			buttonPlayMovie.Image = Tools.GetIcon(Resources.Play, 16);
 			buttonPlayMovie.Text = "";
+			buttonAddFire.Image = Tools.GetIcon(Resources.add, 16);
+			buttonAddFire.Text = "";
+			buttonRemoveFire.Image = Tools.GetIcon(Resources.delete, 16);
+			buttonRemoveFire.Text = "";
 			buttonPlayGled.Image = Tools.GetIcon(Resources.Play, 16);
 			buttonPlayGled.Text = "";
             #endregion
@@ -498,8 +510,14 @@ namespace Vixen_Messaging
                     line = "ListLine1-";
                     i++;
                 } while (i < GlobalVar.MessageNumber);
-                comboBoxName.SelectedIndex = 1;
+                
 			}
+            else
+            {
+				var addCustomMsg = "Default";
+				AddMessage(addCustomMsg);
+            }
+			comboBoxName.SelectedIndex = 0;
 			#endregion
 
 		#region SnowFlake Settings
@@ -554,8 +572,13 @@ namespace Vixen_Messaging
 					line = "SnowFlakeName";
 			        i++;
 				} while (i < GlobalVar.SnowFlakeNumber);
-				comboBoxSnowFlakeName.SelectedIndex = 0;
 			}
+			else
+			{
+				var addCustomMsg = "SnowFlake - Default";
+				AddSnowFlake(addCustomMsg);
+			}
+			comboBoxSnowFlakeName.SelectedIndex = 0;
 			#endregion
 
 		#region Meteor Settings
@@ -612,8 +635,13 @@ namespace Vixen_Messaging
 					line = "MeteorName";
 					i++;
 				} while (i < GlobalVar.MeteorNumber);
-				comboBoxMeteorName.SelectedIndex = 0;
 			}
+			else
+			{
+				var addCustomMsg = "Meteor - Default";
+				AddMeteor(addCustomMsg);
+			}
+			comboBoxMeteorName.SelectedIndex = 0;
 			#endregion
 
 		#region Twinkle Settings
@@ -668,12 +696,43 @@ namespace Vixen_Messaging
 					line = "TwinkleName";
 					i++;
 				} while (i < GlobalVar.TwinkleNumber);
-				comboBoxTwinkleName.SelectedIndex = 0;
 			}
+			else
+			{
+				var addCustomMsg = "Twinkle - Default";
+				AddTwinkle(addCustomMsg);
+			}
+			comboBoxTwinkleName.SelectedIndex = 0;
 			#endregion
 
-			comboBoxName.SelectedIndex = 0;
+		#region Fire Settings
+
+			GlobalVar.FireNumber = profile.GetSetting(XmlProfileSettings.SettingType.Fire, "FireNumber", 0);
+			comboBoxFireName.Items.Clear();
+			i = 0;
+			line = "FireName";
+			if (GlobalVar.FireNumber > 0)
+			{
+				do
+				{
+					customMessageSeqSel.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Fire, line + i, ""));
+					comboBoxFireName.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.Fire, line + i, ""));
+					line = "FireHeight";
+					GlobalVar.FireHeight.Add(profile.GetSetting(XmlProfileSettings.SettingType.Fire, line + i, 25));
+					line = "FireRandomEnable";
+					GlobalVar.FireRandomEnable.Add(profile.GetSetting(XmlProfileSettings.SettingType.Fire, line + i, true));
+					line = "FireName";
+					i++;
+				} while (i < GlobalVar.FireNumber);
+			}
+			else
+			{
+				var addCustomMsg = "Fire - Default";
+				AddFire(addCustomMsg);
+			}
+			comboBoxFireName.SelectedIndex = 0;
         }
+		#endregion
         #endregion
 
 #region Main Form
@@ -1131,17 +1190,25 @@ namespace Vixen_Messaging
 
         private void buttonPlay_Click(object sender, EventArgs e)
         {
-            StopSequence();
-			if (!GlobalVar.PlayCustomMessage)
-            {
-				Stop_Vixen();
-                PlayCustomMessage();
-                Start_Vixen();
-            }
-            else
-            {
-                PlayCustomMessage();
-            }
+	        if (textBoxNodeId.Text != "")
+	        {
+		        StopSequence();
+		        if (!GlobalVar.PlayCustomMessage)
+		        {
+			        Stop_Vixen();
+			        PlayCustomMessage();
+			        Start_Vixen();
+		        }
+		        else
+		        {
+			        PlayCustomMessage();
+		        }
+	        }
+	        else
+	        {
+		        MessageBox.Show(
+			        @"Vixen Messaging is unable to play the effect as there are no Group Node ID's. Add a node ID on the Messaging Settings page.");
+	        }
         }
 
         private void PlayCustomMessage()
@@ -1490,29 +1557,41 @@ namespace Vixen_Messaging
 			var	addCustomMsg = Interaction.InputBox("Enter a Name for your Custom Message", "Custom Message");
 			if (addCustomMsg != "")
 			{
-				GlobalVar.CustomMessageSeqSel.Add("Automatically Assigned");
-				GlobalVar.CustomMessageNodeSel.Add(customMessageNodeSel.Items[0].ToString());
-				GlobalVar.MessageColourOption.Add("Multi");
-				GlobalVar.ListLine1.Add("");
-				GlobalVar.ListLine2.Add("");
-				GlobalVar.ListLine3.Add("");
-				GlobalVar.ListLine4.Add("");
-				GlobalVar.Line1Colour.Add(Convert.ToInt32(-16776961));
-				GlobalVar.Line2Colour.Add(Convert.ToInt32(-65536));
-				GlobalVar.Line3Colour.Add(Convert.ToInt32(-16711936));
-				GlobalVar.Line4Colour.Add(Convert.ToInt32(-32640));
-				GlobalVar.CountDirection.Add("Left");
-				GlobalVar.Position.Add(65);
-				GlobalVar.MessageEnabled.Add(true);
-				GlobalVar.CustomFont.Add("Arial Narrow");
-				GlobalVar.CustomFontSize.Add("10");
-				GlobalVar.TrackBarCustomSpeed.Add(5);
-				GlobalVar.CheckBoxCentreStop.Add(false);
-				GlobalVar.CustomMsgLength.Add(10);
-				comboBoxName.Items.Add(addCustomMsg);
-                comboBoxName.SelectedIndex = comboBoxName.Items.Count - 1;
-            }
+				AddMessage(addCustomMsg);
+			}
         }
+
+		private void AddMessage(string addCustomMsg)
+	    {
+			GlobalVar.CustomMessageSeqSel.Add("Automatically Assigned");
+			if (comboBoxNodeID.Items.Count > 0)
+			{
+				GlobalVar.CustomMessageNodeSel.Add(customMessageNodeSel.Items[0].ToString());
+			}
+			else
+			{
+				GlobalVar.CustomMessageNodeSel.Add("");
+			}
+			GlobalVar.MessageColourOption.Add("Multi");
+			GlobalVar.ListLine1.Add("");
+			GlobalVar.ListLine2.Add("");
+			GlobalVar.ListLine3.Add("");
+			GlobalVar.ListLine4.Add("");
+			GlobalVar.Line1Colour.Add(Convert.ToInt32(-16776961));
+			GlobalVar.Line2Colour.Add(Convert.ToInt32(-65536));
+			GlobalVar.Line3Colour.Add(Convert.ToInt32(-16711936));
+			GlobalVar.Line4Colour.Add(Convert.ToInt32(-32640));
+			GlobalVar.CountDirection.Add("Left");
+			GlobalVar.Position.Add(65);
+			GlobalVar.MessageEnabled.Add(true);
+			GlobalVar.CustomFont.Add("Arial Narrow");
+			GlobalVar.CustomFontSize.Add("10");
+			GlobalVar.TrackBarCustomSpeed.Add(5);
+			GlobalVar.CheckBoxCentreStop.Add(false);
+			GlobalVar.CustomMsgLength.Add(10);
+			comboBoxName.Items.Add(addCustomMsg);
+			comboBoxName.SelectedIndex = comboBoxName.Items.Count - 1;
+	    }
 
         private void comboBoxName_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1609,9 +1688,9 @@ namespace Vixen_Messaging
 					line2Colour.BackColor = Color.FromArgb(-65536);
 					line3Colour.BackColor = Color.FromArgb(-16711936);
 					line4Colour.BackColor = Color.FromArgb(-32640);
-	                messageColourOption.SelectedIndex = 1;
-					customMessageSeqSel.SelectedIndex = 1;
-					customMessageNodeSel.SelectedIndex = 1;
+	                messageColourOption.SelectedIndex = 0;
+					customMessageSeqSel.SelectedIndex = 0;
+					customMessageNodeSel.SelectedIndex = 0;
                 }
             }
         }
@@ -1809,6 +1888,9 @@ namespace Vixen_Messaging
 							int selectedTwinkle;
 							var randomTwinkle = new Random();
 							selectedTwinkle = randomTwinkle.Next(0, comboBoxTwinkleName.Items.Count);
+							int selectedFire;
+							var randomFire = new Random();
+							selectedFire = randomFire.Next(0, comboBoxFireName.Items.Count);
 		                    try
 		                    {
 								comboBoxSnowFlakeName.SelectedIndex = selectedSnowFlake;
@@ -1817,21 +1899,14 @@ namespace Vixen_Messaging
 								CustomMeteor();
 								comboBoxTwinkleName.SelectedIndex = selectedTwinkle;
 								CustomTwinkle();
+								comboBoxFireName.SelectedIndex = selectedFire;
+								CustomFire();
 		                    }
 		                    catch
 		                    {
 		                    }
 	                    }
-						fileText = fileText.Replace("SnowFlake_Change", EffectType.Value.ToString()); //Type
-                        fileText = fileText.Replace("SnowFlakeMax_Change", MaxSnowFlake.Value.ToString()); //Max number
-                        fileText = fileText.Replace("FireHeight_Change", FireHeight.Value.ToString()); //Fire height
-                        fileText = fileText.Replace("MeteorType_Change", MeteorCount.Value.ToString()); //Type
-                        fileText = fileText.Replace("MeteorTrailLength_Change", MeteorTrailLength.Value.ToString()); //Max number
-                        fileText = fileText.Replace("TwinkleLights_Change", trackBarTwinkleLights.Value.ToString());
-                        fileText = fileText.Replace("TwinkleSteps_Change", trackBarTwinkleSteps.Value.ToString());
-                        fileText = fileText.Replace("Movie_Change", trackBarMovieSpeed.Value.ToString()); 
-                        fileText = fileText.Replace("GlediatorFolder_Change", textBoxGlediator.Text);
-                        fileText = fileText.Replace("Glediator_Change", trackBarGlediator.Value.ToString());
+						
                         
                         //Random or selected Selection
 	                    string selectedSeq = "";
@@ -1853,7 +1928,7 @@ namespace Vixen_Messaging
 									selectedSeq = "Movie";
 									break;
 								case "Fire":
-									selectedSeq = "Fire";
+									selectedSeq = comboBoxFireName.Text;
 									break;
 								case "Glediator/Jinx":
 									selectedSeq = "Glediator/Jinx";
@@ -1934,9 +2009,12 @@ namespace Vixen_Messaging
 						}
 	                    var i = 1;
                         //Select an Effect
-	                    if (selectedSeq.Contains("SnowFlake - "))
+						if (selectedSeq.Contains("SnowFlake - "))
 	                    {
-		                    comboBoxSnowFlakeName.SelectedItem = customMessageSeqSel.Text;
+		                    if (msg != "play sequence")
+		                    {
+			                    comboBoxSnowFlakeName.SelectedItem = customMessageSeqSel.Text;
+		                    }
 							fileText = fileText.Replace("Selected_Effect", "Snowflakes");
 							fileText = fileText.Replace("Speed_1Change", trackBarSpeedSnowFlakes.Value.ToString());
 							//Colour selection
@@ -1959,8 +2037,11 @@ namespace Vixen_Messaging
 	                    }
 						if (selectedSeq.Contains("Meteor - "))
 	                    {
-							comboBoxMeteorName.SelectedItem = customMessageSeqSel.Text;
-							fileText = fileText.Replace("Selected_Effect", "Meteors");
+		                    if (msg != "play sequence")
+		                    {
+			                    comboBoxMeteorName.SelectedItem = customMessageSeqSel.Text;
+		                    }
+		                    fileText = fileText.Replace("Selected_Effect", "Meteors");
 							fileText = fileText.Replace("Speed_1Change", trackBarSpeedMeteors.Value.ToString());
 							//Colour selection
 							do
@@ -1981,27 +2062,42 @@ namespace Vixen_Messaging
 	                    }
 	                    if (selectedSeq.Contains("Twinkle - "))
 	                    {
-							comboBoxTwinkleName.SelectedItem = customMessageSeqSel.Text;
-							fileText = fileText.Replace("Selected_Effect", "Twinkles");
-							fileText = fileText.Replace("Speed_1Change", trackBarSpeedTwinkles.Value.ToString());
-							//Colour selection
-							do
-							{
-								var btn = new Button[]
-					                    {
-						                    null, TwinkleColour1, TwinkleColour2, TwinkleColour3, TwinkleColour4, TwinkleColour5,
-						                    TwinkleColour6
-					                    };
-								var ckb = new CheckBox[]
-					                    {
-						                    null, checkBoxTwinkleColour1, checkBoxTwinkleColour2, checkBoxTwinkleColour3,
-						                    checkBoxTwinkleColour4, checkBoxTwinkleColour5, checkBoxTwinkleColour6
-					                    };
-								FileSettingsColour(btn, ckb, i, fileText, out fileText1);
-								fileText = fileText1;
-								i++;
-							} while (i < 7);
+		                    if (msg != "play sequence")
+		                    {
+			                    comboBoxTwinkleName.SelectedItem = customMessageSeqSel.Text;
+		                    }
+		                    fileText = fileText.Replace("Selected_Effect", "Twinkles");
+		                    fileText = fileText.Replace("Speed_1Change", trackBarSpeedTwinkles.Value.ToString());
+		                    //Colour selection
+		                    do
+		                    {
+			                    var btn = new Button[]
+			                    {
+				                    null, TwinkleColour1, TwinkleColour2, TwinkleColour3, TwinkleColour4, TwinkleColour5,
+				                    TwinkleColour6
+			                    };
+			                    var ckb = new CheckBox[]
+			                    {
+				                    null, checkBoxTwinkleColour1, checkBoxTwinkleColour2, checkBoxTwinkleColour3,
+				                    checkBoxTwinkleColour4, checkBoxTwinkleColour5, checkBoxTwinkleColour6
+			                    };
+			                    FileSettingsColour(btn, ckb, i, fileText, out fileText1);
+			                    fileText = fileText1;
+			                    i++;
+		                    } while (i < 7);
 	                    }
+	                    if (selectedSeq.Contains("Fire - "))
+						{
+							if (msg != "play sequence")
+							{
+								comboBoxFireName.SelectedItem = customMessageSeqSel.Text;
+							}
+							fileText = fileText.Replace("Selected_Effect", "Fire");
+							fileText = fileText.Replace("Speed_1Change", "0");
+							//Colour selection
+							FileSettings(fileText, out fileText1);
+							fileText = fileText1;
+						}
 	                    else
 	                    {
 		                    switch (selectedSeq)
@@ -2111,6 +2207,16 @@ namespace Vixen_Messaging
 				                    break;
 		                    }
 	                    }
+						fileText = fileText.Replace("SnowFlake_Change", EffectType.Value.ToString()); //Type
+						fileText = fileText.Replace("SnowFlakeMax_Change", MaxSnowFlake.Value.ToString()); //Max number
+						fileText = fileText.Replace("MeteorType_Change", MeteorCount.Value.ToString()); //Type
+						fileText = fileText.Replace("MeteorTrailLength_Change", MeteorTrailLength.Value.ToString()); //Max number
+						fileText = fileText.Replace("TwinkleLights_Change", trackBarTwinkleLights.Value.ToString());
+						fileText = fileText.Replace("TwinkleSteps_Change", trackBarTwinkleSteps.Value.ToString());
+						fileText = fileText.Replace("Movie_Change", trackBarMovieSpeed.Value.ToString());
+						fileText = fileText.Replace("GlediatorFolder_Change", textBoxGlediator.Text);
+						fileText = fileText.Replace("Glediator_Change", trackBarGlediator.Value.ToString());
+						fileText = fileText.Replace("FireHeight_Change", FireHeight.Value.ToString()); //Fire height
 	                    File.Delete(outputFileName);
                         File.WriteAllText(outputFileName, fileText);
    
@@ -2160,9 +2266,32 @@ namespace Vixen_Messaging
               #endregion
 
             #region Send Play command to Vixen Web API
-                    var url = textBoxVixenServer.Text + "?name=" + WebUtility.UrlEncode(outputFileName);
-                    var result = new WebClient().DownloadString(url); //Used to output to Vixen WebClient
-                    Cursor.Current = Cursors.Default; 
+					var url = textBoxVixenServer.Text + "?name=" + WebUtility.UrlEncode(outputFileName);
+					var result = new WebClient().DownloadString(url); //Used to output to Vixen WebClient
+
+					//using (WebClient client = new WebClient())
+					//{
+					//	byte[] resp = client.Post("http://localhost/playSequence", new {
+					//		Name = "VixenOut",
+					//		FileName = "VixenOut.tim"
+					//	});
+					//	string html = client.Encoding.GetString(resp);
+					//}
+
+					//const string json = @"{""Name"":""VixenOut"",""FileName"":""VixenOut.tim""}";
+					//Uri uri = new Uri("http://localhost:8888/playSequence");
+					//var wc = new WebClient();
+					//wc.Headers["Content-Type"] = "application/json";
+
+					//var resJson = wc.UploadString(uri, "POST", json);
+
+	//				{"Name":"VixenOut","FileName":"VixenOut.tim"}
+
+
+	//				$.post('http://localhost/playSequence', sequence, null, 'JSON');
+
+
+					Cursor.Current = Cursors.Default; 
                     LogDisplay(GlobalVar.LogMsg = ("Vixen Started: + " + result));
                     Log(msg + " has been been displayed in lights");
             #endregion
@@ -2199,7 +2328,11 @@ namespace Vixen_Messaging
             maxWordCount = false;
         }
 
-    #region Write to Sequence File Colour and Checkbox settings
+		
+
+	    public object JsonObject { get; set; }
+
+	    #region Write to Sequence File Colour and Checkbox settings
         private void FileSettingsColour(Button[] btn, CheckBox[] ckb, int i, string fileText1, out string fileText)
         {
             string hexValue = btn[i].BackColor.A.ToString("x2") + btn[i].BackColor.R.ToString("x2") + btn[i].BackColor.G.ToString("x2") + btn[i].BackColor.B.ToString("x2");
@@ -3486,12 +3619,19 @@ namespace Vixen_Messaging
 
         private void Start_Vixen()
         {
-            buttonStart.Image = Tools.GetIcon(Resources.StartB_W, 40);
-            buttonStart.Text = "";
-            buttonStop.Image = Tools.GetIcon(Resources.Stop, 40);
-            buttonStop.Text = "";
-			GlobalVar.PlayCustomMessage = false;
-            StartChecking();
+	        if (textBoxNodeId.Text != "")
+	        {
+		        buttonStart.Image = Tools.GetIcon(Resources.StartB_W, 40);
+		        buttonStart.Text = "";
+		        buttonStop.Image = Tools.GetIcon(Resources.Stop, 40);
+		        buttonStop.Text = "";
+		        GlobalVar.PlayCustomMessage = false;
+		        StartChecking();
+	        }
+	        else
+	        {
+		        MessageBox.Show(@"Vixen Messaging is unable to start as there are no Group Node ID's. Add a node ID on the Messaging Settings page");
+	        }
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
@@ -3750,211 +3890,256 @@ namespace Vixen_Messaging
 #endregion
 
 			#region Group ID Settings
-
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumberSel", comboBoxNodeID.SelectedIndex);
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumber", comboBoxNodeID.Items.Count);
-			var i = 0;
-            var line = "GroupNameID";
-            do
-            {
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, Convert.ToString(comboBoxNodeID.Items[i]));
-				line = "GroupNodeID";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.GroupNodeID[i]);
+			int i;
+			string line;
+			if (comboBoxNodeID.Items.Count > 0)
+			{
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumberSel", comboBoxNodeID.SelectedIndex);
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumber", comboBoxNodeID.Items.Count);
+				i = 0;
 				line = "GroupNameID";
-				i++;
-			} while (i < GlobalVar.GroupNodeID.Count());
+				do
+				{
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, Convert.ToString(comboBoxNodeID.Items[i]));
+					line = "GroupNodeID";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.GroupNodeID[i]);
+					line = "GroupNameID";
+					i++;
+				} while (i < GlobalVar.GroupNodeID.Count());
+			}
+
 			#endregion
 
 			#region Custom Message Settings
 
-			GlobalVar.MessageNumber = GlobalVar.ListLine1.Count();
-			profile.PutSetting(XmlProfileSettings.SettingType.Message, "MessageNumber", GlobalVar.MessageNumber.ToString());
-			i = 0;
-            line = "ListLine1-";
-            do
-            {
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.ListLine1[i]);
-                line = "ListLine2-";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.ListLine2[i]);
-                line = "ListLine3-";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.ListLine3[i]);
-                line = "ListLine4-";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.ListLine4[i]);
-				line = "Line1Colour";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.Line1Colour[i]);
-				line = "Line2Colour";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.Line2Colour[i]);
-				line = "Line3Colour";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.Line3Colour[i]);
-				line = "Line4Colour";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.Line4Colour[i]);
-				line = "MessageDirection";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CountDirection[i]);
-                line = "MessagePosition";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.Position[i]);
-                line = "MessageEnabled";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.MessageEnabled[i]);
-				line = "MessageColourOption";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.MessageColourOption[i]);
-				line = "MessageSeqSel";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CustomMessageSeqSel[i]);
-				line = "MessageNodeSel";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CustomMessageNodeSel[i]);
-				line = "MessageName";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, Convert.ToString(comboBoxName.Items[i]));
-                line = "CustomFont";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CustomFont[i]);
-                line = "CustomSpeed";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.TrackBarCustomSpeed[i]);
-				line = "CenterStop";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CheckBoxCentreStop[i]);
-				line = "CustomFontSize";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CustomFontSize[i]);
-                line = "CustomMsgLength";
-				profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, Convert.ToString(GlobalVar.CustomMsgLength[i]));
-                line = "ListLine1-";
-                i++;
-            } while (i < GlobalVar.ListLine1.Count());
+			if (comboBoxName.Items.Count > 0)
+			{
+				GlobalVar.MessageNumber = GlobalVar.ListLine1.Count();
+				profile.PutSetting(XmlProfileSettings.SettingType.Message, "MessageNumber", GlobalVar.MessageNumber.ToString());
+				i = 0;
+				line = "ListLine1-";
+				do
+				{
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.ListLine1[i]);
+					line = "ListLine2-";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.ListLine2[i]);
+					line = "ListLine3-";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.ListLine3[i]);
+					line = "ListLine4-";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.ListLine4[i]);
+					line = "Line1Colour";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.Line1Colour[i]);
+					line = "Line2Colour";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.Line2Colour[i]);
+					line = "Line3Colour";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.Line3Colour[i]);
+					line = "Line4Colour";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.Line4Colour[i]);
+					line = "MessageDirection";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CountDirection[i]);
+					line = "MessagePosition";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.Position[i]);
+					line = "MessageEnabled";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.MessageEnabled[i]);
+					line = "MessageColourOption";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.MessageColourOption[i]);
+					line = "MessageSeqSel";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CustomMessageSeqSel[i]);
+					line = "MessageNodeSel";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CustomMessageNodeSel[i]);
+					line = "MessageName";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, Convert.ToString(comboBoxName.Items[i]));
+					line = "CustomFont";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CustomFont[i]);
+					line = "CustomSpeed";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.TrackBarCustomSpeed[i]);
+					line = "CenterStop";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CheckBoxCentreStop[i]);
+					line = "CustomFontSize";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, GlobalVar.CustomFontSize[i]);
+					line = "CustomMsgLength";
+					profile.PutSetting(XmlProfileSettings.SettingType.Message, line + i, Convert.ToString(GlobalVar.CustomMsgLength[i]));
+					line = "ListLine1-";
+					i++;
+				} while (i < GlobalVar.ListLine1.Count());
+			}
+
 			#endregion
 
 			#region SnowFlake Settings
 
-			GlobalVar.SnowFlakeNumber = GlobalVar.SnowFlakeEffectType.Count();
-			profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, "SnowFlakeNumber", GlobalVar.SnowFlakeNumber.ToString());
-			i = 0;
-			line = "SnowFlakeName";
-			do
+			if (comboBoxSnowFlakeName.Items.Count > 0)
 			{
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, Convert.ToString(comboBoxSnowFlakeName.Items[i]));
-				line = "SnowFlakeEffectType";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeEffectType[i]);
-				line = "SnowFlakeMax";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeMax[i]);
-				line = "SnowFlakeSpeed";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeSpeed[i]);
-				line = "SnowFlakeRandomEnable";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeRandomEnable[i]);
-				line = "SnowFlakeColourEnable1";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable1[i]);
-				line = "SnowFlakeColourEnable2";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable2[i]);
-				line = "SnowFlakeColourEnable3";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable3[i]);
-				line = "SnowFlakeColourEnable4";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable4[i]);
-				line = "SnowFlakeColourEnable5";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable5[i]);
-				line = "SnowFlakeColourEnable6";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable6[i]);
-				line = "SnowFlakeColour1";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour1[i]);
-				line = "SnowFlakeColour2";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour2[i]);
-				line = "SnowFlakeColour3";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour3[i]);
-				line = "SnowFlakeColour4";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour4[i]);
-				line = "SnowFlakeColour5";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour5[i]);
-				line = "SnowFlakeColour6";
-				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour6[i]);
+				GlobalVar.SnowFlakeNumber = GlobalVar.SnowFlakeEffectType.Count();
+				profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, "SnowFlakeNumber",
+					GlobalVar.SnowFlakeNumber.ToString());
+				i = 0;
 				line = "SnowFlakeName";
-				i++;
-			} while (i < GlobalVar.SnowFlakeEffectType.Count());
+				do
+				{
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i,
+						Convert.ToString(comboBoxSnowFlakeName.Items[i]));
+					line = "SnowFlakeEffectType";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeEffectType[i]);
+					line = "SnowFlakeMax";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeMax[i]);
+					line = "SnowFlakeSpeed";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeSpeed[i]);
+					line = "SnowFlakeRandomEnable";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeRandomEnable[i]);
+					line = "SnowFlakeColourEnable1";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable1[i]);
+					line = "SnowFlakeColourEnable2";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable2[i]);
+					line = "SnowFlakeColourEnable3";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable3[i]);
+					line = "SnowFlakeColourEnable4";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable4[i]);
+					line = "SnowFlakeColourEnable5";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable5[i]);
+					line = "SnowFlakeColourEnable6";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColourEnable6[i]);
+					line = "SnowFlakeColour1";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour1[i]);
+					line = "SnowFlakeColour2";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour2[i]);
+					line = "SnowFlakeColour3";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour3[i]);
+					line = "SnowFlakeColour4";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour4[i]);
+					line = "SnowFlakeColour5";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour5[i]);
+					line = "SnowFlakeColour6";
+					profile.PutSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, GlobalVar.SnowFlakeColour6[i]);
+					line = "SnowFlakeName";
+					i++;
+				} while (i < GlobalVar.SnowFlakeEffectType.Count());
+			}
+
 			#endregion
 
 			#region Meteor Settings
 
-			GlobalVar.MeteorNumber = GlobalVar.MeteorColourType.Count();
-			profile.PutSetting(XmlProfileSettings.SettingType.Meteor, "MeteorNumber", GlobalVar.MeteorNumber.ToString());
-			i = 0;
-			line = "MeteorName";
-			do
+			if (comboBoxMeteorName.Items.Count > 0)
 			{
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, Convert.ToString(comboBoxMeteorName.Items[i]));
-				line = "MeteorColourType";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourType[i]);
-				line = "MeteorCount";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorCount[i]);
-				line = "MeteorTrailLength";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorTrailLength[i]);
-				line = "MeteorSpeed";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorSpeed[i]);
-				line = "MeteorRandomEnable";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorRandomEnable[i]);
-				line = "MeteorColourEnable1";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable1[i]);
-				line = "MeteorColourEnable2";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable2[i]);
-				line = "MeteorColourEnable3";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable3[i]);
-				line = "MeteorColourEnable4";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable4[i]);
-				line = "MeteorColourEnable5";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable5[i]);
-				line = "MeteorColourEnable6";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable6[i]);
-				line = "MeteorColour1";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour1[i]);
-				line = "MeteorColour2";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour2[i]);
-				line = "MeteorColour3";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour3[i]);
-				line = "MeteorColour4";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour4[i]);
-				line = "MeteorColour5";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour5[i]);
-				line = "MeteorColour6";
-				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour6[i]);
+				GlobalVar.MeteorNumber = GlobalVar.MeteorColourType.Count();
+				profile.PutSetting(XmlProfileSettings.SettingType.Meteor, "MeteorNumber", GlobalVar.MeteorNumber.ToString());
+				i = 0;
 				line = "MeteorName";
-				i++;
-			} while (i < GlobalVar.MeteorColourType.Count());
+				do
+				{
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, Convert.ToString(comboBoxMeteorName.Items[i]));
+					line = "MeteorColourType";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourType[i]);
+					line = "MeteorCount";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorCount[i]);
+					line = "MeteorTrailLength";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorTrailLength[i]);
+					line = "MeteorSpeed";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorSpeed[i]);
+					line = "MeteorRandomEnable";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorRandomEnable[i]);
+					line = "MeteorColourEnable1";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable1[i]);
+					line = "MeteorColourEnable2";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable2[i]);
+					line = "MeteorColourEnable3";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable3[i]);
+					line = "MeteorColourEnable4";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable4[i]);
+					line = "MeteorColourEnable5";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable5[i]);
+					line = "MeteorColourEnable6";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColourEnable6[i]);
+					line = "MeteorColour1";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour1[i]);
+					line = "MeteorColour2";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour2[i]);
+					line = "MeteorColour3";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour3[i]);
+					line = "MeteorColour4";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour4[i]);
+					line = "MeteorColour5";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour5[i]);
+					line = "MeteorColour6";
+					profile.PutSetting(XmlProfileSettings.SettingType.Meteor, line + i, GlobalVar.MeteorColour6[i]);
+					line = "MeteorName";
+					i++;
+				} while (i < GlobalVar.MeteorColourType.Count());
+			}
+
 			#endregion
 
 			#region Twinkle Settings
 
-			GlobalVar.TwinkleNumber = GlobalVar.TwinkleLights.Count();
-			profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, "TwinkleNumber", GlobalVar.TwinkleNumber.ToString());
-			i = 0;
-			line = "TwinkleName";
-			do
+			if (comboBoxTwinkleName.Items.Count > 0)
 			{
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, Convert.ToString(comboBoxTwinkleName.Items[i]));
-				line = "TwinkleLights";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleLights[i]);
-				line = "TwinkleSteps";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleSteps[i]);
-				line = "TwinkleSpeed";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleSpeed[i]);
-				line = "TwinkleRandomEnable";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleRandomEnable[i]);
-				line = "TwinkleColourEnable1";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable1[i]);
-				line = "TwinkleColourEnable2";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable2[i]);
-				line = "TwinkleColourEnable3";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable3[i]);
-				line = "TwinkleColourEnable4";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable4[i]);
-				line = "TwinkleColourEnable5";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable5[i]);
-				line = "TwinkleColourEnable6";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable6[i]);
-				line = "TwinkleColour1";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour1[i]);
-				line = "TwinkleColour2";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour2[i]);
-				line = "TwinkleColour3";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour3[i]);
-				line = "TwinkleColour4";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour4[i]);
-				line = "TwinkleColour5";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour5[i]);
-				line = "TwinkleColour6";
-				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour6[i]);
+				GlobalVar.TwinkleNumber = GlobalVar.TwinkleLights.Count();
+				profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, "TwinkleNumber", GlobalVar.TwinkleNumber.ToString());
+				i = 0;
 				line = "TwinkleName";
-				i++;
-			} while (i < GlobalVar.TwinkleLights.Count());
+				do
+				{
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, Convert.ToString(comboBoxTwinkleName.Items[i]));
+					line = "TwinkleLights";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleLights[i]);
+					line = "TwinkleSteps";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleSteps[i]);
+					line = "TwinkleSpeed";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleSpeed[i]);
+					line = "TwinkleRandomEnable";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleRandomEnable[i]);
+					line = "TwinkleColourEnable1";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable1[i]);
+					line = "TwinkleColourEnable2";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable2[i]);
+					line = "TwinkleColourEnable3";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable3[i]);
+					line = "TwinkleColourEnable4";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable4[i]);
+					line = "TwinkleColourEnable5";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable5[i]);
+					line = "TwinkleColourEnable6";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColourEnable6[i]);
+					line = "TwinkleColour1";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour1[i]);
+					line = "TwinkleColour2";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour2[i]);
+					line = "TwinkleColour3";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour3[i]);
+					line = "TwinkleColour4";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour4[i]);
+					line = "TwinkleColour5";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour5[i]);
+					line = "TwinkleColour6";
+					profile.PutSetting(XmlProfileSettings.SettingType.Twinkle, line + i, GlobalVar.TwinkleColour6[i]);
+					line = "TwinkleName";
+					i++;
+				} while (i < GlobalVar.TwinkleLights.Count());
+			}
+
+			#endregion
+
+			#region Fire Settings
+
+			if (comboBoxFireName.Items.Count > 0)
+			{
+				GlobalVar.FireNumber = GlobalVar.FireHeight.Count();
+				profile.PutSetting(XmlProfileSettings.SettingType.Fire, "FireNumber", GlobalVar.FireNumber.ToString());
+				i = 0;
+				line = "FireName";
+				do
+				{
+					profile.PutSetting(XmlProfileSettings.SettingType.Fire, line + i, Convert.ToString(comboBoxFireName.Items[i]));
+					line = "FireHeight";
+					profile.PutSetting(XmlProfileSettings.SettingType.Fire, line + i, GlobalVar.FireHeight[i]);
+					line = "FireRandomEnable";
+					profile.PutSetting(XmlProfileSettings.SettingType.Fire, line + i, GlobalVar.FireRandomEnable[i]);
+					line = "FireName";
+					i++;
+				} while (i < GlobalVar.FireHeight.Count());
+			}
+
 			#endregion
 		}
 #endregion
@@ -4553,28 +4738,33 @@ namespace Vixen_Messaging
 			var addCustomMsg = "Meteor - " + Interaction.InputBox("Enter a Name for your Custom Meteor", "Custom Meteor");
 			if (addCustomMsg != "")
 			{
-				GlobalVar.MeteorColourType.Add("Range");
-				GlobalVar.MeteorCount.Add(11);
-				GlobalVar.MeteorTrailLength.Add(12);
-				GlobalVar.MeteorSpeed.Add(5);
-				GlobalVar.MeteorRandomEnable.Add(true);
-				GlobalVar.MeteorColourEnable1.Add(true);
-				GlobalVar.MeteorColourEnable2.Add(false);
-				GlobalVar.MeteorColourEnable3.Add(false);
-				GlobalVar.MeteorColourEnable4.Add(false);
-				GlobalVar.MeteorColourEnable5.Add(false);
-				GlobalVar.MeteorColourEnable6.Add(false);
-				GlobalVar.MeteorColour1.Add(Convert.ToInt32(-16776961));
-				GlobalVar.MeteorColour2.Add(Convert.ToInt32(-65536));
-				GlobalVar.MeteorColour3.Add(Convert.ToInt32(-16711936));
-				GlobalVar.MeteorColour4.Add(Convert.ToInt32(-32640));
-				GlobalVar.MeteorColour5.Add(Convert.ToInt32(-16711936));
-				GlobalVar.MeteorColour6.Add(Convert.ToInt32(-32640));
-				comboBoxMeteorName.Items.Add(addCustomMsg);
-				comboBoxMeteorName.SelectedIndex = comboBoxMeteorName.Items.Count - 1;
-				customMessageSeqSel.Items.Add(addCustomMsg);
+				AddMeteor(addCustomMsg);
 			}
 		}
+
+	    private void AddMeteor (string addCustomMsg)
+	    {
+			GlobalVar.MeteorColourType.Add("Range");
+			GlobalVar.MeteorCount.Add(11);
+			GlobalVar.MeteorTrailLength.Add(12);
+			GlobalVar.MeteorSpeed.Add(5);
+			GlobalVar.MeteorRandomEnable.Add(true);
+			GlobalVar.MeteorColourEnable1.Add(true);
+			GlobalVar.MeteorColourEnable2.Add(false);
+			GlobalVar.MeteorColourEnable3.Add(false);
+			GlobalVar.MeteorColourEnable4.Add(false);
+			GlobalVar.MeteorColourEnable5.Add(false);
+			GlobalVar.MeteorColourEnable6.Add(false);
+			GlobalVar.MeteorColour1.Add(Convert.ToInt32(-16776961));
+			GlobalVar.MeteorColour2.Add(Convert.ToInt32(-65536));
+			GlobalVar.MeteorColour3.Add(Convert.ToInt32(-16711936));
+			GlobalVar.MeteorColour4.Add(Convert.ToInt32(-32640));
+			GlobalVar.MeteorColour5.Add(Convert.ToInt32(-16711936));
+			GlobalVar.MeteorColour6.Add(Convert.ToInt32(-32640));
+			comboBoxMeteorName.Items.Add(addCustomMsg);
+			comboBoxMeteorName.SelectedIndex = comboBoxMeteorName.Items.Count - 1;
+			customMessageSeqSel.Items.Add(addCustomMsg);
+	    }
 
 		private void buttonRemoveMeteor_Click(object sender, EventArgs e)
 		{
@@ -4694,12 +4884,13 @@ namespace Vixen_Messaging
 			CustomMeteorUpdate();
 		}
 
-		private void MeteorCount_MouseDown(object sender, MouseEventArgs e)
+
+		private void MeteorTrailLength_Leave(object sender, EventArgs e)
 		{
 			CustomMeteorUpdate();
 		}
 
-		private void MeteorCount_MouseClick(object sender, MouseEventArgs e)
+		private void MeteorCount_Leave(object sender, EventArgs e)
 		{
 			CustomMeteorUpdate();
 		}
@@ -4746,16 +4937,23 @@ namespace Vixen_Messaging
 
 		private void buttonPlayMeteor_Click(object sender, EventArgs e)
 		{
-			StopSequence();
-			if (!GlobalVar.PlayCustomMessage)
+			if (textBoxNodeId.Text != "")
 			{
-				Stop_Vixen();
-				PlayCustomSeq();
-				Start_Vixen();
+				StopSequence();
+				if (!GlobalVar.PlayCustomMessage)
+				{
+					Stop_Vixen();
+					PlayCustomSeq();
+					Start_Vixen();
+				}
+				else
+				{
+					PlayCustomSeq();
+				}
 			}
 			else
 			{
-				PlayCustomSeq();
+				MessageBox.Show(@"Vixen Messaging is unable to play the effect as there are no Group Node ID's. Add a node ID on the Messaging Settings page.");
 			}
 		}
 
@@ -4793,27 +4991,32 @@ namespace Vixen_Messaging
 			var addCustomMsg = "SnowFlake - " + Interaction.InputBox("Enter a Name for your Custom SnowFlakes", "Custom SnowFlake");
 			if (addCustomMsg != "")
 			{
-				GlobalVar.SnowFlakeEffectType.Add(2);
-				GlobalVar.SnowFlakeMax.Add(3);
-				GlobalVar.SnowFlakeSpeed.Add(5);
-				GlobalVar.SnowFlakeRandomEnable.Add(true);
-				GlobalVar.SnowFlakeColourEnable1.Add(true);
-				GlobalVar.SnowFlakeColourEnable2.Add(false);
-				GlobalVar.SnowFlakeColourEnable3.Add(false);
-				GlobalVar.SnowFlakeColourEnable4.Add(false);
-				GlobalVar.SnowFlakeColourEnable5.Add(false);
-				GlobalVar.SnowFlakeColourEnable6.Add(false);
-				GlobalVar.SnowFlakeColour1.Add(Convert.ToInt32(-16776961));
-				GlobalVar.SnowFlakeColour2.Add(Convert.ToInt32(-65536));
-				GlobalVar.SnowFlakeColour3.Add(Convert.ToInt32(-16711936));
-				GlobalVar.SnowFlakeColour4.Add(Convert.ToInt32(-32640));
-				GlobalVar.SnowFlakeColour5.Add(Convert.ToInt32(-16711936));
-				GlobalVar.SnowFlakeColour6.Add(Convert.ToInt32(-32640));
-				comboBoxSnowFlakeName.Items.Add(addCustomMsg);
-				comboBoxSnowFlakeName.SelectedIndex = comboBoxSnowFlakeName.Items.Count - 1;
-				customMessageSeqSel.Items.Add(addCustomMsg);
+				AddSnowFlake(addCustomMsg);
 			}
 		}
+
+	    private void AddSnowFlake(string addCustomMsg)
+	    {
+			GlobalVar.SnowFlakeEffectType.Add(2);
+			GlobalVar.SnowFlakeMax.Add(3);
+			GlobalVar.SnowFlakeSpeed.Add(5);
+			GlobalVar.SnowFlakeRandomEnable.Add(true);
+			GlobalVar.SnowFlakeColourEnable1.Add(true);
+			GlobalVar.SnowFlakeColourEnable2.Add(false);
+			GlobalVar.SnowFlakeColourEnable3.Add(false);
+			GlobalVar.SnowFlakeColourEnable4.Add(false);
+			GlobalVar.SnowFlakeColourEnable5.Add(false);
+			GlobalVar.SnowFlakeColourEnable6.Add(false);
+			GlobalVar.SnowFlakeColour1.Add(Convert.ToInt32(-16776961));
+			GlobalVar.SnowFlakeColour2.Add(Convert.ToInt32(-65536));
+			GlobalVar.SnowFlakeColour3.Add(Convert.ToInt32(-16711936));
+			GlobalVar.SnowFlakeColour4.Add(Convert.ToInt32(-32640));
+			GlobalVar.SnowFlakeColour5.Add(Convert.ToInt32(-16711936));
+			GlobalVar.SnowFlakeColour6.Add(Convert.ToInt32(-32640));
+			comboBoxSnowFlakeName.Items.Add(addCustomMsg);
+			comboBoxSnowFlakeName.SelectedIndex = comboBoxSnowFlakeName.Items.Count - 1;
+			customMessageSeqSel.Items.Add(addCustomMsg);
+	    }
 
 		private void buttonRemoveSnowFlake_Click(object sender, EventArgs e)
 		{
@@ -4901,11 +5104,6 @@ namespace Vixen_Messaging
 			}
 		}
 
-		private void EffectType_MouseDown(object sender, MouseEventArgs e)
-		{
-			CustomSnowFlakeUpdate();
-		}
-
 		private void CustomSnowFlakeUpdate()
 		{
 			if (comboBoxSnowFlakeName.Items.Count != 0)
@@ -4928,18 +5126,12 @@ namespace Vixen_Messaging
 				GlobalVar.SnowFlakeColour6[comboBoxSnowFlakeName.SelectedIndex] = SnowFlakeColour6.BackColor.ToArgb();
 			}
 		}
-
-		private void EffectType_MouseClick(object sender, MouseEventArgs e)
+		private void EffectType_Leave(object sender, EventArgs e)
 		{
 			CustomSnowFlakeUpdate();
 		}
 
-		private void MaxSnowFlake_MouseDown(object sender, MouseEventArgs e)
-		{
-			CustomSnowFlakeUpdate();
-		}
-
-		private void MaxSnowFlake_MouseClick(object sender, MouseEventArgs e)
+		private void MaxSnowFlake_Leave(object sender, EventArgs e)
 		{
 			CustomSnowFlakeUpdate();
 		}
@@ -4985,16 +5177,23 @@ namespace Vixen_Messaging
 		}
 		private void buttonPlaySnowFlake_Click(object sender, EventArgs e)
 		{
-			StopSequence();
-			if (!GlobalVar.PlayCustomMessage)
+			if (textBoxNodeId.Text != "")
 			{
-				Stop_Vixen();
-				PlayCustomSeq();
-				Start_Vixen();
+				StopSequence();
+				if (!GlobalVar.PlayCustomMessage)
+				{
+					Stop_Vixen();
+					PlayCustomSeq();
+					Start_Vixen();
+				}
+				else
+				{
+					PlayCustomSeq();
+				}
 			}
 			else
 			{
-				PlayCustomSeq();
+				MessageBox.Show(@"Vixen Messaging is unable to play the effect as there are no Group Node ID's. Add a node ID on the Messaging Settings page.");
 			}
 		}
 
@@ -5032,27 +5231,32 @@ namespace Vixen_Messaging
 			var addCustomMsg = "Twinkle - " + Interaction.InputBox("Enter a Name for your Custom Twinkle", "Custom Twinkle");
 			if (addCustomMsg != "")
 			{
-				GlobalVar.TwinkleLights.Add(25);
-				GlobalVar.TwinkleSteps.Add(20);
-				GlobalVar.TwinkleSpeed.Add(1);
-				GlobalVar.TwinkleRandomEnable.Add(true);
-				GlobalVar.TwinkleColourEnable1.Add(true);
-				GlobalVar.TwinkleColourEnable2.Add(false);
-				GlobalVar.TwinkleColourEnable3.Add(false);
-				GlobalVar.TwinkleColourEnable4.Add(false);
-				GlobalVar.TwinkleColourEnable5.Add(false);
-				GlobalVar.TwinkleColourEnable6.Add(false);
-				GlobalVar.TwinkleColour1.Add(Convert.ToInt32(-16776961));
-				GlobalVar.TwinkleColour2.Add(Convert.ToInt32(-65536));
-				GlobalVar.TwinkleColour3.Add(Convert.ToInt32(-16711936));
-				GlobalVar.TwinkleColour4.Add(Convert.ToInt32(-32640));
-				GlobalVar.TwinkleColour5.Add(Convert.ToInt32(-16711936));
-				GlobalVar.TwinkleColour6.Add(Convert.ToInt32(-32640));
-				comboBoxTwinkleName.Items.Add(addCustomMsg);
-				comboBoxTwinkleName.SelectedIndex = comboBoxTwinkleName.Items.Count - 1;
-				customMessageSeqSel.Items.Add(addCustomMsg);
+				AddTwinkle(addCustomMsg);
 			}
 		}
+
+	    private void AddTwinkle(string addCustomMsg)
+	    {
+			GlobalVar.TwinkleLights.Add(25);
+			GlobalVar.TwinkleSteps.Add(20);
+			GlobalVar.TwinkleSpeed.Add(1);
+			GlobalVar.TwinkleRandomEnable.Add(true);
+			GlobalVar.TwinkleColourEnable1.Add(true);
+			GlobalVar.TwinkleColourEnable2.Add(false);
+			GlobalVar.TwinkleColourEnable3.Add(false);
+			GlobalVar.TwinkleColourEnable4.Add(false);
+			GlobalVar.TwinkleColourEnable5.Add(false);
+			GlobalVar.TwinkleColourEnable6.Add(false);
+			GlobalVar.TwinkleColour1.Add(Convert.ToInt32(-16776961));
+			GlobalVar.TwinkleColour2.Add(Convert.ToInt32(-65536));
+			GlobalVar.TwinkleColour3.Add(Convert.ToInt32(-16711936));
+			GlobalVar.TwinkleColour4.Add(Convert.ToInt32(-32640));
+			GlobalVar.TwinkleColour5.Add(Convert.ToInt32(-16711936));
+			GlobalVar.TwinkleColour6.Add(Convert.ToInt32(-32640));
+			comboBoxTwinkleName.Items.Add(addCustomMsg);
+			comboBoxTwinkleName.SelectedIndex = comboBoxTwinkleName.Items.Count - 1;
+			customMessageSeqSel.Items.Add(addCustomMsg);
+	    }
 
 		private void buttonRemoveTwinkle_Click(object sender, EventArgs e)
 		{
@@ -5080,7 +5284,7 @@ namespace Vixen_Messaging
 				if (comboBoxTwinkleName.Items.Count > 0)
 				{
 					comboBoxTwinkleName.SelectedIndex = 0;
-					trackBarTwinkleLights.Value = GlobalVar.SnowFlakeMax[0];
+					trackBarTwinkleLights.Value = GlobalVar.TwinkleLights[0];
 					trackBarTwinkleSteps.Value = GlobalVar.TwinkleSteps[0];
 					trackBarSpeedSnowFlakes.Value = GlobalVar.TwinkleSpeed[0];
 					checkBoxRandom4.Checked = GlobalVar.TwinkleRandomEnable[0];
@@ -5215,64 +5419,174 @@ namespace Vixen_Messaging
 
 		private void buttonPlayTwinkle_Click(object sender, EventArgs e)
 		{
-			StopSequence();
-			if (!GlobalVar.PlayCustomMessage)
+			if (textBoxNodeId.Text != "")
 			{
-				Stop_Vixen();
-				PlayCustomSeq();
-				Start_Vixen();
+				StopSequence();
+				if (!GlobalVar.PlayCustomMessage)
+				{
+					Stop_Vixen();
+					PlayCustomSeq();
+					Start_Vixen();
+				}
+				else
+				{
+					PlayCustomSeq();
+				}
 			}
 			else
 			{
-				PlayCustomSeq();
+				MessageBox.Show(
+					@"Vixen Messaging is unable to play the effect as there are no Group Node ID's. Add a node ID on the Messaging Settings page.");
+			}
+		}
+
+		#endregion
+
+#region Multiple Fires
+		private void comboBoxFireName_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			CustomFire();
+		}
+
+		private void CustomFire()
+		{
+			var selectedItem = comboBoxFireName.SelectedIndex;
+			FireHeight.Value = GlobalVar.FireHeight[selectedItem];
+			checkBoxRandom2.Checked = GlobalVar.FireRandomEnable[selectedItem];
+		}
+
+		private void buttonAddFire_Click(object sender, EventArgs e)
+		{
+			var addCustomMsg = "Fire - " + Interaction.InputBox("Enter a Name for your Custom Fire", "Custom Fire");
+			if (addCustomMsg != "")
+			{
+				AddFire(addCustomMsg);
+			}
+		}
+
+	    private void AddFire(string addCustomMsg)
+	    {
+			GlobalVar.FireHeight.Add(25);
+			GlobalVar.FireRandomEnable.Add(true);
+			comboBoxFireName.Items.Add(addCustomMsg);
+			comboBoxFireName.SelectedIndex = comboBoxFireName.Items.Count - 1;
+			customMessageSeqSel.Items.Add(addCustomMsg);
+	    }
+
+		private void buttonRemoveFire_Click(object sender, EventArgs e)
+		{
+			if (comboBoxFireName.Items.Count > 0)
+			{
+				customMessageSeqSel.Items.Remove(comboBoxFireName.SelectedItem);
+				GlobalVar.FireHeight.RemoveAt(comboBoxFireName.SelectedIndex);
+				GlobalVar.FireRandomEnable.RemoveAt(comboBoxFireName.SelectedIndex);
+				comboBoxFireName.Items.RemoveAt(comboBoxFireName.SelectedIndex);
+				customMessageSeqSel.SelectedIndex = 0;
+				if (comboBoxFireName.Items.Count > 0)
+				{
+					comboBoxFireName.SelectedIndex = 0;
+					FireHeight.Value = GlobalVar.FireHeight[0];
+					checkBoxRandom2.Checked = GlobalVar.FireRandomEnable[0];
+				}
+				else
+				{
+					comboBoxFireName.Items.Clear();
+					FireHeight.Value = 25;
+					checkBoxRandom2.Checked = true;
+				}
+			}
+			else
+			{
+				comboBoxFireName.Items.Clear();
+				FireHeight.Value = 25;
+				checkBoxRandom2.Checked = true;
+			}
+		}
+
+		private void CustomFireUpdate()
+		{
+			if (comboBoxFireName.Items.Count != 0)
+			{
+				GlobalVar.FireHeight[comboBoxFireName.SelectedIndex] = Convert.ToInt16(FireHeight.Value);
+				GlobalVar.FireRandomEnable[comboBoxFireName.SelectedIndex] = checkBoxRandom2.Checked;
+			}
+		}
+
+		private void FireHeight_Leave(object sender, EventArgs e)
+		{
+			CustomFireUpdate();
+		}
+
+		private void buttonPlayFire_Click(object sender, EventArgs e)
+		{
+			if (textBoxNodeId.Text != "")
+			{
+				StopSequence();
+				if (!GlobalVar.PlayCustomMessage)
+				{
+					Stop_Vixen();
+					PlayCustomSeq();
+					Start_Vixen();
+				}
+				else
+				{
+					PlayCustomSeq();
+				}
+			}
+			else
+			{
+				MessageBox.Show(
+					@"Vixen Messaging is unable to play the effect as there are no Group Node ID's. Add a node ID on the Messaging Settings page.");
 			}
 		}
 
 		#endregion
 
 #region Play Custom Sequence
-		private void buttonPlayFire_Click(object sender, EventArgs e)
-		{
-			StopSequence();
-			if (!GlobalVar.PlayCustomMessage)
-			{
-				Stop_Vixen();
-				PlayCustomSeq();
-				Start_Vixen();
-			}
-			else
-			{
-				PlayCustomSeq();
-			}
-		}
 
 		private void buttonPlayMovie_Click(object sender, EventArgs e)
 		{
-			StopSequence();
-			if (!GlobalVar.PlayCustomMessage)
+			if (textBoxNodeId.Text != "")
 			{
-				Stop_Vixen();
-				PlayCustomSeq();
-				Start_Vixen();
+				StopSequence();
+				if (!GlobalVar.PlayCustomMessage)
+				{
+					Stop_Vixen();
+					PlayCustomSeq();
+					Start_Vixen();
+				}
+				else
+				{
+					PlayCustomSeq();
+				}
 			}
 			else
 			{
-				PlayCustomSeq();
+				MessageBox.Show(
+					@"Vixen Messaging is unable to play the effect as there are no Group Node ID's. Add a node ID on the Messaging Settings page.");
 			}
 		}
 
 		private void buttonPlayGled_Click(object sender, EventArgs e)
 		{
-			StopSequence();
-			if (!GlobalVar.PlayCustomMessage)
+			if (textBoxNodeId.Text != "")
 			{
-				Stop_Vixen();
-				PlayCustomSeq();
-				Start_Vixen();
+				StopSequence();
+				if (!GlobalVar.PlayCustomMessage)
+				{
+					Stop_Vixen();
+					PlayCustomSeq();
+					Start_Vixen();
+				}
+				else
+				{
+					PlayCustomSeq();
+				}
 			}
 			else
 			{
-				PlayCustomSeq();
+				MessageBox.Show(
+					@"Vixen Messaging is unable to play the effect as there are no Group Node ID's. Add a node ID on the Messaging Settings page.");
 			}
 		}
 

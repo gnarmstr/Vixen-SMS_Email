@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 

@@ -126,7 +126,8 @@ namespace Vixen_Messaging
 			Message,
 			SnowFlakes,
 			Meteor,
-			Twinkle
+			Twinkle,
+			Fire
         };
 
     }

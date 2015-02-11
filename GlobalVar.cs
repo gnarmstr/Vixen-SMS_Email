@@ -189,6 +189,16 @@ namespace Vixen_Messaging
 
 			#endregion
 
+			#region Custom Fire
+
+			public static List<int> FireHeight = new List<int>();
+
+			public static List<bool> FireRandomEnable = new List<bool>();
+
+			public static int FireNumber { get; set; }
+
+			#endregion
+
 			/// <summary>
             /// Static value protected by access routine.
             /// </summary>
