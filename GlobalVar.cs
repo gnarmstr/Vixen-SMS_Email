@@ -7,7 +7,9 @@ namespace Vixen_Messaging
             /// <summary>
             /// Global variable that is constant.
             /// </summary>
-            public static string LogMsg { get; set; }
+
+			#region General Global Variables
+			public static string LogMsg { get; set; }
 
             public static string Blacklistlocation { get; set; }
 
@@ -27,7 +29,23 @@ namespace Vixen_Messaging
 
             public static decimal SeqIntervalTime { get; set; }
 
-            public static List<string> ListLine1 = new List<string>();
+			public static int Msgindex;
+
+			public static bool PlayMessage;
+
+			public static bool PlayCustomMessage;
+
+			public static bool NoNodeID;
+
+			public static int GroupIDNumber;
+
+			public static int Sequential { get; set; }
+
+			#endregion
+
+			#region Custom Messages
+
+			public static List<string> ListLine1 = new List<string>();
 
             public static List<string> ListLine2 = new List<string>();
 
@@ -72,6 +90,8 @@ namespace Vixen_Messaging
             public static List<string> CustomFont = new List<string>();
 
             public static List<int> TrackBarCustomSpeed = new List<int>();
+
+			#endregion
 
 			#region Custom SnowFlakes
 
@@ -198,21 +218,5 @@ namespace Vixen_Messaging
 			public static int FireNumber { get; set; }
 
 			#endregion
-
-			/// <summary>
-            /// Static value protected by access routine.
-            /// </summary>
-            public static int Msgindex;
-
-            public static bool PlayMessage;
-
-            public static bool PlayCustomMessage;
-
-			public static bool NoNodeID;
-
-			public static int GroupIDNumber;
-
-			public static int Sequential { get; set; }
-
     }
 }

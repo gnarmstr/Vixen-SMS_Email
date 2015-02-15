@@ -39,6 +39,7 @@
 			this.label3 = new System.Windows.Forms.Label();
 			this.buttonLauncher = new System.Windows.Forms.Button();
 			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+			this.button1 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// buttonDemo
@@ -55,7 +56,7 @@
 			// buttonInstallation
 			// 
 			this.buttonInstallation.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonInstallation.Location = new System.Drawing.Point(50, 893);
+			this.buttonInstallation.Location = new System.Drawing.Point(50, 879);
 			this.buttonInstallation.Name = "buttonInstallation";
 			this.buttonInstallation.Size = new System.Drawing.Size(319, 33);
 			this.buttonInstallation.TabIndex = 4;
@@ -77,7 +78,7 @@
 			// buttonEmails
 			// 
 			this.buttonEmails.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonEmails.Location = new System.Drawing.Point(50, 943);
+			this.buttonEmails.Location = new System.Drawing.Point(50, 921);
 			this.buttonEmails.Name = "buttonEmails";
 			this.buttonEmails.Size = new System.Drawing.Size(319, 33);
 			this.buttonEmails.TabIndex = 6;
@@ -97,7 +98,7 @@
 			// buttonTwilio
 			// 
 			this.buttonTwilio.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonTwilio.Location = new System.Drawing.Point(423, 893);
+			this.buttonTwilio.Location = new System.Drawing.Point(423, 879);
 			this.buttonTwilio.Name = "buttonTwilio";
 			this.buttonTwilio.Size = new System.Drawing.Size(319, 33);
 			this.buttonTwilio.TabIndex = 8;
@@ -108,7 +109,7 @@
 			// buttonRemoteCommands
 			// 
 			this.buttonRemoteCommands.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonRemoteCommands.Location = new System.Drawing.Point(423, 943);
+			this.buttonRemoteCommands.Location = new System.Drawing.Point(423, 921);
 			this.buttonRemoteCommands.Name = "buttonRemoteCommands";
 			this.buttonRemoteCommands.Size = new System.Drawing.Size(319, 33);
 			this.buttonRemoteCommands.TabIndex = 9;
@@ -123,14 +124,14 @@
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(111, 20);
 			this.label3.TabIndex = 10;
-			this.label3.Text = "Version 3.1.17";
+			this.label3.Text = "Version 3.1.18";
 			// 
 			// buttonLauncher
 			// 
 			this.buttonLauncher.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonLauncher.Location = new System.Drawing.Point(220, 990);
+			this.buttonLauncher.Location = new System.Drawing.Point(50, 963);
 			this.buttonLauncher.Name = "buttonLauncher";
-			this.buttonLauncher.Size = new System.Drawing.Size(354, 42);
+			this.buttonLauncher.Size = new System.Drawing.Size(319, 53);
 			this.buttonLauncher.TabIndex = 11;
 			this.buttonLauncher.Text = "Using the Vixen 3 Launcher with Messaging";
 			this.buttonLauncher.UseVisualStyleBackColor = false;
@@ -147,7 +148,17 @@
 			this.richTextBox1.Size = new System.Drawing.Size(756, 738);
 			this.richTextBox1.TabIndex = 12;
 			this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
-			this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+			// 
+			// button1
+			// 
+			this.button1.BackColor = System.Drawing.Color.Honeydew;
+			this.button1.Location = new System.Drawing.Point(423, 963);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(319, 53);
+			this.button1.TabIndex = 13;
+			this.button1.Text = "Adding Custom Messages and Multi Effects";
+			this.button1.UseVisualStyleBackColor = false;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// HelpForm
 			// 
@@ -156,6 +167,7 @@
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.Azure;
 			this.ClientSize = new System.Drawing.Size(784, 1035);
+			this.Controls.Add(this.button1);
 			this.Controls.Add(this.richTextBox1);
 			this.Controls.Add(this.buttonLauncher);
 			this.Controls.Add(this.label3);
@@ -191,5 +203,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonLauncher;
         private System.Windows.Forms.RichTextBox richTextBox1;
+		private System.Windows.Forms.Button button1;
     }
 }

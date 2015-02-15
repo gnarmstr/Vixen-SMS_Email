@@ -96,6 +96,10 @@ namespace Vixen_Messaging
 			this.MaxSnowFlake = new System.Windows.Forms.NumericUpDown();
 			this.label30 = new System.Windows.Forms.Label();
 			this.tabPageFire = new System.Windows.Forms.TabPage();
+			this.label104 = new System.Windows.Forms.Label();
+			this.comboBoxFireName = new System.Windows.Forms.ComboBox();
+			this.buttonRemoveFire = new System.Windows.Forms.Button();
+			this.buttonAddFire = new System.Windows.Forms.Button();
 			this.buttonPlayFire = new System.Windows.Forms.Button();
 			this.checkBoxRandom2 = new System.Windows.Forms.CheckBox();
 			this.FireHeight = new System.Windows.Forms.NumericUpDown();
@@ -399,10 +403,6 @@ namespace Vixen_Messaging
 			this.fileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.timerCheckVixenEnabled = new System.Windows.Forms.Timer(this.components);
 			this.fontDialog1 = new System.Windows.Forms.FontDialog();
-			this.label104 = new System.Windows.Forms.Label();
-			this.comboBoxFireName = new System.Windows.Forms.ComboBox();
-			this.buttonRemoveFire = new System.Windows.Forms.Button();
-			this.buttonAddFire = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBoxEffects.SuspendLayout();
@@ -1208,6 +1208,60 @@ namespace Vixen_Messaging
 			this.tabPageFire.Size = new System.Drawing.Size(858, 225);
 			this.tabPageFire.TabIndex = 1;
 			this.tabPageFire.Text = "Fire";
+			// 
+			// label104
+			// 
+			this.label104.AutoSize = true;
+			this.label104.Location = new System.Drawing.Point(10, 10);
+			this.label104.Name = "label104";
+			this.label104.Size = new System.Drawing.Size(86, 20);
+			this.label104.TabIndex = 93;
+			this.label104.Text = "Fire Name:";
+			// 
+			// comboBoxFireName
+			// 
+			this.comboBoxFireName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxFireName.FormattingEnabled = true;
+			this.comboBoxFireName.Location = new System.Drawing.Point(14, 40);
+			this.comboBoxFireName.Name = "comboBoxFireName";
+			this.comboBoxFireName.Size = new System.Drawing.Size(285, 28);
+			this.comboBoxFireName.TabIndex = 90;
+			this.toolTip1.SetToolTip(this.comboBoxFireName, "List of all Fire effects that have been created.");
+			this.comboBoxFireName.SelectedIndexChanged += new System.EventHandler(this.comboBoxFireName_SelectedIndexChanged);
+			// 
+			// buttonRemoveFire
+			// 
+			this.buttonRemoveFire.BackColor = System.Drawing.Color.Azure;
+			this.buttonRemoveFire.FlatAppearance.BorderSize = 0;
+			this.buttonRemoveFire.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonRemoveFire.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonRemoveFire.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonRemoveFire.Location = new System.Drawing.Point(364, 34);
+			this.buttonRemoveFire.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonRemoveFire.Name = "buttonRemoveFire";
+			this.buttonRemoveFire.Size = new System.Drawing.Size(38, 38);
+			this.buttonRemoveFire.TabIndex = 92;
+			this.buttonRemoveFire.Text = "-";
+			this.toolTip1.SetToolTip(this.buttonRemoveFire, "Delete selected effect.");
+			this.buttonRemoveFire.UseVisualStyleBackColor = false;
+			this.buttonRemoveFire.Click += new System.EventHandler(this.buttonRemoveFire_Click);
+			// 
+			// buttonAddFire
+			// 
+			this.buttonAddFire.BackColor = System.Drawing.Color.Azure;
+			this.buttonAddFire.FlatAppearance.BorderSize = 0;
+			this.buttonAddFire.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+			this.buttonAddFire.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+			this.buttonAddFire.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.buttonAddFire.Location = new System.Drawing.Point(313, 34);
+			this.buttonAddFire.Margin = new System.Windows.Forms.Padding(0);
+			this.buttonAddFire.Name = "buttonAddFire";
+			this.buttonAddFire.Size = new System.Drawing.Size(38, 38);
+			this.buttonAddFire.TabIndex = 91;
+			this.buttonAddFire.Text = "+";
+			this.toolTip1.SetToolTip(this.buttonAddFire, "Create new Fire effect.");
+			this.buttonAddFire.UseVisualStyleBackColor = false;
+			this.buttonAddFire.Click += new System.EventHandler(this.buttonAddFire_Click);
 			// 
 			// buttonPlayFire
 			// 
@@ -4858,60 +4912,6 @@ namespace Vixen_Messaging
 			// 
 			this.fontDialog1.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			// 
-			// label104
-			// 
-			this.label104.AutoSize = true;
-			this.label104.Location = new System.Drawing.Point(10, 10);
-			this.label104.Name = "label104";
-			this.label104.Size = new System.Drawing.Size(86, 20);
-			this.label104.TabIndex = 93;
-			this.label104.Text = "Fire Name:";
-			// 
-			// comboBoxFireName
-			// 
-			this.comboBoxFireName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBoxFireName.FormattingEnabled = true;
-			this.comboBoxFireName.Location = new System.Drawing.Point(14, 40);
-			this.comboBoxFireName.Name = "comboBoxFireName";
-			this.comboBoxFireName.Size = new System.Drawing.Size(285, 28);
-			this.comboBoxFireName.TabIndex = 90;
-			this.toolTip1.SetToolTip(this.comboBoxFireName, "List of all Fire effects that have been created.");
-			this.comboBoxFireName.SelectedIndexChanged += new System.EventHandler(this.comboBoxFireName_SelectedIndexChanged);
-			// 
-			// buttonRemoveFire
-			// 
-			this.buttonRemoveFire.BackColor = System.Drawing.Color.Azure;
-			this.buttonRemoveFire.FlatAppearance.BorderSize = 0;
-			this.buttonRemoveFire.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-			this.buttonRemoveFire.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-			this.buttonRemoveFire.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonRemoveFire.Location = new System.Drawing.Point(364, 34);
-			this.buttonRemoveFire.Margin = new System.Windows.Forms.Padding(0);
-			this.buttonRemoveFire.Name = "buttonRemoveFire";
-			this.buttonRemoveFire.Size = new System.Drawing.Size(38, 38);
-			this.buttonRemoveFire.TabIndex = 92;
-			this.buttonRemoveFire.Text = "-";
-			this.toolTip1.SetToolTip(this.buttonRemoveFire, "Delete selected effect.");
-			this.buttonRemoveFire.UseVisualStyleBackColor = false;
-			this.buttonRemoveFire.Click += new System.EventHandler(this.buttonRemoveFire_Click);
-			// 
-			// buttonAddFire
-			// 
-			this.buttonAddFire.BackColor = System.Drawing.Color.Azure;
-			this.buttonAddFire.FlatAppearance.BorderSize = 0;
-			this.buttonAddFire.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-			this.buttonAddFire.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-			this.buttonAddFire.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.buttonAddFire.Location = new System.Drawing.Point(313, 34);
-			this.buttonAddFire.Margin = new System.Windows.Forms.Padding(0);
-			this.buttonAddFire.Name = "buttonAddFire";
-			this.buttonAddFire.Size = new System.Drawing.Size(38, 38);
-			this.buttonAddFire.TabIndex = 91;
-			this.buttonAddFire.Text = "+";
-			this.toolTip1.SetToolTip(this.buttonAddFire, "Create new Fire effect.");
-			this.buttonAddFire.UseVisualStyleBackColor = false;
-			this.buttonAddFire.Click += new System.EventHandler(this.buttonAddFire_Click);
-			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -4936,7 +4936,7 @@ namespace Vixen_Messaging
 			this.Name = "FormMain";
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-			this.Text = "Vixen Messaging - v3.1.17";
+			this.Text = "Vixen Messaging - v3.1.18";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
 			this.Load += new System.EventHandler(this.FormMain_Load);
 			this.groupBox1.ResumeLayout(false);
