@@ -1,4 +1,6 @@
-﻿#region System modules
+﻿using CodeProject;
+
+#region System modules
 
 using System;
 using System.Collections.Generic;
@@ -25,10 +27,10 @@ using Microsoft.VisualBasic;
 
 namespace Vixen_Messaging
 {
-	
+
 	public partial class FormMain : Form
 	{
-		readonly Pop3Client _pop = new Pop3Client();
+		private readonly Pop3Client _pop = new Pop3Client();
 
 		public FormMain()
 		{
@@ -36,8 +38,8 @@ namespace Vixen_Messaging
 			ClientSize = new Size(784, 1091);
 		}
 
-		void StartChecking()
-		{ 
+		private void StartChecking()
+		{
 			buttonStart.Enabled = false;
 			buttonStop.Enabled = true;
 			timerCheckMail.Interval = 200;
@@ -67,13 +69,16 @@ namespace Vixen_Messaging
 				return false;
 			}
 		}
-#endregion
+
+		#endregion
 
 #region Load Form
+
 		private void FormMain_Load(object sender, EventArgs e)
 		{
-			GlobalVar.Sequential = 1; 
-			GlobalVar.SettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Vixen Messaging");
+			GlobalVar.Sequential = 1;
+			GlobalVar.SettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+				"Vixen Messaging");
 			LoadData();
 			EmailSettings();
 
@@ -95,7 +100,8 @@ namespace Vixen_Messaging
 				File.WriteAllText(GlobalVar.LocalMessages, copyfile);
 			}
 
-			var vixenMovieFolder = textBoxVixenFolder.Text + "\\Module Data Files\\Nutcracker\\EEEEEEEE-EEEE-EEEE-EEEE-EEEEEEEEEEEE";
+			var vixenMovieFolder = textBoxVixenFolder.Text +
+			                       "\\Module Data Files\\Nutcracker\\EEEEEEEE-EEEE-EEEE-EEEE-EEEEEEEEEEEE";
 			if (!Directory.Exists(vixenMovieFolder))
 			{
 				Directory.CreateDirectory(vixenMovieFolder);
@@ -130,6 +136,7 @@ namespace Vixen_Messaging
 			GlobalVar.PlayMessage = false;
 
 			#region Initial Groups, Tab and Checkboxs are Visable/Enabled/Setup
+
 			//Ensures correct groups are enabled or visable on first load.
 			buttonStop.Enabled = false;
 			if (checkBoxEnableSqnctrl.Checked)
@@ -169,9 +176,11 @@ namespace Vixen_Messaging
 			groupBoxLog.Size = new Size(585, 290);
 			richTextBoxLog2.Location = new Point(6, 20);
 			richTextBoxLog2.Size = new Size(575, 265);
+
 			#endregion
 
 			#region Setup Button images and Icons
+
 			//Setup Button images
 			buttonRemoveSeq1.Image = Tools.GetIcon(Resources.delete, 16);
 			buttonRemoveSeq1.Text = "";
@@ -232,9 +241,11 @@ namespace Vixen_Messaging
 			buttonRemoveFire.Text = "";
 			buttonPlayGled.Image = Tools.GetIcon(Resources.Play, 16);
 			buttonPlayGled.Text = "";
+
 			#endregion
 
 			#region Check Vixen Port settings on startup
+
 			try
 			{
 				//checks Vixen for port setting and compare to Vixen messaging
@@ -262,8 +273,10 @@ namespace Vixen_Messaging
 			}
 			catch
 			{
-				MessageBox.Show(@"Vixen 3 User files do not appear to be in the default Documents folder or Vixen 3 is not Installed, Ensure you add the correct folder first or Install Vixen 3.");
+				MessageBox.Show(
+					@"Vixen 3 User files do not appear to be in the default Documents folder or Vixen 3 is not Installed, Ensure you add the correct folder first or Install Vixen 3.");
 			}
+
 			#endregion
 
 			StartChecking();
@@ -276,40 +289,55 @@ namespace Vixen_Messaging
 			string checkfirstload = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "True");
 			if (checkfirstload == "True")
 			{
-				MessageBox.Show(@"Welcome to Vixen Messaging, as this is the first time you have run Vixen Messaging you are required to enter in some information on the following Data form. Also it is recommended that you create a new Email account for use with Vixen Messaging as it will process every incoming email.");
+				MessageBox.Show(
+					@"Welcome to Vixen Messaging, as this is the first time you have run Vixen Messaging you are required to enter in some information on the following Data form. Also it is recommended that you create a new Email account for use with Vixen Messaging as it will process every incoming email.");
 				Stop_Vixen();
 				GetVixenSettings();
 			}
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "False");
 		}
-#endregion
-	
+
+		#endregion
+
 #region Load Data
 
 		#region General Settings
+
 		private void LoadData()
 		{
 			var profile = new XmlProfileSettings();
 			textBoxServer.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "POP3Server", "pop.gmail.com");
 			textBoxUID.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "UID", "");
 			textBoxPWD.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "Password", "");
-			textBoxAccessPWD.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxAccessPWD", "Your Keyword");
-			textBoxVixenFolder.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxVixenFolder", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3"));
-			textBoxVixenServer.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "VixenServer", "http://localhost:8888/api/play/playSequence");
+			textBoxAccessPWD.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxAccessPWD",
+				"Your Keyword");
+			textBoxVixenFolder.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxVixenFolder",
+				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3"));
+			textBoxVixenServer.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "VixenServer",
+				"http://localhost:8888/api/play/playSequence");
 			GlobalVar.Blacklistlocation = Path.Combine(GlobalVar.SettingsPath + "\\Blacklist.txt");
 			GlobalVar.Whitelistlocation = Path.Combine(GlobalVar.SettingsPath + "\\Whitelist.txt");
 			GlobalVar.LocalMessages = Path.Combine(GlobalVar.SettingsPath + "\\LocalMessages.txt");
-			textBoxSequenceTemplate.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SequenceTemplate", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3 Messaging"));
-			textBoxOutputSequence.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "OutputSequence", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Sequence\\VixenOut.tim"));
+			textBoxSequenceTemplate.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SequenceTemplate",
+				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3 Messaging"));
+			textBoxOutputSequence.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "OutputSequence",
+				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Sequence\\VixenOut.tim"));
 			comboBoxString.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "StringOrienation", "Horizontal");
-			textBoxLogFileName.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "LogMessageFile", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3 Messaging\\Logs\\Message.log"));
-			textBoxBlacklistEmailLog.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "LogBlacklistFile", Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3 Messaging\\Logs\\Blacklist.log"));
-			textBoxSubjectHeader.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SMSSubjectHeader", "SMS from");
-			checkBoxEnableSqnctrl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxSqnEnable", false);
+			textBoxLogFileName.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "LogMessageFile",
+				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
+					"Documents\\Vixen 3 Messaging\\Logs\\Message.log"));
+			textBoxBlacklistEmailLog.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "LogBlacklistFile",
+				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
+					"Documents\\Vixen 3 Messaging\\Logs\\Blacklist.log"));
+			textBoxSubjectHeader.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SMSSubjectHeader",
+				"SMS from");
+			checkBoxEnableSqnctrl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxSqnEnable",
+				false);
 			checkBoxAutoStart.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", false);
 			checkBoxBlacklist.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxBlack_list", true);
 			checkBoxDisableSeq.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxDisableSeq", false);
-			incomingMessageColourOption.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "incomingMessageColourOption", "Random");
+			incomingMessageColourOption.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
+				"incomingMessageColourOption", "Random");
 			EffectType.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "EffectType", 2);
 			MaxSnowFlake.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MaxSnowFlake", 5);
 			EffectTime.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "EffectTime", 15);
@@ -323,91 +351,166 @@ namespace Vixen_Messaging
 			textBoxVixenSeq4.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxVixenSeq4", "");
 			textBoxVixenSeq5.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxVixenSeq5", "");
 			textBoxVixenSeq6.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxVixenSeq6", "");
-			checkBoxRandomSeqSelection.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandomSeqSelection", true);
-			TextColor1.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor1", -16776961)));
-			TextColor2.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor2", -65536)));
-			TextColor3.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor3", -16711936)));
-			TextColor4.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor4", -16776961)));
-			TextColor5.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor5", -32640)));
-			TextColor6.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor6", -32513)));
-			TextColor7.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor7", -16711681)));
-			TextColor8.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor8", -8372160)));
-			TextColor9.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor9", -65536)));
-			TextColor10.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor10", -8388353)));
-			SnowFlakeColour1.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour1", -16776961)));
-			SnowFlakeColour2.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour2", -65536)));
-			SnowFlakeColour3.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour3", -16711936)));
-			SnowFlakeColour4.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour4", -32640)));
-			SnowFlakeColour5.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour5", -32513)));
-			SnowFlakeColour6.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour6", -16711681)));
-			checkBoxSnowFlakeColour1.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxSnowFlakeColour1", true);
-			checkBoxSnowFlakeColour2.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxSnowFlakeColour2", false);
-			checkBoxSnowFlakeColour3.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxSnowFlakeColour3", false);
-			checkBoxSnowFlakeColour4.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxSnowFlakeColour4", false);
-			checkBoxSnowFlakeColour5.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxSnowFlakeColour5", false);
-			checkBoxSnowFlakeColour6.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxSnowFlakeColour6", false);
-			MeteorColour1.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MeteorColour1", -16776961)));
-			MeteorColour2.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MeteorColour2", -65536)));
-			MeteorColour3.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MeteorColour3", -16711936)));
-			MeteorColour4.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MeteorColour4", -32640)));
-			MeteorColour5.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MeteorColour5", -32513)));
-			MeteorColour6.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MeteorColour6", -16711681)));
-			checkBoxMeteorColour1.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMeteorColour1", true);
-			checkBoxMeteorColour2.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMeteorColour2", false);
-			checkBoxMeteorColour3.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMeteorColour3", false);
-			checkBoxMeteorColour4.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMeteorColour4", false);
-			checkBoxMeteorColour5.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMeteorColour5", false);
-			checkBoxMeteorColour6.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMeteorColour6", false);
-			TwinkleColour1.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwinkleColour1", -16776961)));
-			TwinkleColour2.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwinkleColour2", -65536)));
-			TwinkleColour3.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwinkleColour3", -16711936)));
-			TwinkleColour4.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwinkleColour4", -32640)));
-			TwinkleColour5.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwinkleColour5", -32513)));
-			TwinkleColour6.BackColor = Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwinkleColour6", -16711681)));
-			checkBoxTwinkleColour1.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour1", true);
-			checkBoxTwinkleColour2.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour2", false);
-			checkBoxTwinkleColour3.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour3", false);
-			checkBoxTwinkleColour4.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour4", false);
-			checkBoxTwinkleColour5.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour5", false);
-			checkBoxTwinkleColour6.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour6", false);
+			checkBoxRandomSeqSelection.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
+				"checkBoxRandomSeqSelection", true);
+			TextColor1.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor1", -16776961)));
+			TextColor2.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor2", -65536)));
+			TextColor3.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor3", -16711936)));
+			TextColor4.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor4", -16776961)));
+			TextColor5.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor5", -32640)));
+			TextColor6.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor6", -32513)));
+			TextColor7.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor7", -16711681)));
+			TextColor8.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor8", -8372160)));
+			TextColor9.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor9", -65536)));
+			TextColor10.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor10", -8388353)));
+			SnowFlakeColour1.BackColor =
+				Color.FromArgb(
+					Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour1", -16776961)));
+			SnowFlakeColour2.BackColor =
+				Color.FromArgb(
+					Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour2", -65536)));
+			SnowFlakeColour3.BackColor =
+				Color.FromArgb(
+					Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour3", -16711936)));
+			SnowFlakeColour4.BackColor =
+				Color.FromArgb(
+					Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour4", -32640)));
+			SnowFlakeColour5.BackColor =
+				Color.FromArgb(
+					Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour5", -32513)));
+			SnowFlakeColour6.BackColor =
+				Color.FromArgb(
+					Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SnowFlakeColour6", -16711681)));
+			checkBoxSnowFlakeColour1.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
+				"checkBoxSnowFlakeColour1", true);
+			checkBoxSnowFlakeColour2.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
+				"checkBoxSnowFlakeColour2", false);
+			checkBoxSnowFlakeColour3.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
+				"checkBoxSnowFlakeColour3", false);
+			checkBoxSnowFlakeColour4.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
+				"checkBoxSnowFlakeColour4", false);
+			checkBoxSnowFlakeColour5.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
+				"checkBoxSnowFlakeColour5", false);
+			checkBoxSnowFlakeColour6.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
+				"checkBoxSnowFlakeColour6", false);
+			MeteorColour1.BackColor =
+				Color.FromArgb(
+					Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MeteorColour1", -16776961)));
+			MeteorColour2.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MeteorColour2", -65536)));
+			MeteorColour3.BackColor =
+				Color.FromArgb(
+					Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MeteorColour3", -16711936)));
+			MeteorColour4.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MeteorColour4", -32640)));
+			MeteorColour5.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MeteorColour5", -32513)));
+			MeteorColour6.BackColor =
+				Color.FromArgb(
+					Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MeteorColour6", -16711681)));
+			checkBoxMeteorColour1.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMeteorColour1",
+				true);
+			checkBoxMeteorColour2.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMeteorColour2",
+				false);
+			checkBoxMeteorColour3.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMeteorColour3",
+				false);
+			checkBoxMeteorColour4.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMeteorColour4",
+				false);
+			checkBoxMeteorColour5.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMeteorColour5",
+				false);
+			checkBoxMeteorColour6.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMeteorColour6",
+				false);
+			TwinkleColour1.BackColor =
+				Color.FromArgb(
+					Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwinkleColour1", -16776961)));
+			TwinkleColour2.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwinkleColour2", -65536)));
+			TwinkleColour3.BackColor =
+				Color.FromArgb(
+					Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwinkleColour3", -16711936)));
+			TwinkleColour4.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwinkleColour4", -32640)));
+			TwinkleColour5.BackColor =
+				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwinkleColour5", -32513)));
+			TwinkleColour6.BackColor =
+				Color.FromArgb(
+					Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwinkleColour6", -16711681)));
+			checkBoxTwinkleColour1.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour1",
+				true);
+			checkBoxTwinkleColour2.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour2",
+				false);
+			checkBoxTwinkleColour3.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour3",
+				false);
+			checkBoxTwinkleColour4.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour4",
+				false);
+			checkBoxTwinkleColour5.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour5",
+				false);
+			checkBoxTwinkleColour6.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwinkleColour6",
+				false);
 			trackBarTextSpeed.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextSpeed", 5);
 			trackBarTextPosition.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextPosition", 5);
-			trackBarSpeedSnowFlakes.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarSpeedSnowFlakes", 5);
+			trackBarSpeedSnowFlakes.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarSpeedSnowFlakes",
+				5);
 			trackBarSpeedMeteors.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarSpeedMeteors", 5);
-			textBoxSequenceLength1.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength1", "");
-			textBoxSequenceLength2.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength2", "");
-			textBoxSequenceLength3.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength3", "");
-			textBoxSequenceLength4.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength4", "");
-			textBoxSequenceLength5.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength5", "");
-			textBoxSequenceLength6.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength6", "");
-			tabControlSequence.SelectedIndex = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "tabControlSequence", 0);
+			textBoxSequenceLength1.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength1",
+				"");
+			textBoxSequenceLength2.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength2",
+				"");
+			textBoxSequenceLength3.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength3",
+				"");
+			textBoxSequenceLength4.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength4",
+				"");
+			textBoxSequenceLength5.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength5",
+				"");
+			textBoxSequenceLength6.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSequenceLength6",
+				"");
+			tabControlSequence.SelectedIndex = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "tabControlSequence",
+				0);
 			tabControlMain.SelectedIndex = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "tabControlMain", 0);
 			tabControlEffects.SelectedIndex = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "tabControlEffects", 0);
 			textBoxFont.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFont", "Arial");
 			textBoxFontSize.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFontSize", "10");
 			GlobalVar.SeqIntervalTime = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SeqIntervalTime", 15);
-			comboBoxTextDirection.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxTextDirection", "Left");
+			comboBoxTextDirection.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxTextDirection",
+				"Left");
 			TextLineNumber.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextLineNumber", 1);
 			trackBarTwinkleLights.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTwinkleLights", 10);
 			trackBarTwinkleSteps.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTwinkleSteps", 10);
 			trackBarSpeedTwinkles.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarSpeedTwinkles", 1);
-			textBoxFromEmailAddress.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFromEmailAddress", "anything@gmail.com");
-			textBoxReturnSubjectHeading.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxReturnSubjectHeading", "Lights on Northridge Rd");
+			textBoxFromEmailAddress.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFromEmailAddress",
+				"anything@gmail.com");
+			textBoxReturnSubjectHeading.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
+				"textBoxReturnSubjectHeading", "Lights on Northridge Rd");
 			textBoxSMTP.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxSMTP", "smtp.gmail.com");
-			comboBoxEmailSettings.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxEmailSettings", "GMail");
-			checkBoxVariableLength.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVariableLength", true);
-			textBoxReturnBannedMSG.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxReturnBannedMSG", "You have been banned for the night for sending inappropiate words.");
-			comboBoxPlayMode.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxPlayMode", "Play Only Incoming Msgs");
+			comboBoxEmailSettings.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxEmailSettings",
+				"GMail");
+			checkBoxVariableLength.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVariableLength",
+				true);
+			textBoxReturnBannedMSG.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxReturnBannedMSG",
+				"You have been banned for the night for sending inappropiate words.");
+			comboBoxPlayMode.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxPlayMode",
+				"Play Only Incoming Msgs");
 			checkBoxLocalRandom.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocalRandom", true);
 			checkBoxRandom1.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom1", true);
 			checkBoxRandom2.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom2", true);
 			checkBoxRandom3.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom3", true);
 			checkBoxRandom4.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom4", true);
 			checkBoxRandom5.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom5", false);
-			checkBoxRandom6.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom6", false); 
+			checkBoxRandom6.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRandom6", false);
 			extraTime.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "extraTime", 0);
 			extraTime.Enabled = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "extraTimeEnabled", false);
-			numericUpDownIntervalMsgs.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownIntervalMsgs", 0);
+			numericUpDownIntervalMsgs.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
+				"numericUpDownIntervalMsgs", 0);
 			trackBarMovieSpeed.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarMovieSpeed", 0);
 			trackBarThumbnail.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarThumbnail", 1);
 			numericUpDownMatrixW.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMatrixW", 50);
@@ -421,16 +524,27 @@ namespace Vixen_Messaging
 			checkBoxTwilio.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwilio", false);
 			GlobalVar.TwilioPhoneNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwilioPhoneNumber", "");
 			checkBoxMultiLine.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMultiLine", false);
-			numericUpDownMultiLine.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMultiLine", 1);
+			numericUpDownMultiLine.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMultiLine",
+				1);
 			numericUpDownMaxWords.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords", 0);
-			checkBoxCountDownEnable.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCountDownEnable", false);
-			var dateCountDownString = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString", "25/12/15");
+			checkBoxCountDownEnable.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
+				"checkBoxCountDownEnable", false);
+			var dateCountDownString = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString",
+				"25/12/15");
 			dateCountDown.Value = Convert.ToDateTime(dateCountDownString);
-			checkBoxVixenControl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", false);
-			messageColourOption.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "messageColourOption", "Single");
-		#endregion
+			checkBoxVixenControl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl",
+				false);
+			messageColourOption.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "messageColourOption",
+				"Single");
+			textBoxTextFileFolder.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxTextFileFolder", "");
+			checkBoxdeleteTextFile.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxdeleteTextFile",
+				true);
+			checkBoxTextFile.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTextFile", false);
 
-		#region Group ID Settings
+			#endregion
+
+			#region Group ID Settings
+
 			var groupIDNumberSel = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumberSel", 0);
 			GlobalVar.GroupIDNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupIDNumber", 0);
 			var i = 0;
@@ -449,9 +563,11 @@ namespace Vixen_Messaging
 				} while (i < GlobalVar.GroupIDNumber);
 				comboBoxNodeID.SelectedIndex = groupIDNumberSel;
 			}
-#endregion
 
-		#region Custom Message Settings
+			#endregion
+
+			#region Custom Message Settings
+
 			GlobalVar.MessageNumber = profile.GetSetting(XmlProfileSettings.SettingType.Message, "MessageNumber", 0);
 			comboBoxName.Items.Clear();
 			i = 0;
@@ -488,7 +604,8 @@ namespace Vixen_Messaging
 					line = "MessageColourOption";
 					GlobalVar.MessageColourOption.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, "Multi"));
 					line = "MessageSeqSel";
-					GlobalVar.CustomMessageSeqSel.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, "Automatically Assigned"));
+					GlobalVar.CustomMessageSeqSel.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i,
+						"Automatically Assigned"));
 					line = "MessageNodeSel";
 					GlobalVar.CustomMessageNodeSel.Add(profile.GetSetting(XmlProfileSettings.SettingType.Message, line + i, ""));
 					line = "MessageName";
@@ -502,7 +619,7 @@ namespace Vixen_Messaging
 					line = "ListLine1-";
 					i++;
 				} while (i < GlobalVar.MessageNumber);
-				
+
 			}
 			else
 			{
@@ -510,9 +627,10 @@ namespace Vixen_Messaging
 				AddMessage(addCustomMsg);
 			}
 			comboBoxName.SelectedIndex = 0;
+
 			#endregion
 
-		#region SnowFlake Settings
+			#region SnowFlake Settings
 
 			GlobalVar.SnowFlakeNumber = profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, "SnowFlakeNumber", 0);
 			comboBoxSnowFlakeName.Items.Clear();
@@ -523,7 +641,7 @@ namespace Vixen_Messaging
 				do
 				{
 					customMessageSeqSel.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, ""));
-					comboBoxSnowFlakeName.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, "")); 
+					comboBoxSnowFlakeName.Items.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, ""));
 					line = "SnowFlakeEffectType";
 					GlobalVar.SnowFlakeEffectType.Add(profile.GetSetting(XmlProfileSettings.SettingType.SnowFlakes, line + i, 2));
 					line = "SnowFlakeMax";
@@ -571,9 +689,10 @@ namespace Vixen_Messaging
 				AddSnowFlake(addCustomMsg);
 			}
 			comboBoxSnowFlakeName.SelectedIndex = 0;
+
 			#endregion
 
-		#region Meteor Settings
+			#region Meteor Settings
 
 			GlobalVar.MeteorNumber = profile.GetSetting(XmlProfileSettings.SettingType.Meteor, "MeteorNumber", 0);
 			comboBoxMeteorName.Items.Clear();
@@ -634,9 +753,10 @@ namespace Vixen_Messaging
 				AddMeteor(addCustomMsg);
 			}
 			comboBoxMeteorName.SelectedIndex = 0;
+
 			#endregion
 
-		#region Twinkle Settings
+			#region Twinkle Settings
 
 			GlobalVar.TwinkleNumber = profile.GetSetting(XmlProfileSettings.SettingType.Twinkle, "TwinkleNumber", 0);
 			comboBoxTwinkleName.Items.Clear();
@@ -695,9 +815,10 @@ namespace Vixen_Messaging
 				AddTwinkle(addCustomMsg);
 			}
 			comboBoxTwinkleName.SelectedIndex = 0;
+
 			#endregion
 
-		#region Fire Settings
+			#region Fire Settings
 
 			GlobalVar.FireNumber = profile.GetSetting(XmlProfileSettings.SettingType.Fire, "FireNumber", 0);
 			comboBoxFireName.Items.Clear();
@@ -724,10 +845,13 @@ namespace Vixen_Messaging
 			}
 			comboBoxFireName.SelectedIndex = 0;
 		}
+
 		#endregion
+
 		#endregion
 
 #region Main Form
+
 		private void timerCheckMail_Tick(object sender, EventArgs e)
 		{
 			timerCheckVixenEnabled.Enabled = true;
@@ -756,38 +880,41 @@ namespace Vixen_Messaging
 					i++;
 				} while (i != l.Count);
 			}
-			// ReSharper disable once EmptyGeneralCatchClause
+				// ReSharper disable once EmptyGeneralCatchClause
 			catch (Exception)
 			{
 			}
 
-			timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + 5 + numericUpDownIntervalMsgs.Value) * 1000;
+			timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + 5 + numericUpDownIntervalMsgs.Value)*1000;
 			Cursor.Current = Cursors.WaitCursor;
 
 			PlayModes();
 		}
-#endregion
+
+		#endregion
 
 #region Play Mode
 
-	#region Play Modes
+		#region Play Modes
+
 		private void PlayModes()
 		{
 			if (comboBoxPlayMode.Text == @"Random")
 			{
 				var rnd = new Random();
-				GlobalVar.Sequential = rnd.Next(1, 4);
+				GlobalVar.Sequential = rnd.Next(1, 5);
 			}
 			switch (GlobalVar.Sequential)
 			{
 				case 1:
 					if (checkBoxEmail.Checked)
 					{
-						PlayIncomingMsgs(); 
+						PlayIncomingMsgs();
 					}
 					else
 					{
-						ShortTimer(); ;
+						ShortTimer();
+						;
 					}
 					GlobalVar.Sequential++;
 					break;
@@ -813,16 +940,29 @@ namespace Vixen_Messaging
 					}
 					GlobalVar.Sequential++;
 					break;
+				case 4:
+					if (checkBoxTextFile.Checked)
+					{
+						PlayTextFile();
+					}
+					else
+					{
+						ShortTimer();
+					}
+					GlobalVar.Sequential++;
+					break;
 
 			}
-			if (GlobalVar.Sequential == 4)
+			if (GlobalVar.Sequential == 5)
 			{
-				GlobalVar.Sequential = 1;				
+				GlobalVar.Sequential = 1;
 			}
 		}
+
 		#endregion
 
-	#region Play Incoming Messages
+		#region Play Incoming Messages
+
 		private void PlayIncomingMsgs()
 		{
 			try
@@ -837,9 +977,9 @@ namespace Vixen_Messaging
 						ShortTimer();
 						return;
 					}
-					
+
 					//GlobalVar.PlayMessage = false;
-					
+
 					for (int messageNum = 1; messageNum <= messageCount; messageNum++)
 					{
 						var header = _pop.GetMessageHeaders(messageNum);
@@ -853,10 +993,10 @@ namespace Vixen_Messaging
 						}
 						else
 						{
-						if (header.Subject.Contains(textBoxSubjectHeader.Text))
-						{
-							headerphone = header.Subject.Substring(textBoxSubjectHeader.Text.Length).Trim();
-						}
+							if (header.Subject.Contains(textBoxSubjectHeader.Text))
+							{
+								headerphone = header.Subject.Substring(textBoxSubjectHeader.Text.Length).Trim();
+							}
 
 
 							if (!CheckBlacklistMessage(header.From.Address, header.Subject, headerphone))
@@ -935,7 +1075,9 @@ namespace Vixen_Messaging
 											}
 											else
 											{
-												rtnmsg = "Sorry, your message is too long and will not be display. Please reduce the number of words in your message to below " + (numericUpDownMaxWords.Value + 1) + " and resend. Thank you.";
+												rtnmsg =
+													"Sorry, your message is too long and will not be display. Please reduce the number of words in your message to below " +
+													(numericUpDownMaxWords.Value + 1) + " and resend. Thank you.";
 												SendReturnText(phoneNumber, header.From.ToString(), rtnmsg,
 													messageNum);
 											}
@@ -974,63 +1116,65 @@ namespace Vixen_Messaging
 
 								#region Email
 
-								
-									if (!CheckBlacklistMessage(header.From.Address, header.Subject, headerphone))
+
+								if (!CheckBlacklistMessage(header.From.Address, header.Subject, headerphone))
+								{
+									LogDisplay(
+										GlobalVar.LogMsg =
+											("Retrieved Header # " + messageNum + ": " + header.Subject));
+									try
 									{
-										LogDisplay(
-											GlobalVar.LogMsg =
-												("Retrieved Header # " + messageNum + ": " + header.Subject));
-										try
+										string emailMessage = header.Subject;
+										LogDisplay(GlobalVar.LogMsg = ("Message: " + emailMessage));
+										_pop.DeleteMessage(messageNum);
+										// We only want one message at a time so, disconnect and wait for next time.
+										_pop.Disconnect();
+										SendMessageToVixen(emailMessage, out blacklist, out notWhitemsg, out maxWordCount);
+										if (!maxWordCount)
 										{
-											string emailMessage = header.Subject;
-											LogDisplay(GlobalVar.LogMsg = ("Message: " + emailMessage));
-											_pop.DeleteMessage(messageNum);
-											// We only want one message at a time so, disconnect and wait for next time.
-											_pop.Disconnect();
-											SendMessageToVixen(emailMessage, out blacklist, out notWhitemsg, out maxWordCount);
-											if (!maxWordCount)
+											if (blacklist && !notWhitemsg)
 											{
-												if (blacklist && !notWhitemsg)
+												rtnmsg =
+													"Please reframe from using inappropiate words. If this happens again your email address will be banned for the night.";
+												using (
+													var file = new StreamWriter(@textBoxBlacklistEmailLog.Text,
+														true))
 												{
-													rtnmsg =
-														"Please reframe from using inappropiate words. If this happens again your email address will be banned for the night.";
-													using (
-														var file = new StreamWriter(@textBoxBlacklistEmailLog.Text,
-															true))
-													{
-														file.WriteLine(header.From.Address);
-													}
+													file.WriteLine(header.From.Address);
+												}
+												SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
+												return;
+											}
+											else
+											{
+												if (!notWhitemsg)
+												{
+													rtnmsg = "Your message will appear soon in lights.";
 													SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
 													return;
 												}
 												else
 												{
-													if (!notWhitemsg)
-													{
-														rtnmsg = "Your message will appear soon in lights.";
-														SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
-														return;
-													}
-													else
-													{
-														rtnmsg =
-															"Sorry one or more of the names you sent is not in the approved list or you are using unapproved abbriviations! You words have been recoreded and if found to be non offensive then they will be added to the list. Please try again on another day.";
-														SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
-													}
+													rtnmsg =
+														"Sorry one or more of the names you sent is not in the approved list or you are using unapproved abbriviations! You words have been recoreded and if found to be non offensive then they will be added to the list. Please try again on another day.";
+													SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
 												}
 											}
-											else
-											{
-												rtnmsg = "Sorry, your message is too long and will not be display. Please reduce the number of words in your message to below " + (numericUpDownMaxWords.Value + 1) + " and resend. Thank you.";
-												SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
-											}
 										}
-										catch (Exception ex)
+										else
 										{
-											LogDisplay(GlobalVar.LogMsg = ("Error Parsing Message Body: " + ex.Message));
+											rtnmsg =
+												"Sorry, your message is too long and will not be display. Please reduce the number of words in your message to below " +
+												(numericUpDownMaxWords.Value + 1) + " and resend. Thank you.";
+											SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
 										}
 									}
-								
+									catch (Exception ex)
+									{
+										LogDisplay(GlobalVar.LogMsg = ("Error Parsing Message Body: " + ex.Message));
+									}
+								}
+
 
 								#endregion
 							}
@@ -1042,15 +1186,15 @@ namespace Vixen_Messaging
 								rtnmsg = textBoxReturnBannedMSG.Text;
 								SendReturnText("", header.From.ToString(), rtnmsg, messageNum);
 							}
-						
-					}
+
+						}
 						Application.DoEvents();
 					}
 				}
 			}
 			catch
 			{
-				
+
 			}
 			finally
 			{
@@ -1060,7 +1204,7 @@ namespace Vixen_Messaging
 					{
 						_pop.Disconnect();
 					}
-					// ReSharper disable once EmptyGeneralCatchClause
+						// ReSharper disable once EmptyGeneralCatchClause
 					catch
 					{
 
@@ -1069,9 +1213,11 @@ namespace Vixen_Messaging
 				LogDisplay(GlobalVar.LogMsg = ("Disconnected"));
 			}
 		}
+
 		#endregion
 
-	#region Play Local Msgs
+		#region Play Local Msgs
+
 		private void PlayLocalMsgs()
 		{
 			if (richTextBoxMessage.Text != "" | checkBoxCountDownEnable.Checked)
@@ -1094,7 +1240,7 @@ namespace Vixen_Messaging
 						do
 						{
 							var rndCustomMsg = new Random();
-							var rndCustomMsgResult = rndCustomMsg.Next(0, comboBoxName.Items.Count -1);
+							var rndCustomMsgResult = rndCustomMsg.Next(0, comboBoxName.Items.Count - 1);
 							if (GlobalVar.MessageEnabled[rndCustomMsgResult])
 							{
 								comboBoxName.SelectedIndex = rndCustomMsgResult;
@@ -1124,7 +1270,8 @@ namespace Vixen_Messaging
 					}
 					else
 					{
-						if (((GlobalVar.Msgindex >= msgcount | richTextBoxMessage.Text == "") & GlobalVar.CustomMessageCount < comboBoxName.Items.Count) & checkBoxCountDownEnable.Checked)
+						if (((GlobalVar.Msgindex >= msgcount | richTextBoxMessage.Text == "") &
+						     GlobalVar.CustomMessageCount < comboBoxName.Items.Count) & checkBoxCountDownEnable.Checked)
 						{
 							do
 							{
@@ -1176,9 +1323,10 @@ namespace Vixen_Messaging
 				SendMessageToVixen(msg, out blacklist, out notWhitemsg, out maxWordCount);
 			}
 		}
+
 		#endregion
 
-	#region Play Custom Message Immediately
+		#region Play Custom Message Immediately
 
 		private void buttonPlay_Click(object sender, EventArgs e)
 		{
@@ -1208,12 +1356,14 @@ namespace Vixen_Messaging
 			bool blacklist;
 			bool notWhitemsg;
 			bool maxWordCount;
-			string msg = "play counter"; 
+			string msg = "play counter";
 			SendMessageToVixen(msg, out blacklist, out notWhitemsg, out maxWordCount);
 		}
+
 		#endregion
 
-	#region Play with Twilio
+		#region Play with Twilio
+
 		private void PlayTwilio()
 		{
 			// Find your Account Sid and Auth Token at twilio.com/user/account 
@@ -1269,10 +1419,10 @@ namespace Vixen_Messaging
 				//pictureBoxMovie.Image = objBmpImage;
 
 				LogDisplay(GlobalVar.LogMsg = ("Checking Twilio Messages"));
-	   //		 foreach (var message in messages.Messages)
+				//		 foreach (var message in messages.Messages)
 				if (!CheckBlacklistMessage(messageFrom, messageBody, ""))
 				{
-					 //Console.WriteLine(message.From + " : " + message.Direction);
+					//Console.WriteLine(message.From + " : " + message.Direction);
 
 					if (messageDirection.Contains("inbound"))
 					{
@@ -1312,10 +1462,13 @@ namespace Vixen_Messaging
 						}
 						else
 						{
-							SendReturnTextTwilio(messageFrom, "Sorry, your message is too long and will not be display. Please reduce the number of words in your message to below " + (numericUpDownMaxWords.Value + 1) + " and resend. Thank you.");
+							SendReturnTextTwilio(messageFrom,
+								"Sorry, your message is too long and will not be display. Please reduce the number of words in your message to below " +
+								(numericUpDownMaxWords.Value + 1) + " and resend. Thank you.");
 							twilio.DeleteMessage(messageSid);
 						}
-						SendReturnTextTwilio(messageFrom, "Sorry one or more of the names you sent is not in the approved list or you are using unapproved abbriviations! You words have been recoreded and if found to be non offensive then they will be added to the list. Please try again on another day.");
+						SendReturnTextTwilio(messageFrom,
+							"Sorry one or more of the names you sent is not in the approved list or you are using unapproved abbriviations! You words have been recoreded and if found to be non offensive then they will be added to the list. Please try again on another day.");
 						twilio.DeleteMessage(messageSid);
 						ShortTimer();
 						return;
@@ -1326,16 +1479,55 @@ namespace Vixen_Messaging
 				SendReturnTextTwilio(messageFrom, textBoxReturnBannedMSG.Text);
 				LogDisplay(GlobalVar.LogMsg = (messageFrom + " has been banned for sending inappropiate messages."));
 				Log(" " + messageFrom + " has been banned for sending inappropiate messages.");
-				}
-				catch
-				{
-					LogDisplay(GlobalVar.LogMsg = ("Unable to connect to the Twilio server or there are no messages on the server."));
-					ShortTimer();
-				}
+			}
+			catch
+			{
+				LogDisplay(GlobalVar.LogMsg = ("Unable to connect to the Twilio server or there are no messages on the server."));
+				ShortTimer();
+			}
 		}
+
 		#endregion
 
-	#region Set Short Timer
+		#region Play Text File
+
+		private void PlayTextFile()
+		{
+			LogDisplay(GlobalVar.LogMsg = ("Checking Text File Messages"));
+			var fileCount = FastDirectoryEnumerator.EnumerateFiles(textBoxTextFileFolder.Text, "*.txt", SearchOption.TopDirectoryOnly).Count();
+			if (fileCount < 1)
+			{
+				LogDisplay(GlobalVar.LogMsg = ("Found " + fileCount + " Messages"));
+				ShortTimer();
+				return;
+			}
+			var oldest = (FastDirectoryEnumerator.EnumerateFiles(textBoxTextFileFolder.Text).OrderBy(f => f.CreationTime).First()).ToString();
+			string messageBody = File.ReadAllText(textBoxTextFileFolder.Text + "\\" + oldest);
+
+			LogDisplay(GlobalVar.LogMsg = ("Found " + fileCount + " Messages"));
+			LogDisplay(GlobalVar.LogMsg = ("Received File Name: " + oldest + " with message-> " + messageBody));
+			var smsMessage = messageBody;
+			bool blacklist;
+			bool notWhitemsg;
+			bool maxWordCount;
+			SendMessageToVixen(smsMessage, out blacklist, out notWhitemsg, out maxWordCount);
+			if (checkBoxdeleteTextFile.Checked)
+			{
+				File.Delete(textBoxTextFileFolder.Text + "\\" + oldest);
+			}
+			else
+			{
+				Directory.CreateDirectory(textBoxTextFileFolder.Text + "\\Processed Files");
+				var fileCreationTime = File.GetCreationTime(textBoxTextFileFolder.Text + "\\" + oldest).ToString();
+				fileCreationTime = Regex.Replace(fileCreationTime, @"[/: PM]", "");
+				File.Move(textBoxTextFileFolder.Text + "\\" + oldest, textBoxTextFileFolder.Text + "\\Processed Files\\" + fileCreationTime + " " + oldest);
+			}
+			ShortTimer();
+		}
+
+		#endregion
+
+		#region Set Short Timer
 
 		private void ShortTimer()
 		{
@@ -1783,7 +1975,7 @@ namespace Vixen_Messaging
 		}
 		#endregion
 
-#region Message to Vixen
+#region Send Message to Vixen
 
 		private void SendMessageToVixen(string msg, out bool blacklist, out bool notWhitemsg, out bool maxWordCount)
 		{
@@ -3899,7 +4091,10 @@ namespace Vixen_Messaging
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCountDownEnable", checkBoxCountDownEnable.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl", checkBoxVixenControl.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "messageColourOption", messageColourOption.Text);
-#endregion
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxTextFileFolder", textBoxTextFileFolder.Text);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxdeleteTextFile", checkBoxdeleteTextFile.Checked.ToString());
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTextFile", checkBoxTextFile.Checked.ToString());
+			#endregion
 
 			#region Group ID Settings
 			int i;
@@ -5616,9 +5811,31 @@ namespace Vixen_Messaging
 		{
 					//		wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
 			var result = new WebClient().DownloadData("http://localhost:8888/api/element/getElements");
-			LogDisplay(GlobalVar.LogMsg = ("Vixen Playing: + " + result));			
-			
+			LogDisplay(GlobalVar.LogMsg = ("Vixen Playing: + " + result));
+
 		}
 
+		private void textBoxTextFileFolder_MouseClick(object sender, MouseEventArgs e)
+		{
+			FolderBrowserDialog folderDlg = new FolderBrowserDialog();
+			if (folderDlg.ShowDialog(this) == DialogResult.OK)
+			{
+				textBoxTextFileFolder.Text = folderDlg.SelectedPath;
+			}
+		}
+
+		private void checkBoxTextFile_CheckedChanged(object sender, EventArgs e)
+		{
+			if (textBoxTextFileFolder.Text == "" | textBoxTextFileFolder.Text == null)
+			{
+				FolderBrowserDialog folderDlg = new FolderBrowserDialog();
+				folderDlg.Description = @"Folder has not been set, please select the folder that hold your Message Text Files";
+				if (folderDlg.ShowDialog(this) == DialogResult.OK)
+				{
+					textBoxTextFileFolder.Text = folderDlg.SelectedPath;
+				}
+			}
+
+		}
 	}
 }

@@ -133,6 +133,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FastDirectoryEnumerator.cs" />
     <Compile Include="Twilio.cs">
       <SubType>Form</SubType>
     </Compile>
