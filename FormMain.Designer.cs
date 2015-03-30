@@ -403,6 +403,10 @@ namespace Vixen_Messaging
 			this.fileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.timerCheckVixenEnabled = new System.Windows.Forms.Timer(this.components);
 			this.fontDialog1 = new System.Windows.Forms.FontDialog();
+			this.checkBoxTextFile = new System.Windows.Forms.CheckBox();
+			this.checkBoxdeleteTextFile = new System.Windows.Forms.CheckBox();
+			this.label105 = new System.Windows.Forms.Label();
+			this.textBoxTextFileFolder = new System.Windows.Forms.TextBox();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBoxEffects.SuspendLayout();
@@ -2958,7 +2962,7 @@ namespace Vixen_Messaging
 			// 
 			this.checkBoxLocal.AutoSize = true;
 			this.checkBoxLocal.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxLocal.Location = new System.Drawing.Point(250, 36);
+			this.checkBoxLocal.Location = new System.Drawing.Point(233, 36);
 			this.checkBoxLocal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.checkBoxLocal.Name = "checkBoxLocal";
 			this.checkBoxLocal.Size = new System.Drawing.Size(73, 24);
@@ -2972,7 +2976,7 @@ namespace Vixen_Messaging
 			// 
 			this.checkBoxTwilio.AutoSize = true;
 			this.checkBoxTwilio.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxTwilio.Location = new System.Drawing.Point(358, 36);
+			this.checkBoxTwilio.Location = new System.Drawing.Point(323, 36);
 			this.checkBoxTwilio.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
 			this.checkBoxTwilio.Name = "checkBoxTwilio";
 			this.checkBoxTwilio.Size = new System.Drawing.Size(122, 24);
@@ -2985,7 +2989,7 @@ namespace Vixen_Messaging
 			// label66
 			// 
 			this.label66.AutoSize = true;
-			this.label66.Location = new System.Drawing.Point(600, 35);
+			this.label66.Location = new System.Drawing.Point(600, 36);
 			this.label66.Name = "label66";
 			this.label66.Size = new System.Drawing.Size(86, 20);
 			this.label66.TabIndex = 59;
@@ -3813,6 +3817,7 @@ namespace Vixen_Messaging
 			// 
 			// groupBoxPlayOptions
 			// 
+			this.groupBoxPlayOptions.Controls.Add(this.checkBoxTextFile);
 			this.groupBoxPlayOptions.Controls.Add(this.comboBoxPlayMode);
 			this.groupBoxPlayOptions.Controls.Add(this.checkBoxEmail);
 			this.groupBoxPlayOptions.Controls.Add(this.checkBoxTwilio);
@@ -3877,9 +3882,9 @@ namespace Vixen_Messaging
 			this.groupBox3.Controls.Add(this.textBoxSequenceTemplate);
 			this.groupBox3.Controls.Add(this.label4);
 			this.groupBox3.Controls.Add(this.textBoxVixenServer);
-			this.groupBox3.Location = new System.Drawing.Point(14, 301);
+			this.groupBox3.Location = new System.Drawing.Point(14, 330);
 			this.groupBox3.Name = "groupBox3";
-			this.groupBox3.Size = new System.Drawing.Size(870, 402);
+			this.groupBox3.Size = new System.Drawing.Size(870, 373);
 			this.groupBox3.TabIndex = 2;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Vixen Settings";
@@ -3899,7 +3904,7 @@ namespace Vixen_Messaging
 			this.buttonGetVixenData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.buttonGetVixenData.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonGetVixenData.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-			this.buttonGetVixenData.Location = new System.Drawing.Point(361, 341);
+			this.buttonGetVixenData.Location = new System.Drawing.Point(362, 327);
 			this.buttonGetVixenData.Name = "buttonGetVixenData";
 			this.buttonGetVixenData.Size = new System.Drawing.Size(286, 40);
 			this.buttonGetVixenData.TabIndex = 11;
@@ -4012,6 +4017,9 @@ namespace Vixen_Messaging
 			// 
 			// groupBox5
 			// 
+			this.groupBox5.Controls.Add(this.label105);
+			this.groupBox5.Controls.Add(this.textBoxTextFileFolder);
+			this.groupBox5.Controls.Add(this.checkBoxdeleteTextFile);
 			this.groupBox5.Controls.Add(this.label78);
 			this.groupBox5.Controls.Add(this.textBoxAccessPWD);
 			this.groupBox5.Controls.Add(this.textBoxReturnBannedMSG);
@@ -4023,7 +4031,7 @@ namespace Vixen_Messaging
 			this.groupBox5.Controls.Add(this.textBoxSubjectHeader);
 			this.groupBox5.Location = new System.Drawing.Point(14, 18);
 			this.groupBox5.Name = "groupBox5";
-			this.groupBox5.Size = new System.Drawing.Size(870, 265);
+			this.groupBox5.Size = new System.Drawing.Size(870, 306);
 			this.groupBox5.TabIndex = 1;
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "Vixen Messaging Options";
@@ -4912,6 +4920,53 @@ namespace Vixen_Messaging
 			// 
 			this.fontDialog1.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			// 
+			// checkBoxTextFile
+			// 
+			this.checkBoxTextFile.AutoSize = true;
+			this.checkBoxTextFile.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.checkBoxTextFile.Location = new System.Drawing.Point(475, 36);
+			this.checkBoxTextFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+			this.checkBoxTextFile.Name = "checkBoxTextFile";
+			this.checkBoxTextFile.Size = new System.Drawing.Size(94, 24);
+			this.checkBoxTextFile.TabIndex = 60;
+			this.checkBoxTextFile.Tag = "4";
+			this.checkBoxTextFile.Text = "Text File";
+			this.toolTip1.SetToolTip(this.checkBoxTextFile, "Select to retrieve messages from a local Text File.\r\nOptions found in Messaging S" +
+        "ettings Tab.");
+			this.checkBoxTextFile.UseVisualStyleBackColor = true;
+			this.checkBoxTextFile.CheckedChanged += new System.EventHandler(this.checkBoxTextFile_CheckedChanged);
+			// 
+			// checkBoxdeleteTextFile
+			// 
+			this.checkBoxdeleteTextFile.AutoSize = true;
+			this.checkBoxdeleteTextFile.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.checkBoxdeleteTextFile.Location = new System.Drawing.Point(17, 266);
+			this.checkBoxdeleteTextFile.Name = "checkBoxdeleteTextFile";
+			this.checkBoxdeleteTextFile.Size = new System.Drawing.Size(336, 24);
+			this.checkBoxdeleteTextFile.TabIndex = 11;
+			this.checkBoxdeleteTextFile.Text = "Delete Text File Message after processing:";
+			this.toolTip1.SetToolTip(this.checkBoxdeleteTextFile, "Select to delete the file once the message has been processed. If unchecked the f" +
+        "ile will be processed and then moved to the Processed folder.");
+			this.checkBoxdeleteTextFile.UseVisualStyleBackColor = true;
+			// 
+			// label105
+			// 
+			this.label105.AutoSize = true;
+			this.label105.Location = new System.Drawing.Point(387, 267);
+			this.label105.Name = "label105";
+			this.label105.Size = new System.Drawing.Size(121, 20);
+			this.label105.TabIndex = 13;
+			this.label105.Text = "Text File Folder:";
+			// 
+			// textBoxTextFileFolder
+			// 
+			this.textBoxTextFileFolder.Location = new System.Drawing.Point(527, 264);
+			this.textBoxTextFileFolder.Name = "textBoxTextFileFolder";
+			this.textBoxTextFileFolder.ReadOnly = true;
+			this.textBoxTextFileFolder.Size = new System.Drawing.Size(319, 26);
+			this.textBoxTextFileFolder.TabIndex = 12;
+			this.textBoxTextFileFolder.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxTextFileFolder_MouseClick);
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -4936,7 +4991,7 @@ namespace Vixen_Messaging
 			this.Name = "FormMain";
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-			this.Text = "Vixen Messaging - v3.1.18";
+			this.Text = "Vixen Messaging - v3.1.19";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
 			this.Load += new System.EventHandler(this.FormMain_Load);
 			this.groupBox1.ResumeLayout(false);
@@ -5413,6 +5468,10 @@ namespace Vixen_Messaging
 		private System.Windows.Forms.ComboBox comboBoxFireName;
 		private System.Windows.Forms.Button buttonRemoveFire;
 		private System.Windows.Forms.Button buttonAddFire;
+		private System.Windows.Forms.CheckBox checkBoxTextFile;
+		private System.Windows.Forms.CheckBox checkBoxdeleteTextFile;
+		private System.Windows.Forms.Label label105;
+		private System.Windows.Forms.TextBox textBoxTextFileFolder;
     }
 }
 

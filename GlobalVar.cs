@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 
 namespace Vixen_Messaging
 {
@@ -40,6 +41,8 @@ namespace Vixen_Messaging
 			public static int GroupIDNumber;
 
 			public static int Sequential { get; set; }
+
+			public static FileInfo oldest;
 
 			#endregion
 
