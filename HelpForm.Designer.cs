@@ -45,9 +45,10 @@
 			// buttonDemo
 			// 
 			this.buttonDemo.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonDemo.Location = new System.Drawing.Point(50, 840);
+			this.buttonDemo.Location = new System.Drawing.Point(44, 672);
+			this.buttonDemo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonDemo.Name = "buttonDemo";
-			this.buttonDemo.Size = new System.Drawing.Size(319, 33);
+			this.buttonDemo.Size = new System.Drawing.Size(284, 26);
 			this.buttonDemo.TabIndex = 3;
 			this.buttonDemo.Text = "Demo";
 			this.buttonDemo.UseVisualStyleBackColor = false;
@@ -56,9 +57,10 @@
 			// buttonInstallation
 			// 
 			this.buttonInstallation.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonInstallation.Location = new System.Drawing.Point(50, 879);
+			this.buttonInstallation.Location = new System.Drawing.Point(44, 703);
+			this.buttonInstallation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonInstallation.Name = "buttonInstallation";
-			this.buttonInstallation.Size = new System.Drawing.Size(319, 33);
+			this.buttonInstallation.Size = new System.Drawing.Size(284, 26);
 			this.buttonInstallation.TabIndex = 4;
 			this.buttonInstallation.Text = "Installation";
 			this.buttonInstallation.UseVisualStyleBackColor = false;
@@ -67,9 +69,10 @@
 			// buttonGmail
 			// 
 			this.buttonGmail.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonGmail.Location = new System.Drawing.Point(423, 840);
+			this.buttonGmail.Location = new System.Drawing.Point(376, 672);
+			this.buttonGmail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonGmail.Name = "buttonGmail";
-			this.buttonGmail.Size = new System.Drawing.Size(319, 33);
+			this.buttonGmail.Size = new System.Drawing.Size(284, 26);
 			this.buttonGmail.TabIndex = 5;
 			this.buttonGmail.Text = "Setting up a Gmail account";
 			this.buttonGmail.UseVisualStyleBackColor = false;
@@ -78,9 +81,10 @@
 			// buttonEmails
 			// 
 			this.buttonEmails.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonEmails.Location = new System.Drawing.Point(50, 921);
+			this.buttonEmails.Location = new System.Drawing.Point(44, 737);
+			this.buttonEmails.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonEmails.Name = "buttonEmails";
-			this.buttonEmails.Size = new System.Drawing.Size(319, 33);
+			this.buttonEmails.Size = new System.Drawing.Size(284, 26);
 			this.buttonEmails.TabIndex = 6;
 			this.buttonEmails.Text = "Retrieving Emails";
 			this.buttonEmails.UseVisualStyleBackColor = false;
@@ -89,18 +93,19 @@
 			// label2
 			// 
 			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label2.Location = new System.Drawing.Point(290, 789);
+			this.label2.Location = new System.Drawing.Point(258, 631);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(211, 41);
+			this.label2.Size = new System.Drawing.Size(188, 33);
 			this.label2.TabIndex = 7;
 			this.label2.Text = "Video links";
 			// 
 			// buttonTwilio
 			// 
 			this.buttonTwilio.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonTwilio.Location = new System.Drawing.Point(423, 879);
+			this.buttonTwilio.Location = new System.Drawing.Point(376, 703);
+			this.buttonTwilio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonTwilio.Name = "buttonTwilio";
-			this.buttonTwilio.Size = new System.Drawing.Size(319, 33);
+			this.buttonTwilio.Size = new System.Drawing.Size(284, 26);
 			this.buttonTwilio.TabIndex = 8;
 			this.buttonTwilio.Text = "Setting up a Twilio account";
 			this.buttonTwilio.UseVisualStyleBackColor = false;
@@ -109,9 +114,10 @@
 			// buttonRemoteCommands
 			// 
 			this.buttonRemoteCommands.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonRemoteCommands.Location = new System.Drawing.Point(423, 921);
+			this.buttonRemoteCommands.Location = new System.Drawing.Point(376, 737);
+			this.buttonRemoteCommands.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonRemoteCommands.Name = "buttonRemoteCommands";
-			this.buttonRemoteCommands.Size = new System.Drawing.Size(319, 33);
+			this.buttonRemoteCommands.Size = new System.Drawing.Size(284, 26);
 			this.buttonRemoteCommands.TabIndex = 9;
 			this.buttonRemoteCommands.Text = "Using Remote Commands";
 			this.buttonRemoteCommands.UseVisualStyleBackColor = false;
@@ -120,18 +126,19 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(12, 9);
+			this.label3.Location = new System.Drawing.Point(11, 7);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(111, 20);
+			this.label3.Size = new System.Drawing.Size(92, 17);
 			this.label3.TabIndex = 10;
-			this.label3.Text = "Version 3.1.18";
+			this.label3.Text = "Version 3.3.1";
 			// 
 			// buttonLauncher
 			// 
 			this.buttonLauncher.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonLauncher.Location = new System.Drawing.Point(50, 963);
+			this.buttonLauncher.Location = new System.Drawing.Point(44, 770);
+			this.buttonLauncher.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonLauncher.Name = "buttonLauncher";
-			this.buttonLauncher.Size = new System.Drawing.Size(319, 53);
+			this.buttonLauncher.Size = new System.Drawing.Size(284, 42);
 			this.buttonLauncher.TabIndex = 11;
 			this.buttonLauncher.Text = "Using the Vixen 3 Launcher with Messaging";
 			this.buttonLauncher.UseVisualStyleBackColor = false;
@@ -141,20 +148,22 @@
 			// 
 			this.richTextBox1.BackColor = System.Drawing.Color.Azure;
 			this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.richTextBox1.Location = new System.Drawing.Point(16, 48);
+			this.richTextBox1.Location = new System.Drawing.Point(14, 38);
+			this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.richTextBox1.Name = "richTextBox1";
 			this.richTextBox1.ReadOnly = true;
 			this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-			this.richTextBox1.Size = new System.Drawing.Size(756, 738);
+			this.richTextBox1.Size = new System.Drawing.Size(672, 590);
 			this.richTextBox1.TabIndex = 12;
 			this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
 			// 
 			// button1
 			// 
 			this.button1.BackColor = System.Drawing.Color.Honeydew;
-			this.button1.Location = new System.Drawing.Point(423, 963);
+			this.button1.Location = new System.Drawing.Point(376, 770);
+			this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(319, 53);
+			this.button1.Size = new System.Drawing.Size(284, 42);
 			this.button1.TabIndex = 13;
 			this.button1.Text = "Adding Custom Messages and Multi Effects";
 			this.button1.UseVisualStyleBackColor = false;
@@ -162,11 +171,11 @@
 			// 
 			// HelpForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.Azure;
-			this.ClientSize = new System.Drawing.Size(784, 1035);
+			this.ClientSize = new System.Drawing.Size(700, 835);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.richTextBox1);
 			this.Controls.Add(this.buttonLauncher);
@@ -180,8 +189,9 @@
 			this.Controls.Add(this.buttonDemo);
 			this.HelpButton = true;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.MaximumSize = new System.Drawing.Size(806, 1091);
-			this.MinimumSize = new System.Drawing.Size(806, 1091);
+			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.MaximumSize = new System.Drawing.Size(718, 882);
+			this.MinimumSize = new System.Drawing.Size(718, 882);
 			this.Name = "HelpForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Vixen Messaging Help";

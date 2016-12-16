@@ -541,6 +541,9 @@ namespace Vixen_Messaging
 				true);
 			checkBoxTextFile.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTextFile", false);
 
+
+			textBoxOutputSequence.Text = textBoxVixenFolder.Text + "\\Sequence\\VixenOut.tim";
+
 			#endregion
 
 			#region Group ID Settings
@@ -2784,7 +2787,7 @@ namespace Vixen_Messaging
 			string accountSid = GlobalVar.TwilioSID;  // "AC29390b0fe3f4cb763862eefedb8afc41";
 			string authToken = GlobalVar.TwilioToken;  // "d68a401090af00f63bbecb4a3e502a7f";
 			var twilio = new TwilioRestClient(accountSid, authToken);
-			var message = twilio.SendMessage(GlobalVar.TwilioPhoneNumber, from, msgBody);
+			twilio.SendMessage(GlobalVar.TwilioPhoneNumber, from, msgBody);
 			LogDisplay(GlobalVar.LogMsg = ("Return Message sent to " + from));
 		}
 
@@ -2812,7 +2815,7 @@ namespace Vixen_Messaging
 						{
 							LogDisplay(GlobalVar.LogMsg = ("Bad Words Detected!"));
 							file.Close();
-							Log(" " + msg + ". Bad Words Detected!");
+							Log(" " + msg + ". Bad Word Detected! - " + textLine);
 							notWhite = false;
 							return true;
 						}
@@ -3700,6 +3703,7 @@ namespace Vixen_Messaging
 				if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
 				{
 					textBoxVixenFolder.Text = folderBrowserDialog1.SelectedPath;
+					textBoxOutputSequence.Text = textBoxVixenFolder.Text + "\\Sequence\\VixenOut.tim";
 				}
 			}
 			
