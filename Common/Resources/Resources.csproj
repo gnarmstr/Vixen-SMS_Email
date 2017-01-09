@@ -91,6 +91,8 @@
     <None Include="Resources\accept.png" />
     <None Include="Resources\control_play_blue.png" />
     <None Include="Save.png" />
+    <None Include="ButtonBackgroundImageHover.jpg" />
+    <None Include="ButtonBackgroundImage.jpg" />
     <Content Include="Vixen Messaging.png" />
   </ItemGroup>
   <ItemGroup />

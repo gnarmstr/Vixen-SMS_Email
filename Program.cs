@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Drawing;
 using System.Net;
 using System.Threading;
 using System.Windows.Forms;
@@ -24,19 +25,21 @@ namespace Vixen_Messaging
 
                 if (!result)
                 {
-                    MessageBox.Show("Another instance of Vixen Messaging is already running; this instance will be closed.",
-                                    "Vixen Messaging already open", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					var messageBox = new MessageBoxForm(@"Another instance of Vixen Messaging is already running; this instance will be closed.",
+                                    "Vixen Messaging already open", MessageBoxButtons.OK, SystemIcons.Warning);
+					messageBox.ShowDialog();
                     return;
                 }
                 var mutex1 = new Mutex(true, "Vixen3RunningInstance", out result);
                 if (result)
                 {
-                    MessageBox.Show("Vixen 3 is Not currently running and must be open when Messages are being retrieved.",
-                                    "Vixen 3 not running", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					var messageBox = new MessageBoxForm(@"Vixen 3 is Not currently running and must be open when Messages are being retrieved.",
+                                    "Vixen 3 not running", MessageBoxButtons.OK, SystemIcons.Warning);
+					messageBox.ShowDialog();
                 }
 
                 Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
+         //       Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new FormMain());
 
                 // mutex shouldn't be released - important line

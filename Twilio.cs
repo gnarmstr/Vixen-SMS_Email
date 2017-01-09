@@ -3,6 +3,7 @@ using System.Drawing;
 using Common.Resources;
 using Common.Resources.Properties;
 using System.Windows.Forms;
+using Vixen_Messaging.Theme;
 
 namespace Vixen_Messaging
 {
@@ -14,6 +15,9 @@ namespace Vixen_Messaging
 			if (ActiveForm != null)
 				Location = new Point(ActiveForm.Location.X + ActiveForm.MaximumSize.Width, ActiveForm.Location.Y);
 			InitializeComponent();
+			ForeColor = ThemeColorTable.ForeColor;
+			BackColor = ThemeColorTable.BackgroundColor;
+			ThemeUpdateControls.UpdateControls(this);
 		}
 
 		private void Twilio_Load(object sender, EventArgs e)

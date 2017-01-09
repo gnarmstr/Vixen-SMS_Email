@@ -39,9 +39,6 @@ namespace Vixen_Messaging
 			checkBoxWebServer.Checked = false;
 			checkBoxNodeID.Checked = false;
 			textBoxVixenGroupName.Text = "";
-			textBoxUID.Text = "";
-			textBoxPWD.Text = "";
-			textBoxServer.Text = "";
 			Close();
 		}
 	}
