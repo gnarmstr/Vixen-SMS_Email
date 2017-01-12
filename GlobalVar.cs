@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 
 namespace Vixen_Messaging
@@ -120,10 +121,34 @@ namespace Vixen_Messaging
 
 	    public static string CountDownDate;
 
-	    public static bool CenterStop;
+	    #endregion
+
+		#region Text Settings
+
+		public static int IncomingMessageColourOption;
+
+		public static string StringOrientation;
+
+		public static string TextDirection;
 
 		public static bool CenterText;
 
-	    #endregion
-    }
+		public static bool CenterStop;
+
+		public static int TextPosition;
+
+		public static int TextSpeed;
+
+		public static int Intensity;
+
+		public static string Font;
+
+		public static string FontSize;
+
+		public static decimal MaxWords;
+
+		public static List<Color> TextColor = new List<Color>(10);
+
+		#endregion
+	}
 }

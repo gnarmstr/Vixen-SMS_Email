@@ -42,46 +42,22 @@ namespace Vixen_Messaging
 			this.label14 = new System.Windows.Forms.Label();
 			this.richTextBoxWhitelist = new System.Windows.Forms.RichTextBox();
 			this.richTextBoxBlacklist = new System.Windows.Forms.RichTextBox();
-			this.RandomColourSelection = new System.Windows.Forms.GroupBox();
-			this.labelColour10 = new System.Windows.Forms.Label();
-			this.labelColour9 = new System.Windows.Forms.Label();
-			this.labelColour8 = new System.Windows.Forms.Label();
-			this.labelColour7 = new System.Windows.Forms.Label();
-			this.labelColour6 = new System.Windows.Forms.Label();
-			this.labelColour5 = new System.Windows.Forms.Label();
-			this.labelColour4 = new System.Windows.Forms.Label();
-			this.labelColour3 = new System.Windows.Forms.Label();
-			this.labelColour2 = new System.Windows.Forms.Label();
-			this.labelColour1 = new System.Windows.Forms.Label();
-			this.TextColor1 = new System.Windows.Forms.Button();
-			this.TextColor10 = new System.Windows.Forms.Button();
-			this.TextColor8 = new System.Windows.Forms.Button();
-			this.TextColor9 = new System.Windows.Forms.Button();
-			this.TextColor2 = new System.Windows.Forms.Button();
-			this.TextColor3 = new System.Windows.Forms.Button();
-			this.TextColor7 = new System.Windows.Forms.Button();
-			this.TextColor4 = new System.Windows.Forms.Button();
-			this.TextColor6 = new System.Windows.Forms.Button();
-			this.TextColor5 = new System.Windows.Forms.Button();
 			this.WebServerStatus = new System.Windows.Forms.Button();
 			this.checkBoxLocal = new System.Windows.Forms.CheckBox();
 			this.checkBoxTwilio = new System.Windows.Forms.CheckBox();
 			this.label66 = new System.Windows.Forms.Label();
-			this.label88 = new System.Windows.Forms.Label();
-			this.numericUpDownMaxWords = new System.Windows.Forms.NumericUpDown();
 			this.checkBoxVixenControl = new System.Windows.Forms.CheckBox();
 			this.SaveAll = new System.Windows.Forms.PictureBox();
 			this.checkBoxLocalRandom = new System.Windows.Forms.CheckBox();
 			this.richTextBoxMessage = new System.Windows.Forms.RichTextBox();
-			this.label87 = new System.Windows.Forms.Label();
 			this.label71 = new System.Windows.Forms.Label();
 			this.checkBoxBlacklist = new System.Windows.Forms.CheckBox();
 			this.checkBoxWhitelist = new System.Windows.Forms.CheckBox();
-			this.label36 = new System.Windows.Forms.Label();
-			this.label45 = new System.Windows.Forms.Label();
 			this.comboBoxPlayMode = new System.Windows.Forms.ComboBox();
 			this.tabControlMain = new System.Windows.Forms.TabControl();
 			this.tabPageMain = new System.Windows.Forms.TabPage();
+			this.label4 = new System.Windows.Forms.Label();
+			this.buttonTextSettings = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.buttonInstantMSG = new System.Windows.Forms.Button();
@@ -89,28 +65,10 @@ namespace Vixen_Messaging
 			this.groupBoxPlayOptions = new System.Windows.Forms.GroupBox();
 			this.label74 = new System.Windows.Forms.Label();
 			this.numericUpDownIntervalMsgs = new System.Windows.Forms.NumericUpDown();
-			this.tabPageTextSetting = new System.Windows.Forms.TabPage();
-			this.groupBox4 = new System.Windows.Forms.GroupBox();
-			this.richTextBoxLog1 = new System.Windows.Forms.RichTextBox();
-			this.groupBoxSeqSettings = new System.Windows.Forms.GroupBox();
-			this.checkBoxCenterText = new System.Windows.Forms.CheckBox();
-			this.checkBoxCenterStop = new System.Windows.Forms.CheckBox();
-			this.label98 = new System.Windows.Forms.Label();
-			this.incomingMessageColourOption = new System.Windows.Forms.ComboBox();
-			this.textBoxFontSize = new System.Windows.Forms.TextBox();
-			this.buttonFont = new System.Windows.Forms.Button();
-			this.textBoxFont = new System.Windows.Forms.TextBox();
-			this.comboBoxString = new System.Windows.Forms.ComboBox();
-			this.comboBoxTextDirection = new System.Windows.Forms.ComboBox();
-			this.trackBarTextPosition = new System.Windows.Forms.TrackBar();
-			this.label44 = new System.Windows.Forms.Label();
-			this.trackBarTextSpeed = new System.Windows.Forms.TrackBar();
-			this.label21 = new System.Windows.Forms.Label();
 			this.localMsgs = new System.Windows.Forms.TabPage();
 			this.groupBoxMessages = new System.Windows.Forms.GroupBox();
 			this.groupBox8 = new System.Windows.Forms.GroupBox();
 			this.label96 = new System.Windows.Forms.Label();
-			this.dateCountDown = new System.Windows.Forms.DateTimePicker();
 			this.tabPageWordLists = new System.Windows.Forms.TabPage();
 			this.pictureBoxSaveBlacklist = new System.Windows.Forms.PictureBox();
 			this.pictureBoxSaveWhitelist = new System.Windows.Forms.PictureBox();
@@ -126,21 +84,12 @@ namespace Vixen_Messaging
 			this.fileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.timerCheckVixenEnabled = new System.Windows.Forms.Timer(this.components);
 			this.fontDialog1 = new System.Windows.Forms.FontDialog();
-			this.trackBarIntensity = new System.Windows.Forms.TrackBar();
-			this.label3 = new System.Windows.Forms.Label();
 			this.groupBox2.SuspendLayout();
-			this.RandomColourSelection.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxWords)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.SaveAll)).BeginInit();
 			this.tabControlMain.SuspendLayout();
 			this.tabPageMain.SuspendLayout();
 			this.groupBoxPlayOptions.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).BeginInit();
-			this.tabPageTextSetting.SuspendLayout();
-			this.groupBox4.SuspendLayout();
-			this.groupBoxSeqSettings.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.trackBarTextPosition)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBarTextSpeed)).BeginInit();
 			this.localMsgs.SuspendLayout();
 			this.groupBoxMessages.SuspendLayout();
 			this.groupBox8.SuspendLayout();
@@ -150,7 +99,6 @@ namespace Vixen_Messaging
 			((System.ComponentModel.ISupportInitialize)(this.buttonStart)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBarIntensity)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// buttonSettings
@@ -250,259 +198,6 @@ namespace Vixen_Messaging
 			this.toolTip1.SetToolTip(this.richTextBoxBlacklist, "Can edit directly in the text box and then save. Not required to use non Alphanum" +
         "eric characters.");
 			// 
-			// RandomColourSelection
-			// 
-			this.RandomColourSelection.Controls.Add(this.labelColour10);
-			this.RandomColourSelection.Controls.Add(this.labelColour9);
-			this.RandomColourSelection.Controls.Add(this.labelColour8);
-			this.RandomColourSelection.Controls.Add(this.labelColour7);
-			this.RandomColourSelection.Controls.Add(this.labelColour6);
-			this.RandomColourSelection.Controls.Add(this.labelColour5);
-			this.RandomColourSelection.Controls.Add(this.labelColour4);
-			this.RandomColourSelection.Controls.Add(this.labelColour3);
-			this.RandomColourSelection.Controls.Add(this.labelColour2);
-			this.RandomColourSelection.Controls.Add(this.labelColour1);
-			this.RandomColourSelection.Controls.Add(this.TextColor1);
-			this.RandomColourSelection.Controls.Add(this.TextColor10);
-			this.RandomColourSelection.Controls.Add(this.TextColor8);
-			this.RandomColourSelection.Controls.Add(this.TextColor9);
-			this.RandomColourSelection.Controls.Add(this.TextColor2);
-			this.RandomColourSelection.Controls.Add(this.TextColor3);
-			this.RandomColourSelection.Controls.Add(this.TextColor7);
-			this.RandomColourSelection.Controls.Add(this.TextColor4);
-			this.RandomColourSelection.Controls.Add(this.TextColor6);
-			this.RandomColourSelection.Controls.Add(this.TextColor5);
-			this.RandomColourSelection.Location = new System.Drawing.Point(13, 248);
-			this.RandomColourSelection.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.RandomColourSelection.Name = "RandomColourSelection";
-			this.RandomColourSelection.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.RandomColourSelection.Size = new System.Drawing.Size(598, 74);
-			this.RandomColourSelection.TabIndex = 9;
-			this.RandomColourSelection.TabStop = false;
-			this.RandomColourSelection.Text = "Colors";
-			this.toolTip1.SetToolTip(this.RandomColourSelection, "Select a color to edit. Number idicates colours that are enabled and will change " +
-        "depending on selected Colour Option..");
-			// 
-			// labelColour10
-			// 
-			this.labelColour10.AutoSize = true;
-			this.labelColour10.Location = new System.Drawing.Point(544, 18);
-			this.labelColour10.Name = "labelColour10";
-			this.labelColour10.Size = new System.Drawing.Size(24, 17);
-			this.labelColour10.TabIndex = 76;
-			this.labelColour10.Text = "10";
-			this.labelColour10.Visible = false;
-			// 
-			// labelColour9
-			// 
-			this.labelColour9.AutoSize = true;
-			this.labelColour9.Location = new System.Drawing.Point(486, 18);
-			this.labelColour9.Name = "labelColour9";
-			this.labelColour9.Size = new System.Drawing.Size(16, 17);
-			this.labelColour9.TabIndex = 75;
-			this.labelColour9.Text = "9";
-			this.labelColour9.Visible = false;
-			// 
-			// labelColour8
-			// 
-			this.labelColour8.AutoSize = true;
-			this.labelColour8.Location = new System.Drawing.Point(428, 18);
-			this.labelColour8.Name = "labelColour8";
-			this.labelColour8.Size = new System.Drawing.Size(16, 17);
-			this.labelColour8.TabIndex = 74;
-			this.labelColour8.Text = "8";
-			this.labelColour8.Visible = false;
-			// 
-			// labelColour7
-			// 
-			this.labelColour7.AutoSize = true;
-			this.labelColour7.Location = new System.Drawing.Point(372, 18);
-			this.labelColour7.Name = "labelColour7";
-			this.labelColour7.Size = new System.Drawing.Size(16, 17);
-			this.labelColour7.TabIndex = 73;
-			this.labelColour7.Text = "7";
-			this.labelColour7.Visible = false;
-			// 
-			// labelColour6
-			// 
-			this.labelColour6.AutoSize = true;
-			this.labelColour6.Location = new System.Drawing.Point(313, 18);
-			this.labelColour6.Name = "labelColour6";
-			this.labelColour6.Size = new System.Drawing.Size(16, 17);
-			this.labelColour6.TabIndex = 72;
-			this.labelColour6.Text = "6";
-			this.labelColour6.Visible = false;
-			// 
-			// labelColour5
-			// 
-			this.labelColour5.AutoSize = true;
-			this.labelColour5.Location = new System.Drawing.Point(256, 18);
-			this.labelColour5.Name = "labelColour5";
-			this.labelColour5.Size = new System.Drawing.Size(16, 17);
-			this.labelColour5.TabIndex = 71;
-			this.labelColour5.Text = "5";
-			this.labelColour5.Visible = false;
-			// 
-			// labelColour4
-			// 
-			this.labelColour4.AutoSize = true;
-			this.labelColour4.Location = new System.Drawing.Point(199, 18);
-			this.labelColour4.Name = "labelColour4";
-			this.labelColour4.Size = new System.Drawing.Size(16, 17);
-			this.labelColour4.TabIndex = 70;
-			this.labelColour4.Text = "4";
-			this.labelColour4.Visible = false;
-			// 
-			// labelColour3
-			// 
-			this.labelColour3.AutoSize = true;
-			this.labelColour3.Location = new System.Drawing.Point(143, 18);
-			this.labelColour3.Name = "labelColour3";
-			this.labelColour3.Size = new System.Drawing.Size(16, 17);
-			this.labelColour3.TabIndex = 69;
-			this.labelColour3.Text = "3";
-			this.labelColour3.Visible = false;
-			// 
-			// labelColour2
-			// 
-			this.labelColour2.AutoSize = true;
-			this.labelColour2.Location = new System.Drawing.Point(90, 18);
-			this.labelColour2.Name = "labelColour2";
-			this.labelColour2.Size = new System.Drawing.Size(16, 17);
-			this.labelColour2.TabIndex = 68;
-			this.labelColour2.Text = "2";
-			this.labelColour2.Visible = false;
-			// 
-			// labelColour1
-			// 
-			this.labelColour1.AutoSize = true;
-			this.labelColour1.Location = new System.Drawing.Point(35, 18);
-			this.labelColour1.Name = "labelColour1";
-			this.labelColour1.Size = new System.Drawing.Size(16, 17);
-			this.labelColour1.TabIndex = 67;
-			this.labelColour1.Text = "1";
-			this.labelColour1.Visible = false;
-			// 
-			// TextColor1
-			// 
-			this.TextColor1.BackColor = System.Drawing.Color.Red;
-			this.TextColor1.Location = new System.Drawing.Point(24, 38);
-			this.TextColor1.Margin = new System.Windows.Forms.Padding(0);
-			this.TextColor1.Name = "TextColor1";
-			this.TextColor1.Size = new System.Drawing.Size(36, 32);
-			this.TextColor1.TabIndex = 10;
-			this.toolTip1.SetToolTip(this.TextColor1, "Select a colour to edit.");
-			this.TextColor1.UseVisualStyleBackColor = false;
-			this.TextColor1.Click += new System.EventHandler(this.TextColor1_Click);
-			// 
-			// TextColor10
-			// 
-			this.TextColor10.BackColor = System.Drawing.Color.DodgerBlue;
-			this.TextColor10.Location = new System.Drawing.Point(534, 38);
-			this.TextColor10.Margin = new System.Windows.Forms.Padding(0);
-			this.TextColor10.Name = "TextColor10";
-			this.TextColor10.Size = new System.Drawing.Size(36, 32);
-			this.TextColor10.TabIndex = 19;
-			this.toolTip1.SetToolTip(this.TextColor10, "Select a colour to edit.");
-			this.TextColor10.UseVisualStyleBackColor = false;
-			this.TextColor10.Click += new System.EventHandler(this.TextColor10_Click);
-			// 
-			// TextColor8
-			// 
-			this.TextColor8.BackColor = System.Drawing.Color.Maroon;
-			this.TextColor8.Location = new System.Drawing.Point(419, 38);
-			this.TextColor8.Margin = new System.Windows.Forms.Padding(0);
-			this.TextColor8.Name = "TextColor8";
-			this.TextColor8.Size = new System.Drawing.Size(36, 32);
-			this.TextColor8.TabIndex = 17;
-			this.toolTip1.SetToolTip(this.TextColor8, "Select a colour to edit.");
-			this.TextColor8.UseVisualStyleBackColor = false;
-			this.TextColor8.Click += new System.EventHandler(this.TextColor8_Click);
-			// 
-			// TextColor9
-			// 
-			this.TextColor9.BackColor = System.Drawing.Color.Brown;
-			this.TextColor9.Location = new System.Drawing.Point(476, 38);
-			this.TextColor9.Margin = new System.Windows.Forms.Padding(0);
-			this.TextColor9.Name = "TextColor9";
-			this.TextColor9.Size = new System.Drawing.Size(36, 32);
-			this.TextColor9.TabIndex = 18;
-			this.toolTip1.SetToolTip(this.TextColor9, "Select a colour to edit.");
-			this.TextColor9.UseVisualStyleBackColor = false;
-			this.TextColor9.Click += new System.EventHandler(this.TextColor9_Click);
-			// 
-			// TextColor2
-			// 
-			this.TextColor2.BackColor = System.Drawing.Color.Lime;
-			this.TextColor2.Location = new System.Drawing.Point(79, 38);
-			this.TextColor2.Margin = new System.Windows.Forms.Padding(0);
-			this.TextColor2.Name = "TextColor2";
-			this.TextColor2.Size = new System.Drawing.Size(36, 32);
-			this.TextColor2.TabIndex = 11;
-			this.toolTip1.SetToolTip(this.TextColor2, "Select a colour to edit.");
-			this.TextColor2.UseVisualStyleBackColor = false;
-			this.TextColor2.Click += new System.EventHandler(this.TextColor2_Click);
-			// 
-			// TextColor3
-			// 
-			this.TextColor3.BackColor = System.Drawing.Color.Blue;
-			this.TextColor3.Location = new System.Drawing.Point(132, 38);
-			this.TextColor3.Margin = new System.Windows.Forms.Padding(0);
-			this.TextColor3.Name = "TextColor3";
-			this.TextColor3.Size = new System.Drawing.Size(36, 32);
-			this.TextColor3.TabIndex = 12;
-			this.toolTip1.SetToolTip(this.TextColor3, "Select a colour to edit.");
-			this.TextColor3.UseVisualStyleBackColor = false;
-			this.TextColor3.Click += new System.EventHandler(this.TextColor3_Click);
-			// 
-			// TextColor7
-			// 
-			this.TextColor7.BackColor = System.Drawing.Color.LightBlue;
-			this.TextColor7.Location = new System.Drawing.Point(362, 38);
-			this.TextColor7.Margin = new System.Windows.Forms.Padding(0);
-			this.TextColor7.Name = "TextColor7";
-			this.TextColor7.Size = new System.Drawing.Size(36, 32);
-			this.TextColor7.TabIndex = 16;
-			this.toolTip1.SetToolTip(this.TextColor7, "Select a colour to edit.");
-			this.TextColor7.UseVisualStyleBackColor = false;
-			this.TextColor7.Click += new System.EventHandler(this.TextColor7_Click);
-			// 
-			// TextColor4
-			// 
-			this.TextColor4.BackColor = System.Drawing.Color.Yellow;
-			this.TextColor4.Location = new System.Drawing.Point(188, 38);
-			this.TextColor4.Margin = new System.Windows.Forms.Padding(0);
-			this.TextColor4.Name = "TextColor4";
-			this.TextColor4.Size = new System.Drawing.Size(36, 32);
-			this.TextColor4.TabIndex = 13;
-			this.toolTip1.SetToolTip(this.TextColor4, "Select a colour to edit.");
-			this.TextColor4.UseVisualStyleBackColor = false;
-			this.TextColor4.Click += new System.EventHandler(this.TextColor4_Click);
-			// 
-			// TextColor6
-			// 
-			this.TextColor6.BackColor = System.Drawing.Color.Pink;
-			this.TextColor6.Location = new System.Drawing.Point(304, 38);
-			this.TextColor6.Margin = new System.Windows.Forms.Padding(0);
-			this.TextColor6.Name = "TextColor6";
-			this.TextColor6.Size = new System.Drawing.Size(36, 32);
-			this.TextColor6.TabIndex = 15;
-			this.toolTip1.SetToolTip(this.TextColor6, "Select a colour to edit.");
-			this.TextColor6.UseVisualStyleBackColor = false;
-			this.TextColor6.Click += new System.EventHandler(this.TextColor6_Click);
-			// 
-			// TextColor5
-			// 
-			this.TextColor5.BackColor = System.Drawing.Color.Orange;
-			this.TextColor5.Location = new System.Drawing.Point(246, 38);
-			this.TextColor5.Margin = new System.Windows.Forms.Padding(0);
-			this.TextColor5.Name = "TextColor5";
-			this.TextColor5.Size = new System.Drawing.Size(36, 32);
-			this.TextColor5.TabIndex = 14;
-			this.toolTip1.SetToolTip(this.TextColor5, "Select a colour to edit.");
-			this.TextColor5.UseVisualStyleBackColor = false;
-			this.TextColor5.Click += new System.EventHandler(this.TextColor5_Click);
-			// 
 			// WebServerStatus
 			// 
 			this.WebServerStatus.BackColor = System.Drawing.Color.OrangeRed;
@@ -553,26 +248,6 @@ namespace Vixen_Messaging
 			this.label66.TabIndex = 59;
 			this.label66.Text = "Play Mode:";
 			this.toolTip1.SetToolTip(this.label66, "Changes between Selected Play options either Randomly or in a Sequential order.");
-			// 
-			// label88
-			// 
-			this.label88.AutoSize = true;
-			this.label88.Location = new System.Drawing.Point(397, 71);
-			this.label88.Name = "label88";
-			this.label88.Size = new System.Drawing.Size(82, 17);
-			this.label88.TabIndex = 66;
-			this.label88.Text = "Max Words:";
-			this.toolTip1.SetToolTip(this.label88, "Enter the Maximum number of words in a message or 0 for unlimited.\r\nWill send rep" +
-        "ly message to sender informing them that their message was too long.");
-			// 
-			// numericUpDownMaxWords
-			// 
-			this.numericUpDownMaxWords.Location = new System.Drawing.Point(483, 70);
-			this.numericUpDownMaxWords.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.numericUpDownMaxWords.Name = "numericUpDownMaxWords";
-			this.numericUpDownMaxWords.Size = new System.Drawing.Size(64, 22);
-			this.numericUpDownMaxWords.TabIndex = 5;
-			this.toolTip1.SetToolTip(this.numericUpDownMaxWords, "Enter 0 for unlimited words.");
 			// 
 			// checkBoxVixenControl
 			// 
@@ -626,17 +301,6 @@ namespace Vixen_Messaging
 			this.richTextBoxMessage.Text = "";
 			this.toolTip1.SetToolTip(this.richTextBoxMessage, resources.GetString("richTextBoxMessage.ToolTip"));
 			// 
-			// label87
-			// 
-			this.label87.Location = new System.Drawing.Point(20, 34);
-			this.label87.Name = "label87";
-			this.label87.Size = new System.Drawing.Size(132, 23);
-			this.label87.TabIndex = 65;
-			this.label87.Text = "CountDown Date:";
-			this.label87.TextAlign = System.Drawing.ContentAlignment.TopRight;
-			this.toolTip1.SetToolTip(this.label87, "Add the word COUNTDOWN to your message to display the number fo days to the selec" +
-        "ted date.");
-			// 
 			// label71
 			// 
 			this.label71.AutoSize = true;
@@ -679,26 +343,6 @@ namespace Vixen_Messaging
 			this.checkBoxWhitelist.UseVisualStyleBackColor = true;
 			this.checkBoxWhitelist.CheckedChanged += new System.EventHandler(this.checkBoxWhitelist_CheckedChanged);
 			// 
-			// label36
-			// 
-			this.label36.AutoSize = true;
-			this.label36.Location = new System.Drawing.Point(296, 31);
-			this.label36.Name = "label36";
-			this.label36.Size = new System.Drawing.Size(119, 17);
-			this.label36.TabIndex = 55;
-			this.label36.Text = "String Orienation:";
-			this.toolTip1.SetToolTip(this.label36, "Set this as per the requirement in Vixen");
-			// 
-			// label45
-			// 
-			this.label45.AutoSize = true;
-			this.label45.Location = new System.Drawing.Point(219, 71);
-			this.label45.Name = "label45";
-			this.label45.Size = new System.Drawing.Size(68, 17);
-			this.label45.TabIndex = 51;
-			this.label45.Text = "Direction:";
-			this.toolTip1.SetToolTip(this.label45, "Text direction");
-			// 
 			// comboBoxPlayMode
 			// 
 			this.comboBoxPlayMode.BackColor = System.Drawing.SystemColors.Window;
@@ -717,7 +361,6 @@ namespace Vixen_Messaging
 			// tabControlMain
 			// 
 			this.tabControlMain.Controls.Add(this.tabPageMain);
-			this.tabControlMain.Controls.Add(this.tabPageTextSetting);
 			this.tabControlMain.Controls.Add(this.localMsgs);
 			this.tabControlMain.Controls.Add(this.tabPageWordLists);
 			this.tabControlMain.Location = new System.Drawing.Point(-2, 10);
@@ -730,6 +373,8 @@ namespace Vixen_Messaging
 			// tabPageMain
 			// 
 			this.tabPageMain.BackColor = System.Drawing.Color.Azure;
+			this.tabPageMain.Controls.Add(this.label4);
+			this.tabPageMain.Controls.Add(this.buttonTextSettings);
 			this.tabPageMain.Controls.Add(this.label2);
 			this.tabPageMain.Controls.Add(this.label1);
 			this.tabPageMain.Controls.Add(this.buttonInstantMSG);
@@ -752,6 +397,27 @@ namespace Vixen_Messaging
 			this.tabPageMain.TabIndex = 0;
 			this.tabPageMain.Tag = "2";
 			this.tabPageMain.Text = "Main";
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(205, 151);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(20, 17);
+			this.label4.TabIndex = 73;
+			this.label4.Text = "2.";
+			// 
+			// buttonTextSettings
+			// 
+			this.buttonTextSettings.BackColor = System.Drawing.Color.Honeydew;
+			this.buttonTextSettings.Location = new System.Drawing.Point(243, 140);
+			this.buttonTextSettings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.buttonTextSettings.Name = "buttonTextSettings";
+			this.buttonTextSettings.Size = new System.Drawing.Size(294, 39);
+			this.buttonTextSettings.TabIndex = 72;
+			this.buttonTextSettings.Text = "Text Settings";
+			this.buttonTextSettings.UseVisualStyleBackColor = false;
+			this.buttonTextSettings.Click += new System.EventHandler(this.buttonTextSettings_Click);
 			// 
 			// label2
 			// 
@@ -829,231 +495,6 @@ namespace Vixen_Messaging
 			this.numericUpDownIntervalMsgs.Size = new System.Drawing.Size(64, 22);
 			this.numericUpDownIntervalMsgs.TabIndex = 15;
 			// 
-			// tabPageTextSetting
-			// 
-			this.tabPageTextSetting.BackColor = System.Drawing.Color.Azure;
-			this.tabPageTextSetting.Controls.Add(this.groupBox4);
-			this.tabPageTextSetting.Controls.Add(this.groupBoxSeqSettings);
-			this.tabPageTextSetting.Location = new System.Drawing.Point(4, 25);
-			this.tabPageTextSetting.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.tabPageTextSetting.Name = "tabPageTextSetting";
-			this.tabPageTextSetting.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.tabPageTextSetting.Size = new System.Drawing.Size(793, 707);
-			this.tabPageTextSetting.TabIndex = 5;
-			this.tabPageTextSetting.Tag = "30";
-			this.tabPageTextSetting.Text = "Text Settings";
-			// 
-			// groupBox4
-			// 
-			this.groupBox4.Controls.Add(this.richTextBoxLog1);
-			this.groupBox4.Location = new System.Drawing.Point(3, 368);
-			this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.groupBox4.Size = new System.Drawing.Size(783, 337);
-			this.groupBox4.TabIndex = 58;
-			this.groupBox4.TabStop = false;
-			this.groupBox4.Text = "Log";
-			// 
-			// richTextBoxLog1
-			// 
-			this.richTextBoxLog1.Location = new System.Drawing.Point(2, 49);
-			this.richTextBoxLog1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.richTextBoxLog1.Name = "richTextBoxLog1";
-			this.richTextBoxLog1.Size = new System.Drawing.Size(773, 258);
-			this.richTextBoxLog1.TabIndex = 2;
-			this.richTextBoxLog1.Text = "";
-			// 
-			// groupBoxSeqSettings
-			// 
-			this.groupBoxSeqSettings.Controls.Add(this.trackBarIntensity);
-			this.groupBoxSeqSettings.Controls.Add(this.label3);
-			this.groupBoxSeqSettings.Controls.Add(this.checkBoxCenterText);
-			this.groupBoxSeqSettings.Controls.Add(this.checkBoxCenterStop);
-			this.groupBoxSeqSettings.Controls.Add(this.label98);
-			this.groupBoxSeqSettings.Controls.Add(this.incomingMessageColourOption);
-			this.groupBoxSeqSettings.Controls.Add(this.label88);
-			this.groupBoxSeqSettings.Controls.Add(this.numericUpDownMaxWords);
-			this.groupBoxSeqSettings.Controls.Add(this.textBoxFontSize);
-			this.groupBoxSeqSettings.Controls.Add(this.buttonFont);
-			this.groupBoxSeqSettings.Controls.Add(this.textBoxFont);
-			this.groupBoxSeqSettings.Controls.Add(this.comboBoxString);
-			this.groupBoxSeqSettings.Controls.Add(this.label36);
-			this.groupBoxSeqSettings.Controls.Add(this.comboBoxTextDirection);
-			this.groupBoxSeqSettings.Controls.Add(this.label45);
-			this.groupBoxSeqSettings.Controls.Add(this.trackBarTextPosition);
-			this.groupBoxSeqSettings.Controls.Add(this.label44);
-			this.groupBoxSeqSettings.Controls.Add(this.trackBarTextSpeed);
-			this.groupBoxSeqSettings.Controls.Add(this.label21);
-			this.groupBoxSeqSettings.Controls.Add(this.RandomColourSelection);
-			this.groupBoxSeqSettings.Location = new System.Drawing.Point(5, 12);
-			this.groupBoxSeqSettings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.groupBoxSeqSettings.Name = "groupBoxSeqSettings";
-			this.groupBoxSeqSettings.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.groupBoxSeqSettings.Size = new System.Drawing.Size(780, 337);
-			this.groupBoxSeqSettings.TabIndex = 1;
-			this.groupBoxSeqSettings.TabStop = false;
-			this.groupBoxSeqSettings.Text = "Incoming Message / Text Settings";
-			// 
-			// checkBoxCenterText
-			// 
-			this.checkBoxCenterText.AutoSize = true;
-			this.checkBoxCenterText.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxCenterText.Location = new System.Drawing.Point(19, 120);
-			this.checkBoxCenterText.Name = "checkBoxCenterText";
-			this.checkBoxCenterText.Size = new System.Drawing.Size(103, 21);
-			this.checkBoxCenterText.TabIndex = 101;
-			this.checkBoxCenterText.Text = "Center Text";
-			this.checkBoxCenterText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.checkBoxCenterText.UseVisualStyleBackColor = true;
-			// 
-			// checkBoxCenterStop
-			// 
-			this.checkBoxCenterStop.AutoSize = true;
-			this.checkBoxCenterStop.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxCenterStop.Location = new System.Drawing.Point(17, 83);
-			this.checkBoxCenterStop.Name = "checkBoxCenterStop";
-			this.checkBoxCenterStop.Size = new System.Drawing.Size(105, 21);
-			this.checkBoxCenterStop.TabIndex = 100;
-			this.checkBoxCenterStop.Text = "Center Stop";
-			this.checkBoxCenterStop.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.checkBoxCenterStop.UseVisualStyleBackColor = true;
-			// 
-			// label98
-			// 
-			this.label98.AutoSize = true;
-			this.label98.Location = new System.Drawing.Point(6, 31);
-			this.label98.Name = "label98";
-			this.label98.Size = new System.Drawing.Size(99, 17);
-			this.label98.TabIndex = 99;
-			this.label98.Text = "Colour Option:";
-			// 
-			// incomingMessageColourOption
-			// 
-			this.incomingMessageColourOption.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.incomingMessageColourOption.FormattingEnabled = true;
-			this.incomingMessageColourOption.Items.AddRange(new object[] {
-            "Single",
-            "Multi",
-            "Random"});
-			this.incomingMessageColourOption.Location = new System.Drawing.Point(111, 29);
-			this.incomingMessageColourOption.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.incomingMessageColourOption.Name = "incomingMessageColourOption";
-			this.incomingMessageColourOption.Size = new System.Drawing.Size(159, 24);
-			this.incomingMessageColourOption.TabIndex = 0;
-			this.incomingMessageColourOption.SelectedIndexChanged += new System.EventHandler(this.incomingMessageColourOption_SelectedIndexChanged);
-			// 
-			// textBoxFontSize
-			// 
-			this.textBoxFontSize.BackColor = System.Drawing.Color.White;
-			this.textBoxFontSize.Enabled = false;
-			this.textBoxFontSize.Location = new System.Drawing.Point(644, 98);
-			this.textBoxFontSize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.textBoxFontSize.Name = "textBoxFontSize";
-			this.textBoxFontSize.Size = new System.Drawing.Size(77, 22);
-			this.textBoxFontSize.TabIndex = 59;
-			this.textBoxFontSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			// 
-			// buttonFont
-			// 
-			this.buttonFont.Location = new System.Drawing.Point(612, 27);
-			this.buttonFont.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.buttonFont.Name = "buttonFont";
-			this.buttonFont.Size = new System.Drawing.Size(132, 26);
-			this.buttonFont.TabIndex = 2;
-			this.buttonFont.Text = "Font Selection";
-			this.buttonFont.UseVisualStyleBackColor = true;
-			this.buttonFont.Click += new System.EventHandler(this.buttonFont_Click);
-			// 
-			// textBoxFont
-			// 
-			this.textBoxFont.BackColor = System.Drawing.Color.White;
-			this.textBoxFont.Enabled = false;
-			this.textBoxFont.ForeColor = System.Drawing.SystemColors.InfoText;
-			this.textBoxFont.Location = new System.Drawing.Point(596, 69);
-			this.textBoxFont.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.textBoxFont.Name = "textBoxFont";
-			this.textBoxFont.Size = new System.Drawing.Size(167, 22);
-			this.textBoxFont.TabIndex = 57;
-			this.textBoxFont.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			// 
-			// comboBoxString
-			// 
-			this.comboBoxString.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBoxString.FormattingEnabled = true;
-			this.comboBoxString.Items.AddRange(new object[] {
-            "Horizontal",
-            "Vertical"});
-			this.comboBoxString.Location = new System.Drawing.Point(433, 29);
-			this.comboBoxString.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.comboBoxString.Name = "comboBoxString";
-			this.comboBoxString.Size = new System.Drawing.Size(114, 24);
-			this.comboBoxString.TabIndex = 1;
-			// 
-			// comboBoxTextDirection
-			// 
-			this.comboBoxTextDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBoxTextDirection.FormattingEnabled = true;
-			this.comboBoxTextDirection.Items.AddRange(new object[] {
-            "Left",
-            "Right",
-            "Up",
-            "Down",
-            "None",
-            "Random"});
-			this.comboBoxTextDirection.Location = new System.Drawing.Point(291, 69);
-			this.comboBoxTextDirection.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.comboBoxTextDirection.Name = "comboBoxTextDirection";
-			this.comboBoxTextDirection.Size = new System.Drawing.Size(82, 24);
-			this.comboBoxTextDirection.TabIndex = 4;
-			// 
-			// trackBarTextPosition
-			// 
-			this.trackBarTextPosition.AutoSize = false;
-			this.trackBarTextPosition.Location = new System.Drawing.Point(100, 159);
-			this.trackBarTextPosition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.trackBarTextPosition.Maximum = 100;
-			this.trackBarTextPosition.Minimum = -100;
-			this.trackBarTextPosition.Name = "trackBarTextPosition";
-			this.trackBarTextPosition.Size = new System.Drawing.Size(300, 32);
-			this.trackBarTextPosition.TabIndex = 8;
-			this.trackBarTextPosition.Scroll += new System.EventHandler(this.trackBarTextPosition_Scroll);
-			this.trackBarTextPosition.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextPosition_MouseDown);
-			this.trackBarTextPosition.MouseHover += new System.EventHandler(this.trackBarTextPosition_MouseHover);
-			// 
-			// label44
-			// 
-			this.label44.AutoSize = true;
-			this.label44.Location = new System.Drawing.Point(10, 166);
-			this.label44.Name = "label44";
-			this.label44.Size = new System.Drawing.Size(62, 17);
-			this.label44.TabIndex = 50;
-			this.label44.Text = "Position:";
-			// 
-			// trackBarTextSpeed
-			// 
-			this.trackBarTextSpeed.AutoSize = false;
-			this.trackBarTextSpeed.Location = new System.Drawing.Point(499, 159);
-			this.trackBarTextSpeed.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.trackBarTextSpeed.Maximum = 20;
-			this.trackBarTextSpeed.Minimum = 1;
-			this.trackBarTextSpeed.Name = "trackBarTextSpeed";
-			this.trackBarTextSpeed.Size = new System.Drawing.Size(276, 32);
-			this.trackBarTextSpeed.TabIndex = 9;
-			this.trackBarTextSpeed.Value = 1;
-			this.trackBarTextSpeed.Scroll += new System.EventHandler(this.trackBarTextSpeed_Scroll);
-			this.trackBarTextSpeed.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextSpeed_MouseDown);
-			this.trackBarTextSpeed.MouseHover += new System.EventHandler(this.trackBarTextSpeed_MouseHover);
-			// 
-			// label21
-			// 
-			this.label21.AutoSize = true;
-			this.label21.Location = new System.Drawing.Point(413, 166);
-			this.label21.Name = "label21";
-			this.label21.Size = new System.Drawing.Size(70, 17);
-			this.label21.TabIndex = 48;
-			this.label21.Text = "Iterations:";
-			// 
 			// localMsgs
 			// 
 			this.localMsgs.BackColor = System.Drawing.Color.Azure;
@@ -1071,8 +512,6 @@ namespace Vixen_Messaging
 			this.groupBoxMessages.Controls.Add(this.groupBox8);
 			this.groupBoxMessages.Controls.Add(this.label96);
 			this.groupBoxMessages.Controls.Add(this.checkBoxLocalRandom);
-			this.groupBoxMessages.Controls.Add(this.dateCountDown);
-			this.groupBoxMessages.Controls.Add(this.label87);
 			this.groupBoxMessages.Location = new System.Drawing.Point(3, 5);
 			this.groupBoxMessages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.groupBoxMessages.Name = "groupBoxMessages";
@@ -1103,20 +542,6 @@ namespace Vixen_Messaging
 			this.label96.Text = "Enter a list of messages in the list box below and/or enter custom messages above" +
     ".\r\nEnter the word COUNTDOWN anywhere to display the number of days to the select" +
     "ed Countdown date above.";
-			// 
-			// dateCountDown
-			// 
-			this.dateCountDown.CalendarForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.dateCountDown.CalendarMonthBackground = System.Drawing.SystemColors.InactiveCaption;
-			this.dateCountDown.CalendarTrailingForeColor = System.Drawing.SystemColors.ControlLightLight;
-			this.dateCountDown.CustomFormat = "";
-			this.dateCountDown.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.dateCountDown.Location = new System.Drawing.Point(168, 31);
-			this.dateCountDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.dateCountDown.Name = "dateCountDown";
-			this.dateCountDown.Size = new System.Drawing.Size(123, 22);
-			this.dateCountDown.TabIndex = 0;
-			this.dateCountDown.Value = new System.DateTime(2017, 12, 25, 0, 0, 0, 0);
 			// 
 			// tabPageWordLists
 			// 
@@ -1239,30 +664,6 @@ namespace Vixen_Messaging
 			// 
 			this.fontDialog1.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			// 
-			// trackBarIntensity
-			// 
-			this.trackBarIntensity.AutoSize = false;
-			this.trackBarIntensity.Location = new System.Drawing.Point(100, 212);
-			this.trackBarIntensity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.trackBarIntensity.Maximum = 100;
-			this.trackBarIntensity.Minimum = 1;
-			this.trackBarIntensity.Name = "trackBarIntensity";
-			this.trackBarIntensity.Size = new System.Drawing.Size(300, 32);
-			this.trackBarIntensity.TabIndex = 102;
-			this.trackBarIntensity.Value = 1;
-			this.trackBarIntensity.Scroll += new System.EventHandler(this.trackBarIntensity_Scroll);
-			this.trackBarIntensity.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextIntensity_MouseDown);
-			this.trackBarIntensity.MouseHover += new System.EventHandler(this.trackBarTextIntensity_MouseHover);
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(10, 219);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(64, 17);
-			this.label3.TabIndex = 103;
-			this.label3.Text = "Intensity:";
-			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1292,9 +693,6 @@ namespace Vixen_Messaging
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
 			this.Load += new System.EventHandler(this.FormMain_Load);
 			this.groupBox2.ResumeLayout(false);
-			this.RandomColourSelection.ResumeLayout(false);
-			this.RandomColourSelection.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxWords)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.SaveAll)).EndInit();
 			this.tabControlMain.ResumeLayout(false);
 			this.tabPageMain.ResumeLayout(false);
@@ -1302,12 +700,6 @@ namespace Vixen_Messaging
 			this.groupBoxPlayOptions.ResumeLayout(false);
 			this.groupBoxPlayOptions.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).EndInit();
-			this.tabPageTextSetting.ResumeLayout(false);
-			this.groupBox4.ResumeLayout(false);
-			this.groupBoxSeqSettings.ResumeLayout(false);
-			this.groupBoxSeqSettings.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.trackBarTextPosition)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBarTextSpeed)).EndInit();
 			this.localMsgs.ResumeLayout(false);
 			this.groupBoxMessages.ResumeLayout(false);
 			this.groupBoxMessages.PerformLayout();
@@ -1318,7 +710,6 @@ namespace Vixen_Messaging
 			((System.ComponentModel.ISupportInitialize)(this.buttonStart)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStop)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonHelp)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBarIntensity)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1343,37 +734,11 @@ namespace Vixen_Messaging
         private System.Windows.Forms.PictureBox buttonStop;
 		private System.Windows.Forms.PictureBox buttonHelp;
 		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.TabPage tabPageTextSetting;
-		private System.Windows.Forms.GroupBox groupBoxSeqSettings;
-        private System.Windows.Forms.ComboBox comboBoxTextDirection;
-        private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.TrackBar trackBarTextPosition;
-        private System.Windows.Forms.Label label44;
-		private System.Windows.Forms.TrackBar trackBarTextSpeed;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.GroupBox RandomColourSelection;
-        private System.Windows.Forms.Button TextColor1;
-        private System.Windows.Forms.Button TextColor10;
-        private System.Windows.Forms.Button TextColor8;
-        private System.Windows.Forms.Button TextColor9;
-        private System.Windows.Forms.Button TextColor2;
-        private System.Windows.Forms.Button TextColor3;
-        private System.Windows.Forms.Button TextColor7;
-        private System.Windows.Forms.Button TextColor4;
-        private System.Windows.Forms.Button TextColor6;
-		private System.Windows.Forms.Button TextColor5;
-        private System.Windows.Forms.ComboBox comboBoxString;
-		private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.Button WebServerStatus;
-		private System.Windows.Forms.TextBox textBoxFont;
-        private System.Windows.Forms.Button buttonFont;
-        private System.Windows.Forms.TextBox textBoxFontSize;
+		private System.Windows.Forms.Button WebServerStatus;
         private System.Windows.Forms.PictureBox pictureBoxSaveBlacklist;
 		private System.Windows.Forms.PictureBox pictureBoxSaveWhitelist;
-		private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label66;
-        private System.Windows.Forms.RichTextBox richTextBoxLog;
-		private System.Windows.Forms.RichTextBox richTextBoxLog1;
+		private System.Windows.Forms.RichTextBox richTextBoxLog;
         private System.Windows.Forms.Button buttonSaveLog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
 		private System.Windows.Forms.Button buttonStopSequence;
@@ -1386,8 +751,6 @@ namespace Vixen_Messaging
 		private System.Windows.Forms.ComboBox comboBoxPlayMode;
         private System.Windows.Forms.CheckBox checkBoxTwilio;
 		private System.Windows.Forms.CheckBox checkBoxLocal;
-        private System.Windows.Forms.Label label88;
-		private System.Windows.Forms.NumericUpDown numericUpDownMaxWords;
         private System.Windows.Forms.Timer timerCheckVixenEnabled;
 		private System.Windows.Forms.CheckBox checkBoxVixenControl;
 		private System.Windows.Forms.PictureBox SaveAll;
@@ -1395,32 +758,16 @@ namespace Vixen_Messaging
 		private System.Windows.Forms.GroupBox groupBoxMessages;
 		private System.Windows.Forms.CheckBox checkBoxLocalRandom;
 		private System.Windows.Forms.RichTextBox richTextBoxMessage;
-		private System.Windows.Forms.DateTimePicker dateCountDown;
-		private System.Windows.Forms.Label label87;
 		private System.Windows.Forms.Label label96;
 		private System.Windows.Forms.GroupBox groupBox8;
-		private System.Windows.Forms.Label labelColour4;
-		private System.Windows.Forms.Label labelColour3;
-		private System.Windows.Forms.Label labelColour2;
-		private System.Windows.Forms.Label labelColour1;
-		private System.Windows.Forms.Label label98;
-		private System.Windows.Forms.ComboBox incomingMessageColourOption;
-		private System.Windows.Forms.Label labelColour10;
-		private System.Windows.Forms.Label labelColour9;
-		private System.Windows.Forms.Label labelColour8;
-		private System.Windows.Forms.Label labelColour7;
-		private System.Windows.Forms.Label labelColour6;
-		private System.Windows.Forms.Label labelColour5;
 		private System.Windows.Forms.FontDialog fontDialog1;
 		private System.Windows.Forms.Button buttonSettings;
 		private System.Windows.Forms.Button buttonInstantMSG;
 		private System.Windows.Forms.TextBox textBoxInstantMSG;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.CheckBox checkBoxCenterText;
-		private System.Windows.Forms.CheckBox checkBoxCenterStop;
-		private System.Windows.Forms.TrackBar trackBarIntensity;
-		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Button buttonTextSettings;
     }
 }
 

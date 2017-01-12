@@ -123,11 +123,7 @@ namespace Vixen_Messaging
 			Profiles,
 			AppSettings,
 			Preferences,
-			Message,
-			SnowFlakes,
-			Meteor,
-			Twinkle,
-			Fire
+			Message
 		};
 
 	}

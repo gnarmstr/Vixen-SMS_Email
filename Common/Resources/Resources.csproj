@@ -93,6 +93,8 @@
     <None Include="Save.png" />
     <None Include="ButtonBackgroundImageHover.jpg" />
     <None Include="ButtonBackgroundImage.jpg" />
+    <EmbeddedResource Include="Resources\Blacklist.txt" />
+    <EmbeddedResource Include="Resources\Whitelist.txt" />
     <Content Include="Vixen Messaging.png" />
   </ItemGroup>
   <ItemGroup />

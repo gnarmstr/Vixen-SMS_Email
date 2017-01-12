@@ -81,6 +81,93 @@ namespace Common.Resources.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to anal
+        ///anus
+        ///arse
+        ///ass
+        ///asshole
+        ///axe
+        ///b00b
+        ///ball
+        ///bang
+        ///bastard
+        ///biatch
+        ///bitch
+        ///bits
+        ///bloody
+        ///blow
+        ///blumpkin
+        ///boll
+        ///boner
+        ///boob
+        ///bugger
+        ///bum
+        ///butt
+        ///clit
+        ///cock
+        ///coon
+        ///cornhole
+        ///crap
+        ///cum
+        ///cunt
+        ///damn
+        ///dick
+        ///dildo
+        ///dyke
+        ///facial
+        ///fag
+        ///fart
+        ///feck
+        ///felch
+        ///fellate
+        ///fellatio
+        ///flange
+        ///flap
+        ///FU
+        ///fuck
+        ///fudge
+        ///gang
+        ///gino
+        ///gmilf
+        ///god
+        ///homo
+        ///jerk
+        ///jizz
+        ///job
+        ///knob
+        ///labia
+        ///lmao
+        ///lmfao
+        ///load
+        ///migra
+        ///muff
+        ///mufugly
+        ///nigg
+        ///omg
+        ///penis
+        ///piss
+        ///poo
+        ///prick
+        ///pube
+        ///pussy
+        ///queer
+        ///scrotum
+        ///seed
+        ///sex
+        ///sh1t
+        ///shit
+        ///shum
+        ///slut
+        ///smegma
+        ///smok [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Blacklist {
+            get {
+                return ResourceManager.GetString("Blacklist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap ButtonBackgroundImage {
@@ -237,6 +324,67 @@ namespace Common.Resources.Properties {
             get {
                 object obj = ResourceManager.GetObject("Vixen_Messaging", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to a
+        ///aback
+        ///abacus
+        ///abandon
+        ///abandoned
+        ///abandonment
+        ///abashed
+        ///abbreviate
+        ///abbreviation
+        ///abdicate
+        ///abdication
+        ///abdomen
+        ///abdominal
+        ///abduct
+        ///abduction
+        ///aberration
+        ///abet
+        ///abhor
+        ///abhorrence
+        ///abhorrent
+        ///abiding
+        ///ability
+        ///abject
+        ///ablaze
+        ///able
+        ///ably
+        ///abnormal
+        ///abnormality
+        ///abnormally
+        ///aboard
+        ///abolish
+        ///abolition
+        ///abolitionist
+        ///abominable
+        ///aboriginal
+        ///aborigine
+        ///abort
+        ///abortion
+        ///abortive
+        ///abound
+        ///about
+        ///above
+        ///aboveboard
+        ///abrasive
+        ///abrasively
+        ///abreast
+        ///abridge
+        ///abridgment
+        ///abroad
+        ///abrupt
+        ///abruptly
+        ///abruptness
+        ///abscess        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string Whitelist {
+            get {
+                return ResourceManager.GetString("Whitelist", resourceCulture);
             }
         }
     }

@@ -31,6 +31,8 @@ namespace Vixen_Messaging
 
 	public partial class FormMain : Form
 	{
+		
+		private Form _msgTextSettings;
 
 		public FormMain()
 		{
@@ -38,7 +40,7 @@ namespace Vixen_Messaging
 			ClientSize = new Size(784, 1091);
 			ForeColor = ThemeColorTable.ForeColor;
 			BackColor = ThemeColorTable.BackgroundColor;
-			ThemeUpdateControls.UpdateControls(this, new List<Control>(new[] { WebServerStatus, TextColor1, TextColor2, TextColor3, TextColor4, TextColor5, TextColor6, TextColor7, TextColor8, TextColor9, TextColor10 }));
+			ThemeUpdateControls.UpdateControls(this, new List<Control>(new[] { WebServerStatus}));
 			WebServerStatus.ForeColor = Color.Black;
 		}
 
@@ -66,12 +68,36 @@ namespace Vixen_Messaging
 			if (File.Exists(GlobalVar.Blacklistlocation + ".bkp"))
 			{
 				var copyfile = File.ReadAllText(GlobalVar.Blacklistlocation + ".bkp");
-				File.WriteAllText(GlobalVar.Blacklistlocation, copyfile);
+				if (copyfile != "")
+					File.WriteAllText(GlobalVar.Blacklistlocation, copyfile);
+				else
+				{
+					File.WriteAllText(GlobalVar.Blacklistlocation + ".bkp", Resources.Blacklist);
+					File.WriteAllText(GlobalVar.Blacklistlocation, Resources.Blacklist);
+				}
+			}
+			else
+			{
+				File.Create(GlobalVar.Blacklistlocation + ".bkp");
+				File.WriteAllText(GlobalVar.Blacklistlocation + ".bkp", Resources.Blacklist);
+				File.WriteAllText(GlobalVar.Blacklistlocation, Resources.Blacklist);
 			}
 			if (File.Exists(GlobalVar.Whitelistlocation + ".bkp"))
 			{
 				var copyfile = File.ReadAllText(GlobalVar.Whitelistlocation + ".bkp");
-				File.WriteAllText(GlobalVar.Whitelistlocation, copyfile);
+				if (copyfile != "")
+					File.WriteAllText(GlobalVar.Whitelistlocation, copyfile);
+				else
+				{
+					File.WriteAllText(GlobalVar.Whitelistlocation + ".bkp", Resources.Whitelist);
+					File.WriteAllText(GlobalVar.Whitelistlocation, Resources.Whitelist);
+				}
+			}
+			else
+			{
+				File.Create(GlobalVar.Whitelistlocation + ".bkp");
+				File.WriteAllText(GlobalVar.Whitelistlocation + ".bkp", Resources.Whitelist);
+				File.WriteAllText(GlobalVar.Whitelistlocation, Resources.Whitelist);
 			}
 			if (File.Exists(GlobalVar.LocalMessages + ".bkp"))
 			{
@@ -98,8 +124,6 @@ namespace Vixen_Messaging
 
 			//Ensures correct groups are enabled or visable on first load.
 			buttonStop.Enabled = false;
-
-			ColourVisible();
 
 			#endregion
 
@@ -187,7 +211,6 @@ namespace Vixen_Messaging
 				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3 Messaging"));
 			GlobalVar.OutputSequenceFolder = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "OutputSequence",
 				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Sequence\\VixenOut.tim"));
-			comboBoxString.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "StringOrienation", "Horizontal");
 			GlobalVar.MessageLog = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "LogMessageFile",
 				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
 					"Documents\\Vixen 3 Messaging\\Logs\\Message.log"));
@@ -196,41 +219,25 @@ namespace Vixen_Messaging
 					"Documents\\Vixen 3 Messaging\\Logs\\Blacklist.log"));
 			GlobalVar.AutoStartMsgRetrieval = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", false);
 			GlobalVar.CenterStop = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterStop", false);
-			checkBoxCenterStop.Checked = GlobalVar.CenterStop;
+			GlobalVar.CenterStop = GlobalVar.CenterStop;
 			GlobalVar.CenterText = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterText", false);
-			checkBoxCenterText.Checked = GlobalVar.CenterText;
+			GlobalVar.CenterText = GlobalVar.CenterText;
 			checkBoxBlacklist.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxBlack_list", true);
-			incomingMessageColourOption.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
-				"incomingMessageColourOption", "Random");
-			TextColor1.BackColor =
-				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor1", -16776961)));
-			TextColor2.BackColor =
-				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor2", -65536)));
-			TextColor3.BackColor =
-				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor3", -16711936)));
-			TextColor4.BackColor =
-				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor4", -16776961)));
-			TextColor5.BackColor =
-				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor5", -32640)));
-			TextColor6.BackColor =
-				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor6", -32513)));
-			TextColor7.BackColor =
-				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor7", -16711681)));
-			TextColor8.BackColor =
-				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor8", -8372160)));
-			TextColor9.BackColor =
-				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor9", -65536)));
-			TextColor10.BackColor =
-				Color.FromArgb(Convert.ToInt32(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor10", -8388353)));
-			trackBarTextSpeed.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextSpeed", 1);
-			trackBarTextPosition.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextPosition", 0);
-			trackBarIntensity.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarIntensity", 100);
+			GlobalVar.IncomingMessageColourOption = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "IncomingMessageColourOption", 0);
+			List<Color> defaultColor = new List<Color>() { Color.White, Color.Red, Color.LawnGreen, Color.Blue, Color.Orange, Color.Aqua, Color.BlueViolet, Color.DarkOliveGreen, Color.Yellow, Color.DodgerBlue };
+			for (int i = 0; i < 10; i++)
+			{
+				GlobalVar.TextColor.Add(Color.FromArgb(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor" + i, Convert.ToInt32(defaultColor[i].ToArgb()))));
+			}
+			GlobalVar.TextSpeed = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextSpeed", 1);
+			GlobalVar.TextPosition = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextPosition", 0);
+			GlobalVar.Intensity = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarIntensity", 100);
 			tabControlMain.SelectedIndex = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "tabControlMain", 0);
-			textBoxFont.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFont", "Arial");
-			textBoxFontSize.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFontSize", "10");
+			GlobalVar.Font = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFont", "Arial");
+			GlobalVar.FontSize = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFontSize", "10");
 			GlobalVar.SeqIntervalTime = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SeqIntervalTime", 15);
-			comboBoxTextDirection.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxTextDirection",
-				"Left");
+			GlobalVar.TextDirection = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextDirection", "Left");
+			GlobalVar.StringOrientation = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "StringOrientation", "Horizontal");
 			GlobalVar.ReturnBannedMSG = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "ReturnBannedMSG",
 				"You have been banned for the night for sending inappropiate words.");
 			comboBoxPlayMode.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxPlayMode",
@@ -243,10 +250,10 @@ namespace Vixen_Messaging
 			checkBoxLocal.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocal", true);
 			checkBoxTwilio.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwilio", false);
 			GlobalVar.TwilioPhoneNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwilioPhoneNumber", "");
-			numericUpDownMaxWords.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords", 0);
+			GlobalVar.MaxWords = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords", 0);
 			GlobalVar.CountDownDate = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString",
 				"25/12/15");
-			dateCountDown.Value = Convert.ToDateTime(GlobalVar.CountDownDate);
+		//	dateCountDown.Value = Convert.ToDateTime(GlobalVar.CountDownDate);
 			checkBoxVixenControl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl",
 				false);
 			GlobalVar.GroupName = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", "");
@@ -530,11 +537,11 @@ namespace Vixen_Messaging
 						{
 							SendReturnTextTwilio(messageFrom,
 								"Auto Reply: Sorry, your message is too long and will not be display. Please reduce the number of words in your message to below " +
-								(numericUpDownMaxWords.Value + 1) + " and resend. Thank you.");
+								(GlobalVar.MaxWords + 1) + " and resend. Thank you.");
 							twilio.DeleteMessage(messageSid);
 						}
 						SendReturnTextTwilio(messageFrom,
-							"Auto Reply: Sorry one or more of the names you sent is not in the approved list or you are using unapproved abbriviations! You words have been recoreded and if found to be non offensive then they will be added to the list. Please try again on another day.");
+							"Auto Reply: Sorry one or more of the names you sent is not in the approved list or you are using unapproved abbriviations! Your words have been recoreded and if found to be non offensive then they will be added to the list. Please try again on another day.");
 						twilio.DeleteMessage(messageSid);
 						ShortTimer();
 						return;
@@ -599,7 +606,7 @@ namespace Vixen_Messaging
 				var inputFileName = inputFolderName + "\\SequenceTemplate.tim";
 				var fileText = File.ReadAllText(inputFileName);
 				var msgWordCount = msg.Split(' ').Length;
-				if (numericUpDownMaxWords.Value != 0 & msgWordCount > numericUpDownMaxWords.Value)
+				if (GlobalVar.MaxWords != 0 & msgWordCount > GlobalVar.MaxWords)
 				{
 					notWhitemsg = false;
 					maxWordCount = true;
@@ -710,31 +717,32 @@ namespace Vixen_Messaging
 			//Text Line Number
 			fileText1 = fileText1.Replace("NamePlaceholder1", msg);
 
-			//		fileText1 = fileText1.Replace("TextPosition_Change", trackBarTextPosition.Value.ToString());
-			if (comboBoxTextDirection.Text == "Random")
+			fileText1 = fileText1.Replace("TextPosition_Change", GlobalVar.TextPosition.ToString());
+			List<string> textDirection1 = new List<string>() { "Left", "Right", "Up", "Down" , "None"};
+			if (GlobalVar.TextDirection == "Random")
 			{
-				comboBoxTextDirection.SelectedIndex = _random.Next(0, 5);
-				fileText1 = fileText1.Replace("TextDirection_Change", comboBoxTextDirection.Text);
-				comboBoxTextDirection.SelectedIndex = 5;
+				var textDirection = _random.Next(0, 5);
+				
+				fileText1 = fileText1.Replace("TextDirection_Change", textDirection1[textDirection]);
 			}
 			else
 			{
-				fileText1 = fileText1.Replace("TextDirection_Change", comboBoxTextDirection.Text);
+				fileText1 = fileText1.Replace("TextDirection_Change", GlobalVar.TextDirection);
 			}
 			fileText1 = fileText1.Replace("NodeId_Change", GlobalVar.GroupID); //adds NodeId
-			fileText1 = fileText1.Replace("StringOrienation_Change", comboBoxString.Text);
-			fileText1 = fileText1.Replace("Speed_Change", trackBarTextSpeed.Value.ToString());
-			fileText1 = fileText1.Replace("Intensity_Change", trackBarIntensity.Value.ToString());
-			fileText1 = fileText1.Replace("FontName_Change", textBoxFont.Text);
-			fileText1 = fileText1.Replace("FontSize_Change", textBoxFontSize.Text);
-			fileText1 = fileText1.Replace("CenterStop_Change", (checkBoxCenterStop.Checked.ToString()).ToLower());
-			fileText1 = fileText1.Replace("CenterText_Change", (checkBoxCenterText.Checked.ToString()).ToLower());
+			fileText1 = fileText1.Replace("StringOrienation_Change", GlobalVar.StringOrientation);
+			fileText1 = fileText1.Replace("Speed_Change", GlobalVar.TextSpeed.ToString());
+			fileText1 = fileText1.Replace("Intensity_Change", GlobalVar.Intensity.ToString());
+			fileText1 = fileText1.Replace("FontName_Change", GlobalVar.Font);
+			fileText1 = fileText1.Replace("FontSize_Change", GlobalVar.FontSize);
+			fileText1 = fileText1.Replace("CenterStop_Change", (GlobalVar.CenterStop.ToString()).ToLower());
+			fileText1 = fileText1.Replace("CenterText_Change", (GlobalVar.CenterText.ToString()).ToLower());
 
 			double X = 1, Y = 1, Z = 1;
-			switch (incomingMessageColourOption.Text)
+			switch (GlobalVar.IncomingMessageColourOption)
 			{
-				case "Single":
-					hexMultiValue = TextColor1.BackColor.A.ToString("x2") + TextColor1.BackColor.R.ToString("x2") + TextColor1.BackColor.G.ToString("x2") + TextColor1.BackColor.B.ToString("x2");
+				case 0:
+					hexMultiValue = GlobalVar.TextColor[1].A.ToString("x2") + GlobalVar.TextColor[1].R.ToString("x2") + GlobalVar.TextColor[1].G.ToString("x2") + GlobalVar.TextColor[1].B.ToString("x2");
 					HEXToXYZ(hexMultiValue, out X, out Y, out Z);
 					break;
 				//case "Multi":
@@ -745,7 +753,7 @@ namespace Vixen_Messaging
 				//	multilineColour = Convert.ToUInt32(hexMultiValue, 16);
 				//	fileText1 = fileText1.Replace("Colour_Change1", multilineColour.ToString());
 				//	break;
-				case "Random":
+				case 2:
 					RandomColourSelect(out hexMultiValue);
 					HEXToXYZ(hexMultiValue, out X, out Y, out Z);
 					break;
@@ -809,6 +817,17 @@ namespace Vixen_Messaging
 			var rgx = new Regex("[^a-zA-Z0-9]");
 
 			#region Checks against Blacklist
+
+			//if (msg.Contains(Resources.Blacklist))
+			//{
+			//	LogDisplay(GlobalVar.LogMsg = ("Bad Words Detected!"));
+			//	Log(" " + msg + ". Bad Word Detected! - " + msg);
+			//	notWhite = false;
+			//	return true;
+			//}
+			//notWhite = false;
+			//return false;
+
 			if (checkBoxBlacklist.Checked)
 			{
 				//Check against your Blacklist
@@ -822,9 +841,9 @@ namespace Vixen_Messaging
 
 						if (textLine != null && msg.ToLower().Contains(textLine))
 						{
-							LogDisplay(GlobalVar.LogMsg = ("Bad Words Detected!"));
+							LogDisplay(GlobalVar.LogMsg = ("Bad Word/s Detected in " + msg + " - " + textLine));
 							file.Close();
-							Log(" " + msg + ". Bad Word Detected! - " + textLine);
+							Log(" " + msg + ". Bad Word/s Detected! - " + textLine);
 							notWhite = false;
 							return true;
 						}
@@ -910,125 +929,7 @@ namespace Vixen_Messaging
 		}
 #endregion
 
-#region Colour
-
-		#region Colour Dialog Box and button colour settings
-
-		private void TextColor1_Click(object sender, EventArgs e)
-		{
-			int colNum = 1;
-			ColPal(colNum, TextColor1.BackColor);
-		}
-
-		private void TextColor2_Click(object sender, EventArgs e)
-		{
-			int colNum = 2;
-			ColPal(colNum, TextColor2.BackColor);
-		}
-
-		private void TextColor3_Click(object sender, EventArgs e)
-		{
-			int colNum = 3;
-			ColPal(colNum, TextColor3.BackColor);
-		}
-
-		private void TextColor4_Click(object sender, EventArgs e)
-		{
-			int colNum = 4;
-			ColPal(colNum, TextColor4.BackColor);
-		}
-
-		private void TextColor5_Click(object sender, EventArgs e)
-		{
-			int colNum = 5;
-			ColPal(colNum, TextColor5.BackColor);
-		}
-
-		private void TextColor6_Click(object sender, EventArgs e)
-		{
-			int colNum = 6;
-			ColPal(colNum, TextColor6.BackColor);
-		}
-
-		private void TextColor7_Click(object sender, EventArgs e)
-		{
-			int colNum = 7;
-			ColPal(colNum, TextColor7.BackColor);
-		}
-
-		private void TextColor8_Click(object sender, EventArgs e)
-		{
-			int colNum = 8;
-			ColPal(colNum, TextColor8.BackColor);
-		}
-
-		private void TextColor9_Click(object sender, EventArgs e)
-		{
-			int colNum = 9;
-			ColPal(colNum, TextColor9.BackColor);
-		}
-
-		private void TextColor10_Click(object sender, EventArgs e)
-		{
-			int colNum = 10;
-			ColPal(colNum, TextColor10.BackColor);
-		}
-
-		private void ColourVisible()
-		{
-			var colourVisible = new Label[]
-			{
-				labelColour1, labelColour2, labelColour3, labelColour4, labelColour5, labelColour6, labelColour7, labelColour8,
-				labelColour9, labelColour10
-			};
-			var i = 0;
-			switch (incomingMessageColourOption.Text)
-			{
-				case "Single":
-					RandomColourSelection.Text = @"Single Colour Selection";
-					colourVisible[i].Visible = true;
-					do
-					{
-						i++;
-						colourVisible[i].Visible = false;
-					} while (i < 9);
-					break;
-				case "Multi":
-					RandomColourSelection.Text = @"Multiple Colour Selection";
-					do
-					{
-						colourVisible[i].Visible = true;
-						i++;
-					} while (i < 4);
-					do
-					{
-						colourVisible[i].Visible = false;
-						i++;
-					} while (i < 10);
-					break;
-				case "Random":
-					RandomColourSelection.Text = @"Random Colour Selection";
-					do
-					{
-						colourVisible[i].Visible = true;
-						i++;
-					} while (i < 10);
-					break;
-			}
-		}
-
-		private void ColPal(int colNum, Color current)
-		{
-			colorDialog1.Color = current;
-			colorDialog1.ShowDialog();
-
-			var btn = new Button[] { TextColor1, TextColor1, TextColor2, TextColor3, TextColor4, TextColor5, TextColor6, TextColor7, TextColor8, TextColor9, TextColor10 };
-			btn[colNum].BackColor = colorDialog1.Color;
-			SeqSave();
-		}
-		#endregion
-
-		#region Colour Selection
+#region Colour Selection
 		private static Random _random = new Random();
 		private void RandomColourSelect(out string hexValue)
 		{
@@ -1036,12 +937,12 @@ namespace Vixen_Messaging
 			{
 			//	var random = new Random();
 				var randomCol = _random.Next(0, 10);
-				var btn = new Button[] { TextColor1, TextColor2, TextColor3, TextColor4, TextColor5, TextColor6, TextColor7, TextColor8, TextColor9, TextColor10 };
-				hexValue = btn[randomCol].BackColor.A.ToString("x2") + btn[randomCol].BackColor.R.ToString("x2") + btn[randomCol].BackColor.G.ToString("x2") + btn[randomCol].BackColor.B.ToString("x2");
+		//		var btn = new Button[] { TextColor1, TextColor2, TextColor3, TextColor4, TextColor5, TextColor6, TextColor7, TextColor8, TextColor9, TextColor10 };
+				hexValue = GlobalVar.TextColor[randomCol].A.ToString("x2") + GlobalVar.TextColor[randomCol].R.ToString("x2") + GlobalVar.TextColor[randomCol].G.ToString("x2") + GlobalVar.TextColor[randomCol].B.ToString("x2");
+
+		//		hexValue = btn[randomCol].BackColor.A.ToString("x2") + btn[randomCol].BackColor.R.ToString("x2") + btn[randomCol].BackColor.G.ToString("x2") + btn[randomCol].BackColor.B.ToString("x2");
 			} while (hexValue == "ff000000");
 		}
-#endregion
-
 #endregion
 
 #region Button Start and Stop checking for Messages
@@ -1161,7 +1062,6 @@ namespace Vixen_Messaging
 		private void LogDisplay(string logMsg)
 		{
 			richTextBoxLog.Text = richTextBoxLog.Text.Insert(0, (DateTime.Now.ToString("h:mm tt ")) + logMsg + "\n");
-			richTextBoxLog1.Text = richTextBoxLog.Text.Insert(0, (DateTime.Now.ToString("h:mm tt ")) + logMsg + "\n");
 		}
 		#endregion
 
@@ -1208,34 +1108,39 @@ namespace Vixen_Messaging
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "VixenServer", GlobalVar.VixenServer);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "SequenceTemplate", GlobalVar.SequenceTemplate);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "OutputSequence", GlobalVar.OutputSequenceFolder);
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "StringOrienation", comboBoxString.Text);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "StringOrientation", GlobalVar.StringOrientation);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "LogMessageFile", GlobalVar.MessageLog);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "LogBlacklistFile", GlobalVar.Blacklistlocation);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", GlobalVar.AutoStartMsgRetrieval);
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterStop", (checkBoxCenterStop.Checked.ToString()).ToLower());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterText", (checkBoxCenterText.Checked.ToString()).ToLower());
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterStop", (GlobalVar.CenterStop.ToString()).ToLower());
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterText", (GlobalVar.CenterText.ToString()).ToLower());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxBlack_list", checkBoxBlacklist.Checked);
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "incomingMessageColourOption",
-				incomingMessageColourOption.Text);
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor1", TextColor1.BackColor.ToArgb());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor2", TextColor2.BackColor.ToArgb());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor3", TextColor3.BackColor.ToArgb());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor4", TextColor4.BackColor.ToArgb());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor5", TextColor5.BackColor.ToArgb());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor6", TextColor6.BackColor.ToArgb());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor7", TextColor7.BackColor.ToArgb());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor8", TextColor8.BackColor.ToArgb());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor9", TextColor9.BackColor.ToArgb());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor10", TextColor10.BackColor.ToArgb());
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "IncomingMessageColourOption",
+				GlobalVar.IncomingMessageColourOption);
+			for (int i = 0; i < 10; i++)
+			{
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor" + i, Convert.ToInt32(GlobalVar.TextColor[i].ToArgb()).ToString());
+			}
+
+			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor1", TextColor1.BackColor.ToArgb());
+			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor2", TextColor2.BackColor.ToArgb());
+			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor3", TextColor3.BackColor.ToArgb());
+			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor4", TextColor4.BackColor.ToArgb());
+			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor5", TextColor5.BackColor.ToArgb());
+			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor6", TextColor6.BackColor.ToArgb());
+			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor7", TextColor7.BackColor.ToArgb());
+			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor8", TextColor8.BackColor.ToArgb());
+			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor9", TextColor9.BackColor.ToArgb());
+			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor10", TextColor10.BackColor.ToArgb());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextPosition",
-				trackBarTextPosition.Value.ToString());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextSpeed", trackBarTextSpeed.Value.ToString());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarIntensity", trackBarIntensity.Value.ToString());
+				GlobalVar.TextPosition.ToString());
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextSpeed", GlobalVar.TextSpeed.ToString());
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarIntensity", GlobalVar.Intensity.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "tabControlMain", tabControlMain.SelectedIndex);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "SeqIntervalTime", GlobalVar.SeqIntervalTime.ToString());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFont", textBoxFont.Text);
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFontSize", textBoxFontSize.Text);
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxTextDirection", comboBoxTextDirection.Text);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFont", GlobalVar.Font);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFontSize", GlobalVar.FontSize);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextDirection", GlobalVar.TextDirection);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "ReturnBannedMSG", GlobalVar.ReturnBannedMSG);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxPlayMode", comboBoxPlayMode.Text);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocalRandom",
@@ -1249,7 +1154,7 @@ namespace Vixen_Messaging
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TwilioPhoneNumber", GlobalVar.TwilioPhoneNumber);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString", GlobalVar.CountDownDate);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords",
-				numericUpDownMaxWords.Value.ToString());
+				GlobalVar.MaxWords.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl",
 				checkBoxVixenControl.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", GlobalVar.GroupName);
@@ -1306,22 +1211,6 @@ namespace Vixen_Messaging
 			checkBoxWhitelist.Checked = !checkBoxBlacklist.Checked;
 		}
 
-		private void FontSelection ()
-		{
-			fontDialog1.Font = new Font(textBoxFont.Text, (int)Math.Round(double.Parse(textBoxFontSize.Text)));
-			if (fontDialog1.ShowDialog() != DialogResult.Cancel)
-			{
-				
-				textBoxFont.Text = string.Format(fontDialog1.Font.Name);
-				textBoxFontSize.Text = string.Format(fontDialog1.Font.Size.ToString());
-			}
-		}
-
-		private void buttonFont_Click(object sender, EventArgs e)
-		{
-			
-			FontSelection();
-		}
 
 		private void pictureBoxSaveBlacklist_Click(object sender, EventArgs e)
 		{
@@ -1401,17 +1290,12 @@ namespace Vixen_Messaging
 			messageBox.ShowDialog();
 		}
 
-		private void incomingMessageColourOption_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			ColourVisible();
-		}
-
 #endregion
 
 		private void buttonSettings_Click(object sender, EventArgs e)
 		{
-			var MSGSettings = new MessagingSettings();
-			MSGSettings.ShowDialog();
+			var msgSettings = new MessagingSettings();
+			msgSettings.ShowDialog();
 		}
 
 		private void buttonInstantMSG_Click(object sender, EventArgs e)
@@ -1420,57 +1304,32 @@ namespace Vixen_Messaging
 			{
 				bool blacklist, notWhitemsg, maxWordCount;
 				SendMessageToVixen(textBoxInstantMSG.Text, out blacklist, out notWhitemsg, out maxWordCount);
+
+
+				if (!maxWordCount)
+				{
+					if (blacklist && !notWhitemsg)
+					{
+						LogDisplay(GlobalVar.LogMsg = ("Auto Reply: Please reframe from using inappropiate words. If this happens again your phone number will be banned."));
+						return;
+					}
+					if (!notWhitemsg)
+					{
+						LogDisplay(GlobalVar.LogMsg = ("Auto Reply: Your message will appear soon in lights."));
+						return;
+					}
+				}
+				else
+				{
+					LogDisplay(GlobalVar.LogMsg = ("Auto Reply: Sorry, your message is too long and will not be display. Please reduce the number of words in your message to below " + (GlobalVar.MaxWords + 1) + " and resend. Thank you."));
+				}
+
 			}
 			else
 			{
 				var messageBox = new MessageBoxForm(@"Instant Message box is empty. Add message and try again", @"Information", MessageBoxButtons.OK, SystemIcons.Information);
 				messageBox.ShowDialog();
 			}
-		}
-
-		private void trackBarTextPosition_Scroll(object sender, EventArgs e)
-		{
-			toolTip1.SetToolTip(trackBarTextPosition, trackBarTextPosition.Value.ToString());
-		}
-
-		private void trackBarTextPosition_MouseDown(object sender, MouseEventArgs e)
-		{
-			toolTip1.SetToolTip(trackBarTextPosition, trackBarTextPosition.Value.ToString());
-		}
-
-		private void trackBarTextPosition_MouseHover(object sender, EventArgs e)
-		{
-			toolTip1.SetToolTip(trackBarTextPosition, trackBarTextPosition.Value.ToString());
-		}
-
-		private void trackBarTextSpeed_Scroll(object sender, EventArgs e)
-		{
-			toolTip1.SetToolTip(trackBarTextSpeed, trackBarTextSpeed.Value.ToString());
-		}
-
-		private void trackBarTextSpeed_MouseDown(object sender, MouseEventArgs e)
-		{
-			toolTip1.SetToolTip(trackBarTextSpeed, trackBarTextSpeed.Value.ToString());
-		}
-
-		private void trackBarTextSpeed_MouseHover(object sender, EventArgs e)
-		{
-			toolTip1.SetToolTip(trackBarTextSpeed, trackBarTextSpeed.Value.ToString());
-		}
-
-		private void trackBarIntensity_Scroll(object sender, EventArgs e)
-		{
-			toolTip1.SetToolTip(trackBarIntensity, trackBarIntensity.Value.ToString());
-		}
-
-		private void trackBarTextIntensity_MouseDown(object sender, MouseEventArgs e)
-		{
-			toolTip1.SetToolTip(trackBarIntensity, trackBarIntensity.Value.ToString());
-		}
-
-		private void trackBarTextIntensity_MouseHover(object sender, EventArgs e)
-		{
-			toolTip1.SetToolTip(trackBarIntensity, trackBarIntensity.Value.ToString());
 		}
 
 		private void buttonBackground_MouseHover(object sender, EventArgs e)
@@ -1483,6 +1342,34 @@ namespace Vixen_Messaging
 		{
 			var btn = (Button)sender;
 			btn.BackgroundImage = Resources.ButtonBackgroundImage;
+		}
+
+		private void buttonTextSettings_Click(object sender, EventArgs e)
+		{
+			if (_msgTextSettings == null || _msgTextSettings.Text == "")
+			{
+				_msgTextSettings = new MSGTextSettings();
+				_msgTextSettings.Show();
+			}
+			else if (CheckedOpened(_msgTextSettings.Text))
+			{
+				_msgTextSettings.WindowState = FormWindowState.Normal;
+				_msgTextSettings.Focus();
+			}
+		}
+
+		private bool CheckedOpened(string name)
+		{
+			FormCollection fc = Application.OpenForms;
+			foreach (Form frm in fc)
+			{
+				if (frm.Text == name)
+				{
+					return true;
+				}
+				
+			}
+			return false;
 		}
 	}
 }

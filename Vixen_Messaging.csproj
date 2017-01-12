@@ -140,6 +140,12 @@
     <Compile Include="MessageBoxForm.Designer.cs">
       <DependentUpon>MessageBoxForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MSGTextSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MSGTextSettings.Designer.cs">
+      <DependentUpon>MSGTextSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="MessagingSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +184,9 @@
     <Compile Include="XMLProfileSettings.cs" />
     <EmbeddedResource Include="MessageBoxForm.resx">
       <DependentUpon>MessageBoxForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MSGTextSettings.resx">
+      <DependentUpon>MSGTextSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MessagingSettings.resx">
       <DependentUpon>MessagingSettings.cs</DependentUpon>
