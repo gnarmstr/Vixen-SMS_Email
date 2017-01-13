@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Common.Resources.Properties;
+using Vixen_Messaging.Theme;
 
 namespace Vixen_Messaging
 {
@@ -12,6 +15,10 @@ namespace Vixen_Messaging
 			if (ActiveForm != null)
 				Location = new Point(ActiveForm.Location.X + ActiveForm.MaximumSize.Width, ActiveForm.Location.Y);
 			InitializeComponent();
+			ForeColor = ThemeColorTable.ForeColor;
+			BackColor = ThemeColorTable.BackgroundColor;
+			ThemeUpdateControls.UpdateControls(this, new List<Control>(new[] {label2}));
+			label2.ForeColor = Color.WhiteSmoke;
 			ClientSize = new Size(806, 1091);
 		}
 
@@ -65,5 +72,16 @@ namespace Vixen_Messaging
 
 		}
 
+		private void buttonBackground_MouseHover(object sender, EventArgs e)
+		{
+			var btn = (Button)sender;
+			btn.BackgroundImage = Resources.ButtonBackgroundImageHover;
+		}
+
+		private void buttonBackground_MouseLeave(object sender, EventArgs e)
+		{
+			var btn = (Button)sender;
+			btn.BackgroundImage = Resources.ButtonBackgroundImage;
+		}
 	}
 }

@@ -53,6 +53,8 @@
 			this.buttonDemo.Text = "Demo";
 			this.buttonDemo.UseVisualStyleBackColor = false;
 			this.buttonDemo.Click += new System.EventHandler(this.buttonDemo_Click);
+			this.buttonDemo.MouseLeave += new System.EventHandler(this.buttonBackground_MouseLeave);
+			this.buttonDemo.MouseHover += new System.EventHandler(this.buttonBackground_MouseHover);
 			// 
 			// buttonInstallation
 			// 
@@ -65,6 +67,8 @@
 			this.buttonInstallation.Text = "Installation";
 			this.buttonInstallation.UseVisualStyleBackColor = false;
 			this.buttonInstallation.Click += new System.EventHandler(this.buttonInstallation_Click);
+			this.buttonInstallation.MouseLeave += new System.EventHandler(this.buttonBackground_MouseLeave);
+			this.buttonInstallation.MouseHover += new System.EventHandler(this.buttonBackground_MouseHover);
 			// 
 			// buttonGmail
 			// 
@@ -77,6 +81,8 @@
 			this.buttonGmail.Text = "Setting up a Gmail account";
 			this.buttonGmail.UseVisualStyleBackColor = false;
 			this.buttonGmail.Click += new System.EventHandler(this.buttonGmail_Click);
+			this.buttonGmail.MouseLeave += new System.EventHandler(this.buttonBackground_MouseLeave);
+			this.buttonGmail.MouseHover += new System.EventHandler(this.buttonBackground_MouseHover);
 			// 
 			// buttonEmails
 			// 
@@ -89,6 +95,8 @@
 			this.buttonEmails.Text = "Retrieving Emails";
 			this.buttonEmails.UseVisualStyleBackColor = false;
 			this.buttonEmails.Click += new System.EventHandler(this.buttonEmails_Click);
+			this.buttonEmails.MouseLeave += new System.EventHandler(this.buttonBackground_MouseLeave);
+			this.buttonEmails.MouseHover += new System.EventHandler(this.buttonBackground_MouseHover);
 			// 
 			// label2
 			// 
@@ -110,6 +118,8 @@
 			this.buttonTwilio.Text = "Setting up a Twilio account";
 			this.buttonTwilio.UseVisualStyleBackColor = false;
 			this.buttonTwilio.Click += new System.EventHandler(this.buttonTwilio_Click);
+			this.buttonTwilio.MouseLeave += new System.EventHandler(this.buttonBackground_MouseLeave);
+			this.buttonTwilio.MouseHover += new System.EventHandler(this.buttonBackground_MouseHover);
 			// 
 			// buttonRemoteCommands
 			// 
@@ -122,6 +132,8 @@
 			this.buttonRemoteCommands.Text = "Using Remote Commands";
 			this.buttonRemoteCommands.UseVisualStyleBackColor = false;
 			this.buttonRemoteCommands.Click += new System.EventHandler(this.buttonRemoteCommands_Click);
+			this.buttonRemoteCommands.MouseLeave += new System.EventHandler(this.buttonBackground_MouseLeave);
+			this.buttonRemoteCommands.MouseHover += new System.EventHandler(this.buttonBackground_MouseHover);
 			// 
 			// label3
 			// 
@@ -143,6 +155,8 @@
 			this.buttonLauncher.Text = "Using the Vixen 3 Launcher with Messaging";
 			this.buttonLauncher.UseVisualStyleBackColor = false;
 			this.buttonLauncher.Click += new System.EventHandler(this.buttonLauncher_Click);
+			this.buttonLauncher.MouseLeave += new System.EventHandler(this.buttonBackground_MouseLeave);
+			this.buttonLauncher.MouseHover += new System.EventHandler(this.buttonBackground_MouseHover);
 			// 
 			// richTextBox1
 			// 
@@ -168,6 +182,8 @@
 			this.button1.Text = "Adding Custom Messages and Multi Effects";
 			this.button1.UseVisualStyleBackColor = false;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.button1.MouseLeave += new System.EventHandler(this.buttonBackground_MouseLeave);
+			this.button1.MouseHover += new System.EventHandler(this.buttonBackground_MouseHover);
 			// 
 			// HelpForm
 			// 

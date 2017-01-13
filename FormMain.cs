@@ -105,17 +105,15 @@ namespace Vixen_Messaging
 				File.WriteAllText(GlobalVar.LocalMessages, copyfile);
 			}
 
-			if (comboBoxPlayMode.Text != "Random" && comboBoxPlayMode.Text != "Sequential")
-			{
-				comboBoxPlayMode.Text = "Sequential";
-			}
+			//if (comboBoxPlayMode.Text != "Random" && comboBoxPlayMode.Text != "Sequential")
+			//{
+			//	comboBoxPlayMode.Text = "Sequential";
+			//}
 
-			var content = File.ReadAllText(GlobalVar.Blacklistlocation);
-			richTextBoxBlacklist.Text = content;
-			var content1 = File.ReadAllText(GlobalVar.Whitelistlocation);
-			richTextBoxWhitelist.Text = content1;
-			var content2 = File.ReadAllText(GlobalVar.LocalMessages);
-			richTextBoxMessage.Text = content2;
+			GlobalVar.Blacklist = File.ReadAllText(GlobalVar.Blacklistlocation);
+			GlobalVar.Whitelist = File.ReadAllText(GlobalVar.Whitelistlocation);
+		//	var content2 = File.ReadAllText(GlobalVar.LocalMessages);
+		//	richTextBoxMessage.Text = content2;
 
 			GlobalVar.Msgindex = 0;
 			GlobalVar.PlayMessage = false;
@@ -134,8 +132,6 @@ namespace Vixen_Messaging
 			buttonStart.Image = Tools.GetIcon(Resources.StartB_W, 40);
 			buttonStop.Image = Tools.GetIcon(Resources.Stop, 40);
 			buttonHelp.Image = Tools.GetIcon(Resources.Help2, 30);
-			pictureBoxSaveWhitelist.Image = Tools.ResizeImage(Resources.SaveWhitelist, 100, 60);
-			pictureBoxSaveBlacklist.Image = Tools.ResizeImage(Resources.SaveBlacklist, 100, 60);
 			SaveAll.Image = Tools.ResizeImage(Resources.Save, 130, 30);
 
 			#endregion
@@ -185,7 +181,7 @@ namespace Vixen_Messaging
 			string checkfirstload = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "True");
 			if (checkfirstload == "True")
 			{
-				var messageBox = new MessageBoxForm(@"Welcome to Vixen Messaging, as this is the first time you have run Vixen Messaging you are required to enter in some information on the following Data form. Also it is recommended that you create a new Email account for use with Vixen Messaging as it will process every incoming email.",
+				var messageBox = new MessageBoxForm(@"Welcome to Vixen Messaging, as this is the first time you have run Vixen Messaging you are required to setup the messaging system by selecting the first three buttons.",
 				"Welcome", MessageBoxButtons.OK, SystemIcons.Information);
 				messageBox.ShowDialog();
 				Stop_Vixen();
@@ -222,7 +218,7 @@ namespace Vixen_Messaging
 			GlobalVar.CenterStop = GlobalVar.CenterStop;
 			GlobalVar.CenterText = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterText", false);
 			GlobalVar.CenterText = GlobalVar.CenterText;
-			checkBoxBlacklist.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxBlack_list", true);
+			GlobalVar.Black_WhiteSelection = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxBlack_list", "Blacklist");
 			GlobalVar.IncomingMessageColourOption = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "IncomingMessageColourOption", 0);
 			List<Color> defaultColor = new List<Color>() { Color.White, Color.Red, Color.LawnGreen, Color.Blue, Color.Orange, Color.Aqua, Color.BlueViolet, Color.DarkOliveGreen, Color.Yellow, Color.DodgerBlue };
 			for (int i = 0; i < 10; i++)
@@ -232,23 +228,25 @@ namespace Vixen_Messaging
 			GlobalVar.TextSpeed = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextSpeed", 1);
 			GlobalVar.TextPosition = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextPosition", 0);
 			GlobalVar.Intensity = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarIntensity", 100);
-			tabControlMain.SelectedIndex = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "tabControlMain", 0);
 			GlobalVar.Font = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFont", "Arial");
 			GlobalVar.FontSize = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFontSize", "10");
 			GlobalVar.SeqIntervalTime = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SeqIntervalTime", 15);
 			GlobalVar.TextDirection = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextDirection", "Left");
 			GlobalVar.StringOrientation = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "StringOrientation", "Horizontal");
 			GlobalVar.ReturnBannedMSG = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "ReturnBannedMSG",
-				"You have been banned for the night for sending inappropiate words.");
-			comboBoxPlayMode.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxPlayMode",
-				"Play Only Incoming Msgs");
-			checkBoxLocalRandom.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocalRandom", true);
-			numericUpDownIntervalMsgs.Value = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
-				"numericUpDownIntervalMsgs", 0);
+				"Your mobile number has been recorded and has been banned for sending inappropiate words.");
+			GlobalVar.ReturnWarningMSG = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "ReturnWarningMSG",
+				"Please reframe from using inappropiate words. If this happens again your phone number will be banned.");
+			GlobalVar.ReturnSuccessMSG = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "ReturnSuccessMSG",
+				"Your message will appear soon in lights.");
+	//		comboBoxPlayMode.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxPlayMode",
+	//			"Play Only Incoming Msgs");
+			GlobalVar.IntervalMsgs = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
+				"IntervalMsgs", 0);
 			GlobalVar.TwilioSID = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwilioSID", "");
 			GlobalVar.TwilioToken = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwilioToken", "");
-			checkBoxLocal.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocal", true);
-			checkBoxTwilio.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwilio", false);
+			//checkBoxLocal.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocal", true);
+			//checkBoxTwilio.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwilio", false);
 			GlobalVar.TwilioPhoneNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwilioPhoneNumber", "");
 			GlobalVar.MaxWords = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords", 0);
 			GlobalVar.CountDownDate = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString",
@@ -258,7 +256,7 @@ namespace Vixen_Messaging
 				false);
 			GlobalVar.GroupName = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", "");
 			GlobalVar.GroupID = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupID", "");
-			textBoxInstantMSG.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "InstantMSG", "");
+			textBoxInstantMSG.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "InstantMSG", "Add your instant MSG here");
 
 			//	GlobalVar.OutputSequenceFolder = textBoxVixenFolder.Text + "\\Sequence\\VixenOut.tim"; 
 
@@ -300,7 +298,7 @@ namespace Vixen_Messaging
 			{
 			}
 
-			timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + 5 + numericUpDownIntervalMsgs.Value)*1000;
+			timerCheckMail.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + 5 + GlobalVar.IntervalMsgs) * 1000;
 			Cursor.Current = Cursors.WaitCursor;
 
 			PlayModes();
@@ -314,41 +312,43 @@ namespace Vixen_Messaging
 
 		private void PlayModes()
 		{
-			if (comboBoxPlayMode.Text == @"Random")
-			{
-				var rnd = new Random();
-				GlobalVar.Sequential = rnd.Next(1, 3);
-			}
-			switch (GlobalVar.Sequential)
-			{
-				case 1:
-					if (checkBoxLocal.Checked)
-					{
-				//		PlayLocalMsgs();
-					}
-					else
-					{
-						ShortTimer();
-					}
-					GlobalVar.Sequential++;
-					break;
-				case 2:
-					if (checkBoxTwilio.Checked)
-					{
-						PlayTwilio();
-					}
-					else
-					{
-						ShortTimer();
-					}
-					GlobalVar.Sequential++;
-					break;
+			//if (comboBoxPlayMode.Text == @"Random")
+			//{
+			//	var rnd = new Random();
+			//	GlobalVar.Sequential = rnd.Next(1, 3);
+			//}
+			//switch (GlobalVar.Sequential)
+			//{
+			//	case 1:
+			//		if (checkBoxLocal.Checked)
+			//		{
+			//	//		PlayLocalMsgs();
+			//		}
+			//		else
+			//		{
+			//			ShortTimer();
+			//		}
+			//		GlobalVar.Sequential++;
+			//		break;
+			//	case 2:
+			//		if (checkBoxTwilio.Checked)
+			//		{
+			//			PlayTwilio();
+			//		}
+			//		else
+			//		{
+			//			ShortTimer();
+			//		}
+			//		GlobalVar.Sequential++;
+			//		break;
 
-			}
-			if (GlobalVar.Sequential == 3)
-			{
-				GlobalVar.Sequential = 1;
-			}
+			//}
+			//if (GlobalVar.Sequential == 3)
+			//{
+			//	GlobalVar.Sequential = 1;
+			//}
+			PlayTwilio();
+
 		}
 
 		#endregion
@@ -516,19 +516,18 @@ namespace Vixen_Messaging
 						{
 							if (blacklist && !notWhitemsg)
 							{
-								using (var file = new StreamWriter(@GlobalVar.Blacklistlocation, true))
+								using (var file = new StreamWriter(GlobalVar.Blacklistlocation, true))
 								{
 									file.WriteLine(messageFrom);
 								}
-								SendReturnTextTwilio(messageFrom,
-									"Auto Reply: Please reframe from using inappropiate words. If this happens again your phone number will be banned.");
+								SendReturnTextTwilio(messageFrom, "Auto Reply: " + GlobalVar.ReturnWarningMSG);
 								twilio.DeleteMessage(messageSid);
 								ShortTimer();
 								return;
 							}
 							if (!notWhitemsg)
 							{
-								SendReturnTextTwilio(messageFrom, "Auto Reply: Your message will appear soon in lights.");
+								SendReturnTextTwilio(messageFrom, "Auto Reply: " + GlobalVar.ReturnSuccessMSG);
 								twilio.DeleteMessage(messageSid);
 								return;
 							}
@@ -549,7 +548,7 @@ namespace Vixen_Messaging
 					twilio.DeleteMessage(messageSid);
 					ShortTimer();
 				}
-				SendReturnTextTwilio(messageFrom, GlobalVar.ReturnBannedMSG);
+				SendReturnTextTwilio(messageFrom, "Auto Reply: " + GlobalVar.ReturnBannedMSG);
 				LogDisplay(GlobalVar.LogMsg = (messageFrom + " has been banned for sending inappropiate messages."));
 				Log(" " + messageFrom + " has been banned for sending inappropiate messages.");
 				twilio.DeleteMessage(messageSid);
@@ -621,13 +620,21 @@ namespace Vixen_Messaging
 					string outputFileName;
 			#region Custom Effects
 
+					int totalCharacters = 0;
+					foreach (char c in msg)
+					{
+						totalCharacters++;
+					}
+
+
+
 						if (msg != "play counter" & msg != "play sequence")
 						{
-							GlobalVar.SeqIntervalTime = 10;//Convert.ToDecimal(EffectTime.Value) + 1;
+							GlobalVar.SeqIntervalTime = Convert.ToDecimal(4 + (totalCharacters * 0.25)) * GlobalVar.TextSpeed;//Convert.ToDecimal(EffectTime.Value) + 1;
 						}
 						else
 						{
-							GlobalVar.SeqIntervalTime = 10;// Convert.ToDecimal(CustomMsgLength.Value) + 1;
+							GlobalVar.SeqIntervalTime = Convert.ToDecimal(4 + (totalCharacters * 0.25)) * GlobalVar.TextSpeed;// Convert.ToDecimal(CustomMsgLength.Value) + 1;
 						}
 
 						outputFileName = GlobalVar.OutputSequenceFolder;
@@ -637,8 +644,9 @@ namespace Vixen_Messaging
 						TextSettings(fileText, msg, out fileText1);
 
 						fileText = fileText1;
-		//				fileText = fileText.Replace("PT20S", "PT" + GlobalVar.SeqIntervalTime + "S"); //Sequence time
-		//				fileText = fileText.Replace("TextTime_Change", GlobalVar.SeqIntervalTime.ToString()); //Text Sequence time
+			//			fileText = fileText.Replace("PT20S", "PT" + GlobalVar.SeqIntervalTime + "S"); //Sequence time
+						fileText = fileText.Replace("TextTime_Change", "PT" + GlobalVar.SeqIntervalTime.ToString() + ".00S"); //Text Sequence time
+						fileText = fileText.Replace("TextLength_Change", "PT" + GlobalVar.SeqIntervalTime.ToString() + ".00S"); //Text Sequence time
 						
 
 						File.Delete(outputFileName);
@@ -818,17 +826,7 @@ namespace Vixen_Messaging
 
 			#region Checks against Blacklist
 
-			//if (msg.Contains(Resources.Blacklist))
-			//{
-			//	LogDisplay(GlobalVar.LogMsg = ("Bad Words Detected!"));
-			//	Log(" " + msg + ". Bad Word Detected! - " + msg);
-			//	notWhite = false;
-			//	return true;
-			//}
-			//notWhite = false;
-			//return false;
-
-			if (checkBoxBlacklist.Checked)
+			if (GlobalVar.Black_WhiteSelection == "Blacklist")
 			{
 				//Check against your Blacklist
 				using (var file = new StreamReader(GlobalVar.Blacklistlocation))
@@ -1114,43 +1112,30 @@ namespace Vixen_Messaging
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", GlobalVar.AutoStartMsgRetrieval);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterStop", (GlobalVar.CenterStop.ToString()).ToLower());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterText", (GlobalVar.CenterText.ToString()).ToLower());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxBlack_list", checkBoxBlacklist.Checked);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxBlack_list", GlobalVar.Black_WhiteSelection);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "IncomingMessageColourOption",
 				GlobalVar.IncomingMessageColourOption);
 			for (int i = 0; i < 10; i++)
 			{
 				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor" + i, Convert.ToInt32(GlobalVar.TextColor[i].ToArgb()).ToString());
 			}
-
-			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor1", TextColor1.BackColor.ToArgb());
-			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor2", TextColor2.BackColor.ToArgb());
-			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor3", TextColor3.BackColor.ToArgb());
-			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor4", TextColor4.BackColor.ToArgb());
-			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor5", TextColor5.BackColor.ToArgb());
-			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor6", TextColor6.BackColor.ToArgb());
-			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor7", TextColor7.BackColor.ToArgb());
-			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor8", TextColor8.BackColor.ToArgb());
-			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor9", TextColor9.BackColor.ToArgb());
-			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextColor10", TextColor10.BackColor.ToArgb());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextPosition",
 				GlobalVar.TextPosition.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextSpeed", GlobalVar.TextSpeed.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarIntensity", GlobalVar.Intensity.ToString());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "tabControlMain", tabControlMain.SelectedIndex);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "SeqIntervalTime", GlobalVar.SeqIntervalTime.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFont", GlobalVar.Font);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFontSize", GlobalVar.FontSize);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextDirection", GlobalVar.TextDirection);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "ReturnBannedMSG", GlobalVar.ReturnBannedMSG);
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxPlayMode", comboBoxPlayMode.Text);
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocalRandom",
-				checkBoxLocalRandom.Checked.ToString());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownIntervalMsgs",
-				numericUpDownIntervalMsgs.Value.ToString());
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "ReturnWarningMSG", GlobalVar.ReturnWarningMSG);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "ReturnSuccessMSG", GlobalVar.ReturnSuccessMSG);
+		//	profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxPlayMode", comboBoxPlayMode.Text);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "IntervalMsgs", GlobalVar.IntervalMsgs);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TwilioSID", GlobalVar.TwilioSID);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TwilioToken", GlobalVar.TwilioToken);
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocal", checkBoxLocal.Checked.ToString());
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwilio", checkBoxTwilio.Checked.ToString());
+			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocal", checkBoxLocal.Checked.ToString());
+			//profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwilio", checkBoxTwilio.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TwilioPhoneNumber", GlobalVar.TwilioPhoneNumber);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString", GlobalVar.CountDownDate);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords",
@@ -1202,47 +1187,6 @@ namespace Vixen_Messaging
 		#endregion
 
 		#region Other
-		private void checkBoxWhitelist_CheckedChanged(object sender, EventArgs e)
-		{
-			checkBoxBlacklist.Checked = !checkBoxWhitelist.Checked;
-		}
-		private void checkBoxBlacklist_CheckedChanged(object sender, EventArgs e)
-		{
-			checkBoxWhitelist.Checked = !checkBoxBlacklist.Checked;
-		}
-
-
-		private void pictureBoxSaveBlacklist_Click(object sender, EventArgs e)
-		{
-			SaveBlackList();
-			var messageBox = new MessageBoxForm(@"Blacklist saved!", @"Saved", MessageBoxButtons.OK, SystemIcons.Information);
-			messageBox.ShowDialog();
-		}
-
-		private void SaveBlackList()
-		{
-			richTextBoxBlacklist.SaveFile(GlobalVar.Blacklistlocation, RichTextBoxStreamType.PlainText);
-			richTextBoxBlacklist.SaveFile(GlobalVar.Blacklistlocation + ".bkp", RichTextBoxStreamType.PlainText);
-		}
-
-		private void pictureBoxSaveWhitelist_Click(object sender, EventArgs e)
-		{
-			SaveWhiteList();
-			var messageBox = new MessageBoxForm(@"Whitelist saved!", @"Saved", MessageBoxButtons.OK, SystemIcons.Information);
-			messageBox.ShowDialog();
-		}
-
-		private void SaveWhiteList()
-		{
-			richTextBoxWhitelist.SaveFile(GlobalVar.Whitelistlocation, RichTextBoxStreamType.PlainText);
-			richTextBoxWhitelist.SaveFile(GlobalVar.Whitelistlocation + ".bkp", RichTextBoxStreamType.PlainText);
-		}
-
-		private void SaveMessageList()
-		{
-			richTextBoxMessage.SaveFile(GlobalVar.LocalMessages, RichTextBoxStreamType.PlainText);
-			richTextBoxMessage.SaveFile(GlobalVar.LocalMessages + ".bkp", RichTextBoxStreamType.PlainText);
-		}
 
 		private void buttonSaveLog_Click(object sender, EventArgs e)
 		{
@@ -1267,27 +1211,24 @@ namespace Vixen_Messaging
 			twilio.ShowDialog();
 		}
 
-		private void comboBoxPlayMode_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (comboBoxPlayMode.Text == "Sequential")
-			{
-				GlobalVar.Sequential = 1;
-			}
-		}
+		//private void comboBoxPlayMode_SelectedIndexChanged(object sender, EventArgs e)
+		//{
+		//	if (comboBoxPlayMode.Text == "Sequential")
+		//	{
+		//		GlobalVar.Sequential = 1;
+		//	}
+		//}
 
 		private void SaveAll_Click(object sender, EventArgs e)
 		{
 			Save();
+			var messageBox = new MessageBoxForm(@"All Settings, Whitelist and Blacklist have been saved.", @"Saved", MessageBoxButtons.OK, SystemIcons.Information);
+			messageBox.ShowDialog();
 		}
 
 		private void Save()
 		{
-			SaveBlackList();
-			SaveWhiteList();
-			SaveMessageList();
 			SeqSave();
-			var messageBox = new MessageBoxForm(@"All Settings, Whitelist, Blacklist and Messagelists have been saved.", @"Saved", MessageBoxButtons.OK, SystemIcons.Information);
-			messageBox.ShowDialog();
 		}
 
 #endregion
@@ -1300,7 +1241,7 @@ namespace Vixen_Messaging
 
 		private void buttonInstantMSG_Click(object sender, EventArgs e)
 		{
-			if (textBoxInstantMSG.Text != "")
+			if (textBoxInstantMSG.Text != "Add your instant MSG here" & textBoxInstantMSG.Text != "" )
 			{
 				bool blacklist, notWhitemsg, maxWordCount;
 				SendMessageToVixen(textBoxInstantMSG.Text, out blacklist, out notWhitemsg, out maxWordCount);
@@ -1310,7 +1251,7 @@ namespace Vixen_Messaging
 				{
 					if (blacklist && !notWhitemsg)
 					{
-						LogDisplay(GlobalVar.LogMsg = ("Auto Reply: Please reframe from using inappropiate words. If this happens again your phone number will be banned."));
+						LogDisplay(GlobalVar.LogMsg = ("Auto Reply: You should know better not to use inappropiate words. Your message has not been displayed."));
 						return;
 					}
 					if (!notWhitemsg)
@@ -1321,13 +1262,13 @@ namespace Vixen_Messaging
 				}
 				else
 				{
-					LogDisplay(GlobalVar.LogMsg = ("Auto Reply: Sorry, your message is too long and will not be display. Please reduce the number of words in your message to below " + (GlobalVar.MaxWords + 1) + " and resend. Thank you."));
+					LogDisplay(GlobalVar.LogMsg = ("Auto Reply: Sorry, your message is too long and will not be display. Please reduce the number of words in your message to below " + (GlobalVar.MaxWords + 1) + " and resend or adjust the Maximum word limit. Thank you."));
 				}
 
 			}
 			else
 			{
-				var messageBox = new MessageBoxForm(@"Instant Message box is empty. Add message and try again", @"Information", MessageBoxButtons.OK, SystemIcons.Information);
+				var messageBox = new MessageBoxForm(@"Instant Message box is empty or default message has not been changed. Add message and try again", @"Information", MessageBoxButtons.OK, SystemIcons.Information);
 				messageBox.ShowDialog();
 			}
 		}
@@ -1370,6 +1311,12 @@ namespace Vixen_Messaging
 				
 			}
 			return false;
+		}
+
+		private void buttonWhite_BlackLists_Click(object sender, EventArgs e)
+		{
+			var white_Black_Lists = new White_Black_Lists();
+			white_Black_Lists.ShowDialog();
 		}
 	}
 }

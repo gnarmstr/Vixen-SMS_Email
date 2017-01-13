@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>198, 17</value>
-  </metadata>
   <metadata name="timerCheckMail.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -127,14 +124,9 @@
     <value>198, 17</value>
   </metadata>
   <data name="checkBoxVixenControl.ToolTip" xml:space="preserve">
-    <value>When enabled Vixen 3 will control when Vixen Messaging Starts and Stops checking for messages.
+    <value>When enabled, Vixen 3 will control when Vixen Messaging Starts and Stops checking for messages.
 To Start and Stop using Vixen 3 you must set up a Command controller in Vixen 3 Display setup.
 See Messaging Help page and Video for instructions. Disable for local control.</value>
-  </data>
-  <data name="richTextBoxMessage.ToolTip" xml:space="preserve">
-    <value>Add your messages to this text box. Each line will be display seperately.
-You can add the word COUNTDOWN to any message in any place and it will be
-replaced with the number of days to the CountDown date.</value>
   </data>
   <metadata name="colorDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>319, 17</value>

@@ -140,6 +140,12 @@
     <Compile Include="MessageBoxForm.Designer.cs">
       <DependentUpon>MessageBoxForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="White_Black_Lists.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="White_Black_Lists.Designer.cs">
+      <DependentUpon>White_Black_Lists.cs</DependentUpon>
+    </Compile>
     <Compile Include="MSGTextSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,12 +167,6 @@
       <DependentUpon>Twilio.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalVar.cs" />
-    <Compile Include="RetrieveVixenSettings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RetrieveVixenSettings.Designer.cs">
-      <DependentUpon>RetrieveVixenSettings.cs</DependentUpon>
-    </Compile>
     <Compile Include="HelpForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +185,9 @@
     <EmbeddedResource Include="MessageBoxForm.resx">
       <DependentUpon>MessageBoxForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="White_Black_Lists.resx">
+      <DependentUpon>White_Black_Lists.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MSGTextSettings.resx">
       <DependentUpon>MSGTextSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -193,9 +196,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Twilio.resx">
       <DependentUpon>Twilio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RetrieveVixenSettings.resx">
-      <DependentUpon>RetrieveVixenSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelpForm.resx">
       <DependentUpon>HelpForm.cs</DependentUpon>
