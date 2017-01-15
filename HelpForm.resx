@@ -118,23 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>1. Vixen Messaging is used to receive messages from the audience either via Email or SMS.
+    <value>1. In order to retrieve SMS’s an internet client (Twilio) is used to store the messages so Vixen messaging can retrieve them when required. Set up an account at www.twilio.com, the account is free to setup however you will also need a cell/mobile number. This number is setup in Twilio and for an Aus number is only $6 a month. I just setup the number for Nov and Dec. as this can t
 
-2. In order to retrieve emails or from an SMS client that redirects the SMS message to an Email (Google Voice) it is necessary to create a new Email account that will solely be used for this app. The Email list on the main tab shows all the recommended and tested email clients.
+2. When you first loaded Vixen Messaging you are required to enter in Twilio, Messaging and Text settings. This will ensure Vixen messaging is setup correctly.
 
-3. Alternately a Twilio account is highly recommend for use with SMS's. It is much easy to setup and an email account is not required as Vixen Messaging directly interacts with Twilio.
+3. The Group name in messaging settings needs to be entered exactly the same as the matrix/megatree name within Vixen. For example my Matrix is called "Front Matrix" this will be used to retrieve the NodeId and is case sensitive.
 
-4. Multiple setups can be configured and Vixen Messaging can automatically process any way depending on the settings on the Main tab.
+4. If you remove or change your allocated Group then you will need to Get a new Node ID. This can be done under the Messaging Settings tab.
 
-5. When you first loaded Vixen Messaging you should have been prompted to enter in more information. It is important that the information is correct and that you have entered your Group Name that you have used in Vixen 3, For example for my Matrix its called "Front Matrix" this will be used to retrieve the NodeId and is case sensitive.
+5. A filter is required to be used to ensure inappropriate words are not displayed to the audience, to do this you can use either a Blacklist or Whitelist (selected on messaging settings). Blacklist is used when you don't want the message to contain any of the listed words. Vixen Messaging will automatically remove any non-alphanumeric characters from the message before comparing to the Blacklist. If someone sends more than one Blacklisted word they will be banned from displaying any messages until the Vixen Messaging app is restarted. Whitelist is used when you only want to display the words that are listed. All words in the message must be in the Whitelist for the message to be displayed, as such this list ensures there cannot be any work arounds displayed.
 
-6. If you remove or change your allocated Group then you will need to Get a new Node ID. This can be done under the Settings tab.
-
-7. Ensure all information on the settings Tab is correct. Default folders will be in the Documents folder for both Vixen 3 and Vixen messaging and should not need to be changed.
-
-8. A filter is required to be used to ensure inappropriate words are not displayed to the audience , to do this you can use either a Blacklist or Whitelist (selected on Main Tab). Blacklist is used when you don't want the message to contain any of the listed words. Vixen Messaging will automatically remove any non-alphanumeric characters from the message before comparing to the Blacklist. If someone sends more than one Blacklisted word they will be banned from displaying any messages until the Vixen Messaging app is restarted. Whitelist is used when you only want to display the words that are listed. All words in the message must be in the Whitelist for the message to be displayed, as such this list ensure there cannot be any work arounds displayed.
-
-9. You may need to lower the security settings within your email settings, this is necessary for gmail addresses, it is also a good idea to create a filter that allows all emails less than 20k to ensure they do not end up in your junk mail. Lastly ensure POP is setup on your email client and messages can be remotely deleted.</value>
+6. You may need to create an exemption in your Virus software for the installed folder.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

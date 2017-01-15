@@ -85,16 +85,19 @@
     <None Include="Start.png" />
     <None Include="StartB_W.png" />
     <None Include="StopB_W.png" />
-    <None Include="SaveWhitelist.png" />
-    <None Include="SaveBlacklist.png" />
-    <None Include="ClicktoOpen.png" />
     <None Include="Resources\accept.png" />
     <None Include="Resources\control_play_blue.png" />
-    <None Include="Save.png" />
     <None Include="ButtonBackgroundImageHover.jpg" />
     <None Include="ButtonBackgroundImage.jpg" />
     <EmbeddedResource Include="Resources\Blacklist.txt" />
     <EmbeddedResource Include="Resources\Whitelist.txt" />
+    <None Include="Resources\disk.png" />
+    <None Include="Resources\Close.png" />
+    <None Include="Resources\Twilio.png" />
+    <None Include="Resources\Text.png" />
+    <None Include="Resources\Message.png" />
+    <None Include="Resources\Log.png" />
+    <None Include="Resources\Lists.png" />
     <Content Include="Vixen Messaging.png" />
   </ItemGroup>
   <ItemGroup />

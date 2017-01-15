@@ -93,10 +93,10 @@
 			// 
 			// pictureBoxOk
 			// 
-			this.pictureBoxOk.Location = new System.Drawing.Point(253, 181);
+			this.pictureBoxOk.Location = new System.Drawing.Point(329, 181);
 			this.pictureBoxOk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.pictureBoxOk.Name = "pictureBoxOk";
-			this.pictureBoxOk.Size = new System.Drawing.Size(71, 64);
+			this.pictureBoxOk.Size = new System.Drawing.Size(61, 61);
 			this.pictureBoxOk.TabIndex = 5;
 			this.pictureBoxOk.TabStop = false;
 			this.pictureBoxOk.Tag = "7";
@@ -104,10 +104,10 @@
 			// 
 			// pictureBoxCancel
 			// 
-			this.pictureBoxCancel.Location = new System.Drawing.Point(347, 181);
+			this.pictureBoxCancel.Location = new System.Drawing.Point(406, 181);
 			this.pictureBoxCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.pictureBoxCancel.Name = "pictureBoxCancel";
-			this.pictureBoxCancel.Size = new System.Drawing.Size(71, 64);
+			this.pictureBoxCancel.Size = new System.Drawing.Size(61, 61);
 			this.pictureBoxCancel.TabIndex = 6;
 			this.pictureBoxCancel.TabStop = false;
 			this.pictureBoxCancel.Tag = "7";

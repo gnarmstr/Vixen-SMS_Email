@@ -47,55 +47,9 @@ namespace Vixen_Messaging
 
 		public static FileInfo oldest;
 
-		#endregion
-
-		#region Custom Messages
-
-		public static List<string> ListLine1 = new List<string>();
-
-		public static List<string> ListLine2 = new List<string>();
-
-		public static List<string> ListLine3 = new List<string>();
-
-		public static List<string> ListLine4 = new List<string>();
-
-		public static List<int> Line1Colour = new List<int>();
-
-		public static List<int> Line2Colour = new List<int>();
-
-		public static List<int> Line3Colour = new List<int>();
-
-		public static List<int> Line4Colour = new List<int>();
-
-		public static List<string> CountDirection = new List<string>();
-
-		public static List<string> MessageColourOption = new List<string>();
-
-		public static List<string> CustomMessageSeqSel = new List<string>();
-
-		public static List<string> CustomMessageNodeSel = new List<string>();
-
-		public static List<string> GroupNodeID = new List<string>();
-
-		public static List<string> GroupNameID = new List<string>();
-
-		public static List<int> Position = new List<int>();
-
-		public static List<bool> MessageEnabled = new List<bool>();
-
-		public static List<bool> CheckBoxCentreStop = new List<bool>();
-
-		public static List<decimal> CustomMsgLength = new List<decimal>();
-
-		public static int MessageNumber { get; set; }
-
-		public static int CustomMessageCount { get; set; }
-
-		public static List<string> CustomFontSize = new List<string>();
-
-		public static List<string> CustomFont = new List<string>();
-
-		public static List<int> TrackBarCustomSpeed = new List<int>();
+		public static bool closeMessagingApp;
+		
+		public static string FileText;
 
 		#endregion
 
@@ -108,6 +62,8 @@ namespace Vixen_Messaging
 		public static string ReturnWarningMSG;
 
 		public static string ReturnSuccessMSG;
+
+		public static string CountDownMSG;
 
 		public static string GroupName;
 
@@ -160,6 +116,14 @@ namespace Vixen_Messaging
 		public static decimal MaxWords;
 
 		public static List<Color> TextColor = new List<Color>(10);
+
+		#endregion
+
+		#region Instant Message
+
+		public static string InstantMSG;
+
+		public static bool CloseInstantMSGForm;
 
 		#endregion
 	}

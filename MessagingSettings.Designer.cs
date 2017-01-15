@@ -1,0 +1,609 @@
+﻿namespace Vixen_Messaging
+{
+	partial class MessagingSettings
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MessagingSettings));
+			this.ok = new System.Windows.Forms.PictureBox();
+			this.Cancel = new System.Windows.Forms.PictureBox();
+			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.label9 = new System.Windows.Forms.Label();
+			this.label100 = new System.Windows.Forms.Label();
+			this.label32 = new System.Windows.Forms.Label();
+			this.label12 = new System.Windows.Forms.Label();
+			this.label87 = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.textBoxReturnBannedMSG = new System.Windows.Forms.TextBox();
+			this.textBoxGroupName = new System.Windows.Forms.TextBox();
+			this.buttonGetVixenData = new System.Windows.Forms.Button();
+			this.textBoxReturnWarningMSG = new System.Windows.Forms.TextBox();
+			this.textBoxReturnSuccessMSG = new System.Windows.Forms.TextBox();
+			this.dateCountDown = new System.Windows.Forms.DateTimePicker();
+			this.label14 = new System.Windows.Forms.Label();
+			this.comboBoxBlack_Whitelist = new System.Windows.Forms.ComboBox();
+			this.numericUpDownIntervalMsgs = new System.Windows.Forms.NumericUpDown();
+			this.label71 = new System.Windows.Forms.Label();
+			this.checkBoxAutoStart = new System.Windows.Forms.CheckBox();
+			this.groupBox3 = new System.Windows.Forms.GroupBox();
+			this.label7 = new System.Windows.Forms.Label();
+			this.textBoxVixenFolder = new System.Windows.Forms.TextBox();
+			this.textBoxNodeId = new System.Windows.Forms.TextBox();
+			this.label6 = new System.Windows.Forms.Label();
+			this.textBoxOutputSequence = new System.Windows.Forms.TextBox();
+			this.label5 = new System.Windows.Forms.Label();
+			this.textBoxSequenceTemplate = new System.Windows.Forms.TextBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.textBoxVixenServer = new System.Windows.Forms.TextBox();
+			this.groupBox6 = new System.Windows.Forms.GroupBox();
+			this.textBoxBlacklistEmailLog = new System.Windows.Forms.TextBox();
+			this.label8 = new System.Windows.Forms.Label();
+			this.textBoxLogFileName = new System.Windows.Forms.TextBox();
+			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.label74 = new System.Windows.Forms.Label();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.textBoxCountDownMSG = new System.Windows.Forms.TextBox();
+			this.label3 = new System.Windows.Forms.Label();
+			((System.ComponentModel.ISupportInitialize)(this.ok)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.Cancel)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).BeginInit();
+			this.groupBox3.SuspendLayout();
+			this.groupBox6.SuspendLayout();
+			this.groupBox5.SuspendLayout();
+			this.groupBox1.SuspendLayout();
+			this.SuspendLayout();
+			// 
+			// ok
+			// 
+			this.ok.Location = new System.Drawing.Point(508, 754);
+			this.ok.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.ok.Name = "ok";
+			this.ok.Size = new System.Drawing.Size(61, 61);
+			this.ok.TabIndex = 3;
+			this.ok.TabStop = false;
+			this.ok.Tag = "7";
+			this.ok.Click += new System.EventHandler(this.Ok_Click);
+			// 
+			// Cancel
+			// 
+			this.Cancel.Location = new System.Drawing.Point(584, 754);
+			this.Cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.Cancel.Name = "Cancel";
+			this.Cancel.Size = new System.Drawing.Size(61, 61);
+			this.Cancel.TabIndex = 4;
+			this.Cancel.TabStop = false;
+			this.Cancel.Tag = "8";
+			this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
+			// 
+			// label9
+			// 
+			this.label9.Location = new System.Drawing.Point(10, 35);
+			this.label9.Name = "label9";
+			this.label9.Size = new System.Drawing.Size(117, 42);
+			this.label9.TabIndex = 7;
+			this.label9.Text = "Banned:";
+			this.toolTip1.SetToolTip(this.label9, "Enter a message that will be sent to the audiance member that sent the inappropia" +
+        "te words that they have been banned.");
+			// 
+			// label100
+			// 
+			this.label100.AutoSize = true;
+			this.label100.Location = new System.Drawing.Point(10, 30);
+			this.label100.Name = "label100";
+			this.label100.Size = new System.Drawing.Size(93, 17);
+			this.label100.TabIndex = 89;
+			this.label100.Text = "Group Name:";
+			this.toolTip1.SetToolTip(this.label100, "Enter your Matrix/Megatree group name that you will be sending messages to.");
+			// 
+			// label32
+			// 
+			this.label32.AutoSize = true;
+			this.label32.Location = new System.Drawing.Point(10, 64);
+			this.label32.Name = "label32";
+			this.label32.Size = new System.Drawing.Size(101, 17);
+			this.label32.TabIndex = 10;
+			this.label32.Text = "Group NodeId:";
+			this.toolTip1.SetToolTip(this.label32, "The Node ID of the Group used to Display the Text. This must be set for the softw" +
+        "are to work.");
+			// 
+			// label12
+			// 
+			this.label12.AutoSize = true;
+			this.label12.Location = new System.Drawing.Point(13, 50);
+			this.label12.Name = "label12";
+			this.label12.Size = new System.Drawing.Size(91, 17);
+			this.label12.TabIndex = 17;
+			this.label12.Text = "Blacklist Log:";
+			this.toolTip1.SetToolTip(this.label12, "Email address and phone numbers are stored in this file when a member has sent a " +
+        "Blacklist word. This will be cleared each time Vixen Messaging is re-started.");
+			// 
+			// label87
+			// 
+			this.label87.Location = new System.Drawing.Point(5, 66);
+			this.label87.Name = "label87";
+			this.label87.Size = new System.Drawing.Size(132, 23);
+			this.label87.TabIndex = 67;
+			this.label87.Text = "CountDown Date:";
+			this.label87.TextAlign = System.Drawing.ContentAlignment.TopRight;
+			this.toolTip1.SetToolTip(this.label87, "Add the word COUNTDOWN to your message to display the number fo days to the selec" +
+        "ted date.");
+			// 
+			// label1
+			// 
+			this.label1.Location = new System.Drawing.Point(11, 91);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(120, 42);
+			this.label1.TabIndex = 92;
+			this.label1.Text = "When Message Displayed:";
+			this.toolTip1.SetToolTip(this.label1, "Enter a message that will be sent to the audiance member that thier message will " +
+        "be displayed soon.");
+			// 
+			// label2
+			// 
+			this.label2.Location = new System.Drawing.Point(10, 143);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(121, 59);
+			this.label2.TabIndex = 94;
+			this.label2.Text = "Warning when inappropriate word received";
+			this.toolTip1.SetToolTip(this.label2, "Enter a message that will be sent to the audiance member an inappropiate word has" +
+        " been recieved, first and only warning.");
+			// 
+			// textBoxReturnBannedMSG
+			// 
+			this.textBoxReturnBannedMSG.Location = new System.Drawing.Point(136, 35);
+			this.textBoxReturnBannedMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.textBoxReturnBannedMSG.Multiline = true;
+			this.textBoxReturnBannedMSG.Name = "textBoxReturnBannedMSG";
+			this.textBoxReturnBannedMSG.Size = new System.Drawing.Size(491, 42);
+			this.textBoxReturnBannedMSG.TabIndex = 4;
+			this.toolTip1.SetToolTip(this.textBoxReturnBannedMSG, "Enter a message that will be sent to the audiance member that sent the inappropia" +
+        "te words that they have been banned.");
+			// 
+			// textBoxGroupName
+			// 
+			this.textBoxGroupName.Location = new System.Drawing.Point(143, 27);
+			this.textBoxGroupName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.textBoxGroupName.Name = "textBoxGroupName";
+			this.textBoxGroupName.Size = new System.Drawing.Size(273, 22);
+			this.textBoxGroupName.TabIndex = 90;
+			this.toolTip1.SetToolTip(this.textBoxGroupName, "Enter your Matrix/Megatree group name that you will be sending messages to.");
+			// 
+			// buttonGetVixenData
+			// 
+			this.buttonGetVixenData.BackColor = System.Drawing.Color.Honeydew;
+			this.buttonGetVixenData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+			this.buttonGetVixenData.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonGetVixenData.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+			this.buttonGetVixenData.Location = new System.Drawing.Point(432, 21);
+			this.buttonGetVixenData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.buttonGetVixenData.Name = "buttonGetVixenData";
+			this.buttonGetVixenData.Size = new System.Drawing.Size(200, 32);
+			this.buttonGetVixenData.TabIndex = 11;
+			this.buttonGetVixenData.Text = "Get Vixen Data Settings";
+			this.toolTip1.SetToolTip(this.buttonGetVixenData, "ENter the Group Name and select Get Vixen data to retrieve all Vixen settings.");
+			this.buttonGetVixenData.UseVisualStyleBackColor = false;
+			this.buttonGetVixenData.Click += new System.EventHandler(this.buttonGetVixenData_Click);
+			this.buttonGetVixenData.MouseLeave += new System.EventHandler(this.buttonBackground_MouseLeave);
+			this.buttonGetVixenData.MouseHover += new System.EventHandler(this.buttonBackground_MouseHover);
+			// 
+			// textBoxReturnWarningMSG
+			// 
+			this.textBoxReturnWarningMSG.Location = new System.Drawing.Point(137, 143);
+			this.textBoxReturnWarningMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.textBoxReturnWarningMSG.Multiline = true;
+			this.textBoxReturnWarningMSG.Name = "textBoxReturnWarningMSG";
+			this.textBoxReturnWarningMSG.Size = new System.Drawing.Size(490, 42);
+			this.textBoxReturnWarningMSG.TabIndex = 93;
+			this.toolTip1.SetToolTip(this.textBoxReturnWarningMSG, "Enter a message that will be sent to the audiance member when an inappropiate wor" +
+        "d has been recieved, first and only warning.");
+			// 
+			// textBoxReturnSuccessMSG
+			// 
+			this.textBoxReturnSuccessMSG.Location = new System.Drawing.Point(137, 91);
+			this.textBoxReturnSuccessMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.textBoxReturnSuccessMSG.Multiline = true;
+			this.textBoxReturnSuccessMSG.Name = "textBoxReturnSuccessMSG";
+			this.textBoxReturnSuccessMSG.Size = new System.Drawing.Size(490, 42);
+			this.textBoxReturnSuccessMSG.TabIndex = 91;
+			this.toolTip1.SetToolTip(this.textBoxReturnSuccessMSG, "Enter a message that will be sent to the audiance member that thier message will " +
+        "be displayed soon. Leave blank for no reply.");
+			// 
+			// dateCountDown
+			// 
+			this.dateCountDown.CustomFormat = "";
+			this.dateCountDown.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+			this.dateCountDown.Location = new System.Drawing.Point(162, 66);
+			this.dateCountDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.dateCountDown.Name = "dateCountDown";
+			this.dateCountDown.Size = new System.Drawing.Size(145, 22);
+			this.dateCountDown.TabIndex = 66;
+			this.toolTip1.SetToolTip(this.dateCountDown, "Enter the date to count down to, for example 25/12/17, christmas day.");
+			this.dateCountDown.Value = new System.DateTime(2015, 12, 25, 0, 0, 0, 0);
+			// 
+			// label14
+			// 
+			this.label14.AutoSize = true;
+			this.label14.Location = new System.Drawing.Point(17, 103);
+			this.label14.Name = "label14";
+			this.label14.Size = new System.Drawing.Size(238, 17);
+			this.label14.TabIndex = 104;
+			this.label14.Text = "Select required Word list to be used:";
+			this.toolTip1.SetToolTip(this.label14, "To add words to the lists please select the Word Lists tab above.");
+			// 
+			// comboBoxBlack_Whitelist
+			// 
+			this.comboBoxBlack_Whitelist.FormattingEnabled = true;
+			this.comboBoxBlack_Whitelist.Items.AddRange(new object[] {
+            "Blacklist",
+            "Whitelist"});
+			this.comboBoxBlack_Whitelist.Location = new System.Drawing.Point(278, 103);
+			this.comboBoxBlack_Whitelist.Name = "comboBoxBlack_Whitelist";
+			this.comboBoxBlack_Whitelist.Size = new System.Drawing.Size(127, 24);
+			this.comboBoxBlack_Whitelist.TabIndex = 105;
+			this.toolTip1.SetToolTip(this.comboBoxBlack_Whitelist, "Select to use either the White list or Black list.");
+			// 
+			// numericUpDownIntervalMsgs
+			// 
+			this.numericUpDownIntervalMsgs.Location = new System.Drawing.Point(470, 54);
+			this.numericUpDownIntervalMsgs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.numericUpDownIntervalMsgs.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+			this.numericUpDownIntervalMsgs.Name = "numericUpDownIntervalMsgs";
+			this.numericUpDownIntervalMsgs.Size = new System.Drawing.Size(64, 22);
+			this.numericUpDownIntervalMsgs.TabIndex = 106;
+			this.toolTip1.SetToolTip(this.numericUpDownIntervalMsgs, "Sets the time interval between message retrieval.");
+			// 
+			// label71
+			// 
+			this.label71.AutoSize = true;
+			this.label71.Location = new System.Drawing.Point(420, 35);
+			this.label71.Name = "label71";
+			this.label71.Size = new System.Drawing.Size(183, 17);
+			this.label71.TabIndex = 107;
+			this.label71.Text = "Interval between Messages:";
+			this.toolTip1.SetToolTip(this.label71, "Time between messages, may need to increase to 1 or 2 secs as a minimum.");
+			// 
+			// checkBoxAutoStart
+			// 
+			this.checkBoxAutoStart.AutoSize = true;
+			this.checkBoxAutoStart.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.checkBoxAutoStart.Location = new System.Drawing.Point(20, 29);
+			this.checkBoxAutoStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.checkBoxAutoStart.Name = "checkBoxAutoStart";
+			this.checkBoxAutoStart.Size = new System.Drawing.Size(281, 21);
+			this.checkBoxAutoStart.TabIndex = 0;
+			this.checkBoxAutoStart.Text = "Auto Start Message retrieval on startup:";
+			this.checkBoxAutoStart.UseVisualStyleBackColor = true;
+			// 
+			// groupBox3
+			// 
+			this.groupBox3.Controls.Add(this.label7);
+			this.groupBox3.Controls.Add(this.textBoxVixenFolder);
+			this.groupBox3.Controls.Add(this.label32);
+			this.groupBox3.Controls.Add(this.textBoxNodeId);
+			this.groupBox3.Controls.Add(this.textBoxGroupName);
+			this.groupBox3.Controls.Add(this.label6);
+			this.groupBox3.Controls.Add(this.textBoxOutputSequence);
+			this.groupBox3.Controls.Add(this.label100);
+			this.groupBox3.Controls.Add(this.label5);
+			this.groupBox3.Controls.Add(this.textBoxSequenceTemplate);
+			this.groupBox3.Controls.Add(this.buttonGetVixenData);
+			this.groupBox3.Controls.Add(this.label4);
+			this.groupBox3.Controls.Add(this.textBoxVixenServer);
+			this.groupBox3.Location = new System.Drawing.Point(12, 456);
+			this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.groupBox3.Name = "groupBox3";
+			this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.groupBox3.Size = new System.Drawing.Size(663, 215);
+			this.groupBox3.TabIndex = 6;
+			this.groupBox3.TabStop = false;
+			this.groupBox3.Text = "Vixen Settings";
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(12, 94);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(102, 17);
+			this.label7.TabIndex = 7;
+			this.label7.Text = "Vixen 3 Folder:";
+			// 
+			// textBoxVixenFolder
+			// 
+			this.textBoxVixenFolder.Enabled = false;
+			this.textBoxVixenFolder.Location = new System.Drawing.Point(143, 93);
+			this.textBoxVixenFolder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.textBoxVixenFolder.Name = "textBoxVixenFolder";
+			this.textBoxVixenFolder.Size = new System.Drawing.Size(489, 22);
+			this.textBoxVixenFolder.TabIndex = 6;
+			// 
+			// textBoxNodeId
+			// 
+			this.textBoxNodeId.Enabled = false;
+			this.textBoxNodeId.Location = new System.Drawing.Point(143, 64);
+			this.textBoxNodeId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.textBoxNodeId.Name = "textBoxNodeId";
+			this.textBoxNodeId.Size = new System.Drawing.Size(489, 22);
+			this.textBoxNodeId.TabIndex = 10;
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(10, 188);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(123, 17);
+			this.label6.TabIndex = 6;
+			this.label6.Text = "Output Sequence:";
+			// 
+			// textBoxOutputSequence
+			// 
+			this.textBoxOutputSequence.Enabled = false;
+			this.textBoxOutputSequence.Location = new System.Drawing.Point(143, 185);
+			this.textBoxOutputSequence.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.textBoxOutputSequence.Name = "textBoxOutputSequence";
+			this.textBoxOutputSequence.Size = new System.Drawing.Size(489, 22);
+			this.textBoxOutputSequence.TabIndex = 9;
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(12, 158);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(124, 17);
+			this.label5.TabIndex = 4;
+			this.label5.Text = "Messaging Folder:";
+			// 
+			// textBoxSequenceTemplate
+			// 
+			this.textBoxSequenceTemplate.Enabled = false;
+			this.textBoxSequenceTemplate.Location = new System.Drawing.Point(143, 155);
+			this.textBoxSequenceTemplate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.textBoxSequenceTemplate.Name = "textBoxSequenceTemplate";
+			this.textBoxSequenceTemplate.Size = new System.Drawing.Size(489, 22);
+			this.textBoxSequenceTemplate.TabIndex = 8;
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(12, 124);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(92, 17);
+			this.label4.TabIndex = 2;
+			this.label4.Text = "Vixen Server:";
+			// 
+			// textBoxVixenServer
+			// 
+			this.textBoxVixenServer.Enabled = false;
+			this.textBoxVixenServer.Location = new System.Drawing.Point(143, 124);
+			this.textBoxVixenServer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.textBoxVixenServer.Name = "textBoxVixenServer";
+			this.textBoxVixenServer.Size = new System.Drawing.Size(489, 22);
+			this.textBoxVixenServer.TabIndex = 7;
+			// 
+			// groupBox6
+			// 
+			this.groupBox6.Controls.Add(this.label12);
+			this.groupBox6.Controls.Add(this.textBoxBlacklistEmailLog);
+			this.groupBox6.Controls.Add(this.label8);
+			this.groupBox6.Controls.Add(this.textBoxLogFileName);
+			this.groupBox6.Location = new System.Drawing.Point(12, 675);
+			this.groupBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.groupBox6.Name = "groupBox6";
+			this.groupBox6.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.groupBox6.Size = new System.Drawing.Size(663, 75);
+			this.groupBox6.TabIndex = 7;
+			this.groupBox6.TabStop = false;
+			this.groupBox6.Text = "Logs";
+			// 
+			// textBoxBlacklistEmailLog
+			// 
+			this.textBoxBlacklistEmailLog.Enabled = false;
+			this.textBoxBlacklistEmailLog.Location = new System.Drawing.Point(143, 47);
+			this.textBoxBlacklistEmailLog.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.textBoxBlacklistEmailLog.Name = "textBoxBlacklistEmailLog";
+			this.textBoxBlacklistEmailLog.Size = new System.Drawing.Size(490, 22);
+			this.textBoxBlacklistEmailLog.TabIndex = 13;
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(13, 22);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(97, 17);
+			this.label8.TabIndex = 15;
+			this.label8.Text = "Message Log:";
+			// 
+			// textBoxLogFileName
+			// 
+			this.textBoxLogFileName.Enabled = false;
+			this.textBoxLogFileName.Location = new System.Drawing.Point(143, 19);
+			this.textBoxLogFileName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.textBoxLogFileName.Name = "textBoxLogFileName";
+			this.textBoxLogFileName.Size = new System.Drawing.Size(490, 22);
+			this.textBoxLogFileName.TabIndex = 12;
+			// 
+			// openFileDialog1
+			// 
+			this.openFileDialog1.AddExtension = false;
+			this.openFileDialog1.FileName = "openFileDialog1";
+			// 
+			// groupBox5
+			// 
+			this.groupBox5.Controls.Add(this.label74);
+			this.groupBox5.Controls.Add(this.numericUpDownIntervalMsgs);
+			this.groupBox5.Controls.Add(this.label71);
+			this.groupBox5.Controls.Add(this.comboBoxBlack_Whitelist);
+			this.groupBox5.Controls.Add(this.label14);
+			this.groupBox5.Controls.Add(this.groupBox1);
+			this.groupBox5.Controls.Add(this.dateCountDown);
+			this.groupBox5.Controls.Add(this.label87);
+			this.groupBox5.Controls.Add(this.checkBoxAutoStart);
+			this.groupBox5.Location = new System.Drawing.Point(12, 11);
+			this.groupBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.groupBox5.Name = "groupBox5";
+			this.groupBox5.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.groupBox5.Size = new System.Drawing.Size(663, 423);
+			this.groupBox5.TabIndex = 5;
+			this.groupBox5.TabStop = false;
+			this.groupBox5.Text = "Messaging Settings";
+			// 
+			// label74
+			// 
+			this.label74.AutoSize = true;
+			this.label74.Location = new System.Drawing.Point(544, 57);
+			this.label74.Name = "label74";
+			this.label74.Size = new System.Drawing.Size(32, 17);
+			this.label74.TabIndex = 108;
+			this.label74.Text = "Sec";
+			// 
+			// groupBox1
+			// 
+			this.groupBox1.Controls.Add(this.textBoxCountDownMSG);
+			this.groupBox1.Controls.Add(this.label3);
+			this.groupBox1.Controls.Add(this.textBoxReturnWarningMSG);
+			this.groupBox1.Controls.Add(this.label2);
+			this.groupBox1.Controls.Add(this.textBoxReturnSuccessMSG);
+			this.groupBox1.Controls.Add(this.label1);
+			this.groupBox1.Controls.Add(this.textBoxReturnBannedMSG);
+			this.groupBox1.Controls.Add(this.label9);
+			this.groupBox1.Location = new System.Drawing.Point(6, 131);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(646, 287);
+			this.groupBox1.TabIndex = 93;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Auto Reply to Audiance";
+			// 
+			// textBoxCountDownMSG
+			// 
+			this.textBoxCountDownMSG.Location = new System.Drawing.Point(138, 215);
+			this.textBoxCountDownMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.textBoxCountDownMSG.Multiline = true;
+			this.textBoxCountDownMSG.Name = "textBoxCountDownMSG";
+			this.textBoxCountDownMSG.Size = new System.Drawing.Size(490, 42);
+			this.textBoxCountDownMSG.TabIndex = 95;
+			this.toolTip1.SetToolTip(this.textBoxCountDownMSG, "Enter a message that will be displayed when Countdown is enabled. Add the word CO" +
+        "UNTDOWN anywhere in the message which will be replaced by number of days to the " +
+        "countdown date.");
+			// 
+			// label3
+			// 
+			this.label3.Location = new System.Drawing.Point(11, 215);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(121, 59);
+			this.label3.TabIndex = 96;
+			this.label3.Text = "Count down message";
+			this.toolTip1.SetToolTip(this.label3, "Enter a message that will be displayed when Countdown is enabled. Add the word CO" +
+        "UNTDOWN which will be replaced by number of days.");
+			// 
+			// MessagingSettings
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoSize = true;
+			this.BackColor = System.Drawing.Color.Azure;
+			this.ClientSize = new System.Drawing.Size(682, 803);
+			this.Controls.Add(this.groupBox6);
+			this.Controls.Add(this.groupBox3);
+			this.Controls.Add(this.groupBox5);
+			this.Controls.Add(this.Cancel);
+			this.Controls.Add(this.ok);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.MaximumSize = new System.Drawing.Size(700, 850);
+			this.MinimumSize = new System.Drawing.Size(700, 850);
+			this.Name = "MessagingSettings";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+			this.Text = "Messaging Settings";
+			this.Load += new System.EventHandler(this.MessagingSettings_Load);
+			((System.ComponentModel.ISupportInitialize)(this.ok)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.Cancel)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).EndInit();
+			this.groupBox3.ResumeLayout(false);
+			this.groupBox3.PerformLayout();
+			this.groupBox6.ResumeLayout(false);
+			this.groupBox6.PerformLayout();
+			this.groupBox5.ResumeLayout(false);
+			this.groupBox5.PerformLayout();
+			this.groupBox1.ResumeLayout(false);
+			this.groupBox1.PerformLayout();
+			this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+		private System.Windows.Forms.PictureBox ok;
+		private System.Windows.Forms.ToolTip toolTip1;
+		public System.Windows.Forms.PictureBox Cancel;
+		private System.Windows.Forms.TextBox textBoxReturnBannedMSG;
+		private System.Windows.Forms.Label label9;
+		private System.Windows.Forms.CheckBox checkBoxAutoStart;
+		private System.Windows.Forms.GroupBox groupBox3;
+		private System.Windows.Forms.Label label100;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.Button buttonGetVixenData;
+		private System.Windows.Forms.TextBox textBoxVixenFolder;
+		private System.Windows.Forms.Label label32;
+		private System.Windows.Forms.TextBox textBoxNodeId;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.TextBox textBoxOutputSequence;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.TextBox textBoxSequenceTemplate;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.TextBox textBoxVixenServer;
+		private System.Windows.Forms.GroupBox groupBox6;
+		private System.Windows.Forms.Label label12;
+		private System.Windows.Forms.TextBox textBoxBlacklistEmailLog;
+		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.TextBox textBoxLogFileName;
+		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+		private System.Windows.Forms.TextBox textBoxGroupName;
+		private System.Windows.Forms.OpenFileDialog openFileDialog1;
+		private System.Windows.Forms.GroupBox groupBox5;
+		private System.Windows.Forms.DateTimePicker dateCountDown;
+		private System.Windows.Forms.Label label87;
+		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.TextBox textBoxReturnSuccessMSG;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.TextBox textBoxReturnWarningMSG;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label label14;
+		private System.Windows.Forms.ComboBox comboBoxBlack_Whitelist;
+		private System.Windows.Forms.Label label74;
+		private System.Windows.Forms.NumericUpDown numericUpDownIntervalMsgs;
+		private System.Windows.Forms.Label label71;
+		private System.Windows.Forms.TextBox textBoxCountDownMSG;
+		private System.Windows.Forms.Label label3;
+    }
+}

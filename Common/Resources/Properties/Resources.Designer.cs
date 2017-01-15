@@ -200,9 +200,9 @@ namespace Common.Resources.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap ClicktoOpen {
+        public static System.Drawing.Bitmap Close {
             get {
-                object obj = ResourceManager.GetObject("ClicktoOpen", resourceCulture);
+                object obj = ResourceManager.GetObject("Close", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -223,6 +223,36 @@ namespace Common.Resources.Properties {
         public static System.Drawing.Bitmap Help2 {
             get {
                 object obj = ResourceManager.GetObject("Help2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Lists {
+            get {
+                object obj = ResourceManager.GetObject("Lists", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Log {
+            get {
+                object obj = ResourceManager.GetObject("Log", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Message {
+            get {
+                object obj = ResourceManager.GetObject("Message", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -253,26 +283,6 @@ namespace Common.Resources.Properties {
         public static System.Drawing.Bitmap Save {
             get {
                 object obj = ResourceManager.GetObject("Save", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap SaveBlacklist {
-            get {
-                object obj = ResourceManager.GetObject("SaveBlacklist", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap SaveWhitelist {
-            get {
-                object obj = ResourceManager.GetObject("SaveWhitelist", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -313,6 +323,26 @@ namespace Common.Resources.Properties {
         public static System.Drawing.Bitmap StopB_W {
             get {
                 object obj = ResourceManager.GetObject("StopB_W", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Text {
+            get {
+                object obj = ResourceManager.GetObject("Text", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap Twilio {
+            get {
+                object obj = ResourceManager.GetObject("Twilio", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
