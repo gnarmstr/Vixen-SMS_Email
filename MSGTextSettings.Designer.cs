@@ -76,6 +76,8 @@
 			this.label21 = new System.Windows.Forms.Label();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.fontDialog1 = new System.Windows.Forms.FontDialog();
+			this.label1 = new System.Windows.Forms.Label();
+			this.comboBoxGradientMode = new System.Windows.Forms.ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.ok)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxWords)).BeginInit();
@@ -111,7 +113,7 @@
 			// label88
 			// 
 			this.label88.AutoSize = true;
-			this.label88.Location = new System.Drawing.Point(217, 71);
+			this.label88.Location = new System.Drawing.Point(217, 102);
 			this.label88.Name = "label88";
 			this.label88.Size = new System.Drawing.Size(82, 17);
 			this.label88.TabIndex = 66;
@@ -121,7 +123,7 @@
 			// 
 			// numericUpDownMaxWords
 			// 
-			this.numericUpDownMaxWords.Location = new System.Drawing.Point(303, 70);
+			this.numericUpDownMaxWords.Location = new System.Drawing.Point(303, 101);
 			this.numericUpDownMaxWords.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.numericUpDownMaxWords.Name = "numericUpDownMaxWords";
 			this.numericUpDownMaxWords.Size = new System.Drawing.Size(64, 22);
@@ -142,7 +144,7 @@
 			// label45
 			// 
 			this.label45.AutoSize = true;
-			this.label45.Location = new System.Drawing.Point(37, 72);
+			this.label45.Location = new System.Drawing.Point(37, 103);
 			this.label45.Name = "label45";
 			this.label45.Size = new System.Drawing.Size(68, 17);
 			this.label45.TabIndex = 51;
@@ -404,6 +406,8 @@
 			// 
 			// groupBoxSeqSettings
 			// 
+			this.groupBoxSeqSettings.Controls.Add(this.label1);
+			this.groupBoxSeqSettings.Controls.Add(this.comboBoxGradientMode);
 			this.groupBoxSeqSettings.Controls.Add(this.trackBarIntensity);
 			this.groupBoxSeqSettings.Controls.Add(this.label3);
 			this.groupBoxSeqSettings.Controls.Add(this.checkBoxCenterText);
@@ -436,7 +440,7 @@
 			// trackBarIntensity
 			// 
 			this.trackBarIntensity.AutoSize = false;
-			this.trackBarIntensity.Location = new System.Drawing.Point(100, 212);
+			this.trackBarIntensity.Location = new System.Drawing.Point(100, 225);
 			this.trackBarIntensity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.trackBarIntensity.Maximum = 100;
 			this.trackBarIntensity.Minimum = 1;
@@ -452,7 +456,7 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(10, 219);
+			this.label3.Location = new System.Drawing.Point(10, 232);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(79, 17);
 			this.label3.TabIndex = 103;
@@ -462,7 +466,7 @@
 			// 
 			this.checkBoxCenterText.AutoSize = true;
 			this.checkBoxCenterText.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxCenterText.Location = new System.Drawing.Point(145, 117);
+			this.checkBoxCenterText.Location = new System.Drawing.Point(145, 140);
 			this.checkBoxCenterText.Name = "checkBoxCenterText";
 			this.checkBoxCenterText.Size = new System.Drawing.Size(103, 21);
 			this.checkBoxCenterText.TabIndex = 101;
@@ -475,7 +479,7 @@
 			// 
 			this.checkBoxCenterStop.AutoSize = true;
 			this.checkBoxCenterStop.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxCenterStop.Location = new System.Drawing.Point(23, 117);
+			this.checkBoxCenterStop.Location = new System.Drawing.Point(23, 140);
 			this.checkBoxCenterStop.Name = "checkBoxCenterStop";
 			this.checkBoxCenterStop.Size = new System.Drawing.Size(105, 21);
 			this.checkBoxCenterStop.TabIndex = 100;
@@ -499,7 +503,7 @@
 			this.incomingMessageColourOption.FormattingEnabled = true;
 			this.incomingMessageColourOption.Items.AddRange(new object[] {
             "Single",
-            "Multi",
+            "Gradient",
             "Random"});
 			this.incomingMessageColourOption.Location = new System.Drawing.Point(111, 29);
 			this.incomingMessageColourOption.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -567,7 +571,7 @@
             "Down",
             "None",
             "Random"});
-			this.comboBoxTextDirection.Location = new System.Drawing.Point(111, 69);
+			this.comboBoxTextDirection.Location = new System.Drawing.Point(111, 100);
 			this.comboBoxTextDirection.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.comboBoxTextDirection.Name = "comboBoxTextDirection";
 			this.comboBoxTextDirection.Size = new System.Drawing.Size(82, 24);
@@ -577,7 +581,7 @@
 			// trackBarTextPosition
 			// 
 			this.trackBarTextPosition.AutoSize = false;
-			this.trackBarTextPosition.Location = new System.Drawing.Point(100, 159);
+			this.trackBarTextPosition.Location = new System.Drawing.Point(100, 176);
 			this.trackBarTextPosition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.trackBarTextPosition.Maximum = 100;
 			this.trackBarTextPosition.Minimum = -100;
@@ -592,7 +596,7 @@
 			// label44
 			// 
 			this.label44.AutoSize = true;
-			this.label44.Location = new System.Drawing.Point(10, 166);
+			this.label44.Location = new System.Drawing.Point(10, 183);
 			this.label44.Name = "label44";
 			this.label44.Size = new System.Drawing.Size(62, 17);
 			this.label44.TabIndex = 50;
@@ -601,7 +605,7 @@
 			// trackBarTextSpeed
 			// 
 			this.trackBarTextSpeed.AutoSize = false;
-			this.trackBarTextSpeed.Location = new System.Drawing.Point(100, 267);
+			this.trackBarTextSpeed.Location = new System.Drawing.Point(100, 272);
 			this.trackBarTextSpeed.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.trackBarTextSpeed.Maximum = 5;
 			this.trackBarTextSpeed.Minimum = 1;
@@ -617,7 +621,7 @@
 			// label21
 			// 
 			this.label21.AutoSize = true;
-			this.label21.Location = new System.Drawing.Point(10, 267);
+			this.label21.Location = new System.Drawing.Point(10, 272);
 			this.label21.Name = "label21";
 			this.label21.Size = new System.Drawing.Size(70, 17);
 			this.label21.TabIndex = 48;
@@ -631,6 +635,34 @@
 			// fontDialog1
 			// 
 			this.fontDialog1.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(6, 67);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(106, 17);
+			this.label1.TabIndex = 105;
+			this.label1.Text = "Gradient Mode:";
+			// 
+			// comboBoxGradientMode
+			// 
+			this.comboBoxGradientMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxGradientMode.FormattingEnabled = true;
+			this.comboBoxGradientMode.Items.AddRange(new object[] {
+            "Across Text",
+            "Across Element",
+            "Vertical Across Text",
+            "Vertical Across Element",
+            "Diagonal Across Text",
+            "Diagonal Across Element",
+            "Backward Diagonal Across Text",
+            "Backward Diagonal Across Element"});
+			this.comboBoxGradientMode.Location = new System.Drawing.Point(111, 65);
+			this.comboBoxGradientMode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.comboBoxGradientMode.Name = "comboBoxGradientMode";
+			this.comboBoxGradientMode.Size = new System.Drawing.Size(256, 24);
+			this.comboBoxGradientMode.TabIndex = 104;
 			// 
 			// MSGTextSettings
 			// 
@@ -712,5 +744,7 @@
 		private System.Windows.Forms.Button TextColor5;
 		private System.Windows.Forms.ColorDialog colorDialog1;
 		private System.Windows.Forms.FontDialog fontDialog1;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.ComboBox comboBoxGradientMode;
     }
 }

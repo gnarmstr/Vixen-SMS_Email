@@ -87,7 +87,7 @@ namespace Vixen_Messaging
 			}
 			else
 			{
-				File.Create(GlobalVar.Blacklistlocation + ".bkp");
+				File.Create(GlobalVar.Blacklistlocation + ".bkp").Close();
 				File.WriteAllText(GlobalVar.Blacklistlocation + ".bkp", Resources.Blacklist);
 				File.WriteAllText(GlobalVar.Blacklistlocation, Resources.Blacklist);
 			}
@@ -104,7 +104,7 @@ namespace Vixen_Messaging
 			}
 			else
 			{
-				File.Create(GlobalVar.Whitelistlocation + ".bkp");
+				File.Create(GlobalVar.Whitelistlocation + ".bkp").Close();
 				File.WriteAllText(GlobalVar.Whitelistlocation + ".bkp", Resources.Whitelist);
 				File.WriteAllText(GlobalVar.Whitelistlocation, Resources.Whitelist);
 			}
@@ -188,7 +188,7 @@ namespace Vixen_Messaging
 			string checkfirstload = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "True");
 			if (checkfirstload == "True")
 			{
-				var messageBox = new MessageBoxForm(@"Welcome to Vixen Messaging, as this is the first time you have run Vixen Messaging you are required to setup the messaging system by selecting the first three buttons.",
+				var messageBox = new MessageBoxForm(@"Welcome to Vixen Messaging, as this is the first time you have run Vixen Messaging you are required to setup the messaging system by going through the Settings.",
 				"Welcome", MessageBoxButtons.OK, SystemIcons.Information);
 				messageBox.ShowDialog();
 				Stop_Vixen();
@@ -240,20 +240,18 @@ namespace Vixen_Messaging
 			GlobalVar.SeqIntervalTime = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SeqIntervalTime", 10);
 			GlobalVar.TextDirection = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextDirection", "Left");
 			GlobalVar.StringOrientation = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "StringOrientation", "Horizontal");
+			GlobalVar.GradientMode = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GradientMode",
+				"Across Text");
 			GlobalVar.ReturnBannedMSG = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "ReturnBannedMSG",
 				"Your mobile number has been recorded and has been banned for sending inappropiate words.");
 			GlobalVar.ReturnWarningMSG = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "ReturnWarningMSG",
 				"Please reframe from using inappropiate words. If this happens again your phone number will be banned.");
 			GlobalVar.ReturnSuccessMSG = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "ReturnSuccessMSG",
 				"Your message will appear soon in lights.");
-	//		comboBoxPlayMode.Text = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "comboBoxPlayMode",
-	//			"Play Only Incoming Msgs");
 			GlobalVar.IntervalMsgs = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
 				"IntervalMsgs", 2);
 			GlobalVar.TwilioSID = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwilioSID", "");
 			GlobalVar.TwilioToken = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwilioToken", "");
-			//checkBoxLocal.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxLocal", true);
-			//checkBoxTwilio.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxTwilio", false);
 			GlobalVar.TwilioPhoneNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwilioPhoneNumber", "");
 			GlobalVar.MaxWords = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords", 0);
 			GlobalVar.CountDownDate = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString",
@@ -320,7 +318,7 @@ namespace Vixen_Messaging
 		{
 			if (checkBoxCountDown.Checked && !string.IsNullOrEmpty(GlobalVar.CountDownMSG))
 			{
-				var randomPlay = _random.Next(0, 10);
+				var randomPlay = _random.Next(0, 15);
 				if (randomPlay < 2)
 				{
 					PlayCountDown();
@@ -621,6 +619,7 @@ namespace Vixen_Messaging
 		private void TextSettings(string msg)
 		{
 			string hexMultiValue;
+			string hexMultiValue1;
 
 			CountDown(msg, out msg);
 
@@ -649,26 +648,35 @@ namespace Vixen_Messaging
 			GlobalVar.FileText = GlobalVar.FileText.Replace("CenterText_Change", (GlobalVar.CenterText.ToString()).ToLower());
 
 			double X = 1, Y = 1, Z = 1;
+			double X1 = 1, Y1 = 1, Z1 = 1;
 			switch (GlobalVar.IncomingMessageColourOption)
 			{
 				case 0:
 					hexMultiValue = GlobalVar.TextColor[1].A.ToString("x2") + GlobalVar.TextColor[1].R.ToString("x2") + GlobalVar.TextColor[1].G.ToString("x2") + GlobalVar.TextColor[1].B.ToString("x2");
 					HEXToXYZ(hexMultiValue, out X, out Y, out Z);
+					X1 = X;
+					Y1 = Y;
+					Z1 = Z;
 					break;
-				//case "Multi":
-				//	hexMultiValue = colourOption1[messageSelection].BackColor.A.ToString("x2") +
-				//					colourOption1[messageSelection].BackColor.R.ToString("x2") +
-				//					colourOption1[messageSelection].BackColor.G.ToString("x2") +
-				//					colourOption1[messageSelection].BackColor.B.ToString("x2");
-				//	multilineColour = Convert.ToUInt32(hexMultiValue, 16);
-				//	fileText1 = fileText1.Replace("Colour_Change1", multilineColour.ToString());
-				//	break;
+				case 1:
+					hexMultiValue = GlobalVar.TextColor[1].A.ToString("x2") + GlobalVar.TextColor[1].R.ToString("x2") + GlobalVar.TextColor[1].G.ToString("x2") + GlobalVar.TextColor[1].B.ToString("x2");
+					hexMultiValue1 = GlobalVar.TextColor[2].A.ToString("x2") + GlobalVar.TextColor[2].R.ToString("x2") + GlobalVar.TextColor[2].G.ToString("x2") + GlobalVar.TextColor[2].B.ToString("x2");
+					HEXToXYZ(hexMultiValue, out X, out Y, out Z);
+					HEXToXYZ(hexMultiValue1, out X1, out Y1, out Z1);
+					break;
 				case 2:
 					RandomColourSelect(out hexMultiValue);
 					HEXToXYZ(hexMultiValue, out X, out Y, out Z);
+					X1 = X;
+					Y1 = Y;
+					Z1 = Z;
 					break;
 			}
 
+			GlobalVar.FileText = GlobalVar.FileText.Replace("GradientMode_Change", GlobalVar.GradientMode.Replace(" ", ""));
+			GlobalVar.FileText = GlobalVar.FileText.Replace("Color_ChangeX1", X1.ToString());
+			GlobalVar.FileText = GlobalVar.FileText.Replace("Color_ChangeY1", Y1.ToString());
+			GlobalVar.FileText = GlobalVar.FileText.Replace("Color_ChangeZ1", Z1.ToString());
 			GlobalVar.FileText = GlobalVar.FileText.Replace("Color_ChangeX", X.ToString());
 			GlobalVar.FileText = GlobalVar.FileText.Replace("Color_ChangeY", Y.ToString());
 			GlobalVar.FileText = GlobalVar.FileText.Replace("Color_ChangeZ", Z.ToString());
@@ -684,9 +692,9 @@ namespace Vixen_Messaging
 		{
 			Color color = ColorTranslator.FromHtml("#" + hexMultiValue);
 
-			float r = (color.R / 255); //R from 0 to 255
-			float g = (color.G / 255); //G from 0 to 255
-			float b = (color.B / 255); //B from 0 to 255
+			float r = ((float)color.R / 255); //R from 0 to 255
+			float g = ((float)color.G / 255); //G from 0 to 255
+			float b = ((float)color.B / 255); //B from 0 to 255
 
 			if (r > 0.04045f) r = (float)Math.Pow((r + 0.055) / 1.055, 2.4);
 			else r = r / 12.92f;
@@ -1020,6 +1028,7 @@ namespace Vixen_Messaging
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFont", GlobalVar.Font);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFontSize", GlobalVar.FontSize);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TextDirection", GlobalVar.TextDirection);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GradientMode", GlobalVar.GradientMode);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "ReturnBannedMSG", GlobalVar.ReturnBannedMSG);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "ReturnWarningMSG", GlobalVar.ReturnWarningMSG);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "ReturnSuccessMSG", GlobalVar.ReturnSuccessMSG);
@@ -1107,7 +1116,7 @@ namespace Vixen_Messaging
 						}
 						if (!notWhitemsg)
 						{
-							LogDisplay(GlobalVar.LogMsg = ("Auto Reply: Your message will appear soon in lights."));
+							LogDisplay(GlobalVar.LogMsg = ("Your message has been displayed."));
 							GlobalVar.InstantMSG = "";
 							return;
 						}
@@ -1249,5 +1258,6 @@ namespace Vixen_Messaging
 				messageBox.ShowDialog();
 			}
 		}
+
 	}
 }

@@ -14,7 +14,7 @@ namespace Vixen_Messaging
 		public InstantMSG()
 		{
 			if (ActiveForm != null)
-				Location = new Point(ActiveForm.Location.X + ActiveForm.MaximumSize.Width, ActiveForm.Location.Y);
+				Location = new Point(ActiveForm.Location.X + ActiveForm.MaximumSize.Width - 10, ActiveForm.Location.Y);
 			InitializeComponent();
 			ForeColor = ThemeColorTable.ForeColor;
 			BackColor = ThemeColorTable.BackgroundColor;

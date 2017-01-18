@@ -36,12 +36,14 @@ namespace Vixen_Messaging
 
 		private decimal _maxWords;
 
+		private string _gradientMode;
+
 		private List<Color> _textColor = new List<Color>(10);
 
 		public MSGTextSettings()
 		{
 			if (ActiveForm != null)
-				Location = new Point(ActiveForm.Location.X + ActiveForm.MaximumSize.Width, ActiveForm.Location.Y);
+				Location = new Point(ActiveForm.Location.X + ActiveForm.MaximumSize.Width - 10, ActiveForm.Location.Y);
 			InitializeComponent();
 			ForeColor = ThemeColorTable.ForeColor;
 			BackColor = ThemeColorTable.BackgroundColor;
@@ -78,7 +80,18 @@ namespace Vixen_Messaging
 			TextColor8.BackColor = GlobalVar.TextColor[8];
 			TextColor9.BackColor = GlobalVar.TextColor[9];
 			TextColor10.BackColor = GlobalVar.TextColor[0];
-			_textColor = GlobalVar.TextColor;
+			comboBoxGradientMode.SelectedItem = _gradientMode = GlobalVar.GradientMode;
+			comboBoxGradientMode.Visible = GlobalVar.IncomingMessageColourOption == 1;
+			_textColor.Add(GlobalVar.TextColor[0]);
+			_textColor.Add(GlobalVar.TextColor[1]);
+			_textColor.Add(GlobalVar.TextColor[2]);
+			_textColor.Add(GlobalVar.TextColor[3]);
+			_textColor.Add(GlobalVar.TextColor[4]);
+			_textColor.Add(GlobalVar.TextColor[5]);
+			_textColor.Add(GlobalVar.TextColor[6]);
+			_textColor.Add(GlobalVar.TextColor[7]);
+			_textColor.Add(GlobalVar.TextColor[8]);
+			_textColor.Add(GlobalVar.TextColor[9]);
 			_envokeChanges = false;
 		}
 
@@ -108,6 +121,7 @@ namespace Vixen_Messaging
 			GlobalVar.FontSize = _fontSize;
 			GlobalVar.MaxWords = _maxWords;
 			GlobalVar.TextColor = _textColor;
+			GlobalVar.GradientMode = _gradientMode;
 			Close();
 		}
 
@@ -153,13 +167,13 @@ namespace Vixen_Messaging
 						colourVisible[i].Visible = false;
 					} while (i < 9);
 					break;
-				case "Multi":
-					RandomColourSelection.Text = @"Multiple Colour Selection";
+				case "Gradient":
+					RandomColourSelection.Text = @"Gradient Colour Selection";
 					do
 					{
 						colourVisible[i].Visible = true;
 						i++;
-					} while (i < 4);
+					} while (i < 2);
 					do
 					{
 						colourVisible[i].Visible = false;
@@ -180,6 +194,7 @@ namespace Vixen_Messaging
 		private void incomingMessageColourOption_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			ColorVisible();
+			comboBoxGradientMode.Visible = incomingMessageColourOption.SelectedIndex == 1;
 			updateChanges();
 		}
 
@@ -234,6 +249,7 @@ namespace Vixen_Messaging
 				GlobalVar.TextColor[8] = TextColor8.BackColor;
 				GlobalVar.TextColor[9] = TextColor9.BackColor;
 				GlobalVar.TextColor[0] = TextColor10.BackColor;
+				GlobalVar.GradientMode = comboBoxGradientMode.SelectedItem.ToString();
 			}
 		}
 

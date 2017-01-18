@@ -30,7 +30,6 @@
         {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelpForm));
 			this.buttonDemo = new System.Windows.Forms.Button();
-			this.buttonInstallation = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
 			this.buttonTwilio = new System.Windows.Forms.Button();
 			this.label3 = new System.Windows.Forms.Label();
@@ -52,20 +51,6 @@
 			this.buttonDemo.MouseLeave += new System.EventHandler(this.buttonBackground_MouseLeave);
 			this.buttonDemo.MouseHover += new System.EventHandler(this.buttonBackground_MouseHover);
 			// 
-			// buttonInstallation
-			// 
-			this.buttonInstallation.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonInstallation.Location = new System.Drawing.Point(304, 559);
-			this.buttonInstallation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.buttonInstallation.Name = "buttonInstallation";
-			this.buttonInstallation.Size = new System.Drawing.Size(225, 26);
-			this.buttonInstallation.TabIndex = 4;
-			this.buttonInstallation.Text = "Installation";
-			this.buttonInstallation.UseVisualStyleBackColor = false;
-			this.buttonInstallation.Click += new System.EventHandler(this.buttonInstallation_Click);
-			this.buttonInstallation.MouseLeave += new System.EventHandler(this.buttonBackground_MouseLeave);
-			this.buttonInstallation.MouseHover += new System.EventHandler(this.buttonBackground_MouseHover);
-			// 
 			// label2
 			// 
 			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -78,7 +63,7 @@
 			// buttonTwilio
 			// 
 			this.buttonTwilio.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonTwilio.Location = new System.Drawing.Point(44, 604);
+			this.buttonTwilio.Location = new System.Drawing.Point(304, 559);
 			this.buttonTwilio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonTwilio.Name = "buttonTwilio";
 			this.buttonTwilio.Size = new System.Drawing.Size(225, 26);
@@ -101,10 +86,10 @@
 			// buttonLauncher
 			// 
 			this.buttonLauncher.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonLauncher.Location = new System.Drawing.Point(304, 596);
+			this.buttonLauncher.Location = new System.Drawing.Point(73, 600);
 			this.buttonLauncher.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonLauncher.Name = "buttonLauncher";
-			this.buttonLauncher.Size = new System.Drawing.Size(225, 42);
+			this.buttonLauncher.Size = new System.Drawing.Size(411, 26);
 			this.buttonLauncher.TabIndex = 11;
 			this.buttonLauncher.Text = "Controlling this messaging app with the Vixen 3 Launcher";
 			this.buttonLauncher.UseVisualStyleBackColor = false;
@@ -137,7 +122,6 @@
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.buttonTwilio);
 			this.Controls.Add(this.label2);
-			this.Controls.Add(this.buttonInstallation);
 			this.Controls.Add(this.buttonDemo);
 			this.HelpButton = true;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -155,8 +139,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button buttonDemo;
-		private System.Windows.Forms.Button buttonInstallation;
+		private System.Windows.Forms.Button buttonDemo;
         private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Button buttonTwilio;
         private System.Windows.Forms.Label label3;

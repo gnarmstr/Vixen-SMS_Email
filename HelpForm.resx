@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>1. In order to retrieve SMS’s an internet client (Twilio) is used to store the messages so Vixen messaging can retrieve them when required. Set up an account at www.twilio.com, the account is free to setup however you will also need a cell/mobile number. This number is setup in Twilio and for an Aus number is only $6 a month. I just setup the number for Nov and Dec. as this can t
+    <value>1. In order to retrieve SMS’s an internet client (Twilio) is used to store the messages so Vixen messaging can retrieve them when required. Set up an account at www.twilio.com, the account is free to setup however you will also need a cell/mobile number. This number is setup in Twilio and for an Aus number is only $6 a month. I just setup the number for Nov and Dec.
 
 2. When you first loaded Vixen Messaging you are required to enter in Twilio, Messaging and Text settings. This will ensure Vixen messaging is setup correctly.
 

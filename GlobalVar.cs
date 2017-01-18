@@ -117,6 +117,8 @@ namespace Vixen_Messaging
 
 		public static List<Color> TextColor = new List<Color>(10);
 
+		public static string GradientMode;
+
 		#endregion
 
 		#region Instant Message

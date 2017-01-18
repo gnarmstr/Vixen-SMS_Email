@@ -48,8 +48,8 @@ namespace Vixen_Messaging
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItemFile = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.twilioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.messagingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -152,7 +152,8 @@ namespace Vixen_Messaging
 			this.checkBoxCountDown.TabIndex = 118;
 			this.checkBoxCountDown.Text = "Enable Countdown Msg";
 			this.checkBoxCountDown.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.toolTip1.SetToolTip(this.checkBoxCountDown, resources.GetString("checkBoxCountDown.ToolTip"));
+			this.toolTip1.SetToolTip(this.checkBoxCountDown, "When enabled, Messaging will send a count down message to be displayed on a Rando" +
+        "m bases.");
 			this.checkBoxCountDown.UseVisualStyleBackColor = true;
 			this.checkBoxCountDown.CheckedChanged += new System.EventHandler(this.checkBoxCountDown_CheckedChanged);
 			// 
@@ -208,8 +209,8 @@ namespace Vixen_Messaging
 			// 
 			this.fileToolStripMenuItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
-            this.closeToolStripMenuItem,
-            this.exportLogToolStripMenuItem});
+            this.exportLogToolStripMenuItem,
+            this.closeToolStripMenuItem});
 			this.fileToolStripMenuItemFile.Name = "fileToolStripMenuItemFile";
 			this.fileToolStripMenuItemFile.Size = new System.Drawing.Size(44, 24);
 			this.fileToolStripMenuItemFile.Text = "File";
@@ -217,23 +218,23 @@ namespace Vixen_Messaging
 			// saveToolStripMenuItem
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
 			this.saveToolStripMenuItem.Text = "Save";
 			this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-			// 
-			// closeToolStripMenuItem
-			// 
-			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-			this.closeToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-			this.closeToolStripMenuItem.Text = "Close";
-			this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
 			// 
 			// exportLogToolStripMenuItem
 			// 
 			this.exportLogToolStripMenuItem.Name = "exportLogToolStripMenuItem";
-			this.exportLogToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+			this.exportLogToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
 			this.exportLogToolStripMenuItem.Text = "Export Log";
 			this.exportLogToolStripMenuItem.Click += new System.EventHandler(this.exportLogToolStripMenuItem_Click);
+			// 
+			// closeToolStripMenuItem
+			// 
+			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+			this.closeToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+			this.closeToolStripMenuItem.Text = "Close";
+			this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
 			// 
 			// settingsToolStripMenuItem
 			// 
