@@ -25,7 +25,7 @@ namespace Vixen_Messaging
 
                 if (!result)
                 {
-					var messageBox = new MessageBoxForm(@"Another instance of Vixen Messaging is already running; this instance will be closed.",
+					var messageBox = new MessageBoxForm("\n\nAnother instance of Vixen Messaging is already running; this instance will be closed.",
                                     "Vixen Messaging already open", MessageBoxButtons.OK, SystemIcons.Warning);
 					messageBox.ShowDialog();
                     return;
@@ -33,7 +33,7 @@ namespace Vixen_Messaging
                 var mutex1 = new Mutex(true, "Vixen3RunningInstance", out result);
                 if (result)
                 {
-					var messageBox = new MessageBoxForm(@"Vixen 3 is Not currently running and must be open when Messages are being retrieved.",
+					var messageBox = new MessageBoxForm("\n\nVixen 3 is Not currently running and must be open when Messages are being retrieved.",
                                     "Vixen 3 not running", MessageBoxButtons.OK, SystemIcons.Warning);
 					messageBox.ShowDialog();
                 }

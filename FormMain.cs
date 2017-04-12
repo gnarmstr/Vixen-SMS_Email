@@ -27,7 +27,8 @@ namespace Vixen_Messaging
 
 	public partial class FormMain : Form
 	{
-		
+		public bool _envokeChanges;
+
 		private Form _msgTextSettings;
 
 		private bool playCountDown;
@@ -36,6 +37,7 @@ namespace Vixen_Messaging
 
 		public FormMain()
 		{
+			_envokeChanges = true;
 			InitializeComponent();
 			ClientSize = new Size(784, 1091);
 			Location = new Point(100, 200);
@@ -51,6 +53,7 @@ namespace Vixen_Messaging
 			exportLogToolStripMenuItem.Image = Resources.Log;
 			whiteBlackListsToolStripMenuItem.Image = Resources.Lists;
 			WebServerStatus.ForeColor = Color.Black;
+			GlobalVar.SaveFlag = false;
 		}
 
 		private void StartChecking()
@@ -172,7 +175,7 @@ namespace Vixen_Messaging
 			}
 			catch
 			{
-				var messageBox = new MessageBoxForm(@"Vixen 3 User files do not appear to be in the default Documents folder or Vixen 3 is not Installed, Ensure you add the correct folder first or Install Vixen 3.", @"Vixen Files", MessageBoxButtons.OK, SystemIcons.Error);
+				var messageBox = new MessageBoxForm("\nVixen 3 User files do not appear to be in the default Documents folder or Vixen 3 is not Installed, Ensure you add the correct folder first or Install Vixen 3.", @"Vixen Files", MessageBoxButtons.OK, SystemIcons.Error);
 				messageBox.ShowDialog();
 			}
 
@@ -188,14 +191,15 @@ namespace Vixen_Messaging
 			string checkfirstload = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "True");
 			if (checkfirstload == "True")
 			{
-				var messageBox = new MessageBoxForm(@"Welcome to Vixen Messaging, as this is the first time you have run Vixen Messaging you are required to setup the messaging system by going through the Settings.",
+				var messageBox = new MessageBoxForm("\nWelcome to Vixen Messaging, as this is the first time you have run Vixen Messaging you are required to setup the messaging system by going through the Settings.",
 				"Welcome", MessageBoxButtons.OK, SystemIcons.Information);
 				messageBox.ShowDialog();
 				Stop_Vixen();
 			}
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkfirstload", "False");
+			_envokeChanges = false;
 		}
-
+			
 		#endregion
 
 #region Load Data
@@ -853,7 +857,7 @@ namespace Vixen_Messaging
 		{
 			if (checkBoxVixenControl.Checked)
 			{
-				var messageBox = new MessageBoxForm(@"You must have the Vixen Control disable to use this button", @"Vixen Control", MessageBoxButtons.OK, SystemIcons.Information);
+				var messageBox = new MessageBoxForm("\n\nYou must have the Vixen Control disable to use this button", @"Vixen Control", MessageBoxButtons.OK, SystemIcons.Information);
 				messageBox.ShowDialog();
 			}
 			else
@@ -875,7 +879,7 @@ namespace Vixen_Messaging
 			}
 			else
 			{
-				var messageBox = new MessageBoxForm(@"Vixen Messaging is unable to start as there are no Group Node ID's. Add a node ID on the Messaging Settings page", @"Error", MessageBoxButtons.OK, SystemIcons.Error);
+				var messageBox = new MessageBoxForm("\n\nVixen Messaging is unable to start as there are no Group Node ID's. Add a node ID on the Messaging Settings page", @"Error", MessageBoxButtons.OK, SystemIcons.Error);
 				messageBox.ShowDialog();
 			}
 		}
@@ -884,7 +888,7 @@ namespace Vixen_Messaging
 		{
 			if (checkBoxVixenControl.Checked)
 			{
-				var messageBox = new MessageBoxForm(@"You must have the Vixen Control disable to use this button", @"Vixen Control", MessageBoxButtons.OK, SystemIcons.Information);
+				var messageBox = new MessageBoxForm("\n\nYou must have the Vixen Control disable to use this button", @"Vixen Control", MessageBoxButtons.OK, SystemIcons.Information);
 				messageBox.ShowDialog();
 			}
 			else
@@ -973,10 +977,10 @@ namespace Vixen_Messaging
 #region Close Vixen Messaging
 		private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (!GlobalVar.closeMessagingApp)
+			if (!GlobalVar.closeMessagingApp && GlobalVar.SaveFlag)
 			{
 				e.Cancel = false;
-				var messageBox = new MessageBoxForm(@"Would you like to save all Settings and Lists on exit?", @"Save",
+				var messageBox = new MessageBoxForm("\n\nSettings have been change, select yes to save on exit?", @"Save",
 					MessageBoxButtons.YesNoCancel, SystemIcons.Information);
 				var save = messageBox.ShowDialog();
 				switch (save)
@@ -994,7 +998,8 @@ namespace Vixen_Messaging
 				}
 			}
 		}
-#endregion
+
+		#endregion
 
 #region Save Data
 
@@ -1046,6 +1051,9 @@ namespace Vixen_Messaging
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", GlobalVar.GroupName);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupID", GlobalVar.GroupID);
 			#endregion
+
+			GlobalVar.SaveFlag = false;
+			Text = @"Vixen Messaging";
 		}
 			
 #endregion
@@ -1072,15 +1080,14 @@ namespace Vixen_Messaging
 		
 		private void checkBoxVixenControl_CheckedChanged(object sender, EventArgs e)
 		{
-			if (checkBoxVixenControl.Checked)
+			if (!_envokeChanges)
 			{
-				timerCheckVixenEnabled.Enabled = true;
+				GlobalVar.SaveFlag = true;
+				Text = @"Vixen Messaging - Unsaved Changes";
 			}
-			else
-			{
-				timerCheckVixenEnabled.Enabled = false;
-			} 
+			timerCheckVixenEnabled.Enabled = checkBoxVixenControl.Checked;
 		}
+
 		#endregion
 
 		#region Other
@@ -1132,7 +1139,7 @@ namespace Vixen_Messaging
 				}
 				else
 				{
-					var messageBox = new MessageBoxForm(@"Instant Message box is empty. Add message and try again", @"Information",
+					var messageBox = new MessageBoxForm("\n\nInstant Message box is empty. Add message and try again", @"Information",
 						MessageBoxButtons.OK, SystemIcons.Information);
 					messageBox.ShowDialog();
 				}
@@ -1168,7 +1175,7 @@ namespace Vixen_Messaging
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			Save();
-			var messageBox = new MessageBoxForm(@"All Settings, Whitelist and Blacklist have been saved.", @"Saved", MessageBoxButtons.OK, SystemIcons.Information);
+			var messageBox = new MessageBoxForm("\n\nAll Settings have been saved.", @"Saved", MessageBoxButtons.OK, SystemIcons.Information);
 			messageBox.ShowDialog();
 		}
 
@@ -1198,63 +1205,87 @@ namespace Vixen_Messaging
 		{
 			var twilio = new Twilio();
 			twilio.ShowDialog();
+			if (GlobalVar.SaveFlag)
+				Text = @"Vixen Messaging - Unsaved Changes";
 		}
 
 		private void messagingToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			var msgSettings = new MessagingSettings();
 			msgSettings.ShowDialog();
+			if (GlobalVar.SaveFlag)
+				Text = @"Vixen Messaging - Unsaved Changes";
 		}
 
 		private void textToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (_msgTextSettings == null || string.IsNullOrEmpty(_msgTextSettings.Text))
+//			if (_msgTextSettings == null || string.IsNullOrEmpty(_msgTextSettings.Text))
 			
-			{
+//			{
 				_msgTextSettings = new MSGTextSettings();
-				_msgTextSettings.Show();
-			}
-			else if (CheckedOpened(_msgTextSettings.Text))
-			{
-				_msgTextSettings.WindowState = FormWindowState.Normal;
-				_msgTextSettings.Focus();
-			}
+				_msgTextSettings.ShowDialog();
+			//}
+			//else if (CheckedOpened(_msgTextSettings.Text))
+			//{
+			//	_msgTextSettings.WindowState = FormWindowState.Normal;
+			//	_msgTextSettings.Focus();
+//			}
+			if (GlobalVar.SaveFlag)
+				Text = @"Vixen Messaging - Unsaved Changes";
 		}
 
 		private void whiteBlackListsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			var white_Black_Lists = new White_Black_Lists();
 			white_Black_Lists.ShowDialog();
+			if (GlobalVar.SaveFlag)
+				Text = @"Vixen Messaging - Unsaved Changes";
 		}
 
 		private void closeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			var messageBox = new MessageBoxForm(@"Would you like to save all Settings and Lists on exit?", @"Save", MessageBoxButtons.YesNoCancel, SystemIcons.Information);
-			var save = messageBox.ShowDialog();
-			switch (save)
+			if (GlobalVar.SaveFlag)
 			{
-				case DialogResult.OK:
-					Save();
-					StopSequence();
-					GlobalVar.closeMessagingApp = true;
-					Close();
-					break;
-				case DialogResult.No:
-					StopSequence();
-					GlobalVar.closeMessagingApp = true;
-					Close();
-					break;
-				case DialogResult.Cancel:
-					GlobalVar.closeMessagingApp = false;
-					break;
+				var messageBox = new MessageBoxForm("\n\nSettings have been change, select yes to save on exit?", @"Save",
+					MessageBoxButtons.YesNoCancel, SystemIcons.Information);
+
+				var save = messageBox.ShowDialog();
+				switch (save)
+				{
+					case DialogResult.OK:
+						Save();
+						StopSequence();
+						GlobalVar.closeMessagingApp = true;
+						Close();
+						break;
+					case DialogResult.No:
+						StopSequence();
+						GlobalVar.closeMessagingApp = true;
+						Close();
+						break;
+					case DialogResult.Cancel:
+						GlobalVar.closeMessagingApp = false;
+						break;
+				}
 			}
+			else
+			{
+				Close();
+			}
+			
 		}
 
 		private void checkBoxCountDown_CheckedChanged(object sender, EventArgs e)
 		{
+			if (!_envokeChanges)
+			{
+				GlobalVar.SaveFlag = true;
+				Text = @"Vixen Messaging - Unsaved Changes";
+			}
+				
 			if (checkBoxCountDown.Checked & string.IsNullOrEmpty(GlobalVar.CountDownMSG))
 			{
-				var messageBox = new MessageBoxForm(@"There is no message in the Messaging settings form for the Count down message.", @"Information", MessageBoxButtons.OK, SystemIcons.Information);
+				var messageBox = new MessageBoxForm("\nThere is no message in the Messaging settings form for the Count down message.", @"Information", MessageBoxButtons.OK, SystemIcons.Information);
 				messageBox.ShowDialog();
 			}
 		}

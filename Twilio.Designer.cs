@@ -52,6 +52,7 @@
 			this.textBoxSID.TabIndex = 0;
 			this.textBoxSID.Text = "AC29390b0fe3f4cb763862eefedb8afc41";
 			this.toolTip1.SetToolTip(this.textBoxSID, "Enter your Twilio Account SID.");
+			this.textBoxSID.TextChanged += new System.EventHandler(this.textBoxSID_TextChanged);
 			// 
 			// textBoxToken
 			// 
@@ -62,6 +63,7 @@
 			this.textBoxToken.TabIndex = 1;
 			this.textBoxToken.Text = "d68a401090af00f63bbecb4a3e502a7f";
 			this.toolTip1.SetToolTip(this.textBoxToken, "Enter Your Authorisation token fro your Twilio account.");
+			this.textBoxToken.TextChanged += new System.EventHandler(this.textBoxSID_TextChanged);
 			// 
 			// label1
 			// 
@@ -131,6 +133,7 @@
 			this.textBoxPhoneNumber.Size = new System.Drawing.Size(276, 22);
 			this.textBoxPhoneNumber.TabIndex = 7;
 			this.toolTip1.SetToolTip(this.textBoxPhoneNumber, "Ensure you enter your exact international number from Twilio ex. +61432615244");
+			this.textBoxPhoneNumber.TextChanged += new System.EventHandler(this.textBoxSID_TextChanged);
 			// 
 			// Twilio
 			// 
@@ -153,6 +156,7 @@
 			this.Name = "Twilio";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Twilio Settings";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Twilio_FormClosing);
 			this.Load += new System.EventHandler(this.Twilio_Load);
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxOk)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxCancel)).EndInit();

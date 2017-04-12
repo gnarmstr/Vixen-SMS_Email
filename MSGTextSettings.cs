@@ -11,7 +11,6 @@ namespace Vixen_Messaging
 {
 	public partial class MSGTextSettings : Form
 	{
-
 		private bool _envokeChanges;
 
 		private int _incomingMessageColourOption;
@@ -93,17 +92,18 @@ namespace Vixen_Messaging
 			_textColor.Add(GlobalVar.TextColor[8]);
 			_textColor.Add(GlobalVar.TextColor[9]);
 			_envokeChanges = false;
+			if (GlobalVar.SaveFlag)
+				_envokeChanges = true;
 		}
 
 		private void Ok_Click(object sender, EventArgs e)
 		{
-			
+			_envokeChanges = true;
 			Close();
 		}
 
 		private void Cancel_Click(object sender, EventArgs e)
 		{
-
 			Close_Form();
 		}
 
@@ -250,8 +250,11 @@ namespace Vixen_Messaging
 				GlobalVar.TextColor[9] = TextColor9.BackColor;
 				GlobalVar.TextColor[0] = TextColor10.BackColor;
 				GlobalVar.GradientMode = comboBoxGradientMode.SelectedItem.ToString();
+				GlobalVar.SaveFlag = true;
 			}
 		}
+
+		
 
 		private void numericUpDownMaxWords_ValueChanged(object sender, EventArgs e)
 		{
@@ -265,7 +268,18 @@ namespace Vixen_Messaging
 
 		private void trackBarIntensity_MouseLeave(object sender, EventArgs e)
 		{
+	//		updateChanges();
+		}
+
+		private void trackBarIntensity_ValueChanged(object sender, EventArgs e)
+		{
 			updateChanges();
+		}
+
+		private void MSGTextSettings_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			if (!_envokeChanges)
+				GlobalVar.SaveFlag = false;
 		}
 	}
 }

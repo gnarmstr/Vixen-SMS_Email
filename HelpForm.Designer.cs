@@ -130,7 +130,7 @@
 			this.MinimumSize = new System.Drawing.Size(580, 700);
 			this.Name = "HelpForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-			this.Text = "Vixen Messaging Help";
+			this.Text = "Vixen Messaging Help - v3.3u2";
 			this.Load += new System.EventHandler(this.Help_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();

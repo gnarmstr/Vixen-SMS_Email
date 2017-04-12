@@ -77,6 +77,7 @@
 			this.richTextBoxWhitelist.Text = "";
 			this.toolTip1.SetToolTip(this.richTextBoxWhitelist, "Can edit directly in the text box and then save. Not required to use non Alphanum" +
         "eric characters.");
+			this.richTextBoxWhitelist.TextChanged += new System.EventHandler(this.richTextBoxBlacklist_TextChanged);
 			// 
 			// richTextBoxBlacklist
 			// 
@@ -89,6 +90,7 @@
 			this.richTextBoxBlacklist.Text = "";
 			this.toolTip1.SetToolTip(this.richTextBoxBlacklist, "Can edit directly in the text box and then save. Not required to use non Alphanum" +
         "eric characters.");
+			this.richTextBoxBlacklist.TextChanged += new System.EventHandler(this.richTextBoxBlacklist_TextChanged);
 			// 
 			// openFileDialog1
 			// 
@@ -146,6 +148,7 @@
 			this.Name = "White_Black_Lists";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Messaging Settings";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.White_Black_Lists_FormClosing);
 			this.Load += new System.EventHandler(this.MessagingSettings_Load);
 			((System.ComponentModel.ISupportInitialize)(this.ok)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).EndInit();

@@ -59,6 +59,8 @@
 			this.TextColor6 = new System.Windows.Forms.Button();
 			this.TextColor5 = new System.Windows.Forms.Button();
 			this.groupBoxSeqSettings = new System.Windows.Forms.GroupBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.comboBoxGradientMode = new System.Windows.Forms.ComboBox();
 			this.trackBarIntensity = new System.Windows.Forms.TrackBar();
 			this.label3 = new System.Windows.Forms.Label();
 			this.checkBoxCenterText = new System.Windows.Forms.CheckBox();
@@ -76,8 +78,6 @@
 			this.label21 = new System.Windows.Forms.Label();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.fontDialog1 = new System.Windows.Forms.FontDialog();
-			this.label1 = new System.Windows.Forms.Label();
-			this.comboBoxGradientMode = new System.Windows.Forms.ComboBox();
 			((System.ComponentModel.ISupportInitialize)(this.ok)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxWords)).BeginInit();
@@ -437,6 +437,34 @@
 			this.groupBoxSeqSettings.TabStop = false;
 			this.groupBoxSeqSettings.Text = "Incoming Message / Text Settings";
 			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(6, 67);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(106, 17);
+			this.label1.TabIndex = 105;
+			this.label1.Text = "Gradient Mode:";
+			// 
+			// comboBoxGradientMode
+			// 
+			this.comboBoxGradientMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxGradientMode.FormattingEnabled = true;
+			this.comboBoxGradientMode.Items.AddRange(new object[] {
+            "Across Text",
+            "Across Element",
+            "Vertical Across Text",
+            "Vertical Across Element",
+            "Diagonal Across Text",
+            "Diagonal Across Element",
+            "Backward Diagonal Across Text",
+            "Backward Diagonal Across Element"});
+			this.comboBoxGradientMode.Location = new System.Drawing.Point(111, 65);
+			this.comboBoxGradientMode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.comboBoxGradientMode.Name = "comboBoxGradientMode";
+			this.comboBoxGradientMode.Size = new System.Drawing.Size(256, 24);
+			this.comboBoxGradientMode.TabIndex = 104;
+			// 
 			// trackBarIntensity
 			// 
 			this.trackBarIntensity.AutoSize = false;
@@ -449,6 +477,7 @@
 			this.trackBarIntensity.TabIndex = 102;
 			this.trackBarIntensity.Value = 1;
 			this.trackBarIntensity.Scroll += new System.EventHandler(this.trackBarTextPosition_ToolTip);
+			this.trackBarIntensity.ValueChanged += new System.EventHandler(this.trackBarIntensity_ValueChanged);
 			this.trackBarIntensity.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextPosition_ToolTip);
 			this.trackBarIntensity.MouseLeave += new System.EventHandler(this.trackBarIntensity_MouseLeave);
 			this.trackBarIntensity.MouseHover += new System.EventHandler(this.trackBarTextPosition_ToolTip);
@@ -589,6 +618,7 @@
 			this.trackBarTextPosition.Size = new System.Drawing.Size(299, 32);
 			this.trackBarTextPosition.TabIndex = 8;
 			this.trackBarTextPosition.Scroll += new System.EventHandler(this.trackBarTextPosition_ToolTip);
+			this.trackBarTextPosition.ValueChanged += new System.EventHandler(this.trackBarIntensity_ValueChanged);
 			this.trackBarTextPosition.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextPosition_ToolTip);
 			this.trackBarTextPosition.MouseLeave += new System.EventHandler(this.trackBarIntensity_MouseLeave);
 			this.trackBarTextPosition.MouseHover += new System.EventHandler(this.trackBarTextPosition_ToolTip);
@@ -614,6 +644,7 @@
 			this.trackBarTextSpeed.TabIndex = 9;
 			this.trackBarTextSpeed.Value = 1;
 			this.trackBarTextSpeed.Scroll += new System.EventHandler(this.trackBarTextPosition_ToolTip);
+			this.trackBarTextSpeed.ValueChanged += new System.EventHandler(this.trackBarIntensity_ValueChanged);
 			this.trackBarTextSpeed.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextPosition_ToolTip);
 			this.trackBarTextSpeed.MouseLeave += new System.EventHandler(this.trackBarIntensity_MouseLeave);
 			this.trackBarTextSpeed.MouseHover += new System.EventHandler(this.trackBarTextPosition_ToolTip);
@@ -636,34 +667,6 @@
 			// 
 			this.fontDialog1.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(6, 67);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(106, 17);
-			this.label1.TabIndex = 105;
-			this.label1.Text = "Gradient Mode:";
-			// 
-			// comboBoxGradientMode
-			// 
-			this.comboBoxGradientMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBoxGradientMode.FormattingEnabled = true;
-			this.comboBoxGradientMode.Items.AddRange(new object[] {
-            "Across Text",
-            "Across Element",
-            "Vertical Across Text",
-            "Vertical Across Element",
-            "Diagonal Across Text",
-            "Diagonal Across Element",
-            "Backward Diagonal Across Text",
-            "Backward Diagonal Across Element"});
-			this.comboBoxGradientMode.Location = new System.Drawing.Point(111, 65);
-			this.comboBoxGradientMode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.comboBoxGradientMode.Name = "comboBoxGradientMode";
-			this.comboBoxGradientMode.Size = new System.Drawing.Size(256, 24);
-			this.comboBoxGradientMode.TabIndex = 104;
-			// 
 			// MSGTextSettings
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -681,6 +684,7 @@
 			this.Name = "MSGTextSettings";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Text Settings";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MSGTextSettings_FormClosing);
 			this.Load += new System.EventHandler(this.MessagingSettings_Load);
 			((System.ComponentModel.ISupportInitialize)(this.ok)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).EndInit();

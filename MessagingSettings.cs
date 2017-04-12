@@ -11,10 +11,13 @@ namespace Vixen_Messaging
 {
 	public partial class MessagingSettings : Form
 	{
+		public bool _envokeChanges;
+
 		public MessagingSettings()
 		{
 			if (ActiveForm != null)
 				Location = new Point(ActiveForm.Location.X + ActiveForm.MaximumSize.Width - 10, ActiveForm.Location.Y);
+			_envokeChanges = true;
 			InitializeComponent();
 			ForeColor = ThemeColorTable.ForeColor;
 			BackColor = ThemeColorTable.BackgroundColor;
@@ -44,6 +47,9 @@ namespace Vixen_Messaging
 			textBoxCountDownMSG.Text = GlobalVar.CountDownMSG;
 			comboBoxBlack_Whitelist.SelectedItem = GlobalVar.Black_WhiteSelection;
 			numericUpDownIntervalMsgs.Value = GlobalVar.IntervalMsgs;
+			_envokeChanges = false;
+			if (GlobalVar.SaveFlag)
+				_envokeChanges = true;
 		}
 
 		private void Ok_Click(object sender, EventArgs e)
@@ -61,6 +67,7 @@ namespace Vixen_Messaging
 			GlobalVar.CountDownMSG = textBoxCountDownMSG.Text;
 			GlobalVar.Black_WhiteSelection = comboBoxBlack_Whitelist.SelectedItem.ToString();
 			GlobalVar.IntervalMsgs = Convert.ToInt16(numericUpDownIntervalMsgs.Value);
+			_envokeChanges = true;
 			Close();
 		}
 
@@ -71,7 +78,6 @@ namespace Vixen_Messaging
 
 		private void Close_Form()
 		{
-			
 			Close();
 		}
 
@@ -211,6 +217,38 @@ namespace Vixen_Messaging
 		{
 			var btn = (Button)sender;
 			btn.BackgroundImage = Resources.ButtonBackgroundImage;
+		}
+
+		private void textBoxReturnBannedMSG_TextChanged(object sender, EventArgs e)
+		{
+			Update_Save_Flag();
+		}
+
+		private void numericUpDownIntervalMsgs_ValueChanged(object sender, EventArgs e)
+		{
+			Update_Save_Flag();
+		}
+
+		private void comboBoxBlack_Whitelist_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			Update_Save_Flag();
+		}
+
+		private void checkBoxAutoStart_CheckedChanged(object sender, EventArgs e)
+		{
+			Update_Save_Flag();
+		}
+
+		private void Update_Save_Flag()
+		{
+			if (!_envokeChanges)
+				GlobalVar.SaveFlag = true;
+		}
+
+		private void MessagingSettings_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			if (!_envokeChanges)
+				GlobalVar.SaveFlag = false;
 		}
 	}
 }

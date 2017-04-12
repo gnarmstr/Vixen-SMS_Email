@@ -57,6 +57,8 @@ namespace Vixen_Messaging
 
 		public static bool AutoStartMsgRetrieval;
 
+		public static bool SaveFlag;
+
 		public static string ReturnBannedMSG;
 
 		public static string ReturnWarningMSG;

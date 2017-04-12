@@ -50,6 +50,8 @@
 			this.comboBoxBlack_Whitelist = new System.Windows.Forms.ComboBox();
 			this.numericUpDownIntervalMsgs = new System.Windows.Forms.NumericUpDown();
 			this.label71 = new System.Windows.Forms.Label();
+			this.textBoxCountDownMSG = new System.Windows.Forms.TextBox();
+			this.label3 = new System.Windows.Forms.Label();
 			this.checkBoxAutoStart = new System.Windows.Forms.CheckBox();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.label7 = new System.Windows.Forms.Label();
@@ -70,8 +72,6 @@
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.label74 = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.textBoxCountDownMSG = new System.Windows.Forms.TextBox();
-			this.label3 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.ok)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).BeginInit();
@@ -186,6 +186,7 @@
 			this.textBoxReturnBannedMSG.TabIndex = 4;
 			this.toolTip1.SetToolTip(this.textBoxReturnBannedMSG, "Enter a message that will be sent to the audiance member that sent the inappropia" +
         "te words that they have been banned.");
+			this.textBoxReturnBannedMSG.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
 			// 
 			// textBoxGroupName
 			// 
@@ -195,6 +196,7 @@
 			this.textBoxGroupName.Size = new System.Drawing.Size(273, 22);
 			this.textBoxGroupName.TabIndex = 90;
 			this.toolTip1.SetToolTip(this.textBoxGroupName, "Enter your Matrix/Megatree group name that you will be sending messages to.");
+			this.textBoxGroupName.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
 			// 
 			// buttonGetVixenData
 			// 
@@ -224,6 +226,7 @@
 			this.textBoxReturnWarningMSG.TabIndex = 93;
 			this.toolTip1.SetToolTip(this.textBoxReturnWarningMSG, "Enter a message that will be sent to the audiance member when an inappropiate wor" +
         "d has been recieved, first and only warning.");
+			this.textBoxReturnWarningMSG.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
 			// 
 			// textBoxReturnSuccessMSG
 			// 
@@ -235,6 +238,7 @@
 			this.textBoxReturnSuccessMSG.TabIndex = 91;
 			this.toolTip1.SetToolTip(this.textBoxReturnSuccessMSG, "Enter a message that will be sent to the audiance member that thier message will " +
         "be displayed soon. Leave blank for no reply.");
+			this.textBoxReturnSuccessMSG.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
 			// 
 			// dateCountDown
 			// 
@@ -247,6 +251,7 @@
 			this.dateCountDown.TabIndex = 66;
 			this.toolTip1.SetToolTip(this.dateCountDown, "Enter the date to count down to, for example 25/12/17, christmas day.");
 			this.dateCountDown.Value = new System.DateTime(2015, 12, 25, 0, 0, 0, 0);
+			this.dateCountDown.ValueChanged += new System.EventHandler(this.numericUpDownIntervalMsgs_ValueChanged);
 			// 
 			// label14
 			// 
@@ -269,6 +274,7 @@
 			this.comboBoxBlack_Whitelist.Size = new System.Drawing.Size(127, 24);
 			this.comboBoxBlack_Whitelist.TabIndex = 105;
 			this.toolTip1.SetToolTip(this.comboBoxBlack_Whitelist, "Select to use either the White list or Black list.");
+			this.comboBoxBlack_Whitelist.SelectedIndexChanged += new System.EventHandler(this.comboBoxBlack_Whitelist_SelectedIndexChanged);
 			// 
 			// numericUpDownIntervalMsgs
 			// 
@@ -283,6 +289,7 @@
 			this.numericUpDownIntervalMsgs.Size = new System.Drawing.Size(64, 22);
 			this.numericUpDownIntervalMsgs.TabIndex = 106;
 			this.toolTip1.SetToolTip(this.numericUpDownIntervalMsgs, "Sets the time interval between message retrieval.");
+			this.numericUpDownIntervalMsgs.ValueChanged += new System.EventHandler(this.numericUpDownIntervalMsgs_ValueChanged);
 			// 
 			// label71
 			// 
@@ -293,6 +300,29 @@
 			this.label71.TabIndex = 107;
 			this.label71.Text = "Interval between Messages:";
 			this.toolTip1.SetToolTip(this.label71, "Time between messages, may need to increase to 1 or 2 secs as a minimum.");
+			// 
+			// textBoxCountDownMSG
+			// 
+			this.textBoxCountDownMSG.Location = new System.Drawing.Point(138, 215);
+			this.textBoxCountDownMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.textBoxCountDownMSG.Multiline = true;
+			this.textBoxCountDownMSG.Name = "textBoxCountDownMSG";
+			this.textBoxCountDownMSG.Size = new System.Drawing.Size(490, 42);
+			this.textBoxCountDownMSG.TabIndex = 95;
+			this.toolTip1.SetToolTip(this.textBoxCountDownMSG, "Enter a message that will be displayed when Countdown is enabled. Add the word CO" +
+        "UNTDOWN anywhere in the message which will be replaced by number of days to the " +
+        "countdown date.");
+			this.textBoxCountDownMSG.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
+			// 
+			// label3
+			// 
+			this.label3.Location = new System.Drawing.Point(11, 215);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(121, 59);
+			this.label3.TabIndex = 96;
+			this.label3.Text = "Count down message";
+			this.toolTip1.SetToolTip(this.label3, "Enter a message that will be displayed when Countdown is enabled. Add the word CO" +
+        "UNTDOWN which will be replaced by number of days.");
 			// 
 			// checkBoxAutoStart
 			// 
@@ -305,6 +335,7 @@
 			this.checkBoxAutoStart.TabIndex = 0;
 			this.checkBoxAutoStart.Text = "Auto Start Message retrieval on startup:";
 			this.checkBoxAutoStart.UseVisualStyleBackColor = true;
+			this.checkBoxAutoStart.CheckedChanged += new System.EventHandler(this.checkBoxAutoStart_CheckedChanged);
 			// 
 			// groupBox3
 			// 
@@ -347,6 +378,7 @@
 			this.textBoxVixenFolder.Name = "textBoxVixenFolder";
 			this.textBoxVixenFolder.Size = new System.Drawing.Size(489, 22);
 			this.textBoxVixenFolder.TabIndex = 6;
+			this.textBoxVixenFolder.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
 			// 
 			// textBoxNodeId
 			// 
@@ -356,6 +388,7 @@
 			this.textBoxNodeId.Name = "textBoxNodeId";
 			this.textBoxNodeId.Size = new System.Drawing.Size(489, 22);
 			this.textBoxNodeId.TabIndex = 10;
+			this.textBoxNodeId.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
 			// 
 			// label6
 			// 
@@ -374,6 +407,7 @@
 			this.textBoxOutputSequence.Name = "textBoxOutputSequence";
 			this.textBoxOutputSequence.Size = new System.Drawing.Size(489, 22);
 			this.textBoxOutputSequence.TabIndex = 9;
+			this.textBoxOutputSequence.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
 			// 
 			// label5
 			// 
@@ -392,6 +426,7 @@
 			this.textBoxSequenceTemplate.Name = "textBoxSequenceTemplate";
 			this.textBoxSequenceTemplate.Size = new System.Drawing.Size(489, 22);
 			this.textBoxSequenceTemplate.TabIndex = 8;
+			this.textBoxSequenceTemplate.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
 			// 
 			// label4
 			// 
@@ -410,6 +445,7 @@
 			this.textBoxVixenServer.Name = "textBoxVixenServer";
 			this.textBoxVixenServer.Size = new System.Drawing.Size(489, 22);
 			this.textBoxVixenServer.TabIndex = 7;
+			this.textBoxVixenServer.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
 			// 
 			// groupBox6
 			// 
@@ -504,28 +540,6 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Auto Reply to Audiance";
 			// 
-			// textBoxCountDownMSG
-			// 
-			this.textBoxCountDownMSG.Location = new System.Drawing.Point(138, 215);
-			this.textBoxCountDownMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.textBoxCountDownMSG.Multiline = true;
-			this.textBoxCountDownMSG.Name = "textBoxCountDownMSG";
-			this.textBoxCountDownMSG.Size = new System.Drawing.Size(490, 42);
-			this.textBoxCountDownMSG.TabIndex = 95;
-			this.toolTip1.SetToolTip(this.textBoxCountDownMSG, "Enter a message that will be displayed when Countdown is enabled. Add the word CO" +
-        "UNTDOWN anywhere in the message which will be replaced by number of days to the " +
-        "countdown date.");
-			// 
-			// label3
-			// 
-			this.label3.Location = new System.Drawing.Point(11, 215);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(121, 59);
-			this.label3.TabIndex = 96;
-			this.label3.Text = "Count down message";
-			this.toolTip1.SetToolTip(this.label3, "Enter a message that will be displayed when Countdown is enabled. Add the word CO" +
-        "UNTDOWN which will be replaced by number of days.");
-			// 
 			// MessagingSettings
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -545,6 +559,7 @@
 			this.Name = "MessagingSettings";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Messaging Settings";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MessagingSettings_FormClosing);
 			this.Load += new System.EventHandler(this.MessagingSettings_Load);
 			((System.ComponentModel.ISupportInitialize)(this.ok)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).EndInit();
