@@ -56,6 +56,7 @@ namespace Vixen_Messaging
 			this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.whiteBlackListsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.checkBoxAdvertising = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStart)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
 			this.menuStrip1.SuspendLayout();
@@ -114,7 +115,7 @@ namespace Vixen_Messaging
 			// buttonStopSequence
 			// 
 			this.buttonStopSequence.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonStopSequence.Location = new System.Drawing.Point(235, 114);
+			this.buttonStopSequence.Location = new System.Drawing.Point(235, 157);
 			this.buttonStopSequence.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonStopSequence.Name = "buttonStopSequence";
 			this.buttonStopSequence.Size = new System.Drawing.Size(175, 39);
@@ -130,7 +131,7 @@ namespace Vixen_Messaging
 			// 
 			this.buttonInstantMSG.BackColor = System.Drawing.Color.Honeydew;
 			this.buttonInstantMSG.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonInstantMSG.Location = new System.Drawing.Point(25, 114);
+			this.buttonInstantMSG.Location = new System.Drawing.Point(25, 157);
 			this.buttonInstantMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonInstantMSG.Name = "buttonInstantMSG";
 			this.buttonInstantMSG.Size = new System.Drawing.Size(173, 39);
@@ -145,7 +146,7 @@ namespace Vixen_Messaging
 			// checkBoxCountDown
 			// 
 			this.checkBoxCountDown.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxCountDown.Location = new System.Drawing.Point(221, 76);
+			this.checkBoxCountDown.Location = new System.Drawing.Point(221, 74);
 			this.checkBoxCountDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.checkBoxCountDown.Name = "checkBoxCountDown";
 			this.checkBoxCountDown.Size = new System.Drawing.Size(194, 34);
@@ -161,7 +162,7 @@ namespace Vixen_Messaging
 			// 
 			this.WebServerStatus.BackColor = System.Drawing.Color.OrangeRed;
 			this.WebServerStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.WebServerStatus.Location = new System.Drawing.Point(92, 367);
+			this.WebServerStatus.Location = new System.Drawing.Point(92, 410);
 			this.WebServerStatus.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.WebServerStatus.Name = "WebServerStatus";
 			this.WebServerStatus.Size = new System.Drawing.Size(255, 34);
@@ -176,7 +177,7 @@ namespace Vixen_Messaging
 			// 
 			// richTextBoxLog
 			// 
-			this.richTextBoxLog.Location = new System.Drawing.Point(12, 193);
+			this.richTextBoxLog.Location = new System.Drawing.Point(12, 236);
 			this.richTextBoxLog.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.richTextBoxLog.Name = "richTextBoxLog";
 			this.richTextBoxLog.Size = new System.Drawing.Size(418, 163);
@@ -186,7 +187,7 @@ namespace Vixen_Messaging
 			// label6
 			// 
 			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(10, 165);
+			this.label6.Location = new System.Drawing.Point(10, 208);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(32, 17);
 			this.label6.TabIndex = 115;
@@ -282,13 +283,29 @@ namespace Vixen_Messaging
 			this.helpToolStripMenuItem.Text = "Help";
 			this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
 			// 
+			// checkBoxAdvertising
+			// 
+			this.checkBoxAdvertising.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.checkBoxAdvertising.Location = new System.Drawing.Point(221, 113);
+			this.checkBoxAdvertising.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.checkBoxAdvertising.Name = "checkBoxAdvertising";
+			this.checkBoxAdvertising.Size = new System.Drawing.Size(194, 34);
+			this.checkBoxAdvertising.TabIndex = 119;
+			this.checkBoxAdvertising.Text = "Enable Advertising Msg";
+			this.checkBoxAdvertising.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.toolTip1.SetToolTip(this.checkBoxAdvertising, "When enabled, Messaging will send a advertising message to be displayed on a Rand" +
+        "om bases.");
+			this.checkBoxAdvertising.UseVisualStyleBackColor = true;
+			this.checkBoxAdvertising.CheckedChanged += new System.EventHandler(this.checkBoxAdvertising_CheckedChanged);
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.Azure;
-			this.ClientSize = new System.Drawing.Size(442, 413);
+			this.ClientSize = new System.Drawing.Size(442, 453);
+			this.Controls.Add(this.checkBoxAdvertising);
 			this.Controls.Add(this.checkBoxCountDown);
 			this.Controls.Add(this.menuStrip1);
 			this.Controls.Add(this.label6);
@@ -307,8 +324,8 @@ namespace Vixen_Messaging
 			this.MainMenuStrip = this.menuStrip1;
 			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.MaximizeBox = false;
-			this.MaximumSize = new System.Drawing.Size(460, 460);
-			this.MinimumSize = new System.Drawing.Size(460, 460);
+			this.MaximumSize = new System.Drawing.Size(460, 500);
+			this.MinimumSize = new System.Drawing.Size(460, 500);
 			this.Name = "FormMain";
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -349,6 +366,7 @@ namespace Vixen_Messaging
 		private System.Windows.Forms.Button buttonInstantMSG;
 		private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
 		private System.Windows.Forms.CheckBox checkBoxCountDown;
+		private System.Windows.Forms.CheckBox checkBoxAdvertising;
     }
 }
 

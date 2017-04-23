@@ -57,5 +57,10 @@ namespace Vixen_Messaging
 			var btn = (Button)sender;
 			btn.BackgroundImage = Resources.ButtonBackgroundImage;
 		}
+
+		private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+		{
+			System.Diagnostics.Process.Start(e.LinkText);
+		}
 	}
 }

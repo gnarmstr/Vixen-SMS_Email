@@ -67,6 +67,8 @@ namespace Vixen_Messaging
 
 		public static string CountDownMSG;
 
+		public static string AdvertisingMSG;
+
 		public static string GroupName;
 
 		public static string GroupID;
@@ -106,6 +108,8 @@ namespace Vixen_Messaging
 		public static bool CenterStop;
 
 		public static int TextPosition;
+
+		public static int TextIterations;
 
 		public static int TextSpeed;
 

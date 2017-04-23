@@ -236,7 +236,8 @@ namespace Vixen_Messaging
 			{
 				GlobalVar.TextColor.Add(Color.FromArgb(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TextColor" + i, Convert.ToInt32(defaultColor[i].ToArgb()))));
 			}
-			GlobalVar.TextSpeed = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextSpeed", 1);
+			GlobalVar.TextIterations = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextIterations", 1);
+			GlobalVar.TextSpeed = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextSpeed", 4);
 			GlobalVar.TextPosition = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextPosition", 0);
 			GlobalVar.Intensity = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarIntensity", 100);
 			GlobalVar.Font = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxFont", "Arial");
@@ -250,6 +251,7 @@ namespace Vixen_Messaging
 				"Your mobile number has been recorded and has been banned for sending inappropiate words.");
 			GlobalVar.ReturnWarningMSG = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "ReturnWarningMSG",
 				"Please reframe from using inappropiate words. If this happens again your phone number will be banned.");
+			GlobalVar.AdvertisingMSG = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "AdvertisingMSG", "");
 			GlobalVar.ReturnSuccessMSG = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "ReturnSuccessMSG",
 				"Your message will appear soon in lights.");
 			GlobalVar.IntervalMsgs = profile.GetSetting(XmlProfileSettings.SettingType.Profiles,
@@ -262,6 +264,7 @@ namespace Vixen_Messaging
 				"25/12/15");
 			GlobalVar.CountDownMSG = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "CountDownMSG", "COUNTDOWN days to Christmas");
 			checkBoxCountDown.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCountDown", false);
+			checkBoxAdvertising.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAdvertising", false);
 			checkBoxVixenControl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl",
 				false);
 			GlobalVar.GroupName = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", "");
@@ -331,6 +334,18 @@ namespace Vixen_Messaging
 					timerCheckTwilio.Start();
 				}
 			}
+
+			if (checkBoxAdvertising.Checked && !string.IsNullOrEmpty(GlobalVar.AdvertisingMSG))
+			{
+				var randomPlay = _random.Next(0, 15);
+				if (randomPlay < 5)
+				{
+					PlayAdvertising();
+					timerCheckTwilio.Stop();
+					timerCheckTwilio.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + GlobalVar.IntervalMsgs) * 1000;
+					timerCheckTwilio.Start();
+				}
+			}
 			
 			PlayTwilio();
 			timerCheckTwilio.Stop();
@@ -348,6 +363,16 @@ namespace Vixen_Messaging
 
 			playCountDown = true;
 			SendMessageToVixen(GlobalVar.CountDownMSG, out blacklist, out notWhitemsg, out maxWordCount);
+			playCountDown = false;
+			LogDisplay(GlobalVar.LogMsg = ("Advertising message has been displayed in lights."));
+		}
+
+		private void PlayAdvertising()
+		{
+			bool blacklist, notWhitemsg, maxWordCount;
+
+			playCountDown = true;
+			SendMessageToVixen(GlobalVar.AdvertisingMSG, out blacklist, out notWhitemsg, out maxWordCount);
 			playCountDown = false;
 			LogDisplay(GlobalVar.LogMsg = ("Count down message has been displayed in lights."));
 		}
@@ -443,7 +468,14 @@ namespace Vixen_Messaging
 			}
 			catch
 			{
-				LogDisplay(GlobalVar.LogMsg = ("Unable to connect to the Twilio server or there are no messages on the server."));
+				if (messages.RestException != null && messages.RestException.Code == "20003")
+				{
+					LogDisplay(GlobalVar.LogMsg = ("Authentication failed, check Twilio Account settings"));
+				}
+				else
+				{
+					LogDisplay(GlobalVar.LogMsg = ("Unable to connect to the Twilio server or there are no messages on the server."));
+				}
 				GlobalVar.SeqIntervalTime = 2;
 				ShortTimer();
 			}
@@ -518,12 +550,12 @@ namespace Vixen_Messaging
 
 					if (msg != "play counter" & msg != "play sequence")
 					{
-						GlobalVar.SeqIntervalTime = Convert.ToDecimal(4 + (totalCharacters*0.25))*GlobalVar.TextSpeed;
+						GlobalVar.SeqIntervalTime = Convert.ToDecimal(GlobalVar.TextSpeed + (totalCharacters * 0.25)) * GlobalVar.TextIterations;
 							//Convert.ToDecimal(EffectTime.Value) + 1;
 					}
 					else
 					{
-						GlobalVar.SeqIntervalTime = Convert.ToDecimal(4 + (totalCharacters*0.25))*GlobalVar.TextSpeed;
+						GlobalVar.SeqIntervalTime = Convert.ToDecimal(GlobalVar.TextSpeed + (totalCharacters * 0.25)) * GlobalVar.TextIterations;
 							// Convert.ToDecimal(CustomMsgLength.Value) + 1;
 					}
 
@@ -644,7 +676,7 @@ namespace Vixen_Messaging
 			}
 			GlobalVar.FileText = GlobalVar.FileText.Replace("NodeId_Change", GlobalVar.GroupID); //adds NodeId
 			GlobalVar.FileText = GlobalVar.FileText.Replace("StringOrienation_Change", GlobalVar.StringOrientation);
-			GlobalVar.FileText = GlobalVar.FileText.Replace("Speed_Change", GlobalVar.TextSpeed.ToString());
+			GlobalVar.FileText = GlobalVar.FileText.Replace("Speed_Change", GlobalVar.TextIterations.ToString());
 			GlobalVar.FileText = GlobalVar.FileText.Replace("Intensity_Change", GlobalVar.Intensity.ToString());
 			GlobalVar.FileText = GlobalVar.FileText.Replace("FontName_Change", GlobalVar.Font);
 			GlobalVar.FileText = GlobalVar.FileText.Replace("FontSize_Change", GlobalVar.FontSize);
@@ -653,7 +685,8 @@ namespace Vixen_Messaging
 
 			double X = 1, Y = 1, Z = 1;
 			double X1 = 1, Y1 = 1, Z1 = 1;
-			switch (GlobalVar.IncomingMessageColourOption)
+			int colorOption = GlobalVar.IncomingMessageColourOption == 4 ? _random.Next(2, 4) : GlobalVar.IncomingMessageColourOption;
+			switch (colorOption)
 			{
 				case 0:
 					hexMultiValue = GlobalVar.TextColor[1].A.ToString("x2") + GlobalVar.TextColor[1].R.ToString("x2") + GlobalVar.TextColor[1].G.ToString("x2") + GlobalVar.TextColor[1].B.ToString("x2");
@@ -675,9 +708,30 @@ namespace Vixen_Messaging
 					Y1 = Y;
 					Z1 = Z;
 					break;
+				case 3:
+					int textColor1 = _random.Next(0, 10);
+					int textColor2;
+					do
+					{
+						textColor2 = _random.Next(0, 10);
+					} while (textColor2 == textColor1);
+					
+					hexMultiValue = GlobalVar.TextColor[textColor1].A.ToString("x2") + GlobalVar.TextColor[textColor1].R.ToString("x2") + GlobalVar.TextColor[textColor1].G.ToString("x2") + GlobalVar.TextColor[textColor1].B.ToString("x2");
+					hexMultiValue1 = GlobalVar.TextColor[textColor2].A.ToString("x2") + GlobalVar.TextColor[textColor2].R.ToString("x2") + GlobalVar.TextColor[textColor2].G.ToString("x2") + GlobalVar.TextColor[textColor2].B.ToString("x2");
+					HEXToXYZ(hexMultiValue, out X, out Y, out Z);
+					HEXToXYZ(hexMultiValue1, out X1, out Y1, out Z1);
+					break;
 			}
-
-			GlobalVar.FileText = GlobalVar.FileText.Replace("GradientMode_Change", GlobalVar.GradientMode.Replace(" ", ""));
+			if (GlobalVar.GradientMode == "Random Gradient Mode" || GlobalVar.IncomingMessageColourOption == 4)
+			{
+				string[] gradientMode = new string[] { "AcrossElement", "AcrossElement", "VerticalAcrossText", "VerticalAcrossElement", "DiagonalAcrossText", "DiagonalAcrossElement", "BackwardDiagonalAcrossText", "BackwardDiagonalAcrossElement" };
+				GlobalVar.FileText = GlobalVar.FileText.Replace("GradientMode_Change", gradientMode[_random.Next(0, 8)]);
+			}
+			else
+			{
+				GlobalVar.FileText = GlobalVar.FileText.Replace("GradientMode_Change", GlobalVar.GradientMode.Replace(" ", ""));
+			}
+			
 			GlobalVar.FileText = GlobalVar.FileText.Replace("Color_ChangeX1", X1.ToString());
 			GlobalVar.FileText = GlobalVar.FileText.Replace("Color_ChangeY1", Y1.ToString());
 			GlobalVar.FileText = GlobalVar.FileText.Replace("Color_ChangeZ1", Z1.ToString());
@@ -996,7 +1050,9 @@ namespace Vixen_Messaging
 						e.Cancel = true;
 						break;
 				}
-			}
+			} 
+			e.Cancel = false;
+			StopSequence();
 		}
 
 		#endregion
@@ -1027,6 +1083,7 @@ namespace Vixen_Messaging
 			}
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextPosition",
 				GlobalVar.TextPosition.ToString());
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextIterations", GlobalVar.TextIterations.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarTextSpeed", GlobalVar.TextSpeed.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarIntensity", GlobalVar.Intensity.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "SeqIntervalTime", Convert.ToInt32(GlobalVar.SeqIntervalTime).ToString());
@@ -1036,6 +1093,7 @@ namespace Vixen_Messaging
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GradientMode", GlobalVar.GradientMode);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "ReturnBannedMSG", GlobalVar.ReturnBannedMSG);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "ReturnWarningMSG", GlobalVar.ReturnWarningMSG);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "AdvertisingMSG", GlobalVar.AdvertisingMSG);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "ReturnSuccessMSG", GlobalVar.ReturnSuccessMSG);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "IntervalMsgs", GlobalVar.IntervalMsgs);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "TwilioSID", GlobalVar.TwilioSID);
@@ -1044,6 +1102,7 @@ namespace Vixen_Messaging
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString", GlobalVar.CountDownDate);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCountDown", checkBoxCountDown.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "CountDownMSG", GlobalVar.CountDownMSG);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAdvertising", checkBoxAdvertising.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords",
 				GlobalVar.MaxWords.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl",
@@ -1286,6 +1345,21 @@ namespace Vixen_Messaging
 			if (checkBoxCountDown.Checked & string.IsNullOrEmpty(GlobalVar.CountDownMSG))
 			{
 				var messageBox = new MessageBoxForm("\nThere is no message in the Messaging settings form for the Count down message.", @"Information", MessageBoxButtons.OK, SystemIcons.Information);
+				messageBox.ShowDialog();
+			}
+		}
+
+		private void checkBoxAdvertising_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!_envokeChanges)
+			{
+				GlobalVar.SaveFlag = true;
+				Text = @"Vixen Messaging - Unsaved Changes";
+			}
+
+			if (checkBoxAdvertising.Checked & string.IsNullOrEmpty(GlobalVar.AdvertisingMSG))
+			{
+				var messageBox = new MessageBoxForm("\nThere is no message in the Messaging settings form for the Advertising message.", @"Information", MessageBoxButtons.OK, SystemIcons.Information);
 				messageBox.ShowDialog();
 			}
 		}

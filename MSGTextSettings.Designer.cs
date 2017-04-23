@@ -74,10 +74,12 @@
 			this.comboBoxTextDirection = new System.Windows.Forms.ComboBox();
 			this.trackBarTextPosition = new System.Windows.Forms.TrackBar();
 			this.label44 = new System.Windows.Forms.Label();
-			this.trackBarTextSpeed = new System.Windows.Forms.TrackBar();
+			this.trackBarTextIterations = new System.Windows.Forms.TrackBar();
 			this.label21 = new System.Windows.Forms.Label();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.fontDialog1 = new System.Windows.Forms.FontDialog();
+			this.trackBarTextSpeed = new System.Windows.Forms.TrackBar();
+			this.label2 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.ok)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxWords)).BeginInit();
@@ -85,12 +87,13 @@
 			this.groupBoxSeqSettings.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarIntensity)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarTextPosition)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarTextIterations)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarTextSpeed)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// ok
 			// 
-			this.ok.Location = new System.Drawing.Point(438, 418);
+			this.ok.Location = new System.Drawing.Point(438, 452);
 			this.ok.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.ok.Name = "ok";
 			this.ok.Size = new System.Drawing.Size(61, 61);
@@ -101,7 +104,7 @@
 			// 
 			// Cancel
 			// 
-			this.Cancel.Location = new System.Drawing.Point(512, 418);
+			this.Cancel.Location = new System.Drawing.Point(512, 452);
 			this.Cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.Cancel.Name = "Cancel";
 			this.Cancel.Size = new System.Drawing.Size(61, 61);
@@ -173,7 +176,7 @@
 			this.RandomColourSelection.Controls.Add(this.TextColor4);
 			this.RandomColourSelection.Controls.Add(this.TextColor6);
 			this.RandomColourSelection.Controls.Add(this.TextColor5);
-			this.RandomColourSelection.Location = new System.Drawing.Point(6, 312);
+			this.RandomColourSelection.Location = new System.Drawing.Point(6, 341);
 			this.RandomColourSelection.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.RandomColourSelection.Name = "RandomColourSelection";
 			this.RandomColourSelection.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -406,6 +409,8 @@
 			// 
 			// groupBoxSeqSettings
 			// 
+			this.groupBoxSeqSettings.Controls.Add(this.trackBarTextSpeed);
+			this.groupBoxSeqSettings.Controls.Add(this.label2);
 			this.groupBoxSeqSettings.Controls.Add(this.label1);
 			this.groupBoxSeqSettings.Controls.Add(this.comboBoxGradientMode);
 			this.groupBoxSeqSettings.Controls.Add(this.trackBarIntensity);
@@ -425,14 +430,14 @@
 			this.groupBoxSeqSettings.Controls.Add(this.label45);
 			this.groupBoxSeqSettings.Controls.Add(this.trackBarTextPosition);
 			this.groupBoxSeqSettings.Controls.Add(this.label44);
-			this.groupBoxSeqSettings.Controls.Add(this.trackBarTextSpeed);
+			this.groupBoxSeqSettings.Controls.Add(this.trackBarTextIterations);
 			this.groupBoxSeqSettings.Controls.Add(this.label21);
 			this.groupBoxSeqSettings.Controls.Add(this.RandomColourSelection);
 			this.groupBoxSeqSettings.Location = new System.Drawing.Point(1, 11);
 			this.groupBoxSeqSettings.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.groupBoxSeqSettings.Name = "groupBoxSeqSettings";
 			this.groupBoxSeqSettings.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.groupBoxSeqSettings.Size = new System.Drawing.Size(587, 399);
+			this.groupBoxSeqSettings.Size = new System.Drawing.Size(587, 426);
 			this.groupBoxSeqSettings.TabIndex = 5;
 			this.groupBoxSeqSettings.TabStop = false;
 			this.groupBoxSeqSettings.Text = "Incoming Message / Text Settings";
@@ -458,7 +463,8 @@
             "Diagonal Across Text",
             "Diagonal Across Element",
             "Backward Diagonal Across Text",
-            "Backward Diagonal Across Element"});
+            "Backward Diagonal Across Element",
+            "Random Gradient Mode"});
 			this.comboBoxGradientMode.Location = new System.Drawing.Point(111, 65);
 			this.comboBoxGradientMode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.comboBoxGradientMode.Name = "comboBoxGradientMode";
@@ -468,7 +474,7 @@
 			// trackBarIntensity
 			// 
 			this.trackBarIntensity.AutoSize = false;
-			this.trackBarIntensity.Location = new System.Drawing.Point(100, 225);
+			this.trackBarIntensity.Location = new System.Drawing.Point(100, 214);
 			this.trackBarIntensity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.trackBarIntensity.Maximum = 100;
 			this.trackBarIntensity.Minimum = 1;
@@ -479,13 +485,12 @@
 			this.trackBarIntensity.Scroll += new System.EventHandler(this.trackBarTextPosition_ToolTip);
 			this.trackBarIntensity.ValueChanged += new System.EventHandler(this.trackBarIntensity_ValueChanged);
 			this.trackBarIntensity.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextPosition_ToolTip);
-			this.trackBarIntensity.MouseLeave += new System.EventHandler(this.trackBarIntensity_MouseLeave);
 			this.trackBarIntensity.MouseHover += new System.EventHandler(this.trackBarTextPosition_ToolTip);
 			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(10, 232);
+			this.label3.Location = new System.Drawing.Point(10, 221);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(79, 17);
 			this.label3.TabIndex = 103;
@@ -533,7 +538,9 @@
 			this.incomingMessageColourOption.Items.AddRange(new object[] {
             "Single",
             "Gradient",
-            "Random"});
+            "Random",
+            "Random Gradient",
+            "Random Color Option"});
 			this.incomingMessageColourOption.Location = new System.Drawing.Point(111, 29);
 			this.incomingMessageColourOption.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.incomingMessageColourOption.Name = "incomingMessageColourOption";
@@ -610,7 +617,7 @@
 			// trackBarTextPosition
 			// 
 			this.trackBarTextPosition.AutoSize = false;
-			this.trackBarTextPosition.Location = new System.Drawing.Point(100, 176);
+			this.trackBarTextPosition.Location = new System.Drawing.Point(100, 169);
 			this.trackBarTextPosition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.trackBarTextPosition.Maximum = 100;
 			this.trackBarTextPosition.Minimum = -100;
@@ -620,44 +627,41 @@
 			this.trackBarTextPosition.Scroll += new System.EventHandler(this.trackBarTextPosition_ToolTip);
 			this.trackBarTextPosition.ValueChanged += new System.EventHandler(this.trackBarIntensity_ValueChanged);
 			this.trackBarTextPosition.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextPosition_ToolTip);
-			this.trackBarTextPosition.MouseLeave += new System.EventHandler(this.trackBarIntensity_MouseLeave);
 			this.trackBarTextPosition.MouseHover += new System.EventHandler(this.trackBarTextPosition_ToolTip);
 			// 
 			// label44
 			// 
 			this.label44.AutoSize = true;
-			this.label44.Location = new System.Drawing.Point(10, 183);
+			this.label44.Location = new System.Drawing.Point(10, 176);
 			this.label44.Name = "label44";
 			this.label44.Size = new System.Drawing.Size(62, 17);
 			this.label44.TabIndex = 50;
 			this.label44.Text = "Position:";
 			// 
-			// trackBarTextSpeed
+			// trackBarTextIterations
 			// 
-			this.trackBarTextSpeed.AutoSize = false;
-			this.trackBarTextSpeed.Location = new System.Drawing.Point(100, 272);
-			this.trackBarTextSpeed.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.trackBarTextSpeed.Maximum = 5;
-			this.trackBarTextSpeed.Minimum = 1;
-			this.trackBarTextSpeed.Name = "trackBarTextSpeed";
-			this.trackBarTextSpeed.Size = new System.Drawing.Size(299, 32);
-			this.trackBarTextSpeed.TabIndex = 9;
-			this.trackBarTextSpeed.Value = 1;
-			this.trackBarTextSpeed.Scroll += new System.EventHandler(this.trackBarTextPosition_ToolTip);
-			this.trackBarTextSpeed.ValueChanged += new System.EventHandler(this.trackBarIntensity_ValueChanged);
-			this.trackBarTextSpeed.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextPosition_ToolTip);
-			this.trackBarTextSpeed.MouseLeave += new System.EventHandler(this.trackBarIntensity_MouseLeave);
-			this.trackBarTextSpeed.MouseHover += new System.EventHandler(this.trackBarTextPosition_ToolTip);
+			this.trackBarTextIterations.AutoSize = false;
+			this.trackBarTextIterations.Location = new System.Drawing.Point(100, 262);
+			this.trackBarTextIterations.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.trackBarTextIterations.Maximum = 5;
+			this.trackBarTextIterations.Minimum = 1;
+			this.trackBarTextIterations.Name = "trackBarTextIterations";
+			this.trackBarTextIterations.Size = new System.Drawing.Size(299, 32);
+			this.trackBarTextIterations.TabIndex = 9;
+			this.trackBarTextIterations.Value = 1;
+			this.trackBarTextIterations.Scroll += new System.EventHandler(this.trackBarTextPosition_ToolTip);
+			this.trackBarTextIterations.ValueChanged += new System.EventHandler(this.trackBarIntensity_ValueChanged);
+			this.trackBarTextIterations.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextPosition_ToolTip);
+			this.trackBarTextIterations.MouseHover += new System.EventHandler(this.trackBarTextPosition_ToolTip);
 			// 
 			// label21
 			// 
 			this.label21.AutoSize = true;
-			this.label21.Location = new System.Drawing.Point(10, 272);
+			this.label21.Location = new System.Drawing.Point(10, 262);
 			this.label21.Name = "label21";
 			this.label21.Size = new System.Drawing.Size(70, 17);
 			this.label21.TabIndex = 48;
 			this.label21.Text = "Iterations:";
-			this.label21.MouseLeave += new System.EventHandler(this.trackBarIntensity_MouseLeave);
 			// 
 			// colorDialog1
 			// 
@@ -667,20 +671,43 @@
 			// 
 			this.fontDialog1.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			// 
+			// trackBarTextSpeed
+			// 
+			this.trackBarTextSpeed.AutoSize = false;
+			this.trackBarTextSpeed.Location = new System.Drawing.Point(100, 305);
+			this.trackBarTextSpeed.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.trackBarTextSpeed.Minimum = 1;
+			this.trackBarTextSpeed.Name = "trackBarTextSpeed";
+			this.trackBarTextSpeed.Size = new System.Drawing.Size(299, 32);
+			this.trackBarTextSpeed.TabIndex = 106;
+			this.trackBarTextSpeed.Value = 1;
+			this.trackBarTextSpeed.Scroll += new System.EventHandler(this.trackBarTextPosition_ToolTip);
+			this.trackBarTextSpeed.ValueChanged += new System.EventHandler(this.trackBarIntensity_ValueChanged);
+			this.trackBarTextSpeed.MouseHover += new System.EventHandler(this.trackBarTextPosition_ToolTip);
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(10, 305);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(53, 17);
+			this.label2.TabIndex = 107;
+			this.label2.Text = "Speed:";
+			// 
 			// MSGTextSettings
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.Azure;
-			this.ClientSize = new System.Drawing.Size(597, 463);
+			this.ClientSize = new System.Drawing.Size(597, 503);
 			this.Controls.Add(this.groupBoxSeqSettings);
 			this.Controls.Add(this.Cancel);
 			this.Controls.Add(this.ok);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.MaximumSize = new System.Drawing.Size(615, 510);
-			this.MinimumSize = new System.Drawing.Size(615, 510);
+			this.MaximumSize = new System.Drawing.Size(615, 550);
+			this.MinimumSize = new System.Drawing.Size(615, 550);
 			this.Name = "MSGTextSettings";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Text Settings";
@@ -695,6 +722,7 @@
 			this.groupBoxSeqSettings.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarIntensity)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarTextPosition)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarTextIterations)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarTextSpeed)).EndInit();
 			this.ResumeLayout(false);
 
@@ -723,7 +751,7 @@
 		private System.Windows.Forms.Label label45;
 		private System.Windows.Forms.TrackBar trackBarTextPosition;
 		private System.Windows.Forms.Label label44;
-		private System.Windows.Forms.TrackBar trackBarTextSpeed;
+		private System.Windows.Forms.TrackBar trackBarTextIterations;
 		private System.Windows.Forms.Label label21;
 		private System.Windows.Forms.GroupBox RandomColourSelection;
 		private System.Windows.Forms.Label labelColour10;
@@ -750,5 +778,7 @@
 		private System.Windows.Forms.FontDialog fontDialog1;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.ComboBox comboBoxGradientMode;
+		private System.Windows.Forms.TrackBar trackBarTextSpeed;
+		private System.Windows.Forms.Label label2;
     }
 }

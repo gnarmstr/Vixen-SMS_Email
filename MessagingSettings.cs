@@ -35,6 +35,7 @@ namespace Vixen_Messaging
 			textBoxReturnBannedMSG.Text = GlobalVar.ReturnBannedMSG;
 			textBoxReturnWarningMSG.Text = GlobalVar.ReturnWarningMSG;
 			textBoxReturnSuccessMSG.Text = GlobalVar.ReturnSuccessMSG;
+			textBoxAdvertisingMSG.Text = GlobalVar.AdvertisingMSG;
 			textBoxGroupName.Text = GlobalVar.GroupName;
 			textBoxNodeId.Text = GlobalVar.GroupID;
 			textBoxVixenFolder.Text = GlobalVar.Vixen3Folder;
@@ -58,6 +59,7 @@ namespace Vixen_Messaging
 			GlobalVar.ReturnBannedMSG = textBoxReturnBannedMSG.Text;
 			GlobalVar.ReturnWarningMSG = textBoxReturnWarningMSG.Text;
 			GlobalVar.ReturnSuccessMSG = textBoxReturnSuccessMSG.Text;
+			GlobalVar.AdvertisingMSG = textBoxAdvertisingMSG.Text;
 			GlobalVar.GroupName = textBoxGroupName.Text;
 			GlobalVar.GroupID = textBoxNodeId.Text;
 			GlobalVar.Vixen3Folder = textBoxVixenFolder.Text;
@@ -197,14 +199,7 @@ namespace Vixen_Messaging
 		#endregion
 
 		#region Reset Vixen Messaging Setting to Default
-		private void buttonResetToDefault_Click(object sender, EventArgs e)
-		{
-			if (MessageBox.Show(@"Are you sure you would like to revert all settings back to the default, this will include all settings on the Sequencing Tab too.", @"Reset Vixen Messaging setting to Default", MessageBoxButtons.YesNo) == DialogResult.Yes)
-			{
-				File.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Vixen Messaging", "Settings.xml"));
-			//	LoadData();
-			}
-		}
+
 		#endregion
 
 		private void buttonBackground_MouseHover(object sender, EventArgs e)

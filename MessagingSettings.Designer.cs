@@ -72,6 +72,8 @@
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
 			this.label74 = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.textBoxAdvertisingMSG = new System.Windows.Forms.TextBox();
+			this.label10 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.ok)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).BeginInit();
@@ -83,7 +85,7 @@
 			// 
 			// ok
 			// 
-			this.ok.Location = new System.Drawing.Point(508, 754);
+			this.ok.Location = new System.Drawing.Point(552, 754);
 			this.ok.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.ok.Name = "ok";
 			this.ok.Size = new System.Drawing.Size(61, 61);
@@ -94,7 +96,7 @@
 			// 
 			// Cancel
 			// 
-			this.Cancel.Location = new System.Drawing.Point(584, 754);
+			this.Cancel.Location = new System.Drawing.Point(628, 754);
 			this.Cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.Cancel.Name = "Cancel";
 			this.Cancel.Size = new System.Drawing.Size(61, 61);
@@ -107,7 +109,7 @@
 			// 
 			this.label9.Location = new System.Drawing.Point(10, 35);
 			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(117, 42);
+			this.label9.Size = new System.Drawing.Size(182, 34);
 			this.label9.TabIndex = 7;
 			this.label9.Text = "Banned:";
 			this.toolTip1.SetToolTip(this.label9, "Enter a message that will be sent to the audiance member that sent the inappropia" +
@@ -158,9 +160,9 @@
 			// 
 			// label1
 			// 
-			this.label1.Location = new System.Drawing.Point(11, 91);
+			this.label1.Location = new System.Drawing.Point(11, 83);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(120, 42);
+			this.label1.Size = new System.Drawing.Size(185, 42);
 			this.label1.TabIndex = 92;
 			this.label1.Text = "When Message Displayed:";
 			this.toolTip1.SetToolTip(this.label1, "Enter a message that will be sent to the audiance member that thier message will " +
@@ -168,9 +170,9 @@
 			// 
 			// label2
 			// 
-			this.label2.Location = new System.Drawing.Point(10, 143);
+			this.label2.Location = new System.Drawing.Point(10, 130);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(121, 59);
+			this.label2.Size = new System.Drawing.Size(186, 42);
 			this.label2.TabIndex = 94;
 			this.label2.Text = "Warning when inappropriate word received";
 			this.toolTip1.SetToolTip(this.label2, "Enter a message that will be sent to the audiance member an inappropiate word has" +
@@ -178,11 +180,11 @@
 			// 
 			// textBoxReturnBannedMSG
 			// 
-			this.textBoxReturnBannedMSG.Location = new System.Drawing.Point(136, 35);
+			this.textBoxReturnBannedMSG.Location = new System.Drawing.Point(206, 27);
 			this.textBoxReturnBannedMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxReturnBannedMSG.Multiline = true;
 			this.textBoxReturnBannedMSG.Name = "textBoxReturnBannedMSG";
-			this.textBoxReturnBannedMSG.Size = new System.Drawing.Size(491, 42);
+			this.textBoxReturnBannedMSG.Size = new System.Drawing.Size(486, 42);
 			this.textBoxReturnBannedMSG.TabIndex = 4;
 			this.toolTip1.SetToolTip(this.textBoxReturnBannedMSG, "Enter a message that will be sent to the audiance member that sent the inappropia" +
         "te words that they have been banned.");
@@ -204,7 +206,7 @@
 			this.buttonGetVixenData.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
 			this.buttonGetVixenData.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.buttonGetVixenData.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-			this.buttonGetVixenData.Location = new System.Drawing.Point(432, 21);
+			this.buttonGetVixenData.Location = new System.Drawing.Point(470, 21);
 			this.buttonGetVixenData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonGetVixenData.Name = "buttonGetVixenData";
 			this.buttonGetVixenData.Size = new System.Drawing.Size(200, 32);
@@ -218,11 +220,11 @@
 			// 
 			// textBoxReturnWarningMSG
 			// 
-			this.textBoxReturnWarningMSG.Location = new System.Drawing.Point(137, 143);
+			this.textBoxReturnWarningMSG.Location = new System.Drawing.Point(206, 127);
 			this.textBoxReturnWarningMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxReturnWarningMSG.Multiline = true;
 			this.textBoxReturnWarningMSG.Name = "textBoxReturnWarningMSG";
-			this.textBoxReturnWarningMSG.Size = new System.Drawing.Size(490, 42);
+			this.textBoxReturnWarningMSG.Size = new System.Drawing.Size(485, 42);
 			this.textBoxReturnWarningMSG.TabIndex = 93;
 			this.toolTip1.SetToolTip(this.textBoxReturnWarningMSG, "Enter a message that will be sent to the audiance member when an inappropiate wor" +
         "d has been recieved, first and only warning.");
@@ -230,11 +232,11 @@
 			// 
 			// textBoxReturnSuccessMSG
 			// 
-			this.textBoxReturnSuccessMSG.Location = new System.Drawing.Point(137, 91);
+			this.textBoxReturnSuccessMSG.Location = new System.Drawing.Point(206, 77);
 			this.textBoxReturnSuccessMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxReturnSuccessMSG.Multiline = true;
 			this.textBoxReturnSuccessMSG.Name = "textBoxReturnSuccessMSG";
-			this.textBoxReturnSuccessMSG.Size = new System.Drawing.Size(490, 42);
+			this.textBoxReturnSuccessMSG.Size = new System.Drawing.Size(485, 42);
 			this.textBoxReturnSuccessMSG.TabIndex = 91;
 			this.toolTip1.SetToolTip(this.textBoxReturnSuccessMSG, "Enter a message that will be sent to the audiance member that thier message will " +
         "be displayed soon. Leave blank for no reply.");
@@ -303,11 +305,11 @@
 			// 
 			// textBoxCountDownMSG
 			// 
-			this.textBoxCountDownMSG.Location = new System.Drawing.Point(138, 215);
+			this.textBoxCountDownMSG.Location = new System.Drawing.Point(205, 178);
 			this.textBoxCountDownMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxCountDownMSG.Multiline = true;
 			this.textBoxCountDownMSG.Name = "textBoxCountDownMSG";
-			this.textBoxCountDownMSG.Size = new System.Drawing.Size(490, 42);
+			this.textBoxCountDownMSG.Size = new System.Drawing.Size(484, 42);
 			this.textBoxCountDownMSG.TabIndex = 95;
 			this.toolTip1.SetToolTip(this.textBoxCountDownMSG, "Enter a message that will be displayed when Countdown is enabled. Add the word CO" +
         "UNTDOWN anywhere in the message which will be replaced by number of days to the " +
@@ -316,9 +318,9 @@
 			// 
 			// label3
 			// 
-			this.label3.Location = new System.Drawing.Point(11, 215);
+			this.label3.Location = new System.Drawing.Point(11, 187);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(121, 59);
+			this.label3.Size = new System.Drawing.Size(186, 33);
 			this.label3.TabIndex = 96;
 			this.label3.Text = "Count down message";
 			this.toolTip1.SetToolTip(this.label3, "Enter a message that will be displayed when Countdown is enabled. Add the word CO" +
@@ -356,7 +358,7 @@
 			this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.groupBox3.Name = "groupBox3";
 			this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.groupBox3.Size = new System.Drawing.Size(663, 215);
+			this.groupBox3.Size = new System.Drawing.Size(708, 215);
 			this.groupBox3.TabIndex = 6;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Vixen Settings";
@@ -376,7 +378,7 @@
 			this.textBoxVixenFolder.Location = new System.Drawing.Point(143, 93);
 			this.textBoxVixenFolder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxVixenFolder.Name = "textBoxVixenFolder";
-			this.textBoxVixenFolder.Size = new System.Drawing.Size(489, 22);
+			this.textBoxVixenFolder.Size = new System.Drawing.Size(559, 22);
 			this.textBoxVixenFolder.TabIndex = 6;
 			this.textBoxVixenFolder.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
 			// 
@@ -386,7 +388,7 @@
 			this.textBoxNodeId.Location = new System.Drawing.Point(143, 64);
 			this.textBoxNodeId.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxNodeId.Name = "textBoxNodeId";
-			this.textBoxNodeId.Size = new System.Drawing.Size(489, 22);
+			this.textBoxNodeId.Size = new System.Drawing.Size(559, 22);
 			this.textBoxNodeId.TabIndex = 10;
 			this.textBoxNodeId.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
 			// 
@@ -405,7 +407,7 @@
 			this.textBoxOutputSequence.Location = new System.Drawing.Point(143, 185);
 			this.textBoxOutputSequence.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxOutputSequence.Name = "textBoxOutputSequence";
-			this.textBoxOutputSequence.Size = new System.Drawing.Size(489, 22);
+			this.textBoxOutputSequence.Size = new System.Drawing.Size(559, 22);
 			this.textBoxOutputSequence.TabIndex = 9;
 			this.textBoxOutputSequence.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
 			// 
@@ -424,7 +426,7 @@
 			this.textBoxSequenceTemplate.Location = new System.Drawing.Point(143, 155);
 			this.textBoxSequenceTemplate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxSequenceTemplate.Name = "textBoxSequenceTemplate";
-			this.textBoxSequenceTemplate.Size = new System.Drawing.Size(489, 22);
+			this.textBoxSequenceTemplate.Size = new System.Drawing.Size(559, 22);
 			this.textBoxSequenceTemplate.TabIndex = 8;
 			this.textBoxSequenceTemplate.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
 			// 
@@ -443,7 +445,7 @@
 			this.textBoxVixenServer.Location = new System.Drawing.Point(143, 124);
 			this.textBoxVixenServer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxVixenServer.Name = "textBoxVixenServer";
-			this.textBoxVixenServer.Size = new System.Drawing.Size(489, 22);
+			this.textBoxVixenServer.Size = new System.Drawing.Size(559, 22);
 			this.textBoxVixenServer.TabIndex = 7;
 			this.textBoxVixenServer.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
 			// 
@@ -457,7 +459,7 @@
 			this.groupBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.groupBox6.Name = "groupBox6";
 			this.groupBox6.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.groupBox6.Size = new System.Drawing.Size(663, 75);
+			this.groupBox6.Size = new System.Drawing.Size(708, 75);
 			this.groupBox6.TabIndex = 7;
 			this.groupBox6.TabStop = false;
 			this.groupBox6.Text = "Logs";
@@ -468,7 +470,7 @@
 			this.textBoxBlacklistEmailLog.Location = new System.Drawing.Point(143, 47);
 			this.textBoxBlacklistEmailLog.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxBlacklistEmailLog.Name = "textBoxBlacklistEmailLog";
-			this.textBoxBlacklistEmailLog.Size = new System.Drawing.Size(490, 22);
+			this.textBoxBlacklistEmailLog.Size = new System.Drawing.Size(559, 22);
 			this.textBoxBlacklistEmailLog.TabIndex = 13;
 			// 
 			// label8
@@ -486,7 +488,7 @@
 			this.textBoxLogFileName.Location = new System.Drawing.Point(143, 19);
 			this.textBoxLogFileName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxLogFileName.Name = "textBoxLogFileName";
-			this.textBoxLogFileName.Size = new System.Drawing.Size(490, 22);
+			this.textBoxLogFileName.Size = new System.Drawing.Size(559, 22);
 			this.textBoxLogFileName.TabIndex = 12;
 			// 
 			// openFileDialog1
@@ -509,7 +511,7 @@
 			this.groupBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.groupBox5.Name = "groupBox5";
 			this.groupBox5.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.groupBox5.Size = new System.Drawing.Size(663, 423);
+			this.groupBox5.Size = new System.Drawing.Size(708, 423);
 			this.groupBox5.TabIndex = 5;
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "Messaging Settings";
@@ -525,6 +527,8 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.textBoxAdvertisingMSG);
+			this.groupBox1.Controls.Add(this.label10);
 			this.groupBox1.Controls.Add(this.textBoxCountDownMSG);
 			this.groupBox1.Controls.Add(this.label3);
 			this.groupBox1.Controls.Add(this.textBoxReturnWarningMSG);
@@ -535,10 +539,31 @@
 			this.groupBox1.Controls.Add(this.label9);
 			this.groupBox1.Location = new System.Drawing.Point(6, 131);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(646, 287);
+			this.groupBox1.Size = new System.Drawing.Size(696, 287);
 			this.groupBox1.TabIndex = 93;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Auto Reply to Audiance";
+			// 
+			// textBoxAdvertisingMSG
+			// 
+			this.textBoxAdvertisingMSG.Location = new System.Drawing.Point(205, 232);
+			this.textBoxAdvertisingMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.textBoxAdvertisingMSG.Multiline = true;
+			this.textBoxAdvertisingMSG.Name = "textBoxAdvertisingMSG";
+			this.textBoxAdvertisingMSG.Size = new System.Drawing.Size(485, 42);
+			this.textBoxAdvertisingMSG.TabIndex = 97;
+			this.toolTip1.SetToolTip(this.textBoxAdvertisingMSG, "Enter a advertising message that will be randomly displayed when enabled.");
+			this.textBoxAdvertisingMSG.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
+			// 
+			// label10
+			// 
+			this.label10.Location = new System.Drawing.Point(9, 240);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(186, 33);
+			this.label10.TabIndex = 98;
+			this.label10.Text = "Advertising message";
+			this.toolTip1.SetToolTip(this.label10, "Enter a message that will be displayed when Countdown is enabled. Add the word CO" +
+        "UNTDOWN which will be replaced by number of days.");
 			// 
 			// MessagingSettings
 			// 
@@ -546,7 +571,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.Azure;
-			this.ClientSize = new System.Drawing.Size(682, 803);
+			this.ClientSize = new System.Drawing.Size(732, 803);
 			this.Controls.Add(this.groupBox6);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox5);
@@ -554,8 +579,8 @@
 			this.Controls.Add(this.ok);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.MaximumSize = new System.Drawing.Size(700, 850);
-			this.MinimumSize = new System.Drawing.Size(700, 850);
+			this.MaximumSize = new System.Drawing.Size(750, 850);
+			this.MinimumSize = new System.Drawing.Size(750, 850);
 			this.Name = "MessagingSettings";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Messaging Settings";
@@ -620,5 +645,7 @@
 		private System.Windows.Forms.Label label71;
 		private System.Windows.Forms.TextBox textBoxCountDownMSG;
 		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.TextBox textBoxAdvertisingMSG;
+		private System.Windows.Forms.Label label10;
     }
 }
