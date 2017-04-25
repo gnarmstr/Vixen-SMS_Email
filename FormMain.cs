@@ -33,6 +33,8 @@ namespace Vixen_Messaging
 
 		private bool playCountDown;
 
+		public string messageFrom;
+
 		private static Random _random = new Random();
 
 		public FormMain()
@@ -50,7 +52,6 @@ namespace Vixen_Messaging
 			twilioToolStripMenuItem.Image = Resources.Twilio;
 			messagingToolStripMenuItem.Image = Resources.Message;
 			textToolStripMenuItem.Image = Resources.Text;
-			exportLogToolStripMenuItem.Image = Resources.Log;
 			whiteBlackListsToolStripMenuItem.Image = Resources.Lists;
 			WebServerStatus.ForeColor = Color.Black;
 			GlobalVar.SaveFlag = false;
@@ -117,16 +118,8 @@ namespace Vixen_Messaging
 				File.WriteAllText(GlobalVar.LocalMessages, copyfile);
 			}
 
-			//if (comboBoxPlayMode.Text != "Random" && comboBoxPlayMode.Text != "Sequential")
-			//{
-			//	comboBoxPlayMode.Text = "Sequential";
-			//}
-
 			GlobalVar.Blacklist = File.ReadAllText(GlobalVar.Blacklistlocation);
 			GlobalVar.Whitelist = File.ReadAllText(GlobalVar.Whitelistlocation);
-		//	var content2 = File.ReadAllText(GlobalVar.LocalMessages);
-		//	richTextBoxMessage.Text = content2;
-
 			GlobalVar.Msgindex = 0;
 			GlobalVar.PlayMessage = false;
 
@@ -269,9 +262,6 @@ namespace Vixen_Messaging
 				false);
 			GlobalVar.GroupName = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", "");
 			GlobalVar.GroupID = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupID", "");
-
-			//	GlobalVar.OutputSequenceFolder = textBoxVixenFolder.Text + "\\Sequence\\VixenOut.tim"; 
-
 		}
 		#endregion
 
@@ -311,7 +301,7 @@ namespace Vixen_Messaging
 			}
 
 			Cursor.Current = Cursors.WaitCursor;
-
+			messageFrom = null;
 			PlayModes();
 		}
 
@@ -332,6 +322,7 @@ namespace Vixen_Messaging
 					timerCheckTwilio.Stop();
 					timerCheckTwilio.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + GlobalVar.IntervalMsgs)*1000;
 					timerCheckTwilio.Start();
+					return;
 				}
 			}
 
@@ -344,6 +335,7 @@ namespace Vixen_Messaging
 					timerCheckTwilio.Stop();
 					timerCheckTwilio.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + GlobalVar.IntervalMsgs) * 1000;
 					timerCheckTwilio.Start();
+					return;
 				}
 			}
 			
@@ -364,7 +356,6 @@ namespace Vixen_Messaging
 			playCountDown = true;
 			SendMessageToVixen(GlobalVar.CountDownMSG, out blacklist, out notWhitemsg, out maxWordCount);
 			playCountDown = false;
-			LogDisplay(GlobalVar.LogMsg = ("Advertising message has been displayed in lights."));
 		}
 
 		private void PlayAdvertising()
@@ -374,7 +365,6 @@ namespace Vixen_Messaging
 			playCountDown = true;
 			SendMessageToVixen(GlobalVar.AdvertisingMSG, out blacklist, out notWhitemsg, out maxWordCount);
 			playCountDown = false;
-			LogDisplay(GlobalVar.LogMsg = ("Count down message has been displayed in lights."));
 		}
 
 		private void PlayTwilio()
@@ -403,7 +393,7 @@ namespace Vixen_Messaging
 					messageSid = messages.Messages[messages.Messages.Count - 1].Sid;
 				}
 				var messageBody = messages.Messages[messages.Messages.Count - 1].Body;
-				var messageFrom = messages.Messages[messages.Messages.Count - 1].From;
+				messageFrom = messages.Messages[messages.Messages.Count - 1].From;
 
 				LogDisplay(GlobalVar.LogMsg = ("Checking Twilio Messages"));
 				if (!CheckBlacklistMessage(messageFrom, messageBody, ""))
@@ -463,18 +453,17 @@ namespace Vixen_Messaging
 				}
 				SendReturnTextTwilio(messageFrom, "Auto Reply: " + GlobalVar.ReturnBannedMSG);
 				LogDisplay(GlobalVar.LogMsg = (messageFrom + " has been banned for sending inappropiate messages."));
-				Log(" " + messageFrom + " has been banned for sending inappropiate messages.");
 				twilio.DeleteMessage(messageSid);
 			}
 			catch
 			{
 				if (messages.RestException != null && messages.RestException.Code == "20003")
 				{
-					LogDisplay(GlobalVar.LogMsg = ("Authentication failed, check Twilio Account settings"));
+					LogDisplay(GlobalVar.LogMsg = ("Authentication failed. Please check your Twilio Account settings"));
 				}
 				else
 				{
-					LogDisplay(GlobalVar.LogMsg = ("Unable to connect to the Twilio server or there are no messages on the server."));
+					LogDisplay(GlobalVar.LogMsg = ("No messages on the Twilio server."));
 				}
 				GlobalVar.SeqIntervalTime = 2;
 				ShortTimer();
@@ -618,10 +607,16 @@ namespace Vixen_Messaging
 					}
 					//				$.post('http://localhost/api/playplaySequence', sequence, null, 'JSON');
 
-
 					Cursor.Current = Cursors.Default;
 
-					Log(msg + " has been been displayed in lights");
+					if (messageFrom != null)
+					{
+						LogDisplay(msg + " from" + messageFrom + " has been been displayed in lights");
+					}
+					else
+					{
+						LogDisplay(msg + " has been been displayed in lights");
+					}
 
 					#endregion
 				}
@@ -806,9 +801,15 @@ namespace Vixen_Messaging
 
 						if (textLine != null && msg.ToLower().Contains(textLine))
 						{
-							LogDisplay(GlobalVar.LogMsg = ("Bad Word/s Detected in " + msg + " - " + textLine));
+							if (messageFrom != null)
+							{
+								LogDisplay(GlobalVar.LogMsg = ("Bad Word/s Detected in " + msg + " from " + messageFrom + " - " + textLine));
+							}
+							else
+							{
+								LogDisplay(GlobalVar.LogMsg = ("Bad Word/s Detected in " + msg + " - " + textLine));
+							}
 							file.Close();
-							Log(" " + msg + ". Bad Word/s Detected! - " + textLine);
 							notWhite = false;
 							return true;
 						}
@@ -863,8 +864,14 @@ namespace Vixen_Messaging
 			}
 			#endregion
 
-			LogDisplay(GlobalVar.LogMsg = ("One or more Names are not in Whitelist."));
-			Log(" " + msg + ". One or more Names are not in Whitelist.");
+			if (messageFrom != null)
+			{
+				LogDisplay(GlobalVar.LogMsg = ("One or more Names are not in Whitelist. From " + messageFrom));
+			}
+			else
+			{
+				LogDisplay(GlobalVar.LogMsg = ("One or more Names are not in Whitelist."));
+			}
 			notWhite = true;
 			return true;
 		}
@@ -1011,20 +1018,19 @@ namespace Vixen_Messaging
 
 #region Logs
 
-		#region Log File
-		private void Log(string st)
-		{
-			var logFileName = GlobalVar.MessageLog;
-			File.AppendAllText(logFileName, DateTime.Now.ToString("g") + " " + st + "\r\n");
-		}
-		#endregion
-
-		#region Log Display
 		private void LogDisplay(string logMsg)
 		{
+			//Update Display Log
 			richTextBoxLog.Text = richTextBoxLog.Text.Insert(0, (DateTime.Now.ToString("h:mm tt ")) + logMsg + "\n");
+
+			//Update log
+			if (!File.Exists(GlobalVar.MessageLog))
+			{
+				File.CreateText(GlobalVar.MessageLog);
+			}
+
+			File.AppendAllText(GlobalVar.MessageLog, DateTime.Now.ToString("g") + " " + logMsg + "\r\n");
 		}
-		#endregion
 
 #endregion
 
@@ -1182,8 +1188,15 @@ namespace Vixen_Messaging
 						}
 						if (!notWhitemsg)
 						{
-							LogDisplay(GlobalVar.LogMsg = ("Your message has been displayed."));
-							GlobalVar.InstantMSG = "";
+							if (messageFrom != null)
+							{
+								LogDisplay(GlobalVar.LogMsg = ("Your message has been displayed. From " + messageFrom));
+							}
+							else
+							{
+								LogDisplay(GlobalVar.LogMsg = ("Your message has been displayed."));
+								GlobalVar.InstantMSG = "";
+							}
 							return;
 						}
 					}
@@ -1244,22 +1257,6 @@ namespace Vixen_Messaging
 			helpform.ShowDialog();
 		}
 
-		private void exportLogToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (!string.IsNullOrEmpty(richTextBoxLog.Text))
-			{
-				string[] sfd = richTextBoxLog.Text.Split('\n');
-				File.WriteAllLines(GlobalVar.SequenceTemplate + "\\Log.txt", sfd);
-				var messageBox = new MessageBoxForm(@"Log.txt has been saved in " + GlobalVar.SequenceTemplate, @"Saved", MessageBoxButtons.OK, SystemIcons.Information);
-				messageBox.ShowDialog();
-			}
-			else
-			{
-				var messageBox = new MessageBoxForm(@"Log is empty and will not be saved", @"Empty Log", MessageBoxButtons.OK, SystemIcons.Information);
-				messageBox.ShowDialog();
-			}
-		}
-
 		private void twilioToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			var twilio = new Twilio();
@@ -1278,17 +1275,8 @@ namespace Vixen_Messaging
 
 		private void textToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-//			if (_msgTextSettings == null || string.IsNullOrEmpty(_msgTextSettings.Text))
-			
-//			{
-				_msgTextSettings = new MSGTextSettings();
-				_msgTextSettings.ShowDialog();
-			//}
-			//else if (CheckedOpened(_msgTextSettings.Text))
-			//{
-			//	_msgTextSettings.WindowState = FormWindowState.Normal;
-			//	_msgTextSettings.Focus();
-//			}
+			_msgTextSettings = new MSGTextSettings();
+			_msgTextSettings.ShowDialog();
 			if (GlobalVar.SaveFlag)
 				Text = @"Vixen Messaging - Unsaved Changes";
 		}
@@ -1363,6 +1351,5 @@ namespace Vixen_Messaging
 				messageBox.ShowDialog();
 			}
 		}
-
 	}
 }

@@ -41,6 +41,7 @@ namespace Vixen_Messaging
 			this.buttonStopSequence = new System.Windows.Forms.Button();
 			this.buttonInstantMSG = new System.Windows.Forms.Button();
 			this.checkBoxCountDown = new System.Windows.Forms.CheckBox();
+			this.checkBoxAdvertising = new System.Windows.Forms.CheckBox();
 			this.WebServerStatus = new System.Windows.Forms.Button();
 			this.timerCheckVixenEnabled = new System.Windows.Forms.Timer(this.components);
 			this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
@@ -48,7 +49,6 @@ namespace Vixen_Messaging
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItemFile = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.exportLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.twilioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +56,6 @@ namespace Vixen_Messaging
 			this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.whiteBlackListsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.checkBoxAdvertising = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStart)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
 			this.menuStrip1.SuspendLayout();
@@ -158,6 +157,21 @@ namespace Vixen_Messaging
 			this.checkBoxCountDown.UseVisualStyleBackColor = true;
 			this.checkBoxCountDown.CheckedChanged += new System.EventHandler(this.checkBoxCountDown_CheckedChanged);
 			// 
+			// checkBoxAdvertising
+			// 
+			this.checkBoxAdvertising.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.checkBoxAdvertising.Location = new System.Drawing.Point(221, 113);
+			this.checkBoxAdvertising.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.checkBoxAdvertising.Name = "checkBoxAdvertising";
+			this.checkBoxAdvertising.Size = new System.Drawing.Size(194, 34);
+			this.checkBoxAdvertising.TabIndex = 119;
+			this.checkBoxAdvertising.Text = "Enable Advertising Msg";
+			this.checkBoxAdvertising.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.toolTip1.SetToolTip(this.checkBoxAdvertising, "When enabled, Messaging will send a advertising message to be displayed on a Rand" +
+        "om bases.");
+			this.checkBoxAdvertising.UseVisualStyleBackColor = true;
+			this.checkBoxAdvertising.CheckedChanged += new System.EventHandler(this.checkBoxAdvertising_CheckedChanged);
+			// 
 			// WebServerStatus
 			// 
 			this.WebServerStatus.BackColor = System.Drawing.Color.OrangeRed;
@@ -210,7 +224,6 @@ namespace Vixen_Messaging
 			// 
 			this.fileToolStripMenuItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
-            this.exportLogToolStripMenuItem,
             this.closeToolStripMenuItem});
 			this.fileToolStripMenuItemFile.Name = "fileToolStripMenuItemFile";
 			this.fileToolStripMenuItemFile.Size = new System.Drawing.Size(44, 24);
@@ -219,21 +232,14 @@ namespace Vixen_Messaging
 			// saveToolStripMenuItem
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
 			this.saveToolStripMenuItem.Text = "Save";
 			this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
-			// 
-			// exportLogToolStripMenuItem
-			// 
-			this.exportLogToolStripMenuItem.Name = "exportLogToolStripMenuItem";
-			this.exportLogToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
-			this.exportLogToolStripMenuItem.Text = "Export Log";
-			this.exportLogToolStripMenuItem.Click += new System.EventHandler(this.exportLogToolStripMenuItem_Click);
 			// 
 			// closeToolStripMenuItem
 			// 
 			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-			this.closeToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+			this.closeToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
 			this.closeToolStripMenuItem.Text = "Close";
 			this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
 			// 
@@ -282,21 +288,6 @@ namespace Vixen_Messaging
 			this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
 			this.helpToolStripMenuItem.Text = "Help";
 			this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
-			// 
-			// checkBoxAdvertising
-			// 
-			this.checkBoxAdvertising.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxAdvertising.Location = new System.Drawing.Point(221, 113);
-			this.checkBoxAdvertising.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.checkBoxAdvertising.Name = "checkBoxAdvertising";
-			this.checkBoxAdvertising.Size = new System.Drawing.Size(194, 34);
-			this.checkBoxAdvertising.TabIndex = 119;
-			this.checkBoxAdvertising.Text = "Enable Advertising Msg";
-			this.checkBoxAdvertising.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			this.toolTip1.SetToolTip(this.checkBoxAdvertising, "When enabled, Messaging will send a advertising message to be displayed on a Rand" +
-        "om bases.");
-			this.checkBoxAdvertising.UseVisualStyleBackColor = true;
-			this.checkBoxAdvertising.CheckedChanged += new System.EventHandler(this.checkBoxAdvertising_CheckedChanged);
 			// 
 			// FormMain
 			// 
@@ -358,7 +349,6 @@ namespace Vixen_Messaging
 		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem exportLogToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem twilioToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem messagingToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
