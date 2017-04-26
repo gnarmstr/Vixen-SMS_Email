@@ -89,7 +89,7 @@ namespace Vixen_Messaging
 			// 
 			// buttonStart
 			// 
-			this.buttonStart.Location = new System.Drawing.Point(54, 48);
+			this.buttonStart.Location = new System.Drawing.Point(54, 65);
 			this.buttonStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonStart.Name = "buttonStart";
 			this.buttonStart.Size = new System.Drawing.Size(61, 61);
@@ -101,7 +101,7 @@ namespace Vixen_Messaging
 			// 
 			// buttonStop
 			// 
-			this.buttonStop.Location = new System.Drawing.Point(120, 48);
+			this.buttonStop.Location = new System.Drawing.Point(120, 65);
 			this.buttonStop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonStop.Name = "buttonStop";
 			this.buttonStop.Size = new System.Drawing.Size(61, 61);

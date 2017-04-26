@@ -42,12 +42,12 @@ namespace Vixen_Messaging
 			textBoxOutputSequence.Text = GlobalVar.OutputSequenceFolder;
 			textBoxVixenServer.Text = GlobalVar.VixenServer;
 			textBoxSequenceTemplate.Text = GlobalVar.SequenceTemplate;
-			textBoxLogFileName.Text = GlobalVar.MessageLog;
-			textBoxBlacklistEmailLog.Text = GlobalVar.BlacklistLog;
 			dateCountDown.Value = Convert.ToDateTime(GlobalVar.CountDownDate);
 			textBoxCountDownMSG.Text = GlobalVar.CountDownMSG;
 			comboBoxBlack_Whitelist.SelectedItem = GlobalVar.Black_WhiteSelection;
 			numericUpDownIntervalMsgs.Value = GlobalVar.IntervalMsgs;
+			trackBarRandomCountDownSensitivity.Value = GlobalVar.RandomCountDownSensitivity;
+			trackBarRandomAdvetisingSensitivity.Value = GlobalVar.RandomAdvertisingSensitivity;
 			_envokeChanges = false;
 			if (GlobalVar.SaveFlag)
 				_envokeChanges = true;
@@ -244,6 +244,23 @@ namespace Vixen_Messaging
 		{
 			if (!_envokeChanges)
 				GlobalVar.SaveFlag = false;
+		}
+
+		private void trackBarTextPosition_MouseDown(object sender, MouseEventArgs e)
+		{
+			var trackBar = (TrackBar)sender;
+			toolTip1.SetToolTip(trackBar, trackBar.Value.ToString());
+		}
+
+		private void trackBarTextPosition_MouseDown(object sender, EventArgs e)
+		{
+			var trackBar = (TrackBar)sender;
+			toolTip1.SetToolTip(trackBar, trackBar.Value.ToString());
+		}
+
+		private void trackBarTextPosition_VisibleChanged(object sender, EventArgs e)
+		{
+			Update_Save_Flag();
 		}
 	}
 }

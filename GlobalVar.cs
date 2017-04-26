@@ -93,6 +93,10 @@ namespace Vixen_Messaging
 
 		public static int IntervalMsgs;
 
+		public static int RandomCountDownSensitivity;
+
+		public static int RandomAdvertisingSensitivity;
+
 		#endregion
 
 		#region Text Settings

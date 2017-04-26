@@ -207,16 +207,12 @@ namespace Vixen_Messaging
 			GlobalVar.Blacklistlocation = Path.Combine(GlobalVar.SettingsPath + "\\Blacklist.txt");
 			GlobalVar.Whitelistlocation = Path.Combine(GlobalVar.SettingsPath + "\\Whitelist.txt");
 			GlobalVar.LocalMessages = Path.Combine(GlobalVar.SettingsPath + "\\LocalMessages.txt");
+			GlobalVar.RandomCountDownSensitivity = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomCountDownSensitivity", 2);
+			GlobalVar.RandomAdvertisingSensitivity = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomAdvertisingSensitivity", 4);
 			GlobalVar.SequenceTemplate = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SequenceTemplate",
 				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3 Messaging"));
 			GlobalVar.OutputSequenceFolder = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "OutputSequence",
 				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Sequence\\VixenOut.tim"));
-			GlobalVar.MessageLog = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "LogMessageFile",
-				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
-					"Documents\\Vixen 3 Messaging\\Logs\\Message.log"));
-			GlobalVar.BlacklistLog = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "LogBlacklistFile",
-				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
-					"Documents\\Vixen 3 Messaging\\Logs\\Blacklist.log"));
 			GlobalVar.AutoStartMsgRetrieval = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", false);
 			GlobalVar.CenterStop = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterStop", false);
 			GlobalVar.CenterStop = GlobalVar.CenterStop;
@@ -262,6 +258,10 @@ namespace Vixen_Messaging
 				false);
 			GlobalVar.GroupName = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", "");
 			GlobalVar.GroupID = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupID", "");
+			GlobalVar.MessageLog = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
+					"Documents\\Vixen 3 Messaging\\Logs\\Message.log");
+			GlobalVar.BlacklistLog = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
+					"Documents\\Vixen 3 Messaging\\Logs\\Blacklist.log");
 		}
 		#endregion
 
@@ -316,7 +316,7 @@ namespace Vixen_Messaging
 			if (checkBoxCountDown.Checked && !string.IsNullOrEmpty(GlobalVar.CountDownMSG))
 			{
 				var randomPlay = _random.Next(0, 15);
-				if (randomPlay < 2)
+				if (randomPlay < GlobalVar.RandomCountDownSensitivity)
 				{
 					PlayCountDown();
 					timerCheckTwilio.Stop();
@@ -329,7 +329,7 @@ namespace Vixen_Messaging
 			if (checkBoxAdvertising.Checked && !string.IsNullOrEmpty(GlobalVar.AdvertisingMSG))
 			{
 				var randomPlay = _random.Next(0, 15);
-				if (randomPlay < 5)
+				if (randomPlay < GlobalVar.RandomAdvertisingSensitivity)
 				{
 					PlayAdvertising();
 					timerCheckTwilio.Stop();
@@ -418,7 +418,7 @@ namespace Vixen_Messaging
 						{
 							if (blacklist && !notWhitemsg)
 							{
-								using (var file = new StreamWriter(GlobalVar.Blacklistlocation, true))
+								using (var file = new StreamWriter(GlobalVar.BlacklistLog, true))
 								{
 									file.WriteLine(messageFrom);
 								}
@@ -883,7 +883,7 @@ namespace Vixen_Messaging
 			var maxaddress = 0;
 			var checkheader = headerfrom;
 
-			using (var file = new StreamReader(GlobalVar.Blacklistlocation))
+			using (var file = new StreamReader(GlobalVar.BlacklistLog))
 			{
 				do
 				{
@@ -1075,8 +1075,8 @@ namespace Vixen_Messaging
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "SequenceTemplate", GlobalVar.SequenceTemplate);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "OutputSequence", GlobalVar.OutputSequenceFolder);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "StringOrientation", GlobalVar.StringOrientation);
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "LogMessageFile", GlobalVar.MessageLog);
-			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "LogBlacklistFile", GlobalVar.Blacklistlocation);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomCountDownSensitivity", GlobalVar.RandomCountDownSensitivity.ToString());
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomAdvertisingSensitivity", GlobalVar.RandomAdvertisingSensitivity.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", GlobalVar.AutoStartMsgRetrieval);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterStop", (GlobalVar.CenterStop.ToString()).ToLower());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterText", (GlobalVar.CenterText.ToString()).ToLower());

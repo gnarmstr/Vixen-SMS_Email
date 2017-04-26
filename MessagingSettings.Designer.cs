@@ -36,7 +36,6 @@
 			this.label9 = new System.Windows.Forms.Label();
 			this.label100 = new System.Windows.Forms.Label();
 			this.label32 = new System.Windows.Forms.Label();
-			this.label12 = new System.Windows.Forms.Label();
 			this.label87 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
@@ -63,10 +62,6 @@
 			this.textBoxSequenceTemplate = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBoxVixenServer = new System.Windows.Forms.TextBox();
-			this.groupBox6 = new System.Windows.Forms.GroupBox();
-			this.textBoxBlacklistEmailLog = new System.Windows.Forms.TextBox();
-			this.label8 = new System.Windows.Forms.Label();
-			this.textBoxLogFileName = new System.Windows.Forms.TextBox();
 			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -74,13 +69,18 @@
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.textBoxAdvertisingMSG = new System.Windows.Forms.TextBox();
 			this.label10 = new System.Windows.Forms.Label();
+			this.trackBarRandomAdvetisingSensitivity = new System.Windows.Forms.TrackBar();
+			this.label44 = new System.Windows.Forms.Label();
+			this.trackBarRandomCountDownSensitivity = new System.Windows.Forms.TrackBar();
+			this.label8 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.ok)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).BeginInit();
 			this.groupBox3.SuspendLayout();
-			this.groupBox6.SuspendLayout();
 			this.groupBox5.SuspendLayout();
 			this.groupBox1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarRandomAdvetisingSensitivity)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarRandomCountDownSensitivity)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// ok
@@ -136,17 +136,6 @@
 			this.toolTip1.SetToolTip(this.label32, "The Node ID of the Group used to Display the Text. This must be set for the softw" +
         "are to work.");
 			// 
-			// label12
-			// 
-			this.label12.AutoSize = true;
-			this.label12.Location = new System.Drawing.Point(13, 50);
-			this.label12.Name = "label12";
-			this.label12.Size = new System.Drawing.Size(91, 17);
-			this.label12.TabIndex = 17;
-			this.label12.Text = "Blacklist Log:";
-			this.toolTip1.SetToolTip(this.label12, "Email address and phone numbers are stored in this file when a member has sent a " +
-        "Blacklist word. This will be cleared each time Vixen Messaging is re-started.");
-			// 
 			// label87
 			// 
 			this.label87.Location = new System.Drawing.Point(5, 66);
@@ -165,8 +154,8 @@
 			this.label1.Size = new System.Drawing.Size(185, 42);
 			this.label1.TabIndex = 92;
 			this.label1.Text = "When Message Displayed:";
-			this.toolTip1.SetToolTip(this.label1, "Enter a message that will be sent to the audiance member that thier message will " +
-        "be displayed soon.");
+			this.toolTip1.SetToolTip(this.label1, "Enter a message that will be sent back to the audiance member after their message" +
+        " is displayed..");
 			// 
 			// label2
 			// 
@@ -354,7 +343,7 @@
 			this.groupBox3.Controls.Add(this.buttonGetVixenData);
 			this.groupBox3.Controls.Add(this.label4);
 			this.groupBox3.Controls.Add(this.textBoxVixenServer);
-			this.groupBox3.Location = new System.Drawing.Point(12, 456);
+			this.groupBox3.Location = new System.Drawing.Point(12, 526);
 			this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.groupBox3.Name = "groupBox3";
 			this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -449,48 +438,6 @@
 			this.textBoxVixenServer.TabIndex = 7;
 			this.textBoxVixenServer.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
 			// 
-			// groupBox6
-			// 
-			this.groupBox6.Controls.Add(this.label12);
-			this.groupBox6.Controls.Add(this.textBoxBlacklistEmailLog);
-			this.groupBox6.Controls.Add(this.label8);
-			this.groupBox6.Controls.Add(this.textBoxLogFileName);
-			this.groupBox6.Location = new System.Drawing.Point(12, 675);
-			this.groupBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.groupBox6.Name = "groupBox6";
-			this.groupBox6.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.groupBox6.Size = new System.Drawing.Size(708, 75);
-			this.groupBox6.TabIndex = 7;
-			this.groupBox6.TabStop = false;
-			this.groupBox6.Text = "Logs";
-			// 
-			// textBoxBlacklistEmailLog
-			// 
-			this.textBoxBlacklistEmailLog.Enabled = false;
-			this.textBoxBlacklistEmailLog.Location = new System.Drawing.Point(143, 47);
-			this.textBoxBlacklistEmailLog.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.textBoxBlacklistEmailLog.Name = "textBoxBlacklistEmailLog";
-			this.textBoxBlacklistEmailLog.Size = new System.Drawing.Size(559, 22);
-			this.textBoxBlacklistEmailLog.TabIndex = 13;
-			// 
-			// label8
-			// 
-			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(13, 22);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(97, 17);
-			this.label8.TabIndex = 15;
-			this.label8.Text = "Message Log:";
-			// 
-			// textBoxLogFileName
-			// 
-			this.textBoxLogFileName.Enabled = false;
-			this.textBoxLogFileName.Location = new System.Drawing.Point(143, 19);
-			this.textBoxLogFileName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.textBoxLogFileName.Name = "textBoxLogFileName";
-			this.textBoxLogFileName.Size = new System.Drawing.Size(559, 22);
-			this.textBoxLogFileName.TabIndex = 12;
-			// 
 			// openFileDialog1
 			// 
 			this.openFileDialog1.AddExtension = false;
@@ -511,7 +458,7 @@
 			this.groupBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.groupBox5.Name = "groupBox5";
 			this.groupBox5.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.groupBox5.Size = new System.Drawing.Size(708, 423);
+			this.groupBox5.Size = new System.Drawing.Size(708, 511);
 			this.groupBox5.TabIndex = 5;
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "Messaging Settings";
@@ -527,6 +474,10 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.trackBarRandomCountDownSensitivity);
+			this.groupBox1.Controls.Add(this.label8);
+			this.groupBox1.Controls.Add(this.trackBarRandomAdvetisingSensitivity);
+			this.groupBox1.Controls.Add(this.label44);
 			this.groupBox1.Controls.Add(this.textBoxAdvertisingMSG);
 			this.groupBox1.Controls.Add(this.label10);
 			this.groupBox1.Controls.Add(this.textBoxCountDownMSG);
@@ -539,14 +490,14 @@
 			this.groupBox1.Controls.Add(this.label9);
 			this.groupBox1.Location = new System.Drawing.Point(6, 131);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(696, 287);
+			this.groupBox1.Size = new System.Drawing.Size(696, 375);
 			this.groupBox1.TabIndex = 93;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Auto Reply to Audiance";
 			// 
 			// textBoxAdvertisingMSG
 			// 
-			this.textBoxAdvertisingMSG.Location = new System.Drawing.Point(205, 232);
+			this.textBoxAdvertisingMSG.Location = new System.Drawing.Point(205, 274);
 			this.textBoxAdvertisingMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxAdvertisingMSG.Multiline = true;
 			this.textBoxAdvertisingMSG.Name = "textBoxAdvertisingMSG";
@@ -557,13 +508,73 @@
 			// 
 			// label10
 			// 
-			this.label10.Location = new System.Drawing.Point(9, 240);
+			this.label10.Location = new System.Drawing.Point(9, 282);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(186, 33);
 			this.label10.TabIndex = 98;
 			this.label10.Text = "Advertising message";
 			this.toolTip1.SetToolTip(this.label10, "Enter a message that will be displayed when Countdown is enabled. Add the word CO" +
         "UNTDOWN which will be replaced by number of days.");
+			// 
+			// trackBarRandomAdvetisingSensitivity
+			// 
+			this.trackBarRandomAdvetisingSensitivity.AutoSize = false;
+			this.trackBarRandomAdvetisingSensitivity.LargeChange = 1;
+			this.trackBarRandomAdvetisingSensitivity.Location = new System.Drawing.Point(234, 329);
+			this.trackBarRandomAdvetisingSensitivity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.trackBarRandomAdvetisingSensitivity.Maximum = 7;
+			this.trackBarRandomAdvetisingSensitivity.Minimum = 1;
+			this.trackBarRandomAdvetisingSensitivity.Name = "trackBarRandomAdvetisingSensitivity";
+			this.trackBarRandomAdvetisingSensitivity.Size = new System.Drawing.Size(455, 32);
+			this.trackBarRandomAdvetisingSensitivity.TabIndex = 99;
+			this.toolTip1.SetToolTip(this.trackBarRandomAdvetisingSensitivity, "This will adjust the sensitivity of how often the Countdown and Advertising messa" +
+        "ges are displayed.");
+			this.trackBarRandomAdvetisingSensitivity.Value = 1;
+			this.trackBarRandomAdvetisingSensitivity.Scroll += new System.EventHandler(this.trackBarTextPosition_MouseDown);
+			this.trackBarRandomAdvetisingSensitivity.ValueChanged += new System.EventHandler(this.trackBarTextPosition_VisibleChanged);
+			this.trackBarRandomAdvetisingSensitivity.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextPosition_MouseDown);
+			this.trackBarRandomAdvetisingSensitivity.MouseHover += new System.EventHandler(this.trackBarTextPosition_MouseDown);
+			// 
+			// label44
+			// 
+			this.label44.AutoSize = true;
+			this.label44.Location = new System.Drawing.Point(11, 334);
+			this.label44.Name = "label44";
+			this.label44.Size = new System.Drawing.Size(206, 17);
+			this.label44.TabIndex = 100;
+			this.label44.Text = "Random Advertising Sensitivity:";
+			this.toolTip1.SetToolTip(this.label44, "This will adjust the sensitivity of how often the Countdown and Advertising messa" +
+        "ges are displayed.");
+			// 
+			// trackBarRandomCountDownSensitivity
+			// 
+			this.trackBarRandomCountDownSensitivity.AutoSize = false;
+			this.trackBarRandomCountDownSensitivity.LargeChange = 1;
+			this.trackBarRandomCountDownSensitivity.Location = new System.Drawing.Point(234, 234);
+			this.trackBarRandomCountDownSensitivity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.trackBarRandomCountDownSensitivity.Maximum = 7;
+			this.trackBarRandomCountDownSensitivity.Minimum = 1;
+			this.trackBarRandomCountDownSensitivity.Name = "trackBarRandomCountDownSensitivity";
+			this.trackBarRandomCountDownSensitivity.Size = new System.Drawing.Size(455, 32);
+			this.trackBarRandomCountDownSensitivity.TabIndex = 101;
+			this.toolTip1.SetToolTip(this.trackBarRandomCountDownSensitivity, "This will adjust the sensitivity of how often the Countdown message is displayed." +
+        "");
+			this.trackBarRandomCountDownSensitivity.Value = 1;
+			this.trackBarRandomCountDownSensitivity.Scroll += new System.EventHandler(this.trackBarTextPosition_MouseDown);
+			this.trackBarRandomCountDownSensitivity.ValueChanged += new System.EventHandler(this.trackBarTextPosition_VisibleChanged);
+			this.trackBarRandomCountDownSensitivity.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextPosition_MouseDown);
+			this.trackBarRandomCountDownSensitivity.MouseHover += new System.EventHandler(this.trackBarTextPosition_MouseDown);
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(11, 239);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(208, 17);
+			this.label8.TabIndex = 102;
+			this.label8.Text = "Random CountDown Sensitivity:";
+			this.toolTip1.SetToolTip(this.label8, "This will adjust the sensitivity of how often the Countdown message is displayed." +
+        "");
 			// 
 			// MessagingSettings
 			// 
@@ -572,7 +583,6 @@
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.Azure;
 			this.ClientSize = new System.Drawing.Size(732, 803);
-			this.Controls.Add(this.groupBox6);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.Cancel);
@@ -591,12 +601,12 @@
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).EndInit();
 			this.groupBox3.ResumeLayout(false);
 			this.groupBox3.PerformLayout();
-			this.groupBox6.ResumeLayout(false);
-			this.groupBox6.PerformLayout();
 			this.groupBox5.ResumeLayout(false);
 			this.groupBox5.PerformLayout();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarRandomAdvetisingSensitivity)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarRandomCountDownSensitivity)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -622,11 +632,6 @@
 		private System.Windows.Forms.TextBox textBoxSequenceTemplate;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox textBoxVixenServer;
-		private System.Windows.Forms.GroupBox groupBox6;
-		private System.Windows.Forms.Label label12;
-		private System.Windows.Forms.TextBox textBoxBlacklistEmailLog;
-		private System.Windows.Forms.Label label8;
-		private System.Windows.Forms.TextBox textBoxLogFileName;
 		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
 		private System.Windows.Forms.TextBox textBoxGroupName;
 		private System.Windows.Forms.OpenFileDialog openFileDialog1;
@@ -647,5 +652,9 @@
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.TextBox textBoxAdvertisingMSG;
 		private System.Windows.Forms.Label label10;
+		private System.Windows.Forms.TrackBar trackBarRandomAdvetisingSensitivity;
+		private System.Windows.Forms.Label label44;
+		private System.Windows.Forms.TrackBar trackBarRandomCountDownSensitivity;
+		private System.Windows.Forms.Label label8;
     }
 }
