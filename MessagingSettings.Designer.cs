@@ -73,6 +73,8 @@
 			this.label44 = new System.Windows.Forms.Label();
 			this.trackBarRandomCountDownSensitivity = new System.Windows.Forms.TrackBar();
 			this.label8 = new System.Windows.Forms.Label();
+			this.checkBoxRepeatDisplayMessage = new System.Windows.Forms.CheckBox();
+			this.label11 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.ok)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).BeginInit();
@@ -85,7 +87,7 @@
 			// 
 			// ok
 			// 
-			this.ok.Location = new System.Drawing.Point(552, 754);
+			this.ok.Location = new System.Drawing.Point(552, 802);
 			this.ok.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.ok.Name = "ok";
 			this.ok.Size = new System.Drawing.Size(61, 61);
@@ -96,7 +98,7 @@
 			// 
 			// Cancel
 			// 
-			this.Cancel.Location = new System.Drawing.Point(628, 754);
+			this.Cancel.Location = new System.Drawing.Point(628, 802);
 			this.Cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.Cancel.Name = "Cancel";
 			this.Cancel.Size = new System.Drawing.Size(61, 61);
@@ -138,7 +140,7 @@
 			// 
 			// label87
 			// 
-			this.label87.Location = new System.Drawing.Point(5, 66);
+			this.label87.Location = new System.Drawing.Point(406, 70);
 			this.label87.Name = "label87";
 			this.label87.Size = new System.Drawing.Size(132, 23);
 			this.label87.TabIndex = 67;
@@ -159,7 +161,7 @@
 			// 
 			// label2
 			// 
-			this.label2.Location = new System.Drawing.Point(10, 130);
+			this.label2.Location = new System.Drawing.Point(10, 217);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(186, 42);
 			this.label2.TabIndex = 94;
@@ -209,7 +211,7 @@
 			// 
 			// textBoxReturnWarningMSG
 			// 
-			this.textBoxReturnWarningMSG.Location = new System.Drawing.Point(206, 127);
+			this.textBoxReturnWarningMSG.Location = new System.Drawing.Point(206, 214);
 			this.textBoxReturnWarningMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxReturnWarningMSG.Multiline = true;
 			this.textBoxReturnWarningMSG.Name = "textBoxReturnWarningMSG";
@@ -235,7 +237,7 @@
 			// 
 			this.dateCountDown.CustomFormat = "";
 			this.dateCountDown.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.dateCountDown.Location = new System.Drawing.Point(162, 66);
+			this.dateCountDown.Location = new System.Drawing.Point(557, 68);
 			this.dateCountDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.dateCountDown.Name = "dateCountDown";
 			this.dateCountDown.Size = new System.Drawing.Size(145, 22);
@@ -247,7 +249,7 @@
 			// label14
 			// 
 			this.label14.AutoSize = true;
-			this.label14.Location = new System.Drawing.Point(17, 103);
+			this.label14.Location = new System.Drawing.Point(12, 68);
 			this.label14.Name = "label14";
 			this.label14.Size = new System.Drawing.Size(238, 17);
 			this.label14.TabIndex = 104;
@@ -260,7 +262,7 @@
 			this.comboBoxBlack_Whitelist.Items.AddRange(new object[] {
             "Blacklist",
             "Whitelist"});
-			this.comboBoxBlack_Whitelist.Location = new System.Drawing.Point(278, 103);
+			this.comboBoxBlack_Whitelist.Location = new System.Drawing.Point(256, 65);
 			this.comboBoxBlack_Whitelist.Name = "comboBoxBlack_Whitelist";
 			this.comboBoxBlack_Whitelist.Size = new System.Drawing.Size(127, 24);
 			this.comboBoxBlack_Whitelist.TabIndex = 105;
@@ -269,7 +271,7 @@
 			// 
 			// numericUpDownIntervalMsgs
 			// 
-			this.numericUpDownIntervalMsgs.Location = new System.Drawing.Point(470, 54);
+			this.numericUpDownIntervalMsgs.Location = new System.Drawing.Point(557, 30);
 			this.numericUpDownIntervalMsgs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.numericUpDownIntervalMsgs.Maximum = new decimal(new int[] {
             300,
@@ -285,7 +287,7 @@
 			// label71
 			// 
 			this.label71.AutoSize = true;
-			this.label71.Location = new System.Drawing.Point(420, 35);
+			this.label71.Location = new System.Drawing.Point(355, 30);
 			this.label71.Name = "label71";
 			this.label71.Size = new System.Drawing.Size(183, 17);
 			this.label71.TabIndex = 107;
@@ -294,7 +296,7 @@
 			// 
 			// textBoxCountDownMSG
 			// 
-			this.textBoxCountDownMSG.Location = new System.Drawing.Point(205, 178);
+			this.textBoxCountDownMSG.Location = new System.Drawing.Point(205, 265);
 			this.textBoxCountDownMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxCountDownMSG.Multiline = true;
 			this.textBoxCountDownMSG.Name = "textBoxCountDownMSG";
@@ -307,7 +309,7 @@
 			// 
 			// label3
 			// 
-			this.label3.Location = new System.Drawing.Point(11, 187);
+			this.label3.Location = new System.Drawing.Point(11, 274);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(186, 33);
 			this.label3.TabIndex = 96;
@@ -343,7 +345,7 @@
 			this.groupBox3.Controls.Add(this.buttonGetVixenData);
 			this.groupBox3.Controls.Add(this.label4);
 			this.groupBox3.Controls.Add(this.textBoxVixenServer);
-			this.groupBox3.Location = new System.Drawing.Point(12, 526);
+			this.groupBox3.Location = new System.Drawing.Point(12, 574);
 			this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.groupBox3.Name = "groupBox3";
 			this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -458,7 +460,7 @@
 			this.groupBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.groupBox5.Name = "groupBox5";
 			this.groupBox5.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.groupBox5.Size = new System.Drawing.Size(708, 511);
+			this.groupBox5.Size = new System.Drawing.Size(708, 559);
 			this.groupBox5.TabIndex = 5;
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "Messaging Settings";
@@ -466,7 +468,7 @@
 			// label74
 			// 
 			this.label74.AutoSize = true;
-			this.label74.Location = new System.Drawing.Point(544, 57);
+			this.label74.Location = new System.Drawing.Point(634, 32);
 			this.label74.Name = "label74";
 			this.label74.Size = new System.Drawing.Size(32, 17);
 			this.label74.TabIndex = 108;
@@ -474,6 +476,8 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.label11);
+			this.groupBox1.Controls.Add(this.checkBoxRepeatDisplayMessage);
 			this.groupBox1.Controls.Add(this.trackBarRandomCountDownSensitivity);
 			this.groupBox1.Controls.Add(this.label8);
 			this.groupBox1.Controls.Add(this.trackBarRandomAdvetisingSensitivity);
@@ -488,16 +492,16 @@
 			this.groupBox1.Controls.Add(this.label1);
 			this.groupBox1.Controls.Add(this.textBoxReturnBannedMSG);
 			this.groupBox1.Controls.Add(this.label9);
-			this.groupBox1.Location = new System.Drawing.Point(6, 131);
+			this.groupBox1.Location = new System.Drawing.Point(6, 96);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(696, 375);
+			this.groupBox1.Size = new System.Drawing.Size(696, 458);
 			this.groupBox1.TabIndex = 93;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Auto Reply to Audiance";
 			// 
 			// textBoxAdvertisingMSG
 			// 
-			this.textBoxAdvertisingMSG.Location = new System.Drawing.Point(205, 274);
+			this.textBoxAdvertisingMSG.Location = new System.Drawing.Point(205, 361);
 			this.textBoxAdvertisingMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxAdvertisingMSG.Multiline = true;
 			this.textBoxAdvertisingMSG.Name = "textBoxAdvertisingMSG";
@@ -508,27 +512,26 @@
 			// 
 			// label10
 			// 
-			this.label10.Location = new System.Drawing.Point(9, 282);
+			this.label10.Location = new System.Drawing.Point(9, 369);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(186, 33);
 			this.label10.TabIndex = 98;
 			this.label10.Text = "Advertising message";
-			this.toolTip1.SetToolTip(this.label10, "Enter a message that will be displayed when Countdown is enabled. Add the word CO" +
-        "UNTDOWN which will be replaced by number of days.");
+			this.toolTip1.SetToolTip(this.label10, "Enter a message that will be displayed when Advertising is enabled.");
 			// 
 			// trackBarRandomAdvetisingSensitivity
 			// 
 			this.trackBarRandomAdvetisingSensitivity.AutoSize = false;
 			this.trackBarRandomAdvetisingSensitivity.LargeChange = 1;
-			this.trackBarRandomAdvetisingSensitivity.Location = new System.Drawing.Point(234, 329);
+			this.trackBarRandomAdvetisingSensitivity.Location = new System.Drawing.Point(234, 416);
 			this.trackBarRandomAdvetisingSensitivity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.trackBarRandomAdvetisingSensitivity.Maximum = 7;
 			this.trackBarRandomAdvetisingSensitivity.Minimum = 1;
 			this.trackBarRandomAdvetisingSensitivity.Name = "trackBarRandomAdvetisingSensitivity";
 			this.trackBarRandomAdvetisingSensitivity.Size = new System.Drawing.Size(455, 32);
 			this.trackBarRandomAdvetisingSensitivity.TabIndex = 99;
-			this.toolTip1.SetToolTip(this.trackBarRandomAdvetisingSensitivity, "This will adjust the sensitivity of how often the Countdown and Advertising messa" +
-        "ges are displayed.");
+			this.toolTip1.SetToolTip(this.trackBarRandomAdvetisingSensitivity, "This will adjust the sensitivity of how often the Advertising messages is display" +
+        "ed.");
 			this.trackBarRandomAdvetisingSensitivity.Value = 1;
 			this.trackBarRandomAdvetisingSensitivity.Scroll += new System.EventHandler(this.trackBarTextPosition_MouseDown);
 			this.trackBarRandomAdvetisingSensitivity.ValueChanged += new System.EventHandler(this.trackBarTextPosition_VisibleChanged);
@@ -538,19 +541,19 @@
 			// label44
 			// 
 			this.label44.AutoSize = true;
-			this.label44.Location = new System.Drawing.Point(11, 334);
+			this.label44.Location = new System.Drawing.Point(11, 421);
 			this.label44.Name = "label44";
 			this.label44.Size = new System.Drawing.Size(206, 17);
 			this.label44.TabIndex = 100;
 			this.label44.Text = "Random Advertising Sensitivity:";
-			this.toolTip1.SetToolTip(this.label44, "This will adjust the sensitivity of how often the Countdown and Advertising messa" +
-        "ges are displayed.");
+			this.toolTip1.SetToolTip(this.label44, "This will adjust the sensitivity of how often the Advertising messages is display" +
+        "ed.");
 			// 
 			// trackBarRandomCountDownSensitivity
 			// 
 			this.trackBarRandomCountDownSensitivity.AutoSize = false;
 			this.trackBarRandomCountDownSensitivity.LargeChange = 1;
-			this.trackBarRandomCountDownSensitivity.Location = new System.Drawing.Point(234, 234);
+			this.trackBarRandomCountDownSensitivity.Location = new System.Drawing.Point(234, 321);
 			this.trackBarRandomCountDownSensitivity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.trackBarRandomCountDownSensitivity.Maximum = 7;
 			this.trackBarRandomCountDownSensitivity.Minimum = 1;
@@ -568,7 +571,7 @@
 			// label8
 			// 
 			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(11, 239);
+			this.label8.Location = new System.Drawing.Point(11, 326);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(208, 17);
 			this.label8.TabIndex = 102;
@@ -576,21 +579,47 @@
 			this.toolTip1.SetToolTip(this.label8, "This will adjust the sensitivity of how often the Countdown message is displayed." +
         "");
 			// 
+			// checkBoxRepeatDisplayMessage
+			// 
+			this.checkBoxRepeatDisplayMessage.AutoSize = true;
+			this.checkBoxRepeatDisplayMessage.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.checkBoxRepeatDisplayMessage.Location = new System.Drawing.Point(276, 129);
+			this.checkBoxRepeatDisplayMessage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.checkBoxRepeatDisplayMessage.Name = "checkBoxRepeatDisplayMessage";
+			this.checkBoxRepeatDisplayMessage.Size = new System.Drawing.Size(346, 21);
+			this.checkBoxRepeatDisplayMessage.TabIndex = 109;
+			this.checkBoxRepeatDisplayMessage.Text = "Repeat Displayed message per audiance number:";
+			this.toolTip1.SetToolTip(this.checkBoxRepeatDisplayMessage, "Check this when you want the diplayed messgae sent every time. Uncheck to only se" +
+        "nd the display message once per phone/cell number.");
+			this.checkBoxRepeatDisplayMessage.UseVisualStyleBackColor = true;
+			// 
+			// label11
+			// 
+			this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label11.ForeColor = System.Drawing.Color.Red;
+			this.label11.Location = new System.Drawing.Point(7, 158);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(682, 46);
+			this.label11.TabIndex = 110;
+			this.label11.Text = "NOTE: Banned and Returned Display message phone/cell numbers will be cleared each" +
+    " time this application is restarted.";
+			this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
 			// MessagingSettings
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.Azure;
-			this.ClientSize = new System.Drawing.Size(732, 803);
+			this.ClientSize = new System.Drawing.Size(732, 853);
 			this.Controls.Add(this.groupBox3);
 			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.Cancel);
 			this.Controls.Add(this.ok);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.MaximumSize = new System.Drawing.Size(750, 850);
-			this.MinimumSize = new System.Drawing.Size(750, 850);
+			this.MaximumSize = new System.Drawing.Size(750, 900);
+			this.MinimumSize = new System.Drawing.Size(750, 900);
 			this.Name = "MessagingSettings";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Messaging Settings";
@@ -656,5 +685,7 @@
 		private System.Windows.Forms.Label label44;
 		private System.Windows.Forms.TrackBar trackBarRandomCountDownSensitivity;
 		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.CheckBox checkBoxRepeatDisplayMessage;
+		private System.Windows.Forms.Label label11;
     }
 }

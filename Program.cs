@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Windows.Forms;
@@ -23,6 +25,8 @@ namespace Vixen_Messaging
                 bool result;
                 var mutex = new Mutex(true, "VixenMessagingRunningInstance", out result);
 
+				bool vixenRunning = Process.GetProcesses().Any(clsProcess => clsProcess.ProcessName.Contains("VixenApplication"));
+			
                 if (!result)
                 {
 					var messageBox = new MessageBoxForm("\n\nAnother instance of Vixen Messaging is already running; this instance will be closed.",
@@ -31,7 +35,7 @@ namespace Vixen_Messaging
                     return;
                 }
                 var mutex1 = new Mutex(true, "Vixen3RunningInstance", out result);
-                if (result)
+				if (!vixenRunning)
                 {
 					var messageBox = new MessageBoxForm("\n\nVixen 3 is Not currently running and must be open when Messages are being retrieved.",
                                     "Vixen 3 not running", MessageBoxButtons.OK, SystemIcons.Warning);

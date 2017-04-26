@@ -57,6 +57,8 @@ namespace Vixen_Messaging
 
 		public static bool AutoStartMsgRetrieval;
 
+		public static bool RepeatDisplayMessage;
+
 		public static bool SaveFlag;
 
 		public static string ReturnBannedMSG;
@@ -86,6 +88,8 @@ namespace Vixen_Messaging
 		public static string MessageLog;
 
 		public static string BlacklistLog;
+
+		public static string PhoneNumberLog;
 
 		public static string CountDownDate;
 

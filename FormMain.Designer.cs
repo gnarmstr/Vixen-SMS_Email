@@ -56,6 +56,7 @@ namespace Vixen_Messaging
 			this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.whiteBlackListsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.viewLogFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStart)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
 			this.menuStrip1.SuspendLayout();
@@ -224,6 +225,7 @@ namespace Vixen_Messaging
 			// 
 			this.fileToolStripMenuItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
+            this.viewLogFolderToolStripMenuItem,
             this.closeToolStripMenuItem});
 			this.fileToolStripMenuItemFile.Name = "fileToolStripMenuItemFile";
 			this.fileToolStripMenuItemFile.Size = new System.Drawing.Size(44, 24);
@@ -288,6 +290,13 @@ namespace Vixen_Messaging
 			this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
 			this.helpToolStripMenuItem.Text = "Help";
 			this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+			// 
+			// viewLogFolderToolStripMenuItem
+			// 
+			this.viewLogFolderToolStripMenuItem.Name = "viewLogFolderToolStripMenuItem";
+			this.viewLogFolderToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
+			this.viewLogFolderToolStripMenuItem.Text = "View Log Folder";
+			this.viewLogFolderToolStripMenuItem.Click += new System.EventHandler(this.viewLogFolderToolStripMenuItem_Click);
 			// 
 			// FormMain
 			// 
@@ -357,6 +366,7 @@ namespace Vixen_Messaging
 		private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
 		private System.Windows.Forms.CheckBox checkBoxCountDown;
 		private System.Windows.Forms.CheckBox checkBoxAdvertising;
+		private System.Windows.Forms.ToolStripMenuItem viewLogFolderToolStripMenuItem;
     }
 }
 

@@ -22,6 +22,9 @@ namespace Vixen_Messaging
 			ForeColor = ThemeColorTable.ForeColor;
 			BackColor = ThemeColorTable.BackgroundColor;
 			ThemeUpdateControls.UpdateControls(this);
+			Font font = new Font(new FontFamily("Times New Roman"), 12.0f);
+			label11.Font = font;
+			label11.ForeColor = Color.Red;
 		}
 
 		private void MessagingSettings_Load(object sender, EventArgs e)
@@ -32,6 +35,7 @@ namespace Vixen_Messaging
 			Cancel.Text = "";
 
 			checkBoxAutoStart.Checked = GlobalVar.AutoStartMsgRetrieval;
+			checkBoxRepeatDisplayMessage.Checked = GlobalVar.RepeatDisplayMessage;
 			textBoxReturnBannedMSG.Text = GlobalVar.ReturnBannedMSG;
 			textBoxReturnWarningMSG.Text = GlobalVar.ReturnWarningMSG;
 			textBoxReturnSuccessMSG.Text = GlobalVar.ReturnSuccessMSG;
@@ -56,6 +60,7 @@ namespace Vixen_Messaging
 		private void Ok_Click(object sender, EventArgs e)
 		{
 			GlobalVar.AutoStartMsgRetrieval = checkBoxAutoStart.Checked;
+			GlobalVar.RepeatDisplayMessage = checkBoxRepeatDisplayMessage.Checked;
 			GlobalVar.ReturnBannedMSG = textBoxReturnBannedMSG.Text;
 			GlobalVar.ReturnWarningMSG = textBoxReturnWarningMSG.Text;
 			GlobalVar.ReturnSuccessMSG = textBoxReturnSuccessMSG.Text;
@@ -69,6 +74,8 @@ namespace Vixen_Messaging
 			GlobalVar.CountDownMSG = textBoxCountDownMSG.Text;
 			GlobalVar.Black_WhiteSelection = comboBoxBlack_Whitelist.SelectedItem.ToString();
 			GlobalVar.IntervalMsgs = Convert.ToInt16(numericUpDownIntervalMsgs.Value);
+			GlobalVar.RandomCountDownSensitivity = trackBarRandomCountDownSensitivity.Value;
+			GlobalVar.RandomAdvertisingSensitivity = trackBarRandomAdvetisingSensitivity.Value ;
 			_envokeChanges = true;
 			Close();
 		}

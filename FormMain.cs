@@ -52,6 +52,7 @@ namespace Vixen_Messaging
 			twilioToolStripMenuItem.Image = Resources.Twilio;
 			messagingToolStripMenuItem.Image = Resources.Message;
 			textToolStripMenuItem.Image = Resources.Text;
+			viewLogFolderToolStripMenuItem.Image = Resources.Log;
 			whiteBlackListsToolStripMenuItem.Image = Resources.Lists;
 			WebServerStatus.ForeColor = Color.Black;
 			GlobalVar.SaveFlag = false;
@@ -76,7 +77,7 @@ namespace Vixen_Messaging
 				"Vixen Messaging");
 			LoadData();
 
-			//Ensures a backup of Whitelist, Blacklist and LocalMessages are made in the Appdata folder so a new installation does not remove them and users loose there changes.
+			//Ensures a backup of Whitelist and Blacklist are made in the Appdata folder so a new installation does not remove them and users loose there changes.
 			File.Create(GlobalVar.Blacklistlocation).Close();
 			if (File.Exists(GlobalVar.Blacklistlocation + ".bkp"))
 			{
@@ -112,10 +113,25 @@ namespace Vixen_Messaging
 				File.WriteAllText(GlobalVar.Whitelistlocation + ".bkp", Resources.Whitelist);
 				File.WriteAllText(GlobalVar.Whitelistlocation, Resources.Whitelist);
 			}
-			if (File.Exists(GlobalVar.LocalMessages + ".bkp"))
+
+			if (!File.Exists(GlobalVar.PhoneNumberLog))
 			{
-				var copyfile = File.ReadAllText(GlobalVar.LocalMessages + ".bkp");
-				File.WriteAllText(GlobalVar.LocalMessages, copyfile);
+				File.CreateText(GlobalVar.PhoneNumberLog);
+			}
+			else
+			{
+				File.Delete(GlobalVar.PhoneNumberLog);
+				File.CreateText(GlobalVar.PhoneNumberLog);
+			}
+
+			if (!File.Exists(GlobalVar.BlacklistLog))
+			{
+				File.CreateText(GlobalVar.BlacklistLog);
+			}
+			else
+			{
+				File.Delete(GlobalVar.BlacklistLog);
+				File.CreateText(GlobalVar.BlacklistLog);
 			}
 
 			GlobalVar.Blacklist = File.ReadAllText(GlobalVar.Blacklistlocation);
@@ -206,7 +222,6 @@ namespace Vixen_Messaging
 				"http://localhost:8888/api/play/playSequence");
 			GlobalVar.Blacklistlocation = Path.Combine(GlobalVar.SettingsPath + "\\Blacklist.txt");
 			GlobalVar.Whitelistlocation = Path.Combine(GlobalVar.SettingsPath + "\\Whitelist.txt");
-			GlobalVar.LocalMessages = Path.Combine(GlobalVar.SettingsPath + "\\LocalMessages.txt");
 			GlobalVar.RandomCountDownSensitivity = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomCountDownSensitivity", 2);
 			GlobalVar.RandomAdvertisingSensitivity = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomAdvertisingSensitivity", 4);
 			GlobalVar.SequenceTemplate = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SequenceTemplate",
@@ -214,6 +229,7 @@ namespace Vixen_Messaging
 			GlobalVar.OutputSequenceFolder = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "OutputSequence",
 				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Sequence\\VixenOut.tim"));
 			GlobalVar.AutoStartMsgRetrieval = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", false);
+			GlobalVar.RepeatDisplayMessage = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRepeatDisplayMessage", false);
 			GlobalVar.CenterStop = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterStop", false);
 			GlobalVar.CenterStop = GlobalVar.CenterStop;
 			GlobalVar.CenterText = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterText", false);
@@ -262,6 +278,8 @@ namespace Vixen_Messaging
 					"Documents\\Vixen 3 Messaging\\Logs\\Message.log");
 			GlobalVar.BlacklistLog = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
 					"Documents\\Vixen 3 Messaging\\Logs\\Blacklist.log");
+			GlobalVar.PhoneNumberLog = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
+					"Documents\\Vixen 3 Messaging\\Logs\\PhoneNumber.log");
 		}
 		#endregion
 
@@ -401,7 +419,8 @@ namespace Vixen_Messaging
 
 					if (messageDirection.Contains("inbound"))
 					{
-						LogDisplay(GlobalVar.LogMsg = ("Found " + messages.Messages.Count() + " Messages"));
+						int inboundCount = messages.Messages.Count(inboundMessages => inboundMessages.Direction.Contains("inbound"));
+						LogDisplay(GlobalVar.LogMsg = ("Found " + inboundCount + " Messages"));
 						if (!messages.Messages.Any())
 						{
 							ShortTimer();
@@ -429,10 +448,39 @@ namespace Vixen_Messaging
 							}
 							if (!notWhitemsg)
 							{
-								if (!string.IsNullOrEmpty(GlobalVar.ReturnSuccessMSG))
-									SendReturnTextTwilio(messageFrom, "Auto Reply: " + GlobalVar.ReturnSuccessMSG); //Success message.
-								twilio.DeleteMessage(messageSid);
-								return;
+								bool phoneNumberFound = false;
+								using (var file = new StreamReader(GlobalVar.PhoneNumberLog))
+								{
+									do
+									{
+										var checkNumberlist = file.ReadLine();
+
+										if (messageFrom == checkNumberlist && !GlobalVar.RepeatDisplayMessage)
+										{
+											file.Close();
+											twilio.DeleteMessage(messageSid);
+											return;
+										}
+										if (messageFrom == checkNumberlist)
+										{
+											phoneNumberFound = true;
+										}
+									} while (file.Peek() != -1);
+									file.Close();
+									if (!phoneNumberFound)
+									{
+										using (var fileW = new StreamWriter(GlobalVar.PhoneNumberLog, true))
+										{
+											fileW.WriteLine(messageFrom);
+											fileW.Close();
+										}
+									}
+									if (!string.IsNullOrEmpty(GlobalVar.ReturnSuccessMSG))
+												SendReturnTextTwilio(messageFrom, "Auto Reply: " + GlobalVar.ReturnSuccessMSG); //Success message.
+									twilio.DeleteMessage(messageSid);
+									return;
+								}
+								
 							}
 						}
 						else
@@ -490,7 +538,7 @@ namespace Vixen_Messaging
 				var now = DateTime.Now;
 				//Calculate countdown timer.
 				TimeSpan t = daysLeft - now;
-				string countDown = string.Format("{0}", t.Days);
+				string countDown = string.Format("{0}", t.Days + 1);
 				rtnmsg = msg.Replace("COUNTDOWN", countDown);
 			}
 			else
@@ -527,8 +575,6 @@ namespace Vixen_Messaging
 					//Write message to Vixen
 					msg = msg.Replace("&", "&amp;");
 
-					string outputFileName;
-
 					#region Custom Effects
 
 					int totalCharacters = 0;
@@ -547,8 +593,6 @@ namespace Vixen_Messaging
 						GlobalVar.SeqIntervalTime = Convert.ToDecimal(GlobalVar.TextSpeed + (totalCharacters * 0.25)) * GlobalVar.TextIterations;
 							// Convert.ToDecimal(CustomMsgLength.Value) + 1;
 					}
-
-					outputFileName = GlobalVar.OutputSequenceFolder;
 
 					TextSettings(msg);
 
@@ -571,8 +615,8 @@ namespace Vixen_Messaging
 						//Text Sequence time
 					}
 
-					File.Delete(outputFileName);
-					File.WriteAllText(outputFileName, GlobalVar.FileText);
+					File.Delete(GlobalVar.OutputSequenceFolder);
+					File.WriteAllText(GlobalVar.OutputSequenceFolder, GlobalVar.FileText);
 
 					#endregion
 
@@ -583,7 +627,7 @@ namespace Vixen_Messaging
 					try
 					{
 
-						var result = new WebClient().DownloadString(url + "?name=" + WebUtility.UrlEncode(outputFileName));
+						var result = new WebClient().DownloadString(url + "?name=" + WebUtility.UrlEncode(GlobalVar.OutputSequenceFolder));
 							//Used to output to Vixen WebClient
 						LogDisplay(GlobalVar.LogMsg = ("Vixen Playing: + " + result));
 					}
@@ -916,15 +960,26 @@ namespace Vixen_Messaging
 #region Button Start and Stop checking for Messages
 		private void buttonStart_Click(object sender, EventArgs e)
 		{
-			if (checkBoxVixenControl.Checked)
+			bool vixenRunning = Process.GetProcesses().Any(clsProcess => clsProcess.ProcessName.Contains("VixenApplication"));
+			if (vixenRunning)
 			{
-				var messageBox = new MessageBoxForm("\n\nYou must have the Vixen Control disable to use this button", @"Vixen Control", MessageBoxButtons.OK, SystemIcons.Information);
-				messageBox.ShowDialog();
+				if (checkBoxVixenControl.Checked)
+				{
+					var messageBox = new MessageBoxForm("\n\nYou must have the Vixen Control disable to use this button",
+						@"Vixen Control", MessageBoxButtons.OK, SystemIcons.Information);
+					messageBox.ShowDialog();
+				}
+				else
+				{
+					Start_Vixen();
+				}
 			}
 			else
 			{
-				Start_Vixen();
+				var messageBox = new MessageBoxForm("\n\nVixen 3 is Not currently running and must be open to be able to Start message retrieval.", @"Vixen 3 Issue", MessageBoxButtons.OK, SystemIcons.Error);
+				messageBox.ShowDialog();
 			}
+			
 		}
 
 		private void Start_Vixen()
@@ -985,16 +1040,31 @@ namespace Vixen_Messaging
 				if (vixenRunning)
 				{
 					var uri = GlobalVar.VixenServer.Replace("playSequence", "stopSequence");
-					try
-					{
-						using (var wc = new WebClient())
-						{
-							wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
-							wc.UploadString(GlobalVar.VixenServer.Replace("playSequence", "stopSequence"), "");
-						}
-					}
-					catch
-					{}
+					//try
+					//{
+					//	var stopSequence = "Name=VixenOut&FileName=VixenOut.tim";
+					//	using (var wc = new WebClient())
+					//	{
+					//		wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+					//		var test = wc.DownloadString(GlobalVar.VixenServer.Replace("playSequence", "status"));
+					//		var test1 = test;
+					//		var test2 = test1;
+					//	}
+					//}
+					//catch
+					//{ }
+
+					
+					//try
+					//{
+					//	using (var wc = new WebClient())
+					//	{
+					//		wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+					//		wc.UploadString(GlobalVar.VixenServer.Replace("playSequence", "stopSequence"), "");
+					//	}
+					//}
+					//catch
+					//{}
 					try
 					{
 						var stopSequence = "Name=VixenOut&FileName=VixenOut.tim";
@@ -1078,6 +1148,7 @@ namespace Vixen_Messaging
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomCountDownSensitivity", GlobalVar.RandomCountDownSensitivity.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomAdvertisingSensitivity", GlobalVar.RandomAdvertisingSensitivity.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", GlobalVar.AutoStartMsgRetrieval);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRepeatDisplayMessage", GlobalVar.RepeatDisplayMessage);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterStop", (GlobalVar.CenterStop.ToString()).ToLower());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterText", (GlobalVar.CenterText.ToString()).ToLower());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxBlack_list", GlobalVar.Black_WhiteSelection);
@@ -1188,16 +1259,8 @@ namespace Vixen_Messaging
 						}
 						if (!notWhitemsg)
 						{
-							if (messageFrom != null)
-							{
-								LogDisplay(GlobalVar.LogMsg = ("Your message has been displayed. From " + messageFrom));
-							}
-							else
-							{
-								LogDisplay(GlobalVar.LogMsg = ("Your message has been displayed."));
-								GlobalVar.InstantMSG = "";
-							}
-							return;
+							LogDisplay(GlobalVar.LogMsg = ("Your message has been displayed."));
+							GlobalVar.InstantMSG = "";
 						}
 					}
 					else
@@ -1351,5 +1414,18 @@ namespace Vixen_Messaging
 				messageBox.ShowDialog();
 			}
 		}
+
+		private void viewLogFolderToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ProcessStartInfo startInfo = new ProcessStartInfo
+			{
+				Arguments = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
+					"Documents\\Vixen 3 Messaging\\Logs"),
+				FileName = "explorer.exe"
+			};
+
+			Process.Start(startInfo);
+		}
+	
 	}
 }
