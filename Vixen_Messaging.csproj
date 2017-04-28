@@ -140,6 +140,12 @@
     <Compile Include="MessageBoxForm.Designer.cs">
       <DependentUpon>MessageBoxForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="VixenSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VixenSettings.Designer.cs">
+      <DependentUpon>VixenSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Theme\ThemeToolStripRenderer.cs" />
     <Compile Include="InstantMSG.cs">
       <SubType>Form</SubType>
@@ -194,6 +200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InstantMSG.resx">
       <DependentUpon>InstantMSG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VixenSettings.resx">
+      <DependentUpon>VixenSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="White_Black_Lists.resx">
       <DependentUpon>White_Black_Lists.cs</DependentUpon>

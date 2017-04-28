@@ -350,6 +350,16 @@ namespace Common.Resources.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Vixen {
+            get {
+                object obj = ResourceManager.GetObject("Vixen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Vixen_Messaging {
             get {
                 object obj = ResourceManager.GetObject("Vixen_Messaging", resourceCulture);

@@ -98,6 +98,9 @@
     <None Include="Resources\Message.png" />
     <None Include="Resources\Log.png" />
     <None Include="Resources\Lists.png" />
+    <None Include="Resources\Vixen3.ico" />
+    <None Include="Resources\Vixen3.png" />
+    <None Include="Resources\Vixen.png" />
     <Content Include="Vixen Messaging.png" />
   </ItemGroup>
   <ItemGroup />

@@ -51,6 +51,7 @@ namespace Vixen_Messaging
 			closeToolStripMenuItem.Image = Resources.Close;
 			twilioToolStripMenuItem.Image = Resources.Twilio;
 			messagingToolStripMenuItem.Image = Resources.Message;
+			vixenToolStripMenuItem.Image = Resources.Vixen;
 			textToolStripMenuItem.Image = Resources.Text;
 			viewLogFolderToolStripMenuItem.Image = Resources.Log;
 			whiteBlackListsToolStripMenuItem.Image = Resources.Lists;
@@ -1324,6 +1325,14 @@ namespace Vixen_Messaging
 		{
 			var twilio = new Twilio();
 			twilio.ShowDialog();
+			if (GlobalVar.SaveFlag)
+				Text = @"Vixen Messaging - Unsaved Changes";
+		}
+
+		private void vixenToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var vixenSettings = new VixenSettings();
+			vixenSettings.ShowDialog();
 			if (GlobalVar.SaveFlag)
 				Text = @"Vixen Messaging - Unsaved Changes";
 		}
