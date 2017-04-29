@@ -256,7 +256,7 @@
 			this.MinimumSize = new System.Drawing.Size(750, 345);
 			this.Name = "VixenSettings";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-			this.Text = "Messaging Settings";
+			this.Text = "Vixen Settings";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MessagingSettings_FormClosing);
 			this.Load += new System.EventHandler(this.VixenSettings_Load);
 			((System.ComponentModel.ISupportInitialize)(this.ok)).EndInit();

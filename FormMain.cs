@@ -281,6 +281,14 @@ namespace Vixen_Messaging
 					"Documents\\Vixen 3 Messaging\\Logs\\Blacklist.log");
 			GlobalVar.PhoneNumberLog = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
 					"Documents\\Vixen 3 Messaging\\Logs\\PhoneNumber.log");
+			int vixenSequenceCount = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "VixenSequenceCount", 0);
+			GlobalVar.VixenSequencesList = new List<string>();
+			for (int i = 0; i < vixenSequenceCount; i++)
+			{
+				GlobalVar.VixenSequencesList.Add(profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "VixenSequence" + i, ""));
+			}
+			GlobalVar.VixenSequences = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenSequences",
+				false);
 		}
 		#endregion
 
@@ -359,9 +367,9 @@ namespace Vixen_Messaging
 			}
 			
 			PlayTwilio();
-			timerCheckTwilio.Stop();
-			timerCheckTwilio.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + GlobalVar.IntervalMsgs) * 1000;
-			timerCheckTwilio.Start();
+			//timerCheckTwilio.Stop();
+			//timerCheckTwilio.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + GlobalVar.IntervalMsgs) * 1000;
+			//timerCheckTwilio.Start();
 		}
 
 		#endregion
@@ -509,13 +517,93 @@ namespace Vixen_Messaging
 				if (messages.RestException != null && messages.RestException.Code == "20003")
 				{
 					LogDisplay(GlobalVar.LogMsg = ("Authentication failed. Please check your Twilio Account settings"));
+					ShortTimer();
 				}
 				else
 				{
 					LogDisplay(GlobalVar.LogMsg = ("No messages on the Twilio server."));
+					if (GlobalVar.VixenSequences)
+					{
+						try
+						{
+							//	"Name=VixenOut&FileName=VixenOut.tim";
+
+							var url = GlobalVar.VixenServer;
+							int randomSequence = _random.Next(0, GlobalVar.VixenSequencesList.Count);
+							using (var wc = new WebClient())
+							{
+								wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+								wc.UploadString(url, "Name=VixenOut&FileName=" + GlobalVar.VixenSequencesList[randomSequence]);
+								LogDisplay(GlobalVar.LogMsg = ("Vixen Playing:"));
+							}
+
+							GlobalVar.CurrentSequence = File.ReadAllText(GlobalVar.Vixen3Folder + "\\Sequence\\" + GlobalVar.VixenSequencesList[randomSequence]);
+
+							string selectedSeqTime;
+							string str;
+							var sequenceLength = "";
+							var reading = File.OpenText(GlobalVar.Vixen3Folder + "\\Sequence\\" + GlobalVar.VixenSequencesList[randomSequence]);
+							while ((str = reading.ReadLine()) != null)
+							{
+								if (str.Contains("<Length xmlns="))
+								{
+									sequenceLength = str;
+								}
+							}
+							reading.Close();
+							sequenceLength = sequenceLength.Replace("<Length xmlns=\"\">PT", "");
+							sequenceLength = sequenceLength.Replace("</Length>", "");
+							sequenceLength = sequenceLength.Replace(" ", "");
+							selectedSeqTime = sequenceLength;
+
+							string seqTimeString;
+							var selectedSeqTime1 = "";
+							if (selectedSeqTime.Contains("M"))
+							{
+								//get time string of 1M23.345S for example and convert to seconds then add to Time Interval box.
+								var index = selectedSeqTime.IndexOf(".");
+
+								if (index > 0)
+								{
+									selectedSeqTime = selectedSeqTime.Substring(0, index);
+								}
+								seqTimeString = selectedSeqTime.Replace("M", "");
+								var length = seqTimeString.Length;
+								var seqTimeString1 = seqTimeString.Remove(1, length - 1);
+								int seqTimeString2 = Convert.ToInt16(seqTimeString1);
+								seqTimeString2 = seqTimeString2 * 60;
+								seqTimeString = seqTimeString.Remove(0, 1);
+								seqTimeString = seqTimeString.Replace("S", "");
+								selectedSeqTime = seqTimeString;
+								int seqTimeString3 = Convert.ToInt16(seqTimeString);
+								GlobalVar.SeqIntervalTime = Convert.ToDecimal(seqTimeString2 + seqTimeString3);
+							}
+							else
+							{
+								var index = selectedSeqTime.IndexOf(".");
+								if (index > 0)
+								{
+									selectedSeqTime = selectedSeqTime.Substring(0, index);
+								}
+								seqTimeString = selectedSeqTime.Replace("S", "");
+								selectedSeqTime = seqTimeString;
+								GlobalVar.SeqIntervalTime = Convert.ToDecimal(seqTimeString);
+							}
+
+							timerCheckTwilio.Stop();
+							timerCheckTwilio.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + GlobalVar.IntervalMsgs) * 1000;
+							timerCheckTwilio.Start();
+						}
+						catch
+						{
+						}
+					}
+					else
+					{
+						ShortTimer();
+					}
 				}
 				GlobalVar.SeqIntervalTime = 2;
-				ShortTimer();
 			}
 		}
 
@@ -525,7 +613,9 @@ namespace Vixen_Messaging
 
 		private void ShortTimer()
 		{
+			timerCheckTwilio.Stop();
 			timerCheckTwilio.Interval = 200;
+			timerCheckTwilio.Start();
 		}
 		#endregion
 
@@ -625,16 +715,16 @@ namespace Vixen_Messaging
 					#region Send Play command to Vixen Web API
 
 					var url = GlobalVar.VixenServer;
-					try
-					{
+					//try
+					//{
 
-						var result = new WebClient().DownloadString(url + "?name=" + WebUtility.UrlEncode(GlobalVar.OutputSequenceFolder));
-							//Used to output to Vixen WebClient
-						LogDisplay(GlobalVar.LogMsg = ("Vixen Playing: + " + result));
-					}
-					catch
-					{
-					}
+					//	var result = new WebClient().DownloadString(url + "?name=" + WebUtility.UrlEncode(GlobalVar.OutputSequenceFolder));
+					//		//Used to output to Vixen WebClient
+					//	LogDisplay(GlobalVar.LogMsg = ("Vixen Playing: + " + result));
+					//}
+					//catch
+					//{
+					//}
 					//VIX-356
 					try
 					{
@@ -1187,6 +1277,19 @@ namespace Vixen_Messaging
 				checkBoxVixenControl.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", GlobalVar.GroupName);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupID", GlobalVar.GroupID);
+			if (GlobalVar.VixenSequencesList!= null)
+			{
+				int ii = 0;
+				foreach (var vixenSequence in GlobalVar.VixenSequencesList)
+				{
+					profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "VixenSequence" + ii, vixenSequence);
+					ii++;
+				}
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "VixenSequenceCount", GlobalVar.VixenSequencesList.Count);
+			}
+
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenSequences", GlobalVar.VixenSequences);
+
 			#endregion
 
 			GlobalVar.SaveFlag = false;
@@ -1361,6 +1464,14 @@ namespace Vixen_Messaging
 				Text = @"Vixen Messaging - Unsaved Changes";
 		}
 
+		private void vixenSequencesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var vixenSequenceSettings = new VixenSequenceSettings();
+			vixenSequenceSettings.ShowDialog();
+			if (GlobalVar.SaveFlag)
+				Text = @"Vixen Messaging - Unsaved Changes";
+		}
+
 		private void closeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (GlobalVar.SaveFlag)
@@ -1435,6 +1546,5 @@ namespace Vixen_Messaging
 
 			Process.Start(startInfo);
 		}
-	
 	}
 }

@@ -51,6 +51,10 @@ namespace Vixen_Messaging
 		
 		public static string FileText;
 
+		public static bool SaveFlag;
+
+		public static string CurrentSequence  { get; set; }
+
 		#endregion
 
 		#region Messaging Settings
@@ -59,7 +63,15 @@ namespace Vixen_Messaging
 
 		public static bool RepeatDisplayMessage;
 
-		public static bool SaveFlag;
+		public static string CountDownDate;
+
+		public static string Black_WhiteSelection;
+
+		public static int IntervalMsgs;
+
+		#endregion
+
+		#region Vixen Settings
 
 		public static string ReturnBannedMSG;
 
@@ -90,12 +102,6 @@ namespace Vixen_Messaging
 		public static string BlacklistLog;
 
 		public static string PhoneNumberLog;
-
-		public static string CountDownDate;
-
-		public static string Black_WhiteSelection;
-
-		public static int IntervalMsgs;
 
 		public static int RandomCountDownSensitivity;
 
@@ -132,6 +138,14 @@ namespace Vixen_Messaging
 		public static List<Color> TextColor = new List<Color>(10);
 
 		public static string GradientMode;
+
+		#endregion
+
+		#region Vixen Sequences
+
+		public static List<string> VixenSequencesList;
+
+		public static bool VixenSequences;
 
 		#endregion
 

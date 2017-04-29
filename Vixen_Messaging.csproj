@@ -140,6 +140,12 @@
     <Compile Include="MessageBoxForm.Designer.cs">
       <DependentUpon>MessageBoxForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="VixenSequenceSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VixenSequenceSettings.Designer.cs">
+      <DependentUpon>VixenSequenceSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="VixenSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InstantMSG.resx">
       <DependentUpon>InstantMSG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VixenSequenceSettings.resx">
+      <DependentUpon>VixenSequenceSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VixenSettings.resx">
       <DependentUpon>VixenSettings.cs</DependentUpon>
