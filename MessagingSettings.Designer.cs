@@ -47,12 +47,6 @@
 			this.label71 = new System.Windows.Forms.Label();
 			this.textBoxCountDownMSG = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.checkBoxAutoStart = new System.Windows.Forms.CheckBox();
-			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-			this.groupBox5 = new System.Windows.Forms.GroupBox();
-			this.label74 = new System.Windows.Forms.Label();
-			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.textBoxAdvertisingMSG = new System.Windows.Forms.TextBox();
 			this.label10 = new System.Windows.Forms.Label();
 			this.trackBarRandomAdvetisingSensitivity = new System.Windows.Forms.TrackBar();
@@ -60,14 +54,20 @@
 			this.trackBarRandomCountDownSensitivity = new System.Windows.Forms.TrackBar();
 			this.label8 = new System.Windows.Forms.Label();
 			this.checkBoxRepeatDisplayMessage = new System.Windows.Forms.CheckBox();
+			this.checkBoxAutoStart = new System.Windows.Forms.CheckBox();
+			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+			this.groupBox5 = new System.Windows.Forms.GroupBox();
+			this.label74 = new System.Windows.Forms.Label();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.label11 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.ok)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).BeginInit();
-			this.groupBox5.SuspendLayout();
-			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarRandomAdvetisingSensitivity)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackBarRandomCountDownSensitivity)).BeginInit();
+			this.groupBox5.SuspendLayout();
+			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// ok
@@ -253,6 +253,100 @@
 			this.toolTip1.SetToolTip(this.label3, "Enter a message that will be displayed when Countdown is enabled. Add the word CO" +
         "UNTDOWN which will be replaced by number of days.");
 			// 
+			// textBoxAdvertisingMSG
+			// 
+			this.textBoxAdvertisingMSG.Location = new System.Drawing.Point(205, 361);
+			this.textBoxAdvertisingMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.textBoxAdvertisingMSG.Multiline = true;
+			this.textBoxAdvertisingMSG.Name = "textBoxAdvertisingMSG";
+			this.textBoxAdvertisingMSG.Size = new System.Drawing.Size(485, 42);
+			this.textBoxAdvertisingMSG.TabIndex = 97;
+			this.toolTip1.SetToolTip(this.textBoxAdvertisingMSG, "Enter a advertising message that will be randomly displayed when enabled.");
+			this.textBoxAdvertisingMSG.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
+			// 
+			// label10
+			// 
+			this.label10.Location = new System.Drawing.Point(9, 369);
+			this.label10.Name = "label10";
+			this.label10.Size = new System.Drawing.Size(186, 33);
+			this.label10.TabIndex = 98;
+			this.label10.Text = "Advertising message";
+			this.toolTip1.SetToolTip(this.label10, "Enter a message that will be displayed when Advertising is enabled.");
+			// 
+			// trackBarRandomAdvetisingSensitivity
+			// 
+			this.trackBarRandomAdvetisingSensitivity.AutoSize = false;
+			this.trackBarRandomAdvetisingSensitivity.LargeChange = 1;
+			this.trackBarRandomAdvetisingSensitivity.Location = new System.Drawing.Point(234, 416);
+			this.trackBarRandomAdvetisingSensitivity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.trackBarRandomAdvetisingSensitivity.Maximum = 50;
+			this.trackBarRandomAdvetisingSensitivity.Minimum = 1;
+			this.trackBarRandomAdvetisingSensitivity.Name = "trackBarRandomAdvetisingSensitivity";
+			this.trackBarRandomAdvetisingSensitivity.Size = new System.Drawing.Size(455, 32);
+			this.trackBarRandomAdvetisingSensitivity.TabIndex = 99;
+			this.toolTip1.SetToolTip(this.trackBarRandomAdvetisingSensitivity, "This will adjust the sensitivity of how often the Advertising messages is display" +
+        "ed.");
+			this.trackBarRandomAdvetisingSensitivity.Value = 1;
+			this.trackBarRandomAdvetisingSensitivity.Scroll += new System.EventHandler(this.trackBarTextPosition_MouseDown);
+			this.trackBarRandomAdvetisingSensitivity.ValueChanged += new System.EventHandler(this.trackBarTextPosition_VisibleChanged);
+			this.trackBarRandomAdvetisingSensitivity.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextPosition_MouseDown);
+			this.trackBarRandomAdvetisingSensitivity.MouseHover += new System.EventHandler(this.trackBarTextPosition_MouseDown);
+			// 
+			// label44
+			// 
+			this.label44.AutoSize = true;
+			this.label44.Location = new System.Drawing.Point(11, 421);
+			this.label44.Name = "label44";
+			this.label44.Size = new System.Drawing.Size(206, 17);
+			this.label44.TabIndex = 100;
+			this.label44.Text = "Random Advertising Sensitivity:";
+			this.toolTip1.SetToolTip(this.label44, "This will adjust the sensitivity of how often the Advertising messages is display" +
+        "ed.");
+			// 
+			// trackBarRandomCountDownSensitivity
+			// 
+			this.trackBarRandomCountDownSensitivity.AutoSize = false;
+			this.trackBarRandomCountDownSensitivity.LargeChange = 1;
+			this.trackBarRandomCountDownSensitivity.Location = new System.Drawing.Point(234, 321);
+			this.trackBarRandomCountDownSensitivity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.trackBarRandomCountDownSensitivity.Maximum = 50;
+			this.trackBarRandomCountDownSensitivity.Minimum = 1;
+			this.trackBarRandomCountDownSensitivity.Name = "trackBarRandomCountDownSensitivity";
+			this.trackBarRandomCountDownSensitivity.Size = new System.Drawing.Size(455, 32);
+			this.trackBarRandomCountDownSensitivity.TabIndex = 101;
+			this.toolTip1.SetToolTip(this.trackBarRandomCountDownSensitivity, "This will adjust the sensitivity of how often the Countdown message is displayed." +
+        "");
+			this.trackBarRandomCountDownSensitivity.Value = 1;
+			this.trackBarRandomCountDownSensitivity.Scroll += new System.EventHandler(this.trackBarTextPosition_MouseDown);
+			this.trackBarRandomCountDownSensitivity.ValueChanged += new System.EventHandler(this.trackBarTextPosition_VisibleChanged);
+			this.trackBarRandomCountDownSensitivity.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextPosition_MouseDown);
+			this.trackBarRandomCountDownSensitivity.MouseHover += new System.EventHandler(this.trackBarTextPosition_MouseDown);
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(11, 326);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(208, 17);
+			this.label8.TabIndex = 102;
+			this.label8.Text = "Random CountDown Sensitivity:";
+			this.toolTip1.SetToolTip(this.label8, "This will adjust the sensitivity of how often the Countdown message is displayed." +
+        "");
+			// 
+			// checkBoxRepeatDisplayMessage
+			// 
+			this.checkBoxRepeatDisplayMessage.AutoSize = true;
+			this.checkBoxRepeatDisplayMessage.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.checkBoxRepeatDisplayMessage.Location = new System.Drawing.Point(276, 129);
+			this.checkBoxRepeatDisplayMessage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.checkBoxRepeatDisplayMessage.Name = "checkBoxRepeatDisplayMessage";
+			this.checkBoxRepeatDisplayMessage.Size = new System.Drawing.Size(346, 21);
+			this.checkBoxRepeatDisplayMessage.TabIndex = 109;
+			this.checkBoxRepeatDisplayMessage.Text = "Repeat Displayed message per audiance number:";
+			this.toolTip1.SetToolTip(this.checkBoxRepeatDisplayMessage, "Check this when you want the diplayed messgae sent every time. Uncheck to only se" +
+        "nd the display message once per phone/cell number.");
+			this.checkBoxRepeatDisplayMessage.UseVisualStyleBackColor = true;
+			// 
 			// checkBoxAutoStart
 			// 
 			this.checkBoxAutoStart.AutoSize = true;
@@ -325,100 +419,6 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Auto Reply to Audiance";
 			// 
-			// textBoxAdvertisingMSG
-			// 
-			this.textBoxAdvertisingMSG.Location = new System.Drawing.Point(205, 361);
-			this.textBoxAdvertisingMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.textBoxAdvertisingMSG.Multiline = true;
-			this.textBoxAdvertisingMSG.Name = "textBoxAdvertisingMSG";
-			this.textBoxAdvertisingMSG.Size = new System.Drawing.Size(485, 42);
-			this.textBoxAdvertisingMSG.TabIndex = 97;
-			this.toolTip1.SetToolTip(this.textBoxAdvertisingMSG, "Enter a advertising message that will be randomly displayed when enabled.");
-			this.textBoxAdvertisingMSG.TextChanged += new System.EventHandler(this.textBoxReturnBannedMSG_TextChanged);
-			// 
-			// label10
-			// 
-			this.label10.Location = new System.Drawing.Point(9, 369);
-			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(186, 33);
-			this.label10.TabIndex = 98;
-			this.label10.Text = "Advertising message";
-			this.toolTip1.SetToolTip(this.label10, "Enter a message that will be displayed when Advertising is enabled.");
-			// 
-			// trackBarRandomAdvetisingSensitivity
-			// 
-			this.trackBarRandomAdvetisingSensitivity.AutoSize = false;
-			this.trackBarRandomAdvetisingSensitivity.LargeChange = 1;
-			this.trackBarRandomAdvetisingSensitivity.Location = new System.Drawing.Point(234, 416);
-			this.trackBarRandomAdvetisingSensitivity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.trackBarRandomAdvetisingSensitivity.Maximum = 7;
-			this.trackBarRandomAdvetisingSensitivity.Minimum = 1;
-			this.trackBarRandomAdvetisingSensitivity.Name = "trackBarRandomAdvetisingSensitivity";
-			this.trackBarRandomAdvetisingSensitivity.Size = new System.Drawing.Size(455, 32);
-			this.trackBarRandomAdvetisingSensitivity.TabIndex = 99;
-			this.toolTip1.SetToolTip(this.trackBarRandomAdvetisingSensitivity, "This will adjust the sensitivity of how often the Advertising messages is display" +
-        "ed.");
-			this.trackBarRandomAdvetisingSensitivity.Value = 1;
-			this.trackBarRandomAdvetisingSensitivity.Scroll += new System.EventHandler(this.trackBarTextPosition_MouseDown);
-			this.trackBarRandomAdvetisingSensitivity.ValueChanged += new System.EventHandler(this.trackBarTextPosition_VisibleChanged);
-			this.trackBarRandomAdvetisingSensitivity.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextPosition_MouseDown);
-			this.trackBarRandomAdvetisingSensitivity.MouseHover += new System.EventHandler(this.trackBarTextPosition_MouseDown);
-			// 
-			// label44
-			// 
-			this.label44.AutoSize = true;
-			this.label44.Location = new System.Drawing.Point(11, 421);
-			this.label44.Name = "label44";
-			this.label44.Size = new System.Drawing.Size(206, 17);
-			this.label44.TabIndex = 100;
-			this.label44.Text = "Random Advertising Sensitivity:";
-			this.toolTip1.SetToolTip(this.label44, "This will adjust the sensitivity of how often the Advertising messages is display" +
-        "ed.");
-			// 
-			// trackBarRandomCountDownSensitivity
-			// 
-			this.trackBarRandomCountDownSensitivity.AutoSize = false;
-			this.trackBarRandomCountDownSensitivity.LargeChange = 1;
-			this.trackBarRandomCountDownSensitivity.Location = new System.Drawing.Point(234, 321);
-			this.trackBarRandomCountDownSensitivity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.trackBarRandomCountDownSensitivity.Maximum = 7;
-			this.trackBarRandomCountDownSensitivity.Minimum = 1;
-			this.trackBarRandomCountDownSensitivity.Name = "trackBarRandomCountDownSensitivity";
-			this.trackBarRandomCountDownSensitivity.Size = new System.Drawing.Size(455, 32);
-			this.trackBarRandomCountDownSensitivity.TabIndex = 101;
-			this.toolTip1.SetToolTip(this.trackBarRandomCountDownSensitivity, "This will adjust the sensitivity of how often the Countdown message is displayed." +
-        "");
-			this.trackBarRandomCountDownSensitivity.Value = 1;
-			this.trackBarRandomCountDownSensitivity.Scroll += new System.EventHandler(this.trackBarTextPosition_MouseDown);
-			this.trackBarRandomCountDownSensitivity.ValueChanged += new System.EventHandler(this.trackBarTextPosition_VisibleChanged);
-			this.trackBarRandomCountDownSensitivity.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarTextPosition_MouseDown);
-			this.trackBarRandomCountDownSensitivity.MouseHover += new System.EventHandler(this.trackBarTextPosition_MouseDown);
-			// 
-			// label8
-			// 
-			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(11, 326);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(208, 17);
-			this.label8.TabIndex = 102;
-			this.label8.Text = "Random CountDown Sensitivity:";
-			this.toolTip1.SetToolTip(this.label8, "This will adjust the sensitivity of how often the Countdown message is displayed." +
-        "");
-			// 
-			// checkBoxRepeatDisplayMessage
-			// 
-			this.checkBoxRepeatDisplayMessage.AutoSize = true;
-			this.checkBoxRepeatDisplayMessage.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxRepeatDisplayMessage.Location = new System.Drawing.Point(276, 129);
-			this.checkBoxRepeatDisplayMessage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.checkBoxRepeatDisplayMessage.Name = "checkBoxRepeatDisplayMessage";
-			this.checkBoxRepeatDisplayMessage.Size = new System.Drawing.Size(346, 21);
-			this.checkBoxRepeatDisplayMessage.TabIndex = 109;
-			this.checkBoxRepeatDisplayMessage.Text = "Repeat Displayed message per audiance number:";
-			this.toolTip1.SetToolTip(this.checkBoxRepeatDisplayMessage, "Check this when you want the diplayed messgae sent every time. Uncheck to only se" +
-        "nd the display message once per phone/cell number.");
-			this.checkBoxRepeatDisplayMessage.UseVisualStyleBackColor = true;
-			// 
 			// label11
 			// 
 			this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -453,12 +453,12 @@
 			((System.ComponentModel.ISupportInitialize)(this.ok)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarRandomAdvetisingSensitivity)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarRandomCountDownSensitivity)).EndInit();
 			this.groupBox5.ResumeLayout(false);
 			this.groupBox5.PerformLayout();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.trackBarRandomAdvetisingSensitivity)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.trackBarRandomCountDownSensitivity)).EndInit();
 			this.ResumeLayout(false);
 
         }

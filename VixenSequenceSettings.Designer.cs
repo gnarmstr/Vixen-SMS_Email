@@ -41,14 +41,17 @@
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.label1 = new System.Windows.Forms.Label();
 			this.checkBoxSequences = new System.Windows.Forms.CheckBox();
+			this.trackBarRandomVixenSequenceSensitivity = new System.Windows.Forms.TrackBar();
+			this.label8 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.ok)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).BeginInit();
 			this.contextMenuStrip1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.trackBarRandomVixenSequenceSensitivity)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// ok
 			// 
-			this.ok.Location = new System.Drawing.Point(556, 590);
+			this.ok.Location = new System.Drawing.Point(286, 590);
 			this.ok.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.ok.Name = "ok";
 			this.ok.Size = new System.Drawing.Size(61, 61);
@@ -59,7 +62,7 @@
 			// 
 			// Cancel
 			// 
-			this.Cancel.Location = new System.Drawing.Point(632, 590);
+			this.Cancel.Location = new System.Drawing.Point(362, 590);
 			this.Cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.Cancel.Name = "Cancel";
 			this.Cancel.Size = new System.Drawing.Size(61, 61);
@@ -93,10 +96,10 @@
 			this.listBoxSequences.ContextMenuStrip = this.contextMenuStrip1;
 			this.listBoxSequences.FormattingEnabled = true;
 			this.listBoxSequences.ItemHeight = 16;
-			this.listBoxSequences.Location = new System.Drawing.Point(23, 84);
+			this.listBoxSequences.Location = new System.Drawing.Point(117, 165);
 			this.listBoxSequences.Name = "listBoxSequences";
 			this.listBoxSequences.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-			this.listBoxSequences.Size = new System.Drawing.Size(689, 388);
+			this.listBoxSequences.Size = new System.Drawing.Size(269, 308);
 			this.listBoxSequences.TabIndex = 111;
 			this.listBoxSequences.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBoxSequences_KeyUp);
 			// 
@@ -117,9 +120,9 @@
 			// 
 			// label1
 			// 
-			this.label1.Location = new System.Drawing.Point(76, 504);
+			this.label1.Location = new System.Drawing.Point(12, 485);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(565, 54);
+			this.label1.Size = new System.Drawing.Size(466, 87);
 			this.label1.TabIndex = 112;
 			this.label1.Text = "Note: Add Vixen Sequences here that will be displayed randomly when enables and t" +
     "here are no incoming messages from the audiance.";
@@ -129,7 +132,7 @@
 			// 
 			this.checkBoxSequences.AutoSize = true;
 			this.checkBoxSequences.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxSequences.Location = new System.Drawing.Point(296, 22);
+			this.checkBoxSequences.Location = new System.Drawing.Point(258, 32);
 			this.checkBoxSequences.Name = "checkBoxSequences";
 			this.checkBoxSequences.Size = new System.Drawing.Size(149, 21);
 			this.checkBoxSequences.TabIndex = 113;
@@ -138,13 +141,43 @@
 			this.checkBoxSequences.UseVisualStyleBackColor = true;
 			this.checkBoxSequences.CheckedChanged += new System.EventHandler(this.checkBoxSequences_CheckedChanged);
 			// 
+			// trackBarRandomVixenSequenceSensitivity
+			// 
+			this.trackBarRandomVixenSequenceSensitivity.AutoSize = false;
+			this.trackBarRandomVixenSequenceSensitivity.LargeChange = 1;
+			this.trackBarRandomVixenSequenceSensitivity.Location = new System.Drawing.Point(23, 110);
+			this.trackBarRandomVixenSequenceSensitivity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.trackBarRandomVixenSequenceSensitivity.Maximum = 50;
+			this.trackBarRandomVixenSequenceSensitivity.Minimum = 1;
+			this.trackBarRandomVixenSequenceSensitivity.Name = "trackBarRandomVixenSequenceSensitivity";
+			this.trackBarRandomVixenSequenceSensitivity.Size = new System.Drawing.Size(455, 32);
+			this.trackBarRandomVixenSequenceSensitivity.TabIndex = 114;
+			this.toolTip1.SetToolTip(this.trackBarRandomVixenSequenceSensitivity, "This will adjust the sensitivity of how often a Vixen Sequence is displayed.");
+			this.trackBarRandomVixenSequenceSensitivity.Value = 1;
+			this.trackBarRandomVixenSequenceSensitivity.Scroll += new System.EventHandler(this.trackBarRandomVixenSequenceSensitivity_MouseDown);
+			this.trackBarRandomVixenSequenceSensitivity.ValueChanged += new System.EventHandler(this.trackBarRandomVixenSequenceSensitivity_ValueChanged);
+			this.trackBarRandomVixenSequenceSensitivity.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarRandomVixenSequenceSensitivity_MouseDown);
+			this.trackBarRandomVixenSequenceSensitivity.MouseHover += new System.EventHandler(this.trackBarRandomVixenSequenceSensitivity_MouseDown);
+			// 
+			// label8
+			// 
+			this.label8.AutoSize = true;
+			this.label8.Location = new System.Drawing.Point(147, 81);
+			this.label8.Name = "label8";
+			this.label8.Size = new System.Drawing.Size(200, 17);
+			this.label8.TabIndex = 115;
+			this.label8.Text = "Random Sequence Sensitivity:";
+			this.toolTip1.SetToolTip(this.label8, "This will adjust the sensitivity of how often a Vixen Sequence is displayed.");
+			// 
 			// VixenSequenceSettings
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.Azure;
-			this.ClientSize = new System.Drawing.Size(732, 633);
+			this.ClientSize = new System.Drawing.Size(482, 633);
+			this.Controls.Add(this.trackBarRandomVixenSequenceSensitivity);
+			this.Controls.Add(this.label8);
 			this.Controls.Add(this.checkBoxSequences);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.listBoxSequences);
@@ -153,8 +186,8 @@
 			this.Controls.Add(this.ok);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.MaximumSize = new System.Drawing.Size(750, 680);
-			this.MinimumSize = new System.Drawing.Size(750, 680);
+			this.MaximumSize = new System.Drawing.Size(500, 680);
+			this.MinimumSize = new System.Drawing.Size(500, 680);
 			this.Name = "VixenSequenceSettings";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Vixen Sequences";
@@ -163,6 +196,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.ok)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).EndInit();
 			this.contextMenuStrip1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.trackBarRandomVixenSequenceSensitivity)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -181,5 +215,7 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.CheckBox checkBoxSequences;
+		private System.Windows.Forms.TrackBar trackBarRandomVixenSequenceSensitivity;
+		private System.Windows.Forms.Label label8;
     }
 }

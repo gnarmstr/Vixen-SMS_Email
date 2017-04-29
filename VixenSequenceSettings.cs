@@ -45,6 +45,7 @@ namespace Vixen_Messaging
 				}
 			}
 			checkBoxSequences.Checked = GlobalVar.VixenSequences;
+			trackBarRandomVixenSequenceSensitivity.Value = GlobalVar.RandomSequenceSensitivity;
 
 			_envokeChanges = false;
 			if (GlobalVar.SaveFlag)
@@ -55,6 +56,7 @@ namespace Vixen_Messaging
 		{
 			GlobalVar.VixenSequencesList = listBoxSequences.Items.Cast<String>().ToList();
 			GlobalVar.VixenSequences = checkBoxSequences.Checked;
+			GlobalVar.RandomSequenceSensitivity = trackBarRandomVixenSequenceSensitivity.Value;
 			_envokeChanges = true;
 			Close();
 		}
@@ -138,6 +140,29 @@ namespace Vixen_Messaging
 		}
 
 		private void checkBoxSequences_CheckedChanged(object sender, EventArgs e)
+		{
+			Update_Save_Flag();
+		}
+
+		private void trackBarRandomVixenSequenceSensitivity_VisibleChanged(object sender, EventArgs e)
+		{
+			var trackBar = (TrackBar)sender;
+			toolTip1.SetToolTip(trackBar, trackBar.Value.ToString());
+		}
+
+		private void trackBarRandomVixenSequenceSensitivity_MouseDown(object sender, MouseEventArgs e)
+		{
+			var trackBar = (TrackBar)sender;
+			toolTip1.SetToolTip(trackBar, trackBar.Value.ToString());
+		}
+
+		private void trackBarRandomVixenSequenceSensitivity_MouseDown(object sender, EventArgs e)
+		{
+			var trackBar = (TrackBar)sender;
+			toolTip1.SetToolTip(trackBar, trackBar.Value.ToString());
+		}
+
+		private void trackBarRandomVixenSequenceSensitivity_ValueChanged(object sender, EventArgs e)
 		{
 			Update_Save_Flag();
 		}

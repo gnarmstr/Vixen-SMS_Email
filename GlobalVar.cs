@@ -33,12 +33,6 @@ namespace Vixen_Messaging
 
 		public static decimal SeqIntervalTime { get; set; }
 
-		public static int Msgindex;
-
-		public static bool PlayMessage;
-
-		public static bool PlayCustomMessage;
-
 		public static bool NoNodeID;
 
 		public static int GroupIDNumber;
@@ -146,6 +140,8 @@ namespace Vixen_Messaging
 		public static List<string> VixenSequencesList;
 
 		public static bool VixenSequences;
+
+		public static int RandomSequenceSensitivity;
 
 		#endregion
 
