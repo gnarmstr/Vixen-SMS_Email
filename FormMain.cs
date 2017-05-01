@@ -1,4 +1,6 @@
-﻿using Vixen_Messaging.Theme;
+﻿using System.Net.NetworkInformation;
+using System.Windows.Forms.VisualStyles;
+using Vixen_Messaging.Theme;
 
 #region System modules
 
@@ -351,7 +353,17 @@ namespace Vixen_Messaging
 
 		#endregion
 
-#region Play Mode
+		#region Check for Network connection
+
+		private bool CheckNetworkConnection()
+		{
+			var allNetworkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
+			return allNetworkInterfaces.Any(networkConnection => (networkConnection.NetworkInterfaceType.ToString().Contains("Ethernet") || networkConnection.NetworkInterfaceType.ToString().Contains("Wireless")) && networkConnection.OperationalStatus.ToString().Contains("Up"));
+		}
+
+		#endregion
+
+		#region Play Mode
 
 		#region Play Modes
 
@@ -391,7 +403,7 @@ namespace Vixen_Messaging
 
 		#endregion
 
-		#region Play with Twilio
+		#region Play Count Down
 
 		private void PlayCountDown()
 		{
@@ -402,6 +414,10 @@ namespace Vixen_Messaging
 			playCountDown = false;
 		}
 
+		#endregion
+
+		#region Play Advertising
+
 		private void PlayAdvertising()
 		{
 			bool blacklist, notWhitemsg, maxWordCount;
@@ -410,6 +426,10 @@ namespace Vixen_Messaging
 			SendMessageToVixen(GlobalVar.AdvertisingMSG, out blacklist, out notWhitemsg, out maxWordCount);
 			playCountDown = false;
 		}
+
+		#endregion
+
+		#region Play with Twilio
 
 		private void PlayTwilio()
 		{
@@ -534,13 +554,27 @@ namespace Vixen_Messaging
 			}
 			catch
 			{
-				if (messages.RestException != null && messages.RestException.Code == "20003")
+				if (messages != null)
 				{
-					LogDisplay(GlobalVar.LogMsg = ("Authentication failed. Please check your Twilio Account settings"));
+					if (messages.RestException != null && messages.RestException.Code == "20003")
+					{
+						LogDisplay(GlobalVar.LogMsg = ("Authentication failed. Please check your Twilio Account settings"));
+					}
+					else
+					{
+						LogDisplay(GlobalVar.LogMsg = ("No messages on the Twilio server."));
+					}
 				}
 				else
 				{
-					LogDisplay(GlobalVar.LogMsg = ("No messages on the Twilio server."));
+					if (!CheckNetworkConnection())
+					{
+						LogDisplay(GlobalVar.LogMsg = ("Unable to retrive Twilio messages as there is no Network connection detected, connect to internet and try again."));
+					}
+					else
+					{
+						LogDisplay(GlobalVar.LogMsg = ("Unknown issue, please try again and if the issue continues contact the Development team"));
+					}
 				}
 				ShortTimer();
 				GlobalVar.SeqIntervalTime = 2;
@@ -548,6 +582,9 @@ namespace Vixen_Messaging
 		}
 
 		#endregion
+		#endregion
+
+		#region Play Vixen Sequence
 
 		private void Play_Vixen_Sequence()
 		{
@@ -663,9 +700,12 @@ namespace Vixen_Messaging
 
 		private void SequenceTimer()
 		{
-			timerCheckTwilio.Stop();
-			timerCheckTwilio.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + GlobalVar.IntervalMsgs) * 1000;
-			timerCheckTwilio.Start();
+			if (!buttonStart.Enabled)
+			{
+				timerCheckTwilio.Stop();
+				timerCheckTwilio.Interval = Convert.ToInt16(GlobalVar.SeqIntervalTime + GlobalVar.IntervalMsgs)*1000;
+				timerCheckTwilio.Start();
+			}
 		}
 		#endregion
 
@@ -785,11 +825,11 @@ namespace Vixen_Messaging
 
 					if (messageFrom != null)
 					{
-						LogDisplay(msg + " from" + messageFrom + " has been been displayed in lights");
+						LogDisplay(msg + " from" + messageFrom + " has been displayed in lights");
 					}
 					else
 					{
-						LogDisplay(msg + " has been been displayed in lights");
+						LogDisplay(msg + " has been displayed in lights");
 					}
 
 					#endregion

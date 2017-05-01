@@ -49,16 +49,16 @@ namespace Vixen_Messaging
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItemFile = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.viewLogFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.twilioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.vixenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.messagingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.whiteBlackListsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.viewLogFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.vixenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.vixenSequencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStart)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
 			this.menuStrip1.SuspendLayout();
@@ -197,6 +197,7 @@ namespace Vixen_Messaging
 			this.richTextBoxLog.Location = new System.Drawing.Point(12, 236);
 			this.richTextBoxLog.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.richTextBoxLog.Name = "richTextBoxLog";
+			this.richTextBoxLog.ReadOnly = true;
 			this.richTextBoxLog.Size = new System.Drawing.Size(418, 163);
 			this.richTextBoxLog.TabIndex = 1;
 			this.richTextBoxLog.Text = "";
@@ -236,14 +237,21 @@ namespace Vixen_Messaging
 			// saveToolStripMenuItem
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
 			this.saveToolStripMenuItem.Text = "Save";
 			this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+			// 
+			// viewLogFolderToolStripMenuItem
+			// 
+			this.viewLogFolderToolStripMenuItem.Name = "viewLogFolderToolStripMenuItem";
+			this.viewLogFolderToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
+			this.viewLogFolderToolStripMenuItem.Text = "View Log Folder";
+			this.viewLogFolderToolStripMenuItem.Click += new System.EventHandler(this.viewLogFolderToolStripMenuItem_Click);
 			// 
 			// closeToolStripMenuItem
 			// 
 			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-			this.closeToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+			this.closeToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
 			this.closeToolStripMenuItem.Text = "Close";
 			this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
 			// 
@@ -267,6 +275,13 @@ namespace Vixen_Messaging
 			this.twilioToolStripMenuItem.Text = "Twilio";
 			this.twilioToolStripMenuItem.Click += new System.EventHandler(this.twilioToolStripMenuItem_Click);
 			// 
+			// vixenToolStripMenuItem
+			// 
+			this.vixenToolStripMenuItem.Name = "vixenToolStripMenuItem";
+			this.vixenToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
+			this.vixenToolStripMenuItem.Text = "Vixen";
+			this.vixenToolStripMenuItem.Click += new System.EventHandler(this.vixenToolStripMenuItem_Click);
+			// 
 			// messagingToolStripMenuItem
 			// 
 			this.messagingToolStripMenuItem.Name = "messagingToolStripMenuItem";
@@ -288,33 +303,19 @@ namespace Vixen_Messaging
 			this.whiteBlackListsToolStripMenuItem.Text = "White/Black Lists";
 			this.whiteBlackListsToolStripMenuItem.Click += new System.EventHandler(this.whiteBlackListsToolStripMenuItem_Click);
 			// 
-			// helpToolStripMenuItem
-			// 
-			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-			this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-			this.helpToolStripMenuItem.Text = "Help";
-			this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
-			// 
-			// viewLogFolderToolStripMenuItem
-			// 
-			this.viewLogFolderToolStripMenuItem.Name = "viewLogFolderToolStripMenuItem";
-			this.viewLogFolderToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
-			this.viewLogFolderToolStripMenuItem.Text = "View Log Folder";
-			this.viewLogFolderToolStripMenuItem.Click += new System.EventHandler(this.viewLogFolderToolStripMenuItem_Click);
-			// 
-			// vixenToolStripMenuItem
-			// 
-			this.vixenToolStripMenuItem.Name = "vixenToolStripMenuItem";
-			this.vixenToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
-			this.vixenToolStripMenuItem.Text = "Vixen";
-			this.vixenToolStripMenuItem.Click += new System.EventHandler(this.vixenToolStripMenuItem_Click);
-			// 
 			// vixenSequencesToolStripMenuItem
 			// 
 			this.vixenSequencesToolStripMenuItem.Name = "vixenSequencesToolStripMenuItem";
 			this.vixenSequencesToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
 			this.vixenSequencesToolStripMenuItem.Text = "Vixen Sequences";
 			this.vixenSequencesToolStripMenuItem.Click += new System.EventHandler(this.vixenSequencesToolStripMenuItem_Click);
+			// 
+			// helpToolStripMenuItem
+			// 
+			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+			this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+			this.helpToolStripMenuItem.Text = "Help";
+			this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
 			// 
 			// FormMain
 			// 

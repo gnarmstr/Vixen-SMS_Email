@@ -340,9 +340,9 @@
 			this.checkBoxRepeatDisplayMessage.Location = new System.Drawing.Point(276, 129);
 			this.checkBoxRepeatDisplayMessage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.checkBoxRepeatDisplayMessage.Name = "checkBoxRepeatDisplayMessage";
-			this.checkBoxRepeatDisplayMessage.Size = new System.Drawing.Size(346, 21);
+			this.checkBoxRepeatDisplayMessage.Size = new System.Drawing.Size(349, 21);
 			this.checkBoxRepeatDisplayMessage.TabIndex = 109;
-			this.checkBoxRepeatDisplayMessage.Text = "Repeat Displayed message per audiance number:";
+			this.checkBoxRepeatDisplayMessage.Text = "Repeat Displayed message per audiance member:";
 			this.toolTip1.SetToolTip(this.checkBoxRepeatDisplayMessage, "Check this when you want the diplayed messgae sent every time. Uncheck to only se" +
         "nd the display message once per phone/cell number.");
 			this.checkBoxRepeatDisplayMessage.UseVisualStyleBackColor = true;

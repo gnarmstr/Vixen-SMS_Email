@@ -12,6 +12,8 @@ namespace Vixen_Messaging
 	public partial class MSGTextSettings : Form
 	{
 		private bool _envokeChanges;
+		private bool _envokeChanges1;
+		private bool localSaveFlag;
 
 		public MSGTextSettings()
 		{
@@ -19,6 +21,7 @@ namespace Vixen_Messaging
 				Location = new Point(ActiveForm.Location.X + ActiveForm.MaximumSize.Width - 10, ActiveForm.Location.Y);
 			InitializeComponent();
 			_envokeChanges = true;
+			_envokeChanges1 = true;
 			ForeColor = ThemeColorTable.ForeColor;
 			BackColor = ThemeColorTable.BackgroundColor;
 			ThemeUpdateControls.UpdateControls(this, new List<Control>(new[] { TextColor1, TextColor2, TextColor3, TextColor4, TextColor5, TextColor6, TextColor7, TextColor8, TextColor9, TextColor10 }));
@@ -57,6 +60,8 @@ namespace Vixen_Messaging
 			comboBoxGradientMode.SelectedItem = GlobalVar.GradientMode;
 			comboBoxGradientMode.Enabled = (GlobalVar.IncomingMessageColourOption == 1 || GlobalVar.IncomingMessageColourOption == 3);
 			_envokeChanges = false;
+			_envokeChanges1 = false;
+			localSaveFlag = false;
 			if (GlobalVar.SaveFlag)
 				_envokeChanges = true;
 		}
@@ -65,6 +70,7 @@ namespace Vixen_Messaging
 		{
 			updateChanges();
 			_envokeChanges = true;
+			localSaveFlag = false;
 			Close();
 		}
 
@@ -144,6 +150,14 @@ namespace Vixen_Messaging
 					break;
 				case "Random Gradient":
 					RandomColourSelection.Text = @"Random Gradient Colour Selection";
+					do
+					{
+						colourVisible[i].Visible = true;
+						i++;
+					} while (i < 10);
+					break;
+				case "Random Color Option":
+					RandomColourSelection.Text = @"Random Color Option";
 					do
 					{
 						colourVisible[i].Visible = true;
@@ -230,12 +244,28 @@ namespace Vixen_Messaging
 		private void Update_Save_Flag()
 		{
 			if (!_envokeChanges)
+			{
 				GlobalVar.SaveFlag = true;
+			}
+			if (!_envokeChanges1)
+			{
+				localSaveFlag = true;
+			}
 		}
 
 		private void MSGTextSettings_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (!_envokeChanges)
+			if (localSaveFlag && !_envokeChanges1)
+			{
+				var messageBox = new MessageBoxForm(@"Changes have been made and will be disgarded", @"Warning",
+						MessageBoxButtons.OKCancel, SystemIcons.Warning);
+				messageBox.ShowDialog();
+				if (messageBox.DialogResult == DialogResult.Cancel)
+				{
+					e.Cancel = true;
+				}
+			}
+			if (!_envokeChanges && !e.Cancel)
 				GlobalVar.SaveFlag = false;
 		}
 	}
