@@ -96,10 +96,10 @@
 			this.listBoxSequences.ContextMenuStrip = this.contextMenuStrip1;
 			this.listBoxSequences.FormattingEnabled = true;
 			this.listBoxSequences.ItemHeight = 16;
-			this.listBoxSequences.Location = new System.Drawing.Point(117, 165);
+			this.listBoxSequences.Location = new System.Drawing.Point(103, 165);
 			this.listBoxSequences.Name = "listBoxSequences";
 			this.listBoxSequences.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-			this.listBoxSequences.Size = new System.Drawing.Size(269, 308);
+			this.listBoxSequences.Size = new System.Drawing.Size(283, 308);
 			this.listBoxSequences.TabIndex = 111;
 			this.listBoxSequences.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBoxSequences_KeyUp);
 			// 

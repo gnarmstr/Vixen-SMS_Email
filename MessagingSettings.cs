@@ -11,13 +11,16 @@ namespace Vixen_Messaging
 {
 	public partial class MessagingSettings : Form
 	{
-		public bool _envokeChanges;
+		private bool _envokeChanges;
+		private bool _envokeChanges1;
+		private bool localSaveFlag;
 
 		public MessagingSettings()
 		{
 			if (ActiveForm != null)
 				Location = new Point(ActiveForm.Location.X + ActiveForm.MaximumSize.Width - 10, ActiveForm.Location.Y);
 			_envokeChanges = true;
+			_envokeChanges1 = true;
 			InitializeComponent();
 			ForeColor = ThemeColorTable.ForeColor;
 			BackColor = ThemeColorTable.BackgroundColor;
@@ -47,6 +50,8 @@ namespace Vixen_Messaging
 			trackBarRandomCountDownSensitivity.Value = GlobalVar.RandomCountDownSensitivity;
 			trackBarRandomAdvetisingSensitivity.Value = GlobalVar.RandomAdvertisingSensitivity;
 			_envokeChanges = false;
+			_envokeChanges1 = false;
+			localSaveFlag = false;
 			if (GlobalVar.SaveFlag)
 				_envokeChanges = true;
 		}
@@ -66,6 +71,7 @@ namespace Vixen_Messaging
 			GlobalVar.RandomCountDownSensitivity = trackBarRandomCountDownSensitivity.Value;
 			GlobalVar.RandomAdvertisingSensitivity = trackBarRandomAdvetisingSensitivity.Value ;
 			_envokeChanges = true;
+			localSaveFlag = false;
 			Close();
 		}
 
@@ -102,12 +108,28 @@ namespace Vixen_Messaging
 		private void Update_Save_Flag()
 		{
 			if (!_envokeChanges)
+			{
 				GlobalVar.SaveFlag = true;
+			}
+			if (!_envokeChanges1)
+			{
+				localSaveFlag = true;
+			}
 		}
 
 		private void MessagingSettings_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (!_envokeChanges)
+			if (localSaveFlag && !_envokeChanges1)
+			{
+				var messageBox = new MessageBoxForm(@"Changes have been made and will be disgarded", @"Warning",
+						MessageBoxButtons.OKCancel, SystemIcons.Warning);
+				messageBox.ShowDialog();
+				if (messageBox.DialogResult == DialogResult.Cancel)
+				{
+					e.Cancel = true;
+				}
+			}
+			if (!_envokeChanges && !e.Cancel)
 				GlobalVar.SaveFlag = false;
 		}
 

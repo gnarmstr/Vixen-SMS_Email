@@ -81,21 +81,22 @@
 			this.label100.AutoSize = true;
 			this.label100.Location = new System.Drawing.Point(10, 30);
 			this.label100.Name = "label100";
-			this.label100.Size = new System.Drawing.Size(93, 17);
+			this.label100.Size = new System.Drawing.Size(104, 17);
 			this.label100.TabIndex = 89;
-			this.label100.Text = "Group Name:";
-			this.toolTip1.SetToolTip(this.label100, "Enter your Matrix/Megatree group name that you will be sending messages to.");
+			this.label100.Text = "Element Name:";
+			this.toolTip1.SetToolTip(this.label100, "Enter your Matrix/Megatree element name that you will be sending messages to. Is " +
+        "case sensitive.");
 			// 
 			// label32
 			// 
 			this.label32.AutoSize = true;
 			this.label32.Location = new System.Drawing.Point(10, 64);
 			this.label32.Name = "label32";
-			this.label32.Size = new System.Drawing.Size(101, 17);
+			this.label32.Size = new System.Drawing.Size(112, 17);
 			this.label32.TabIndex = 10;
-			this.label32.Text = "Group NodeId:";
-			this.toolTip1.SetToolTip(this.label32, "The Node ID of the Group used to Display the Text. This must be set for the softw" +
-        "are to work.");
+			this.label32.Text = "Element NodeId:";
+			this.toolTip1.SetToolTip(this.label32, "The Node ID of the Element used to Display the Text. This must be set for the sof" +
+        "tware to work.");
 			// 
 			// textBoxGroupName
 			// 
@@ -104,7 +105,8 @@
 			this.textBoxGroupName.Name = "textBoxGroupName";
 			this.textBoxGroupName.Size = new System.Drawing.Size(273, 22);
 			this.textBoxGroupName.TabIndex = 90;
-			this.toolTip1.SetToolTip(this.textBoxGroupName, "Enter your Matrix/Megatree group name that you will be sending messages to.");
+			this.toolTip1.SetToolTip(this.textBoxGroupName, "Enter your Matrix/Megatree element name that you will be sending messages to. Is " +
+        "case sensitive.");
 			this.textBoxGroupName.TextChanged += new System.EventHandler(this.textBox_Changed);
 			// 
 			// buttonGetVixenData
