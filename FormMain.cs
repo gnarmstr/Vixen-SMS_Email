@@ -53,6 +53,7 @@ namespace Vixen_Messaging
 			closeToolStripMenuItem.Image = Resources.Close;
 			twilioToolStripMenuItem.Image = Resources.Twilio;
 			messagingToolStripMenuItem.Image = Resources.Message;
+			messagesToolStripMenuItem.Image = Resources.Message;
 			vixenToolStripMenuItem.Image = Resources.Vixen;
 			vixenSequencesToolStripMenuItem.Image = Resources.Vixen;
 			textToolStripMenuItem.Image = Resources.Text;
@@ -226,6 +227,7 @@ namespace Vixen_Messaging
 			GlobalVar.Whitelistlocation = Path.Combine(GlobalVar.SettingsPath + "\\Whitelist.txt");
 			GlobalVar.RandomCountDownSensitivity = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomCountDownSensitivity", 15);
 			GlobalVar.RandomAdvertisingSensitivity = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomAdvertisingSensitivity", 20);
+			GlobalVar.RandomMessagesSensitivity = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomMessagesSensitivity", 15);
 			GlobalVar.RandomSequenceSensitivity = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomSequenceSensitivity", 50);
 			GlobalVar.SequenceTemplate = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SequenceTemplate",
 				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3 Messaging"));
@@ -273,6 +275,7 @@ namespace Vixen_Messaging
 			GlobalVar.CountDownMSG = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "CountDownMSG", "COUNTDOWN days to Christmas");
 			checkBoxCountDown.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCountDown", false);
 			checkBoxAdvertising.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAdvertising", false);
+			checkBoxMessages.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMessages", false);
 			checkBoxVixenControl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl",
 				false);
 			GlobalVar.GroupName = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", "");
@@ -283,6 +286,14 @@ namespace Vixen_Messaging
 					"Documents\\Vixen 3 Messaging\\Logs\\Blacklist.log");
 			GlobalVar.PhoneNumberLog = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
 					"Documents\\Vixen 3 Messaging\\Logs\\PhoneNumber.log");
+
+			int MessagesCount = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MessagesCount", 1);
+			GlobalVar.Messages = new string[MessagesCount];
+			for (int i = 0; i < MessagesCount; i++)
+			{
+				GlobalVar.Messages[i] = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "Messages" + i, "");
+			}
+
 			int vixenSequenceCount = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "VixenSequenceCount", 0);
 			GlobalVar.VixenSequencesList = new List<string>();
 			bool deletedSequences = false;
@@ -393,6 +404,17 @@ namespace Vixen_Messaging
 				}
 			}
 
+			if (checkBoxMessages.Checked && GlobalVar.Messages != null && GlobalVar.Messages.Length > 0)
+			{
+				var randomPlay = _random.Next(0, 100);
+				if (randomPlay < GlobalVar.RandomMessagesSensitivity)
+				{
+					PlayMessages();
+					SequenceTimer();
+					return;
+				}
+			}
+
 			PlayTwilio();
 
 			if (GlobalVar.VixenSequences && GlobalVar.LogMsg == "No messages on the Twilio server.")
@@ -424,6 +446,20 @@ namespace Vixen_Messaging
 
 			playCountDown = true;
 			SendMessageToVixen(GlobalVar.AdvertisingMSG, out blacklist, out notWhitemsg, out maxWordCount);
+			playCountDown = false;
+		}
+
+		#endregion
+
+		#region Play Extra Messages
+
+		private void PlayMessages()
+		{
+			bool blacklist, notWhitemsg, maxWordCount;
+
+			playCountDown = true;
+			int selectedMessage = _random.Next(0, (GlobalVar.Messages.Count()));
+			SendMessageToVixen(GlobalVar.Messages[selectedMessage], out blacklist, out notWhitemsg, out maxWordCount);
 			playCountDown = false;
 		}
 
@@ -582,6 +618,7 @@ namespace Vixen_Messaging
 		}
 
 		#endregion
+
 		#endregion
 
 		#region Play Vixen Sequence
@@ -1306,6 +1343,7 @@ namespace Vixen_Messaging
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "StringOrientation", GlobalVar.StringOrientation);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomCountDownSensitivity", GlobalVar.RandomCountDownSensitivity.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomAdvertisingSensitivity", GlobalVar.RandomAdvertisingSensitivity.ToString());
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomMessagesSensitivity", GlobalVar.RandomMessagesSensitivity.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomSequenceSensitivity", GlobalVar.RandomSequenceSensitivity.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", GlobalVar.AutoStartMsgRetrieval);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRepeatDisplayMessage", GlobalVar.RepeatDisplayMessage);
@@ -1340,12 +1378,21 @@ namespace Vixen_Messaging
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCountDown", checkBoxCountDown.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "CountDownMSG", GlobalVar.CountDownMSG);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAdvertising", checkBoxAdvertising.Checked.ToString());
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMessages", checkBoxMessages.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords",
 				GlobalVar.MaxWords.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl",
 				checkBoxVixenControl.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", GlobalVar.GroupName);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "GroupID", GlobalVar.GroupID);
+			if (GlobalVar.Messages != null)
+			{
+				for (int i = 0; i < GlobalVar.Messages.Count(); i++)
+				{
+					profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "Messages" + i, GlobalVar.Messages[i]);
+				}
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "MessagesCount", GlobalVar.Messages.Count());
+			}
 			if (GlobalVar.VixenSequencesList!= null)
 			{
 				int ii = 0;
@@ -1518,6 +1565,14 @@ namespace Vixen_Messaging
 				Text = @"Vixen Messaging - Unsaved Changes";
 		}
 
+		private void messagesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var msgsSettings = new Messages();
+			msgsSettings.ShowDialog();
+			if (GlobalVar.SaveFlag)
+				Text = @"Vixen Messaging - Unsaved Changes";
+		}
+
 		private void textToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			_msgTextSettings = new MSGTextSettings();
@@ -1617,5 +1672,6 @@ namespace Vixen_Messaging
 				Text = @"Vixen Messaging - Unsaved Changes";
 			}
 		}
+
 	}
 }

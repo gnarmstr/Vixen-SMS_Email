@@ -65,6 +65,22 @@ namespace Vixen_Messaging
 
 		#endregion
 
+		#region Messages
+
+		public static string CountDownMSG;
+
+		public static string AdvertisingMSG;
+
+		public static string[] Messages;
+
+		public static int RandomCountDownSensitivity;
+
+		public static int RandomAdvertisingSensitivity;
+
+		public static int RandomMessagesSensitivity;
+
+		#endregion
+
 		#region Vixen Settings
 
 		public static string ReturnBannedMSG;
@@ -72,10 +88,6 @@ namespace Vixen_Messaging
 		public static string ReturnWarningMSG;
 
 		public static string ReturnSuccessMSG;
-
-		public static string CountDownMSG;
-
-		public static string AdvertisingMSG;
 
 		public static string GroupName;
 
@@ -96,11 +108,7 @@ namespace Vixen_Messaging
 		public static string BlacklistLog;
 
 		public static string PhoneNumberLog;
-
-		public static int RandomCountDownSensitivity;
-
-		public static int RandomAdvertisingSensitivity;
-
+		
 		#endregion
 
 		#region Text Settings

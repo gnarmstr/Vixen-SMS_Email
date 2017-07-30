@@ -9,13 +9,13 @@ using Vixen_Messaging.Theme;
 
 namespace Vixen_Messaging
 {
-	public partial class MessagingSettings : Form
+	public partial class Messages : Form
 	{
 		private bool _envokeChanges;
 		private bool _envokeChanges1;
 		private bool localSaveFlag;
 
-		public MessagingSettings()
+		public Messages()
 		{
 			if (ActiveForm != null)
 				Location = new Point(ActiveForm.Location.X + ActiveForm.MaximumSize.Width - 10, ActiveForm.Location.Y);
@@ -26,25 +26,23 @@ namespace Vixen_Messaging
 			BackColor = ThemeColorTable.BackgroundColor;
 			ThemeUpdateControls.UpdateControls(this);
 			Font font = new Font(new FontFamily("Times New Roman"), 12.0f);
-			label11.Font = font;
-			label11.ForeColor = Color.Red;
+			label1.Font = font;
+			label1.ForeColor = Color.Red;
 		}
 
-		private void MessagingSettings_Load(object sender, EventArgs e)
+		private void Messages_Load(object sender, EventArgs e)
 		{
 			ok.Image = Tools.GetIcon(Resources.Ok, 40);
 			ok.Text = "";
 			Cancel.Image = Tools.GetIcon(Resources.Cancel, 40);
 			Cancel.Text = "";
 
-			checkBoxAutoStart.Checked = GlobalVar.AutoStartMsgRetrieval;
-			checkBoxRepeatDisplayMessage.Checked = GlobalVar.RepeatDisplayMessage;
-			textBoxReturnBannedMSG.Text = GlobalVar.ReturnBannedMSG;
-			textBoxReturnWarningMSG.Text = GlobalVar.ReturnWarningMSG;
-			textBoxReturnSuccessMSG.Text = GlobalVar.ReturnSuccessMSG;
-			dateCountDown.Value = Convert.ToDateTime(GlobalVar.CountDownDate);
-			comboBoxBlack_Whitelist.SelectedItem = GlobalVar.Black_WhiteSelection;
-			numericUpDownIntervalMsgs.Value = GlobalVar.IntervalMsgs;
+			textBoxAdvertisingMSG.Text = GlobalVar.AdvertisingMSG;
+			textBoxCountDownMSG.Text = GlobalVar.CountDownMSG;
+			textBoxMessages.Text = string.Join("\n", GlobalVar.Messages);
+			trackBarRandomCountDownSensitivity.Value = GlobalVar.RandomCountDownSensitivity;
+			trackBarRandomAdvetisingSensitivity.Value = GlobalVar.RandomAdvertisingSensitivity;
+			trackBarRandomMessagesSensitivity.Value = GlobalVar.RandomMessagesSensitivity;
 			_envokeChanges = false;
 			_envokeChanges1 = false;
 			localSaveFlag = false;
@@ -54,14 +52,12 @@ namespace Vixen_Messaging
 
 		private void Ok_Click(object sender, EventArgs e)
 		{
-			GlobalVar.AutoStartMsgRetrieval = checkBoxAutoStart.Checked;
-			GlobalVar.RepeatDisplayMessage = checkBoxRepeatDisplayMessage.Checked;
-			GlobalVar.ReturnBannedMSG = textBoxReturnBannedMSG.Text;
-			GlobalVar.ReturnWarningMSG = textBoxReturnWarningMSG.Text;
-			GlobalVar.ReturnSuccessMSG = textBoxReturnSuccessMSG.Text;
-			GlobalVar.CountDownDate = dateCountDown.Value.ToString();
-			GlobalVar.Black_WhiteSelection = comboBoxBlack_Whitelist.SelectedItem.ToString();
-			GlobalVar.IntervalMsgs = Convert.ToInt16(numericUpDownIntervalMsgs.Value);
+			GlobalVar.AdvertisingMSG = textBoxAdvertisingMSG.Text;
+			GlobalVar.CountDownMSG = textBoxCountDownMSG.Text;
+			GlobalVar.Messages = textBoxMessages.Text.Split('\n');
+			GlobalVar.RandomCountDownSensitivity = trackBarRandomCountDownSensitivity.Value;
+			GlobalVar.RandomAdvertisingSensitivity = trackBarRandomAdvetisingSensitivity.Value;
+			GlobalVar.RandomMessagesSensitivity = trackBarRandomMessagesSensitivity.Value;
 			_envokeChanges = true;
 			localSaveFlag = false;
 			Close();
@@ -77,22 +73,7 @@ namespace Vixen_Messaging
 			Close();
 		}
 
-		private void textBoxReturnBannedMSG_TextChanged(object sender, EventArgs e)
-		{
-			Update_Save_Flag();
-		}
-
-		private void numericUpDownIntervalMsgs_ValueChanged(object sender, EventArgs e)
-		{
-			Update_Save_Flag();
-		}
-
-		private void comboBoxBlack_Whitelist_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			Update_Save_Flag();
-		}
-
-		private void checkBoxAutoStart_CheckedChanged(object sender, EventArgs e)
+		private void textBoxMessages_TextChanged(object sender, EventArgs e)
 		{
 			Update_Save_Flag();
 		}
