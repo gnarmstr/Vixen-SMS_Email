@@ -42,6 +42,7 @@ namespace Vixen_Messaging
 			this.buttonInstantMSG = new System.Windows.Forms.Button();
 			this.checkBoxCountDown = new System.Windows.Forms.CheckBox();
 			this.checkBoxAdvertising = new System.Windows.Forms.CheckBox();
+			this.checkBoxMessages = new System.Windows.Forms.CheckBox();
 			this.WebServerStatus = new System.Windows.Forms.Button();
 			this.timerCheckVixenEnabled = new System.Windows.Forms.Timer(this.components);
 			this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
@@ -55,12 +56,11 @@ namespace Vixen_Messaging
 			this.twilioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.vixenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.messagingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.messagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.whiteBlackListsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.vixenSequencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.messagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.checkBoxMessages = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStart)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
 			this.menuStrip1.SuspendLayout();
@@ -177,6 +177,20 @@ namespace Vixen_Messaging
 			this.checkBoxAdvertising.UseVisualStyleBackColor = true;
 			this.checkBoxAdvertising.CheckedChanged += new System.EventHandler(this.checkBoxAdvertising_CheckedChanged);
 			// 
+			// checkBoxMessages
+			// 
+			this.checkBoxMessages.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.checkBoxMessages.Location = new System.Drawing.Point(210, 151);
+			this.checkBoxMessages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.checkBoxMessages.Name = "checkBoxMessages";
+			this.checkBoxMessages.Size = new System.Drawing.Size(194, 34);
+			this.checkBoxMessages.TabIndex = 120;
+			this.checkBoxMessages.Text = "Enable Extra Messages";
+			this.checkBoxMessages.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.toolTip1.SetToolTip(this.checkBoxMessages, "When enabled, Messaging will send a random message from the list to be displayed." +
+        "");
+			this.checkBoxMessages.UseVisualStyleBackColor = true;
+			// 
 			// WebServerStatus
 			// 
 			this.WebServerStatus.BackColor = System.Drawing.Color.OrangeRed;
@@ -274,42 +288,49 @@ namespace Vixen_Messaging
 			// twilioToolStripMenuItem
 			// 
 			this.twilioToolStripMenuItem.Name = "twilioToolStripMenuItem";
-			this.twilioToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
+			this.twilioToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
 			this.twilioToolStripMenuItem.Text = "Twilio";
 			this.twilioToolStripMenuItem.Click += new System.EventHandler(this.twilioToolStripMenuItem_Click);
 			// 
 			// vixenToolStripMenuItem
 			// 
 			this.vixenToolStripMenuItem.Name = "vixenToolStripMenuItem";
-			this.vixenToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
+			this.vixenToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
 			this.vixenToolStripMenuItem.Text = "Vixen";
 			this.vixenToolStripMenuItem.Click += new System.EventHandler(this.vixenToolStripMenuItem_Click);
 			// 
 			// messagingToolStripMenuItem
 			// 
 			this.messagingToolStripMenuItem.Name = "messagingToolStripMenuItem";
-			this.messagingToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
+			this.messagingToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
 			this.messagingToolStripMenuItem.Text = "Messaging";
 			this.messagingToolStripMenuItem.Click += new System.EventHandler(this.messagingToolStripMenuItem_Click);
+			// 
+			// messagesToolStripMenuItem
+			// 
+			this.messagesToolStripMenuItem.Name = "messagesToolStripMenuItem";
+			this.messagesToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+			this.messagesToolStripMenuItem.Text = "Displayed Messages";
+			this.messagesToolStripMenuItem.Click += new System.EventHandler(this.messagesToolStripMenuItem_Click);
 			// 
 			// textToolStripMenuItem
 			// 
 			this.textToolStripMenuItem.Name = "textToolStripMenuItem";
-			this.textToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
+			this.textToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
 			this.textToolStripMenuItem.Text = "Text";
 			this.textToolStripMenuItem.Click += new System.EventHandler(this.textToolStripMenuItem_Click);
 			// 
 			// whiteBlackListsToolStripMenuItem
 			// 
 			this.whiteBlackListsToolStripMenuItem.Name = "whiteBlackListsToolStripMenuItem";
-			this.whiteBlackListsToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
+			this.whiteBlackListsToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
 			this.whiteBlackListsToolStripMenuItem.Text = "White/Black Lists";
 			this.whiteBlackListsToolStripMenuItem.Click += new System.EventHandler(this.whiteBlackListsToolStripMenuItem_Click);
 			// 
 			// vixenSequencesToolStripMenuItem
 			// 
 			this.vixenSequencesToolStripMenuItem.Name = "vixenSequencesToolStripMenuItem";
-			this.vixenSequencesToolStripMenuItem.Size = new System.Drawing.Size(196, 26);
+			this.vixenSequencesToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
 			this.vixenSequencesToolStripMenuItem.Text = "Vixen Sequences";
 			this.vixenSequencesToolStripMenuItem.Click += new System.EventHandler(this.vixenSequencesToolStripMenuItem_Click);
 			// 
@@ -319,27 +340,6 @@ namespace Vixen_Messaging
 			this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
 			this.helpToolStripMenuItem.Text = "Help";
 			this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
-			// 
-			// messagesToolStripMenuItem
-			// 
-			this.messagesToolStripMenuItem.Name = "messagesToolStripMenuItem";
-			this.messagesToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
-			this.messagesToolStripMenuItem.Text = "Displayed Messages";
-			this.messagesToolStripMenuItem.Click += new System.EventHandler(this.messagesToolStripMenuItem_Click);
-			// 
-			// checkBoxMessages
-			// 
-			this.checkBoxMessages.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxMessages.Location = new System.Drawing.Point(210, 151);
-			this.checkBoxMessages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.checkBoxMessages.Name = "checkBoxMessages";
-			this.checkBoxMessages.Size = new System.Drawing.Size(194, 34);
-			this.checkBoxMessages.TabIndex = 120;
-			this.checkBoxMessages.Text = "Enable Extra Messages";
-			this.checkBoxMessages.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.toolTip1.SetToolTip(this.checkBoxMessages, "When enabled, Messaging will send a advertising message to be displayed on a Rand" +
-        "om bases.");
-			this.checkBoxMessages.UseVisualStyleBackColor = true;
 			// 
 			// FormMain
 			// 

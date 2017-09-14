@@ -57,7 +57,7 @@
 			// 
 			// ok
 			// 
-			this.ok.Location = new System.Drawing.Point(556, 590);
+			this.ok.Location = new System.Drawing.Point(466, 591);
 			this.ok.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.ok.Name = "ok";
 			this.ok.Size = new System.Drawing.Size(61, 61);
@@ -68,7 +68,7 @@
 			// 
 			// Cancel
 			// 
-			this.Cancel.Location = new System.Drawing.Point(632, 590);
+			this.Cancel.Location = new System.Drawing.Point(542, 591);
 			this.Cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.Cancel.Name = "Cancel";
 			this.Cancel.Size = new System.Drawing.Size(61, 61);
@@ -79,7 +79,7 @@
 			// 
 			// label9
 			// 
-			this.label9.Location = new System.Drawing.Point(14, 239);
+			this.label9.Location = new System.Drawing.Point(14, 288);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(182, 34);
 			this.label9.TabIndex = 7;
@@ -89,11 +89,11 @@
 			// 
 			// textBoxMessages
 			// 
-			this.textBoxMessages.Location = new System.Drawing.Point(210, 231);
+			this.textBoxMessages.Location = new System.Drawing.Point(210, 280);
 			this.textBoxMessages.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxMessages.Multiline = true;
 			this.textBoxMessages.Name = "textBoxMessages";
-			this.textBoxMessages.Size = new System.Drawing.Size(486, 244);
+			this.textBoxMessages.Size = new System.Drawing.Size(407, 244);
 			this.textBoxMessages.TabIndex = 4;
 			this.toolTip1.SetToolTip(this.textBoxMessages, "Enter a message that will be sent to the audiance member that sent the inappropia" +
         "te words that they have been banned.");
@@ -105,7 +105,7 @@
 			this.textBoxCountDownMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxCountDownMSG.Multiline = true;
 			this.textBoxCountDownMSG.Name = "textBoxCountDownMSG";
-			this.textBoxCountDownMSG.Size = new System.Drawing.Size(484, 42);
+			this.textBoxCountDownMSG.Size = new System.Drawing.Size(405, 62);
 			this.textBoxCountDownMSG.TabIndex = 95;
 			this.toolTip1.SetToolTip(this.textBoxCountDownMSG, "Enter a message that will be displayed when Countdown is enabled. Add the word CO" +
         "UNTDOWN anywhere in the message which will be replaced by number of days to the " +
@@ -124,18 +124,18 @@
 			// 
 			// textBoxAdvertisingMSG
 			// 
-			this.textBoxAdvertisingMSG.Location = new System.Drawing.Point(209, 122);
+			this.textBoxAdvertisingMSG.Location = new System.Drawing.Point(209, 146);
 			this.textBoxAdvertisingMSG.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.textBoxAdvertisingMSG.Multiline = true;
 			this.textBoxAdvertisingMSG.Name = "textBoxAdvertisingMSG";
-			this.textBoxAdvertisingMSG.Size = new System.Drawing.Size(485, 42);
+			this.textBoxAdvertisingMSG.Size = new System.Drawing.Size(406, 66);
 			this.textBoxAdvertisingMSG.TabIndex = 97;
 			this.toolTip1.SetToolTip(this.textBoxAdvertisingMSG, "Enter a advertising message that will be randomly displayed when enabled.");
 			this.textBoxAdvertisingMSG.TextChanged += new System.EventHandler(this.textBoxMessages_TextChanged);
 			// 
 			// label10
 			// 
-			this.label10.Location = new System.Drawing.Point(13, 130);
+			this.label10.Location = new System.Drawing.Point(13, 154);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(186, 33);
 			this.label10.TabIndex = 98;
@@ -146,12 +146,12 @@
 			// 
 			this.trackBarRandomAdvetisingSensitivity.AutoSize = false;
 			this.trackBarRandomAdvetisingSensitivity.LargeChange = 1;
-			this.trackBarRandomAdvetisingSensitivity.Location = new System.Drawing.Point(238, 177);
+			this.trackBarRandomAdvetisingSensitivity.Location = new System.Drawing.Point(238, 229);
 			this.trackBarRandomAdvetisingSensitivity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.trackBarRandomAdvetisingSensitivity.Maximum = 50;
 			this.trackBarRandomAdvetisingSensitivity.Minimum = 1;
 			this.trackBarRandomAdvetisingSensitivity.Name = "trackBarRandomAdvetisingSensitivity";
-			this.trackBarRandomAdvetisingSensitivity.Size = new System.Drawing.Size(455, 32);
+			this.trackBarRandomAdvetisingSensitivity.Size = new System.Drawing.Size(376, 32);
 			this.trackBarRandomAdvetisingSensitivity.TabIndex = 99;
 			this.toolTip1.SetToolTip(this.trackBarRandomAdvetisingSensitivity, "This will adjust the sensitivity of how often the Advertising messages is display" +
         "ed.");
@@ -164,7 +164,7 @@
 			// label44
 			// 
 			this.label44.AutoSize = true;
-			this.label44.Location = new System.Drawing.Point(15, 182);
+			this.label44.Location = new System.Drawing.Point(15, 234);
 			this.label44.Name = "label44";
 			this.label44.Size = new System.Drawing.Size(206, 17);
 			this.label44.TabIndex = 100;
@@ -176,12 +176,12 @@
 			// 
 			this.trackBarRandomCountDownSensitivity.AutoSize = false;
 			this.trackBarRandomCountDownSensitivity.LargeChange = 1;
-			this.trackBarRandomCountDownSensitivity.Location = new System.Drawing.Point(238, 82);
+			this.trackBarRandomCountDownSensitivity.Location = new System.Drawing.Point(238, 102);
 			this.trackBarRandomCountDownSensitivity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.trackBarRandomCountDownSensitivity.Maximum = 50;
 			this.trackBarRandomCountDownSensitivity.Minimum = 1;
 			this.trackBarRandomCountDownSensitivity.Name = "trackBarRandomCountDownSensitivity";
-			this.trackBarRandomCountDownSensitivity.Size = new System.Drawing.Size(455, 32);
+			this.trackBarRandomCountDownSensitivity.Size = new System.Drawing.Size(376, 32);
 			this.trackBarRandomCountDownSensitivity.TabIndex = 101;
 			this.toolTip1.SetToolTip(this.trackBarRandomCountDownSensitivity, "This will adjust the sensitivity of how often the Countdown message is displayed." +
         "");
@@ -194,7 +194,7 @@
 			// label8
 			// 
 			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(15, 87);
+			this.label8.Location = new System.Drawing.Point(15, 107);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(208, 17);
 			this.label8.TabIndex = 102;
@@ -204,12 +204,12 @@
 			// 
 			// label1
 			// 
-			this.label1.Location = new System.Drawing.Point(13, 273);
+			this.label1.Location = new System.Drawing.Point(13, 322);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(150, 202);
 			this.label1.TabIndex = 103;
 			this.label1.Text = "Note: Add COUNTDOWN anywhere in the messages and it will be replace with the numb" +
-    "er of days to teh countdown date.";
+    "er of days to the countdown date.";
 			this.toolTip1.SetToolTip(this.label1, "Enter a message that will be sent to the audiance member that sent the inappropia" +
         "te words that they have been banned.");
 			// 
@@ -222,12 +222,12 @@
 			// 
 			this.trackBarRandomMessagesSensitivity.AutoSize = false;
 			this.trackBarRandomMessagesSensitivity.LargeChange = 1;
-			this.trackBarRandomMessagesSensitivity.Location = new System.Drawing.Point(241, 493);
+			this.trackBarRandomMessagesSensitivity.Location = new System.Drawing.Point(241, 542);
 			this.trackBarRandomMessagesSensitivity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.trackBarRandomMessagesSensitivity.Maximum = 50;
 			this.trackBarRandomMessagesSensitivity.Minimum = 1;
 			this.trackBarRandomMessagesSensitivity.Name = "trackBarRandomMessagesSensitivity";
-			this.trackBarRandomMessagesSensitivity.Size = new System.Drawing.Size(455, 32);
+			this.trackBarRandomMessagesSensitivity.Size = new System.Drawing.Size(376, 32);
 			this.trackBarRandomMessagesSensitivity.TabIndex = 104;
 			this.toolTip1.SetToolTip(this.trackBarRandomMessagesSensitivity, "This will adjust the sensitivity of how often the Advertising messages is display" +
         "ed.");
@@ -240,7 +240,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(18, 498);
+			this.label2.Location = new System.Drawing.Point(18, 547);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(200, 17);
 			this.label2.TabIndex = 105;
@@ -253,7 +253,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.Azure;
-			this.ClientSize = new System.Drawing.Size(732, 633);
+			this.ClientSize = new System.Drawing.Size(642, 633);
 			this.Controls.Add(this.trackBarRandomMessagesSensitivity);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
@@ -271,11 +271,11 @@
 			this.Controls.Add(this.textBoxAdvertisingMSG);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.MaximumSize = new System.Drawing.Size(750, 680);
-			this.MinimumSize = new System.Drawing.Size(750, 680);
+			this.MaximumSize = new System.Drawing.Size(660, 680);
+			this.MinimumSize = new System.Drawing.Size(660, 680);
 			this.Name = "Messages";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-			this.Text = "Messages";
+			this.Text = "Displayed Messages";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MessagingSettings_FormClosing);
 			this.Load += new System.EventHandler(this.Messages_Load);
 			((System.ComponentModel.ISupportInitialize)(this.ok)).EndInit();
