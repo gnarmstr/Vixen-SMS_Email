@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 
 namespace Vixen_Messaging
 {
-	internal class GlobalVar
+	public class GlobalVar
 	{
 		/// <summary>
 		/// Global variable that is constant.
@@ -108,6 +109,8 @@ namespace Vixen_Messaging
 		public static string BlacklistLog;
 
 		public static string PhoneNumberLog;
+
+		public static string DisplayLog;
 		
 		#endregion
 
@@ -159,6 +162,21 @@ namespace Vixen_Messaging
 
 		public static bool CloseInstantMSGForm;
 
+		#endregion
+
+		#region Scheduler
+
+		public static List<SchedulerClass> _schedules;
+
+		public static string[] ScheduledDay = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+
+		public class SchedulerClass
+		{
+			public string Schedule_Day;
+			public DateTime Schedule_TimeOn;
+			public DateTime Schedule_TimeOff;
+		}
+		
 		#endregion
 	}
 }

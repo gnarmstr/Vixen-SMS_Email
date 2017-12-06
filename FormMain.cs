@@ -39,6 +39,8 @@ namespace Vixen_Messaging
 
 		private static Random _random = new Random();
 
+		public static List<GlobalVar.SchedulerClass> _schedules = new List<GlobalVar.SchedulerClass>();
+
 		public FormMain()
 		{
 			_envokeChanges = true;
@@ -54,6 +56,8 @@ namespace Vixen_Messaging
 			twilioToolStripMenuItem.Image = Resources.Twilio;
 			messagingToolStripMenuItem.Image = Resources.Message;
 			messagesToolStripMenuItem.Image = Resources.Message;
+			schedulesToolStripMenuItem.Image = Resources.schedule;
+			sendBulkSMSToolStripMenuItem.Image = Resources.sms;
 			vixenToolStripMenuItem.Image = Resources.Vixen;
 			vixenSequencesToolStripMenuItem.Image = Resources.Vixen;
 			textToolStripMenuItem.Image = Resources.Text;
@@ -271,12 +275,14 @@ namespace Vixen_Messaging
 			GlobalVar.TwilioPhoneNumber = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "TwilioPhoneNumber", "");
 			GlobalVar.MaxWords = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords", 0);
 			GlobalVar.CountDownDate = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "dateCountDownString",
-				"25/12/15");
+				"25/12/17");
 			GlobalVar.CountDownMSG = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "CountDownMSG", "COUNTDOWN days to Christmas");
 			checkBoxCountDown.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCountDown", false);
 			checkBoxAdvertising.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAdvertising", false);
 			checkBoxMessages.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMessages", false);
 			checkBoxVixenControl.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl",
+				false);
+			checkBoxScheduler.Checked = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxScheduler",
 				false);
 			GlobalVar.GroupName = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupName", "");
 			GlobalVar.GroupID = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "GroupID", "");
@@ -286,6 +292,20 @@ namespace Vixen_Messaging
 					"Documents\\Vixen 3 Messaging\\Logs\\Blacklist.log");
 			GlobalVar.PhoneNumberLog = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
 					"Documents\\Vixen 3 Messaging\\Logs\\PhoneNumber.log");
+			GlobalVar.DisplayLog = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
+				"Documents\\Vixen 3 Messaging\\Logs\\DisplayLog.log");
+			for (int i = 0; i < 7; i++)
+			{
+				GlobalVar.SchedulerClass s = new GlobalVar.SchedulerClass();
+				s.Schedule_Day = GlobalVar.ScheduledDay[i];
+				string timeAdd = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "scheduleTimeOn" + i, "19:00:00");
+				s.Schedule_TimeOn = DateTime.Parse(timeAdd, CultureInfo.CurrentCulture);
+				timeAdd = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "scheduleTimeOff" + i, "22:00:00");
+				s.Schedule_TimeOff = DateTime.Parse(timeAdd, CultureInfo.CurrentCulture);
+				_schedules.Add(s);
+			}
+
+			GlobalVar._schedules = _schedules;
 
 			int MessagesCount = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "MessagesCount", 1);
 			GlobalVar.Messages = new string[MessagesCount];
@@ -541,6 +561,7 @@ namespace Vixen_Messaging
 										{
 											file.Close();
 											twilio.DeleteMessage(messageSid);
+											MessageLog(smsMessage, messageFrom);
 											SequenceTimer();
 											return;
 										}
@@ -558,6 +579,7 @@ namespace Vixen_Messaging
 											fileW.Close();
 										}
 									}
+									MessageLog(smsMessage, messageFrom);
 									if (!string.IsNullOrEmpty(GlobalVar.ReturnSuccessMSG))
 												SendReturnTextTwilio(messageFrom, "Auto Reply: " + GlobalVar.ReturnSuccessMSG); //Success message.
 									twilio.DeleteMessage(messageSid);
@@ -1290,12 +1312,23 @@ namespace Vixen_Messaging
 			richTextBoxLog.Text = richTextBoxLog.Text.Insert(0, (DateTime.Now.ToString("h:mm tt ")) + logMsg + "\n");
 
 			//Update log
+			if (!File.Exists(GlobalVar.DisplayLog))
+			{
+				File.CreateText(GlobalVar.DisplayLog);
+			}
+
+			File.AppendAllText(GlobalVar.DisplayLog, DateTime.Now.ToString("g") + " " + logMsg + "\r\n");
+		}
+
+		private void MessageLog(string smsMessage, string messageFrom)
+		{
+			//Update log
 			if (!File.Exists(GlobalVar.MessageLog))
 			{
 				File.CreateText(GlobalVar.MessageLog);
 			}
 
-			File.AppendAllText(GlobalVar.MessageLog, DateTime.Now.ToString("g") + " " + logMsg + "\r\n");
+			File.AppendAllText(GlobalVar.MessageLog, messageFrom + " " + DateTime.Now.ToString("g") + " " + smsMessage + "\r\n");
 		}
 
 #endregion
@@ -1379,6 +1412,7 @@ namespace Vixen_Messaging
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "CountDownMSG", GlobalVar.CountDownMSG);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAdvertising", checkBoxAdvertising.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMessages", checkBoxMessages.Checked.ToString());
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxScheduler", checkBoxScheduler.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords",
 				GlobalVar.MaxWords.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl",
@@ -1406,6 +1440,12 @@ namespace Vixen_Messaging
 
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenSequences", GlobalVar.VixenSequences);
 
+			for (int iii = 0; iii < 7; iii++)
+			{
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "scheduleTimeOn" + iii, GlobalVar._schedules[iii].Schedule_TimeOn.ToString());
+				profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "scheduleTimeOff" + iii, GlobalVar._schedules[iii].Schedule_TimeOff.ToString());
+			}
+			
 			#endregion
 
 			GlobalVar.SaveFlag = false;
@@ -1442,6 +1482,51 @@ namespace Vixen_Messaging
 				Text = @"Vixen Messaging - Unsaved Changes";
 			}
 			timerCheckVixenEnabled.Enabled = checkBoxVixenControl.Checked;
+		}
+
+		#endregion
+
+		#region Timer to check Scheduler
+
+		private void timerCheckScheduler_Tick(object sender, EventArgs e)
+		{
+			if (checkBoxScheduler.Checked)
+			{
+				foreach (var schedule in _schedules)
+				{
+					if (schedule.Schedule_Day == DateTime.Now.DayOfWeek.ToString())
+					{
+						if (!buttonStart.Enabled)
+						{
+							var timeToSwitch = (schedule.Schedule_TimeOff.TimeOfDay.Ticks - DateTime.Now.TimeOfDay.Ticks) / 10000000;
+							if (timeToSwitch <= 0 && timeToSwitch >= -3)
+							{
+								Stop_Vixen();
+								StopSequence();
+							}
+						}
+						else
+						{
+							var timeToSwitch = (schedule.Schedule_TimeOn.TimeOfDay.Ticks - DateTime.Now.TimeOfDay.Ticks) / 10000000;
+							if (timeToSwitch <= 0 && timeToSwitch >= -3)
+							{
+								Start_Vixen();
+							}
+						}
+						break;
+					}
+				}
+			}
+		}
+
+		private void checkBoxScheduler_CheckedChanged(object sender, EventArgs e)
+		{
+			if (!_envokeChanges)
+			{
+				GlobalVar.SaveFlag = true;
+				Text = @"Vixen Messaging - Unsaved Changes";
+			}
+			timerCheckScheduler.Enabled = checkBoxScheduler.Checked;
 		}
 
 		#endregion
@@ -1597,6 +1682,20 @@ namespace Vixen_Messaging
 				Text = @"Vixen Messaging - Unsaved Changes";
 		}
 
+		private void schedulesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var schedules = new Schedules();
+			schedules.ShowDialog();
+			if (GlobalVar.SaveFlag)
+				Text = @"Vixen Messaging - Unsaved Changes";
+		}
+
+		private void sendBulkSMSToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var bulkSMS = new BulkSMS();
+			bulkSMS.ShowDialog();
+		}
+
 		private void closeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (GlobalVar.SaveFlag)
@@ -1672,6 +1771,5 @@ namespace Vixen_Messaging
 				Text = @"Vixen Messaging - Unsaved Changes";
 			}
 		}
-
 	}
 }

@@ -101,6 +101,11 @@
     <None Include="Resources\Vixen3.ico" />
     <None Include="Resources\Vixen3.png" />
     <None Include="Resources\Vixen.png" />
+    <None Include="Resources\Off.png" />
+    <None Include="Resources\On.png" />
+    <None Include="Resources\schedule.png" />
+    <None Include="Resources\sms.png" />
+    <None Include="Resources\Send.png" />
     <Content Include="Vixen Messaging.png" />
   </ItemGroup>
   <ItemGroup />

@@ -61,6 +61,10 @@ namespace Vixen_Messaging
 			this.whiteBlackListsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.vixenSequencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.schedulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.timerCheckScheduler = new System.Windows.Forms.Timer(this.components);
+			this.checkBoxScheduler = new System.Windows.Forms.CheckBox();
+			this.sendBulkSMSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStart)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
 			this.menuStrip1.SuspendLayout();
@@ -280,7 +284,9 @@ namespace Vixen_Messaging
             this.messagesToolStripMenuItem,
             this.textToolStripMenuItem,
             this.whiteBlackListsToolStripMenuItem,
-            this.vixenSequencesToolStripMenuItem});
+            this.vixenSequencesToolStripMenuItem,
+            this.schedulesToolStripMenuItem,
+            this.sendBulkSMSToolStripMenuItem});
 			this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
 			this.settingsToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
 			this.settingsToolStripMenuItem.Text = "Settings";
@@ -341,6 +347,39 @@ namespace Vixen_Messaging
 			this.helpToolStripMenuItem.Text = "Help";
 			this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
 			// 
+			// schedulesToolStripMenuItem
+			// 
+			this.schedulesToolStripMenuItem.Name = "schedulesToolStripMenuItem";
+			this.schedulesToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+			this.schedulesToolStripMenuItem.Text = "Scheduler";
+			this.schedulesToolStripMenuItem.Click += new System.EventHandler(this.schedulesToolStripMenuItem_Click);
+			// 
+			// timerCheckScheduler
+			// 
+			this.timerCheckScheduler.Interval = 2000;
+			this.timerCheckScheduler.Tick += new System.EventHandler(this.timerCheckScheduler_Tick);
+			// 
+			// checkBoxScheduler
+			// 
+			this.checkBoxScheduler.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.checkBoxScheduler.Location = new System.Drawing.Point(28, 151);
+			this.checkBoxScheduler.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.checkBoxScheduler.Name = "checkBoxScheduler";
+			this.checkBoxScheduler.Size = new System.Drawing.Size(153, 34);
+			this.checkBoxScheduler.TabIndex = 121;
+			this.checkBoxScheduler.Text = "Enable Scheduler";
+			this.checkBoxScheduler.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.toolTip1.SetToolTip(this.checkBoxScheduler, "Enables Messaging app based off Scheduler times.");
+			this.checkBoxScheduler.UseVisualStyleBackColor = true;
+			this.checkBoxScheduler.CheckedChanged += new System.EventHandler(this.checkBoxScheduler_CheckedChanged);
+			// 
+			// sendBulkSMSToolStripMenuItem
+			// 
+			this.sendBulkSMSToolStripMenuItem.Name = "sendBulkSMSToolStripMenuItem";
+			this.sendBulkSMSToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+			this.sendBulkSMSToolStripMenuItem.Text = "Send Bulk SMS";
+			this.sendBulkSMSToolStripMenuItem.Click += new System.EventHandler(this.sendBulkSMSToolStripMenuItem_Click);
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -348,6 +387,7 @@ namespace Vixen_Messaging
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.Azure;
 			this.ClientSize = new System.Drawing.Size(442, 483);
+			this.Controls.Add(this.checkBoxScheduler);
 			this.Controls.Add(this.checkBoxMessages);
 			this.Controls.Add(this.checkBoxAdvertising);
 			this.Controls.Add(this.checkBoxCountDown);
@@ -415,6 +455,10 @@ namespace Vixen_Messaging
 		private System.Windows.Forms.ToolStripMenuItem vixenSequencesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem messagesToolStripMenuItem;
 		private System.Windows.Forms.CheckBox checkBoxMessages;
+		private System.Windows.Forms.ToolStripMenuItem schedulesToolStripMenuItem;
+		private System.Windows.Forms.Timer timerCheckScheduler;
+		private System.Windows.Forms.CheckBox checkBoxScheduler;
+		private System.Windows.Forms.ToolStripMenuItem sendBulkSMSToolStripMenuItem;
     }
 }
 
