@@ -69,7 +69,7 @@ namespace Vixen_Messaging
 		private HashSet<string> GetMobilNumber()
 		{
 			//Check against your Blacklist
-			using (var file = new StreamReader(GlobalVar.MessageLog))
+			using (var file = new StreamReader(GlobalVar.PhoneNumberLog))
 			{
 				HashSet<string> uniqueMobile = new HashSet<string>();
 

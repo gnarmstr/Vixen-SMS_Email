@@ -80,6 +80,7 @@
 			this.label21 = new System.Windows.Forms.Label();
 			this.colorDialog1 = new System.Windows.Forms.ColorDialog();
 			this.fontDialog1 = new System.Windows.Forms.FontDialog();
+			this.checkBoxSingleLine = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.ok)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownMaxWords)).BeginInit();
@@ -409,6 +410,7 @@
 			// 
 			// groupBoxSeqSettings
 			// 
+			this.groupBoxSeqSettings.Controls.Add(this.checkBoxSingleLine);
 			this.groupBoxSeqSettings.Controls.Add(this.trackBarTextSpeed);
 			this.groupBoxSeqSettings.Controls.Add(this.label2);
 			this.groupBoxSeqSettings.Controls.Add(this.label1);
@@ -694,6 +696,20 @@
 			// 
 			this.fontDialog1.Font = new System.Drawing.Font("Arial Narrow", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			// 
+			// checkBoxSingleLine
+			// 
+			this.checkBoxSingleLine.AutoSize = true;
+			this.checkBoxSingleLine.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.checkBoxSingleLine.Location = new System.Drawing.Point(264, 140);
+			this.checkBoxSingleLine.Name = "checkBoxSingleLine";
+			this.checkBoxSingleLine.Size = new System.Drawing.Size(100, 21);
+			this.checkBoxSingleLine.TabIndex = 108;
+			this.checkBoxSingleLine.Text = "Single Line";
+			this.checkBoxSingleLine.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.toolTip1.SetToolTip(this.checkBoxSingleLine, "Convert multi line incoming messages to single line of text.");
+			this.checkBoxSingleLine.UseVisualStyleBackColor = true;
+			this.checkBoxSingleLine.CheckedChanged += new System.EventHandler(this.checkBox_CheckedChanged);
+			// 
 			// MSGTextSettings
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -780,5 +796,6 @@
 		private System.Windows.Forms.ComboBox comboBoxGradientMode;
 		private System.Windows.Forms.TrackBar trackBarTextSpeed;
 		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.CheckBox checkBoxSingleLine;
     }
 }

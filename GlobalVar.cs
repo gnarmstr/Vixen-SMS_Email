@@ -126,6 +126,8 @@ namespace Vixen_Messaging
 
 		public static bool CenterStop;
 
+		public static bool SingleLine;
+
 		public static int TextPosition;
 
 		public static int TextIterations;

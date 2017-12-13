@@ -40,6 +40,7 @@ namespace Vixen_Messaging
 			comboBoxTextDirection.SelectedItem = GlobalVar.TextDirection;
 			checkBoxCenterText.Checked = GlobalVar.CenterText;
 			checkBoxCenterStop.Checked = GlobalVar.CenterStop;
+			checkBoxSingleLine.Checked = GlobalVar.SingleLine;
 			trackBarTextPosition.Value = GlobalVar.TextPosition;
 			trackBarTextIterations.Value = GlobalVar.TextIterations;
 			trackBarTextSpeed.Value = GlobalVar.TextSpeed;
@@ -206,6 +207,7 @@ namespace Vixen_Messaging
 			GlobalVar.TextDirection = comboBoxTextDirection.SelectedItem.ToString();
 			GlobalVar.CenterText = checkBoxCenterText.Checked;
 			GlobalVar.CenterStop = checkBoxCenterStop.Checked;
+			GlobalVar.SingleLine = checkBoxSingleLine.Checked;
 			GlobalVar.TextPosition = trackBarTextPosition.Value;
 			GlobalVar.TextIterations = trackBarTextIterations.Value;
 			GlobalVar.TextSpeed = trackBarTextSpeed.Value;

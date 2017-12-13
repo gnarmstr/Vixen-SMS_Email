@@ -127,11 +127,11 @@ namespace Vixen_Messaging
 			{
 				File.CreateText(GlobalVar.PhoneNumberLog);
 			}
-			else
-			{
-				File.Delete(GlobalVar.PhoneNumberLog);
-				File.CreateText(GlobalVar.PhoneNumberLog);
-			}
+			//else
+			//{
+			//	File.Delete(GlobalVar.PhoneNumberLog);
+			//	File.CreateText(GlobalVar.PhoneNumberLog);
+			//}
 
 			if (!File.Exists(GlobalVar.BlacklistLog))
 			{
@@ -243,6 +243,7 @@ namespace Vixen_Messaging
 			GlobalVar.CenterStop = GlobalVar.CenterStop;
 			GlobalVar.CenterText = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterText", false);
 			GlobalVar.CenterText = GlobalVar.CenterText;
+			GlobalVar.SingleLine = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxSingleLine", true);
 			GlobalVar.Black_WhiteSelection = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxBlack_list", "Blacklist");
 			GlobalVar.IncomingMessageColourOption = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "IncomingMessageColourOption", 0);
 			List<Color> defaultColor = new List<Color>() { Color.White, Color.Red, Color.LawnGreen, Color.Blue, Color.Orange, Color.Aqua, Color.BlueViolet, Color.DarkOliveGreen, Color.Yellow, Color.DodgerBlue };
@@ -573,11 +574,11 @@ namespace Vixen_Messaging
 									file.Close();
 									if (!phoneNumberFound)
 									{
-										using (var fileW = new StreamWriter(GlobalVar.PhoneNumberLog, true))
-										{
-											fileW.WriteLine(messageFrom);
-											fileW.Close();
-										}
+										//using (var fileW = new StreamWriter(GlobalVar.PhoneNumberLog, true))
+										//{
+										File.AppendAllText(GlobalVar.PhoneNumberLog, messageFrom + "\r\n");
+										//	fileW.Close();
+									//	}
 									}
 									MessageLog(smsMessage, messageFrom);
 									if (!string.IsNullOrEmpty(GlobalVar.ReturnSuccessMSG))
@@ -797,6 +798,10 @@ namespace Vixen_Messaging
 		{
 			var notWhite = false;
 			blacklist = false;
+
+			// Will convert multi line message to a single line, used for matrix that will only fit one line.
+			if (GlobalVar.SingleLine) msg = msg.Replace("\n", " ");
+			
 			try
 			{
 				var inputFolderName = GlobalVar.SequenceTemplate;
@@ -1058,7 +1063,10 @@ namespace Vixen_Messaging
 		{
 			string textLine;
 			var rgx = new Regex("[^a-zA-Z0-9]");
-
+			var msg1 = msg;
+			string[] splitmsg;
+			int splitmsgcount;
+			
 			#region Checks against Blacklist
 
 			if (GlobalVar.Black_WhiteSelection == "Blacklist")
@@ -1076,6 +1084,48 @@ namespace Vixen_Messaging
 						{
 							if (messageFrom != null)
 							{
+								#region Checks against Whitelist
+								//Checks against your Whitelist
+								rgx = new Regex("[^a-zA-Z0-9 ]");
+								msg1 = rgx.Replace(msg1, ""); //creates an array of all the individual names.
+								splitmsg = msg1.Split(' ');
+								var ii = 0;
+								splitmsgcount = splitmsg.Length; //to determine how many words are in the message.
+								bool notWhiteCheck1;
+								do
+								{
+									using (var fileWhiteList = new StreamReader(GlobalVar.Whitelistlocation))
+									{
+										do
+										{
+											textLine = fileWhiteList.ReadLine();
+											if (splitmsg[ii].ToLower() == textLine)
+											{
+												notWhiteCheck1 = false;
+												break;
+											}
+											//if (splitmsg1[ii].ToLower() == "countdown")
+											//{
+											//	notWhiteCheck1 = false;
+											//	break;
+											//}
+											notWhiteCheck1 = true;
+										} while (fileWhiteList.Peek() != -1);
+										fileWhiteList.Close();
+
+										if (notWhiteCheck1)
+										{
+											break;
+										}
+									}
+									ii++;
+								} while (ii < splitmsgcount);
+								if (!notWhiteCheck1)
+								{
+									notWhite = false;
+									return false;
+								}
+								#endregion
 								LogDisplay(GlobalVar.LogMsg = ("Bad Word/s Detected in " + msg + " from " + messageFrom + " - " + textLine));
 							}
 							else
@@ -1098,9 +1148,9 @@ namespace Vixen_Messaging
 			//Checks against your Whitelist
 			rgx = new Regex("[^a-zA-Z0-9 ]");
 			msg = rgx.Replace(msg, ""); //creates an array of all the individual names.
-			var splitmsg = msg.Split(' ');
+			splitmsg = msg.Split(' ');
 			var i = 0;
-			var splitmsgcount = splitmsg.Length; //to determine how many words are in the message.
+			splitmsgcount = splitmsg.Length; //to determine how many words are in the message.
 			bool notWhiteCheck;
 			do
 			{
@@ -1413,6 +1463,7 @@ namespace Vixen_Messaging
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAdvertising", checkBoxAdvertising.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxMessages", checkBoxMessages.Checked.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxScheduler", checkBoxScheduler.Checked.ToString());
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxSingleLine", GlobalVar.SingleLine.ToString().ToLower());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "numericUpDownMaxWords",
 				GlobalVar.MaxWords.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxVixenControl",
