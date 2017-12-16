@@ -61,7 +61,12 @@ namespace Vixen_Messaging
 			vixenToolStripMenuItem.Image = Resources.Vixen;
 			vixenSequencesToolStripMenuItem.Image = Resources.Vixen;
 			textToolStripMenuItem.Image = Resources.Text;
+			logFoldersToolStripMenuItem.Image = Resources.Log;
 			viewLogFolderToolStripMenuItem.Image = Resources.Log;
+			clearAllLogsToolStripMenuItem.Image = Resources.Clear;
+			clearDisplayLogToolStripMenuItem.Image = Resources.Clear;
+			clearMessageLogToolStripMenuItem.Image = Resources.Clear;
+			clearPhoneNumberLogToolStripMenuItem.Image = Resources.Clear;
 			whiteBlackListsToolStripMenuItem.Image = Resources.Lists;
 			WebServerStatus.ForeColor = Color.Black;
 			GlobalVar.SaveFlag = false;
@@ -127,11 +132,6 @@ namespace Vixen_Messaging
 			{
 				File.CreateText(GlobalVar.PhoneNumberLog);
 			}
-			//else
-			//{
-			//	File.Delete(GlobalVar.PhoneNumberLog);
-			//	File.CreateText(GlobalVar.PhoneNumberLog);
-			//}
 
 			if (!File.Exists(GlobalVar.BlacklistLog))
 			{
@@ -1821,6 +1821,46 @@ namespace Vixen_Messaging
 				GlobalVar.SaveFlag = true;
 				Text = @"Vixen Messaging - Unsaved Changes";
 			}
+		}
+
+		private void clearAllLogsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ClearPhoneLog();
+			ClearMessageLog();
+			ClearDisplayLog();
+		}
+
+		private void clearPhoneNumberLogToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ClearPhoneLog();
+		}
+
+		private void clearMessageLogToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ClearMessageLog();
+		}
+
+		private void clearDisplayLogToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ClearDisplayLog();
+		}
+
+		private void ClearPhoneLog()
+		{
+			File.Delete(GlobalVar.PhoneNumberLog);
+			File.CreateText(GlobalVar.PhoneNumberLog);
+		}
+
+		private void ClearMessageLog()
+		{
+			File.Delete(GlobalVar.MessageLog);
+			File.CreateText(GlobalVar.MessageLog);
+		}
+
+		private void ClearDisplayLog()
+		{
+			File.Delete(GlobalVar.DisplayLog);
+			File.CreateText(GlobalVar.DisplayLog);
 		}
 	}
 }

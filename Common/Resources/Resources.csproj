@@ -106,6 +106,7 @@
     <None Include="Resources\schedule.png" />
     <None Include="Resources\sms.png" />
     <None Include="Resources\Send.png" />
+    <None Include="Resources\Clear.png" />
     <Content Include="Vixen Messaging.png" />
   </ItemGroup>
   <ItemGroup />

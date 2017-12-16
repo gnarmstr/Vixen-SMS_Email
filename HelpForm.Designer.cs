@@ -79,9 +79,9 @@
 			this.label3.AutoSize = true;
 			this.label3.Location = new System.Drawing.Point(11, 7);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(80, 17);
+			this.label3.Size = new System.Drawing.Size(92, 17);
 			this.label3.TabIndex = 10;
-			this.label3.Text = "Version 3.4";
+			this.label3.Text = "Version 3.4.2";
 			// 
 			// buttonLauncher
 			// 
@@ -131,7 +131,7 @@
 			this.MinimumSize = new System.Drawing.Size(580, 700);
 			this.Name = "HelpForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-			this.Text = "Vixen Messaging Help - V3.4";
+			this.Text = "Vixen Messaging Help - V3.4.2";
 			this.Load += new System.EventHandler(this.Help_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();

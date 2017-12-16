@@ -43,6 +43,7 @@ namespace Vixen_Messaging
 			this.checkBoxCountDown = new System.Windows.Forms.CheckBox();
 			this.checkBoxAdvertising = new System.Windows.Forms.CheckBox();
 			this.checkBoxMessages = new System.Windows.Forms.CheckBox();
+			this.checkBoxScheduler = new System.Windows.Forms.CheckBox();
 			this.WebServerStatus = new System.Windows.Forms.Button();
 			this.timerCheckVixenEnabled = new System.Windows.Forms.Timer(this.components);
 			this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
@@ -50,7 +51,7 @@ namespace Vixen_Messaging
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fileToolStripMenuItemFile = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.viewLogFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.logFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.twilioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,11 +61,15 @@ namespace Vixen_Messaging
 			this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.whiteBlackListsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.vixenSequencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.schedulesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.timerCheckScheduler = new System.Windows.Forms.Timer(this.components);
-			this.checkBoxScheduler = new System.Windows.Forms.CheckBox();
 			this.sendBulkSMSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.timerCheckScheduler = new System.Windows.Forms.Timer(this.components);
+			this.viewLogFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearAllLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearPhoneNumberLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearMessageLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearDisplayLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStart)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
 			this.menuStrip1.SuspendLayout();
@@ -195,6 +200,20 @@ namespace Vixen_Messaging
         "");
 			this.checkBoxMessages.UseVisualStyleBackColor = true;
 			// 
+			// checkBoxScheduler
+			// 
+			this.checkBoxScheduler.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.checkBoxScheduler.Location = new System.Drawing.Point(28, 151);
+			this.checkBoxScheduler.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.checkBoxScheduler.Name = "checkBoxScheduler";
+			this.checkBoxScheduler.Size = new System.Drawing.Size(153, 34);
+			this.checkBoxScheduler.TabIndex = 121;
+			this.checkBoxScheduler.Text = "Enable Scheduler";
+			this.checkBoxScheduler.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.toolTip1.SetToolTip(this.checkBoxScheduler, "Enables Messaging app based off Scheduler times.");
+			this.checkBoxScheduler.UseVisualStyleBackColor = true;
+			this.checkBoxScheduler.CheckedChanged += new System.EventHandler(this.checkBoxScheduler_CheckedChanged);
+			// 
 			// WebServerStatus
 			// 
 			this.WebServerStatus.BackColor = System.Drawing.Color.OrangeRed;
@@ -248,7 +267,7 @@ namespace Vixen_Messaging
 			// 
 			this.fileToolStripMenuItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem,
-            this.viewLogFolderToolStripMenuItem,
+            this.logFoldersToolStripMenuItem,
             this.closeToolStripMenuItem});
 			this.fileToolStripMenuItemFile.Name = "fileToolStripMenuItemFile";
 			this.fileToolStripMenuItemFile.Size = new System.Drawing.Size(44, 24);
@@ -257,21 +276,26 @@ namespace Vixen_Messaging
 			// saveToolStripMenuItem
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
 			this.saveToolStripMenuItem.Text = "Save";
 			this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
 			// 
-			// viewLogFolderToolStripMenuItem
+			// logFoldersToolStripMenuItem
 			// 
-			this.viewLogFolderToolStripMenuItem.Name = "viewLogFolderToolStripMenuItem";
-			this.viewLogFolderToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
-			this.viewLogFolderToolStripMenuItem.Text = "View Log Folder";
-			this.viewLogFolderToolStripMenuItem.Click += new System.EventHandler(this.viewLogFolderToolStripMenuItem_Click);
+			this.logFoldersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewLogFolderToolStripMenuItem,
+            this.clearAllLogsToolStripMenuItem,
+            this.clearPhoneNumberLogToolStripMenuItem,
+            this.clearMessageLogToolStripMenuItem,
+            this.clearDisplayLogToolStripMenuItem});
+			this.logFoldersToolStripMenuItem.Name = "logFoldersToolStripMenuItem";
+			this.logFoldersToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+			this.logFoldersToolStripMenuItem.Text = "Logs";
 			// 
 			// closeToolStripMenuItem
 			// 
 			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-			this.closeToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
+			this.closeToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
 			this.closeToolStripMenuItem.Text = "Close";
 			this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
 			// 
@@ -340,13 +364,6 @@ namespace Vixen_Messaging
 			this.vixenSequencesToolStripMenuItem.Text = "Vixen Sequences";
 			this.vixenSequencesToolStripMenuItem.Click += new System.EventHandler(this.vixenSequencesToolStripMenuItem_Click);
 			// 
-			// helpToolStripMenuItem
-			// 
-			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-			this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
-			this.helpToolStripMenuItem.Text = "Help";
-			this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
-			// 
 			// schedulesToolStripMenuItem
 			// 
 			this.schedulesToolStripMenuItem.Name = "schedulesToolStripMenuItem";
@@ -354,31 +371,59 @@ namespace Vixen_Messaging
 			this.schedulesToolStripMenuItem.Text = "Scheduler";
 			this.schedulesToolStripMenuItem.Click += new System.EventHandler(this.schedulesToolStripMenuItem_Click);
 			// 
-			// timerCheckScheduler
-			// 
-			this.timerCheckScheduler.Interval = 2000;
-			this.timerCheckScheduler.Tick += new System.EventHandler(this.timerCheckScheduler_Tick);
-			// 
-			// checkBoxScheduler
-			// 
-			this.checkBoxScheduler.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBoxScheduler.Location = new System.Drawing.Point(28, 151);
-			this.checkBoxScheduler.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.checkBoxScheduler.Name = "checkBoxScheduler";
-			this.checkBoxScheduler.Size = new System.Drawing.Size(153, 34);
-			this.checkBoxScheduler.TabIndex = 121;
-			this.checkBoxScheduler.Text = "Enable Scheduler";
-			this.checkBoxScheduler.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.toolTip1.SetToolTip(this.checkBoxScheduler, "Enables Messaging app based off Scheduler times.");
-			this.checkBoxScheduler.UseVisualStyleBackColor = true;
-			this.checkBoxScheduler.CheckedChanged += new System.EventHandler(this.checkBoxScheduler_CheckedChanged);
-			// 
 			// sendBulkSMSToolStripMenuItem
 			// 
 			this.sendBulkSMSToolStripMenuItem.Name = "sendBulkSMSToolStripMenuItem";
 			this.sendBulkSMSToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
 			this.sendBulkSMSToolStripMenuItem.Text = "Send Bulk SMS";
 			this.sendBulkSMSToolStripMenuItem.Click += new System.EventHandler(this.sendBulkSMSToolStripMenuItem_Click);
+			// 
+			// helpToolStripMenuItem
+			// 
+			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+			this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+			this.helpToolStripMenuItem.Text = "Help";
+			this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+			// 
+			// timerCheckScheduler
+			// 
+			this.timerCheckScheduler.Interval = 2000;
+			this.timerCheckScheduler.Tick += new System.EventHandler(this.timerCheckScheduler_Tick);
+			// 
+			// viewLogFolderToolStripMenuItem
+			// 
+			this.viewLogFolderToolStripMenuItem.Name = "viewLogFolderToolStripMenuItem";
+			this.viewLogFolderToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
+			this.viewLogFolderToolStripMenuItem.Text = "View Log Folder";
+			this.viewLogFolderToolStripMenuItem.Click += new System.EventHandler(this.viewLogFolderToolStripMenuItem_Click);
+			// 
+			// clearAllLogsToolStripMenuItem
+			// 
+			this.clearAllLogsToolStripMenuItem.Name = "clearAllLogsToolStripMenuItem";
+			this.clearAllLogsToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+			this.clearAllLogsToolStripMenuItem.Text = "Clear All Logs";
+			this.clearAllLogsToolStripMenuItem.Click += new System.EventHandler(this.clearAllLogsToolStripMenuItem_Click);
+			// 
+			// clearPhoneNumberLogToolStripMenuItem
+			// 
+			this.clearPhoneNumberLogToolStripMenuItem.Name = "clearPhoneNumberLogToolStripMenuItem";
+			this.clearPhoneNumberLogToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+			this.clearPhoneNumberLogToolStripMenuItem.Text = "Clear Phone Number Log";
+			this.clearPhoneNumberLogToolStripMenuItem.Click += new System.EventHandler(this.clearPhoneNumberLogToolStripMenuItem_Click);
+			// 
+			// clearMessageLogToolStripMenuItem
+			// 
+			this.clearMessageLogToolStripMenuItem.Name = "clearMessageLogToolStripMenuItem";
+			this.clearMessageLogToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+			this.clearMessageLogToolStripMenuItem.Text = "Clear Message Log";
+			this.clearMessageLogToolStripMenuItem.Click += new System.EventHandler(this.clearMessageLogToolStripMenuItem_Click);
+			// 
+			// clearDisplayLogToolStripMenuItem
+			// 
+			this.clearDisplayLogToolStripMenuItem.Name = "clearDisplayLogToolStripMenuItem";
+			this.clearDisplayLogToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+			this.clearDisplayLogToolStripMenuItem.Text = "Clear Display Log";
+			this.clearDisplayLogToolStripMenuItem.Click += new System.EventHandler(this.clearDisplayLogToolStripMenuItem_Click);
 			// 
 			// FormMain
 			// 
@@ -450,7 +495,7 @@ namespace Vixen_Messaging
 		private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
 		private System.Windows.Forms.CheckBox checkBoxCountDown;
 		private System.Windows.Forms.CheckBox checkBoxAdvertising;
-		private System.Windows.Forms.ToolStripMenuItem viewLogFolderToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem logFoldersToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem vixenToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem vixenSequencesToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem messagesToolStripMenuItem;
@@ -459,6 +504,11 @@ namespace Vixen_Messaging
 		private System.Windows.Forms.Timer timerCheckScheduler;
 		private System.Windows.Forms.CheckBox checkBoxScheduler;
 		private System.Windows.Forms.ToolStripMenuItem sendBulkSMSToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem viewLogFolderToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem clearAllLogsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem clearPhoneNumberLogToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem clearMessageLogToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem clearDisplayLogToolStripMenuItem;
     }
 }
 
