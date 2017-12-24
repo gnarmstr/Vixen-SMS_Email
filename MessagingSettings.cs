@@ -38,6 +38,7 @@ namespace Vixen_Messaging
 			Cancel.Text = "";
 
 			checkBoxAutoStart.Checked = GlobalVar.AutoStartMsgRetrieval;
+			checkBoxClearBannedLog.Checked = GlobalVar.ClearBannedLog;
 			checkBoxRepeatDisplayMessage.Checked = GlobalVar.RepeatDisplayMessage;
 			textBoxReturnBannedMSG.Text = GlobalVar.ReturnBannedMSG;
 			textBoxReturnWarningMSG.Text = GlobalVar.ReturnWarningMSG;
@@ -55,6 +56,7 @@ namespace Vixen_Messaging
 		private void Ok_Click(object sender, EventArgs e)
 		{
 			GlobalVar.AutoStartMsgRetrieval = checkBoxAutoStart.Checked;
+			GlobalVar.ClearBannedLog = checkBoxClearBannedLog.Checked;
 			GlobalVar.RepeatDisplayMessage = checkBoxRepeatDisplayMessage.Checked;
 			GlobalVar.ReturnBannedMSG = textBoxReturnBannedMSG.Text;
 			GlobalVar.ReturnWarningMSG = textBoxReturnWarningMSG.Text;

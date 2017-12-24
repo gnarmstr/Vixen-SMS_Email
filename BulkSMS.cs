@@ -45,25 +45,39 @@ namespace Vixen_Messaging
 		{
 			if (textBoxMessage.Text != String.Empty)
 			{
-				HashSet<string> mobileNumbers = GetMobilNumber();
-
-				var messageBox = new MessageBoxForm("\n\nThere are " + mobileNumbers.Count + " mobile numbers that will be sent the bulk message. Do you want to continue as this will cost money through Twilio?", @"Bulk Messages",
-					MessageBoxButtons.YesNo, SystemIcons.Information);
-
-				var bulkMessage = messageBox.ShowDialog();
-				switch (bulkMessage)
+				Cursor.Current = Cursors.WaitCursor;
+				if (checkBoxSingleSMS.Checked)
 				{
-					case DialogResult.OK:
-						int i = 1;
-						foreach (var number in mobileNumbers)
-						{
-							SendMessageToAllMobiles(number);
-							labelBulkStatus.Text = i + " of " + mobileNumbers.Count + " messages sent.";
-							i++;
-						}
-						break;
+					SendMessageToAllMobiles(textBoxSingleSMS.Text);
+					labelBulkStatus.Text = "Messages has been sent.";
 				}
+				else
+				{
+					HashSet<string>  mobileNumbers = GetMobilNumber();
+
+					var messageBox = new MessageBoxForm("\n\nThere are " + mobileNumbers.Count + " mobile numbers that will be sent the bulk message. Do you want to continue as this will cost money through Twilio?", @"Bulk Messages",
+						MessageBoxButtons.YesNo, SystemIcons.Information);
+
+					var bulkMessage = messageBox.ShowDialog();
+					switch (bulkMessage)
+					{
+						case DialogResult.OK:
+							int i = 1;
+							foreach (var number in mobileNumbers)
+							{
+								SendMessageToAllMobiles(number);
+								labelBulkStatus.Text = i + " of " + mobileNumbers.Count + " messages sent.";
+								i++;
+							}
+							break;
+					}
+				}
+				Cursor.Current = Cursors.Default;
+				return;
 			}
+			var messageBox1 = new MessageBoxForm("\n\nThere is no text in the message box to be sent, please add text and resend.", @"Empty Message Box",
+				MessageBoxButtons.OK, SystemIcons.Information);
+			messageBox1.ShowDialog();
 		}
 
 		private HashSet<string> GetMobilNumber()
@@ -93,6 +107,11 @@ namespace Vixen_Messaging
 			string authToken = GlobalVar.TwilioToken; // "d68a401090af00f63bbecb4a3e502a7f";
 			var twilio = new TwilioRestClient(accountSid, authToken);
 			twilio.SendMessage(GlobalVar.TwilioPhoneNumber, number, textBoxMessage.Text);
+		}
+
+		private void checkBoxSingleSMS_CheckedChanged(object sender, EventArgs e)
+		{
+			textBoxSingleSMS.Visible = label1.Visible = checkBoxSingleSMS.Checked;
 		}
 	}
 }

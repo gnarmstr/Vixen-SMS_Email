@@ -39,6 +39,9 @@
 			this.textBoxMessage = new System.Windows.Forms.TextBox();
 			this.SendMessage = new System.Windows.Forms.PictureBox();
 			this.labelBulkStatus = new System.Windows.Forms.Label();
+			this.checkBoxSingleSMS = new System.Windows.Forms.CheckBox();
+			this.textBoxSingleSMS = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.ok)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.SendMessage)).BeginInit();
 			this.SuspendLayout();
@@ -56,19 +59,20 @@
 			// 
 			// label3
 			// 
-			this.label3.AutoSize = true;
 			this.label3.BackColor = System.Drawing.Color.Transparent;
 			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.label3.ForeColor = System.Drawing.Color.RoyalBlue;
-			this.label3.Location = new System.Drawing.Point(26, 22);
+			this.label3.Location = new System.Drawing.Point(26, 9);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(472, 20);
+			this.label3.Size = new System.Drawing.Size(472, 42);
 			this.label3.TabIndex = 102;
-			this.label3.Text = "Message to be sent to all Mobile numbers in the message log:";
+			this.label3.Text = "Message to be sent to Mobile number/s in the Phone log or below if Single Mobile " +
+    "is selected:";
+			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// ok
 			// 
-			this.ok.Location = new System.Drawing.Point(437, 350);
+			this.ok.Location = new System.Drawing.Point(437, 404);
 			this.ok.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.ok.Name = "ok";
 			this.ok.Size = new System.Drawing.Size(61, 61);
@@ -79,7 +83,7 @@
 			// 
 			// textBoxMessage
 			// 
-			this.textBoxMessage.Location = new System.Drawing.Point(30, 61);
+			this.textBoxMessage.Location = new System.Drawing.Point(30, 69);
 			this.textBoxMessage.Multiline = true;
 			this.textBoxMessage.Name = "textBoxMessage";
 			this.textBoxMessage.Size = new System.Drawing.Size(468, 221);
@@ -87,7 +91,7 @@
 			// 
 			// SendMessage
 			// 
-			this.SendMessage.Location = new System.Drawing.Point(200, 287);
+			this.SendMessage.Location = new System.Drawing.Point(89, 356);
 			this.SendMessage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.SendMessage.Name = "SendMessage";
 			this.SendMessage.Size = new System.Drawing.Size(131, 48);
@@ -98,10 +102,39 @@
 			// 
 			// labelBulkStatus
 			// 
-			this.labelBulkStatus.Location = new System.Drawing.Point(100, 374);
+			this.labelBulkStatus.Location = new System.Drawing.Point(98, 421);
 			this.labelBulkStatus.Name = "labelBulkStatus";
 			this.labelBulkStatus.Size = new System.Drawing.Size(301, 23);
 			this.labelBulkStatus.TabIndex = 105;
+			// 
+			// checkBoxSingleSMS
+			// 
+			this.checkBoxSingleSMS.AutoSize = true;
+			this.checkBoxSingleSMS.Location = new System.Drawing.Point(30, 307);
+			this.checkBoxSingleSMS.Name = "checkBoxSingleSMS";
+			this.checkBoxSingleSMS.Size = new System.Drawing.Size(221, 21);
+			this.checkBoxSingleSMS.TabIndex = 106;
+			this.checkBoxSingleSMS.Text = "Send to Single Mobile Number";
+			this.checkBoxSingleSMS.UseVisualStyleBackColor = true;
+			this.checkBoxSingleSMS.CheckedChanged += new System.EventHandler(this.checkBoxSingleSMS_CheckedChanged);
+			// 
+			// textBoxSingleSMS
+			// 
+			this.textBoxSingleSMS.Location = new System.Drawing.Point(278, 307);
+			this.textBoxSingleSMS.Name = "textBoxSingleSMS";
+			this.textBoxSingleSMS.Size = new System.Drawing.Size(220, 22);
+			this.textBoxSingleSMS.TabIndex = 107;
+			this.textBoxSingleSMS.Visible = false;
+			// 
+			// label1
+			// 
+			this.label1.Location = new System.Drawing.Point(278, 336);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(220, 56);
+			this.label1.TabIndex = 108;
+			this.label1.Text = "Only enter one number and must have country code in front. Ex +61425183697";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.label1.Visible = false;
 			// 
 			// BulkSMS
 			// 
@@ -109,7 +142,10 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.Azure;
-			this.ClientSize = new System.Drawing.Size(532, 403);
+			this.ClientSize = new System.Drawing.Size(532, 453);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.textBoxSingleSMS);
+			this.Controls.Add(this.checkBoxSingleSMS);
 			this.Controls.Add(this.labelBulkStatus);
 			this.Controls.Add(this.SendMessage);
 			this.Controls.Add(this.textBoxMessage);
@@ -117,11 +153,11 @@
 			this.Controls.Add(this.label3);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.MaximumSize = new System.Drawing.Size(550, 450);
-			this.MinimumSize = new System.Drawing.Size(550, 450);
+			this.MaximumSize = new System.Drawing.Size(550, 500);
+			this.MinimumSize = new System.Drawing.Size(550, 500);
 			this.Name = "BulkSMS";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-			this.Text = "Send Bulk SMS";
+			this.Text = "Send SMS";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Scheduler_FormClosing);
 			this.Load += new System.EventHandler(this.Schedules_Load);
 			((System.ComponentModel.ISupportInitialize)(this.ok)).EndInit();
@@ -142,5 +178,8 @@
 		private System.Windows.Forms.TextBox textBoxMessage;
 		private System.Windows.Forms.PictureBox SendMessage;
 		private System.Windows.Forms.Label labelBulkStatus;
+		private System.Windows.Forms.CheckBox checkBoxSingleSMS;
+		private System.Windows.Forms.TextBox textBoxSingleSMS;
+		private System.Windows.Forms.Label label1;
     }
 }

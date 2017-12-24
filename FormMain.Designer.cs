@@ -52,6 +52,11 @@ namespace Vixen_Messaging
 			this.fileToolStripMenuItemFile = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.logFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.viewLogFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearAllLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearPhoneNumberLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearMessageLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearDisplayLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.twilioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,11 +70,6 @@ namespace Vixen_Messaging
 			this.sendBulkSMSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.timerCheckScheduler = new System.Windows.Forms.Timer(this.components);
-			this.viewLogFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.clearAllLogsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.clearPhoneNumberLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.clearMessageLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.clearDisplayLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStart)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonStop)).BeginInit();
 			this.menuStrip1.SuspendLayout();
@@ -276,7 +276,7 @@ namespace Vixen_Messaging
 			// saveToolStripMenuItem
 			// 
 			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-			this.saveToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
 			this.saveToolStripMenuItem.Text = "Save";
 			this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
 			// 
@@ -292,10 +292,45 @@ namespace Vixen_Messaging
 			this.logFoldersToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
 			this.logFoldersToolStripMenuItem.Text = "Logs";
 			// 
+			// viewLogFolderToolStripMenuItem
+			// 
+			this.viewLogFolderToolStripMenuItem.Name = "viewLogFolderToolStripMenuItem";
+			this.viewLogFolderToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+			this.viewLogFolderToolStripMenuItem.Text = "View Log Folder";
+			this.viewLogFolderToolStripMenuItem.Click += new System.EventHandler(this.viewLogFolderToolStripMenuItem_Click);
+			// 
+			// clearAllLogsToolStripMenuItem
+			// 
+			this.clearAllLogsToolStripMenuItem.Name = "clearAllLogsToolStripMenuItem";
+			this.clearAllLogsToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+			this.clearAllLogsToolStripMenuItem.Text = "Clear All Below Logs";
+			this.clearAllLogsToolStripMenuItem.Click += new System.EventHandler(this.clearAllLogsToolStripMenuItem_Click);
+			// 
+			// clearPhoneNumberLogToolStripMenuItem
+			// 
+			this.clearPhoneNumberLogToolStripMenuItem.Name = "clearPhoneNumberLogToolStripMenuItem";
+			this.clearPhoneNumberLogToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+			this.clearPhoneNumberLogToolStripMenuItem.Text = "Clear Phone Number Log";
+			this.clearPhoneNumberLogToolStripMenuItem.Click += new System.EventHandler(this.clearPhoneNumberLogToolStripMenuItem_Click);
+			// 
+			// clearMessageLogToolStripMenuItem
+			// 
+			this.clearMessageLogToolStripMenuItem.Name = "clearMessageLogToolStripMenuItem";
+			this.clearMessageLogToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+			this.clearMessageLogToolStripMenuItem.Text = "Clear Message Log";
+			this.clearMessageLogToolStripMenuItem.Click += new System.EventHandler(this.clearMessageLogToolStripMenuItem_Click);
+			// 
+			// clearDisplayLogToolStripMenuItem
+			// 
+			this.clearDisplayLogToolStripMenuItem.Name = "clearDisplayLogToolStripMenuItem";
+			this.clearDisplayLogToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+			this.clearDisplayLogToolStripMenuItem.Text = "Clear Display Log";
+			this.clearDisplayLogToolStripMenuItem.Click += new System.EventHandler(this.clearDisplayLogToolStripMenuItem_Click);
+			// 
 			// closeToolStripMenuItem
 			// 
 			this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-			this.closeToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+			this.closeToolStripMenuItem.Size = new System.Drawing.Size(120, 26);
 			this.closeToolStripMenuItem.Text = "Close";
 			this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
 			// 
@@ -375,7 +410,7 @@ namespace Vixen_Messaging
 			// 
 			this.sendBulkSMSToolStripMenuItem.Name = "sendBulkSMSToolStripMenuItem";
 			this.sendBulkSMSToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
-			this.sendBulkSMSToolStripMenuItem.Text = "Send Bulk SMS";
+			this.sendBulkSMSToolStripMenuItem.Text = "Send SMS";
 			this.sendBulkSMSToolStripMenuItem.Click += new System.EventHandler(this.sendBulkSMSToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
@@ -389,41 +424,6 @@ namespace Vixen_Messaging
 			// 
 			this.timerCheckScheduler.Interval = 2000;
 			this.timerCheckScheduler.Tick += new System.EventHandler(this.timerCheckScheduler_Tick);
-			// 
-			// viewLogFolderToolStripMenuItem
-			// 
-			this.viewLogFolderToolStripMenuItem.Name = "viewLogFolderToolStripMenuItem";
-			this.viewLogFolderToolStripMenuItem.Size = new System.Drawing.Size(191, 26);
-			this.viewLogFolderToolStripMenuItem.Text = "View Log Folder";
-			this.viewLogFolderToolStripMenuItem.Click += new System.EventHandler(this.viewLogFolderToolStripMenuItem_Click);
-			// 
-			// clearAllLogsToolStripMenuItem
-			// 
-			this.clearAllLogsToolStripMenuItem.Name = "clearAllLogsToolStripMenuItem";
-			this.clearAllLogsToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
-			this.clearAllLogsToolStripMenuItem.Text = "Clear All Logs";
-			this.clearAllLogsToolStripMenuItem.Click += new System.EventHandler(this.clearAllLogsToolStripMenuItem_Click);
-			// 
-			// clearPhoneNumberLogToolStripMenuItem
-			// 
-			this.clearPhoneNumberLogToolStripMenuItem.Name = "clearPhoneNumberLogToolStripMenuItem";
-			this.clearPhoneNumberLogToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
-			this.clearPhoneNumberLogToolStripMenuItem.Text = "Clear Phone Number Log";
-			this.clearPhoneNumberLogToolStripMenuItem.Click += new System.EventHandler(this.clearPhoneNumberLogToolStripMenuItem_Click);
-			// 
-			// clearMessageLogToolStripMenuItem
-			// 
-			this.clearMessageLogToolStripMenuItem.Name = "clearMessageLogToolStripMenuItem";
-			this.clearMessageLogToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
-			this.clearMessageLogToolStripMenuItem.Text = "Clear Message Log";
-			this.clearMessageLogToolStripMenuItem.Click += new System.EventHandler(this.clearMessageLogToolStripMenuItem_Click);
-			// 
-			// clearDisplayLogToolStripMenuItem
-			// 
-			this.clearDisplayLogToolStripMenuItem.Name = "clearDisplayLogToolStripMenuItem";
-			this.clearDisplayLogToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
-			this.clearDisplayLogToolStripMenuItem.Text = "Clear Display Log";
-			this.clearDisplayLogToolStripMenuItem.Click += new System.EventHandler(this.clearDisplayLogToolStripMenuItem_Click);
 			// 
 			// FormMain
 			// 

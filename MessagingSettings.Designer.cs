@@ -53,6 +53,7 @@
 			this.label74 = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.label11 = new System.Windows.Forms.Label();
+			this.checkBoxClearBannedLog = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.ok)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.Cancel)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownIntervalMsgs)).BeginInit();
@@ -62,7 +63,7 @@
 			// 
 			// ok
 			// 
-			this.ok.Location = new System.Drawing.Point(550, 407);
+			this.ok.Location = new System.Drawing.Point(552, 441);
 			this.ok.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.ok.Name = "ok";
 			this.ok.Size = new System.Drawing.Size(61, 61);
@@ -73,7 +74,7 @@
 			// 
 			// Cancel
 			// 
-			this.Cancel.Location = new System.Drawing.Point(626, 407);
+			this.Cancel.Location = new System.Drawing.Point(628, 441);
 			this.Cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.Cancel.Name = "Cancel";
 			this.Cancel.Size = new System.Drawing.Size(61, 61);
@@ -94,7 +95,7 @@
 			// 
 			// label87
 			// 
-			this.label87.Location = new System.Drawing.Point(406, 70);
+			this.label87.Location = new System.Drawing.Point(406, 104);
 			this.label87.Name = "label87";
 			this.label87.Size = new System.Drawing.Size(132, 23);
 			this.label87.TabIndex = 67;
@@ -163,7 +164,7 @@
 			// 
 			this.dateCountDown.CustomFormat = "";
 			this.dateCountDown.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.dateCountDown.Location = new System.Drawing.Point(557, 68);
+			this.dateCountDown.Location = new System.Drawing.Point(557, 102);
 			this.dateCountDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.dateCountDown.Name = "dateCountDown";
 			this.dateCountDown.Size = new System.Drawing.Size(145, 22);
@@ -175,7 +176,7 @@
 			// label14
 			// 
 			this.label14.AutoSize = true;
-			this.label14.Location = new System.Drawing.Point(12, 68);
+			this.label14.Location = new System.Drawing.Point(12, 102);
 			this.label14.Name = "label14";
 			this.label14.Size = new System.Drawing.Size(238, 17);
 			this.label14.TabIndex = 104;
@@ -188,7 +189,7 @@
 			this.comboBoxBlack_Whitelist.Items.AddRange(new object[] {
             "Blacklist",
             "Whitelist"});
-			this.comboBoxBlack_Whitelist.Location = new System.Drawing.Point(256, 65);
+			this.comboBoxBlack_Whitelist.Location = new System.Drawing.Point(256, 99);
 			this.comboBoxBlack_Whitelist.Name = "comboBoxBlack_Whitelist";
 			this.comboBoxBlack_Whitelist.Size = new System.Drawing.Size(127, 24);
 			this.comboBoxBlack_Whitelist.TabIndex = 105;
@@ -254,6 +255,7 @@
 			// 
 			// groupBox5
 			// 
+			this.groupBox5.Controls.Add(this.checkBoxClearBannedLog);
 			this.groupBox5.Controls.Add(this.label74);
 			this.groupBox5.Controls.Add(this.numericUpDownIntervalMsgs);
 			this.groupBox5.Controls.Add(this.label71);
@@ -267,7 +269,7 @@
 			this.groupBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.groupBox5.Name = "groupBox5";
 			this.groupBox5.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.groupBox5.Size = new System.Drawing.Size(708, 383);
+			this.groupBox5.Size = new System.Drawing.Size(708, 414);
 			this.groupBox5.TabIndex = 5;
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "Messaging Settings";
@@ -291,9 +293,9 @@
 			this.groupBox1.Controls.Add(this.label1);
 			this.groupBox1.Controls.Add(this.textBoxReturnBannedMSG);
 			this.groupBox1.Controls.Add(this.label9);
-			this.groupBox1.Location = new System.Drawing.Point(6, 96);
+			this.groupBox1.Location = new System.Drawing.Point(6, 140);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(696, 281);
+			this.groupBox1.Size = new System.Drawing.Size(696, 269);
 			this.groupBox1.TabIndex = 93;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Auto Reply to Audiance";
@@ -310,20 +312,35 @@
     " time this application is restarted.";
 			this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
+			// checkBoxClearBannedLog
+			// 
+			this.checkBoxClearBannedLog.AutoSize = true;
+			this.checkBoxClearBannedLog.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.checkBoxClearBannedLog.Location = new System.Drawing.Point(45, 63);
+			this.checkBoxClearBannedLog.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.checkBoxClearBannedLog.Name = "checkBoxClearBannedLog";
+			this.checkBoxClearBannedLog.Size = new System.Drawing.Size(256, 21);
+			this.checkBoxClearBannedLog.TabIndex = 109;
+			this.checkBoxClearBannedLog.Text = "Clear Banned Phone log on startup:";
+			this.toolTip1.SetToolTip(this.checkBoxClearBannedLog, "Enable this if you wish to delete all banned number on startup. WIll allow those " +
+        "users to send messages again.");
+			this.checkBoxClearBannedLog.UseVisualStyleBackColor = true;
+			this.checkBoxClearBannedLog.CheckedChanged += new System.EventHandler(this.checkBoxAutoStart_CheckedChanged);
+			// 
 			// MessagingSettings
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.Azure;
-			this.ClientSize = new System.Drawing.Size(732, 463);
+			this.ClientSize = new System.Drawing.Size(732, 513);
 			this.Controls.Add(this.groupBox5);
 			this.Controls.Add(this.Cancel);
 			this.Controls.Add(this.ok);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.MaximumSize = new System.Drawing.Size(750, 510);
-			this.MinimumSize = new System.Drawing.Size(750, 510);
+			this.MaximumSize = new System.Drawing.Size(750, 560);
+			this.MinimumSize = new System.Drawing.Size(750, 560);
 			this.Name = "MessagingSettings";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Messaging Settings";
@@ -365,5 +382,6 @@
 		private System.Windows.Forms.Label label71;
 		private System.Windows.Forms.CheckBox checkBoxRepeatDisplayMessage;
 		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.CheckBox checkBoxClearBannedLog;
     }
 }

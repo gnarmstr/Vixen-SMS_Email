@@ -139,8 +139,11 @@ namespace Vixen_Messaging
 			}
 			else
 			{
-				File.Delete(GlobalVar.BlacklistLog);
-				File.CreateText(GlobalVar.BlacklistLog);
+				if (GlobalVar.ClearBannedLog)
+				{
+					File.Delete(GlobalVar.BlacklistLog);
+					File.CreateText(GlobalVar.BlacklistLog);
+				}
 			}
 
 			GlobalVar.Blacklist = File.ReadAllText(GlobalVar.Blacklistlocation);
@@ -238,6 +241,7 @@ namespace Vixen_Messaging
 			GlobalVar.OutputSequenceFolder = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "OutputSequence",
 				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Sequence\\VixenOut.tim"));
 			GlobalVar.AutoStartMsgRetrieval = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", false);
+			GlobalVar.ClearBannedLog = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxClearBannedLog", true);
 			GlobalVar.RepeatDisplayMessage = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRepeatDisplayMessage", false);
 			GlobalVar.CenterStop = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterStop", false);
 			GlobalVar.CenterStop = GlobalVar.CenterStop;
@@ -1098,17 +1102,12 @@ namespace Vixen_Messaging
 									{
 										do
 										{
-											textLine = fileWhiteList.ReadLine();
-											if (splitmsg[ii].ToLower() == textLine)
+											string textLine1 = fileWhiteList.ReadLine();
+											if (splitmsg[ii].ToLower() == textLine1)
 											{
 												notWhiteCheck1 = false;
 												break;
 											}
-											//if (splitmsg1[ii].ToLower() == "countdown")
-											//{
-											//	notWhiteCheck1 = false;
-											//	break;
-											//}
 											notWhiteCheck1 = true;
 										} while (fileWhiteList.Peek() != -1);
 										fileWhiteList.Close();
@@ -1429,6 +1428,7 @@ namespace Vixen_Messaging
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomMessagesSensitivity", GlobalVar.RandomMessagesSensitivity.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomSequenceSensitivity", GlobalVar.RandomSequenceSensitivity.ToString());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", GlobalVar.AutoStartMsgRetrieval);
+			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxClearBannedLog", GlobalVar.ClearBannedLog);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRepeatDisplayMessage", GlobalVar.RepeatDisplayMessage);
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterStop", (GlobalVar.CenterStop.ToString()).ToLower());
 			profile.PutSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxCenterText", (GlobalVar.CenterText.ToString()).ToLower());
@@ -1616,7 +1616,7 @@ namespace Vixen_Messaging
 						}
 						if (!notWhitemsg)
 						{
-					//		LogDisplay(GlobalVar.LogMsg = ("Your message has been displayed."));
+							;
 							GlobalVar.InstantMSG = "";
 						}
 					}
