@@ -133,6 +133,11 @@ namespace Vixen_Messaging
 				File.CreateText(GlobalVar.PhoneNumberLog);
 			}
 
+			if (!File.Exists(GlobalVar.PhoneNumberMaxWordsLog))
+			{
+				File.CreateText(GlobalVar.PhoneNumberMaxWordsLog);
+			}
+
 			if (!File.Exists(GlobalVar.BlacklistLog))
 			{
 				File.CreateText(GlobalVar.BlacklistLog);
@@ -297,6 +302,8 @@ namespace Vixen_Messaging
 					"Documents\\Vixen 3 Messaging\\Logs\\Blacklist.log");
 			GlobalVar.PhoneNumberLog = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
 					"Documents\\Vixen 3 Messaging\\Logs\\PhoneNumber.log");
+			GlobalVar.PhoneNumberMaxWordsLog = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
+				"Documents\\Vixen 3 Messaging\\Logs\\PhoneNumberMaxWords.log");
 			GlobalVar.DisplayLog = Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"),
 				"Documents\\Vixen 3 Messaging\\Logs\\DisplayLog.log");
 			for (int i = 0; i < 7; i++)
@@ -517,8 +524,9 @@ namespace Vixen_Messaging
 					messageDirection = messages.Messages[messages.Messages.Count - 1].Direction;
 					messageSid = messages.Messages[messages.Messages.Count - 1].Sid;
 				}
-				var messageBody = messages.Messages[messages.Messages.Count - 1].Body;
-				messageFrom = messages.Messages[messages.Messages.Count - 1].From;
+
+				var messageBody = "This is a test"; //messages.Messages[messages.Messages.Count - 1].Body;
+				messageFrom = "+61422181687"; //messages.Messages[messages.Messages.Count - 1].From;
 
 				LogDisplay(GlobalVar.LogMsg = ("Checking Twilio Messages"));
 				if (!CheckBlacklistMessage(messageFrom, messageBody, ""))
@@ -539,6 +547,8 @@ namespace Vixen_Messaging
 						bool blacklist;
 						bool notWhitemsg;
 						bool maxWordCount;
+
+						// Send the text to Vixen to be displayed.
 						SendMessageToVixen(smsMessage, out blacklist, out notWhitemsg, out maxWordCount);
 						if (!maxWordCount)
 						{
@@ -553,57 +563,47 @@ namespace Vixen_Messaging
 								ShortTimer();
 								return;
 							}
+
 							if (!notWhitemsg)
 							{
-								bool phoneNumberFound = false;
-								using (var file = new StreamReader(GlobalVar.PhoneNumberLog))
-								{
-									do
-									{
-										var checkNumberlist = file.ReadLine();
+								// Check if Phone number is stored and if message reply is required.
+								bool phoneNumberFound = !GlobalVar.RepeatDisplayMessage &&
+								                        CheckPhoneNumberLogs(smsMessage,
+									                        GlobalVar.PhoneNumberLog);
 
-										if (messageFrom == checkNumberlist && !GlobalVar.RepeatDisplayMessage)
-										{
-											file.Close();
-											twilio.DeleteMessage(messageSid);
-											MessageLog(smsMessage, messageFrom);
-											SequenceTimer();
-											return;
-										}
-										if (messageFrom == checkNumberlist)
-										{
-											phoneNumberFound = true;
-										}
-									} while (file.Peek() != -1);
-									file.Close();
-									if (!phoneNumberFound)
-									{
-										//using (var fileW = new StreamWriter(GlobalVar.PhoneNumberLog, true))
-										//{
-										File.AppendAllText(GlobalVar.PhoneNumberLog, messageFrom + "\r\n");
-										//	fileW.Close();
-									//	}
-									}
+								if (!phoneNumberFound)
+								{
 									MessageLog(smsMessage, messageFrom);
 									if (!string.IsNullOrEmpty(GlobalVar.ReturnSuccessMSG))
-												SendReturnTextTwilio(messageFrom, "Auto Reply: " + GlobalVar.ReturnSuccessMSG); //Success message.
-									twilio.DeleteMessage(messageSid);
-
-
+										SendReturnTextTwilio(messageFrom,
+											"Auto Reply: " + GlobalVar.ReturnSuccessMSG); //Success message.
 								}
+
+								twilio.DeleteMessage(messageSid);
 								SequenceTimer();
 								return;
 							}
 						}
 						else
 						{
-							SendReturnTextTwilio(messageFrom,
-								"Auto Reply: Sorry, your message is too long and will not be display. Please reduce the number of words in your message to below " +
-								(GlobalVar.MaxWords + 1) + " and resend. Thank you.");
+							// Check if Phone number is stored and if message reply is required.
+							bool phoneNumberFound = CheckPhoneNumberLogs(smsMessage, GlobalVar.PhoneNumberMaxWordsLog);
+
+							if (!phoneNumberFound)
+							{
+								MessageLog(smsMessage, messageFrom);
+								SendReturnTextTwilio(messageFrom,
+									"Auto Reply: Sorry, your message is too long and will not be display. Please reduce the number of words in your message to below " +
+									(GlobalVar.MaxWords + 1) + " and resend. Thank you.");
+							}
+
 							twilio.DeleteMessage(messageSid);
+							ShortTimer();
+							return;
 						}
+
 						SendReturnTextTwilio(messageFrom,
-							"Auto Reply: Sorry one or more of the names you sent is not in the approved list or you are using unapproved abbriviations! Your words have been recoreded and if found to be non offensive then they will be added to the list. Please try again on another day.");
+							"Auto Reply: Sorry one or more of the names you sent is not in the approved list or you are using unapproved abbreviations! Your words have been recorded and if found to be non offensive then they will be added to the list. Please try again on another day.");
 						twilio.DeleteMessage(messageSid);
 						ShortTimer();
 						return;
@@ -612,7 +612,7 @@ namespace Vixen_Messaging
 					ShortTimer();
 				}
 				SendReturnTextTwilio(messageFrom, "Auto Reply: " + GlobalVar.ReturnBannedMSG);
-				LogDisplay(GlobalVar.LogMsg = (messageFrom + " has been banned for sending inappropiate messages."));
+				LogDisplay(GlobalVar.LogMsg = (messageFrom + " has been banned for sending inappropriate messages."));
 				twilio.DeleteMessage(messageSid);
 			}
 			catch
@@ -632,7 +632,7 @@ namespace Vixen_Messaging
 				{
 					if (!CheckNetworkConnection())
 					{
-						LogDisplay(GlobalVar.LogMsg = ("Unable to retrive Twilio messages as there is no Network connection detected, connect to internet and try again."));
+						LogDisplay(GlobalVar.LogMsg = ("Unable to retrieve Twilio messages as there is no Network connection detected, connect to internet and try again."));
 					}
 					else
 					{
@@ -641,6 +641,33 @@ namespace Vixen_Messaging
 				}
 				ShortTimer();
 				GlobalVar.SeqIntervalTime = 2;
+			}
+		}
+
+		#endregion
+
+		#region Check Phone Number logs
+
+		private bool CheckPhoneNumberLogs(string smsMessage, string phoneNumberLog)
+		{
+			using (var file = new StreamReader(phoneNumberLog))
+			{
+				do
+				{
+					var checkNumberlist = file.ReadLine();
+
+					if (messageFrom == checkNumberlist)
+					{
+						file.Close();
+						MessageLog(smsMessage, messageFrom);
+						SequenceTimer();
+						return true;
+					}
+				} while (file.Peek() != -1);
+
+				file.Close();
+				File.AppendAllText(phoneNumberLog, messageFrom + "\r\n");
+				return false;
 			}
 		}
 
@@ -1053,8 +1080,8 @@ namespace Vixen_Messaging
 
 		private void SendReturnTextTwilio(string from, string msgBody)
 		{
-			string accountSid = GlobalVar.TwilioSID;  // "AC29390b0fe3f4cb763862eefedb8afc41";
-			string authToken = GlobalVar.TwilioToken;  // "d68a401090af00f63bbecb4a3e502a7f";
+			string accountSid = GlobalVar.TwilioSID;
+			string authToken = GlobalVar.TwilioToken;
 			var twilio = new TwilioRestClient(accountSid, authToken);
 			twilio.SendMessage(GlobalVar.TwilioPhoneNumber, from, msgBody);
 			LogDisplay(GlobalVar.LogMsg = ("Return Message sent to " + from));
@@ -1849,6 +1876,8 @@ namespace Vixen_Messaging
 		{
 			File.Delete(GlobalVar.PhoneNumberLog);
 			File.CreateText(GlobalVar.PhoneNumberLog);
+			File.Delete(GlobalVar.PhoneNumberMaxWordsLog);
+			File.CreateText(GlobalVar.PhoneNumberMaxWordsLog);
 		}
 
 		private void ClearMessageLog()

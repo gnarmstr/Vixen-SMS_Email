@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vixen_Messaging", "Vixen_Messaging.csproj", "{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}"
 EndProject
@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Build|Any CPU = Build|Any CPU
+		Build|Mixed Platforms = Build|Mixed Platforms
+		Build|x64 = Build|x64
+		Build|x86 = Build|x86
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x64 = Debug|x64
@@ -23,6 +27,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}.Build|Any CPU.ActiveCfg = Release|Any CPU
+		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}.Build|Any CPU.Build.0 = Release|Any CPU
+		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}.Build|Mixed Platforms.ActiveCfg = Debug|x86
+		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}.Build|Mixed Platforms.Build.0 = Debug|x86
+		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}.Build|x64.ActiveCfg = Debug|x64
+		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}.Build|x64.Build.0 = Debug|x64
+		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}.Build|x86.ActiveCfg = Debug|x86
+		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}.Build|x86.Build.0 = Debug|x86
 		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -38,6 +50,14 @@ Global
 		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}.Release|x64.Build.0 = Release|x64
 		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}.Release|x86.ActiveCfg = Release|x86
 		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E}.Release|x86.Build.0 = Release|x86
+		{F7A80169-6310-4585-9D58-A6F6F5C5B380}.Build|Any CPU.ActiveCfg = Release|x64
+		{F7A80169-6310-4585-9D58-A6F6F5C5B380}.Build|Any CPU.Build.0 = Release|x64
+		{F7A80169-6310-4585-9D58-A6F6F5C5B380}.Build|Mixed Platforms.ActiveCfg = Release|x86
+		{F7A80169-6310-4585-9D58-A6F6F5C5B380}.Build|Mixed Platforms.Build.0 = Release|x86
+		{F7A80169-6310-4585-9D58-A6F6F5C5B380}.Build|x64.ActiveCfg = Release|x64
+		{F7A80169-6310-4585-9D58-A6F6F5C5B380}.Build|x64.Build.0 = Release|x64
+		{F7A80169-6310-4585-9D58-A6F6F5C5B380}.Build|x86.ActiveCfg = Release|x86
+		{F7A80169-6310-4585-9D58-A6F6F5C5B380}.Build|x86.Build.0 = Release|x86
 		{F7A80169-6310-4585-9D58-A6F6F5C5B380}.Debug|Any CPU.ActiveCfg = Release|x86
 		{F7A80169-6310-4585-9D58-A6F6F5C5B380}.Debug|Mixed Platforms.ActiveCfg = Release|x86
 		{F7A80169-6310-4585-9D58-A6F6F5C5B380}.Debug|Mixed Platforms.Build.0 = Release|x86
@@ -59,5 +79,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{10A18BFF-B6B1-449B-9B34-E2ADDDE1785E} = {0FA6F75A-D9C7-471E-BE91-3FF97D8D6BC2}
 		{F7A80169-6310-4585-9D58-A6F6F5C5B380} = {5BA691E1-CC10-48A0-9E48-B6168CF78F24}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A99BCB0D-DA08-42F5-B182-CB0D86CDD968}
 	EndGlobalSection
 EndGlobal

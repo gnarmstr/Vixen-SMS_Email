@@ -112,6 +112,8 @@ namespace Vixen_Messaging
 
 		public static string PhoneNumberLog;
 
+		public static string PhoneNumberMaxWordsLog;
+
 		public static string DisplayLog;
 		
 		#endregion
