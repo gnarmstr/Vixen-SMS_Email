@@ -40,10 +40,10 @@
 			// buttonDemo
 			// 
 			this.buttonDemo.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonDemo.Location = new System.Drawing.Point(33, 454);
-			this.buttonDemo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.buttonDemo.Location = new System.Drawing.Point(44, 559);
+			this.buttonDemo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonDemo.Name = "buttonDemo";
-			this.buttonDemo.Size = new System.Drawing.Size(169, 21);
+			this.buttonDemo.Size = new System.Drawing.Size(225, 26);
 			this.buttonDemo.TabIndex = 3;
 			this.buttonDemo.Text = "Demo";
 			this.buttonDemo.UseVisualStyleBackColor = false;
@@ -54,20 +54,19 @@
 			// label2
 			// 
 			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label2.Location = new System.Drawing.Point(150, 413);
-			this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.label2.Location = new System.Drawing.Point(200, 508);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(141, 27);
+			this.label2.Size = new System.Drawing.Size(188, 33);
 			this.label2.TabIndex = 7;
 			this.label2.Text = "Video links";
 			// 
 			// buttonTwilio
 			// 
 			this.buttonTwilio.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonTwilio.Location = new System.Drawing.Point(228, 454);
-			this.buttonTwilio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.buttonTwilio.Location = new System.Drawing.Point(304, 559);
+			this.buttonTwilio.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonTwilio.Name = "buttonTwilio";
-			this.buttonTwilio.Size = new System.Drawing.Size(169, 21);
+			this.buttonTwilio.Size = new System.Drawing.Size(225, 26);
 			this.buttonTwilio.TabIndex = 8;
 			this.buttonTwilio.Text = "Setting up a Twilio account";
 			this.buttonTwilio.UseVisualStyleBackColor = false;
@@ -78,20 +77,19 @@
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(8, 6);
-			this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+			this.label3.Location = new System.Drawing.Point(11, 7);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(69, 13);
+			this.label3.Size = new System.Drawing.Size(92, 17);
 			this.label3.TabIndex = 10;
-			this.label3.Text = "Version 3.5.1";
+			this.label3.Text = "Version 3.5.2";
 			// 
 			// buttonLauncher
 			// 
 			this.buttonLauncher.BackColor = System.Drawing.Color.Honeydew;
-			this.buttonLauncher.Location = new System.Drawing.Point(55, 488);
-			this.buttonLauncher.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.buttonLauncher.Location = new System.Drawing.Point(73, 601);
+			this.buttonLauncher.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.buttonLauncher.Name = "buttonLauncher";
-			this.buttonLauncher.Size = new System.Drawing.Size(308, 21);
+			this.buttonLauncher.Size = new System.Drawing.Size(411, 26);
 			this.buttonLauncher.TabIndex = 11;
 			this.buttonLauncher.Text = "Controlling this messaging app with the Vixen 3 Launcher";
 			this.buttonLauncher.UseVisualStyleBackColor = false;
@@ -103,23 +101,23 @@
 			// 
 			this.richTextBox1.BackColor = System.Drawing.Color.Azure;
 			this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.richTextBox1.Location = new System.Drawing.Point(10, 31);
-			this.richTextBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.richTextBox1.Location = new System.Drawing.Point(13, 38);
+			this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.richTextBox1.Name = "richTextBox1";
 			this.richTextBox1.ReadOnly = true;
 			this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-			this.richTextBox1.Size = new System.Drawing.Size(406, 372);
+			this.richTextBox1.Size = new System.Drawing.Size(541, 458);
 			this.richTextBox1.TabIndex = 12;
 			this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
 			this.richTextBox1.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBox1_LinkClicked);
 			// 
 			// HelpForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.BackColor = System.Drawing.Color.Azure;
-			this.ClientSize = new System.Drawing.Size(423, 537);
+			this.ClientSize = new System.Drawing.Size(561, 651);
 			this.Controls.Add(this.richTextBox1);
 			this.Controls.Add(this.buttonLauncher);
 			this.Controls.Add(this.label3);
@@ -128,12 +126,12 @@
 			this.Controls.Add(this.buttonDemo);
 			this.HelpButton = true;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-			this.MaximumSize = new System.Drawing.Size(439, 576);
-			this.MinimumSize = new System.Drawing.Size(439, 576);
+			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.MaximumSize = new System.Drawing.Size(579, 698);
+			this.MinimumSize = new System.Drawing.Size(579, 698);
 			this.Name = "HelpForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-			this.Text = "Vixen Messaging Help - V3.5.1";
+			this.Text = "Vixen Messaging Help - V3.5.2";
 			this.Load += new System.EventHandler(this.Help_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();

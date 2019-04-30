@@ -49,7 +49,7 @@ namespace Vixen_Messaging
 				if (checkBoxSingleSMS.Checked)
 				{
 					SendMessageToAllMobiles(textBoxSingleSMS.Text);
-					labelBulkStatus.Text = "Messages has been sent.";
+					labelBulkStatus.Text = "Messages have been sent.";
 				}
 				else
 				{
@@ -103,8 +103,8 @@ namespace Vixen_Messaging
 
 		private void SendMessageToAllMobiles(string number)
 		{
-			string accountSid = GlobalVar.TwilioSID; // "AC29390b0fe3f4cb763862eefedb8afc41";
-			string authToken = GlobalVar.TwilioToken; // "d68a401090af00f63bbecb4a3e502a7f";
+			string accountSid = GlobalVar.TwilioSID;
+			string authToken = GlobalVar.TwilioToken;
 			var twilio = new TwilioRestClient(accountSid, authToken);
 			twilio.SendMessage(GlobalVar.TwilioPhoneNumber, number, textBoxMessage.Text);
 		}

@@ -1,5 +1,7 @@
 ﻿using System.Net.NetworkInformation;
+using System.Web;
 using System.Windows.Forms.VisualStyles;
+using RestSharp;
 using Vixen_Messaging.Theme;
 
 #region System modules
@@ -230,9 +232,10 @@ namespace Vixen_Messaging
 
 		private void LoadData()
 		{
+			string userProfileFolder = Environment.ExpandEnvironmentVariables("%userprofile%");
 			var profile = new XmlProfileSettings();
 			GlobalVar.Vixen3Folder = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "textBoxVixenFolder",
-				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3"));
+				Path.Combine(userProfileFolder, "Documents\\Vixen 3"));
 			GlobalVar.VixenServer = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "VixenServer",
 				"http://localhost:8888/api/play/playSequence");
 			GlobalVar.Blacklistlocation = Path.Combine(GlobalVar.SettingsPath + "\\Blacklist.txt");
@@ -241,10 +244,9 @@ namespace Vixen_Messaging
 			GlobalVar.RandomAdvertisingSensitivity = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomAdvertisingSensitivity", 20);
 			GlobalVar.RandomMessagesSensitivity = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomMessagesSensitivity", 15);
 			GlobalVar.RandomSequenceSensitivity = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "trackBarRandomSequenceSensitivity", 50);
-			GlobalVar.SequenceTemplate = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "SequenceTemplate",
-				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3 Messaging"));
+			GlobalVar.SequenceTemplate = Path.Combine(userProfileFolder, "Documents\\Vixen 3 Messaging");
 			GlobalVar.OutputSequenceFolder = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "OutputSequence",
-				Path.Combine(Environment.ExpandEnvironmentVariables("%userprofile%"), "Documents\\Vixen 3\\Sequence\\VixenOut.tim"));
+				Path.Combine(userProfileFolder, "Documents\\Vixen 3\\Sequence\\VixenOut.tim"));
 			GlobalVar.AutoStartMsgRetrieval = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxAutoStart", false);
 			GlobalVar.ClearBannedLog = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxClearBannedLog", true);
 			GlobalVar.RepeatDisplayMessage = profile.GetSetting(XmlProfileSettings.SettingType.Profiles, "checkBoxRepeatDisplayMessage", false);
@@ -501,14 +503,17 @@ namespace Vixen_Messaging
 
 		private void PlayTwilio()
 		{
+			//HttpClient client = new SystemNetHttpClient();
+			//Request request = new Request(HttpMethod.Get, "https://api.twilio.com:8443");
+			//Response response = client.MakeRequest(request);
+
 			// Find your Account Sid and Auth Token at twilio.com/user/account 
-			string AccountSid = GlobalVar.TwilioSID; // "AC29390b0fe3f4cb763862eefedb8afc41";
-			string AuthToken = GlobalVar.TwilioToken; // "d68a401090af00f63bbecb4a3e502a7f";
+			string AccountSid = GlobalVar.TwilioSID;
+			string AuthToken = GlobalVar.TwilioToken;
 			var twilio = new TwilioRestClient(AccountSid, AuthToken);
 
 			// Build the parameters 
 			var options = new MessageListRequest();
-			//options.DateSent = DateTime.Today;
 
 			var messages = twilio.ListMessages(options);
 			try
@@ -525,8 +530,8 @@ namespace Vixen_Messaging
 					messageSid = messages.Messages[messages.Messages.Count - 1].Sid;
 				}
 
-				var messageBody = "This is a test"; //messages.Messages[messages.Messages.Count - 1].Body;
-				messageFrom = "+61422181687"; //messages.Messages[messages.Messages.Count - 1].From;
+				var messageBody = messages.Messages[messages.Messages.Count - 1].Body;
+				messageFrom = messages.Messages[messages.Messages.Count - 1].From;
 
 				LogDisplay(GlobalVar.LogMsg = ("Checking Twilio Messages"));
 				if (!CheckBlacklistMessage(messageFrom, messageBody, ""))
