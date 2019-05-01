@@ -15,3 +15,11 @@ C:\Users\Geoff\Documents\Visual Studio 2013\Projects\DVA Compensation Calculator
 C:\Users\Geoff\Documents\Visual Studio 2013\Projects\DVA Compensation Calculator\DVA Compensation Calculator\Release\Common\Resources.pdb
 C:\Users\Geoff\Documents\Visual Studio 2013\Projects\Vixen Messaging\Common\Resources\obj\x86\Release\Resources.csprojResolveAssemblyReference.cache
 C:\Users\Geoff\Documents\Visual Studio 2013\Projects\Vixen Messaging\Common\Resources\obj\x86\Release\Resources.csproj.CoreCompileInputs.cache
+C:\Users\Geoff-Laptop\Documents\Visual Studio 2017\Projects\Vixen Messaging\Release\Common\Resources.dll
+C:\Users\Geoff-Laptop\Documents\Visual Studio 2017\Projects\Vixen Messaging\Release\Common\Resources.pdb
+C:\Users\Geoff-Laptop\Documents\Visual Studio 2017\Projects\Vixen Messaging\Common\Resources\obj\x86\Release\Resources.csprojAssemblyReference.cache
+C:\Users\Geoff-Laptop\Documents\Visual Studio 2017\Projects\Vixen Messaging\Common\Resources\obj\x86\Release\Common.Resources.Properties.Resources.resources
+C:\Users\Geoff-Laptop\Documents\Visual Studio 2017\Projects\Vixen Messaging\Common\Resources\obj\x86\Release\Resources.csproj.GenerateResource.cache
+C:\Users\Geoff-Laptop\Documents\Visual Studio 2017\Projects\Vixen Messaging\Common\Resources\obj\x86\Release\Resources.csproj.CoreCompileInputs.cache
+C:\Users\Geoff-Laptop\Documents\Visual Studio 2017\Projects\Vixen Messaging\Common\Resources\obj\x86\Release\Resources.dll
+C:\Users\Geoff-Laptop\Documents\Visual Studio 2017\Projects\Vixen Messaging\Common\Resources\obj\x86\Release\Resources.pdb
